@@ -1,0 +1,14 @@
+---
+const categories = ["HMD", "Infinix", "Oppo", "Redmi", "Samsung", "Tecno"];
+---
+<section class="px-4 mt-6">
+  <h2 class="bg-orange-500 text-white font-bold px-4 py-2">Popular Categories</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 py-4">
+    {categories.map(name => (
+      <div class="border rounded-lg p-2 text-center shadow-sm bg-white">
+        <img src={`/phones/${name.toLowerCase()}.jpg`} alt={name} class="h-28 object-contain mx-auto mb-2" />
+        <span class="font-semibold">{name}</span>
+      </div>
+    ))}
+  </div>
+</section>
