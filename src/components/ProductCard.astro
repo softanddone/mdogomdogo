@@ -1,5 +1,5 @@
 ---
-const { name, image,from, deposit, totalPrice } = Astro.props;
+const { name, image,source,from, deposit, totalPrice } = Astro.props;
 ---
 
 <!-- <div class="card">
@@ -11,7 +11,7 @@ const { name, image,from, deposit, totalPrice } = Astro.props;
 </div> -->
 <article class="card">
   <div class="card__img">
-    <img src="/phones/Samsung-A16.webp" alt="" />
+    <img src={source} alt="" />
   </div>
   <div class="card__name">
       <div class="card__precis">

@@ -7,7 +7,8 @@ export const products = [
     from:"Ksh 6000",
     deposit: "Ksh 5499",
     daily:"95",
-    totalPrice: "Ksh 14,999"
+    totalPrice: "Ksh 14,999",
+    source:"/phones/Samsung-A16.webp"
   },
   {
     id: 2,
@@ -16,6 +17,8 @@ export const products = [
      status:"new",
      from:"Ksh 4200",
     deposit: "Ksh 3500",
+     source:"/phones/a06.webp",
+    
     daily:"93",
     totalPrice: "Ksh 12,999"
 
@@ -28,7 +31,8 @@ export const products = [
     deposit: "Ksh 3500",
      status:"new",
     daily:"83",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+    source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp"
   },
 
   {
@@ -39,7 +43,10 @@ export const products = [
     deposit: "Ksh 3299",
      status:"new",
     daily:"72",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp"
+
+    
   },
 
     {
@@ -50,7 +57,8 @@ export const products = [
     deposit: "Ksh 4199",
     daily:"90",
      status:"new",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/Mkopa-X20-Purple-1024x1024.webp"
   },
 
       {
@@ -61,7 +69,8 @@ export const products = [
     deposit: "Ksh 2799",
     daily:"62",
      status:"new",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/m10.webp"
   },
 
         {
@@ -72,7 +81,8 @@ export const products = [
     from:"Ksh 2500",
     deposit: "Ksh 1999",
     daily:"49",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/Samsung-Galaxy-A04e-Black-1024x1024.webp"
   },
 
        {
@@ -83,7 +93,8 @@ export const products = [
     from:"Ksh 3400",
     deposit: "Ksh 2199",
     daily:"50",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp"
   },
 
        {
@@ -94,18 +105,20 @@ export const products = [
     from:"Ksh 3200",
     deposit: "Ksh 2499",
     daily:"59",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp"
   },
 
          {
     id: 10,
-    name: "X2",
+    name: "X20",
     status:"refurb",
     image: "/phones/phone1.jpg",
     from:"Ksh 3800",
     deposit: "Ksh 3199",
     daily:"78",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     source:"/phones/Mkopa-X20-Purple-1024x1024.webp"
   },
 
 ];
