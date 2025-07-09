@@ -1,33 +1,198 @@
 ---
-const { name, image, deposit, totalPrice } = Astro.props;
+const { name, image,from, deposit, totalPrice } = Astro.props;
 ---
-<div class="card">
+
+<!-- <div class="card">
   <img src={image} alt={name} class="product-img" />
   <h2>{name}</h2>
   <p><strong>Deposit:</strong> {deposit}</p>
   <p><strong>Total Price:</strong> {totalPrice}</p>
   <a href="https://wa.me/254700000000" class="btn">Lipa Mdogo Mdogo</a>
-</div>
+</div> -->
+<article class="card">
+  <div class="card__img">
+    <img src="/public/phones/Samsung-A16.webp" alt="" />
+  </div>
+  <div class="card__name">
+      <div class="card__precis">
+    <a href="" class="card__icon"><ion-icon name="heart-outline"></ion-icon></a>
+
+    <div>
+      <span class="card__preci card__preci--before">{from}</span>
+      <span class="card__preci card__preci--now">{deposit}</span>
+    </div>
+
+    <div class="pfon">
+      <span class="nameitem"
+        >{name}
+      </span>
+      <br />
+      <span class="statusitem">
+        <i class="fa fa-check tick-icon"></i>
+        In stock
+      </span>
+    </div>
+    <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
+  </div>
+    <p>FREE Delivery</p>
+  </div>
+
+</article>
 
 <style>
-  .card {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    text-align: center;
-    border-radius: 10px;
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+
+  :root {
+    --first-color: #e3f8ff;
+    --accent-color: #ff5151;
+    --dark-color: #161616;
+    --body-font: "Open Sans";
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --smaller-font-size: 0.75rem;
   }
-  .product-img {
+
+  @media screen and (min-width: 768px) {
+    :root {
+      --normal-font-size: 1rem;
+      --smaller-font-size: 0.813rem;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #fff;
+    color: var(--dark-color);
+    font-family: var(--body-font);
+  }
+
+  img {
     max-width: 100%;
-    border-radius: 5px;
+    height: auto;
   }
-  .btn {
-    background: pink;
-    color: white;
-    padding: 0.5rem 1rem;
+
+  a {
     text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 1rem;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 2rem 4rem 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    cursor: pointer;
+    background-color: var(--first-color);
+  
+  }
+
+  .card__img {
+    width: 180px;
+    padding: 3rem 0;
+    transition: transform 0.3s ease;
+  }
+
+  .card__name {
+    position: absolute;
+    left: 0;
+    bottom: -3rem;
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* background-color: var(--dark-color); */
+    background: lightseagreen;
+    color: #fff;
+    font-weight: bold;
+    font-size: var(--smaller-font-size);
+    transition: bottom 0.3s ease;
+    z-index: 10;
+    flex-direction: column;
+  }
+
+  .card__name p {
+    /* margin: 0;
+    letter-spacing: 0.5px; */
+    margin-bottom: 0px;
+
+  }
+
+  .card__icon {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card__icon:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+  }
+
+  .card__precis {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -50px;
+    background: white;
+  }
+
+  .card__preci {
+    display: block;
+    text-align: center;
+  }
+
+  .card__preci--before {
+    font-size: var(--smaller-font-size);
+    color: var(--accent-color);
+    margin-bottom: 0.25rem;
+    text-decoration: line-through;
+    margin-left: 20px;
+
+        /* font-size: var(--h3-font-size); */
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  .card__preci--now {
+    font-size: var(--h3-font-size);
+    font-weight: bold;
+    margin-left: 20px;
+    color:black;
+  }
+
+  .pfon {
+    margin-left: 20px;
+    color:black;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .card:hover .card__name {
+    bottom: 0;
+  }
+
+  .card:hover .card__img {
+    transform: translateY(-5px);
   }
 </style>
