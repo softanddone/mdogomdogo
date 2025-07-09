@@ -4,7 +4,8 @@ import { products } from "../data/products.js";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en">  
+	
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,7 +82,7 @@ a {
   position: relative;
   margin: 0 2.5rem;
 }
-.title-shop::after {
+/* .title-shop::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -89,7 +90,7 @@ a {
   height: 2px;
   background-color: var(--dark-color);
   margin-left: 0.25rem;
-}
+} */
 
 /* Card */
 .card {
@@ -178,6 +179,11 @@ footer a:hover {
   color: var(--accent-color);
 }
 
+.headertext{
+	display: flex;
+	justify-content: space-around;
+}
+
 /* Responsive fix */
 @media screen and (min-width: 1200px) {
   body {
@@ -195,7 +201,12 @@ footer a:hover {
     </style>
   </head>
   <body>
-    <h1 class="title-shop">Lipa Mdogo Mdogo Phones</h1>
+	<div class="headertext">
+ <h1 class="title-shop">Lipa Mdogo Mdogo Phones</h1>
+	<h3>Contact/Whatsapp 0722867659</h3>
+	</div>
+   
+
     <main class="main bd-grid">
 	
 		 {products.map(product => <ProductCard {...product} />)}
