@@ -28,7 +28,6 @@ import { products } from "../data/products.js";
 
   --body-font: "Open Sans";
   --h1-font-size: 1.5rem;
-  --h3-font-size: 1rem;
   --normal-font-size: 0.938rem;
   --smaller-font-size: 0.75rem;
 }
@@ -53,15 +52,9 @@ body {
   color: var(--dark-color);
   font-family: var(--body-font);
 }
-h1 {
-  font-size: var(--h1-font-size);
-}
 img {
   max-width: 100%;
   height: auto;
-}
-a {
-  text-decoration: none;
 }
 
 /* Layout */
@@ -76,22 +69,6 @@ a {
   align-items: center;
   gap: 2rem;
 }
-
-/* Title */
-.title-shop {
-  position: relative;
-  margin: 0 2.5rem;
-  font-size: 16px;
-}
-/* .title-shop::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 72px;
-  height: 2px;
-  background-color: var(--dark-color);
-  margin-left: 0.25rem;
-} */
 
 /* Card */
 .card {
@@ -180,18 +157,10 @@ footer a:hover {
   color: var(--accent-color);
 }
 
-.headertext{
-	display: flex;
-	justify-content: space-between;
-}
-
 /* Responsive fix */
 @media screen and (min-width: 1200px) {
   body {
     margin: 3rem 0 0 0;
-  }
-  .title-shop {
-    margin: 0 5rem;
   }
   .bd-grid {
     margin-left: auto;
@@ -202,20 +171,20 @@ footer a:hover {
     </style>
   </head>
   <body>
-	<div class="headertext">
- <h1 class="title-shop">Lipa Mdogo Mdogo Phones</h1>
-	<h1 class="title-shop">Contact/Whatsapp 0722867659</h1>
-	</div>
-   
 
     <main class="main bd-grid">
 	
 		 {products.map(product => <ProductCard {...product} />)}
+
+     <div class="whatsapp">
+<a href="https://wa.me/254722867659" target="_blank" rel="noopener noreferrer" style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; padding: 12px 15px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); text-decoration: none; font-size: 24px; z-index: 999;">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+     </div>
     </main>
     <footer>
       <a >Copyright @2025. All rights reserved</a>
     </footer>
-    <!-- ICONS -->
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   </body>
 </html>

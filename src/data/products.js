@@ -8,7 +8,9 @@ export const products = [
     deposit: "Ksh 5499",
     daily:"95",
     totalPrice: "Ksh 14,999",
-    source:"/phones/Samsung-A16.webp"
+    source:"/phones/Samsung-A16.webp",
+    discount:"-12%",
+    display:"block"
   },
   {
     id: 2,
@@ -20,7 +22,9 @@ export const products = [
      source:"/phones/a06.webp",
     
     daily:"93",
-    totalPrice: "Ksh 12,999"
+    totalPrice: "Ksh 12,999",
+     discount:"-22%",
+     display:"block"
 
   },
 {
@@ -32,7 +36,9 @@ export const products = [
      status:"new",
     daily:"83",
     totalPrice: "Ksh 12,999",
-    source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp"
+    source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp",
+     discount:"-19%",
+     display:"block"
   },
 
   {
@@ -44,7 +50,9 @@ export const products = [
      status:"new",
     daily:"72",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp"
+     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp",
+      discount:"-10%",
+      display:"none"
 
     
   },
@@ -58,7 +66,9 @@ export const products = [
     daily:"90",
      status:"new",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Mkopa-X20-Purple-1024x1024.webp"
+     source:"/phones/Mkopa-X20-Purple-1024x1024.webp",
+      discount:"-11%",
+      display:"block"
   },
 
       {
@@ -70,7 +80,9 @@ export const products = [
     daily:"62",
      status:"new",
     totalPrice: "Ksh 12,999",
-     source:"/phones/m10.webp"
+     source:"/phones/m10.webp",
+      discount:"-13%",
+      display:"none"
   },
 
         {
@@ -82,7 +94,9 @@ export const products = [
     deposit: "Ksh 1999",
     daily:"49",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Samsung-Galaxy-A04e-Black-1024x1024.webp"
+     source:"/phones/Samsung-Galaxy-A04e-Black-1024x1024.webp",
+      discount:"-13%",
+      display:"none"
   },
 
        {
@@ -94,7 +108,9 @@ export const products = [
     deposit: "Ksh 2199",
     daily:"50",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp"
+     source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp",
+      discount:"-14%",
+      display:"none"
   },
 
        {
@@ -106,7 +122,9 @@ export const products = [
     deposit: "Ksh 2499",
     daily:"59",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp"
+     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp",
+      discount:"-10%",
+      display:"none"
   },
 
          {
@@ -118,7 +136,9 @@ export const products = [
     deposit: "Ksh 3199",
     daily:"78",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Mkopa-X20-Purple-1024x1024.webp"
+     source:"/phones/Mkopa-X20-Purple-1024x1024.webp",
+     discount:"-14%",
+     display:"block"
   },
 
 ];

@@ -1,7 +1,11 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import ProductCard from "../components/ProductCard.astro";
-import { products } from "../data/products.js";
+// import { products } from "../data/products.js";
+
+import Nav from "../components/Nav.astro";
+import ProductDetails from "../components/ProductDetails.astro";
+import { products } from "../data/products";
 ---
 
 <!-- ---
@@ -64,10 +68,6 @@ import { products } from "../data/products.js";
   </body>
 </html> -->
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,8 +76,11 @@ import { products } from "../data/products.js";
   <title>Document</title>
 </head>
 <body>
-
+<Nav></Nav>
   <Welcome/>
+
+  <!-- <ProductDetails {...products} /> -->
+
   
 </body>
 </html>
