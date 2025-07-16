@@ -396,14 +396,26 @@
 
         @media (max-width: 768px) {
             .top-nav {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
                 height: auto;
                 gap: 15px;
                 padding: 20px 0;
+                height: 40px;
+
+               
             }
 
+            .bottom-nav{
+               
+                display: none;
+            }
+      
+            
+            
+
             .search-nav {
-                order: -1;
+                /* order: -1; */
+                display: none;
             }
 
             .support-nav, .delivery-nav {
