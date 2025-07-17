@@ -69,7 +69,34 @@ img {
   align-items: center;
   gap: 2rem;
 }
+.whatsapp{
+  /* background: red!important; */
+  z-index: 2;
+  width:100px;
+  height: 50px;
+  position: fixed; 
+  bottom: 20px; 
+  right: 60px; 
+  /* background-color: #25D366;  */
+  /* color: white;  */
+  padding: 12px 15px; 
+  border-radius: 20px; 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); 
+  text-decoration: none; 
+  font-size: 24px; 
+  z-index: 999;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
 
+.message{
+  /* background: yellow; */
+  display: flex;
+}
+.message h1{
+  font-size: 10px;
+  margin: auto;
+}
 /* Card */
 .card {
   position: relative;
@@ -177,9 +204,16 @@ footer a:hover {
 		 {products.map(product => <ProductCard {...product} />)}
 
      <div class="whatsapp">
-<a href="https://wa.me/254722867659" target="_blank" rel="noopener noreferrer" style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; padding: 12px 15px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); text-decoration: none; font-size: 24px; z-index: 999;">
+
+<a href="https://wa.me/254722867659" target="_blank" rel="noopener noreferrer" style=" background-color: #25D366; color: white; padding: 12px 15px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); text-decoration: none; font-size: 24px; z-index: 999;">
   <i class="fab fa-whatsapp"></i>
 </a>
+
+<div class="message">
+  <h1>Message</h1>
+</div>
+
+
 
      </div>
     </main>
