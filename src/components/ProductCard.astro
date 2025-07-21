@@ -1,5 +1,4 @@
 ---
-import ProductDetails from "./ProductDetails.astro";
 
 const { name, image,source,from, deposit, totalPrice,discount,display,slug } = Astro.props;
 
@@ -10,57 +9,51 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug } = A
 
 <article class="card">
   <div class="card__img">
-    <div class="lebo1"><h4>{discount}</h4>
+    <div class="lebo1"><h4>{discount}</h4></div>
 
+    <div class="lebo2" style={`display: ${display};`}>
+      <h4 class="hot" style={`display: ${display};`}>Hot</h4>
     </div>
 
-  <div class="lebo2" style={`display: ${display};`}>
-  <h4 class="hot" style={`display: ${display};`}>Hot</h4>
-</div>
     <img src={source} alt="" />
   </div>
+
   <div class="card__name">
-      <div class="card__precis">
-    <a href="" class="card__icon"><ion-icon name="heart-outline"></ion-icon></a>
+    <div class="card__precis">
+      <a href="" class="card__icon"><ion-icon name="heart-outline"></ion-icon></a>
 
-    
-    <div class="taginfo">
-      <h1 class="phonename">{name}</h1>
-      <span class="card__preci card__preci--before">{from}</span>
-      <span class="card__preci card__preci--now">{deposit}</span>
+      <div class="taginfo">
+        <h1 class="phonename">{name}</h1>
+        <span class="card__preci card__preci--before">{from}</span>
+        <span class="card__preci card__preci--now">{deposit}</span>
+      </div>
+
+      <div class="pfon">
+        <span class="statusitem">
+          <i class="fa fa-check tick-icon"></i>
+          In stock
+        </span>
+      </div>
+
+      <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
     </div>
 
-    <div class="pfon">
-     
-      
-      <span class="statusitem">
-        <i class="fa fa-check tick-icon"></i>
-        In stock
-      </span>
+    <div class="orderdiv">
+      <a href={`/products/${slug}`}>
+        <button class="displaybutton">Order Now</button>
+      </a>
+      <p>FREE Delivery <i class="fa fa-check tick-icon"></i></p>
     </div>
-    <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
   </div>
-  <div class="orderdiv">
-
-   <a href={`/products/${slug}`}>
-      <button class="displaybutton">Order Now</button>
-    </a>
- 
-    <p>FREE Delivery    <i class="fa fa-check tick-icon"></i></p>
-  </div>
- 
-
-  </div>
-
 </article>
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
 
   :root {
-    --first-color: #e3f8ff;
-    --accent-color: #ff5151;
-    --dark-color: #161616;
+    --first-color: #fdfaf5;
+    --accent-color: #b07f31;
+    --dark-color: #1c1c1c;
     --body-font: "Open Sans";
     --h3-font-size: 1rem;
     --normal-font-size: 0.938rem;
@@ -73,34 +66,34 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug } = A
       --smaller-font-size: 0.813rem;
     }
   }
-  .phonename{
-    color:black!important;
+
+  .phonename {
+    color: #2a2a2a !important;
     margin-left: 40px;
     position: absolute;
-    top:-55%;
+    top: -55%;
     font-size: 18px;
   }
 
-  .taginfo{
+  .taginfo {
     position: relative;
     width: 100%;
   }
 
-  .orderdiv{
-    /* background: red!important; */
+  .orderdiv {
     display: flex;
     flex-direction: row;
-    width:100%;
+    width: 100%;
     justify-content: space-around;
-    
   }
-   .orderdiv button{
-background: rgb(55, 55, 255);
-padding:10px 30px;
-border:none;
-border-radius: 5px;
-cursor: pointer;
-color:white;
+
+  .orderdiv button {
+    background: #b07f31;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
   }
 
   * {
@@ -131,13 +124,9 @@ color:white;
     padding: 1.5rem 2rem 4rem 2rem;
     border-radius: 1rem;
     overflow: hidden;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     background-color: var(--first-color);
-    
-  
   }
 
   .card__img {
@@ -148,54 +137,50 @@ color:white;
     position: relative;
   }
 
-   .card__img .lebo1{
-position: absolute;
-top:60px;
-left: -20px;
-width:55px;
-height: 20px;
-background: blue;
-border-radius: 20px;
-z-index: 2;
-display: flex;
-justify-content: center;
-align-items: center;
-color:white;
-   }
-    .card__img .lebo1 h4{
-font-size: 13px;
-z-index: 20;
-color:white;
-    }
+  .card__img .lebo1 {
+    position: absolute;
+    top: 60px;
+    left: -20px;
+    width: 55px;
+    height: 20px;
+    background: #b07f31;
+    border-radius: 20px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
 
-       .card__img .lebo2 h4{
-font-size: 13px;
-z-index: 20;
-color:white;
+  .card__img .lebo1 h4 {
+    font-size: 13px;
+    z-index: 20;
+    color: white;
+  }
 
+  .card__img .lebo2 h4 {
+    font-size: 13px;
+    z-index: 20;
+    color: white;
+    position: absolute;
+    top: -18px;
+    left: 12px;
+  }
 
-position: absolute;
-top:-18px;
-left: 12px;
-    }
-
-.card__img .lebo2{
-position: absolute;
-top:90px;
-left: -20px;
-width:55px;
-height: 20px;
-background: red;
-border-radius: 20px;
-z-index: 2;
-display: flex;
-justify-content: center;
-align-items: center;
-color:white;
-}
-
-
-
+  .card__img .lebo2 {
+    position: absolute;
+    top: 90px;
+    left: -20px;
+    width: 55px;
+    height: 20px;
+    background: #8a6431;
+    border-radius: 20px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
 
   .card__name {
     position: absolute;
@@ -206,8 +191,6 @@ color:white;
     display: flex;
     align-items: center;
     justify-content: center;
-
-   
     color: #fff;
     font-weight: bold;
     font-size: var(--smaller-font-size);
@@ -217,16 +200,13 @@ color:white;
   }
 
   .card__name p {
-    color:green;
-
+    color: #4caf50;
   }
 
   .card__icon {
     font-size: 1.5rem;
     color: var(--dark-color);
-    transition:
-      color 0.2s ease,
-      transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
     padding: 0.5rem;
     border-radius: 50%;
     display: flex;
@@ -255,10 +235,9 @@ color:white;
 
   .card__preci--before {
     font-size: var(--smaller-font-size);
-    color: var(--accent-color);
+    color: #999;
     margin-bottom: 0.25rem;
     text-decoration: line-through;
-   
     font-weight: bold;
     margin-left: -125px;
     margin-top: 10px;
@@ -268,15 +247,13 @@ color:white;
   .card__preci--now {
     font-size: var(--h3-font-size);
     font-weight: bold;
-    margin-left: 20px;
-    color:black;
+    color: var(--accent-color);
     margin-left: -125px;
   }
 
   .pfon {
     margin-left: 40px;
-    color:black;
-    
+    color: #2a2a2a;
   }
 
   .card:hover {
@@ -292,8 +269,3 @@ color:white;
     transform: translateY(-5px);
   }
 </style>
-
-
-
-
-

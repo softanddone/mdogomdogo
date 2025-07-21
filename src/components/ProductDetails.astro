@@ -10,34 +10,36 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Image Hover</title>
- 
   <style>
-    body{
+    body {
       font-family: 'Poppins', sans-serif;
+      background-color: #fdfdfd;
+      width: 100vw;
+      overflow-x: hidden;
     }
+
     .containerproductdetails {
       width: 98vw;
       height: 100vh;
-    
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
     .info-phone {
       width: 80vw;
       height: 80%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-     
     }
+
     .image-phone {
       overflow: hidden;
-      /* height: 80vh; */
       position: relative;
       cursor: crosshair;
-      background: #f8f8f8;
+      background: #f2f2f5;
       transition: all 0.3s ease;
     }
 
@@ -71,39 +73,18 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       opacity: 1;
     }
 
-    .phone-content{
-        width:95%;
-        height: 95%;
-    }
-    .phone-content .name-title{
-        font-size: 18px;
-        text-align: center;
-    }
-  .phone-content .price-content{
-     font-size: 18px;
-        text-align: center;
-}
-
-
-    .image-content{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       
-    }
-
     .zoom-lens {
       position: absolute;
       width: 120px;
       height: 120px;
-      border: 2px solid #fff;
+      border: 2px solid #e0e0e0;
       border-radius: 50%;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 20px rgba(60, 60, 60, 0.2);
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
       z-index: 2;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(1px);
     }
 
@@ -112,563 +93,211 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
     }
 
     .image-phone:hover {
-      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.5);
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
+      border: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .phone-content {
+      width: 95%;
+      height: 95%;
+    }
+
+    .phone-content .name-title,
+    .phone-content .price-content {
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .price-content s {
+      color: #a0a0a0;
+    }
+
+    .price-content span {
+      color: #b07f31;
+    }
+
+    .spec-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f9f9fa 100%);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      width: 300px;
+      max-height: 300px;
+      margin: 0 auto;
+      border: 1px solid #eaeaea;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      color: #2c2c2e;
+    }
+
+    .spec-table tr {
+      border-bottom: 1px solid #e9ecef;
+      transition: all 0.3s ease;
+    }
+
+    .spec-table tr:hover {
+      background-color: rgba(176, 127, 49, 0.05);
+      transform: translateX(4px);
+    }
+
+    .spec-label {
+      font-weight: 600;
+      color: #6c757d;
+      padding: 10px 16px 10px 0;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .spec-value {
+      font-weight: 500;
+      color: #2a2a2a;
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: left;
+      padding-left: 0;
+      vertical-align: top;
+    }
+
+    .value-text {
+      display: inline-block;
+      margin-top: -25px;
+    }
+
+    .info-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .details-info {
+      display: grid;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-text {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(176, 127, 49, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .card-text:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+      border-color: rgba(176, 127, 49, 0.3);
+    }
+
+    .card-text h1 {
+      color: #2a2a2a;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card-text p {
+      color: #4b4b4b;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
 
     @media (max-width: 768px) {
-      .image-phone:hover img {
-        transform: scale(1.5);
+      .info-phone {
+        grid-template-columns: 1fr;
       }
 
-      .zoom-lens {
-        width: 80px;
-        height: 80px;
+      .containerproductdetails {
+        height: 100%;
+        margin-top: 60px;
       }
-      /* .image-phone{
-      width:70%;
-      } */
+
+      .info-section {
+        padding: 30px 20px;
+      }
+
+      .card-text {
+        min-height: 120px;
+        height: auto;
+      }
+
+      .card-text h1 {
+        font-size: 1.2rem;
+      }
+
+      .card-text p {
+        font-size: 0.9rem;
+      }
     }
 
+    @media (max-width: 480px) {
+      .info-section {
+        padding: 20px 15px;
+      }
 
-
-   .spec-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-            padding: 20px;
-            width: 300px;
-            max-height: 300px;
-            margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .spec-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            
-        }
-
-        .spec-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            color: #2c3e50;
-            /* background: red; */
-        }
-
-        .spec-table tr {
-            border-bottom: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
-
-        .spec-table tr:hover {
-            background-color: rgba(102, 126, 234, 0.04);
-            transform: translateX(4px);
-        }
-
-        .spec-table tr:last-child {
-            border-bottom: none;
-        }
-
-
-
-        .spec-label {
-            font-weight: 600;
-            color: #495057;
-            padding: 10px 16px 10px 0;
-            /* width: auto; */
-            vertical-align: top;
-            position: relative;
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 0.5px;
-           
-        }
-
-        .spec-label::after {
-            content: '';
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 3px;
-          
-            border-radius: 50%;
-        }
-
-        .spec-value {
-            font-weight: 500;
-            color: #212529;
-             /* padding: 10px 0; */
-            font-size: 13px;
-            line-height: 1.4; 
-            text-align: left;
-
-    
-            
-            
-        }
-
-        .spec-value::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 2px;
-            /* margin-right: 12px; */
-            vertical-align: middle;
-            border-radius: 1px;
-        }
-
-        .details-info{
-/* width:95%;
-height: 95%; */
-/* background: red; */
-
-        }
-
-     .info-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            /* background: linear-gradient(135deg, white 0%, wheat 100%); */
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            /* justify-content: center; */
-            /* align-items: center; */
-        }
-
-        .info-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            pointer-events: none;
-        }
-
-        .details-info {
-            display: grid;
-            /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
-            gap: 10px;
-            /* height: 300px; */
-            /* align-items: center; */
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-text {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            transition: all 0.3s ease;
-            height: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            /* background: yellow; */
-          
-        }
-
-        .card-text h1,p{
-          color:black!important;
-          
-        }
-    
-
-        .card-text::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .card-text:hover::before {
-            left: 100%;
-        }
-
-        .card-text:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .card-text h1 {
-            color: #ffffff;
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-text p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Add icons for each service */
-        .card-text:nth-child(1)::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .card-text:nth-child(2)::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .card-text:nth-child(3)::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .card-text:nth-child(4)::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .spec-value {
-  padding-left: 0; /* remove left padding from the td */
-  vertical-align: top;
-  
-}
-.value-text{
-  display: inline-block; /* or block */
-  padding-left: 0;
-  text-indent: 0;
-  white-space: normal;
-  margin-top: -25px;
-}
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .info-section {
-                padding: 30px 20px;
-            }
-            
-            .details-info {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                height: auto;
-            }
-
-            .info-phone{
-              grid-template-columns: 1fr;
-              /* height: 400vh!important; */
-            }
-
-            .containerproductdetails{
-              height: 100%;
-              margin-top: 60px;
-            }
-
-            .card-text {
-                height: auto;
-                min-height: 120px;
-            }
-            
-            .card-text h1 {
-                font-size: 1.2rem;
-            }
-            
-            .card-text p {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .info-section {
-                padding: 20px 15px;
-            }
-            
-            .card-text {
-                padding: 20px;
-            }
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .spec-card {
-                padding: 24px;
-                margin: 0 16px;
-            }
-            
-            .spec-table {
-                font-size: 14px;
-            }
-            
-            .spec-label {
-                padding: 12px 16px 12px 0;
-                font-size: 11px;
-            }
-            
-            .spec-value {
-                padding: 12px 0;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .spec-table tr {
-                display: flex;
-                flex-direction: column;
-                padding: 16px 0;
-            }
-            
-            .spec-label {
-                width: 100%;
-                padding: 0 0 8px 0;
-                margin-bottom: 4px;
-            }
-            
-            .spec-value {
-                padding: 0;
-                margin-left: 0;
-            }
-        }
-
-        /* Accessibility enhancements */
-        .spec-table tr:focus-within {
-            background-color: rgba(102, 126, 234, 0.08);
-            outline: 2px solid #667eea;
-            outline-offset: 2px;
-        }
-
-        /* Print styles */
-        @media print {
-            .spec-card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                background: white;
-            }
-            
-            .spec-table tr:hover {
-                background-color: transparent;
-                transform: none;
-            }
-        }
+      .card-text {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="containerproductdetails" id="containerproductdetails">
+  <div class="containerproductdetails">
     <div class="info-phone">
       <div class="image-phone" id="imageContainer">
-        <img
-          src={source}
-          alt={name}
-        />
+        <img src={source} alt={name} />
         <div class="zoom-lens" id="zoomLens"></div>
       </div>
+
       <div class="image-content">
-
         <div class="phone-content">
-        <h1 class="name-title">
-           
-            {name} ({memory}; {camera}; {battery})
-        </h1>
+          <h1 class="name-title">{name} ({memory}; {camera}; {battery})</h1>
+          <h1 class="price-content"><s>{from}</s> <span>{deposit}</span></h1>
 
-        <h1 class="price-content">
-<s>{from}</s> <span style="color: green;">{deposit}</span>
-</h1>
-  
-
-
-<div class="spec-card">
-    <table class="spec-table">
-      <tr>
-        <td class="spec-label">Display</td>
-        <td class="spec-value">
-          
-         <div class="value-text">
-          6.7" HD+ (720 x 1600)
-
-         </div>
-
-
-        
-        </td>
-      </tr>
-      <tr>
-        <td class="spec-label">Processor</td>
-        <td class="spec-value">
-          
-          <div class="value-text">
-          {processor}
-
+          <div class="spec-card">
+            <table class="spec-table">
+              <tr><td class="spec-label">Display</td><td class="spec-value"><div class="value-text">6.7" HD+ (720 x 1600)</div></td></tr>
+              <tr><td class="spec-label">Processor</td><td class="spec-value"><div class="value-text">{processor}</div></td></tr>
+              <tr><td class="spec-label">Camera</td><td class="spec-value"><div class="value-text">{camera}</div></td></tr>
+              <tr><td class="spec-label">Storage</td><td class="spec-value"><div class="value-text">{memory}</div></td></tr>
+              <tr><td class="spec-label">Battery</td><td class="spec-value"><div class="value-text">{battery}</div></td></tr>
+              <tr><td class="spec-label">Version</td><td class="spec-value"><div class="value-text">Android 14 + 2 OS Upgrades; One UI 6.1</div></td></tr>
+              <tr><td class="spec-label">Deposit</td><td class="spec-value"><div class="value-text">{deposit} Daily Ksh {daily}</div></td></tr>
+              <tr><td>Warranty</td><td><div class="value-text">2 years</div></td></tr>
+            </table>
           </div>
-        
-        
-        </td>
-      </tr>
-      <tr>
-        <td class="spec-label">Camera</td>
-        <td class="spec-value">
-          
-          <div class="value-text">
-          {camera}
-
-          </div>
-        
-        
-        </td>
-      </tr>
-      <tr>
-        <td class="spec-label">Storage</td>
-        <td class="spec-value">
-
-          <div class="value-text">
-
-
-          {memory}
-
-          </div>
-
-        
-        </td>
-      </tr>
-  
-      <tr>
-        <td class="spec-label">Battery</td>
-        <td class="spec-value">
-
-          <div class="value-text">
-          {battery}
-
-          </div>
-        </td>
-      </tr>
-     <tr>
-        <td class="spec-label">Version</td>
-        <td class="spec-value">
-
-          <div class="value-text">
-         Android 14 + 2 OS Upgrades; One UI 6.1
-
-          </div>
-        </td>
-      </tr>
-
-         <tr>
-        <td class="spec-label">Deposit</td>
-        <td class="spec-value">
-
-          <div class="value-text">
-        {deposit} Daily Ksh {daily}
-
-          </div>
-        </td>
-      </tr>
-
-   
-      <tr>
-        <td>Warranty</td>
-        <td>
-             <div class="value-text">
-         2 years
-
-          </div>
-        </td>
-      </tr>
-    </table>
-</div>
-
         </div>
-     
       </div>
-
-
-
 
       <div class="info-section">
         <div class="details-info">
-
-          <div class="card-text">
-<h1>Free Delivery</h1>
-
-<div>
-  <p>
-    Free Deliveries for orders in Nairobi and Kiambu.
-  </p>
-</div>
-          </div>
-
-                 <div class="card-text">
-<h1>Payment on Delivery</h1>
-
-<div>
-  <p>
-  Pay Deposit after receiving your new smartphone.
-  </p>
-</div>
-          </div>
-
-          <div class="card-text">
-<h1>Same Day Delivery</h1>
-
-<div>
-  <p>
-Place an order and our rider is on the way to your place!
-  </p>
-</div>
-          </div>
-
-          <div class="card-text">
-<h1>2 Years Warranty</h1>
-
-<div>
-  <p>
-All our smartphones are backed up with a 24 months warranty.
-  </p>
-</div>
-          </div>
-
-
-
-
+          <div class="card-text"><h1>Free Delivery</h1><p>Free Deliveries for orders in Nairobi and Kiambu.</p></div>
+          <div class="card-text"><h1>Payment on Delivery</h1><p>Pay Deposit after receiving your new smartphone.</p></div>
+          <div class="card-text"><h1>Same Day Delivery</h1><p>Place an order and our rider is on the way to your place!</p></div>
+          <div class="card-text"><h1>2 Years Warranty</h1><p>All our smartphones are backed up with a 24 months warranty.</p></div>
         </div>
       </div>
     </div>
