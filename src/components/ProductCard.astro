@@ -1,6 +1,11 @@
 ---
-const { name, image,source,from, deposit, totalPrice,discount,display } = Astro.props;
+import ProductDetails from "./ProductDetails.astro";
+
+const { name, image,source,from, deposit, totalPrice,discount,display,slug } = Astro.props;
+
 ---
+
+
 
 
 <article class="card">
@@ -36,7 +41,11 @@ const { name, image,source,from, deposit, totalPrice,discount,display } = Astro.
     <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
   </div>
   <div class="orderdiv">
- <button>Order Now</button>
+
+   <a href={`/products/${slug}`}>
+      <button class="displaybutton">Order Now</button>
+    </a>
+ 
     <p>FREE Delivery    <i class="fa fa-check tick-icon"></i></p>
   </div>
  
@@ -283,3 +292,8 @@ color:white;
     transform: translateY(-5px);
   }
 </style>
+
+
+
+
+

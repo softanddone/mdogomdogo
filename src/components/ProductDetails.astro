@@ -1,11 +1,21 @@
+---
+
+const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,memory,camera,battery } = Astro.props;
+
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Image Hover</title>
+ 
   <style>
-    .container {
+    body{
+      font-family: 'Poppins', sans-serif;
+    }
+    .containerproductdetails {
       width: 98vw;
       height: 100vh;
     
@@ -15,17 +25,13 @@
       justify-content: center;
       align-items: center;
     }
-
     .info-phone {
       width: 80vw;
-      height: 80vh;
-   
+      height: 80%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
+     
     }
-
-    
-
     .image-phone {
       overflow: hidden;
       height: 80vh;
@@ -152,6 +158,7 @@
             border-collapse: collapse;
             font-size: 13px;
             color: #2c3e50;
+            /* background: red; */
         }
 
         .spec-table tr {
@@ -174,12 +181,13 @@
             font-weight: 600;
             color: #495057;
             padding: 10px 16px 10px 0;
-            width: 40%;
+            /* width: auto; */
             vertical-align: top;
             position: relative;
             text-transform: uppercase;
             font-size: 10px;
             letter-spacing: 0.5px;
+           
         }
 
         .spec-label::after {
@@ -197,9 +205,14 @@
         .spec-value {
             font-weight: 500;
             color: #212529;
-            padding: 10px 0;
+             /* padding: 10px 0; */
             font-size: 13px;
-            line-height: 1.4;
+            line-height: 1.4; 
+            text-align: left;
+
+    
+            
+            
         }
 
         .spec-value::before {
@@ -207,8 +220,7 @@
             display: inline-block;
             width: 6px;
             height: 2px;
-           
-            margin-right: 12px;
+            /* margin-right: 12px; */
             vertical-align: middle;
             border-radius: 1px;
         }
@@ -221,7 +233,7 @@ height: 95%;
      .info-section {
             max-width: 1200px;
             margin: 0 auto;
-            background: linear-gradient(135deg, white 0%, wheat 100%);
+            /* background: linear-gradient(135deg, white 0%, wheat 100%); */
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -352,6 +364,19 @@ height: 95%;
             opacity: 0.3;
         }
 
+        .spec-value {
+  padding-left: 0; /* remove left padding from the td */
+  vertical-align: top;
+  
+}
+.value-text{
+  display: inline-block; /* or block */
+  padding-left: 0;
+  text-indent: 0;
+  white-space: normal;
+  margin-top: -25px;
+}
+
         /* Responsive design */
         @media (max-width: 768px) {
             .info-section {
@@ -362,6 +387,16 @@ height: 95%;
                 grid-template-columns: 1fr;
                 gap: 20px;
                 height: auto;
+            }
+
+            .info-phone{
+              grid-template-columns: 1fr;
+              /* height: 400vh!important; */
+            }
+
+            .containerproductdetails{
+              height: 100%;
+              margin-top: 60px;
             }
 
             .card-text {
@@ -449,27 +484,15 @@ height: 95%;
                 transform: none;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="containerproductdetails" id="containerproductdetails">
     <div class="info-phone">
       <div class="image-phone" id="imageContainer">
         <img
-          src="./phones/Mkopa-X2-Atmos-Blue-1024x1024.webp"
-          alt="Samsung Galaxy Phone"
+          src={source}
+          alt={name}
         />
         <div class="zoom-lens" id="zoomLens"></div>
       </div>
@@ -477,43 +500,111 @@ height: 95%;
 
         <div class="phone-content">
         <h1 class="name-title">
-            Samsung A06 (128GB/4GB; 50MP Dual Camera; 5000mAh)
+           
+            {name} ({memory}; {camera}; {battery})
         </h1>
 
         <h1 class="price-content">
-  <s>KSh 4,000</s> <span style="color: green;">KSh 3,500</span>
+<s>{from}</s> <span style="color: green;">{deposit}</span>
 </h1>
+  
 
 
 <div class="spec-card">
     <table class="spec-table">
       <tr>
         <td class="spec-label">Display</td>
-        <td class="spec-value">6.7" HD+ (720 x 1600)</td>
+        <td class="spec-value">
+          
+         <div class="value-text">
+          6.7" HD+ (720 x 1600)
+
+         </div>
+
+
+        
+        </td>
       </tr>
       <tr>
         <td class="spec-label">Processor</td>
-        <td class="spec-value">2.0 GHz Octa-core</td>
+        <td class="spec-value">
+          
+          <div class="value-text">
+          {processor}
+
+          </div>
+        
+        
+        </td>
       </tr>
       <tr>
         <td class="spec-label">Camera</td>
-        <td class="spec-value">50MP + 2MP Dual</td>
+        <td class="spec-value">
+          
+          <div class="value-text">
+          {camera}
+
+          </div>
+        
+        
+        </td>
       </tr>
       <tr>
         <td class="spec-label">Storage</td>
-        <td class="spec-value">128GB / 64GB; MicroSD up to 1TB</td>
+        <td class="spec-value">
+
+          <div class="value-text">
+
+
+          {memory}
+
+          </div>
+
+        
+        </td>
       </tr>
-      <tr>
-        <td class="spec-label">RAM</td>
-        <td class="spec-value">4GB</td>
-      </tr>
+  
       <tr>
         <td class="spec-label">Battery</td>
-        <td class="spec-value">5,000mAh, 25W Fast Charging</td>
+        <td class="spec-value">
+
+          <div class="value-text">
+          {battery}
+
+          </div>
+        </td>
       </tr>
+     <tr>
+        <td class="spec-label">Version</td>
+        <td class="spec-value">
+
+          <div class="value-text">
+         Android 14 + 2 OS Upgrades; One UI 6.1
+
+          </div>
+        </td>
+      </tr>
+
+         <tr>
+        <td class="spec-label">Deposit</td>
+        <td class="spec-value">
+
+          <div class="value-text">
+        {deposit} Daily Ksh {daily}
+
+          </div>
+        </td>
+      </tr>
+
+   
       <tr>
-        <td class="spec-label">Software</td>
-        <td class="spec-value">Android 14 + 2 OS Upgrades; One UI 6.1</td>
+        <td>Warranty</td>
+        <td>
+             <div class="value-text">
+         2 years
+
+          </div>
+        </td>
       </tr>
     </table>
 </div>

@@ -1,0 +1,28 @@
+---
+import ProductDetails from '../../components/ProductDetails.astro';
+import { products } from '../../data/products';
+
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const product = products.find(p => p.slug === slug);
+
+if (!product) {
+  throw new Error("Product not found");
+}
+---
+
+<html lang="en">
+  <head>
+    <title>{product.name}</title>
+    <meta name="description" content={product.description} />
+  </head>
+  <body>
+    <ProductDetails {...product} />
+  </body>
+</html>
