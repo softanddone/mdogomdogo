@@ -34,7 +34,7 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
     }
     .image-phone {
       overflow: hidden;
-      height: 80vh;
+      /* height: 80vh; */
       position: relative;
       cursor: crosshair;
       background: #f8f8f8;
@@ -125,6 +125,9 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
         width: 80px;
         height: 80px;
       }
+      /* .image-phone{
+      width:70%;
+      } */
     }
 
 
@@ -226,8 +229,10 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
         }
 
         .details-info{
-width:95%;
-height: 95%;
+/* width:95%;
+height: 95%; */
+/* background: red; */
+
         }
 
      .info-section {
@@ -240,8 +245,8 @@ height: 95%;
             position: relative;
             overflow: hidden;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            /* justify-content: center; */
+            /* align-items: center; */
         }
 
         .info-section::before {
@@ -257,10 +262,10 @@ height: 95%;
 
         .details-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            height: 300px;
-            align-items: center;
+            /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
+            gap: 10px;
+            /* height: 300px; */
+            /* align-items: center; */
             position: relative;
             z-index: 1;
         }
@@ -273,12 +278,14 @@ height: 95%;
             padding: 24px;
             text-align: center;
             transition: all 0.3s ease;
-            height: 100%;
+            height: 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            /* background: yellow; */
+          
         }
 
         .card-text h1,p{
@@ -329,7 +336,7 @@ height: 95%;
 
         /* Add icons for each service */
         .card-text:nth-child(1)::after {
-            content: '🚚';
+            content: '';
             position: absolute;
             top: -10px;
             right: -10px;
@@ -338,7 +345,7 @@ height: 95%;
         }
 
         .card-text:nth-child(2)::after {
-            content: '💳';
+            content: '';
             position: absolute;
             top: -10px;
             right: -10px;
@@ -347,7 +354,7 @@ height: 95%;
         }
 
         .card-text:nth-child(3)::after {
-            content: '⚡';
+            content: '';
             position: absolute;
             top: -10px;
             right: -10px;
@@ -356,7 +363,7 @@ height: 95%;
         }
 
         .card-text:nth-child(4)::after {
-            content: '🛡️';
+            content: '';
             position: absolute;
             top: -10px;
             right: -10px;
