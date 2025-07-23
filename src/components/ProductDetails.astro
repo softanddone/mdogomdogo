@@ -251,6 +251,10 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       .card-text p {
         font-size: 0.9rem;
       }
+      body{
+        width:99vw;
+        overflow-x: hidden;
+      }
     }
 
     @media (max-width: 480px) {
@@ -260,6 +264,10 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
 
       .card-text {
         padding: 20px;
+      }
+        body{
+        width:99vw;
+        overflow-x: hidden;
       }
     }
   </style>
@@ -286,7 +294,8 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
               <tr><td class="spec-label">Battery</td><td class="spec-value"><div class="value-text">{battery}</div></td></tr>
               <tr><td class="spec-label">Version</td><td class="spec-value"><div class="value-text">Android 14 + 2 OS Upgrades; One UI 6.1</div></td></tr>
               <tr><td class="spec-label">Deposit</td><td class="spec-value"><div class="value-text">{deposit} Daily Ksh {daily}</div></td></tr>
-              <tr><td>Warranty</td><td><div class="value-text">2 years</div></td></tr>
+              <tr><td class="spec-label">Warranty</td><td class="spec-value"><div class="value-text">2 years</div></td></tr>
+              <tr><td class="order"> Order Now</td>  <td class="orderbywhatsapp"> Order through Whatsapp</td>    </tr>
             </table>
           </div>
         </div>

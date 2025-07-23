@@ -42,7 +42,11 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug } = A
       <a href={`/products/${slug}`}>
         <button class="displaybutton">Order Now</button>
       </a>
-      <p>FREE Delivery <i class="fa fa-check tick-icon"></i></p>
+
+       <a href={`/products/${slug}`}>
+        <button class="displaybutton more-info">More Info</button>
+      </a>
+      <!-- <p>FREE Delivery <i class="fa fa-check tick-icon"></i></p> -->
     </div>
   </div>
 </article>
@@ -98,6 +102,11 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug } = A
 
   * {
     box-sizing: border-box;
+  }
+
+  .more-info{
+    background: wheat!important;
+    color: #1c1c1c!important;
   }
 
   body {
