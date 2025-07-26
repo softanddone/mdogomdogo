@@ -1,9 +1,7 @@
 ---
 
 const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,memory,camera,battery } = Astro.props;
-
 ---
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,30 +9,43 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Image Hover</title>
   <style>
-    body {
+    body, html {
       font-family: 'Poppins', sans-serif;
       background-color: #fdfdfd;
-      width: 100vw;
-      overflow-x: hidden;
-    }
+    
+   margin: 0;
+   padding: 0;
+  width: 100%;
+  max-width: 100vw!important;
+  overflow-x: hidden!important;
 
+    }
     .containerproductdetails {
-      width: 98vw;
+      
       height: 100vh;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+
+
+       width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
     }
 
     .info-phone {
-      width: 80vw;
+      /* width: 80vw; */
       height: 80%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-    }
 
+        width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+
+    }
     .image-phone {
       overflow: hidden;
       position: relative;
@@ -42,7 +53,6 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       background: #f2f2f5;
       transition: all 0.3s ease;
     }
-
     .image-phone img {
       width: 100%;
       height: 100%;
@@ -50,11 +60,9 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       transition: transform 0.3s ease;
       transform-origin: center;
     }
-
     .image-phone:hover img {
       transform: scale(2);
     }
-
     .image-phone::before {
       content: '';
       position: absolute;
@@ -68,11 +76,9 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       pointer-events: none;
       z-index: 1;
     }
-
     .image-phone:hover::before {
       opacity: 1;
     }
-
     .zoom-lens {
       position: absolute;
       width: 120px;
@@ -101,52 +107,50 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       width: 95%;
       height: 95%;
     }
-
     .phone-content .name-title,
     .phone-content .price-content {
       font-size: 18px;
       text-align: center;
     }
-
     .price-content s {
       color: #a0a0a0;
     }
-
     .price-content span {
       color: #b07f31;
     }
-
     .spec-card {
       background: linear-gradient(135deg, #ffffff 0%, #f9f9fa 100%);
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
       padding: 20px;
-      width: 300px;
+      /* width: 300px; */
+
+       width: 100%;
+       max-width: 300px;
+
       max-height: 300px;
       margin: 0 auto;
       border: 1px solid #eaeaea;
       backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
-    }
 
+       
+    }
     .spec-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
       color: #2c2c2e;
     }
-
     .spec-table tr {
       border-bottom: 1px solid #e9ecef;
       transition: all 0.3s ease;
     }
-
     .spec-table tr:hover {
       background-color: rgba(176, 127, 49, 0.05);
       transform: translateX(4px);
     }
-
     .spec-label {
       font-weight: 600;
       color: #6c757d;
@@ -156,7 +160,6 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       text-transform: uppercase;
       position: relative;
     }
-
     .spec-value {
       font-weight: 500;
       color: #2a2a2a;
@@ -166,30 +169,42 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       padding-left: 0;
       vertical-align: top;
     }
-
     .value-text {
       display: inline-block;
       margin-top: -25px;
     }
 
     .info-section {
-      max-width: 1200px;
+      /* max-width: 1200px; */
       margin: 0 auto;
       border-radius: 16px;
       padding: 40px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
       position: relative;
       overflow: hidden;
-      display: flex;
+      /* display: flex; */
+
+
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
     }
 
     .details-info {
-      display: grid;
+      /* display: grid;
       gap: 10px;
       position: relative;
-      z-index: 1;
-    }
+      z-index: 1; */
 
+
+       display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+
+    }
     .card-text {
       background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(10px);
@@ -203,42 +218,48 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       flex-direction: column;
       justify-content: center;
       position: relative;
-    }
 
+      width: 100%;
+  max-width: 300px;
+
+
+    }
     .card-text:hover {
       transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
       border-color: rgba(176, 127, 49, 0.3);
     }
-
     .card-text h1 {
       color: #2a2a2a;
       font-size: 1.4rem;
       font-weight: 600;
       margin-bottom: 12px;
     }
-
     .card-text p {
       color: #4b4b4b;
       font-size: 0.95rem;
       line-height: 1.5;
     }
-
     @media (max-width: 768px) {
       .info-phone {
         grid-template-columns: 1fr;
+            width: 100%;
+  max-width: 80vw;
+  overflow-x: hidden;
       }
-
       .containerproductdetails {
         height: 100%;
         margin-top: 60px;
-      }
 
+
+
+
+
+      }
       .info-section {
         padding: 30px 20px;
       }
-
       .card-text {
         min-height: 120px;
         height: auto;
@@ -252,8 +273,8 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
         font-size: 0.9rem;
       }
       body{
-        width:99vw;
-        overflow-x: hidden;
+       max-width: 100vw;
+  overflow-x: hidden;
       }
     }
 
@@ -261,13 +282,12 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
       .info-section {
         padding: 20px 15px;
       }
-
       .card-text {
         padding: 20px;
       }
         body{
-        width:99vw;
-        overflow-x: hidden;
+       max-width: 100vw;
+  overflow-x: hidden;
       }
     }
   </style>
@@ -300,7 +320,6 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
           </div>
         </div>
       </div>
-
       <div class="info-section">
         <div class="details-info">
           <div class="card-text"><h1>Free Delivery</h1><p>Free Deliveries for orders in Nairobi and Kiambu.</p></div>
@@ -322,16 +341,12 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
         const rect = imageContainer.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
         const lensX = x - zoomLens.offsetWidth / 2;
         const lensY = y - zoomLens.offsetHeight / 2;
-
         zoomLens.style.left = lensX + 'px';
         zoomLens.style.top = lensY + 'px';
-
         const originX = (x / rect.width) * 100;
         const originY = (y / rect.height) * 100;
-
         img.style.transformOrigin = `${originX}% ${originY}%`;
       });
 

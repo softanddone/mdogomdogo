@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard.astro";
 import Nav from "../components/Nav.astro";
 import ProductDetails from "../components/ProductDetails.astro";
 import { products } from "../data/products";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <!-- ---
@@ -68,22 +69,12 @@ import { products } from "../data/products.js";
   </body>
 </html> -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-<Nav></Nav>
+
+
+<Layout>
+  <Nav></Nav>
   <Welcome/>
-
-  <!-- <ProductDetails {...products} /> -->
-
-  
-</body>
-</html>
+</Layout>
 
 
 
