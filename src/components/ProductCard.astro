@@ -1,6 +1,6 @@
 ---
 
-const { name, image,source,from, deposit, totalPrice,discount,display,slug } = Astro.props;
+const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs } = Astro.props;
 
 ---
 
@@ -39,7 +39,7 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug } = A
     </div>
 
     <div class="orderdiv">
-      <a href={`/products/${slug}`}>
+ <a href={`/checkout/${slugs}`}>
         <button class="displaybutton">Order Now</button>
       </a>
 

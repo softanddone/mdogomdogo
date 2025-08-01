@@ -1,0 +1,970 @@
+---
+
+const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,memory,camera,battery } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Complete Your Order</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+       .orderbywhatsapp {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  font-family: "Segoe UI", sans-serif;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.orderbywhatsapp h1 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.orderbywhatsapp a {
+  display: inline-block;
+  background-color: #25D366;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.orderbywhatsapp a:hover {
+  background-color: #1ebe5d;
+}
+        
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e2e8f0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+            border: 3px solid #e2e8f0;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .step-circle.completed {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .step-circle.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .step-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+        }
+        
+        .step-text.active {
+            color: #667eea;
+        }
+        
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .success-message i {
+            font-size: 24px;
+        }
+        
+        .success-message .message-content h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .success-message .message-content p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .success-message a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+        
+        /* Main Content */
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .billing-section, .order-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1e293b;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        select {
+            cursor: pointer;
+        }
+        
+        .country-info {
+            background: #f8fafc;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        /* Order Summary */
+        .product-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            /* background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #94a3b8;
+            font-size: 24px;
+            overflow: hidden;
+        }
+  .product-image img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+        
+        .product-details {
+            flex: 1;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+        
+        .product-variant {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        
+        .product-quantity {
+            font-size: 14px;
+            color: #64748b;
+        }
+        
+        .product-price {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 18px;
+        }
+        
+        /* Summary Totals */
+        .order-totals {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #f1f5f9;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .total-row:last-child {
+            margin-bottom: 0;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .total-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .total-value {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .shipping-free {
+            color: #10b981;
+            font-weight: 600;
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            margin-top: 30px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: #667eea;
+            background: #f8fafc;
+        }
+        
+        .payment-option input[type="radio"] {
+            width: auto;
+            margin-right: 12px;
+        }
+        
+        .payment-option label {
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+        
+        .payment-option.selected {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .payment-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .payment-details small {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .orderbywhatsapp{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .orderbywhatsapp h1{
+            font-size: 20px;
+        }
+        
+        .payment-info-banner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .payment-info-banner i {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .payment-info-banner p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Action Buttons */
+        .checkout-actions, .order-actions {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .order-actions {
+            margin-top: 25px;
+            padding: 20px 0 0 0;
+            background: transparent;
+            box-shadow: none;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8fafc;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        
+        /* Security Badge */
+        .security-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #166534;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .faq-item {
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .faq-question i {
+            color: #667eea;
+            font-size: 18px;
+            width: 20px;
+        }
+
+        
+        .faq-question h4 {
+            margin: 0;
+            color: #1e293b;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .faq-item p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding-top: 25px;
+            border-top: 2px solid #f1f5f9;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .contact-item i {
+            color: #10b981;
+            font-size: 20px;
+            width: 24px;
+        }
+        
+        .contact-item strong {
+            color: #1e293b;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .contact-item p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .progress-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .progress-bar::before,
+            .progress-bar::after {
+                display: none;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .billing-section, .order-summary, .checkout-actions, .faq-section {
+                padding: 20px;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-step">
+                    <div class="step-circle completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="step-text">Shopping Cart</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle active">2</div>
+                    <div class="step-text active">Checkout</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <div class="step-text">Order Complete</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <div class="message-content">
+                <h3>Item Added Successfully!</h3>
+                <p>{name} added to your cart. 
+                   <a href="#">Continue Shopping</a> or complete your checkout below.
+                </p>
+            </div>
+        </div>
+
+        <!-- Main Checkout Content -->
+        <div class="checkout-content">
+            <!-- Billing Details -->
+            <div class="billing-section">
+
+
+                <div class="orderbywhatsapp">
+<h1>You can Order through Whatsapp and pay after delivery</h1>
+<a href="">Order by  WhatsApp pay on Delivery</a>
+
+<h1>Or Fill the Details below</h1>
+                </div>
+
+                <h2 class="section-title">Billing Details</h2>
+                
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <div class="country-info">
+                            <i class="fas fa-flag"></i> Kenya
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="county">County *</label>
+                        <select name="county" id="county" required>
+                            <option value="">--Select County--</option>
+                            <option value="Baringo">Baringo</option>
+                            <option value="Bomet">Bomet</option>
+                            <option value="Bungoma">Bungoma</option>
+                            <option value="Busia">Busia</option>
+                            <option value="Elgeyo-Marakwet">Elgeyo-Marakwet</option>
+                            <option value="Embu">Embu</option>
+                            <option value="Garissa">Garissa</option>
+                            <option value="Homa Bay">Homa Bay</option>
+                            <option value="Isiolo">Isiolo</option>
+                            <option value="Kajiado">Kajiado</option>
+                            <option value="Kakamega">Kakamega</option>
+                            <option value="Kericho">Kericho</option>
+                            <option value="Kiambu">Kiambu</option>
+                            <option value="Kilifi">Kilifi</option>
+                            <option value="Kirinyaga">Kirinyaga</option>
+                            <option value="Kisii">Kisii</option>
+                            <option value="Kisumu">Kisumu</option>
+                            <option value="Kitui">Kitui</option>
+                            <option value="Kwale">Kwale</option>
+                            <option value="Laikipia">Laikipia</option>
+                            <option value="Lamu">Lamu</option>
+                            <option value="Machakos">Machakos</option>
+                            <option value="Makueni">Makueni</option>
+                            <option value="Mandera">Mandera</option>
+                            <option value="Marsabit">Marsabit</option>
+                            <option value="Meru">Meru</option>
+                            <option value="Migori">Migori</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Murang'a">Murang'a</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Nakuru">Nakuru</option>
+                            <option value="Nandi">Nandi</option>
+                            <option value="Narok">Narok</option>
+                            <option value="Nyamira">Nyamira</option>
+                            <option value="Nyandarua">Nyandarua</option>
+                            <option value="Nyeri">Nyeri</option>
+                            <option value="Samburu">Samburu</option>
+                            <option value="Siaya">Siaya</option>
+                            <option value="Taita-Taveta">Taita-Taveta</option>
+                            <option value="Tana River">Tana River</option>
+                            <option value="Tharaka-Nithi">Tharaka-Nithi</option>
+                            <option value="Trans Nzoia">Trans Nzoia</option>
+                            <option value="Turkana">Turkana</option>
+                            <option value="Uasin Gishu">Uasin Gishu</option>
+                            <option value="Vihiga">Vihiga</option>
+                            <option value="Wajir">Wajir</option>
+                            <option value="West Pokot">West Pokot</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Street Address *</label>
+                        <input type="text" id="address" name="address" placeholder="House number and street name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apartment">Apartment, suite, etc. (optional)</label>
+                        <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, unit, etc.">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+254 700 000 000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="altPhone">Alternative Phone</label>
+                            <input type="tel" id="altPhone" name="altPhone" placeholder="+254 700 000 000">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Order Notes (optional)</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                    </div>
+                </form>
+
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <h3 class="section-title">Payment Method</h3>
+                    
+                    <div class="payment-info-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Pay on Delivery Available!</strong>
+                            <p>You can order now and pay via M-Pesa when your item is delivered to you.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-option selected">
+                        <input type="radio" id="mpesa-delivery" name="payment" value="mpesa-delivery" checked>
+                        <label for="mpesa-delivery">
+                            <i class="fas fa-mobile-alt" style="color: #10b981;"></i>
+                            <div class="payment-details">
+                                <strong>M-Pesa on Delivery</strong>
+                                <small>Pay via M-Pesa when your order arrives</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2 class="section-title">Your Order</h2>
+                
+                <div class="product-item">
+                    <div class="product-image">
+                        <!-- <i class="fas fa-image"></i> -->
+                         <img src={source} alt="">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-name">{name}</div>
+                        <div class="product-variant">Color: Black | Size: One Size</div>
+                        <div class="product-quantity">Quantity: 1</div>
+                    </div>
+                    <div class="product-price">{deposit}</div>
+                </div>
+
+                <div class="order-totals">
+                    <div class="total-row">
+                        <span class="total-label">Subtotal:</span>
+                        <span class="total-value">{deposit}</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Shipping:</span>
+                        <span class="total-value shipping-free">Free Shipping</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Tax:</span>
+                        <span class="total-value">NA</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Total:</span>
+                        <span class="total-value">{deposit}</span>
+                    </div>
+                </div>
+
+                <div class="security-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Your payment information is secure and encrypted</span>
+                </div>
+
+                <!-- Checkout Actions -->
+              
+            </div>
+        </div>
+
+
+
+        <div>
+
+  <div class="order-actions">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i>
+                            Return to Cart
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-shopping-bag"></i>
+                            Order Now - Pay on Delivery
+                        </button>
+                    </div>
+                </div>
+
+        </div>
+
+
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>How does M-Pesa on Delivery work?</h4>
+                    </div>
+                    <p>You place your order now without payment. When your item is delivered, you'll pay the delivery person via M-Pesa using your phone.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-truck"></i>
+                        <h4>How long does delivery take?</h4>
+                    </div>
+                    <p>We deliver within 1-3 business days in Nairobi and major towns. Remote areas may take 3-5 business days.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>What if I'm not satisfied with my order?</h4>
+                    </div>
+                    <p>You can inspect your item before payment. If not satisfied, you can refuse delivery. We also offer 7-day returns on unopened items.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-phone"></i>
+                        <h4>What if I'm not available during delivery?</h4>
+                    </div>
+                    <p>Our delivery team will call you before arrival. If unavailable, we'll reschedule for a convenient time at no extra cost.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h4>Are there any extra charges?</h4>
+                    </div>
+                    <p>No hidden fees! The price shown is final. Free delivery within major towns. Remote areas may have small delivery charges.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-undo"></i>
+                        <h4>Can I cancel my order?</h4>
+                    </div>
+                    <p>Yes! You can cancel anytime before dispatch. Call us or WhatsApp and we'll cancel immediately with no charges.</p>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Call Us:</strong>
+                        <p>+254 700 000 000</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>WhatsApp:</strong>
+                        <p>+254 700 000 000</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email:</strong>
+                        <p>support@yourstore.co.ke</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

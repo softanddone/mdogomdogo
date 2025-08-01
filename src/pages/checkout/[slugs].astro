@@ -1,17 +1,17 @@
 ---
+import CheckComp from '../../components/CheckComp.astro';
 import Nav from '../../components/Nav.astro';
-import ProductDetails from '../../components/ProductDetails.astro';
 import { products } from '../../data/products';
 
 
 export async function getStaticPaths() {
   return products.map((product) => ({
-    params: { slug: product.slug },
+    params: { slugs: product.slugs },
   }));
 }
 
-const { slug } = Astro.params;
-const product = products.find(p => p.slug === slug);
+const { slugs } = Astro.params;
+const product = products.find(p => p.slugs === slugs);
 
 if (!product) {
   throw new Error("Product not found");
@@ -34,6 +34,6 @@ body{
   </head>
   <body>
      <Nav></Nav>
-    <ProductDetails {...product} />
+    <CheckComp {...product} />
   </body>
 </html>

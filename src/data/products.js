@@ -19,6 +19,7 @@ export const products = [
     version:"Android 14TM",
     depositanddaily:"Ksh 5499 Daily Ksh 95",
     slug: "sumsung-galaxy-a16",
+      slugs: "sumsung-galaxy-a16",
     description:"Buy Samsung Galaxy A16 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more"
   },
   {
@@ -42,6 +43,7 @@ export const products = [
  version:"Android 14TM",
      depositanddaily:"Ksh 3999 Daily Ksh 67",
      slug: "sumsung-galaxy-a06",
+        slugs: "sumsung-galaxy-a06",
      description:"Buy Samsung Galaxy A06 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Delivery by MKOPA, Watu Simu & others"
   },
 {
@@ -64,6 +66,7 @@ export const products = [
          version:"Android 14TM",
              depositanddaily:"Ksh 3099 Daily Ksh 65",
              slug: "sumsung-galaxy-a05",
+               slugs: "sumsung-galaxy-a05",
              description:"Get Samsung Galaxy A05 on lipa mdogo mdogo in Nairobi. Pay a small deposit, then daily. Trusted sellers like MKOPA, Ulephone, Watu Simu & more"
   },
 
@@ -87,6 +90,7 @@ export const products = [
       version:"Android 14TM",
     depositanddaily:"Ksh 3299 Daily Ksh 72",
     slug: "hmd-mkopa-x2",
+       slugs: "hmd-mkopa-x2",
     description:"Get MKOPA X2 on lipa mdogo mdogo in Nairobi Kenya. Pay little deposit and daily. Order online and get delivered by MKOPA"
 
     
@@ -112,6 +116,7 @@ export const products = [
        version:"Android 14TM",
            depositanddaily:"Ksh 4199 Daily Ksh 90",
            slug: "hmd-mkopa-x20",
+             slugs: "hmd-mkopa-x20",
            description:"Buy MKOPA X20 in Kenya on credit. Lipa mdogo mdogo with deposit + daily payments. Supplied by MKOPA. Fast Nairobi delivery"
 
   },
@@ -119,7 +124,7 @@ export const products = [
       {
     id: 6,
     name: "Mkopa HMD M10",
-    image: "/phones/phone1.jpg",
+    image: "/phones/samsung-a15.png",
     from:"Ksh 3500",
     deposit: "Ksh 2799",
     daily:"62",
@@ -134,8 +139,60 @@ export const products = [
          battery:"5,000mAh, 25W Fast Charging",
          version:"Android 14TM",
          slug: "hmd-mkopa-m10",
+           slugs: "hmd-mkopa-m10",
          description:"Order MKOPA M10 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA"
   },
+
+
+
+
+     {
+    id: 7,
+    name: "Samsung A25",
+    image: "/phones/samsung-a25.png",
+    from:"Ksh 3500",
+    deposit: "Ksh 8799",
+    daily:"62",
+     status:"new",
+    totalPrice: "Ksh 12,999",
+     source:"/phones/samsung-a25.png",
+      discount:"-8%",
+      display:"none",
+         phonedisplay:"6.5 HD+ (720 x 1600)",
+         processor:"Unisoc SC9863A",
+         camera:"50MP Rear + 13MP Front",
+         battery:"5,000mAh, 25W Fast Charging",
+         version:"Android TM 14",
+         slug: "samsung a25",
+               slugs: "samsung a25",
+         description:"Order Samsung A25 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA"
+  },
+
+
+
+       {
+    id: 8,
+    name: "Samsung A15",
+    image: "/phones/samsung-a15.png",
+    from:"Ksh 3500",
+    deposit: "Ksh 7799",
+    daily:"62",
+     status:"new",
+    totalPrice: "Ksh 12,999",
+     source:"/phones/samsung-a15.png",
+      discount:"-8%",
+      display:"none",
+         phonedisplay:"6.5 HD+ (720 x 1600)",
+         processor:"Unisoc SC9863A",
+         camera:"50MP Rear + 13MP Front",
+         battery:"5,000mAh, 25W Fast Charging",
+         version:"Android TM 14",
+         slug: "samsung a15",
+           slugs: "samsung a15",
+         description:"Order Samsung A15 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA"
+  },
+
+
 
   //       {
   //   id: 7,

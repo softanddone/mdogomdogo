@@ -1,0 +1,35 @@
+---
+import Nav from "../components/Nav.astro";
+import CheckComp from "../components/CheckComp.astro";
+import { products } from '../data/products';
+
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slugs: product.slugs },
+  }));
+}
+
+const { slugs } = Astro.params;
+const product = products.find(p => p.slugs === slugs);
+
+if (!product) {
+  throw new Error("Product not found");
+}
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <Nav></Nav>
+    <CheckComp {...products}></CheckComp>
+    
+</body>
+</html>
