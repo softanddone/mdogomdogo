@@ -1,9 +1,12 @@
 ---
+import Layout from "../layouts/Layout.astro";
+
 
 const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,memory,camera,battery } = Astro.props;
 ---
 
-
+<Layout>
+    
      <style>
         /* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"); */
         
@@ -969,3 +972,6 @@ const { name, image,source,from, deposit,processor,daily, totalPrice,discount,di
             </div>
         </div>
     </div>
+
+</Layout>
+    

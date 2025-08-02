@@ -1,7 +1,12 @@
 ---
+import Layout from "../layouts/Layout.astro";
+
 
 const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,slugs,memory,camera,battery } = Astro.props;
 ---
+
+
+<Layout>
 
   <style>
     body, html {
@@ -367,3 +372,7 @@ height: 70%;
     }
   </script>
 
+
+  
+</Layout>
+  
