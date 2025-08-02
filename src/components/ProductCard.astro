@@ -4,55 +4,8 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
 
 ---
 
-
-
-
-<article class="card">
-  <div class="card__img">
-    <div class="lebo1"><h4>{discount}</h4></div>
-
-    <div class="lebo2" style={`display: ${display};`}>
-      <h4 class="hot" style={`display: ${display};`}>Hot</h4>
-    </div>
-
-    <img src={source} alt="" />
-  </div>
-
-  <div class="card__name">
-    <div class="card__precis">
-      <a href="" class="card__icon"><ion-icon name="heart-outline"></ion-icon></a>
-
-      <div class="taginfo">
-        <h1 class="phonename">{name}</h1>
-        <span class="card__preci card__preci--before">{from}</span>
-        <span class="card__preci card__preci--now"> Deposit {deposit}</span>
-      </div>
-
-      <div class="pfon">
-        <span class="statusitem">
-          <i class="fa fa-check tick-icon"></i>
-          In stock
-        </span>
-      </div>
-
-      <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
-    </div>
-
-    <div class="orderdiv">
- <a href={`/checkout/${slugs}`}>
-        <button class="displaybutton">Order Now</button>
-      </a>
-
-       <a href={`/products/${slug}`}>
-        <button class="displaybutton more-info">More Info</button>
-      </a>
-      <!-- <p>FREE Delivery <i class="fa fa-check tick-icon"></i></p> -->
-    </div>
-  </div>
-</article>
-
 <style>
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+  /* @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"); */
 
   :root {
     --first-color: #fdfaf5;
@@ -278,3 +231,51 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     transform: translateY(-5px);
   }
 </style>
+
+
+
+<article class="card">
+  <div class="card__img">
+    <div class="lebo1"><h4>{discount}</h4></div>
+
+    <div class="lebo2" style={`display: ${display};`}>
+      <h4 class="hot" style={`display: ${display};`}>Hot</h4>
+    </div>
+
+    <img src={source} alt="" />
+  </div>
+
+  <div class="card__name">
+    <div class="card__precis">
+      <a href="" class="card__icon"><ion-icon name="heart-outline"></ion-icon></a>
+
+      <div class="taginfo">
+        <h1 class="phonename">{name}</h1>
+        <span class="card__preci card__preci--before">{from}</span>
+        <span class="card__preci card__preci--now"> Deposit {deposit}</span>
+      </div>
+
+      <div class="pfon">
+        <span class="statusitem">
+          <i class="fa fa-check tick-icon"></i>
+          In stock
+        </span>
+      </div>
+
+      <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
+    </div>
+
+    <div class="orderdiv">
+ <a href={`/checkout/${slugs}`}>
+        <button class="displaybutton">Order Now</button>
+      </a>
+
+       <a href={`/products/${slug}`}>
+        <button class="displaybutton more-info">More Info</button>
+      </a>
+      <!-- <p>FREE Delivery <i class="fa fa-check tick-icon"></i></p> -->
+    </div>
+  </div>
+</article>
+
+
