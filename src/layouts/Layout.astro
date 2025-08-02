@@ -1,22 +1,74 @@
 ---
-// src/layouts/Layout.astro
-const { title = "Lipa Mdogo Mdogo Phones" } = Astro.props;
+// export interface Props {
+//   title?: string;
+//   description?: string;
+//   image?: string;
+//   url?: string;
+// }
+
+
+const {
+ title = "Mdogomdogo Deals Kenya | Lipa Mdogo Mdogo Phones Nairobi, Kiambu & Beyond",
+  description = "Buy affordable smartphones on Lipa Mdogo Mdogo in Nairobi and Kiambu. Get Samsung, Infinix, Itel, Tecno, and more with home delivery. Pay slowly, own it easily.",
+  canonical = "https://mdogomdogodeals.co.ke",
+  ogImage = "https://mdogomdogodeals.co.ke/phones/samsung-a15.png",
+  ogType = "website",
+  ogLocale = "en_KE",
+  twitterCard = "summary_large_image",
+  schema
+} = Astro.props;
+
+const keywords = [
+  "lipa mdogo mdogo phones", "simu za kulipa polepole", "affordable smartphones",
+  "cheap smartphones", "get smartphones in nairobi", "m-kopa", "watu", "ulephone",
+  "chukua simu lipa polepole", "cheap samsung", "affordable samsung", "hmd phone",
+  "mkopa phone", "watu phones online", "phone online delivery", "samsung lipa mdogo mdogo",
+  "itel lipa mdogo mdogo", "infinix lipa mdogo mdogo", "buy phone on credit in kenya",
+  "phone lipa polepole", "simu kwa malipo polepole", "phones for sale in nairobi",
+  "budget phones kenya", "cheap android phones nairobi", "phones with delivery",
+  "lipa mdogo mdogo nairobi", "kiambu phone offers", "installment phones kenya"
+].join(", ");
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
 
-    <!-- Optional: external fonts/icons -->
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:url" content={canonical} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" />
+
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
 
     <!-- Optional: custom head content from page -->
     <slot name="head" />
     
+
+
     <style>
       :global(html),
       :global(body) {
