@@ -1,6 +1,6 @@
 ---
 
-const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,memory,camera,battery } = Astro.props;
+const { name, image,source,from, deposit,processor,daily, totalPrice,discount,display,slug,slugs,memory,camera,battery } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -323,13 +323,14 @@ height: 70%;
               <tr><td class="spec-label">Version</td><td class="spec-value"><div class="value-text">Android 14 + 2 OS Upgrades; One UI 6.1</div></td></tr>
               <tr><td class="spec-label">Deposit</td><td class="spec-value"><div class="value-text">{deposit} Daily Ksh {daily}</div></td></tr>
               <tr><td class="spec-label">Warranty</td><td class="spec-value"><div class="value-text">2 years</div></td></tr>
-              <tr><td class="order"> </td>  <td class="orderbywhatsapp"> <a href="https://wa.me/254762790513?text=Hello%2C%20I'm%20interested%20in%20your%20products" 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   style="background-color: rgb(33, 33, 252); color: white; padding:5px;border-radius: 5px;  box-shadow: 0 2px 6px rgba(0,0,0,0.2); text-decoration: none;  z-index: 1;" 
-   aria-label="Chat with us on WhatsApp">
-Order Now. Pay on Delivery
-</a>
+              <tr><td class="order"> </td>  <td class="orderbywhatsapp"> 
+                
+          
+ <a href={`/checkout/${slugs}`}
+ style="background: rgb(33, 33, 252); color: white; padding:5px;border-radius: 5px;  box-shadow: 0 2px 6px rgba(0,0,0,0.2); text-decoration: none;  z-index: 1;" 
+ >
+    Order Now. Pay on Delivery
+      </a>
 
 </td>    </tr>
             </table>
