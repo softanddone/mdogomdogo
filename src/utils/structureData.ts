@@ -7,15 +7,16 @@ export function generateProductSchema(product: {
   totalPrice: string;
   source: string;
 }) {
-  const price = product.totalPrice.replace(/[^\d.]/g, ''); // Remove Ksh and commas
+  const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, '')); // Convert to number
   const depositAmount = product.deposit.replace(/[^\d.]/g, '');
   const dailyAmount = product.daily.replace(/[^\d.]/g, '');
 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `https://mdogomdogodeals.co.ke/phones/${product.slug}`, // Add unique ID
     name: product.name,
-    image: [`https://mdogomdogodeals.co.ke${product.source}`],
+    image: `https://mdogomdogodeals.co.ke${product.source}`, // Single image instead of array
     description: product.description,
     sku: product.slug,
     mpn: product.slug,
@@ -25,15 +26,17 @@ export function generateProductSchema(product: {
     },
     offers: {
       '@type': 'Offer',
+      '@id': `https://mdogomdogodeals.co.ke/phones/${product.slug}#offer`,
       url: `https://mdogomdogodeals.co.ke/phones/${product.slug}`,
       priceCurrency: 'KES',
-      price: price,
+      price: price, // Now a number
       priceValidUntil: '2025-12-31',
       itemCondition: 'https://schema.org/NewCondition',
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',
         name: 'Mdogomdogo Deals',
+        url: 'https://mdogomdogodeals.co.ke'
       },
     },
     additionalProperty: [

@@ -1,11 +1,7 @@
----
-// export interface Props {
-//   title?: string;
-//   description?: string;
-//   image?: string;
-//   url?: string;
-// }
 
+---
+// Import your schema function
+import { generateProductSchema } from '../utils/structureData';
 
 const {
  title = "Mdogomdogo Deals Kenya | Lipa Mdogo Mdogo Phones Nairobi, Kiambu & Beyond",
@@ -15,7 +11,8 @@ const {
   ogType = "website",
   ogLocale = "en_KE",
   twitterCard = "summary_large_image",
-  schema
+  product, // Add product prop for schema generation
+  schema // Optional: pre-generated schema
 } = Astro.props;
 
 const keywords = [
@@ -28,6 +25,14 @@ const keywords = [
   "budget phones kenya", "cheap android phones nairobi", "phones with delivery",
   "lipa mdogo mdogo nairobi", "kiambu phone offers", "installment phones kenya"
 ].join(", ");
+
+// Generate schema if product data is provided
+let generatedSchema = '';
+if (product) {
+  generatedSchema = generateProductSchema(product);
+} else if (schema) {
+  generatedSchema = schema;
+}
 ---
 
 <!DOCTYPE html>
@@ -56,18 +61,16 @@ const keywords = [
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.ico" />
-    <title>{title}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" />
 
-
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-
+    <!-- JSON-LD Structured Data -->
+    {generatedSchema && (
+      <script type="application/ld+json" set:html={generatedSchema}></script>
+    )}
 
     <!-- Optional: custom head content from page -->
     <slot name="head" />
-    
-
 
     <style>
       :global(html),
