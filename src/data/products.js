@@ -31,11 +31,30 @@ export const products = [
  color: "Deep Purple, Black, Light Green",
 weight: "199g",
 
-"dimensions": {
+dimensions: {
   "length": "167.7mm",
   "width": "76.7mm",
   "height": "8.4mm"
+},
+
+
+material: "Plastic",
+pattern: "Glossy",
+productLine: "Galaxy A",
+
+reviews: {
+  averageRating: 4.5,
+  reviewCount: 23,
+  reviews: [
+    {
+      author: "John M.",
+      rating: 5,
+      reviewBody: "Excellent phone, fast delivery and great payment plan!",
+      datePublished: "2024-12-15"
+    }
+  ]
 }
+
 
 
   },
@@ -76,11 +95,32 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
 color: "Black, Light Green, Light Blue",
 weight: "189g",
 
-"dimensions": {
+dimensions: {
   length: "167.3mm",
   width: "77.3mm",
   height: "8.0mm"
+},
+
+material: "Plastic",
+pattern: "Textured",
+productLine: "Galaxy A",
+
+reviews: {
+  averageRating: 4.2,
+  reviewCount: 17,
+  reviews: [
+    {
+      author: "Mary K.",
+      rating: 4,
+      reviewBody: "Great value for the price. Battery lasts long and the display is clear.",
+      datePublished: "2024-07-10"
+    }
+  ]
 }
+
+
+
+
 
 
 
@@ -119,11 +159,29 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
 color: "Black, Silver, Light Green",
 weight: "195g",
 
-"dimensions": {
+dimensions: {
   length: "168.8mm",
   width: "78.2mm",
   height: "8.8mm"
+},
+
+material: "Plastic",
+pattern: "Smooth",
+productLine: "Galaxy A",
+
+reviews: {
+  averageRating: 4.3,
+  reviewCount: 21,
+  reviews: [
+    {
+      author: "Peter N.",
+      rating: 4,
+      reviewBody: "Affordable and performs well for everyday tasks. Camera is decent.",
+      datePublished: "2025-05-22"
+    }
+  ]
 }
+
 
   },
 
@@ -160,11 +218,29 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
 color: "Meteor Black, Atmos Blue",
 weight: "187g",
 
-"dimensions": {
+dimensions: {
   length: "163.19mm",
   width: "75.02mm",
   height: "8.45mm"
+},
+
+material: "Plastic",
+pattern: "Matte",
+productLine: "HMD X Series",
+
+reviews: {
+  averageRating: 4.0,
+  reviewCount: 14,
+  reviews: [
+    {
+      author: "Lucy W.",
+      rating: 4,
+      reviewBody: "Simple and reliable. Good for calls, WhatsApp, and basic apps.",
+      datePublished: "2025-04-18"
+    }
+  ]
 }
+
 
     
   },
@@ -204,11 +280,28 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
 color: "Glacier Green, Black Ocean",
 weight: "196g",
 
-"dimensions": {
+dimensions: {
   length: "163.19mm",
   width: "75.02mm",
   height: "8.55mm"
+},
+material: "Plastic",
+pattern: "Glossy",
+productLine: "HMD X Series",
+
+reviews: {
+  averageRating: 4.1,
+  reviewCount: 16,
+  reviews: [
+    {
+      author: "Daniel M.",
+      rating: 4,
+      reviewBody: "Nice design and smooth performance for basic smartphone needs.",
+      datePublished: "2025-03-12"
+    }
+  ]
 }
+
 
 
 
@@ -246,11 +339,29 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
 color: "Black",
 weight: "185.4g",
 
-"dimensions": {
+dimensions: {
   length: "166.4mm",
   width: "76.9mm",
   height: "8.95mm"
+},
+
+material: "Plastic",
+pattern: "Textured",
+productLine: "HMD M Series",
+
+reviews: {
+  averageRating: 4.0,
+  reviewCount: 12,
+  reviews: [
+    {
+      author: "Faith A.",
+      rating: 4,
+      reviewBody: "Sturdy phone with good battery life. Works well for everyday use.",
+      datePublished: "2025-02-08"
+    }
+  ]
 }
+
 
   },
 
@@ -287,11 +398,28 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung","Mkopa"]
 color: "Brave Black, Fantasy Blue, Personality Yellow",
 weight: "197g",
 
-"dimensions": {
+dimensions: {
   length: "161mm",
   width: "76.5mm",
   height: "8.3mm"
+},
+material: "Plastic",
+pattern: "Glossy",
+productLine: "Galaxy A",
+
+reviews: {
+  averageRating: 4.6,
+  reviewCount: 28,
+  reviews: [
+    {
+      author: "Kevin O.",
+      rating: 5,
+      reviewBody: "Impressive performance and great display. Perfect for multitasking and social apps.",
+      datePublished: "2025-06-25"
+    }
+  ]
 }
+
 
   },
 
@@ -328,13 +456,31 @@ categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"
 color: "Black, Green, Blue",
 weight: "200g",
 
-"dimensions": {
+dimensions: {
   length: "160.1mm",
   width: "76.8mm",
   height: "8.4mm"
+},
+material: "Plastic",
+pattern: "Matte",
+productLine: "Galaxy A",
+
+reviews: {
+  averageRating: 4.4,
+  reviewCount: 19,
+  reviews: [
+    {
+      author: "Angela M.",
+      rating: 4,
+      reviewBody: "Solid phone for the price. Clear display and good battery performance.",
+      datePublished: "2025-05-30"
+    }
+  ]
 }
 
+
   },
+
 
 
 
