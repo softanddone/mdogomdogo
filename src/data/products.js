@@ -6,7 +6,7 @@ export const products = [
     image: "/phones/phone1.jpg",
     from:"Ksh 6000",
     deposit: "Ksh 5499",
-    daily:"95",
+    daily:"Ksh 95",
     totalPrice: "Ksh 14,999",
     source:"/phones/Samsung-A16.webp",
     discount:"-12%",
@@ -20,7 +20,24 @@ export const products = [
     depositanddaily:"Ksh 5499 Daily Ksh 95",
     slug: "sumsung-galaxy-a16",
       slugs: "sumsung-galaxy-a16",
-    description:"Buy Samsung Galaxy A16 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more"
+    description:"Buy Samsung Galaxy A16 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
+  brand:"Mkopa",
+ seller:"Mkopa",
+ model:"SM-A165F/DS",
+  storage: "128GB",
+    condition: "new",
+   gtin: "",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
+ color: "Deep Purple, Black, Light Green",
+weight: "199g",
+
+"dimensions": {
+  "length": "167.7mm",
+  "width": "76.7mm",
+  "height": "8.4mm"
+}
+
+
   },
   {
     id: 2,
@@ -31,7 +48,7 @@ export const products = [
     deposit: "Ksh 3500",
      source:"/phones/a06.webp",
     
-    daily:"93",
+    daily:"Ksh 93",
     totalPrice: "Ksh 12,999",
      discount:"-22%",
      display:"block",
@@ -44,8 +61,31 @@ export const products = [
      depositanddaily:"Ksh 3999 Daily Ksh 67",
      slug: "sumsung-galaxy-a06",
         slugs: "sumsung-galaxy-a06",
-     description:"Buy Samsung Galaxy A06 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Delivery by MKOPA, Watu Simu & others"
-  },
+     description:"Buy Samsung Galaxy A06 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Delivery by MKOPA, Watu Simu & others",
+    brand:"Watu Simu",
+ seller:"Watu Simu",
+
+
+
+
+model: "SM-A065F/DS",
+storage: "128GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
+color: "Black, Light Green, Light Blue",
+weight: "189g",
+
+"dimensions": {
+  length: "167.3mm",
+  width: "77.3mm",
+  height: "8.0mm"
+}
+
+
+
+
+    },
 {
       id: 3,
     name: "Samsung A05",
@@ -53,7 +93,7 @@ export const products = [
     from:"Ksh 4000",
     deposit: "Ksh 3500",
      status:"New",
-    daily:"83",
+    daily:"Ksh 83",
     totalPrice: "Ksh 12,999",
     source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp",
      discount:"-19%",
@@ -67,7 +107,24 @@ export const products = [
              depositanddaily:"Ksh 3099 Daily Ksh 65",
              slug: "sumsung-galaxy-a05",
                slugs: "sumsung-galaxy-a05",
-             description:"Get Samsung Galaxy A05 on lipa mdogo mdogo in Nairobi. Pay a small deposit, then daily. Trusted sellers like MKOPA, Ulephone, Watu Simu & more"
+             description:"Get Samsung Galaxy A05 on lipa mdogo mdogo in Nairobi. Pay a small deposit, then daily. Trusted sellers like MKOPA, Ulephone, Watu Simu & more",
+                 brand:"Watu Simu",
+ seller:"Watu Simu",
+
+ model: "SM-A055F/DS",
+storage: "64GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
+color: "Black, Silver, Light Green",
+weight: "195g",
+
+"dimensions": {
+  length: "168.8mm",
+  width: "78.2mm",
+  height: "8.8mm"
+}
+
   },
 
   {
@@ -77,7 +134,7 @@ export const products = [
     from:"Ksh 4000",
     deposit: "Ksh 3299",
      status:"new",
-    daily:"72",
+    daily:"Ksh 72",
     totalPrice: "Ksh 12,999",
      source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp",
       discount:"-10%",
@@ -91,7 +148,23 @@ export const products = [
     depositanddaily:"Ksh 3299 Daily Ksh 72",
     slug: "hmd-mkopa-x2",
        slugs: "hmd-mkopa-x2",
-    description:"Get MKOPA X2 on lipa mdogo mdogo in Nairobi Kenya. Pay little deposit and daily. Order online and get delivered by MKOPA"
+    description:"Get MKOPA X2 on lipa mdogo mdogo in Nairobi Kenya. Pay little deposit and daily. Order online and get delivered by MKOPA",
+        brand:"Mkopa",
+ seller:"Mkopa",
+
+ model: "HMD Global M‑KOPA X2",
+storage: "128GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
+color: "Meteor Black, Atmos Blue",
+weight: "187g",
+
+"dimensions": {
+  length: "163.19mm",
+  width: "75.02mm",
+  height: "8.45mm"
+}
 
     
   },
@@ -102,7 +175,7 @@ export const products = [
     image: "/phones/phone1.jpg",
     from:"Ksh 4800",
     deposit: "Ksh 4199",
-    daily:"90",
+    daily:"Ksh 90",
      status:"new",
     totalPrice: "Ksh 12,999",
      source:"/phones/Mkopa-X20-Purple-1024x1024.webp",
@@ -117,7 +190,28 @@ export const products = [
            depositanddaily:"Ksh 4199 Daily Ksh 90",
            slug: "hmd-mkopa-x20",
              slugs: "hmd-mkopa-x20",
-           description:"Buy MKOPA X20 in Kenya on credit. Lipa mdogo mdogo with deposit + daily payments. Supplied by MKOPA. Fast Nairobi delivery"
+           description:"Buy MKOPA X20 in Kenya on credit. Lipa mdogo mdogo with deposit + daily payments. Supplied by MKOPA. Fast Nairobi delivery",
+                brand:"Mkopa",
+ seller:"Mkopa",
+
+
+ 
+ model: "M-KOPA X20",
+storage: "256GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
+color: "Glacier Green, Black Ocean",
+weight: "196g",
+
+"dimensions": {
+  length: "163.19mm",
+  width: "75.02mm",
+  height: "8.55mm"
+}
+
+
+
 
   },
 
@@ -127,7 +221,7 @@ export const products = [
     image: "/phones/samsung-a15.png",
     from:"Ksh 3500",
     deposit: "Ksh 2799",
-    daily:"62",
+    daily:"Ksh 62",
      status:"new",
     totalPrice: "Ksh 12,999",
      source:"/phones/m10.webp",
@@ -140,7 +234,24 @@ export const products = [
          version:"Android 14TM",
          slug: "hmd-mkopa-m10",
            slugs: "hmd-mkopa-m10",
-         description:"Order MKOPA M10 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA"
+         description:"Order MKOPA M10 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA",
+              brand:"Mkopa",
+ seller:"Mkopa",
+
+ model: "M-KOPA M10",
+storage: "64GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
+color: "Black",
+weight: "185.4g",
+
+"dimensions": {
+  length: "166.4mm",
+  width: "76.9mm",
+  height: "8.95mm"
+}
+
   },
 
 
@@ -152,7 +263,7 @@ export const products = [
     image: "/phones/samsung-a25.png",
     from:"Ksh 3500",
     deposit: "Ksh 8799",
-    daily:"62",
+    daily:"125",
      status:"new",
     totalPrice: "Ksh 12,999",
      source:"/phones/samsung-a25.png",
@@ -165,7 +276,23 @@ export const products = [
          version:"Android TM 14",
          slug: "samsung a25",
                slugs: "samsung a25",
-         description:"Order Samsung A25 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA"
+         description:"Order Samsung A25 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA",
+              brand:"Mkopa",
+ seller:"Mkopa",
+ model: "SM-A256E",
+storage: "128GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung","Mkopa"],
+color: "Brave Black, Fantasy Blue, Personality Yellow",
+weight: "197g",
+
+"dimensions": {
+  length: "161mm",
+  width: "76.5mm",
+  height: "8.3mm"
+}
+
   },
 
 
@@ -189,7 +316,24 @@ export const products = [
          version:"Android TM 14",
          slug: "samsung a15",
            slugs: "samsung a15",
-         description:"Order Samsung A15 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA"
+         description:"Order Samsung A15 smartphone on credit in Kenya. Small deposit, daily payment plan. Delivered fast in Nairobi by MKOPA",
+              brand:"Mkopa",
+ seller:"Mkopa",
+
+ model: "SM‑A155F/DSN",
+storage: "128GB",
+condition: "new",
+gtin: "",
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+color: "Black, Green, Blue",
+weight: "200g",
+
+"dimensions": {
+  length: "160.1mm",
+  width: "76.8mm",
+  height: "8.4mm"
+}
+
   },
 
 
@@ -197,7 +341,7 @@ export const products = [
   //       {
   //   id: 7,
   //   name: "Samsung A04e",
-  //   status:"refurb",
+  //s   status:"refurb",
   //   image: "/phones/phone1.jpg",
   //   from:"Ksh 2500",
   //   deposit: "Ksh 1999",
