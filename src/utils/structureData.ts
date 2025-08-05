@@ -435,7 +435,7 @@ export function generateProductSchema(product: FlexibleProduct) {
         }
       },
 
-      // Enhanced availability regions
+      // Enhanced availability regions with proper geographic targeting
       availableAtOrFrom: kenyaLocationData.counties.map(county => ({
         '@type': 'Place',
         name: county,
@@ -447,6 +447,12 @@ export function generateProductSchema(product: FlexibleProduct) {
         '@type': 'Country',
         name: 'Kenya',
         identifier: 'KE'
+      },
+
+      // Geographic and demographic targeting through offer properties
+      eligibleCustomerType: {
+        '@type': 'BusinessEntityType',
+        name: 'Individual Consumers'
       }
     },
 
@@ -552,21 +558,6 @@ export function generateProductSchema(product: FlexibleProduct) {
         description: 'Multiple financing options available'
       }
     ],
-
-    // Enhanced audience targeting - fixed to single audience object
-    audience: {
-      '@type': 'Audience',
-      '@id': `${productId}#audience`,
-      audienceType: 'Geographic',
-      geographicArea: {
-        '@type': 'Country',
-        name: 'Kenya',
-        identifier: 'KE'
-      },
-      suggestedMinAge: 18,
-      suggestedMaxAge: 65,
-      suggestedGender: 'unisex'
-    },
 
     // Enhanced dimensions (if available)
     ...(product.dimensions && {
@@ -897,6 +888,7 @@ export function generateLocalBusinessSchema() {
     '@id': 'https://mdogomdogodeals.co.ke#localbusiness',
     name: 'Mdogo Mdogo Deals',
     image: 'https://mdogomdogodeals.co.ke/assets/store-front.jpg',
+    
     url: 'https://mdogomdogodeals.co.ke',
     telephone: '+254-700-000-000',
     priceRange: 'KES 5,000 - KES 200,000',
