@@ -320,7 +320,8 @@ export function generateProductSchema(product: FlexibleProduct) {
           addressLocality: 'Nairobi',
           addressRegion: 'Nairobi County',
           addressCountry: 'KE',
-          streetAddress: 'CBD, Nairobi'
+          streetAddress: 'CBD, Nairobi',
+          postalCode: '00100'
         },
         
         geo: kenyaLocationData.nairobi.geo,
@@ -552,27 +553,20 @@ export function generateProductSchema(product: FlexibleProduct) {
       }
     ],
 
-    // Enhanced audience targeting
-    audience: [
-      {
-        '@type': 'Audience',
-        '@id': `${productId}#audience-geographic`,
-        audienceType: 'Geographic',
-        geographicArea: {
-          '@type': 'Country',
-          name: 'Kenya',
-          identifier: 'KE'
-        }
+    // Enhanced audience targeting - fixed to single audience object
+    audience: {
+      '@type': 'Audience',
+      '@id': `${productId}#audience`,
+      audienceType: 'Geographic',
+      geographicArea: {
+        '@type': 'Country',
+        name: 'Kenya',
+        identifier: 'KE'
       },
-      {
-        '@type': 'Audience',
-        '@id': `${productId}#audience-demographic`,
-        audienceType: 'Demographic',
-        suggestedMinAge: 18,
-        suggestedMaxAge: 65,
-        suggestedGender: 'unisex'
-      }
-    ],
+      suggestedMinAge: 18,
+      suggestedMaxAge: 65,
+      suggestedGender: 'unisex'
+    },
 
     // Enhanced dimensions (if available)
     ...(product.dimensions && {
@@ -897,8 +891,7 @@ export function generateOrganizationSchema() {
 }
 
 export function generateLocalBusinessSchema() {
- 
-    return {
+  return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': 'https://mdogomdogodeals.co.ke#localbusiness',
@@ -907,9 +900,6 @@ export function generateLocalBusinessSchema() {
     url: 'https://mdogomdogodeals.co.ke',
     telephone: '+254-700-000-000',
     priceRange: 'KES 5,000 - KES 200,000',
-  
-
-
     
     address: {
       '@type': 'PostalAddress',
