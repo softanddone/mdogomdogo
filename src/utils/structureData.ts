@@ -888,7 +888,6 @@ export function generateLocalBusinessSchema() {
     '@id': 'https://mdogomdogodeals.co.ke#localbusiness',
     name: 'Mdogo Mdogo Deals',
     image: 'https://mdogomdogodeals.co.ke/assets/store-front.jpg',
-    
     url: 'https://mdogomdogodeals.co.ke',
     telephone: '+254-700-000-000',
     priceRange: 'KES 5,000 - KES 200,000',
@@ -1128,4 +1127,252 @@ export function generateHowToSchema(product: FlexibleProduct) {
       }
     ]
   };
+}
+
+// Generate VideoObject schema (if product has video)
+export function generateVideoSchema(product: FlexibleProduct, videoData?: any) {
+  if (!videoData) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `https://mdogomdogodeals.co.ke/phones/${product.slug}#video`,
+    name: `${product.name} Review and Unboxing`,
+    description: `Watch our comprehensive review of ${product.name}. See the unboxing, features demonstration, and payment plan explanation for Kenya buyers.`,
+    thumbnailUrl: videoData.thumbnail || `https://mdogomdogodeals.co.ke${product.source}`,
+    uploadDate: videoData.uploadDate || new Date().toISOString(),
+    duration: videoData.duration || 'PT5M30S',
+    contentUrl: videoData.url,
+    embedUrl: videoData.embedUrl,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Mdogo Mdogo Deals',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://mdogomdogodeals.co.ke/assets/logo.png'
+      }
+    },
+    inLanguage: 'en-KE',
+    isPartOf: {
+      '@type': 'WebPage',
+      url: `https://mdogomdogodeals.co.ke/phones/${product.slug}`
+    }
+  };
+}
+
+// Generate Article schema for product reviews/guides
+export function generateArticleSchema(product: FlexibleProduct, articleData?: any) {
+  const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
+  const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `https://mdogomdogodeals.co.ke/phones/${product.slug}#article`,
+    headline: articleData?.headline || `${product.name} Review: Complete Buying Guide for Kenya 2025`,
+    description: articleData?.description || `Comprehensive review of ${product.name} including specifications, price analysis, and how to buy with Lipa Mdogo Mdogo payment plan in Kenya.`,
+    image: `https://mdogomdogodeals.co.ke${product.source}`,
+    author: {
+      '@type': 'Person',
+      name: articleData?.author || 'Mdogo Mdogo Deals Team',
+      url: 'https://mdogomdogodeals.co.ke/about'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Mdogo Mdogo Deals',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://mdogomdogodeals.co.ke/assets/logo.png'
+      }
+    },
+    datePublished: articleData?.datePublished || new Date().toISOString(),
+    dateModified: articleData?.dateModified || new Date().toISOString(),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://mdogomdogodeals.co.ke/phones/${product.slug}`
+    },
+    articleSection: 'Mobile Phone Reviews',
+    wordCount: articleData?.wordCount || 1500,
+    inLanguage: 'en-KE',
+    about: [
+      {
+        '@type': 'Thing',
+        name: product.name
+      },
+      {
+        '@type': 'Thing',
+        name: 'Mobile Phone Financing Kenya'
+      }
+    ],
+    mentions: [
+      {
+        '@type': 'Product',
+        name: product.name,
+        url: `https://mdogomdogodeals.co.ke/phones/${product.slug}`
+      },
+      {
+        '@type': 'Organization',
+        name: product.brand
+      }
+    ]
+  };
+}
+
+// Generate Event schema for product launches or sales
+export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
+  if (!eventData) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    '@id': `https://mdogomdogodeals.co.ke/events/${eventData.slug}#event`,
+    name: eventData.name || `${product.name} Launch Event - Special Pricing`,
+    description: eventData.description || `Join us for the official launch of ${product.name} in Kenya. Special launch pricing with reduced deposit requirements.`,
+    startDate: eventData.startDate,
+    endDate: eventData.endDate,
+    location: {
+      '@type': 'Place',
+      name: eventData.location || 'Mdogo Mdogo Deals Store',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'CBD Center, Tom Mboya Street',
+        addressLocality: 'Nairobi',
+        addressRegion: 'Nairobi County',
+        postalCode: '00100',
+        addressCountry: 'KE'
+      }
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'Mdogo Mdogo Deals',
+      url: 'https://mdogomdogodeals.co.ke'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: eventData.specialPrice || parseFloat(product.totalPrice.replace(/[^\d.]/g, '')),
+      priceCurrency: 'KES',
+      availability: 'https://schema.org/InStock',
+      url: `https://mdogomdogodeals.co.ke/phones/${product.slug}`
+    },
+    image: `https://mdogomdogodeals.co.ke${product.source}`,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode'
+  };
+}
+
+// Generate Review schema for individual product reviews
+export function generateReviewSchema(product: FlexibleProduct, reviewData: any) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    '@id': `https://mdogomdogodeals.co.ke/phones/${product.slug}#review-${reviewData.id}`,
+    itemReviewed: {
+      '@type': 'Product',
+      name: product.name,
+      image: `https://mdogomdogodeals.co.ke${product.source}`,
+      brand: {
+        '@type': 'Brand',
+        name: product.brand
+      }
+    },
+    author: {
+      '@type': 'Person',
+      name: reviewData.author,
+      location: {
+        '@type': 'Place',
+        name: reviewData.location || 'Kenya'
+      }
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: reviewData.rating,
+      bestRating: '5',
+      worstRating: '1'
+    },
+    reviewBody: reviewData.reviewBody,
+    datePublished: reviewData.datePublished,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Mdogo Mdogo Deals'
+    },
+    inLanguage: 'en-KE'
+  };
+}
+
+// Master function to generate all schemas
+export function generateAllSchemas(product: FlexibleProduct, additionalData?: {
+  video?: any;
+  article?: any;
+  event?: any;
+  reviews?: any[];
+}) {
+  const schemas: any = {
+    product: JSON.parse(generateProductSchema(product)),
+    breadcrumb: generateBreadcrumbSchema(product),
+    website: generateWebsiteSchema(),
+    organization: generateOrganizationSchema(),
+    localBusiness: generateLocalBusinessSchema(),
+    faq: generateFAQSchema(product),
+    howTo: generateHowToSchema(product)
+  };
+
+  // Add optional schemas if data is provided
+  if (additionalData?.video) {
+    const videoSchema = generateVideoSchema(product, additionalData.video);
+    if (videoSchema) {
+      schemas.video = videoSchema;
+    }
+  }
+
+  if (additionalData?.article) {
+    schemas.article = generateArticleSchema(product, additionalData.article);
+  }
+
+  if (additionalData?.event) {
+    const eventSchema = generateEventSchema(product, additionalData.event);
+    if (eventSchema) {
+      schemas.event = eventSchema;
+    }
+  }
+
+  if (additionalData?.reviews && additionalData.reviews.length > 0) {
+    schemas.reviews = additionalData.reviews.map(review => 
+      generateReviewSchema(product, review)
+    );
+  }
+
+  return schemas;
+}
+
+// Utility function to generate core schemas only (always safe)
+export function generateCoreSchemas(product: FlexibleProduct) {
+  return {
+    product: JSON.parse(generateProductSchema(product)),
+    breadcrumb: generateBreadcrumbSchema(product),
+    website: generateWebsiteSchema(),
+    organization: generateOrganizationSchema(),
+    localBusiness: generateLocalBusinessSchema(),
+    faq: generateFAQSchema(product),
+    howTo: generateHowToSchema(product)
+  };
+}
+
+// Utility function to get schema as JSON-LD script tags
+export function generateSchemaScripts(product: FlexibleProduct, additionalData?: {
+  video?: any;
+  article?: any;
+  event?: any;
+  reviews?: any[];
+}) {
+  const allSchemas = generateAllSchemas(product, additionalData);
+  const scripts: string[] = [];
+
+  // Generate script tags for each schema
+  Object.entries(allSchemas).forEach(([key, schema]) => {
+    if (schema) {
+      scripts.push(`<script type="application/ld+json">${JSON.stringify(schema, null, 2)}</script>`);
+    }
+  });
+
+  return scripts;
 }
