@@ -30,9 +30,7 @@ export async function getStaticPaths() {
   const paths = categories.map(category => ({
     params: { category },
   }));
-  
-  console.log('Generated paths:', paths);
-  
+
   return paths;
 }
 
@@ -179,7 +177,7 @@ const seo = {
   <Nav />
 
   <div class="headerCategory">
-<h1 style="text-transform: capitalize;">{displayCategory} Phones</h1>
+<h1 style="text-transform: capitalize;">{displayCategory} SmartPhones</h1>
       <p>Found {filteredProducts.length} products in {displayCategory}</p>
   </div>
       
