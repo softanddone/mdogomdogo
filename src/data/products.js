@@ -57,6 +57,9 @@ reviews: {
 
 
 
+
+
+
   },
   {
     id: 2,
@@ -65,7 +68,7 @@ reviews: {
      status:"New",
      from:"Ksh 4200",
     deposit: "Ksh 3500",
-     source:"/phones/a06.webp",
+     source:"/phones/Samsung-Galaxy-A06.webp",
     
     daily:"Ksh 93",
     totalPrice: "Ksh 12,999",
@@ -135,7 +138,7 @@ reviews: {
      status:"New",
     daily:"Ksh 83",
     totalPrice: "Ksh 12,999",
-    source:"/phones/Samsung-Galaxy-A05-Silver-1024x1024.webp",
+    source:"/phones/Samsung-Galaxy-A05.webp",
      discount:"-19%",
      display:"block",
         phonedisplay:"6.7 HD+ (720 x 1600)",
@@ -194,7 +197,7 @@ reviews: {
      status:"new",
     daily:"Ksh 72",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Mkopa-X2-Atmos-Blue-1024x1024.webp",
+     source:"/phones/HMD-Mkopa-X2.webp",
       discount:"-10%",
       display:"none",
          phonedisplay:"6.7 HD+ (720 x 1600)",
@@ -254,7 +257,7 @@ reviews: {
     daily:"Ksh 90",
      status:"new",
     totalPrice: "Ksh 12,999",
-     source:"/phones/Mkopa-X20-Purple-1024x1024.webp",
+     source:"/phones/HMD-Mkopa-X20.webp",
       discount:"-11%",
       display:"block",
          phonedisplay:"6.7 HD+ (720 x 1600)",
@@ -311,7 +314,7 @@ reviews: {
       {
     id: 6,
     name: "Mkopa HMD M10",
-    image: "/phones/samsung-a15.png",
+    image: "/phones/HMD-Mkopa-M10.png",
     from:"Ksh 3500",
     deposit: "Ksh 2799",
     daily:"Ksh 62",
@@ -377,7 +380,7 @@ reviews: {
     daily:"125",
      status:"new",
     totalPrice: "Ksh 12,999",
-     source:"/phones/samsung-a25.png",
+     source:"/phones/samsung-a25.webp",
       discount:"-8%",
       display:"none",
          phonedisplay:"6.5 HD+ (720 x 1600)",
@@ -428,13 +431,13 @@ reviews: {
        {
     id: 8,
     name: "Samsung A15",
-    image: "/phones/samsung-a15.png",
+    image: "/phones/samsung-a15.webp",
     from:"Ksh 3500",
     deposit: "Ksh 7799",
     daily:"62",
      status:"new",
     totalPrice: "Ksh 12,999",
-     source:"/phones/samsung-a15.png",
+     source:"/phones/samsung-a15.webp",
       discount:"-8%",
       display:"none",
          phonedisplay:"6.5 HD+ (720 x 1600)",

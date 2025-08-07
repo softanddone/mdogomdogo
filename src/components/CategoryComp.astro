@@ -1,0 +1,42 @@
+---
+import ProductCard from "./ProductCard.astro";
+
+const { name, image, deposit, daily, totalPrice, status } = Astro.props;
+---
+
+<article class="product-card">
+  <img src={image} alt={name} loading="lazy" />
+  <h2>{name}</h2>
+  <p>Status: {status}</p>
+  <p>Deposit: {deposit}</p>
+  <p>Daily: {daily}</p>
+  <p>Total Price: {totalPrice}</p>
+
+</article>
+
+<style>
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .product-card h2 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+
+  .product-card p {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+  }
+</style>

@@ -1376,3 +1376,97 @@ export function generateSchemaScripts(product: FlexibleProduct, additionalData?:
 
   return scripts;
 }
+
+export function generateCategorySchema(category: string, products: FlexibleProduct[], displayCategory: string) {
+  const baseUrl = 'https://mdogomdogodeals.co.ke';
+  
+  // Generate ItemList schema for the category page
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `${displayCategory} Products`,
+    "description": `Browse our collection of ${displayCategory} products with flexible payment options`,
+    "url": `${baseUrl}/category/${category}`,
+    "numberOfItems": products.length,
+    "itemListElement": products.map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Product",
+        "@id": `${baseUrl}/${product.slug}`,
+        "name": product.name,
+        "description": product.description || `${product.name} available with flexible payment options`,
+        "image": `${baseUrl}${product.source}`,
+        "url": `${baseUrl}/${product.slug}`,
+        "brand": {
+          "@type": "Brand",
+          "name": product.brand || displayCategory
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "KES",
+          "price": parseFloat(product.totalPrice.replace(/[^\d.-]/g, '')),
+          "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": product.seller || "MdogoMdogoDeals"
+          },
+          "paymentAccepted": ["Cash", "Credit", "Installment"],
+          "availableDeliveryMethod": "https://schema.org/DeliveryModeDirectDownload"
+        },
+        "aggregateRating": product.reviews ? {
+          "@type": "AggregateRating",
+          "ratingValue": product.reviews.averageRating,
+          "reviewCount": product.reviews.reviewCount,
+          "bestRating": 5,
+          "worstRating": 1
+        } : undefined
+      }
+    }))
+  };
+
+  // Generate CollectionPage schema
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${displayCategory} Products - MdogoMdogoDeals`,
+    "description": `Explore our ${displayCategory} collection with flexible payment options. Pay small deposits and daily installments.`,
+    "url": `${baseUrl}/category/${category}`,
+    "mainEntity": itemListSchema,
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": baseUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Categories",
+          "item": `${baseUrl}/categories`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": displayCategory,
+          "item": `${baseUrl}/category/${category}`
+        }
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MdogoMdogoDeals",
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`
+      }
+    }
+  };
+
+  return [collectionSchema, itemListSchema];
+}
