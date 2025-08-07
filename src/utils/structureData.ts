@@ -1413,7 +1413,43 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
             "name": product.seller || "MdogoMdogoDeals"
           },
           "paymentAccepted": ["Cash", "Credit", "Installment"],
-          "availableDeliveryMethod": "https://schema.org/DeliveryModeDirectDownload"
+          "availableDeliveryMethod": "https://schema.org/DeliveryModeDirectDownload",
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0.00",
+              "currency": "KES"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "KE",
+              "addressRegion": ["Nairobi", "Kiambu"]
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "d"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 2,
+                "unitCode": "d"
+              }
+            }
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnInStore",
+            "returnFees": "https://schema.org/FreeReturn",
+            "applicableCountry": "KE"
+          }
         },
         "aggregateRating": product.reviews ? {
           "@type": "AggregateRating",
