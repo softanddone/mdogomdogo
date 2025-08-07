@@ -1,14 +1,14 @@
 ---
-import ProductCard from '../../components/ProductCard.astro';
+import CategoryComp from '../../components/CategoryComp.astro';
 import Nav from '../../components/Nav.astro';
+import Layout from '../../layouts/Layout.astro';
 import { products } from '../../data/products';
 import { generateCategorySchema } from '../../utils/structureData';
-import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
   
-    
   // Extract all category levels from all products
   products.forEach(product => {
     const categoryPath = product.categoryPath as string[];
@@ -25,12 +25,15 @@ export async function getStaticPaths() {
   
   const categories = Array.from(allCategories);
   
-  
+  // Debug: Log the generated categories
+  console.log('Generated categories:', categories);
   
   const paths = categories.map(category => ({
     params: { category },
   }));
-
+  
+  console.log('Generated paths:', paths);
+  
   return paths;
 }
 
@@ -53,9 +56,6 @@ if (filteredProducts.length === 0) {
   throw new Error(`No products found in the category: ${category}`);
 }
 
-
-
-
 // Get the display name (find the original case version of the category)
 let displayCategory = category;
 for (const product of filteredProducts) {
@@ -74,14 +74,16 @@ for (const product of filteredProducts) {
   }
 }
 
-const schema = generateCategorySchema(category, filteredProducts, displayCategory);
+// Generate schema for SEO
+const schemaArray = generateCategorySchema(category, filteredProducts, displayCategory);
 
+// SEO configuration
 const seo = {
   title: `${displayCategory} Products - Buy Now | Lipa Mdogo Mdogo`,
   description: `Browse our ${displayCategory} collection with flexible payment options. Pay small deposits and daily installments. ${filteredProducts.length} products available.`,
   canonical: `https://mdogomdogodeals.co.ke/category/${category}`,
   ogImage: filteredProducts[0] ? `https://mdogomdogodeals.co.ke${filteredProducts[0].source}` : 'https://mdogomdogodeals.co.ke/default-og-image.jpg',
-  schema
+  schema: schemaArray.map(schema => JSON.stringify(schema)).join('')
 };
 ---
     <style is:inline>
