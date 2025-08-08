@@ -11,9 +11,14 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     --h3-font-size: 1rem;
     --normal-font-size: 0.938rem;
     --smaller-font-size: 0.75rem;
-    --success-color: #4caf50;
-    --text-secondary: #666;
+    --success-color: #2e7d32; /* Darker green for better contrast */
+    --text-secondary: #424242; /* Darker gray for better contrast */
     --border-light: #e0e0e0;
+    /* New variables for improved contrast */
+    --discount-bg: #d32f2f; /* Darker red background */
+    --discount-text: #ffffff; /* White text for maximum contrast */
+    --hot-bg: #e65100; /* Darker orange background */
+    --hot-text: #ffffff; /* White text for maximum contrast */
   }
 
   @media screen and (min-width: 768px) {
@@ -29,6 +34,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     position: absolute;
     top: -25%;
     font-size: 18px;
+    font-weight: 600; /* Bolder font weight for better visibility */
   }
 
   .taginfo {
@@ -50,12 +56,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     border-radius: 5px;
     cursor: pointer;
     color: white;
-    font-weight: 500;
+    font-weight: 600; /* Bolder for better readability */
     transition: background-color 0.3s ease;
   }
 
   .orderdiv button:hover {
-    background: #9a6b28;
+    background: #8b5a1f; /* Darker hover state for better contrast */
   }
 
   * {
@@ -66,6 +72,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     background: var(--first-color) !important;
     color: var(--dark-color) !important;
     border: 2px solid var(--accent-color) !important;
+    font-weight: 600 !important; /* Bolder text */
   }
 
   .more-info:hover {
@@ -113,46 +120,50 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     display: flex;
   }
 
+  /* Fixed discount label with high contrast */
   .card__img .lebo1 {
     position: absolute;
     top: 60px;
     left: -20px;
     width: 55px;
     height: 20px;
-    background: var(--accent-color);
+    background: var(--discount-bg); /* Dark red background */
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: var(--discount-text); /* White text */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Stronger shadow for definition */
   }
 
+  /* Fixed "Hot" badge with high contrast */
   .card__img .lebo2 {
     position: absolute;
     top: 90px;
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #e74c3c;
+    background: var(--hot-bg); /* Dark orange background */
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: var(--hot-text); /* White text */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Stronger shadow for definition */
   }
 
+  /* Enhanced text styling for badges */
   .card__img .lebo1 h4,
   .card__img .lebo2 h4 {
     font-size: 13px;
     z-index: 20;
-    color: white;
-    font-weight: bold;
+    color: var(--discount-text); /* Explicit white color */
+    font-weight: 700; /* Bold font weight for maximum readability */
     padding: 5px;
     margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow for extra definition */
   }
 
   .card__name {
@@ -176,6 +187,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .card__name p {
     color: var(--success-color);
+    font-weight: 600; /* Bolder for better visibility */
   }
 
   .card__icon {
@@ -210,10 +222,10 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .card__preci--before {
     font-size: var(--smaller-font-size);
-    color: var(--text-secondary);
+    color: var(--text-secondary); /* Better contrast gray */
     margin-bottom: 0.25rem;
     text-decoration: line-through;
-    font-weight: bold;
+    font-weight: 600; /* Bolder for better visibility */
     margin-left: -125px;
     margin-top: 10px;
     font-size: 16px;
@@ -221,7 +233,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .card__preci--now {
     font-size: var(--h3-font-size);
-    font-weight: bold;
+    font-weight: 700; /* Extra bold for price visibility */
     color: var(--accent-color);
     margin-left: -63px;
   }
@@ -232,13 +244,14 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
 
   .statusitem {
-    color: var(--success-color);
-    font-weight: 500;
+    color: var(--success-color); /* Darker green for better contrast */
+    font-weight: 600; /* Bolder font weight */
   }
 
   .tick-icon {
-    color: var(--success-color);
+    color: var(--success-color); /* Darker green for better contrast */
     margin-right: 5px;
+    font-weight: bold;
   }
 
   .card:hover {
@@ -252,6 +265,28 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .card:hover .card__name {
     bottom: 0;
+  }
+
+  /* Additional accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    .card__img,
+    .card__name,
+    .card__icon {
+      transition: none;
+    }
+  }
+
+  /* Focus styles for keyboard navigation */
+  .card:focus-within {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+
+  .orderdiv button:focus,
+  .card__icon:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
   }
 </style>
 
@@ -274,7 +309,9 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   <div class="card__name">
     <div class="card__precis">
-      <a href="" class="card__icon"><ion-icon name="heart-outline"></ion-icon></a>
+      <a href="" class="card__icon" aria-label="Add to wishlist">
+        <ion-icon name="heart-outline"></ion-icon>
+      </a>
 
       <div class="taginfo">
         <h1 class="phonename">{name}</h1>
@@ -284,12 +321,14 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
       <div class="pfon">
         <span class="statusitem">
-          <i class="fa fa-check tick-icon"></i>
+          <i class="fa fa-check tick-icon" aria-hidden="true"></i>
           In stock
         </span>
       </div>
 
-      <a href="" class="card__icon"><ion-icon name="cart-outline"></ion-icon></a>
+      <a href="" class="card__icon" aria-label="Add to cart">
+        <ion-icon name="cart-outline"></ion-icon>
+      </a>
     </div>
 
     <div class="orderdiv">
