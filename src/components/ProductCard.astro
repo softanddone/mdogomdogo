@@ -11,14 +11,16 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     --h3-font-size: 1rem;
     --normal-font-size: 0.938rem;
     --smaller-font-size: 0.75rem;
-    --success-color: #2e7d32; /* Darker green for better contrast */
-    --text-secondary: #424242; /* Darker gray for better contrast */
+    --success-color: #2e7d32;
+    --text-secondary: #424242;
     --border-light: #e0e0e0;
-    /* New variables for improved contrast */
-    --discount-bg: #d32f2f; /* Darker red background */
-    --discount-text: #ffffff; /* White text for maximum contrast */
-    --hot-bg: #e65100; /* Darker orange background */
-    --hot-text: #ffffff; /* White text for maximum contrast */
+    --discount-bg: #d32f2f;
+    --discount-text: #ffffff;
+    --hot-bg: #e65100;
+    --hot-text: #ffffff;
+    /* Touch target specifications */
+    --touch-target-min: 48px;
+    --touch-spacing-min: 8px;
   }
 
   @media screen and (min-width: 768px) {
@@ -34,7 +36,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     position: absolute;
     top: -25%;
     font-size: 18px;
-    font-weight: 600; /* Bolder font weight for better visibility */
+    font-weight: 600;
   }
 
   .taginfo {
@@ -42,42 +44,66 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     width: 100%;
   }
 
+  /* FIXED: Complete restructure of button container for proper touch targets */
   .orderdiv {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    justify-content: space-around;
+    gap: var(--touch-spacing-min);
+    margin-top: 16px;
+    padding: 0 8px;
   }
 
-  .orderdiv button {
+  /* FIXED: Make button links the full touch target - no nested buttons */
+  .orderdiv a {
+    display: block;
     background: var(--accent-color);
-    padding: 10px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     color: white;
-    font-weight: 600; /* Bolder for better readability */
+    text-decoration: none;
+    padding: 16px 20px;
+    min-height: var(--touch-target-min);
+    min-width: 100%;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
     transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--touch-spacing-min);
   }
 
-  .orderdiv button:hover {
-    background: #8b5a1f; /* Darker hover state for better contrast */
+  .orderdiv a:hover {
+    background: #8b5a1f;
+  }
+
+  .orderdiv a:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+  }
+
+  /* FIXED: Style the "More Info" button differently */
+  .orderdiv a.more-info-link {
+    background: var(--first-color) !important;
+    color: var(--dark-color) !important;
+    border: 2px solid var(--accent-color) !important;
+    font-weight: 600 !important;
+  }
+
+  .orderdiv a.more-info-link:hover {
+    background: var(--accent-color) !important;
+    color: white !important;
+  }
+
+  /* Remove the old button styles as we're using links directly now */
+  .displaybutton {
+    display: none; /* Hide any remaining button elements */
   }
 
   * {
     box-sizing: border-box;
-  }
-
-  .more-info {
-    background: var(--first-color) !important;
-    color: var(--dark-color) !important;
-    border: 2px solid var(--accent-color) !important;
-    font-weight: 600 !important; /* Bolder text */
-  }
-
-  .more-info:hover {
-    background: var(--accent-color) !important;
-    color: white !important;
   }
 
   body {
@@ -120,41 +146,38 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     display: flex;
   }
 
-  /* Fixed discount label with high contrast - using explicit colors */
   .card__img .lebo1 {
     position: absolute;
     top: 60px;
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #c62828 !important; /* Dark red background - explicit and important */
+    background: #c62828 !important;
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff !important; /* Pure white text - explicit and important */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for definition */
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
-  /* Fixed "Hot" badge with high contrast - using explicit colors */
   .card__img .lebo2 {
     position: absolute;
     top: 90px;
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #d84315 !important; /* Dark orange background - explicit and important */
+    background: #d84315 !important;
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff !important; /* Pure white text - explicit and important */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for definition */
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
-  /* Enhanced text styling for badges with maximum specificity */
   .card__img .lebo1 h4,
   .card__img .lebo2 h4,
   .card .card__img .lebo1 h4,
@@ -162,13 +185,13 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   h4.hot {
     font-size: 13px !important;
     z-index: 20;
-    color: #ffffff !important; /* Pure white - explicit and important */
+    color: #ffffff !important;
     background: transparent !important;
-    font-weight: 800 !important; /* Extra bold font weight */
+    font-weight: 800 !important;
     padding: 5px;
     margin: 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important; /* Strong text shadow for definition */
-    letter-spacing: 0.5px !important; /* Better letter spacing for readability */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+    letter-spacing: 0.5px !important;
   }
 
   .card__name {
@@ -176,9 +199,10 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     left: 0;
     bottom: -3.6rem;
     width: 100%;
-    height: 8rem;
+    height: auto; /* CHANGED: Allow flexible height */
+    min-height: 8rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* CHANGED: Align to top */
     justify-content: center;
     color: var(--dark-color);
     font-weight: bold;
@@ -188,34 +212,59 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     flex-direction: column;
     background: white;
     border-radius: 1rem 1rem 0 0;
+    padding: 16px 12px; /* ADDED: Internal padding */
   }
 
   .card__name p {
     color: var(--success-color);
-    font-weight: 600; /* Bolder for better visibility */
+    font-weight: 600;
   }
 
+  /* FIXED: Proper touch targets for icon buttons with adequate spacing */
   .card__icon {
     font-size: 1.5rem;
     color: var(--text-secondary);
     transition: color 0.2s ease, transform 0.2s ease;
-    padding: 0.5rem;
+    padding: 12px;
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: var(--touch-spacing-min) auto; /* FIXED: Center and add spacing */
+    position: relative;
+    background-color: transparent;
+    border: 2px solid transparent; /* Invisible border for focus */
   }
 
   .card__icon:hover {
     color: var(--accent-color);
     transform: scale(1.1);
+    background-color: rgba(176, 127, 49, 0.1);
+  }
+
+  .card__icon:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+    border-color: var(--accent-color);
+  }
+
+  /* FIXED: Ensure icon container has proper spacing */
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--touch-spacing-min);
+    width: 100%;
+    margin: 12px 0;
   }
 
   .card__precis {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* CHANGED: Center align all content */
     margin-top: -50px;
     background: white;
   }
@@ -227,46 +276,46 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .card__preci--before {
     font-size: var(--smaller-font-size);
-    color: var(--text-secondary); /* Better contrast gray */
+    color: var(--text-secondary);
     margin-bottom: 0.25rem;
     text-decoration: line-through;
-    font-weight: 600; /* Bolder for better visibility */
+    font-weight: 600;
     margin-left: -125px;
     margin-top: 10px;
     font-size: 16px;
   }
 
-  /* Price/deposit text with high contrast */
   .card__preci--now,
   .card .card__preci--now,
   span.card__preci.card__preci--now {
     font-size: var(--h3-font-size);
-    font-weight: 800 !important; /* Extra bold for price visibility */
-    color: #8b5a1f !important; /* Darker brown/gold for better contrast */
+    font-weight: 800 !important;
+    color: #8b5a1f !important;
     margin-left: -63px;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important; /* Light text shadow on white background */
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important;
   }
 
   .pfon {
-    margin-left: 40px;
-    color: #2e7d32 !important; /* Dark green for better contrast */
+    margin: 12px 0;
+    color: #2e7d32 !important;
+    text-align: center;
+    width: 100%;
   }
 
-  /* Stock status with high contrast */
   .statusitem,
   .pfon .statusitem,
   span.statusitem {
-    color: #1b5e20 !important; /* Very dark green for maximum contrast */
-    font-weight: 700 !important; /* Extra bold font weight */
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important; /* Light text shadow for definition */
+    color: #1b5e20 !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important;
   }
 
   .tick-icon,
   .statusitem .tick-icon,
   i.fa.fa-check.tick-icon {
-    color: #1b5e20 !important; /* Very dark green for maximum contrast */
+    color: #1b5e20 !important;
     margin-right: 5px;
-    font-weight: 900 !important; /* Maximum font weight */
+    font-weight: 900 !important;
   }
 
   .card:hover {
@@ -282,50 +331,42 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     bottom: 0;
   }
 
-  /* Additional accessibility improvements */
-  @media (prefers-reduced-motion: reduce) {
-    .card,
-    .card__img,
-    .card__name,
-    .card__icon {
-      transition: none;
-    }
-  }
-
-  /* Additional high-specificity overrides to ensure contrast fixes are applied */
-  .card .card__name .card__precis .taginfo .phonename,
-  .card .card__name .card__precis .pfon .statusitem,
-  .card .card__name .card__precis .taginfo .card__preci--now,
-  .card .card__name .card__precis .taginfo .card__preci--before {
-    color: inherit !important;
-  }
-
-  /* Ensure Hot badge text is always white with maximum contrast */
-  .lebo2 h4.hot,
-  .card__img .lebo2 h4.hot,
-  div.lebo2 h4.hot,
-  .hot {
-    color: #ffffff !important;
-    background-color: transparent !important;
-    font-weight: 800 !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
-  }
-
-  /* Ensure discount text is always white with maximum contrast */
-  .lebo1 h4,
-  .card__img .lebo1 h4,
-  div.lebo1 h4 {
-    color: #ffffff !important;
-    background-color: transparent !important;
-    font-weight: 800 !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
-  }
-
-  /* Mobile-specific overrides */
+  /* Mobile-specific improvements */
   @media screen and (max-width: 767px) {
+    /* FIXED: Even larger touch targets on mobile */
+    .card__icon {
+      min-width: 56px;
+      min-height: 56px;
+      padding: 16px;
+      margin: 12px auto;
+    }
+
+    .orderdiv a {
+      min-height: 56px;
+      padding: 18px 24px;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .orderdiv {
+      gap: 12px;
+      margin-top: 20px;
+      padding: 0 12px;
+    }
+
+    /* Increase card height to accommodate larger buttons */
+    .card__name {
+      min-height: 10rem;
+      padding: 20px 16px;
+    }
+
+    .card {
+      padding-bottom: 5rem; /* More space for expanded content */
+    }
+
     .card__img .lebo1,
     .card__img .lebo2 {
-      background-color: #1a1a1a !important; /* Very dark background for mobile */
+      background-color: #1a1a1a !important;
     }
     
     .card__img .lebo1 h4,
@@ -339,14 +380,14 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
     .card__preci--now,
     span.card__preci.card__preci--now {
-      color: #6d4c41 !important; /* Very dark brown for mobile */
+      color: #6d4c41 !important;
       font-weight: 900 !important;
     }
 
     .statusitem,
     span.statusitem,
     .pfon .statusitem {
-      color: #0d5016 !important; /* Very dark green for mobile */
+      color: #0d5016 !important;
       font-weight: 800 !important;
     }
 
@@ -354,6 +395,70 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     i.fa.fa-check.tick-icon {
       color: #0d5016 !important;
     }
+  }
+
+  /* Tablet adjustments */
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .orderdiv a {
+      min-height: 52px;
+      padding: 16px 22px;
+      font-size: 15px;
+    }
+
+    .card__icon {
+      min-width: 52px;
+      min-height: 52px;
+      padding: 14px;
+    }
+  }
+
+  /* Additional accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    .card__img,
+    .card__name,
+    .card__icon,
+    .orderdiv a {
+      transition: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .card__icon {
+      border: 2px solid currentColor;
+    }
+
+    .orderdiv a {
+      border: 2px solid currentColor;
+    }
+  }
+
+  /* Additional high-specificity overrides */
+  .card .card__name .card__precis .taginfo .phonename,
+  .card .card__name .card__precis .pfon .statusitem,
+  .card .card__name .card__precis .taginfo .card__preci--now,
+  .card .card__name .card__precis .taginfo .card__preci--before {
+    color: inherit !important;
+  }
+
+  .lebo2 h4.hot,
+  .card__img .lebo2 h4.hot,
+  div.lebo2 h4.hot,
+  .hot {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    font-weight: 800 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  .lebo1 h4,
+  .card__img .lebo1 h4,
+  div.lebo1 h4 {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    font-weight: 800 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
   }
 </style>
 
@@ -376,9 +481,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   <div class="card__name">
     <div class="card__precis">
-      <a href="" class="card__icon" aria-label="Add to wishlist">
-        <ion-icon name="heart-outline"></ion-icon>
-      </a>
+      <!-- FIXED: Icon container with proper spacing -->
+      <div class="icon-container">
+        <a href="" class="card__icon" aria-label="Add to wishlist">
+          <ion-icon name="heart-outline"></ion-icon>
+        </a>
+      </div>
 
       <div class="taginfo">
         <h1 class="phonename">{name}</h1>
@@ -393,18 +501,22 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
         </span>
       </div>
 
-      <a href="" class="card__icon" aria-label="Add to cart">
-        <ion-icon name="cart-outline"></ion-icon>
-      </a>
+      <!-- FIXED: Icon container with proper spacing -->
+      <div class="icon-container">
+        <a href="" class="card__icon" aria-label="Add to cart">
+          <ion-icon name="cart-outline"></ion-icon>
+        </a>
+      </div>
     </div>
 
+    <!-- FIXED: Simplified button structure - no nested buttons, just styled links -->
     <div class="orderdiv">
-      <a href={`/checkout/${slugs}`}>
-        <button class="displaybutton">Order Now</button>
+      <a href={`/checkout/${slugs}`} aria-label={`Order ${name} now`}>
+        Order Now
       </a>
-
-      <a href={`/products/${slug}`}>
-        <button class="displaybutton more-info">More Info</button>
+      
+      <a href={`/products/${slug}`} class="more-info-link" aria-label={`View more information about ${name}`}>
+        More Info
       </a>
     </div>
   </div>
