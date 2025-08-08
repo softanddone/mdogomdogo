@@ -154,12 +154,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for definition */
   }
 
-  /* Enhanced text styling for badges with maximum specificity */
-  .card__img .lebo1 h4,
-  .card__img .lebo2 h4,
-  .card .card__img .lebo1 h4,
-  .card .card__img .lebo2 h4,
-  h4.hot {
+  /* Enhanced text styling for badges with maximum specificity - UPDATED FOR SPAN */
+  .card__img .lebo1 span,
+  .card__img .lebo2 span,
+  .card .card__img .lebo1 span,
+  .card .card__img .lebo2 span,
+  span.hot {
     font-size: 13px !important;
     z-index: 20;
     color: #ffffff !important; /* Pure white - explicit and important */
@@ -169,6 +169,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     margin: 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important; /* Strong text shadow for definition */
     letter-spacing: 0.5px !important; /* Better letter spacing for readability */
+    display: block; /* Ensure proper display */
   }
 
   .card__name {
@@ -300,10 +301,10 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     color: inherit !important;
   }
 
-  /* Ensure Hot badge text is always white with maximum contrast */
-  .lebo2 h4.hot,
-  .card__img .lebo2 h4.hot,
-  div.lebo2 h4.hot,
+  /* Ensure Hot badge text is always white with maximum contrast - UPDATED FOR SPAN */
+  .lebo2 span.hot,
+  .card__img .lebo2 span.hot,
+  div.lebo2 span.hot,
   .hot {
     color: #ffffff !important;
     background-color: transparent !important;
@@ -311,26 +312,26 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
   }
 
-  /* Ensure discount text is always white with maximum contrast */
-  .lebo1 h4,
-  .card__img .lebo1 h4,
-  div.lebo1 h4 {
+  /* Ensure discount text is always white with maximum contrast - UPDATED FOR SPAN */
+  .lebo1 span,
+  .card__img .lebo1 span,
+  div.lebo1 span {
     color: #ffffff !important;
     background-color: transparent !important;
     font-weight: 800 !important;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
   }
 
-  /* Mobile-specific overrides */
+  /* Mobile-specific overrides - UPDATED FOR SPAN */
   @media screen and (max-width: 767px) {
     .card__img .lebo1,
     .card__img .lebo2 {
       background-color: #1a1a1a !important; /* Very dark background for mobile */
     }
     
-    .card__img .lebo1 h4,
-    .card__img .lebo2 h4,
-    h4.hot,
+    .card__img .lebo1 span,
+    .card__img .lebo2 span,
+    span.hot,
     .hot {
       color: #ffffff !important;
       font-weight: 900 !important;
@@ -359,10 +360,10 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
 <article class="card">
   <div class="card__img">
-    <div class="lebo1"><h4>{discount}</h4></div>
+    <div class="lebo1"><span>{discount}</span></div>
 
     <div class="lebo2" style={`display: ${display};`}>
-      <h4 class="hot" style={`display: ${display};`}>Hot</h4>
+      <span class="hot" style={`display: ${display};`}>Hot</span>
     </div>
 
     <img
@@ -398,12 +399,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
       </a>
     </div>
 
-    <div class="orderdiv">
-      <a href={`/checkout/${slugs}`}>
+   <div class="orderdiv">
+      <a href={`/checkout/${slugs}`} aria-label={`Order ${name} now`}>
         <button class="displaybutton">Order Now</button>
       </a>
 
-      <a href={`/products/${slug}`}>
+      <a href={`/products/${slug}`} aria-label={`View more information about ${name}`}>
         <button class="displaybutton more-info">More Info</button>
       </a>
     </div>
