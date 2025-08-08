@@ -11,6 +11,9 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     --h3-font-size: 1rem;
     --normal-font-size: 0.938rem;
     --smaller-font-size: 0.75rem;
+    --success-color: #4caf50;
+    --text-secondary: #666;
+    --border-light: #e0e0e0;
   }
 
   @media screen and (min-width: 768px) {
@@ -21,7 +24,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
 
   .phonename {
-    color: #2a2a2a !important;
+    color: var(--dark-color) !important;
     margin-left: 40px;
     position: absolute;
     top: -25%;
@@ -41,12 +44,18 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
 
   .orderdiv button {
-    background: #b07f31;
+    background: var(--accent-color);
     padding: 10px 30px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     color: white;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .orderdiv button:hover {
+    background: #9a6b28;
   }
 
   * {
@@ -54,8 +63,14 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
 
   .more-info {
-    background: wheat !important;
-    color: #1c1c1c !important;
+    background: var(--first-color) !important;
+    color: var(--dark-color) !important;
+    border: 2px solid var(--accent-color) !important;
+  }
+
+  .more-info:hover {
+    background: var(--accent-color) !important;
+    color: white !important;
   }
 
   body {
@@ -86,6 +101,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     cursor: pointer;
     background-color: var(--first-color);
     width: 300px;
+    border: 1px solid var(--border-light);
   }
 
   .card__img {
@@ -97,20 +113,20 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     display: flex;
   }
 
-  /* ✅ Fixed contrast: darker backgrounds, white text */
   .card__img .lebo1 {
     position: absolute;
     top: 60px;
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #5c3a0e; /* improved contrast */
+    background: var(--accent-color);
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   .card__img .lebo2 {
@@ -119,13 +135,14 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #3e260a; /* improved contrast */
+    background: #e74c3c;
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   .card__img .lebo1 h4,
@@ -135,6 +152,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     color: white;
     font-weight: bold;
     padding: 5px;
+    margin: 0;
   }
 
   .card__name {
@@ -146,21 +164,23 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--dark-color);
     font-weight: bold;
     font-size: var(--smaller-font-size);
     transition: bottom 0.3s ease;
     z-index: 10;
     flex-direction: column;
+    background: white;
+    border-radius: 1rem 1rem 0 0;
   }
 
   .card__name p {
-    color: #4caf50;
+    color: var(--success-color);
   }
 
   .card__icon {
     font-size: 1.5rem;
-    color: var(--dark-color);
+    color: var(--text-secondary);
     transition: color 0.2s ease, transform 0.2s ease;
     padding: 0.5rem;
     border-radius: 50%;
@@ -190,7 +210,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .card__preci--before {
     font-size: var(--smaller-font-size);
-    color: #999;
+    color: var(--text-secondary);
     margin-bottom: 0.25rem;
     text-decoration: line-through;
     font-weight: bold;
@@ -208,7 +228,17 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   .pfon {
     margin-left: 40px;
-    color: #2a2a2a;
+    color: var(--success-color);
+  }
+
+  .statusitem {
+    color: var(--success-color);
+    font-weight: 500;
+  }
+
+  .tick-icon {
+    color: var(--success-color);
+    margin-right: 5px;
   }
 
   .card:hover {
