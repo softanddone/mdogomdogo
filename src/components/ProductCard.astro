@@ -356,10 +356,24 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
       color: #0d5016 !important;
     }
   }
+
+  /* Screen reader only text for better accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>
 
 <article class="card">
-  <div class="card__img">
+  <!-- Product image link with descriptive text -->
+  <a href={`/products/${slug}`} class="card__img" aria-label={`View ${name} product details`}>
     <div class="lebo1"><span>{discount}</span></div>
 
     <div class="lebo2" style={`display: ${display};`}>
@@ -368,21 +382,26 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
     <img
       src={source}
-      alt=""
+      alt={`${name} product image`}
       width="200"
       height="300"
       fetchpriority={index === 0 ? "high" : undefined}
     />
-  </div>
+  </a>
 
   <div class="card__name">
     <div class="card__precis">
-      <a href="" class="card__icon" aria-label="Add to wishlist">
-        <ion-icon name="heart-outline"></ion-icon>
+      <!-- Wishlist link with descriptive text -->
+      <a href={`/wishlist/add/${slug}`} class="card__icon" aria-label={`Add ${name} to wishlist`}>
+        <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+        <span class="sr-only">Add {name} to wishlist</span>
       </a>
 
       <div class="taginfo">
-        <h1 class="phonename">{name}</h1>
+        <!-- Product name link with descriptive text -->
+        <a href={`/products/${slug}`} aria-label={`View ${name} details`}>
+          <h1 class="phonename">{name}</h1>
+        </a>
         <span class="card__preci card__preci--before">{from}</span>
         <span class="card__preci card__preci--now">Deposit {deposit}</span>
       </div>
@@ -394,17 +413,21 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
         </span>
       </div>
 
-      <a href="" class="card__icon" aria-label="Add to cart">
-        <ion-icon name="cart-outline"></ion-icon>
+      <!-- Cart link with descriptive text -->
+      <a href={`/cart/add/${slug}`} class="card__icon" aria-label={`Add ${name} to shopping cart`}>
+        <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
+        <span class="sr-only">Add {name} to cart</span>
       </a>
     </div>
 
-   <div class="orderdiv">
-      <a href={`/checkout/${slugs}`} aria-label={`Order ${name} now`}>
+    <div class="orderdiv">
+      <!-- Order now link with descriptive text -->
+      <a href={`/checkout/${slugs}`} aria-label={`Order ${name} now - Deposit ${deposit}`}>
         <button class="displaybutton">Order Now</button>
       </a>
 
-      <a href={`/products/${slug}`} aria-label={`View more information about ${name}`}>
+      <!-- More info link with descriptive text -->
+      <a href={`/products/${slug}`} aria-label={`View detailed information about ${name}`}>
         <button class="displaybutton more-info">More Info</button>
       </a>
     </div>
