@@ -1,11 +1,8 @@
 ---
-
-const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs,index } = Astro.props;
-
+const { name, image, source, from, deposit, totalPrice, discount, display, slug, slugs, index } = Astro.props;
 ---
 
 <style is:inline>
-
   :root {
     --first-color: #fdfaf5;
     --accent-color: #b07f31;
@@ -29,8 +26,6 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     position: absolute;
     top: -25%;
     font-size: 18px;
-   
-   
   }
 
   .taginfo {
@@ -43,7 +38,6 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
-    
   }
 
   .orderdiv button {
@@ -59,9 +53,9 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     box-sizing: border-box;
   }
 
-  .more-info{
-    background: wheat!important;
-    color: #1c1c1c!important;
+  .more-info {
+    background: wheat !important;
+    color: #1c1c1c !important;
   }
 
   body {
@@ -91,8 +85,7 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     background-color: var(--first-color);
-    /* background: red!important; */
-    width:300px;
+    width: 300px;
   }
 
   .card__img {
@@ -102,37 +95,22 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     height: 300px;
     position: relative;
     display: flex;
-    
-  
   }
 
+  /* ✅ Fixed contrast: darker backgrounds, white text */
   .card__img .lebo1 {
     position: absolute;
     top: 60px;
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #b07f31;
+    background: #5c3a0e; /* improved contrast */
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-  }
-
-  .card__img .lebo1 h4 {
-    font-size: 13px;
-    z-index: 20;
-    color: white;
-  }
-
-  .card__img .lebo2 h4 {
-
- 
-    z-index: 21!important;
-    color: white!important;
-    margin-left: 10px;
   }
 
   .card__img .lebo2 {
@@ -141,13 +119,22 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     left: -20px;
     width: 55px;
     height: 20px;
-    background: #8a6431;
+    background: #3e260a; /* improved contrast */
     border-radius: 20px;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+  }
+
+  .card__img .lebo1 h4,
+  .card__img .lebo2 h4 {
+    font-size: 13px;
+    z-index: 20;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
   }
 
   .card__name {
@@ -165,7 +152,6 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     transition: bottom 0.3s ease;
     z-index: 10;
     flex-direction: column;
-
   }
 
   .card__name p {
@@ -229,22 +215,15 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   }
-  .card:hover .card__img{
-    
 
-
+  .card:hover .card__img {
+    transform: translateY(-5px);
   }
 
   .card:hover .card__name {
     bottom: 0;
   }
-
-  .card:hover .card__img {
-    transform: translateY(-5px);
-  }
 </style>
-
-
 
 <article class="card">
   <div class="card__img">
@@ -254,8 +233,13 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
       <h4 class="hot" style={`display: ${display};`}>Hot</h4>
     </div>
 
-   
-    <img src={source} alt="" width="200" height="300" fetchpriority={index === 0 ? "high" : undefined} />
+    <img
+      src={source}
+      alt=""
+      width="200"
+      height="300"
+      fetchpriority={index === 0 ? "high" : undefined}
+    />
   </div>
 
   <div class="card__name">
@@ -265,7 +249,7 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
       <div class="taginfo">
         <h1 class="phonename">{name}</h1>
         <span class="card__preci card__preci--before">{from}</span>
-        <span class="card__preci card__preci--now"> Deposit {deposit}</span>
+        <span class="card__preci card__preci--now">Deposit {deposit}</span>
       </div>
 
       <div class="pfon">
@@ -279,16 +263,13 @@ const { name, image,source,from, deposit, totalPrice,discount,display,slug,slugs
     </div>
 
     <div class="orderdiv">
- <a href={`/checkout/${slugs}`}>
+      <a href={`/checkout/${slugs}`}>
         <button class="displaybutton">Order Now</button>
       </a>
 
-       <a href={`/products/${slug}`}>
+      <a href={`/products/${slug}`}>
         <button class="displaybutton more-info">More Info</button>
       </a>
-      <!-- <p>FREE Delivery <i class="fa fa-check tick-icon"></i></p> -->
     </div>
   </div>
 </article>
-
-
