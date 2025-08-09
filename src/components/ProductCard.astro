@@ -4,237 +4,189 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
 <style is:inline>
   :root {
-    /* Enhanced Theme variables */
-    --primary-bg: #ffffff;
-    --secondary-bg: #f8fafc;
-    --accent-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    --accent-primary-solid: #ff6b35;
-    --accent-hover: linear-gradient(135deg, #e55a2b 0%, #de8419 100%);
-    --accent-light: rgba(255, 107, 53, 0.08);
-    --accent-secondary: #2563eb;
-    --accent-secondary-hover: #1d4ed8;
+    /* Streamlined design tokens */
+    --primary: #ff6b35;
+    --primary-hover: #e55a2b;
+    --secondary: #2563eb;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    
+    /* Semantic colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #64748b;
-    --success-color: #10b981;
-    --success-light: rgba(16, 185, 129, 0.1);
-    --error-color: #ef4444;
-    --error-light: rgba(239, 68, 68, 0.1);
-    --warning-color: #f59e0b;
-    --warning-light: rgba(245, 158, 11, 0.1);
-    --border-subtle: #e2e8f0;
-    --border-medium: #cbd5e1;
-    --surface-white: #ffffff;
-    --surface-glass: rgba(255, 255, 255, 0.95);
-    --backdrop-blur: blur(20px);
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --shadow-glow: 0 0 20px rgba(255, 107, 53, 0.15);
-    --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.12);
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 0.9375rem;
-    --font-size-lg: 1rem;
-    --font-size-xl: 1.125rem;
-    --font-size-2xl: 1.25rem;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
+    --border: #e2e8f0;
+    --border-focus: #cbd5e1;
+    
+    /* Spacing system (consistent rem units) */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
     --space-3: 0.75rem;
     --space-4: 1rem;
-    --space-5: 1.25rem;
     --space-6: 1.5rem;
     --space-8: 2rem;
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
+    
+    /* Typography */
+    --font-sm: 0.875rem;
+    --font-base: 0.9375rem;
+    --font-lg: 1rem;
+    --font-xl: 1.125rem;
+    --font-2xl: 1.25rem;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* Border radius */
+    --radius: 0.75rem;
     --radius-lg: 1rem;
-    --radius-xl: 1.25rem;
-    --radius-2xl: 1.5rem;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius-xl: 1.5rem;
+    
+    /* Shadows with consistent opacity */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    
+    /* Transitions */
+    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-transform: transform var(--transition);
   }
 
-  * {
+  /* Component-scoped reset */
+  .product-card *,
+  .product-card *::before,
+  .product-card *::after {
     box-sizing: border-box;
   }
 
-  /* Main card with glassmorphism effect */
+  /* Main card container */
   .product-card {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 280px;
-    background: var(--surface-glass);
-    backdrop-filter: var(--backdrop-blur);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-2xl);
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
     overflow: hidden;
+    box-shadow: var(--shadow);
     transition: var(--transition);
     cursor: pointer;
-    box-shadow: var(--shadow-md);
-  }
-  
-  .product-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-    z-index: 1;
+    /* Improve paint performance */
+    will-change: transform;
+    contain: layout;
   }
   
   .product-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
-    border-color: var(--accent-primary-solid);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
   }
 
-  /* Image section with enhanced effects */
+  /* Image container with aspect ratio */
   .product-image {
     position: relative;
-    width: 100%;
+    aspect-ratio: 1;
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--secondary-bg) 0%, #ffffff 100%);
-    transition: var(--transition);
-    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-    border-bottom: 1px solid var(--border-subtle);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
     overflow: hidden;
-  }
-  
-  .product-image::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.03) 0%, transparent 70%);
-    transition: var(--transition);
-    opacity: 0;
-  }
-  
-  .product-card:hover .product-image::before {
-    opacity: 1;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.03; }
-    50% { transform: scale(1.1); opacity: 0.08; }
-  }
-  
-  .product-image:focus-visible {
-    outline: 2px solid var(--accent-secondary);
-    outline-offset: 2px;
+    transition: var(--transition-transform);
   }
   
   .product-card:hover .product-image {
-    transform: scale(1.03);
+    transform: scale(1.02);
   }
   
   .product-image img {
     width: 140px;
     height: 140px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
-    transition: var(--transition);
-    z-index: 2;
-    position: relative;
+    transition: var(--transition-transform);
+    /* Improve rendering */
+    image-rendering: auto;
   }
   
   .product-card:hover .product-image img {
-    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.15));
     transform: scale(1.05);
   }
 
-  /* Enhanced badges with gradients */
-  .discount-badge,
-  .hot-badge {
+  /* Badges with simplified animations */
+  .badge {
     position: absolute;
     top: var(--space-3);
     padding: var(--space-2) var(--space-3);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.05em;
-    color: #ffffff;
-    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: var(--font-bold);
+    color: white;
+    border-radius: var(--radius);
     z-index: 10;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-    backdrop-filter: var(--backdrop-blur);
-    box-shadow: var(--shadow-md);
-    animation: slideInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    animation: slideIn 0.3s ease-out;
   }
   
-  @keyframes slideInDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  @keyframes slideIn {
+    from { 
+      transform: translateY(-100%); 
+      opacity: 0; 
+    }
+    to { 
+      transform: translateY(0); 
+      opacity: 1; 
+    }
   }
   
   .discount-badge { 
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    background: var(--error);
     left: var(--space-3);
   }
   
   .hot-badge { 
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    background: var(--warning);
     right: var(--space-3);
   }
 
-  /* Info area with reduced padding */
+  /* Content area */
   .product-info {
     padding: var(--space-4);
-    background: var(--surface-white);
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    position: relative;
-  }
-  
-  .product-info::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: var(--space-4);
-    right: var(--space-4);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
   }
 
-  /* Enhanced title */
+  /* Typography improvements */
   .product-title {
-    flex: 1;
     margin: 0;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-lg);
+    font-weight: var(--font-semibold);
     color: var(--text-primary);
     line-height: 1.4;
-    letter-spacing: -0.01em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* Better text rendering */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
   
   .product-title a {
     color: inherit;
     text-decoration: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     padding: var(--space-1);
     margin: calc(-1 * var(--space-1));
-    transition: var(--transition-fast);
+    transition: var(--transition);
     position: relative;
-    display: inline-block;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   
   .product-title a::after {
@@ -244,13 +196,13 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     left: var(--space-1);
     right: var(--space-1);
     height: 2px;
-    background: var(--accent-primary);
+    background: var(--primary);
     transform: scaleX(0);
-    transition: var(--transition-fast);
+    transition: var(--transition);
   }
   
   .product-title a:hover { 
-    color: var(--accent-secondary);
+    color: var(--secondary);
   }
   
   .product-title a:hover::after {
@@ -258,262 +210,282 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
   
   .product-title a:focus-visible {
-    outline: 2px solid var(--accent-secondary);
+    outline: 2px solid var(--secondary);
     outline-offset: 2px;
-    background: var(--accent-light);
   }
 
-  /* Enhanced pricing with gradient text */
+  /* Pricing section */
   .product-pricing {
     display: flex;
     align-items: baseline;
     gap: var(--space-2);
-    flex-wrap: wrap;
   }
   
   .deposit-price {
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: var(--font-2xl);
+    font-weight: var(--font-bold);
+    color: var(--error);
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
   }
   
   .original-price {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-sm);
     color: var(--text-muted);
     text-decoration: line-through;
-    font-weight: var(--font-weight-medium);
-    position: relative;
+    font-weight: var(--font-medium);
   }
 
-  /* Compact stock status */
+  /* Stock status with better semantics */
   .stock-status {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    font-size: var(--font-size-sm);
-    color: var(--success-color);
-    font-weight: var(--font-weight-medium);
-    background: var(--success-light);
+    font-size: var(--font-sm);
+    color: var(--success);
+    font-weight: var(--font-medium);
+    background: rgb(16 185 129 / 0.1);
     padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius);
     width: fit-content;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    border: 1px solid rgb(16 185 129 / 0.2);
   }
   
-  .stock-icon {
+  .stock-indicator {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--success-color);
-    animation: pulse-stock 2s infinite;
+    background: var(--success);
+    animation: pulse 2s infinite;
   }
   
-  @keyframes pulse-stock {
+  @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.6; }
   }
 
-  /* Enhanced action buttons with reduced spacing */
+  /* Action buttons with better hierarchy */
   .product-actions {
     display: flex;
     gap: var(--space-2);
-    margin-top: var(--space-2);
+    margin-top: auto;
   }
   
-  .order-btn {
-    flex: 1;
-    background: var(--accent-primary);
-    color: #ffffff;
+  .btn {
     border: none;
     border-radius: var(--radius-lg);
-    padding: var(--space-3) var(--space-4);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
     cursor: pointer;
-    transition: var(--transition-fast);
-    min-height: 42px;
-    letter-spacing: -0.01em;
-    position: relative;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .order-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: var(--transition);
-  }
-  
-  .order-btn:hover {
-    background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .order-btn:hover::before {
-    left: 100%;
-  }
-  
-  .order-btn:focus-visible {
-    box-shadow: var(--shadow-focus), var(--shadow-lg);
-  }
-  
-  .cart-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    background: var(--surface-white);
-    border: 1px solid var(--border-medium);
-    border-radius: var(--radius-lg);
-    color: var(--text-secondary);
-    transition: var(--transition-fast);
-    flex-shrink: 0;
-    cursor: pointer;
+    text-decoration: none;
     position: relative;
     overflow: hidden;
   }
   
-  .cart-btn::before {
+  .btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.2), transparent);
+    transform: translateX(-100%);
     transition: var(--transition);
   }
   
-  .cart-btn:hover {
-    background: var(--accent-light);
-    border-color: var(--accent-primary-solid);
-    color: var(--accent-primary-solid);
+  .btn:hover::before {
+    transform: translateX(100%);
+  }
+  
+  .btn-primary {
+    flex: 1;
+    background: var(--primary);
+    color: white;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-base);
+    min-height: 44px;
+  }
+  
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+  }
+  
+  .btn-secondary {
+    width: 44px;
+    height: 44px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-focus);
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+  
+  .btn-secondary:hover {
+    background: rgb(255 107 53 / 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
     transform: scale(1.05);
   }
   
-  .cart-btn:hover::before {
-    left: 100%;
-  }
-  
-  .cart-btn:focus-visible {
-    outline: 2px solid var(--accent-primary-solid);
+  .btn:focus-visible {
+    outline: 2px solid var(--secondary);
     outline-offset: 2px;
   }
 
-  /* Screen reader only */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
+  /* Accessibility improvements */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
   }
 
-  /* High contrast mode */
-  @media (prefers-contrast: high) {
-    .product-card, .order-btn, .cart-btn, .wishlist-btn { border-width: 2px; }
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    * { 
-      transition: none !important; 
-      animation: none !important;
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .product-card { 
+      width: 100%; 
+      max-width: 320px; 
     }
+    .product-image { 
+      height: 180px; 
+    }
+    .product-image img { 
+      width: 120px; 
+      height: 120px; 
+    }
+    .product-info { 
+      padding: var(--space-3); 
+    }
+    .product-title { 
+      font-size: var(--font-base); 
+    }
+    .deposit-price { 
+      font-size: var(--font-xl); 
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .product-card,
+    .product-image,
+    .product-image img,
+    .btn,
+    .badge {
+      transition: none;
+      animation: none;
+    }
+    
     .product-card:hover,
     .product-card:hover .product-image,
-    .cart-btn:hover { transform: none; }
+    .product-card:hover .product-image img,
+    .btn:hover,
+    .btn-secondary:hover {
+      transform: none;
+    }
   }
 
-  /* Mobile optimizations */
-  @media screen and (max-width: 767px) {
-    .product-card { width: 100%; max-width: 320px; }
-    .product-image { height: 180px; }
-    .product-image img { width: 120px; height: 120px; }
-    .product-info { padding: var(--space-3); gap: var(--space-3); }
-    .product-title { font-size: var(--font-size-base); }
-    .deposit-price { font-size: var(--font-size-xl); }
-    .order-btn, .cart-btn { min-height: 40px; min-width: 40px; }
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .product-card,
+    .btn,
+    .stock-status {
+      border-width: 2px;
+    }
   }
 
-  /* Print optimizations */
+  /* Print styles */
   @media print {
     .product-card { 
-      break-inside: avoid; 
-      box-shadow: none; 
-      border: 1px solid var(--border-medium);
-      background: var(--surface-white) !important;
+      break-inside: avoid;
+      box-shadow: none;
+      border: 1px solid var(--border);
     }
-    .cart-btn, .order-btn { display: none; }
+    .product-actions { 
+      display: none; 
+    }
+    .badge { 
+      background: var(--text-primary) !important;
+      color: var(--bg-primary) !important;
+    }
   }
 </style>
 
 <article class="product-card" itemscope itemtype="https://schema.org/Product">
-  <a href={`/products/${slug}`} class="product-image" aria-label={`View ${name} product details`}>
+  <a href={`/products/${slug}`} class="product-image" aria-label={`View ${name} details`}>
     {discount && (
-      <div class="discount-badge" aria-label={`${discount} discount`}><span>{discount}</span></div>
+      <span class="badge discount-badge" aria-label={`${discount} discount`}>
+        {discount}
+      </span>
     )}
     {display !== 'none' && (
-      <div class="hot-badge" aria-label="Hot item" style={`display: ${display};`}><span>Hot</span></div>
+      <span class="badge hot-badge" aria-label="Popular item" style={`display: ${display};`}>
+        Hot
+      </span>
     )}
     <img
       src={source}
-      alt={`${name} - Product image`}
+      alt={`${name} product`}
       width="140"
       height="140"
       itemprop="image"
       loading={index === 0 ? "eager" : "lazy"}
+      decoding={index === 0 ? "sync" : "async"}
       fetchpriority={index === 0 ? "high" : undefined}
     />
   </a>
 
   <div class="product-info">
-    <header class="product-header">
-      <h2 class="product-title" id={`product-title-${slug}`} itemprop="name">
-        <a href={`/products/${slug}`} aria-describedby={`product-price-${slug}`}>{name}</a>
-      </h2>
-    </header>
+    <h2 class="product-title" itemprop="name">
+      <a href={`/products/${slug}`} aria-describedby={`price-${slug}`}>
+        {name}
+      </a>
+    </h2>
 
-    <div class="product-pricing" id={`product-price-${slug}`}>
-      <span class="deposit-price" aria-label={`Deposit amount: ${deposit}`} itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+    <div class="product-pricing" id={`price-${slug}`}>
+      <span class="deposit-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <span class="visually-hidden">Deposit amount:</span>
         Deposit {deposit}
-        <meta itemprop="price" content={deposit} />
+        <meta itemprop="price" content={deposit.replace(/[^\d.]/g, '')} />
+        <meta itemprop="priceCurrency" content="USD" />
       </span>
       {totalPrice && totalPrice !== deposit && (
-        <span class="original-price" aria-label={`Original price: ${totalPrice}`}>{totalPrice}</span>
+        <span class="original-price">
+          <span class="visually-hidden">Original price:</span>
+          {totalPrice}
+        </span>
       )}
     </div>
 
     <div class="stock-status" role="status" aria-live="polite">
-      <div class="stock-icon" aria-hidden="true"></div>
-      <span>In stock</span>
+      <div class="stock-indicator" aria-hidden="true"></div>
+      <span>In Stock</span>
     </div>
 
     <div class="product-actions">
-        <a href={`/checkout/${slugs}`} class="order-link" aria-label={`Order ${name} now with deposit ${deposit}`} style="flex:1">
-        <button class="order-btn" type="button">Order Now</button>
+      <a 
+        href={`/checkout/${slugs}`} 
+        class="btn btn-primary" 
+        aria-label={`Order ${name} with ${deposit} deposit`}
+      >
+        Order Now
       </a>
-      <button class="cart-btn" type="button" aria-label={`Add ${name} to cart`} title="Add to cart">
+      <button 
+        class="btn btn-secondary" 
+        type="button" 
+        aria-label={`Add ${name} to cart`}
+        title="Add to cart"
+      >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="9" cy="21" r="1"></circle>
           <circle cx="20" cy="21" r="1"></circle>
           <path d="m1 1 4 4 10 0 2 11-14 0"></path>
         </svg>
-        <span class="sr-only">Add to cart</span>
+        <span class="visually-hidden">Add to cart</span>
       </button>
     </div>
   </div>
