@@ -100,7 +100,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   .product-image {
     position: relative;
     width: 100%;
-    height: 240px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,8 +143,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
   
   .product-image img {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
     transition: var(--transition);
@@ -161,13 +161,13 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   .discount-badge,
   .hot-badge {
     position: absolute;
-    top: var(--space-4);
-    padding: var(--space-2) var(--space-4);
+    top: var(--space-3);
+    padding: var(--space-2) var(--space-3);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-bold);
     letter-spacing: 0.05em;
     color: #ffffff;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     z-index: 10;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     white-space: nowrap;
@@ -183,22 +183,22 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   
   .discount-badge { 
     background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    left: var(--space-4);
+    left: var(--space-3);
   }
   
   .hot-badge { 
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    right: var(--space-4);
+    right: var(--space-3);
   }
 
-  /* Info area with improved spacing */
+  /* Info area with reduced padding */
   .product-info {
-    padding: var(--space-6);
+    padding: var(--space-4);
     background: var(--surface-white);
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: var(--space-3);
     position: relative;
   }
   
@@ -206,8 +206,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     content: '';
     position: absolute;
     top: 0;
-    left: var(--space-6);
-    right: var(--space-6);
+    left: var(--space-4);
+    right: var(--space-4);
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
   }
@@ -219,7 +219,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
-    line-height: 1.5;
+    line-height: 1.4;
     letter-spacing: -0.01em;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -263,55 +263,11 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     background: var(--accent-light);
   }
 
-  /* Stylish wishlist button */
-  .wishlist-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--border-medium);
-    border-radius: var(--radius-lg);
-    background: var(--surface-white);
-    color: var(--text-muted);
-    transition: var(--transition-fast);
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .wishlist-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.1), transparent);
-    transition: var(--transition);
-  }
-  
-  .wishlist-btn:hover {
-    background: var(--error-light);
-    color: var(--error-color);
-    border-color: var(--error-color);
-    transform: scale(1.1);
-  }
-  
-  .wishlist-btn:hover::before {
-    left: 100%;
-  }
-  
-  .wishlist-btn:focus-visible {
-    outline: 2px solid var(--accent-secondary);
-    outline-offset: 2px;
-  }
-
   /* Enhanced pricing with gradient text */
   .product-pricing {
     display: flex;
     align-items: baseline;
-    gap: var(--space-3);
+    gap: var(--space-2);
     flex-wrap: wrap;
   }
   
@@ -334,7 +290,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     position: relative;
   }
 
-  /* Animated stock status */
+  /* Compact stock status */
   .stock-status {
     display: flex;
     align-items: center;
@@ -343,8 +299,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     color: var(--success-color);
     font-weight: var(--font-weight-medium);
     background: var(--success-light);
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-lg);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
     width: fit-content;
     border: 1px solid rgba(16, 185, 129, 0.2);
   }
@@ -362,12 +318,11 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     50% { opacity: 0.6; }
   }
 
-  /* Enhanced action buttons */
+  /* Enhanced action buttons with reduced spacing */
   .product-actions {
     display: flex;
-    gap: var(--space-3);
-    margin-top: auto;
-    padding-top: var(--space-2);
+    gap: var(--space-2);
+    margin-top: var(--space-2);
   }
   
   .order-btn {
@@ -376,12 +331,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     color: #ffffff;
     border: none;
     border-radius: var(--radius-lg);
-    padding: var(--space-4) var(--space-6);
+    padding: var(--space-3) var(--space-4);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
     transition: var(--transition-fast);
-    min-height: 48px;
+    min-height: 42px;
     letter-spacing: -0.01em;
     position: relative;
     overflow: hidden;
@@ -417,8 +372,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     background: var(--surface-white);
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
@@ -481,19 +436,18 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     }
     .product-card:hover,
     .product-card:hover .product-image,
-    .wishlist-btn:hover,
     .cart-btn:hover { transform: none; }
   }
 
   /* Mobile optimizations */
   @media screen and (max-width: 767px) {
     .product-card { width: 100%; max-width: 320px; }
-    .product-image { height: 220px; }
-    .product-image img { width: 140px; height: 140px; }
-    .product-info { padding: var(--space-5); gap: var(--space-4); }
+    .product-image { height: 180px; }
+    .product-image img { width: 120px; height: 120px; }
+    .product-info { padding: var(--space-3); gap: var(--space-3); }
     .product-title { font-size: var(--font-size-base); }
     .deposit-price { font-size: var(--font-size-xl); }
-    .order-btn, .cart-btn, .wishlist-btn { min-height: 44px; min-width: 44px; }
+    .order-btn, .cart-btn { min-height: 40px; min-width: 40px; }
   }
 
   /* Print optimizations */
@@ -504,7 +458,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
       border: 1px solid var(--border-medium);
       background: var(--surface-white) !important;
     }
-    .wishlist-btn, .cart-btn, .order-btn { display: none; }
+    .cart-btn, .order-btn { display: none; }
   }
 </style>
 
@@ -519,8 +473,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     <img
       src={source}
       alt={`${name} - Product image`}
-      width="160"
-      height="160"
+      width="140"
+      height="140"
       itemprop="image"
       loading={index === 0 ? "eager" : "lazy"}
       fetchpriority={index === 0 ? "high" : undefined}
@@ -532,12 +486,6 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
       <h2 class="product-title" id={`product-title-${slug}`} itemprop="name">
         <a href={`/products/${slug}`} aria-describedby={`product-price-${slug}`}>{name}</a>
       </h2>
-      <a href={`/wishlist/add/${slug}`} class="wishlist-btn" aria-label={`Add ${name} to wishlist`}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-        </svg>
-        <span class="sr-only">Add to wishlist</span>
-      </a>
     </header>
 
     <div class="product-pricing" id={`product-price-${slug}`}>
@@ -567,7 +515,6 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
         </svg>
         <span class="sr-only">Add to cart</span>
       </button>
-    
     </div>
   </div>
 </article>
