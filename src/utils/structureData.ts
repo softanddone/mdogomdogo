@@ -114,6 +114,70 @@ const kenyaLocationData = {
   ]
 };
 
+
+
+const generateValidSKU = (slug: string, productId: number) => {
+  return `${productId.toString().padStart(4, '0')}-${slug.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').toUpperCase()}`;
+};
+
+// FIX 2: Return Policy Generator
+const generateReturnPolicy = () => ({
+  '@type': 'MerchantReturnPolicy',
+  '@id': 'https://mdogomdogodeals.co.ke#returnpolicy',
+  applicableCountry: 'KE',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnUnlimitedWindow',
+  merchantReturnDays: 365,
+  returnMethod: ['https://schema.org/ReturnInStore', 'https://schema.org/ReturnByMail'],
+  returnFees: 'https://schema.org/FreeReturn',
+  customerRemorseReturnFees: 'https://schema.org/FreeReturn',
+  refundType: 'https://schema.org/FullRefund',
+  returnPolicySeasonalOverride: false,
+  merchantReturnLink: 'https://mdogomdogodeals.co.ke/returns',
+  restockingFee: {
+    '@type': 'MonetaryAmount',
+    value: '0',
+    currency: 'KES'
+  },
+  returnShippingFeesAmount: {
+    '@type': 'MonetaryAmount',
+    value: '0',
+    currency: 'KES'
+  },
+  inStoreReturnsOffered: true
+});
+
+// FIX 3: Delivery Time Generator
+const generateDeliveryTime = () => ({
+  '@type': 'ShippingDeliveryTime',
+  handlingTime: {
+    '@type': 'QuantitativeValue',
+    minValue: 0,
+    maxValue: 2,
+    unitCode: 'HUR'
+  },
+  transitTime: {
+    '@type': 'QuantitativeValue',
+    minValue: 0,
+    maxValue: 1,
+    unitCode: 'DAY'
+  },
+  cutoffTime: '16:00',
+  businessDays: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [
+      'https://schema.org/Monday',
+      'https://schema.org/Tuesday',
+      'https://schema.org/Wednesday',
+      'https://schema.org/Thursday',
+      'https://schema.org/Friday',
+      'https://schema.org/Saturday'
+    ],
+    opens: '08:00',
+    closes: '18:00'
+  }
+});
+
+
 export function generateProductSchema(product: FlexibleProduct) {
   const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
   const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
@@ -123,6 +187,17 @@ export function generateProductSchema(product: FlexibleProduct) {
   const productId = `https://mdogomdogodeals.co.ke/phones/${product.slug}`;
   const offerId = `${productId}#offer`;
   const organizationId = 'https://mdogomdogodeals.co.ke#organization';
+
+
+
+
+
+
+
+
+
+
+  
   
   // Enhanced brand information
   const brandInfo = brandData[product.brand] || {
@@ -173,7 +248,8 @@ export function generateProductSchema(product: FlexibleProduct) {
     image: imageArray,
     
     // Enhanced product identifiers for better indexing
-    sku: product.slug,
+    // sku: product.slug,
+    sku: generateValidSKU(product.slug, product.id),
     mpn: product.model || product.slug,
     productID: product.id.toString(),
     ...(product.gtin && product.gtin.trim() !== '' && product.gtin !== 'placeholder' && { gtin: product.gtin }),
@@ -371,21 +447,7 @@ export function generateProductSchema(product: FlexibleProduct) {
       ],
 
       // Enhanced return policy
-      hasMerchantReturnPolicy: {
-        '@type': 'MerchantReturnPolicy',
-        applicableCountry: 'KE',
-        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-        merchantReturnDays: 30,
-        returnMethod: 'https://schema.org/ReturnByMail',
-        returnFees: 'https://schema.org/FreeReturn',
-        customerRemorseReturnFees: 'https://schema.org/FreeReturn',
-        refundType: 'https://schema.org/FullRefund',
-        restockingFee: {
-          '@type': 'MonetaryAmount',
-          value: '0',
-          currency: 'KES'
-        }
-      },
+  hasMerchantReturnPolicy: generateReturnPolicy(),
 
       // Comprehensive shipping details
       shippingDetails: {
@@ -400,34 +462,8 @@ export function generateProductSchema(product: FlexibleProduct) {
           value: '0',
           currency: 'KES'
         },
-        deliveryTime: {
-          '@type': 'ShippingDeliveryTime',
-          handlingTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 1,
-            maxValue: 2,
-            unitCode: 'DAY'
-          },
-          transitTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 1,
-            maxValue: 3,
-            unitCode: 'DAY'
-          },
-          cutoffTime: '15:00',
-          businessDays: {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: [
-              'https://schema.org/Monday',
-              'https://schema.org/Tuesday',
-              'https://schema.org/Wednesday',
-              'https://schema.org/Thursday',
-              'https://schema.org/Friday'
-            ],
-            opens: '08:00',
-            closes: '18:00'
-          }
-        },
+      deliveryTime: generateDeliveryTime(),
+       
         shippingDestination: {
           '@type': 'DefinedRegion',
           addressCountry: 'KE',
@@ -595,7 +631,8 @@ export function generateProductSchema(product: FlexibleProduct) {
         '@id': `https://mdogomdogodeals.co.ke/phones/${variant.slug}`,
         name: variant.name,
         url: `https://mdogomdogodeals.co.ke/phones/${variant.slug}`,
-        sku: variant.slug
+        // sku: variant.slug
+        sku: generateValidSKU(variant.slug, product.id),
       }))
     }),
 
@@ -684,6 +721,8 @@ export function generateProductSchema(product: FlexibleProduct) {
 
   return JSON.stringify(structuredData, null, 2);
 }
+
+
 
 // Additional SEO utility functions
 export function generateBreadcrumbSchema(product: FlexibleProduct) {
