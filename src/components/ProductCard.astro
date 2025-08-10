@@ -83,7 +83,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   .product-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
+    /* border-color: var(--primary); */
+    border-color: wheat;
   }
 
   /* Image container with aspect ratio */
@@ -458,7 +459,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
 </style>
 
-<article class="product-card" itemscope itemtype="https://schema.org/Product">
+<article class="product-card">
   <a href={`/products/${slug}`} class="product-image" aria-label={`View ${name} details`}>
     {discount && (
       <span class="badge discount-badge" aria-label={`${discount} discount`}>
@@ -490,11 +491,10 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     </h2>
 
     <div class="product-pricing" id={`price-${slug}`}>
-      <span class="deposit-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <span class="deposit-price"  >
         <span class="visually-hidden">Deposit amount:</span>
         Deposit {deposit}
-        <meta itemprop="price" content={deposit.replace(/[^\d.]/g, '')} />
-        <meta itemprop="priceCurrency" content="USD" />
+     
       </span>
       {totalPrice && totalPrice !== deposit && (
         <span class="original-price">

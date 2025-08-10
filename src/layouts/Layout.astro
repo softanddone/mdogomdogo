@@ -1,17 +1,18 @@
-
 ---
-// Import your schema function
-import { generateProductSchema } from '../utils/structureData';
+// Import your schema functions
+import { generateProductSchema, generateHomepageSchema, generatePageSchema } from '../utils/structureData';
 
 const {
- title = "Mdogomdogo Deals Kenya | Lipa Mdogo Mdogo Phones Nairobi, Kiambu & Beyond",
+  title = "Mdogomdogo Deals Kenya | Lipa Mdogo Mdogo Phones Nairobi, Kiambu & Beyond",
   description = "Buy affordable smartphones on Lipa Mdogo Mdogo in Nairobi and Kiambu. Get Samsung, Infinix, Itel, Tecno, and more with home delivery. Pay slowly, own it easily.",
   canonical = "https://mdogomdogodeals.co.ke",
   ogImage = "https://mdogomdogodeals.co.ke/phones/samsung-a15.png",
   ogType = "website",
   ogLocale = "en_KE",
   twitterCard = "summary_large_image",
-  product, // Add product prop for schema generation
+  product, // For individual product pages
+  products, // For homepage with multiple products
+  pageType, // 'product' | 'homepage' | 'other'
   schema // Optional: pre-generated schema
 } = Astro.props;
 
@@ -26,19 +27,31 @@ const keywords = [
   "lipa mdogo mdogo nairobi", "kiambu phone offers", "installment phones kenya"
 ].join(", ");
 
-// Generate schema if product data is provided
+// Generate appropriate schema based on page type
 let generatedSchema = '';
-if (product) {
-  generatedSchema = generateProductSchema(product);
-} else if (schema) {
+
+if (schema) {
+  // Use pre-generated schema if provided
   generatedSchema = schema;
+} else if (pageType === 'product' && product) {
+  // Generate product schema for individual product pages
+  generatedSchema = generateProductSchema(product);
+} else if (pageType === 'homepage' && products) {
+  // Generate homepage schema for pages with multiple products
+  generatedSchema = generateHomepageSchema(products);
+} else if (product) {
+  // Fallback: if product exists but no pageType specified
+  generatedSchema = generateProductSchema(product);
+} else if (products) {
+  // Fallback: if products exist but no pageType specified
+  generatedSchema = generateHomepageSchema(products);
 }
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />

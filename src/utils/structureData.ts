@@ -1506,3 +1506,193 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
 
   return [collectionSchema, itemListSchema];
 }
+
+
+export function generateHomepageSchema(products: FlexibleProduct[]) {
+  const baseUrl = 'https://mdogomdogodeals.co.ke';
+  
+  // Main organization schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${baseUrl}#organization`,
+    "name": "Lipa Mdogo Mdogo Phones",
+    "alternateName": ["Mdogo Mdogo Deals", "MMD Kenya"],
+    "url": baseUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${baseUrl}/assets/logo.png`,
+      "width": 300,
+      "height": 150
+    },
+    "description": "Kenya's leading mobile phone retailer offering flexible payment plans through Lipa Mdogo Mdogo system. Buy smartphones with daily payments starting from KES 50.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "CBD Center",
+      "addressLocality": "Nairobi",
+      "addressRegion": "Nairobi County", 
+      "postalCode": "00100",
+      "addressCountry": "KE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -1.2921,
+      "longitude": 36.8219
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+254-700-000-000",
+      "contactType": "customer service",
+      "availableLanguage": ["English", "Swahili"],
+      "areaServed": "KE"
+    },
+    "sameAs": [
+      "https://www.facebook.com/mdogomdogodeals",
+      "https://twitter.com/mdogomdogodeals", 
+      "https://www.instagram.com/mdogomdogodeals"
+    ],
+    "areaServed": kenyaLocationData.counties.map(county => ({
+      "@type": "AdministrativeArea",
+      "name": county,
+      "addressCountry": "KE"
+    }))
+  };
+
+  // ItemList schema for products on homepage
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Featured Mobile Phones - Lipa Mdogo Mdogo",
+    "description": "Browse our featured collection of smartphones with flexible payment options in Kenya",
+    "url": baseUrl,
+    "numberOfItems": products.length,
+    "itemListElement": products.map((product, index) => {
+      const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
+      const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
+      const dailyAmount = parseFloat(product.daily.replace(/[^\d.]/g, ''));
+      
+      return {
+        "@type": "ListItem", 
+        "position": index + 1,
+        "item": {
+          "@type": "Product",
+          "@id": `${baseUrl}/phones/${product.slug}`,
+          "name": product.name,
+          "description": product.description || `${product.name} available with flexible payment options in Kenya`,
+          "image": `${baseUrl}${product.source}`,
+          "url": `${baseUrl}/phones/${product.slug}`,
+          "sku": product.slug,
+          "brand": {
+            "@type": "Brand",
+            "name": product.brand
+          },
+          "category": "Mobile Phones",
+          "offers": {
+            "@type": "Offer",
+            "@id": `${baseUrl}/phones/${product.slug}#offer`,
+            "priceCurrency": "KES",
+            "price": price,
+            "priceValidUntil": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "seller": {
+              "@type": "Organization", 
+              "name": product.seller || "Lipa Mdogo Mdogo Phones",
+              "@id": `${baseUrl}#organization`
+            },
+            "priceSpecification": [
+              {
+                "@type": "UnitPriceSpecification",
+                "price": depositAmount,
+                "priceCurrency": "KES", 
+                "name": "Deposit Amount"
+              },
+              {
+                "@type": "UnitPriceSpecification",
+                "price": dailyAmount,
+                "priceCurrency": "KES",
+                "name": "Daily Payment"
+              }
+            ],
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0",
+                "currency": "KES"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion", 
+                "addressCountry": "KE",
+                "addressRegion": ["Nairobi County", "Kiambu County"]
+              }
+            },
+            "acceptedPaymentMethod": [
+              "https://schema.org/CreditCard",
+              "https://schema.org/PaymentMethodCreditCard",
+              {
+                "@type": "PaymentMethod",
+                "name": "M-Pesa"
+              }
+            ]
+          },
+          // Add reviews if available
+          ...(product.reviews && product.reviews.reviewCount > 0 && {
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": product.reviews.averageRating,
+              "reviewCount": product.reviews.reviewCount,
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          })
+        }
+      };
+    })
+  };
+
+  // Website schema  
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${baseUrl}#website`, 
+    "url": baseUrl,
+    "name": "Lipa Mdogo Mdogo Phones",
+    "description": "Kenya's premier mobile phone retailer offering flexible payment plans",
+    "publisher": {
+      "@id": `${baseUrl}#organization`
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${baseUrl}/search?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": "en-KE"
+  };
+
+  // Combine all schemas into single JSON-LD
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationSchema,
+      websiteSchema, 
+      itemListSchema
+    ]
+  };
+
+  return JSON.stringify(combinedSchema, null, 2);
+}
+
+// Modified function to handle different page types
+export function generatePageSchema(pageType: 'homepage' | 'product', data: any) {
+  if (pageType === 'homepage') {
+    return generateHomepageSchema(data.products);
+  } else if (pageType === 'product') {
+    return generateProductSchema(data.product);
+  }
+  
+  return null;
+}
