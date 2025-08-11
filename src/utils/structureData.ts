@@ -449,7 +449,7 @@ export function generateProductSchema(product: FlexibleProduct) {
       ],
 
       // Enhanced return policy
-  hasMerchantReturnPolicy: generateReturnPolicy(),
+  // hasMerchantReturnPolicy: generateReturnPolicy(),
 
       // Comprehensive shipping details
       shippingDetails: {
@@ -1298,7 +1298,7 @@ export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
     image: `https://mdogomdogodeals.co.ke${product.source}`,
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
-    hasMerchantReturnPolicy: generateReturnPolicy(),
+    // hasMerchantReturnPolicy: generateReturnPolicy(),
   };
 }
 
