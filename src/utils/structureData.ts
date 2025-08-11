@@ -1620,7 +1620,8 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
           "description": product.description || `${product.name} available with flexible payment options in Kenya`,
           "image": `${baseUrl}${product.source}`,
           "url": `${baseUrl}/phones/${product.slug}`,
-          "sku": product.slug,
+          // "sku": product.slug,
+          "sku":  generateValidSKU(product.slug, product.id),
           "brand": {
             "@type": "Brand",
             "name": product.brand
