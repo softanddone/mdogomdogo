@@ -350,6 +350,8 @@ export function generateProductSchema(product: FlexibleProduct) {
       lowPrice: price,
       highPrice: price,
       priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+
+      
       
       // Enhanced pricing information
       priceSpecification: [
@@ -1295,7 +1297,8 @@ export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
     },
     image: `https://mdogomdogodeals.co.ke${product.source}`,
     eventStatus: 'https://schema.org/EventScheduled',
-    eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode'
+    eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
+    hasMerchantReturnPolicy: generateReturnPolicy(),
   };
 }
 
@@ -1451,6 +1454,8 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
             "@type": "Organization",
             "name": product.seller || "MdogoMdogoDeals"
           },
+          
+          
           "paymentAccepted": ["Cash", "Credit", "Installment"],
           "availableDeliveryMethod": "https://schema.org/DeliveryModeDirectDownload",
           "shippingDetails": {
@@ -1481,14 +1486,8 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
               }
             }
           },
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-            "merchantReturnDays": 7,
-            "returnMethod": "https://schema.org/ReturnInStore",
-            "returnFees": "https://schema.org/FreeReturn",
-            "applicableCountry": "KE"
-          }
+          "hasMerchantReturnPolicy": generateReturnPolicy(),
+     
         },
         "aggregateRating": product.reviews ? {
           "@type": "AggregateRating",
@@ -1629,6 +1628,7 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
           "category": "Mobile Phones",
           "offers": {
             "@type": "Offer",
+            "hasMerchantReturnPolicy": generateReturnPolicy(),
             "@id": `${baseUrl}/phones/${product.slug}#offer`,
             "priceCurrency": "KES",
             "price": price,
