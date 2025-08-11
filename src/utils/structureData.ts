@@ -1486,7 +1486,7 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
               }
             }
           },
-          "hasMerchantReturnPolicy": generateReturnPolicy(),
+          // "hasMerchantReturnPolicy": generateReturnPolicy(),
      
         },
         "aggregateRating": product.reviews ? {
@@ -1628,7 +1628,7 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
           "category": "Mobile Phones",
           "offers": {
             "@type": "Offer",
-            // "hasMerchantReturnPolicy": generateReturnPolicy(),
+            "hasMerchantReturnPolicy": generateReturnPolicy(),
             "@id": `${baseUrl}/phones/${product.slug}#offer`,
             "priceCurrency": "KES",
             "price": price,
