@@ -55,6 +55,41 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     --transition-transform: transform var(--transition);
   }
 
+  /* Grid container styles - Add these to your parent container */
+  .product-grid {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1rem;
+    
+    /* Mobile: 2 columns */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Tablet: 3 columns */
+  @media (min-width: 640px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  /* Desktop: 5 columns */
+  @media (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+  }
+
+  /* Large screens: maintain 5 columns with max width */
+  @media (min-width: 1280px) {
+    .product-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+
   /* Component-scoped reset */
   .product-card *,
   .product-card *::before,
@@ -62,12 +97,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     box-sizing: border-box;
   }
 
-  /* Main card container */
+  /* Main card container - Updated for responsive grid */
   .product-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 100%; /* Changed from fixed 280px to 100% for responsive grid */
     background: var(--bg-primary);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
@@ -150,7 +185,8 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   .discount-badge { 
     /* Darker red for better contrast: 4.51:1 ratio with white text */
     /* background: #dc2626; */
-    background: #ff6b35;
+    /* background: #ff6b35; */
+    background: rgb(1, 51, 1);
     /* left: var(--space-3); */
     left: 2px;
   }
@@ -317,9 +353,10 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     flex: 1;
     background: var(--primary);
     color: white;
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-2) var(--space-3);
     font-size: var(--font-base);
-    min-height: 44px;
+    /* min-height: 44px; */
+    min-height: 40px;
   }
   
   .btn-primary:hover {
@@ -361,25 +398,62 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     border: 0 !important;
   }
 
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .product-card { 
-      width: 100%; 
-      max-width: 320px; 
+  /* Responsive design updates for grid layout */
+  @media (max-width: 640px) {
+    .product-grid {
+      gap: 1rem;
+      padding: 0.5rem;
     }
+    
+    .product-image { 
+      height: 160px; 
+    }
+    
+    .product-image img { 
+      width: 100px; 
+      height: 100px; 
+    }
+    
+    .product-info { 
+      padding: var(--space-3); 
+    }
+    
+    .product-title { 
+      font-size: var(--font-base); 
+    }
+    
+    .deposit-price { 
+      font-size: var(--font-xl); 
+    }
+  }
+
+  /* Medium screens adjustments */
+  @media (min-width: 640px) and (max-width: 1023px) {
     .product-image { 
       height: 180px; 
     }
+    
     .product-image img { 
       width: 120px; 
       height: 120px; 
     }
-    .product-info { 
-      padding: var(--space-3); 
+  }
+
+  /* Desktop (5 columns) - optimize for smaller card sizes */
+  @media (min-width: 1024px) {
+    .product-image { 
+      height: 200px; 
     }
+    
+    .product-image img { 
+      width: 140px; 
+      height: 140px; 
+    }
+    
     .product-title { 
       font-size: var(--font-base); 
     }
+    
     .deposit-price { 
       font-size: var(--font-xl); 
     }
@@ -500,7 +574,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
       {totalPrice && totalPrice !== deposit && (
         <span class="original-price">
           <span class="visually-hidden">Original price:</span>
-          {totalPrice}
+          {from}
         </span>
       )}
     </div>
