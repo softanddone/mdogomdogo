@@ -67,7 +67,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 280px;
+    /* width: 280px; */
     background: var(--bg-primary);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
@@ -235,7 +235,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
   }
   
   .deposit-price {
-    font-size: var(--font-2xl);
+    font-size: var(--font-lg);
     font-weight: var(--font-bold);
     /* Darker red for better contrast: 7.73:1 ratio with white background */
     color: #b91c1c;
@@ -463,7 +463,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 </style>
 
 <article class="product-card">
-  <a href={`/products/${slug}`} class="product-image" aria-label={`View ${name} details`}>
+  <a href={`/${slug}`} class="product-image" aria-label={`View ${name} details`}>
     {discount && (
       <span class="badge discount-badge" aria-label={`${discount} discount`}>
         {discount}
@@ -488,7 +488,7 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
 
   <div class="product-info">
     <h2 class="product-title" itemprop="name">
-      <a href={`/products/${slug}`} aria-describedby={`price-${slug}`}>
+      <a href={`/${slug}`} aria-describedby={`price-${slug}`}>
         {name}
       </a>
     </h2>
