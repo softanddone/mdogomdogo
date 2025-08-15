@@ -485,6 +485,185 @@ reviews: {
   },
 
 
+{
+  id: 9,
+  name: "Tecno Pop 10",
+  status: "New",
+  image: "/phones/tecno-pop-10.webp",
+  from: "Ksh 3,999",
+  deposit: "Ksh 2,300",
+  daily: "Ksh 60",
+  totalPrice: "Ksh 15,999",
+  source: "/phones/tecno-pop-10.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.67 inches, 720 x 1612 px, 120Hz",
+  processor: "MediaTek Dimensity 7025, Octa Core, 2.5 GHz",
+  camera: "50MP Dual Rear + 8MP Front",
+  memory: "Storage 64GB RAM 3GB, MicroSD up to 1TB",
+  battery: "5,100mAh, Fast Charging",
+  version: "Android 15",
+  depositanddaily: "Ksh 5,499 Daily Ksh 95",
+  slug: "tecno-pop-10",
+  slugs: "tecno-pop-10",
+  description: "Buy Tecno Pop 10 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more.",
+  brand: "Tecno",
+  seller: "Onfon Mobile",
+  model: "POP10",
+  storage: "64GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  color: "Black, Ice Blue, Lavender",
+  weight: "190g",
+  dimensions: {
+    length: "165.5mm",
+    width: "76.0mm",
+    height: "8.7mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Pop Series",
+  connectivity: "Dual Sim, 3G, 4G, 5G, VoLTE, Wi-Fi, NFC, IR Blaster",
+  reviews: {
+    averageRating: 4.4,
+    reviewCount: 21,
+    reviews: [
+      {
+        author: "Ian K.",
+        rating: 4,
+        reviewBody: "Smooth performance, great camera, and very affordable on a payment plan.",
+        datePublished: "2025-07-10"
+      }
+    ]
+  }
+
+
+
+
+  
+},
+
+{
+  id: 10,
+  name: "Tecno Spark 40",
+  status: "New",
+  image: "/phones/tecno-spark-40.webp",
+  from: "Ksh 3,499",
+  deposit: "Ksh 2900",
+  daily: "Ksh 75",
+  totalPrice: "Ksh 16,499",
+  source: "/phones/tecno-spark-40.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.67\" IPS LCD, HD+ (720×1600), 120 Hz",
+  processor: "MediaTek Helio G81",
+  camera: "50 MP rear, 8 MP front (Dual LED Flash)",
+  memory: "128GB storage; RAM options 4/6/8 GB (Extended RAM)",
+  battery: "5,200 mAh, 45W Fast Charging",
+  version: "Android 15 (HiOS 15.1)",
+  depositanddaily: "Ksh 5,999 Daily Ksh 110",
+  slug: "tecno-spark-40",
+  slugs: "tecno-spark-40",
+  description: "Buy Tecno Spark 40 on credit in Nairobi Kenya. Lipa mdogo-mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more.",
+  brand: "Tecno",
+  seller: "Onfon Mobile",
+  model: "Spark 40",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  color: "Ink Black, Titanium Grey, Veil White, Mirage Blue",
+  weight: "188 g",
+  dimensions: {
+    length: "165.6 mm",
+    width: "77 mm",
+    height: "7.67 mm"
+  },
+  material: "Glass front, plastic back & frame",
+  pattern: "Matte back",
+  productLine: "Spark Series",
+  connectivity: "2G/3G/4G, Wi-Fi, Bluetooth, GPS, USB-C, FM Radio",
+  sensors: "Side Fingerprint, Accelerometer, Gyroscope, Proximity, Magnetometer, Infrared Remote",
+  durability: "IP64 (dust & water splash resistant), drop-resistant up to 1.5 m",
+  sound: "Dual speakers, DTS Sound",
+  features: "Ask Ella AI Assistant, AI Writing, AI Translate, FreeLink (offline calls and messages)",
+  reviews: {
+    averageRating: 4.2,
+    reviewCount: 15,
+    reviews: [
+      {
+        author: "Mark N.",
+        rating: 4,
+        reviewBody: "Great value—smooth 120 Hz screen, long battery life, and water-resistant build.",
+        datePublished: "2025-07-15"
+      }
+    ]
+  }
+},
+ {
+  id: 11,
+  name: "Infinix Hot 60i",
+  status: "New",
+  image: "/phones/infinix-hot-60i.webp",
+  from: "Ksh 3,999",         
+  deposit: "Ksh 3,000",        
+  daily: "Ksh 78",            
+  totalPrice: "Ksh 16,499",    
+  source: "/phones/infinix-hot-60i.webp",
+  discount: "-5%",
+  display: "block",
+  phonedisplay: "6.7″ IPS LCD, HD+ (720×1600), 120 Hz, 700 nits",
+  processor: "MediaTek Helio G81 Ultimate (Octa-core)",
+  camera: "50 MP rear (with auxiliary lens), 8 MP front",
+  memory: "128 GB storage + 6 GB RAM (with extended RAM up to 6 GB), expandable up to 1 TB",
+  battery: "5,160 mAh, 45 W Fast Charging, reverse & bypass charging",
+  version: "Android 15, XOS 15.1.1",
+  depositanddaily: "Ksh 4,500 Daily Ksh 140",
+  slug: "infinix-hot-60i",
+  slugs: "infinix-hot-60i",
+  description: "Buy Infinix Hot 60i on credit in Nairobi Kenya. Lipa mdogo-mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more.",
+  brand: "Infinix",
+  seller: "OnFon Mobile",
+  model: "Hot 60i",
+  storage: "128 GB ",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix"],
+  color: "Sleek Black, Titanium Silver, Shadow Blue, Neon Red, Meadow Green, Soul Eye Purple",
+  weight: "188 g",
+  dimensions: {
+    length: "166 mm",
+    width: "76.6 mm",
+    height: "7.7 mm"
+  },
+  material: "Glass front, plastic back & frame",
+  pattern: "Matte",
+  productLine: "Hot Series",
+  connectivity: "2G/3G/4G, Dual-SIM, Wi-Fi 802.11 a/b/g/n/ac, Bluetooth 5.3, GPS, NFC, USB-C, 3.5 mm jack, Infrared",
+  sensors: "Side-mounted fingerprint, Accelerometer, Gyro, Proximity, Compass",
+  durability: "IP64 (splash-resistant), Drop-resistant up to 1.5 m",
+  multimedia: "Stereo speakers, FM Radio, DTS audio, 3.5 mm headphone jack",
+  reviews: {
+    averageRating: 4.3,
+    reviewCount: 10,
+    reviews: [
+      {
+        author: "Alex M.",
+        rating: 4,
+        reviewBody: "Great value—the 120 Hz display and long battery life stand out.",
+        datePublished: "2025-07-20"
+      }
+    ]
+  }
+}
+
+
+
+
+
+
+
 
 
   //       {

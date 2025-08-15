@@ -55,41 +55,6 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     --transition-transform: transform var(--transition);
   }
 
-  /* Grid container styles - Add these to your parent container */
-  .product-grid {
-    display: grid;
-    gap: 1.5rem;
-    padding: 1rem;
-    
-    /* Mobile: 2 columns */
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Tablet: 3 columns */
-  @media (min-width: 640px) {
-    .product-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-  }
-
-  /* Desktop: 5 columns */
-  @media (min-width: 1024px) {
-    .product-grid {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-  }
-
-  /* Large screens: maintain 5 columns with max width */
-  @media (min-width: 1280px) {
-    .product-grid {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-  }
-
   /* Component-scoped reset */
   .product-card *,
   .product-card *::before,
@@ -97,12 +62,12 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     box-sizing: border-box;
   }
 
-  /* Main card container - Updated for responsive grid */
+  /* Main card container */
   .product-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%; /* Changed from fixed 280px to 100% for responsive grid */
+    width: 280px;
     background: var(--bg-primary);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
@@ -398,62 +363,25 @@ const { name, image, source, from, deposit, totalPrice, discount, display, slug,
     border: 0 !important;
   }
 
-  /* Responsive design updates for grid layout */
-  @media (max-width: 640px) {
-    .product-grid {
-      gap: 1rem;
-      padding: 0.5rem;
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .product-card { 
+      width: 100%; 
+      max-width: 320px; 
     }
-    
-    .product-image { 
-      height: 160px; 
-    }
-    
-    .product-image img { 
-      width: 100px; 
-      height: 100px; 
-    }
-    
-    .product-info { 
-      padding: var(--space-3); 
-    }
-    
-    .product-title { 
-      font-size: var(--font-base); 
-    }
-    
-    .deposit-price { 
-      font-size: var(--font-xl); 
-    }
-  }
-
-  /* Medium screens adjustments */
-  @media (min-width: 640px) and (max-width: 1023px) {
     .product-image { 
       height: 180px; 
     }
-    
     .product-image img { 
       width: 120px; 
       height: 120px; 
     }
-  }
-
-  /* Desktop (5 columns) - optimize for smaller card sizes */
-  @media (min-width: 1024px) {
-    .product-image { 
-      height: 200px; 
+    .product-info { 
+      padding: var(--space-3); 
     }
-    
-    .product-image img { 
-      width: 140px; 
-      height: 140px; 
-    }
-    
     .product-title { 
       font-size: var(--font-base); 
     }
-    
     .deposit-price { 
       font-size: var(--font-xl); 
     }
