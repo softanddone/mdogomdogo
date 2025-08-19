@@ -1,3 +1,7 @@
+---
+import Links from "./Links.astro"
+---
+
 <!DOCTYPE html>
 
   <style is:inline>
@@ -385,6 +389,7 @@
             align-items: center;
             justify-content: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+         
         }
 
         .no-results {
@@ -419,7 +424,8 @@
 
             .bottom-nav{
                
-                display: none;
+                /* display: none; */
+                margin-top: 50px;
             }
       
             
@@ -463,7 +469,7 @@
                         <img src="/phones/phone.svg" alt="Support">
                     </div>
                     <div class="support-text">
-                        <h3>24/7 Support</h3>
+                        <h3>Call to Order</h3>
                         <h3>0722867659</h3>
                     </div>
                 </div>
@@ -480,7 +486,7 @@
             </div>
             
             <div class="bottom-nav">
-      
+      <Links></Links>
             </div>
         </div>
     </nav>

@@ -2,28 +2,28 @@
 import Welcome from "../components/Welcome.astro";
 import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
-import { products } from '../data/products'; // Import your homepage products
+import { products } from "../data/products"; // Import your homepage products
+import Links from "../components/Links.astro";
+import Hero from "../components/Hero.astro";
 
 const seo = {
   title: "Lipa Mdogo Mdogo Phones in Kenya | Affordable Smartphones",
-  description: "Own a smartphone today with a small deposit and pay the rest in flexible installments. Free delivery in Nairobi,Kiambu and its surroundings.",
+  description:
+    "Own a smartphone today with a small deposit and pay the rest in flexible installments. Free delivery in Nairobi,Kiambu and its surroundings.",
   canonical: "https://mdogomdogodeals.co.ke/",
   ogImage: "https://mdogomdogodeals.co.ke/phones/samsung-a15.png",
-  pageType: 'homepage', // 👈 Add this
-  products: products // 👈 Pass your homepage products
+  pageType: "homepage", // 👈 Add this
+  products: products, // 👈 Pass your homepage products
 };
 ---
 
-<Layout {...seo}>
+<!-- <Layout {...seo}>
   <Nav></Nav>
   <Welcome/>
+</Layout> -->
+<Layout {...seo}>
+  <Nav />
+  <Hero />
+
+  <Welcome />
 </Layout>
-
-
-
-
-
-
-
-
-

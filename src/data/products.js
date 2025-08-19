@@ -27,7 +27,7 @@ export const products = [
   storage: "128GB",
     condition: "new",
    gtin: "",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung","Mkopa"],
  color: "Deep Purple, Black, Light Green",
 weight: "199g",
 
@@ -54,11 +54,6 @@ reviews: {
     }
   ]
 }
-
-
-
-
-
 
   },
   {
@@ -94,7 +89,7 @@ model: "SM-A065F/DS",
 storage: "128GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung","Watu Simu"],
 color: "Black, Light Green, Light Blue",
 weight: "189g",
 
@@ -120,13 +115,6 @@ reviews: {
     }
   ]
 }
-
-
-
-
-
-
-
 
     },
 {
@@ -158,7 +146,7 @@ reviews: {
 storage: "64GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu"],
 color: "Black, Silver, Light Green",
 weight: "195g",
 
@@ -217,7 +205,7 @@ reviews: {
 storage: "128GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA","HMD","mkopa"],
 color: "Meteor Black, Atmos Blue",
 weight: "187g",
 
@@ -279,7 +267,7 @@ reviews: {
 storage: "256GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA","HMD","mkopa"],
 color: "Glacier Green, Black Ocean",
 weight: "196g",
 
@@ -338,7 +326,7 @@ reviews: {
 storage: "64GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA","HMD","mkopa"],
 color: "Black",
 weight: "185.4g",
 
@@ -657,14 +645,6 @@ reviews: {
     ]
   }
 }
-
-
-
-
-
-
-
-
 
   //       {
   //   id: 7,
