@@ -27,15 +27,53 @@ import { products } from "../data/products.js";
     padding: 2rem 0;
   }
 
-  .bd-grid {
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
-    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* Step-by-step carousel styles */
+  .carousel-container {
     max-width: 1200px;
     margin: 0 2.5rem;
-    /* align-items: center; */
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
     gap: 2rem;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: calc((100% - 8rem) / 5); /* 5 products on desktop minus gaps */
+    min-width: 180px;
+  }
+
+  /* Responsive product display */
+  @media (max-width: 1024px) {
+    .carousel-item {
+      width: calc((100% - 6rem) / 4); /* 4 products on tablet */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-item {
+      width: calc((100% - 4rem) / 3); /* 3 products on small tablet */
+    }
+
+    .carousel-container {
+      margin: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-item {
+      width: calc((100% - 2rem) / 2); /* 2 products on mobile */
+    }
+  }
+
+  @media (max-width: 320px) {
+    .carousel-item {
+      width: 100%; /* 1 product on very small mobile */
+    }
   }
 
   .whatsapp {
@@ -46,13 +84,12 @@ import { products } from "../data/products.js";
     right: 10px;
     padding: 12px 15px;
     border-radius: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     z-index: 999;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-  
   }
 
   .message {
@@ -86,49 +123,35 @@ import { products } from "../data/products.js";
     body {
       margin: 3rem 0 0 0;
     }
-    .bd-grid {
+    .carousel-container {
       margin-left: auto;
       margin-right: auto;
     }
   }
-
-    @media (max-width: 768px) {
-  .bd-grid {
-    /* grid-template-columns: 1fr 1fr; */
-  }
-    }
 </style>
 
-
-<!-- <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
-
-<link 
-  rel="preload" 
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-  as="style" 
-  onload="this.onload=null;this.rel='stylesheet'">
-
-<noscript>
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</noscript> -->
-
-
-<main class="main bd-grid">
-  {products.map((product, index) => <ProductCard {...product} index={index} />)}
-
+<main class="main">
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel-track">
+      {
+        products.map((product, index) => (
+          <div class="carousel-item">
+            <ProductCard {...product} index={index} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
 
   <div class="whatsapp">
-    <a href="https://wa.me/254762790513?text=Hello%2C%20I'm%20interested%20in%20your%20products" 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       style="background-color: #25D366; color: white; padding: 8px 12px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); font-size: 24px; z-index: 999;" 
-       aria-label="Chat with us on WhatsApp">
-     
+    <a
+      href="https://wa.me/254762790513?text=Hello%2C%20I'm%20interested%20in%20your%20products"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="background-color: #25D366; color: white; padding: 8px 12px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); font-size: 24px; z-index: 999;"
+      aria-label="Chat with us on WhatsApp"
+    >
     </a>
-
 
     <div class="message">
       <h1>Chat</h1>
@@ -136,8 +159,47 @@ import { products } from "../data/products.js";
   </div>
 </main>
 
+<script define:vars={{ totalProducts: products.length }}>
+  document.addEventListener("DOMContentLoaded", function () {
+    const track = document.getElementById("carousel-track");
+    let currentIndex = 0;
+
+    function getProductsPerView() {
+      const width = window.innerWidth;
+      if (width <= 320) return 1; // Very small mobile: 1 product
+      if (width <= 480) return 2; // Mobile: 2 products
+      if (width <= 768) return 3; // Small tablet: 3 products
+      if (width <= 1024) return 4; // Tablet: 4 products
+      return 5; // Desktop: 5 products
+    }
+
+    function moveToNext() {
+      const productsPerView = getProductsPerView();
+      const maxIndex = Math.max(0, totalProducts - productsPerView);
+
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+
+      const itemWidth = track.children[0].offsetWidth + 32; // width + gap
+      const translateX = -currentIndex * itemWidth;
+
+      if (track) {
+        track.style.transform = `translateX(${translateX}px)`;
+      }
+    }
+
+    // Move to next product every 4 seconds (3.5s viewing + 0.5s transition)
+    setInterval(moveToNext, 4000);
+
+    // Recalculate on window resize
+    window.addEventListener("resize", function () {
+      currentIndex = 0;
+      if (track) {
+        track.style.transform = "translateX(0px)";
+      }
+    });
+  });
+</script>
+
 <footer>
   <a>Copyright @2025. All rights reserved</a>
 </footer>
-
-
