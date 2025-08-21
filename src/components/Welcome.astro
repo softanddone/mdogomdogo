@@ -27,36 +27,52 @@ import { products } from "../data/products.js";
     padding: 2rem 0;
   }
 
-  /* Step-by-step carousel styles */
+  /* Infinite carousel styles */
   .carousel-container {
     max-width: 1200px;
     margin: 0 2.5rem;
     overflow: hidden;
     position: relative;
+    user-select: none;
   }
 
   .carousel-track {
     display: flex;
     gap: 2rem;
     transition: transform 0.5s ease-in-out;
+    will-change: transform;
+  }
+
+  .carousel-track.no-transition {
+    transition: none;
   }
 
   .carousel-item {
     flex: 0 0 auto;
-    width: calc((100% - 8rem) / 5); /* 5 products on desktop minus gaps */
-    min-width: 180px;
+    cursor: grab;
   }
 
-  /* Responsive product display */
+  .carousel-item:active {
+    cursor: grabbing;
+  }
+
+  /* Responsive product display - fixed widths */
+  .carousel-item {
+    width: 200px; /* Fixed width on desktop */
+    min-width: 200px;
+  }
+
   @media (max-width: 1024px) {
     .carousel-item {
-      width: calc((100% - 6rem) / 4); /* 4 products on tablet */
+      width: 180px; /* Fixed width on tablet */
+      min-width: 180px;
     }
   }
 
   @media (max-width: 768px) {
     .carousel-item {
-      width: calc((100% - 4rem) / 3); /* 3 products on small tablet */
+      width: 160px; /* Fixed width on small tablet */
+      min-width: 160px;
     }
 
     .carousel-container {
@@ -66,13 +82,15 @@ import { products } from "../data/products.js";
 
   @media (max-width: 480px) {
     .carousel-item {
-      width: calc((100% - 2rem) / 2); /* 2 products on mobile */
+      width: calc(50vw - 3rem); /* Exactly half screen minus margins and gaps */
+      min-width: calc(50vw - 3rem);
     }
   }
 
   @media (max-width: 320px) {
     .carousel-item {
-      width: 100%; /* 1 product on very small mobile */
+      width: calc(100vw - 4rem); /* Full width minus margins */
+      min-width: calc(100vw - 4rem);
     }
   }
 
@@ -128,19 +146,53 @@ import { products } from "../data/products.js";
       margin-right: auto;
     }
   }
+
+  /* Navigation dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .dot.active {
+    background-color: var(--accent-color);
+  }
 </style>
 
 <main class="main">
   <div class="carousel-container">
+    <h1>Trending Phones on Lipa Mdogo Mdogo in Kenya</h1>
+
     <div class="carousel-track" id="carousel-track">
+      {/* Original products */}
       {
         products.map((product, index) => (
-          <div class="carousel-item">
+          <div class="carousel-item" data-index={index}>
+            <ProductCard {...product} index={index} />
+          </div>
+        ))
+      }
+      {/* Cloned products for infinite effect */}
+      {
+        products.map((product, index) => (
+          <div class="carousel-item" data-index={index + products.length}>
             <ProductCard {...product} index={index} />
           </div>
         ))
       }
     </div>
+
+    <div class="carousel-dots" id="carousel-dots"></div>
   </div>
 
   <div class="whatsapp">
@@ -162,41 +214,235 @@ import { products } from "../data/products.js";
 <script define:vars={{ totalProducts: products.length }}>
   document.addEventListener("DOMContentLoaded", function () {
     const track = document.getElementById("carousel-track");
+    const dotsContainer = document.getElementById("carousel-dots");
+
+    if (!track || !dotsContainer) return;
+
     let currentIndex = 0;
+    let autoPlayInterval;
+    let isTransitioning = false;
+
+    // Touch/drag variables
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let initialTransform = 0;
 
     function getProductsPerView() {
       const width = window.innerWidth;
-      if (width <= 320) return 1; // Very small mobile: 1 product
-      if (width <= 480) return 2; // Mobile: 2 products
-      if (width <= 768) return 3; // Small tablet: 3 products
-      if (width <= 1024) return 4; // Tablet: 4 products
-      return 5; // Desktop: 5 products
+      if (width <= 320) return 1;
+      if (width <= 480) return 2;
+      if (width <= 768) return 3;
+      if (width <= 1024) return 4;
+      return 5;
     }
 
-    function moveToNext() {
-      const productsPerView = getProductsPerView();
-      const maxIndex = Math.max(0, totalProducts - productsPerView);
+    function getItemWidth() {
+      const firstItem = track.children[0];
+      return firstItem ? firstItem.offsetWidth + 32 : 232; // width + gap
+    }
 
-      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+    function updateTransform(index, immediate = false) {
+      const itemWidth = getItemWidth();
+      const translateX = -index * itemWidth;
 
-      const itemWidth = track.children[0].offsetWidth + 32; // width + gap
-      const translateX = -currentIndex * itemWidth;
-
-      if (track) {
+      if (immediate) {
+        track.classList.add("no-transition");
+        track.style.transform = `translateX(${translateX}px)`;
+        // Force reflow
+        track.offsetHeight;
+        track.classList.remove("no-transition");
+      } else {
         track.style.transform = `translateX(${translateX}px)`;
       }
     }
 
-    // Move to next product every 4 seconds (3.5s viewing + 0.5s transition)
-    setInterval(moveToNext, 4000);
+    function createDots() {
+      dotsContainer.innerHTML = "";
+      for (let i = 0; i < totalProducts; i++) {
+        const dot = document.createElement("div");
+        dot.className = "dot";
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
 
-    // Recalculate on window resize
-    window.addEventListener("resize", function () {
-      currentIndex = 0;
-      if (track) {
-        track.style.transform = "translateX(0px)";
+    function updateDots() {
+      const dots = dotsContainer.querySelectorAll(".dot");
+      const realIndex = currentIndex % totalProducts;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === realIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      if (isTransitioning) return;
+
+      stopAutoPlay();
+      currentIndex = index;
+      updateTransform(currentIndex);
+      updateDots();
+      startAutoPlay();
+    }
+
+    function moveToNext() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+      currentIndex++;
+      updateTransform(currentIndex);
+      updateDots();
+
+      // Check if we need to reset to create infinite loop
+      if (currentIndex >= totalProducts) {
+        setTimeout(() => {
+          currentIndex = 0;
+          updateTransform(currentIndex, true);
+          isTransitioning = false;
+        }, 500); // Match transition duration
+      } else {
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 500);
+      }
+    }
+
+    function moveToPrev() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+
+      if (currentIndex <= 0) {
+        currentIndex = totalProducts;
+        updateTransform(currentIndex, true);
+        setTimeout(() => {
+          currentIndex = totalProducts - 1;
+          updateTransform(currentIndex);
+          updateDots();
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 500);
+        }, 50);
+      } else {
+        currentIndex--;
+        updateTransform(currentIndex);
+        updateDots();
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 500);
+      }
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayInterval = setInterval(moveToNext, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+      }
+    }
+
+    // Touch and mouse events for swiping/dragging
+    function handleStart(clientX) {
+      isDragging = true;
+      startX = clientX;
+      currentX = clientX;
+      initialTransform = currentIndex * getItemWidth();
+      stopAutoPlay();
+      track.classList.add("no-transition");
+    }
+
+    function handleMove(clientX) {
+      if (!isDragging) return;
+
+      currentX = clientX;
+      const deltaX = currentX - startX;
+      const newTransform = -initialTransform + deltaX;
+      track.style.transform = `translateX(${newTransform}px)`;
+    }
+
+    function handleEnd() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      track.classList.remove("no-transition");
+
+      const deltaX = currentX - startX;
+      const threshold = getItemWidth() / 3;
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > 0) {
+          moveToPrev();
+        } else {
+          moveToNext();
+        }
+      } else {
+        updateTransform(currentIndex);
+      }
+
+      startAutoPlay();
+    }
+
+    // Mouse events
+    track.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      handleStart(e.clientX);
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      handleMove(e.clientX);
+    });
+
+    document.addEventListener("mouseup", handleEnd);
+
+    // Touch events
+    track.addEventListener(
+      "touchstart",
+      (e) => {
+        handleStart(e.touches[0].clientX);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener(
+      "touchmove",
+      (e) => {
+        handleMove(e.touches[0].clientX);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener("touchend", handleEnd, { passive: true });
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        moveToPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        moveToNext();
       }
     });
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      stopAutoPlay();
+      updateTransform(currentIndex, true);
+      setTimeout(startAutoPlay, 100);
+    });
+
+    // Pause on hover
+    track.addEventListener("mouseenter", stopAutoPlay);
+    track.addEventListener("mouseleave", startAutoPlay);
+
+    // Initialize
+    createDots();
+    updateTransform(currentIndex, true);
+    startAutoPlay();
   });
 </script>
 
