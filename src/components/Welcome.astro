@@ -1,6 +1,44 @@
 ---
 import ProductCard from "./ProductCard.astro";
 import { products } from "../data/products.js";
+import Latest from "./Latest.astro";
+
+// Extract unique categories from all categoryPaths
+const allCategories = products.flatMap((product) => product.categoryPath || []);
+const uniqueCategories = [...new Set(allCategories)];
+
+// Category icons mapping with proper TypeScript index signature
+const categoryIcons: { [key: string]: string } = {
+  Electronics: "📱",
+  "Mobile Phones": "📞",
+  Smartphones: "📱",
+  Samsung: "📱",
+  Mkopa: "💳",
+  "Watu Simu": "📲",
+  Apple: "🍎",
+  Huawei: "📱",
+  Oppo: "📱",
+  Tecno: "📱",
+  Infinix: "📱",
+  Xiaomi: "📱",
+  Accessories: "🔌",
+  Cases: "🛡️",
+  Chargers: "🔌",
+  Headphones: "🎧",
+  Tablets: "📋",
+  Laptops: "💻",
+  Computing: "💻",
+  Gaming: "🎮",
+  Audio: "🔊",
+  Cameras: "📷",
+  "Smart Home": "🏠",
+  Wearables: "⌚",
+};
+
+// Helper function to safely get category icon
+const getCategoryIcon = (category: string): string => {
+  return categoryIcons[category] || "📦";
+};
 ---
 
 <style is:inline>
@@ -27,7 +65,160 @@ import { products } from "../data/products.js";
     padding: 2rem 0;
   }
 
-  /* Infinite carousel styles */
+  /* Category carousel specific styles */
+  .category-carousel-container {
+    max-width: 1200px;
+    margin: 0 2.5rem 3rem 2.5rem;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+  }
+
+  .category-carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+  }
+
+  .category-carousel-track.no-transition {
+    transition: none;
+  }
+
+  .category-item {
+    flex: 0 0 auto;
+    cursor: grab;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 80px;
+  }
+
+  .category-item:active {
+    cursor: grabbing;
+  }
+
+  .category-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
+  }
+
+  .category-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .category-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin: 0;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  /* Category carousel responsive widths */
+  .category-item {
+    width: calc(
+      (1200px - 6rem) / 5
+    ); /* 5 categories: max-width - gaps (4 gaps * 1.5rem) */
+    min-width: calc((1200px - 6rem) / 5);
+  }
+
+  @media (max-width: 1024px) {
+    .category-item {
+      width: calc(
+        (100vw - 5rem - 4.5rem) / 4
+      ); /* 4 categories: viewport - container margins - gaps */
+      min-width: calc((100vw - 5rem - 4.5rem) / 4);
+    }
+
+    .category-carousel-track {
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .category-carousel-track {
+      gap: 1rem;
+    }
+
+    .category-item {
+      width: calc((100vw - 2rem - 2rem) / 3); /* 3 categories */
+      min-width: calc((100vw - 2rem - 2rem) / 3);
+      padding: 1rem;
+      gap: 0.75rem;
+      min-height: 70px;
+    }
+
+    .category-carousel-container {
+      margin: 0 1rem 3rem 1rem;
+    }
+
+    .category-icon {
+      font-size: 2rem;
+    }
+
+    .category-name {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .category-carousel-track {
+      gap: 0.75rem;
+    }
+
+    .category-item {
+      width: calc((100vw - 2rem - 0.75rem) / 2); /* 2 categories for mobile */
+      min-width: calc((100vw - 2rem - 0.75rem) / 2);
+      padding: 0.75rem;
+      gap: 0.5rem;
+      min-height: 60px;
+    }
+
+    .category-icon {
+      font-size: 1.75rem;
+    }
+
+    .category-name {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .category-carousel-track {
+      gap: 0.5rem;
+    }
+
+    .category-item {
+      width: calc(
+        (100vw - 2rem - 0.5rem) / 2
+      ); /* Keep 2 categories even on very small screens */
+      min-width: calc((100vw - 2rem - 0.5rem) / 2);
+      padding: 0.5rem;
+      gap: 0.5rem;
+      min-height: 50px;
+    }
+
+    .category-icon {
+      font-size: 1.5rem;
+    }
+
+    .category-name {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Product carousel styles */
+  /* Product carousel styles */
   .carousel-container {
     max-width: 1200px;
     margin: 0 2.5rem;
@@ -56,23 +247,31 @@ import { products } from "../data/products.js";
     cursor: grabbing;
   }
 
-  /* Responsive product display - fixed widths */
+  /* Responsive product display - calculated widths for perfect fit */
   .carousel-item {
-    width: 200px; /* Fixed width on desktop */
-    min-width: 200px;
+    width: calc((1200px - 8rem) / 5); /* 5 cards: max-width - gaps */
+    min-width: calc((1200px - 8rem) / 5);
   }
 
   @media (max-width: 1024px) {
     .carousel-item {
-      width: 180px; /* Fixed width on tablet */
-      min-width: 180px;
+      width: calc(
+        (100vw - 5rem - 6rem) / 4
+      ); /* 4 cards: viewport - container margins - gaps */
+      min-width: calc((100vw - 5rem - 6rem) / 4);
     }
   }
 
   @media (max-width: 768px) {
+    .carousel-track {
+      gap: 1rem; /* Reduced gap for small tablets */
+    }
+
     .carousel-item {
-      width: 160px; /* Fixed width on small tablet */
-      min-width: 160px;
+      width: calc(
+        (100vw - 2rem - 2rem) / 3
+      ); /* 3 cards: viewport - container margins - gaps */
+      min-width: calc((100vw - 2rem - 2rem) / 3);
     }
 
     .carousel-container {
@@ -81,16 +280,28 @@ import { products } from "../data/products.js";
   }
 
   @media (max-width: 480px) {
+    .carousel-track {
+      gap: 0.75rem; /* Even smaller gap for mobile */
+    }
+
     .carousel-item {
-      width: calc(50vw - 3rem); /* Exactly half screen minus margins and gaps */
-      min-width: calc(50vw - 3rem);
+      width: calc(
+        (100vw - 2rem - 0.75rem) / 2
+      ); /* 2 cards: viewport - container margins - gap */
+      min-width: calc((100vw - 2rem - 0.75rem) / 2);
     }
   }
 
   @media (max-width: 320px) {
+    .carousel-track {
+      gap: 0.5rem; /* Minimal gap for very small screens */
+    }
+
     .carousel-item {
-      width: calc(100vw - 4rem); /* Full width minus margins */
-      min-width: calc(100vw - 4rem);
+      width: calc(
+        100vw - 2rem
+      ); /* 1 card: full viewport minus container margins */
+      min-width: calc(100vw - 2rem);
     }
   }
 
@@ -146,30 +357,41 @@ import { products } from "../data/products.js";
       margin-right: auto;
     }
   }
-
-  /* Navigation dots */
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .dot.active {
-    background-color: var(--accent-color);
-  }
 </style>
 
 <main class="main">
+  <!-- Category Carousel -->
+  <div class="category-carousel-container">
+    <h2>Shop by Category</h2>
+
+    <div class="category-carousel-track" id="category-carousel-track">
+      {/* Original categories */}
+      {
+        uniqueCategories.map((category, index) => (
+          <div class="category-item" data-index={index}>
+            <span class="category-icon">{getCategoryIcon(category)}</span>
+            <h3 class="category-name">{category}</h3>
+          </div>
+        ))
+      }
+      {/* Cloned categories for infinite effect */}
+      {
+        uniqueCategories.map((category, index) => (
+          <div
+            class="category-item"
+            data-index={index + uniqueCategories.length}
+          >
+            <span class="category-icon">{getCategoryIcon(category)}</span>
+            <h3 class="category-name">{category}</h3>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <Latest />
+
+  <!-- Product Carousel -->
   <div class="carousel-container">
     <h1>Trending Phones on Lipa Mdogo Mdogo in Kenya</h1>
 
@@ -191,8 +413,6 @@ import { products } from "../data/products.js";
         ))
       }
     </div>
-
-    <div class="carousel-dots" id="carousel-dots"></div>
   </div>
 
   <div class="whatsapp">
@@ -211,12 +431,205 @@ import { products } from "../data/products.js";
   </div>
 </main>
 
-<script define:vars={{ totalProducts: products.length }}>
+<script
+  define:vars={{
+    totalProducts: products.length,
+    totalCategories: uniqueCategories.length,
+  }}
+>
   document.addEventListener("DOMContentLoaded", function () {
-    const track = document.getElementById("carousel-track");
-    const dotsContainer = document.getElementById("carousel-dots");
+    // Category Carousel Logic
+    const categoryTrack = document.getElementById("category-carousel-track");
 
-    if (!track || !dotsContainer) return;
+    if (categoryTrack) {
+      let categoryCurrentIndex = 0;
+      let categoryAutoPlayInterval;
+      let categoryIsTransitioning = false;
+      let categoryIsDragging = false;
+      let categoryStartX = 0;
+      let categoryCurrentX = 0;
+      let categoryInitialTransform = 0;
+
+      function getCategoryItemWidth() {
+        const firstItem = categoryTrack.children[0];
+        if (!firstItem) return 150; // fallback
+
+        const width = window.innerWidth;
+        let gap = 24; // default 1.5rem gap
+
+        if (width <= 320) {
+          gap = 8; // 0.5rem
+        } else if (width <= 480) {
+          gap = 12; // 0.75rem
+        } else if (width <= 768) {
+          gap = 16; // 1rem
+        }
+
+        return firstItem.offsetWidth + gap;
+      }
+
+      function updateCategoryTransform(index, immediate = false) {
+        const itemWidth = getCategoryItemWidth();
+        const translateX = -index * itemWidth;
+
+        if (immediate) {
+          categoryTrack.classList.add("no-transition");
+          categoryTrack.style.transform = `translateX(${translateX}px)`;
+          categoryTrack.offsetHeight;
+          categoryTrack.classList.remove("no-transition");
+        } else {
+          categoryTrack.style.transform = `translateX(${translateX}px)`;
+        }
+      }
+
+      function moveCategoryToNext() {
+        if (categoryIsTransitioning) return;
+
+        categoryIsTransitioning = true;
+        categoryCurrentIndex++;
+        updateCategoryTransform(categoryCurrentIndex);
+
+        if (categoryCurrentIndex >= totalCategories) {
+          setTimeout(() => {
+            categoryCurrentIndex = 0;
+            updateCategoryTransform(categoryCurrentIndex, true);
+            categoryIsTransitioning = false;
+          }, 500);
+        } else {
+          setTimeout(() => {
+            categoryIsTransitioning = false;
+          }, 500);
+        }
+      }
+
+      function moveCategoryToPrev() {
+        if (categoryIsTransitioning) return;
+
+        categoryIsTransitioning = true;
+
+        if (categoryCurrentIndex <= 0) {
+          categoryCurrentIndex = totalCategories;
+          updateCategoryTransform(categoryCurrentIndex, true);
+          setTimeout(() => {
+            categoryCurrentIndex = totalCategories - 1;
+            updateCategoryTransform(categoryCurrentIndex);
+            setTimeout(() => {
+              categoryIsTransitioning = false;
+            }, 500);
+          }, 50);
+        } else {
+          categoryCurrentIndex--;
+          updateCategoryTransform(categoryCurrentIndex);
+          setTimeout(() => {
+            categoryIsTransitioning = false;
+          }, 500);
+        }
+      }
+
+      function startCategoryAutoPlay() {
+        stopCategoryAutoPlay();
+        categoryAutoPlayInterval = setInterval(moveCategoryToNext, 3000);
+      }
+
+      function stopCategoryAutoPlay() {
+        if (categoryAutoPlayInterval) {
+          clearInterval(categoryAutoPlayInterval);
+        }
+      }
+
+      // Category carousel drag/touch events
+      function handleCategoryStart(clientX) {
+        categoryIsDragging = true;
+        categoryStartX = clientX;
+        categoryCurrentX = clientX;
+        categoryInitialTransform =
+          categoryCurrentIndex * getCategoryItemWidth();
+        stopCategoryAutoPlay();
+        categoryTrack.classList.add("no-transition");
+      }
+
+      function handleCategoryMove(clientX) {
+        if (!categoryIsDragging) return;
+        categoryCurrentX = clientX;
+        const deltaX = categoryCurrentX - categoryStartX;
+        const newTransform = -categoryInitialTransform + deltaX;
+        categoryTrack.style.transform = `translateX(${newTransform}px)`;
+      }
+
+      function handleCategoryEnd() {
+        if (!categoryIsDragging) return;
+        categoryIsDragging = false;
+        categoryTrack.classList.remove("no-transition");
+
+        const deltaX = categoryCurrentX - categoryStartX;
+        const threshold = getCategoryItemWidth() / 3;
+
+        if (Math.abs(deltaX) > threshold) {
+          if (deltaX > 0) {
+            moveCategoryToPrev();
+          } else {
+            moveCategoryToNext();
+          }
+        } else {
+          updateCategoryTransform(categoryCurrentIndex);
+        }
+
+        startCategoryAutoPlay();
+      }
+
+      // Category mouse events
+      categoryTrack.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        handleCategoryStart(e.clientX);
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        handleCategoryMove(e.clientX);
+      });
+
+      document.addEventListener("mouseup", handleCategoryEnd);
+
+      // Category touch events
+      categoryTrack.addEventListener(
+        "touchstart",
+        (e) => {
+          handleCategoryStart(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+
+      categoryTrack.addEventListener(
+        "touchmove",
+        (e) => {
+          handleCategoryMove(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+
+      categoryTrack.addEventListener("touchend", handleCategoryEnd, {
+        passive: true,
+      });
+
+      // Category hover events
+      categoryTrack.addEventListener("mouseenter", stopCategoryAutoPlay);
+      categoryTrack.addEventListener("mouseleave", startCategoryAutoPlay);
+
+      // Initialize category carousel
+      updateCategoryTransform(categoryCurrentIndex, true);
+      startCategoryAutoPlay();
+
+      // Handle resize for category carousel
+      window.addEventListener("resize", () => {
+        stopCategoryAutoPlay();
+        updateCategoryTransform(categoryCurrentIndex, true);
+        setTimeout(startCategoryAutoPlay, 100);
+      });
+    }
+
+    // Product Carousel Logic (existing code)
+    const track = document.getElementById("carousel-track");
+
+    if (!track) return;
 
     let currentIndex = 0;
     let autoPlayInterval;
@@ -239,7 +652,21 @@ import { products } from "../data/products.js";
 
     function getItemWidth() {
       const firstItem = track.children[0];
-      return firstItem ? firstItem.offsetWidth + 32 : 232; // width + gap
+      if (!firstItem) return 232; // fallback
+
+      const width = window.innerWidth;
+      let gap = 32; // default 2rem gap
+
+      // Adjust gap based on screen size to match CSS
+      if (width <= 320) {
+        gap = 8; // 0.5rem
+      } else if (width <= 480) {
+        gap = 12; // 0.75rem
+      } else if (width <= 768) {
+        gap = 16; // 1rem
+      }
+
+      return firstItem.offsetWidth + gap;
     }
 
     function updateTransform(index, immediate = false) {
@@ -257,42 +684,12 @@ import { products } from "../data/products.js";
       }
     }
 
-    function createDots() {
-      dotsContainer.innerHTML = "";
-      for (let i = 0; i < totalProducts; i++) {
-        const dot = document.createElement("div");
-        dot.className = "dot";
-        if (i === 0) dot.classList.add("active");
-        dot.addEventListener("click", () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-      }
-    }
-
-    function updateDots() {
-      const dots = dotsContainer.querySelectorAll(".dot");
-      const realIndex = currentIndex % totalProducts;
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === realIndex);
-      });
-    }
-
-    function goToSlide(index) {
-      if (isTransitioning) return;
-
-      stopAutoPlay();
-      currentIndex = index;
-      updateTransform(currentIndex);
-      updateDots();
-      startAutoPlay();
-    }
-
     function moveToNext() {
       if (isTransitioning) return;
 
       isTransitioning = true;
       currentIndex++;
       updateTransform(currentIndex);
-      updateDots();
 
       // Check if we need to reset to create infinite loop
       if (currentIndex >= totalProducts) {
@@ -319,7 +716,6 @@ import { products } from "../data/products.js";
         setTimeout(() => {
           currentIndex = totalProducts - 1;
           updateTransform(currentIndex);
-          updateDots();
           setTimeout(() => {
             isTransitioning = false;
           }, 500);
@@ -327,7 +723,6 @@ import { products } from "../data/products.js";
       } else {
         currentIndex--;
         updateTransform(currentIndex);
-        updateDots();
         setTimeout(() => {
           isTransitioning = false;
         }, 500);
@@ -440,7 +835,6 @@ import { products } from "../data/products.js";
     track.addEventListener("mouseleave", startAutoPlay);
 
     // Initialize
-    createDots();
     updateTransform(currentIndex, true);
     startAutoPlay();
   });
