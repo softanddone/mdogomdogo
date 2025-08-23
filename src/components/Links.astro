@@ -1,402 +1,431 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>World Class Cart Section</title>
-    <style>
-      .linkscontainer {
-        width: 100%;
-        height: 70px;
-        display: grid;
-        grid-template-columns: 1fr 0.8fr;
-        align-items: center;
-        background: #fff;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        padding: 0 5%;
-        box-sizing: border-box;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
+<style>
+  .linkscontainer {
+    width: 100%;
+    height: 70px;
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
 
-      /* Left Section */
-      .allcategoriesitems {
-        display: flex;
-        gap: 25px;
-      }
+    align-items: center;
+    /* background: #fff; */
+    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
+    padding: 0 5%;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-      .allcategoriesitems a,
-      .mobilemenu a {
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: 500;
-        color: #333;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
-        position: relative;
-        transition: color 0.3s ease;
-      }
+  /* Left Section */
+  .allcategoriesitems {
+    display: flex;
+    gap: 25px;
+  }
 
-      .allcategoriesitems a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -6px;
-        width: 0;
-        height: 2px;
-        background: #0070f3;
-        transition: width 0.3s ease;
-      }
+  .cart-img {
+    width: 30px;
+  }
 
-      .allcategoriesitems a:hover {
-        color: #0070f3;
-      }
+  .allcategoriesitems a,
+  .mobilemenu a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    position: relative;
+    transition: color 0.3s ease;
+  }
 
-      .allcategoriesitems a:hover::after {
-        width: 100%;
-      }
+  .allcategoriesitems a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #0070f3;
+    transition: width 0.3s ease;
+  }
 
-      /* Right Section */
-      .links {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 25px;
-      }
+  .allcategoriesitems a:hover {
+    color: #0070f3;
+  }
 
-      .links a {
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: 500;
-        color: #444;
-        position: relative;
-        transition: color 0.3s ease;
-      }
+  .allcategoriesitems a:hover::after {
+    width: 100%;
+  }
 
-      .links a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -6px;
-        width: 0;
-        height: 2px;
-        background: #ff5722;
-        transition: width 0.3s ease;
-      }
+  /* Right Section */
+  .links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 25px;
+  }
 
-      .links a:hover {
-        color: #ff5722;
-      }
+  .links a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #444;
+    position: relative;
+    transition: color 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+  }
 
-      .links a:hover::after {
-        width: 100%;
-      }
+  .links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #ff5722;
+    transition: width 0.3s ease;
+  }
 
-      /* Cart */
-      .cart {
-        position: relative;
-        font-size: 24px;
-        cursor: pointer;
-      }
+  .links a:hover {
+    color: #ff5722;
+  }
 
-      .badge {
-        position: absolute;
-        top: -6px;
-        right: -10px;
-        background: #ff5722;
-        color: #fff;
-        font-size: 12px;
-        font-weight: bold;
-        border-radius: 50%;
-        padding: 3px 6px;
-        line-height: 1;
-      }
+  .links a:hover::after {
+    width: 100%;
+  }
 
-      /* Menu Icon */
-      .menuicon {
-        font-size: 24px;
-        cursor: pointer;
-        padding: 2px 4px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        display: none;
-        user-select: none;
-        background: rgba(0, 112, 243, 0.1);
-        color: #0070f3;
-        border: 1px solid rgba(0, 112, 243, 0.2);
-      }
+  /* Cart */
+  .cart {
+    position: relative;
+    font-size: 24px;
+    cursor: pointer;
+  }
 
-      .menuicon:hover {
-        background: rgba(0, 112, 243, 0.15);
-        transform: scale(1.05);
-      }
+  .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #ff5722;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 3px 6px;
+    line-height: 1;
+  }
 
-      .menuicon:active {
-        transform: scale(0.95);
-      }
+  /* Menu Icon */
+  .menuicon {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: none;
+    user-select: none;
+    background: rgba(0, 112, 243, 0.1);
+    color: #0070f3;
+    border: 1px solid rgba(0, 112, 243, 0.2);
+  }
 
-      /* Mobile Menu */
-      .mobilemenu {
-        position: fixed;
-        top: 70px;
-        right: -280px;
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
-        width: 260px;
-        min-height: calc(100vh - 70px);
-        display: flex;
-        flex-direction: column;
-        padding: 30px 25px;
-        gap: 8px;
-        z-index: 200;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border-left: 3px solid #0070f3;
-      }
+  .menuicon:hover {
+    background: rgba(0, 112, 243, 0.15);
+    transform: scale(1.05);
+  }
 
-      .mobilemenu.open {
-        right: 0;
-      }
+  .menuicon:active {
+    transform: scale(0.95);
+  }
 
-      /* Mobile Menu Links */
-      .mobilemenu a {
-        display: block;
-        padding: 16px 20px;
-        margin: 4px 0;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(0, 112, 243, 0.1);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
+  /* Mobile Menu */
+  .mobilemenu {
+    position: fixed;
+    top: 70px;
+    right: -280px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    width: 260px;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 25px;
+    gap: 8px;
+    z-index: 200;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* border-left: 3px solid #0070f3; */
+  }
 
-      .mobilemenu a::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(0, 112, 243, 0.1),
-          transparent
-        );
-        transition: left 0.5s ease;
-      }
+  .mobilemenu.open {
+    right: 0;
+    /* background: yellow; */
+    top: 0;
+  }
 
-      .mobilemenu a:hover::before {
-        left: 100%;
-      }
+  /* Mobile Menu Links */
+  .mobilemenu a {
+    display: block;
+    padding: 16px 20px;
+    margin: 4px 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 112, 243, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
 
-      .mobilemenu a:hover {
-        background: rgba(0, 112, 243, 0.05);
-        border-color: rgba(0, 112, 243, 0.3);
-        transform: translateX(8px);
-        box-shadow: 0 4px 12px rgba(0, 112, 243, 0.15);
-      }
+  .mobilemenu a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 112, 243, 0.1),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
 
-      .mobilemenu a:active {
-        transform: translateX(4px) scale(0.98);
-      }
+  .mobilemenu a:hover::before {
+    left: 100%;
+  }
 
-      /* Mobile Menu Header */
-      .mobilemenu::before {
-        content: "Menu";
-        display: block;
-        font-weight: 600;
-        font-size: 16px;
-        color: #666;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid rgba(0, 112, 243, 0.1);
-      }
+  .mobilemenu a:hover {
+    background: rgba(0, 112, 243, 0.05);
+    border-color: rgba(0, 112, 243, 0.3);
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba(0, 112, 243, 0.15);
+  }
 
-      /* Backdrop for mobile menu */
-      .menu-backdrop {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(4px);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 150;
-      }
+  .mobilemenu a:active {
+    transform: translateX(4px) scale(0.98);
+  }
 
-      .menu-backdrop.active {
-        opacity: 1;
-        visibility: visible;
-      }
+  /* Mobile Menu Header */
+  .mobilemenu::before {
+    content: "Menu";
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(0, 112, 243, 0.1);
+  }
 
-      /* Responsive */
-      @media (max-width: 768px) {
-        .desktop-menu {
-          display: none;
-        }
-        .menuicon {
-          display: block;
-        }
-        .linkscontainer {
-          background: transparent !important;
-          border: none;
-          width: 150px;
-          position: absolute;
-          top: 50px;
-          right: 0;
-        }
-      }
+  /* Backdrop for mobile menu */
+  .menu-backdrop {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 150;
+  }
 
-      /* Enhanced mobile responsiveness */
-      @media (max-width: 480px) {
-        .linkscontainer {
-          padding: 0 3%;
-          height: 65px;
-        }
+  .menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+  }
 
-        .mobilemenu {
-          width: 240px;
-          right: -260px;
-          padding: 25px 20px;
-        }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .desktop-menu {
+      display: none;
+    }
+    .cart {
+      margin-left: 10px;
+    }
 
-        .mobilemenu a {
-          padding: 14px 18px;
-          font-size: 16px;
-        }
-      }
+    .rels {
+      width: 100vw;
+      height: 100px;
+      /* background: red; */
+      position: relative;
+    }
 
-      /* Subtle animations */
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
+    .links {
+      /* background: blue; */
+      width: 100%;
+      justify-content: space-between;
+      /* background: blue; */
+      /* background: red; */
+    }
+    .brandlinks {
+      /* background: red; */
+      width: 200px;
+      display: grid;
+      /* background: red; */
+    }
+    .menuicon {
+      display: block;
+    }
+    .linkscontainer {
+      border: none;
+      width: 40%;
+      position: absolute;
+      top: -55px;
+      right: 10px;
+      display: flex;
+    }
+  }
 
-      .mobilemenu.open a {
-        animation: slideInRight 0.3s ease forwards;
-      }
+  /* Enhanced mobile responsiveness */
+  @media (max-width: 480px) {
+    .linkscontainer {
+      padding: 0 3%;
+      height: 65px;
+    }
 
-      .mobilemenu.open a:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      .mobilemenu.open a:nth-child(2) {
-        animation-delay: 0.15s;
-      }
-      .mobilemenu.open a:nth-child(3) {
-        animation-delay: 0.2s;
-      }
-      .mobilemenu.open a:nth-child(4) {
-        animation-delay: 0.25s;
-      }
-      .mobilemenu.open a:nth-child(5) {
-        animation-delay: 0.3s;
-      }
-      .mobilemenu.open a:nth-child(6) {
-        animation-delay: 0.35s;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="linkscontainer">
-      <!-- Left side -->
-      <div class="allcategories">
-        <div class="allcategoriesitems desktop-menu">
-          <a href="/">All Categories</a>
-          <a href="/">Promotions</a>
-          <a href="/">Shop</a>
-        </div>
+    .mobilemenu {
+      width: 240px;
+      right: -260px;
+      padding: 25px 20px;
+    }
+
+    .mobilemenu a {
+      padding: 14px 18px;
+      font-size: 16px;
+    }
+  }
+
+  /* Subtle animations */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .mobilemenu.open a {
+    animation: slideInRight 0.3s ease forwards;
+  }
+
+  .mobilemenu.open a:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .mobilemenu.open a:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .mobilemenu.open a:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .mobilemenu.open a:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  .mobilemenu.open a:nth-child(5) {
+    animation-delay: 0.3s;
+  }
+  .mobilemenu.open a:nth-child(6) {
+    animation-delay: 0.35s;
+  }
+</style>
+
+<div class="rels">
+  <div class="linkscontainer">
+    <!-- Left side -->
+    <div class="allcategories">
+      <div class="allcategoriesitems desktop-menu">
+        <a href="/">Categories</a>
+        <a href="/">Promotions</a>
+        <a href="/">Shop</a>
       </div>
+    </div>
 
-      <!-- Right side -->
-      <div class="brandlinks">
-        <div class="links">
-          <a href="/samsung" class="desktop-menu">Samsung</a>
-          <a href="/infinix" class="desktop-menu">Infinix</a>
-          <a href="/tecno" class="desktop-menu">Tecno</a>
-          <a href="/hmd" class="desktop-menu">HMD</a>
+    <!-- Right side -->
+    <div class="brandlinks">
+      <div class="links">
+        <a href="/samsung" class="desktop-menu">Samsung</a>
+        <a href="/infinix" class="desktop-menu">Infinix</a>
+        <a href="/tecno" class="desktop-menu">Tecno</a>
+        <a href="/hmd" class="desktop-menu">HMD</a>
 
-          <div class="cart">
-            🛒
-            <span class="badge">0</span>
+        <div class="cart">
+          <div class="cart-img">
+            <img src="/phones/one.png" alt="" />
           </div>
-          <!-- Menu icon (mobile only) -->
-          <div class="menuicon" id="menuIcon">☰</div>
+
+          <span class="badge">0</span>
         </div>
+        <!-- Menu icon (mobile only) -->
+        <div class="menuicon" id="menuIcon">☰</div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Backdrop for mobile menu -->
-    <div class="menu-backdrop" id="menuBackdrop"></div>
+<!-- Backdrop for mobile menu -->
+<div class="menu-backdrop" id="menuBackdrop"></div>
 
-    <!-- Mobile menu (hidden by default) -->
-    <div class="mobilemenu" id="mobileMenu">
-      <a href="/samsung">Samsung</a>
-      <a href="/infinix">Infinix</a>
-      <a href="/mkopa">Mkopa</a>
-      <a href="/watu-simu">Watu Simu</a>
-      <a href="/tecno">Tecno</a>
-      <a href="/hmd">HMD</a>
-    </div>
+<!-- Mobile menu (hidden by default) -->
+<div class="mobilemenu" id="mobileMenu">
+  <a href="/samsung">Samsung</a>
+  <a href="/infinix">Infinix</a>
+  <a href="/mkopa">Mkopa</a>
+  <a href="/watu-simu">Watu Simu</a>
+  <a href="/tecno">Tecno</a>
+  <a href="/hmd">HMD</a>
+</div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const menu = document.getElementById("mobileMenu");
-        const menuIcon = document.getElementById("menuIcon");
-        const backdrop = document.getElementById("menuBackdrop");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menu = document.getElementById("mobileMenu");
+    const menuIcon = document.getElementById("menuIcon");
+    const backdrop = document.getElementById("menuBackdrop");
 
-        if (menu && menuIcon && backdrop) {
-          // Toggle menu when clicking the icon
-          menuIcon.addEventListener("click", (e) => {
-            e.stopPropagation();
-            menu.classList.toggle("open");
-            backdrop.classList.toggle("active");
-            menuIcon.textContent = menu.classList.contains("open") ? "✖" : "☰";
-          });
+    if (menu && menuIcon && backdrop) {
+      // Toggle menu when clicking the icon
+      menuIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menu.classList.toggle("open");
+        backdrop.classList.toggle("active");
+        menuIcon.textContent = menu.classList.contains("open") ? "✖" : "☰";
+      });
 
-          // Close when clicking backdrop
-          backdrop.addEventListener("click", () => {
-            menu.classList.remove("open");
-            backdrop.classList.remove("active");
-            menuIcon.textContent = "☰";
-          });
+      // Close when clicking backdrop
+      backdrop.addEventListener("click", () => {
+        menu.classList.remove("open");
+        backdrop.classList.remove("active");
+        menuIcon.textContent = "☰";
+      });
 
-          // Close when clicking outside
-          document.addEventListener("click", (e) => {
-            const target = e.target as Node;
-            if (
-              menu.classList.contains("open") &&
-              !menu.contains(target) &&
-              !menuIcon.contains(target)
-            ) {
-              menu.classList.remove("open");
-              backdrop.classList.remove("active");
-              menuIcon.textContent = "☰";
-            }
-          });
-
-          // Close when clicking a menu link
-          menu.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-              menu.classList.remove("open");
-              backdrop.classList.remove("active");
-              menuIcon.textContent = "☰";
-            });
-          });
+      // Close when clicking outside
+      document.addEventListener("click", (e) => {
+        const target = e.target as Node;
+        if (
+          menu.classList.contains("open") &&
+          !menu.contains(target) &&
+          !menuIcon.contains(target)
+        ) {
+          menu.classList.remove("open");
+          backdrop.classList.remove("active");
+          menuIcon.textContent = "☰";
         }
       });
-    </script>
-  </body>
-</html>
+
+      // Close when clicking a menu link
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menu.classList.remove("open");
+          backdrop.classList.remove("active");
+          menuIcon.textContent = "☰";
+        });
+      });
+    }
+  });
+</script>
