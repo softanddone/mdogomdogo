@@ -2,6 +2,9 @@
 import ProductCard from "./ProductCard.astro";
 import { products } from "../data/products.js";
 import Latest from "./Latest.astro";
+import Promotion from "./Promotion.astro";
+import Complement from "./Complement.astro";
+import Iphone from "./Iphone.astro";
 
 // Extract unique categories from all categoryPaths
 const allCategories = products.flatMap((product) => product.categoryPath || []);
@@ -102,6 +105,11 @@ const getCategoryIcon = (category: string): string => {
     transition: none;
   }
 
+  .promo {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+  }
+
   .category-item {
     flex: 0 0 auto;
     cursor: grab;
@@ -174,6 +182,12 @@ const getCategoryIcon = (category: string): string => {
       margin-bottom: 40px;
     }
 
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 20px;
+    }
+
     .category-item {
       width: calc((100vw - 2rem - 2rem) / 3); /* 3 categories */
       min-width: calc((100vw - 2rem - 2rem) / 3);
@@ -198,6 +212,12 @@ const getCategoryIcon = (category: string): string => {
   @media (max-width: 480px) {
     .category-carousel-track {
       gap: 0.75rem;
+    }
+
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 20px;
     }
 
     .category-item {
@@ -284,11 +304,26 @@ const getCategoryIcon = (category: string): string => {
       ); /* 4 cards: viewport - container margins - gaps */
       min-width: calc((100vw - 5rem - 6rem) / 4);
     }
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 20px;
+    }
   }
 
   @media (max-width: 768px) {
     .carousel-track {
       gap: 1rem; /* Reduced gap for small tablets */
+    }
+
+    .promo {
+      grid-template-columns: 1fr;
+    }
+
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 20px;
     }
 
     .carousel-item {
@@ -379,6 +414,11 @@ const getCategoryIcon = (category: string): string => {
     .carousel-container {
       margin-left: auto;
       margin-right: auto;
+    }
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      padding: 100px;
     }
   }
 </style>
@@ -863,6 +903,18 @@ const getCategoryIcon = (category: string): string => {
     startAutoPlay();
   });
 </script>
+
+<div class="promo">
+  <div></div>
+  <Promotion />
+  <Iphone />
+  <div></div>
+</div>
+
+<div></div>
+<div class="set">
+  {products.map((product, index) => <ProductCard {...product} index={index} />)}
+</div>
 
 <footer>
   <a>Copyright @2025. All rights reserved</a>

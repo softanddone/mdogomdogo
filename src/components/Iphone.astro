@@ -1,0 +1,232 @@
+---
+// iPhonePromoCard.astro
+---
+
+<div class="promo-card">
+  <div class="decorative-element"></div>
+  <div class="card-content">
+    <div class="brand-badge">✨ EXCLUSIVE DEAL</div>
+
+    <div class="discount-text">15% OFF</div>
+
+    <p class="offer-description">
+      on All <span class="highlight">iPhone</span> Models
+    </p>
+
+    <button class="cta-button" id="discover-now-btn">Discover Now</button>
+  </div>
+</div>
+
+<style>
+  .promo-card {
+    /* background: linear-gradient(145deg, #fafafa 0%, #f0f0f0 100%); */
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .promo-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    /* background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%); */
+  }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    /* box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.3); */
+  }
+
+  .discount-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .offer-description {
+    color: #374151;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+  }
+
+  .highlight {
+    color: #7c3aed;
+    font-weight: 700;
+  }
+
+  .cta-button {
+    background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 16px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.6s;
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px -5px rgba(124, 58, 237, 0.5);
+  }
+
+  .cta-button:active {
+    transform: translateY(0);
+  }
+
+  .decorative-element {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #a855f720 0%, #8b5cf620 100%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .decorative-element::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #6366f115 0%, #8b5cf615 100%);
+    border-radius: 50%;
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 640px) {
+    .promo-card {
+      padding: 2rem;
+      max-width: 100%;
+    }
+
+    .discount-text {
+      font-size: 2rem;
+    }
+
+    .offer-description {
+      font-size: 1.125rem;
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 1.25rem 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .discount-text {
+      font-size: 1.75rem;
+    }
+
+    .offer-description {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .promo-card {
+      padding: 1.5rem;
+    }
+  }
+
+  /* Animation */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .promo-card {
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+ 
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const discoverButton = document.getElementById("discover-now-btn");
+
+    // Handle discover button click
+    if (discoverButton) {
+      discoverButton.addEventListener("click", () => {
+        // Replace with your actual iPhone collection URL
+        console.log("Redirecting to iPhone collection...");
+        // window.location.href = '/collections/iphone';
+        alert("Redirecting to iPhone collection!");
+      });
+    }
+  });
+</script>
