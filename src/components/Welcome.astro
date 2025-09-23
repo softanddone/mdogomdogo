@@ -236,6 +236,9 @@ const getCategoryIcon = (category: string): string => {
       font-size: 0.85rem;
     }
   }
+  .item {
+    padding: 10px;
+  }
 
   @media (max-width: 320px) {
     .category-carousel-track {
@@ -453,7 +456,7 @@ const getCategoryIcon = (category: string): string => {
     </div>
   </div>
 
-  <Latest />
+  <!-- <Latest /> -->
 
   <!-- Product Carousel -->
   <div class="carousel-container">
@@ -906,14 +909,20 @@ const getCategoryIcon = (category: string): string => {
 
 <div class="promo">
   <div></div>
-  <Promotion />
-  <Iphone />
+  <!-- <Promotion /> -->
+  <!-- <Iphone /> -->
   <div></div>
 </div>
 
 <div></div>
 <div class="set">
-  {products.map((product, index) => <ProductCard {...product} index={index} />)}
+  {
+    products.map((product, index) => (
+      <div class="item">
+        <ProductCard {...product} index={index} />
+      </div>
+    ))
+  }
 </div>
 
 <footer>

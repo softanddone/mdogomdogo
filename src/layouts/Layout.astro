@@ -1,6 +1,10 @@
 ---
 // Import your schema functions
-import { generateProductSchema, generateHomepageSchema, generatePageSchema } from '../utils/structureData';
+import {
+  generateProductSchema,
+  generateHomepageSchema,
+  generatePageSchema,
+} from "../utils/structureData";
 
 const {
   title = "Mdogomdogo Deals Kenya | Lipa Mdogo Mdogo Phones Nairobi, Kiambu & Beyond",
@@ -13,30 +17,50 @@ const {
   product, // For individual product pages
   products, // For homepage with multiple products
   pageType, // 'product' | 'homepage' | 'other'
-  schema // Optional: pre-generated schema
+  schema, // Optional: pre-generated schema
 } = Astro.props;
 
 const keywords = [
-  "lipa mdogo mdogo phones", "simu za kulipa polepole", "affordable smartphones",
-  "cheap smartphones", "get smartphones in nairobi", "m-kopa", "watu", "ulephone",
-  "chukua simu lipa polepole", "cheap samsung", "affordable samsung", "hmd phone",
-  "mkopa phone", "watu phones online", "phone online delivery", "samsung lipa mdogo mdogo",
-  "itel lipa mdogo mdogo", "infinix lipa mdogo mdogo", "buy phone on credit in kenya",
-  "phone lipa polepole", "simu kwa malipo polepole", "phones for sale in nairobi",
-  "budget phones kenya", "cheap android phones nairobi", "phones with delivery",
-  "lipa mdogo mdogo nairobi", "kiambu phone offers", "installment phones kenya"
+  "lipa mdogo mdogo phones",
+  "simu za kulipa polepole",
+  "affordable smartphones",
+  "cheap smartphones",
+  "get smartphones in nairobi",
+  "m-kopa",
+  "watu",
+  "ulephone",
+  "chukua simu lipa polepole",
+  "cheap samsung",
+  "affordable samsung",
+  "hmd phone",
+  "mkopa phone",
+  "watu phones online",
+  "phone online delivery",
+  "samsung lipa mdogo mdogo",
+  "itel lipa mdogo mdogo",
+  "infinix lipa mdogo mdogo",
+  "buy phone on credit in kenya",
+  "phone lipa polepole",
+  "simu kwa malipo polepole",
+  "phones for sale in nairobi",
+  "budget phones kenya",
+  "cheap android phones nairobi",
+  "phones with delivery",
+  "lipa mdogo mdogo nairobi",
+  "kiambu phone offers",
+  "installment phones kenya",
 ].join(", ");
 
 // Generate appropriate schema based on page type
-let generatedSchema = '';
+let generatedSchema = "";
 
 if (schema) {
   // Use pre-generated schema if provided
   generatedSchema = schema;
-} else if (pageType === 'product' && product) {
+} else if (pageType === "product" && product) {
   // Generate product schema for individual product pages
   generatedSchema = generateProductSchema(product);
-} else if (pageType === 'homepage' && products) {
+} else if (pageType === "homepage" && products) {
   // Generate homepage schema for pages with multiple products
   generatedSchema = generateHomepageSchema(products);
 } else if (product) {
@@ -48,7 +72,7 @@ if (schema) {
 }
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -73,11 +97,13 @@ if (schema) {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    
+
     <!-- JSON-LD Structured Data -->
-    {generatedSchema && (
-      <script type="application/ld+json" set:html={generatedSchema}></script>
-    )}
+    {
+      generatedSchema && (
+        <script type="application/ld+json" set:html={generatedSchema} />
+      )
+    }
 
     <!-- Optional: custom head content from page -->
     <slot name="head" />
