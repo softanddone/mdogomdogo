@@ -1,53 +1,55 @@
 ---
-import CategoryComp from '../components/CategoryComp.astro';
-import Nav from '../components/Nav.astro';
-import Layout from '../layouts/Layout.astro';
-import { products } from '../data/products';
-import { generateCategorySchema } from '../utils/structureData';
-import ProductCard from '../components/ProductCard.astro';
+import CategoryComp from "../components/CategoryComp.astro";
+import Nav from "../components/Nav.astro";
+import Layout from "../layouts/Layout.astro";
+import { products } from "../data/products";
+import { generateCategorySchema } from "../utils/structureData";
+import ProductCard from "../components/ProductCard.astro";
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
-  
+
   // Extract all category levels from all products
-  products.forEach(product => {
+  products.forEach((product) => {
     const categoryPath = product.categoryPath as string[];
-    categoryPath.forEach(category => {
+    categoryPath.forEach((category) => {
       // Convert to lowercase, replace spaces with hyphens, and handle existing hyphens
-      const slug = category.toLowerCase()
-        .replace(/\s+/g, '-')  // Replace spaces with hyphens
-        .replace(/[^\w-]/g, '-')  // Replace any non-word, non-hyphen characters with hyphens
-        .replace(/-+/g, '-')  // Replace multiple consecutive hyphens with single hyphen
-        .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+      const slug = category
+        .toLowerCase()
+        .replace(/\s+/g, "-") // Replace spaces with hyphens
+        .replace(/[^\w-]/g, "-") // Replace any non-word, non-hyphen characters with hyphens
+        .replace(/-+/g, "-") // Replace multiple consecutive hyphens with single hyphen
+        .replace(/^-|-$/g, ""); // Remove leading/trailing hyphens
       allCategories.add(slug);
     });
   });
-  
+
   const categories = Array.from(allCategories);
-  
+
   // Debug: Log the generated categories
-  console.log('Generated categories:', categories);
-  
-  const paths = categories.map(category => ({
+  console.log("Generated categories:", categories);
+
+  const paths = categories.map((category) => ({
     params: { category },
   }));
-  
-  console.log('Generated paths:', paths);
-  
+
+  console.log("Generated paths:", paths);
+
   return paths;
 }
 
 const { category } = Astro.params;
 
 // Filter products that contain this category in their categoryPath
-const filteredProducts = products.filter(product => {
+const filteredProducts = products.filter((product) => {
   const categoryPath = product.categoryPath as string[];
-  return categoryPath.some(cat => {
-    const slug = cat.toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w-]/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
+  return categoryPath.some((cat) => {
+    const slug = cat
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
     return slug === category;
   });
 });
@@ -60,12 +62,13 @@ if (filteredProducts.length === 0) {
 let displayCategory = category;
 for (const product of filteredProducts) {
   const categoryPath = product.categoryPath as string[];
-  const found = categoryPath.find(cat => {
-    const slug = cat.toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w-]/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
+  const found = categoryPath.find((cat) => {
+    const slug = cat
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
     return slug === category;
   });
   if (found) {
@@ -75,24 +78,31 @@ for (const product of filteredProducts) {
 }
 
 // Generate schema for SEO
-const schemaArray = generateCategorySchema(category, filteredProducts, displayCategory);
+const schemaArray = generateCategorySchema(
+  category,
+  filteredProducts,
+  displayCategory
+);
 
 // SEO configuration
 const seo = {
   title: `${displayCategory} Products - Buy Now | Lipa Mdogo Mdogo`,
   description: `Browse our ${displayCategory} collection with flexible payment options. Pay small deposits and daily installments. ${filteredProducts.length} products available.`,
   canonical: `https://mdogomdogodeals.co.ke/category/${category}`,
-  ogImage: filteredProducts[0] ? `https://mdogomdogodeals.co.ke${filteredProducts[0].source}` : 'https://mdogomdogodeals.co.ke/default-og-image.jpg',
-  schema: schemaArray.map(schema => JSON.stringify(schema)).join('')
+  ogImage: filteredProducts[0]
+    ? `https://mdogomdogodeals.co.ke${filteredProducts[0].source}`
+    : "https://mdogomdogodeals.co.ke/default-og-image.jpg",
+  schema: schemaArray.map((schema) => JSON.stringify(schema)).join(""),
 };
 ---
-    <style is:inline>
-         .main {
+
+<style is:inline>
+  .main {
     padding: 2rem 0;
     display: grid;
   }
 
-  .headerCategory{
+  .headerCategory {
     display: flex;
     width: 68vw;
     margin: 0 auto;
@@ -108,87 +118,71 @@ const seo = {
     margin: 0 2.5rem;
     align-items: center;
     gap: 2rem;
-      margin-top: 30px;
+    margin-top: 30px;
   }
 
-
-      body {
-        width: 100vw;
-        overflow-x: hidden;
-            margin: 2rem 0 0 0;
+  body {
+    width: 100vw;
+    overflow-x: hidden;
+    margin: 2rem 0 0 0;
     background-color: #fff;
     color: var(--dark-color);
     width: 100vw;
     overflow-x: hidden;
-
-    
-      }
-        @media screen and (min-width: 1200px) {
+  }
+  @media screen and (min-width: 1200px) {
     body {
       margin: 3rem 0 0 0;
     }
     .bd-grid {
       margin-left: auto;
       margin-right: auto;
-        
     }
-
-}
-/* Small devices (phones, less than 600px) */
-@media screen and (max-width: 599px) {
-  /* Styles for small devices */
-    .bd-grid{
-  grid-template-columns: 1fr;
-
+  }
+  /* Small devices (phones, less than 600px) */
+  @media screen and (max-width: 599px) {
+    /* Styles for small devices */
+    .bd-grid {
+      grid-template-columns: 1fr;
     }
-    .main{
-        
+    .main {
     }
-}
+  }
 
-/* Medium devices (tablets, 600px to 899px) */
-@media screen and (min-width: 600px) and (max-width: 899px) {
-  /* Styles for medium devices */
-   .bd-grid{
-  grid-template-columns: 1fr 1fr;
-   }
+  /* Medium devices (tablets, 600px to 899px) */
+  @media screen and (min-width: 600px) and (max-width: 899px) {
+    /* Styles for medium devices */
+    .bd-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 
-}
+  /* Large devices (desktops, 900px to 1199px) */
+  @media screen and (min-width: 900px) and (max-width: 1199px) {
+    /* Styles for large devices */
+    .bd-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 
-/* Large devices (desktops, 900px to 1199px) */
-@media screen and (min-width: 900px) and (max-width: 1199px) {
-  /* Styles for large devices */
-   .bd-grid{
-  grid-template-columns: 1fr 1fr 1fr;
+  /* Extra large devices (1200px and up) */
+  @media screen and (min-width: 1200px) {
+    /* Styles for extra-large screens */
+    .bd-grid {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+</style>
 
-
-   }
-}
-
-/* Extra large devices (1200px and up) */
-@media screen and (min-width: 1200px) {
-  /* Styles for extra-large screens */
-     .bd-grid{
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-
-     }
-}
-    </style>
-
-    <Layout {...seo}>
+<Layout {...seo}>
   <Nav />
 
   <div class="headerCategory">
-<h1 style="text-transform: capitalize;">{displayCategory} SmartPhones</h1>
-      <!-- <p>Found {filteredProducts.length} products in {displayCategory}</p> -->
+    <h1 style="text-transform: capitalize;">{displayCategory} SmartPhones</h1>
+    <!-- <p>Found {filteredProducts.length} products in {displayCategory}</p> -->
   </div>
-      
-      
-        <main class="main bd-grid">
-      {filteredProducts.map((product) => (
-       
-        <ProductCard {...product} />
-      ))}
-    </main>
-    </Layout>
-  
+
+  <main class="main bd-grid">
+    {filteredProducts.map((product) => <ProductCard {...product} />)}
+  </main>
+</Layout>

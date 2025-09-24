@@ -9,7 +9,7 @@ import Links from "./Links.astro";
     padding: 0;
     box-sizing: border-box;
   }
-  s nav {
+  nav {
     width: 100vw;
     /* background: linear-gradient(135deg, #e3f8ff 0%, #ffe8df 100%); */
     background: white !important;
@@ -31,7 +31,7 @@ import Links from "./Links.astro";
     grid-template-columns: 200px 1fr 200px 200px;
     gap: 20px;
     align-items: center;
-    /* background: blue!important; */
+    /* background: blue !important; */
   }
 
   .brand-nav {
@@ -431,14 +431,42 @@ import Links from "./Links.astro";
     font-style: italic;
   }
 
+  @media screen and (min-width: 0px) and (max-width: 767px) {
+    .support-text {
+      display: none;
+    }
+
+    .support-icon img {
+      width: 120px;
+      height: 60px;
+    }
+    .support-nav {
+      /* background: yellow !important; */
+    }
+    .support-icon img {
+      margin-right: 30px;
+      width: 35px !important;
+      height: 35px !important;
+    }
+  }
+
   @media (max-width: 768px) {
+    .support-icon img {
+      width: 120px;
+      height: 60px;
+    }
     .top-nav {
-      grid-template-columns: 1fr 1fr 2fr !important;
+      /* grid-template-columns: 1fr 1fr 2fr !important; */
       height: auto;
       gap: 15px;
       padding: 20px 0;
       height: 40px;
       /* background: yellow; */
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .support-text {
+      display: none;
     }
 
     .bottom-nav {
@@ -524,7 +552,7 @@ import Links from "./Links.astro";
             <img src="/phones/phone.svg" alt="Support" />
           </div>
           <div class="support-text">
-            <h4>Call to Order</h4>
+            <h4>Need Help?</h4>
             <h3>0722867659</h3>
           </div>
         </div>
