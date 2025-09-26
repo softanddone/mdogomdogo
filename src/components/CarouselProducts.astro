@@ -1,0 +1,367 @@
+---
+import ProductCard from "./ProductCard.astro";
+import { products } from "../data/products.js";
+import ShopBy from "./ShopBy.astro";
+---
+
+<style is:inline>
+  :root {
+    --dark-color: #161616;
+    --accent-color: #ff5151;
+  }
+
+  body {
+    margin: 2rem 0 0 0;
+    background-color: #fff;
+    color: var(--dark-color);
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Product carousel styles */
+  .carousel-container {
+    max-width: 1200px;
+    margin: 0 2.5rem;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+  }
+
+  .carousel-container h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+  }
+
+  .carousel-track.no-transition {
+    transition: none;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    cursor: grab;
+  }
+
+  .carousel-item:active {
+    cursor: grabbing;
+  }
+
+  /* Responsive product display - calculated widths for perfect fit */
+  .carousel-item {
+    width: calc((1200px - 8rem) / 5); /* 5 cards: max-width - gaps */
+    min-width: calc((1200px - 8rem) / 5);
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-item {
+      width: calc(
+        (100vw - 5rem - 6rem) / 4
+      ); /* 4 cards: viewport - container margins - gaps */
+      min-width: calc((100vw - 5rem - 6rem) / 4);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-track {
+      gap: 1rem; /* Reduced gap for small tablets */
+    }
+
+    .carousel-item {
+      width: calc(
+        (100vw - 2rem - 2rem) / 3
+      ); /* 3 cards: viewport - container margins - gaps */
+      min-width: calc((100vw - 2rem - 2rem) / 3);
+    }
+
+    .carousel-container {
+      margin: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-track {
+      gap: 0.75rem; /* Even smaller gap for mobile */
+    }
+
+    .carousel-item {
+      width: calc(
+        (100vw - 2rem - 0.75rem) / 2
+      ); /* 2 cards: viewport - container margins - gap */
+      min-width: calc((100vw - 2rem - 0.75rem) / 2);
+    }
+  }
+
+  @media (max-width: 320px) {
+    .carousel-track {
+      gap: 0.5rem; /* Minimal gap for very small screens */
+    }
+
+    .carousel-item {
+      width: calc(
+        100vw - 2rem
+      ); /* 1 card: full viewport minus container margins */
+      min-width: calc(100vw - 2rem);
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    body {
+      margin: 3rem 0 0 0;
+    }
+    .carousel-container {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>
+
+<div class="carousel-container">
+  <h1>Trending Phones on Lipa Mdogo Mdogo in Kenya</h1>
+
+  <div class="carousel-track" id="carousel-track">
+    {/* Original products */}
+    {
+      products.map((product, index) => (
+        <div class="carousel-item" data-index={index}>
+          <ProductCard {...product} index={index} />
+        </div>
+      ))
+    }
+
+    {/* Cloned products for infinite effect */}
+    {
+      products.map((product, index) => (
+        <div class="carousel-item" data-index={index + products.length}>
+          <ProductCard {...product} index={index} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script
+  define:vars={{
+    totalProducts: products.length,
+  }}
+>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Product Carousel Logic
+    const track = document.getElementById("carousel-track");
+
+    if (!track) return;
+
+    let currentIndex = 0;
+    let autoPlayInterval;
+    let isTransitioning = false;
+
+    // Touch/drag variables
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let initialTransform = 0;
+
+    function getItemWidth() {
+      const firstItem = track.children[0];
+      if (!firstItem) return 232; // fallback
+
+      const width = window.innerWidth;
+      let gap = 32; // default 2rem gap
+
+      // Adjust gap based on screen size to match CSS
+      if (width <= 320) {
+        gap = 8; // 0.5rem
+      } else if (width <= 480) {
+        gap = 12; // 0.75rem
+      } else if (width <= 768) {
+        gap = 16; // 1rem
+      }
+
+      return firstItem.offsetWidth + gap;
+    }
+
+    function updateTransform(index, immediate = false) {
+      const itemWidth = getItemWidth();
+      const translateX = -index * itemWidth;
+
+      if (immediate) {
+        track.classList.add("no-transition");
+        track.style.transform = `translateX(${translateX}px)`;
+        // Force reflow
+        track.offsetHeight;
+        track.classList.remove("no-transition");
+      } else {
+        track.style.transform = `translateX(${translateX}px)`;
+      }
+    }
+
+    function moveToNext() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+      currentIndex++;
+      updateTransform(currentIndex);
+
+      // When we reach the first cloned item, immediately jump back to start
+      if (currentIndex === totalProducts) {
+        setTimeout(() => {
+          currentIndex = 0;
+          updateTransform(currentIndex, true);
+          isTransitioning = false;
+        }, 500); // Match transition duration
+      } else {
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 500);
+      }
+    }
+
+    function moveToPrev() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+
+      if (currentIndex <= 0) {
+        // Jump to the last original item position
+        currentIndex = totalProducts;
+        updateTransform(currentIndex, true);
+        setTimeout(() => {
+          currentIndex = totalProducts - 1;
+          updateTransform(currentIndex);
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 500);
+        }, 50);
+      } else {
+        currentIndex--;
+        updateTransform(currentIndex);
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 500);
+      }
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayInterval = setInterval(moveToNext, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+      }
+    }
+
+    // Touch and mouse events for swiping/dragging
+    function handleStart(clientX) {
+      isDragging = true;
+      startX = clientX;
+      currentX = clientX;
+      initialTransform = currentIndex * getItemWidth();
+      stopAutoPlay();
+      track.classList.add("no-transition");
+    }
+
+    function handleMove(clientX) {
+      if (!isDragging) return;
+
+      currentX = clientX;
+      const deltaX = currentX - startX;
+      const newTransform = -initialTransform + deltaX;
+      track.style.transform = `translateX(${newTransform}px)`;
+    }
+
+    function handleEnd() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      track.classList.remove("no-transition");
+
+      const deltaX = currentX - startX;
+      const threshold = getItemWidth() / 3;
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > 0) {
+          moveToPrev();
+        } else {
+          moveToNext();
+        }
+      } else {
+        updateTransform(currentIndex);
+      }
+
+      startAutoPlay();
+    }
+
+    // Mouse events
+    track.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      handleStart(e.clientX);
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      handleMove(e.clientX);
+    });
+
+    document.addEventListener("mouseup", handleEnd);
+
+    // Touch events
+    track.addEventListener(
+      "touchstart",
+      (e) => {
+        handleStart(e.touches[0].clientX);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener(
+      "touchmove",
+      (e) => {
+        handleMove(e.touches[0].clientX);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener("touchend", handleEnd, { passive: true });
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        moveToPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        moveToNext();
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      stopAutoPlay();
+      updateTransform(currentIndex, true);
+      setTimeout(startAutoPlay, 100);
+    });
+
+    // Pause on hover
+    track.addEventListener("mouseenter", stopAutoPlay);
+    track.addEventListener("mouseleave", startAutoPlay);
+
+    // Initialize
+    updateTransform(currentIndex, true);
+    startAutoPlay();
+  });
+</script>

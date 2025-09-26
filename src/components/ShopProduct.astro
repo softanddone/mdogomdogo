@@ -1,10 +1,10 @@
 ---
-
 import { products } from "../data/products.js";
 import Latest from "./Latest.astro";
 import Promotion from "./Promotion.astro";
 import Complement from "./Complement.astro";
 import Iphone from "./Iphone.astro";
+import ProductCard from "./ProductCard.astro";
 
 // Extract unique categories from all categoryPaths
 const allCategories = products.flatMap((product) => product.categoryPath || []);
@@ -46,7 +46,6 @@ const getCategoryIcon = (category: string): string => {
   );
 };
 ---
-
 
 <style is:inline>
   :root {
@@ -343,20 +342,18 @@ const getCategoryIcon = (category: string): string => {
   <div class="category-carousel-track" id="category-carousel-track">
     {/* Original categories */}
     {
-      uniqueCategories.map((category, index) => (
-        <a href=`/${category.toLowerCase().replace(/\s+/g, "-") }` class="category-item" data-index={index}>
-          <span class="category-icon" set:html={getCategoryIcon(category)} />
-          <h3 class="category-name">{category}</h3>
-        </a>
+      products.map((category, index) => (
+        // <a href=`/${category.toLowerCase().replace(/\s+/g, "-") }` class="category-item" data-index={index}>
+        //   <span class="category-icon" set:html={getCategoryIcon(category)} />
+        //   <h3 class="category-name">{category}</h3>
+        // </a>
+        <ProductCard />
       ))
     }
     {/* Cloned categories for infinite effect */}
     {
       uniqueCategories.map((category, index) => (
-        <div
-          class="category-item"
-          data-index={index + uniqueCategories.length}
-        >
+        <div class="category-item" data-index={index + uniqueCategories.length}>
           <span class="category-icon" set:html={getCategoryIcon(category)} />
           <h3 class="category-name">{category}</h3>
         </div>

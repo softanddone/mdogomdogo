@@ -2,12 +2,13 @@
 import ProductCard from "./ProductCard.astro";
 import { products } from "../data/products.js";
 import ShopBy from "./ShopBy.astro";
+import CarouselProducts from "./CarouselProducts.astro";
+import Latest from "./Latest.astro";
 ---
 
 <style is:inline>
   :root {
     --dark-color: #161616;
-    --smaller-font-size: 0.75rem;
     --accent-color: #ff5151;
   }
 
@@ -26,136 +27,12 @@ import ShopBy from "./ShopBy.astro";
 
   .main {
     padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
     margin-top: 40px;
-    /* background-color: yellow; */
-    justify-content: center;
-    align-items: center;
   }
 
-  /* Product carousel styles */
-  .carousel-container {
-    max-width: 1200px;
-    margin: 0 2.5rem;
-    overflow: hidden;
-    position: relative;
-    user-select: none;
-  }
-
-  .carousel-container h1 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif;
-    margin-top: 50px;
-    margin-bottom: 30px;
-  }
-
-  .carousel-track {
-    display: flex;
-    gap: 2rem;
-    transition: transform 0.5s ease-in-out;
-    will-change: transform;
-  }
-
-  .carousel-track.no-transition {
-    transition: none;
-  }
-
-  .carousel-item {
-    flex: 0 0 auto;
-    cursor: grab;
-  }
-
-  .carousel-item:active {
-    cursor: grabbing;
-  }
-
-  .promo {
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
-  }
-
-  /* Responsive product display - calculated widths for perfect fit */
-  .carousel-item {
-    width: calc((1200px - 8rem) / 5); /* 5 cards: max-width - gaps */
-    min-width: calc((1200px - 8rem) / 5);
-  }
-
-  @media (max-width: 1024px) {
-    .carousel-item {
-      width: calc(
-        (100vw - 5rem - 6rem) / 4
-      ); /* 4 cards: viewport - container margins - gaps */
-      min-width: calc((100vw - 5rem - 6rem) / 4);
-    }
-    .set {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 20px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .carousel-track {
-      gap: 1rem; /* Reduced gap for small tablets */
-    }
-
-    .promo {
-      grid-template-columns: 1fr;
-    }
-
-    .set {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 20px;
-    }
-
-    .carousel-item {
-      width: calc(
-        (100vw - 2rem - 2rem) / 3
-      ); /* 3 cards: viewport - container margins - gaps */
-      min-width: calc((100vw - 2rem - 2rem) / 3);
-    }
-
-    .carousel-container {
-      margin: 0 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .carousel-track {
-      gap: 0.75rem; /* Even smaller gap for mobile */
-    }
-
-    .set {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 20px;
-    }
-
-    .carousel-item {
-      width: calc(
-        (100vw - 2rem - 0.75rem) / 2
-      ); /* 2 cards: viewport - container margins - gap */
-      min-width: calc((100vw - 2rem - 0.75rem) / 2);
-    }
-  }
-
-  .item {
-    padding: 10px;
-  }
-
-  @media (max-width: 320px) {
-    .carousel-track {
-      gap: 0.5rem; /* Minimal gap for very small screens */
-    }
-
-    .carousel-item {
-      width: calc(
-        100vw - 2rem
-      ); /* 1 card: full viewport minus container margins */
-      min-width: calc(100vw - 2rem);
-    }
+  .smartphones {
+    text-align: center;
+    font-size: 18px;
   }
 
   .whatsapp {
@@ -184,30 +61,35 @@ import ShopBy from "./ShopBy.astro";
     margin: auto;
   }
 
-  footer {
-    text-align: center;
-    margin-top: 3rem;
-    padding: 2rem;
-    color: var(--dark-color);
-    opacity: 0.7;
+  .item {
+    padding: 10px;
   }
 
-  footer a {
-    color: var(--dark-color);
-    transition: color 0.3s ease;
+  .set {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
   }
 
-  footer a:hover {
-    color: var(--accent-color);
+  @media (max-width: 1024px) {
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 20px;
+    }
   }
 
   @media screen and (min-width: 1200px) {
     body {
       margin: 3rem 0 0 0;
-    }
-    .carousel-container {
-      margin-left: auto;
-      margin-right: auto;
     }
     .set {
       display: grid;
@@ -222,28 +104,7 @@ import ShopBy from "./ShopBy.astro";
   <ShopBy />
 
   <!-- Product Carousel -->
-  <div class="carousel-container">
-    <h1>Trending Phones on Lipa Mdogo Mdogo in Kenya</h1>
-
-    <div class="carousel-track" id="carousel-track">
-      {/* Original products */}
-      {
-        products.map((product, index) => (
-          <div class="carousel-item" data-index={index}>
-            <ProductCard {...product} index={index} />
-          </div>
-        ))
-      }
-      {/* Cloned products for infinite effect */}
-      {
-        products.map((product, index) => (
-          <div class="carousel-item" data-index={index + products.length}>
-            <ProductCard {...product} index={index} />
-          </div>
-        ))
-      }
-    </div>
-  </div>
+  <CarouselProducts />
 
   <div class="whatsapp">
     <a
@@ -260,13 +121,9 @@ import ShopBy from "./ShopBy.astro";
     </div>
   </div>
 </main>
+<Latest />
 
-<div class="promo">
-  <div></div>
-  <div></div>
-</div>
-
-<div></div>
+<h1 class="smartphones">Get Your Dream Smartphone today on Lipa Mdogo Mdogo</h1>
 <div class="set">
   {
     products.map((product, index) => (

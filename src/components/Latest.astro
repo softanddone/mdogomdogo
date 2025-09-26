@@ -9,7 +9,7 @@
         </h1>
 
         <h2 class="amaze">AMAZING DISCOUNTS <br /> And DEALS</h2>
-<!-- 
+        <!-- 
         <a href="#" class="sleek-button">
           <span class="button-text">
             SHOP NOW
@@ -35,7 +35,7 @@
         <h1>Samsung</h1>
         <!-- <h1>Samsung Phones</h1>
         <h1>In Nairobi Kenya</h1> -->
-<!-- 
+        <!-- 
         <a href="#" class="sleek-button">
           <span class="button-text">
             SHOP NOW
@@ -55,7 +55,7 @@
 <style>
   .phonex {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     /* background: yellow; */
   }
   .l-container {
@@ -63,13 +63,16 @@
     width: 85%;
     margin: 0 auto;
   }
+
   .fonix2 {
     display: flex;
     flex-direction: column;
     background-image: url("/phones/im2.webp");
     background-repeat: no-repeat;
-    background-position: center;
-  }
+    background-position: center center;
+    background-size: cover;
+    background-attachment: scroll;
+}
   .deals h1 {
     text-align: center;
     margin: 0 auto;
@@ -123,6 +126,7 @@
   }
   .phonextext {
     /* margin-left: 70px; */
+    /* background: red; */
   }
   .latest {
     width: 100vw;
@@ -265,7 +269,9 @@
     .fonix2 {
       grid-row: 1;
 
-      height: 400px;
+      height: 300px;
+      width:380px;
+
     }
   }
 </style>

@@ -6,6 +6,7 @@ import { products } from "../data/products";
 import { generateCategorySchema } from "../utils/structureData";
 import ProductCard from "../components/ProductCard.astro";
 import ShopBy from "../components/ShopBy.astro";
+import CarouselProducts from "../components/CarouselProducts.astro";
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
@@ -426,5 +427,6 @@ const seo = {
       </p>
     </div>
     <ShopBy />
+    <CarouselProducts />
   </div>
 </Layout>
