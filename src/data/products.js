@@ -18,7 +18,7 @@ export const products = [
     battery:"5,000mAh, 25W Fast Charging",
     version:"Android 14TM",
     depositanddaily:"Ksh 5499 Daily Ksh 95",
-    slug: "sumsung-galaxy-a16",
+    slug: "samsung-galaxy-a16",
       slugs: "sumsung-galaxy-a16",
     description:"Buy Samsung Galaxy A16 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
   brand:"Mkopa",
@@ -76,8 +76,8 @@ reviews: {
  battery:"5,000mAh, 25W Fast Charging",
  version:"Android 14TM",
      depositanddaily:"Ksh 3999 Daily Ksh 67",
-     slug: "sumsung-galaxy-a06",
-        slugs: "sumsung-galaxy-a06",
+     slug: "samsung-galaxy-a06",
+        slugs: "samsung-galaxy-a06",
      description:"Buy Samsung Galaxy A06 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Delivery by MKOPA, Watu Simu & others",
     brand:"Watu Simu",
  seller:"Watu Simu",
@@ -205,7 +205,7 @@ reviews: {
 storage: "128GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA","HMD","mkopa"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones","HMD","Mkopa"],
 color: "Meteor Black, Atmos Blue",
 weight: "187g",
 
@@ -267,7 +267,7 @@ reviews: {
 storage: "256GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA","HMD","mkopa"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones","HMD","Mkopa"],
 color: "Glacier Green, Black Ocean",
 weight: "196g",
 
@@ -326,7 +326,7 @@ reviews: {
 storage: "64GB",
 condition: "new",
 gtin: "",
-categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "M‑KOPA","HMD","mkopa"],
+categoryPath: ["Electronics", "Mobile Phones", "Smartphones","HMD","Mkopa"],
 color: "Black",
 weight: "185.4g",
 
@@ -504,6 +504,10 @@ reviews: {
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
   color: "Black, Ice Blue, Lavender",
   weight: "190g",
+
+
+
+
   dimensions: {
     length: "165.5mm",
     width: "76.0mm",
