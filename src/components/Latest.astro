@@ -56,7 +56,6 @@
   .phonex {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    /* background: yellow; */
   }
   .l-container {
     display: flex;
@@ -67,12 +66,14 @@
   .fonix2 {
     display: flex;
     flex-direction: column;
-    background-image: url("/phones/im2.webp");
+    background-image: url("/phones/p1.png");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
+    background-size: contain;
     background-attachment: scroll;
-}
+    object-fit: cover;
+    width:100%!important;
+  }
   .deals h1 {
     text-align: center;
     margin: 0 auto;
@@ -242,17 +243,26 @@
   @media screen and (min-width: 0) and (max-width: 760px) {
     .latest {
       grid-template-columns: 1fr;
+      /* background: blue; */
+      place-items: center;
+      margin: 0 auto;
+      width: 100% !important;
+    }
+    .phonextext {
+      /* background: red; */
+      margin: 0 auto;
+      width: 100% !important;
+    }
+    .phonextext h1 {
+      font-size: 20px;
     }
     .phonex {
-      grid-row: 2;
+      /* grid-row: 2; */
+      /* grid-template-columns: 1fr; */
       grid-template-columns: 1fr;
-      margin: 0 auto;
-      place-items: center;
-      justify-content: center;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 30px;
+      /* place-items: center; */
     }
+
     .sleek-button {
       text-align: center;
       margin-left: 100px;
@@ -268,10 +278,10 @@
     }
     .fonix2 {
       grid-row: 1;
-
+      /* background: yellow; */
       height: 300px;
-      width:380px;
-
+      width: 380px;
+      margin: 0 auto;
     }
   }
 </style>
