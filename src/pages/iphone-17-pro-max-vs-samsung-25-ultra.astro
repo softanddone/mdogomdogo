@@ -197,9 +197,8 @@ const comparisonData = [
 
 const iphonePrice = "$1,199";
 const samsungPrice = "$1,299";
-const iphonePurchaseLink = "https://apple.com/iphone-17-pro-max";
-const samsungPurchaseLink =
-  "https://samsung.com/us/smartphones/galaxy-s25-ultra";
+const iphonePurchaseLink = "https://amzn.to/470etVe";
+const samsungPurchaseLink = "https://amzn.to/4gTPkPG";
 ---
 
 <style>
@@ -756,15 +755,15 @@ const samsungPurchaseLink =
     if (iphoneScore > samsungScore) {
       winner = "iPhone 17 Pro Max";
       runnerUp = "Galaxy S25 Ultra";
-      winnerLink = "https://apple.com/iphone-17-pro-max";
-      runnerUpLink = "https://samsung.com/us/smartphones/galaxy-s25-ultra";
+      winnerLink = "https://amzn.to/470etVe";
+      runnerUpLink = "https://amzn.to/4gTPkPG";
       winnerTitle.textContent = "🏆 iPhone 17 Pro Max Wins!";
       winnerText.textContent = `Leading with ${iphoneScore} category wins vs ${samsungScore}. Superior display brightness, performance, and camera zoom make it the clear winner.`;
     } else if (samsungScore > iphoneScore) {
       winner = "Galaxy S25 Ultra";
       runnerUp = "iPhone 17 Pro Max";
-      winnerLink = "https://samsung.com/us/smartphones/galaxy-s25-ultra";
-      runnerUpLink = "https://apple.com/iphone-17-pro-max";
+      winnerLink = "https://amzn.to/4gTPkPG";
+      runnerUpLink = "https://amzn.to/470etVe";
       winnerTitle.textContent = "🏆 Galaxy S25 Ultra Wins!";
       winnerText.textContent = `Dominating with ${samsungScore} category wins vs ${iphoneScore}. S Pen productivity, titanium build, and versatile AI features secure the victory.`;
     } else {
@@ -772,8 +771,8 @@ const samsungPurchaseLink =
       winnerText.textContent = `Both phones excel in ${iphoneScore} categories each. Your choice depends on ecosystem preference.`;
       winner = "iPhone 17 Pro Max";
       runnerUp = "Galaxy S25 Ultra";
-      winnerLink = "https://apple.com/iphone-17-pro-max";
-      runnerUpLink = "https://samsung.com/us/smartphones/galaxy-s25-ultra";
+      winnerLink = "https://amzn.to/470etVe";
+      runnerUpLink = "https://amzn.to/4gTPkPG";
     }
 
     winnerPhone.textContent = winner;
