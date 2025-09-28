@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samsung Galaxy A15 - Interactive Showcase</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(
+          135deg,
+          #0f0f23 0%,
+          #1a1a2e 50%,
+          #16213e 100%
+        );
+        color: white;
+        overflow-x: hidden;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1400px;
+        width: 100%;
+        padding: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .phone-showcase {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .phone-container {
+        position: relative;
+        transform: perspective(1000px) rotateY(-15deg);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .phone-image {
+        width: 300px;
+        height: auto;
+        border-radius: 2rem;
+        box-shadow:
+          0 50px 100px rgba(59, 130, 246, 0.3),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .phone-image:hover {
+        transform: scale(1.05) rotateY(5deg);
+      }
+
+      .phone-glow {
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        right: -50px;
+        bottom: -50px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.4) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+
+      .product-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .product-title {
+        font-size: 4rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+        animation: slideInRight 1s ease-out;
+      }
+
+      .product-subtitle {
+        font-size: 1.5rem;
+        color: #94a3b8;
+        margin-bottom: 1rem;
+        animation: slideInRight 1s ease-out 0.2s both;
+      }
+
+      .price-showcase {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        animation: slideInRight 1s ease-out 0.4s both;
+      }
+
+      .price-main {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #10b981;
+        margin-bottom: 1rem;
+      }
+
+      .price-breakdown {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .price-item {
+        text-align: center;
+        padding: 1rem;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 1rem;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+
+      .price-label {
+        font-size: 0.875rem;
+        color: #94a3b8;
+        margin-bottom: 0.5rem;
+      }
+
+      .price-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #3b82f6;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        animation: slideInRight 1s ease-out 0.6s both;
+      }
+
+      .btn-primary {
+        flex: 1;
+        padding: 1.25rem 2rem;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border: none;
+        border-radius: 1rem;
+        color: white;
+        font-size: 1.125rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+      }
+
+      .btn-secondary {
+        flex: 1;
+        padding: 1.25rem 2rem;
+        background: transparent;
+        border: 2px solid #3b82f6;
+        border-radius: 1rem;
+        color: #3b82f6;
+        font-size: 1.125rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: #3b82f6;
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      /* Features Navigation */
+      .features-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(15, 15, 35, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0 2rem;
+        overflow-x: auto;
+      }
+
+      .nav-item {
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+      }
+
+      /* Interactive Features Sections */
+      .features-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+      }
+
+      .feature-section {
+        margin-bottom: 6rem;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .feature-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .section-subtitle {
+        font-size: 1.25rem;
+        color: #94a3b8;
+      }
+
+      .specs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .spec-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .spec-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.1),
+          rgba(139, 92, 246, 0.1)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .spec-card:hover::before {
+        opacity: 1;
+      }
+
+      .spec-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+      }
+
+      .spec-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .spec-label {
+        font-size: 0.875rem;
+        color: #94a3b8;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .spec-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .spec-description {
+        font-size: 0.875rem;
+        color: #cbd5e1;
+        line-height: 1.6;
+      }
+
+      .spec-card.highlight {
+        border: 2px solid #10b981;
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .highlight-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      /* Interactive Comparison Tool */
+      .comparison-tool {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 2rem;
+        padding: 3rem;
+        margin: 4rem 0;
+        text-align: center;
+      }
+
+      .comparison-toggle {
+        display: inline-flex;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2rem;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .toggle-option {
+        padding: 0.75rem 2rem;
+        border-radius: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .toggle-option.active {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+      }
+
+      .comparison-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .comparison-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Progress Bars */
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.1);
+        height: 8px;
+        border-radius: 1rem;
+        margin: 1rem 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #059669);
+        border-radius: 1rem;
+        transition: width 1s ease;
+        width: 0%;
+      }
+
+      /* Reviews Section */
+      .reviews-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 2rem;
+        padding: 3rem;
+        margin: 4rem 0;
+      }
+
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .review-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .review-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .stars {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .star {
+        color: #fbbf24;
+        font-size: 1.25rem;
+      }
+
+      /* Final CTA */
+      .final-cta {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.1),
+          rgba(139, 92, 246, 0.1)
+        );
+        border-radius: 2rem;
+        margin: 4rem 0;
+      }
+
+      .cta-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+
+      .cta-subtitle {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        margin-bottom: 2rem;
+      }
+
+      .urgency-timer {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .timer-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 1rem;
+        min-width: 80px;
+      }
+
+      .timer-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #10b981;
+      }
+
+      .timer-label {
+        font-size: 0.875rem;
+        color: #94a3b8;
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: perspective(1000px) rotateY(-15deg) translateY(0px);
+        }
+        50% {
+          transform: perspective(1000px) rotateY(-15deg) translateY(-20px);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0.8;
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          text-align: center;
+        }
+
+        .phone-container {
+          transform: none;
+        }
+
+        .product-title {
+          font-size: 3rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-container {
+          justify-content: flex-start;
+        }
+
+        .specs-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .price-breakdown {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="phone-showcase">
+          <div class="phone-container">
+            <div class="phone-glow"></div>
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDMwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNjAwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQpIi8+CjxyZWN0IHg9IjEwIiB5PSIzMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI1NDAiIHJ4PSIzMCIgZmlsbD0iIzAwMCIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSI1NzAiIHI9IjIwIiBmaWxsPSIjMzMzIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMzIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIiBmb250LXNpemU9IjI0Ij5TYW1zdW5nPC90ZXh0Pgo8dGV4dCB4PSIxNTAiIHk9IjM1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2FhYSIgZm9udC1zaXplPSIxOCI+R2FsYXh5IEExNTwvdGV4dD4KPHN2ZyB4PSI1MCIgeT0iNTAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj4KPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIyMCIgZmlsbD0idXJsKCNzY3JlZW4pIi8+CjwvZz4KPHN2ZyB4PSI1MCIgeT0iMjcwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiByeD0iMjAiIGZpbGw9InVybCgjY2FtZXJhKSIvPgo8L2c+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIHN0b3AtY29sb3I9IiMzYjgyZjYiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGI1Y2Y2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2NyZWVuIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIHN0b3AtY29sb3I9IiMxZTI5M2IiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMzM0MTU1Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iY2FtZXJhIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIHN0b3AtY29sb3I9IiMyMjIiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDQ0Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+"
+              alt="Samsung Galaxy A15"
+              class="phone-image"
+              id="phoneImage"
+            />
+          </div>
+        </div>
+        <div class="product-info">
+          <h1 class="product-title">Galaxy A15</h1>
+          <p class="product-subtitle">Premium features, affordable price</p>
+
+          <div class="price-showcase">
+            <div class="price-main">KES 18,999</div>
+            <div class="price-breakdown">
+              <div class="price-item">
+                <div class="price-label">Deposit</div>
+                <div class="price-value">KES 2,999</div>
+              </div>
+              <div class="price-item">
+                <div class="price-label">Daily</div>
+                <div class="price-value">KES 89</div>
+              </div>
+            </div>
+            <p style="text-align: center; color: #94a3b8;">
+              Starting from KES 2,999
+            </p>
+          </div>
+
+          <div class="cta-buttons">
+            <button class="btn-primary" onclick="orderNow()"
+              >Order Now - KES 2,999</button
+            >
+            <button class="btn-secondary" onclick="scrollToSpecs()"
+              >Explore Features</button
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Navigation -->
+    <nav class="features-nav">
+      <div class="nav-container">
+        <div class="nav-item active" data-section="display">📱 Display</div>
+        <div class="nav-item" data-section="performance">⚡ Performance</div>
+        <div class="nav-item" data-section="camera">📸 Camera</div>
+        <div class="nav-item" data-section="battery">🔋 Battery</div>
+        <div class="nav-item" data-section="features">✨ Features</div>
+        <div class="nav-item" data-section="reviews">⭐ Reviews</div>
+      </div>
+    </nav>
+
+    <div class="features-container">
+      <!-- Display Section -->
+      <section class="feature-section" id="display">
+        <div class="section-header">
+          <h2 class="section-title">Immersive Display</h2>
+          <p class="section-subtitle">
+            Experience vibrant colors and crisp details
+          </p>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-card highlight">
+            <div class="highlight-badge">KEY FEATURE</div>
+            <div class="spec-content">
+              <div class="spec-label">Screen Size</div>
+              <div class="spec-value">6.5" HD+ Display</div>
+              <div class="spec-description">
+                Large, immersive screen perfect for streaming, gaming, and
+                browsing
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Resolution</div>
+              <div class="spec-value">1600 x 720 pixels</div>
+              <div class="spec-description">
+                Sharp HD+ resolution for clear text and vivid images
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Aspect Ratio</div>
+              <div class="spec-value">20:9 Infinity-V</div>
+              <div class="spec-description">
+                Cinematic viewing experience with minimal bezels
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Brightness</div>
+              <div class="spec-value">800 nits peak</div>
+              <div class="spec-description">
+                Excellent outdoor visibility even in bright sunlight
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 78%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Performance Section -->
+      <section class="feature-section" id="performance">
+        <div class="section-header">
+          <h2 class="section-title">Powerful Performance</h2>
+          <p class="section-subtitle">
+            Smooth multitasking and responsive experience
+          </p>
+        </div>
+
+        <div class="comparison-tool">
+          <h3 style="margin-bottom: 2rem;">Performance Comparison</h3>
+          <div class="comparison-toggle">
+            <div
+              class="toggle-option active"
+              onclick="showComparison('benchmark', event)"
+            >
+              Benchmark
+            </div>
+            <div
+              class="toggle-option"
+              onclick="showComparison('realworld', event)"
+            >
+              Real World
+            </div>
+          </div>
+
+          <div class="comparison-content" id="benchmark">
+            <div class="comparison-item">
+              <h4>CPU Performance</h4>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 72%"></div>
+              </div>
+              <p>72/100 Score</p>
+            </div>
+            <div class="comparison-item">
+              <h4>GPU Performance</h4>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 68%"></div>
+              </div>
+              <p>68/100 Score</p>
+            </div>
+            <div class="comparison-item">
+              <h4>Memory Speed</h4>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+              </div>
+              <p>75/100 Score</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-card highlight">
+            <div class="highlight-badge">FLAGSHIP</div>
+            <div class="spec-content">
+              <div class="spec-label">Processor</div>
+              <div class="spec-value">MediaTek Helio G99</div>
+              <div class="spec-description">
+                Flagship-level performance with advanced AI capabilities
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">RAM</div>
+              <div class="spec-value">4GB + 4GB Virtual</div>
+              <div class="spec-description">
+                8GB total RAM for seamless multitasking
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Storage</div>
+              <div class="spec-value">128GB + MicroSD</div>
+              <div class="spec-description">
+                Expandable up to 1TB for all your files
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Gaming Performance</div>
+              <div class="spec-value">60 FPS Capable</div>
+              <div class="spec-description">
+                Smooth gaming experience with optimized graphics
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Camera Section -->
+      <section class="feature-section" id="camera">
+        <div class="section-header">
+          <h2 class="section-title">AI-Powered Camera</h2>
+          <p class="section-subtitle">
+            Capture life's moments in stunning detail
+          </p>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-card highlight">
+            <div class="highlight-badge">PRO CAMERA</div>
+            <div class="spec-content">
+              <div class="spec-label">Main Camera</div>
+              <div class="spec-value">50MP Triple Setup</div>
+              <div class="spec-description">
+                Ultra-high resolution with advanced AI photography features
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Ultra Wide</div>
+              <div class="spec-value">5MP 123° FOV</div>
+              <div class="spec-description">
+                Capture more in every shot with ultra-wide perspective
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Macro Camera</div>
+              <div class="spec-value">2MP Macro Lens</div>
+              <div class="spec-description">
+                Get up close and personal with stunning macro photography
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Front Camera</div>
+              <div class="spec-value">13MP Selfie</div>
+              <div class="spec-description">
+                Perfect selfies with AI beauty and portrait modes
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Video Recording</div>
+              <div class="spec-value">1080p @ 30fps</div>
+              <div class="spec-description">
+                Smooth video recording with electronic image stabilization
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Night Mode</div>
+              <div class="spec-value">AI Enhanced</div>
+              <div class="spec-description">
+                Capture stunning photos even in low-light conditions
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Battery Section -->
+      <section class="feature-section" id="battery">
+        <div class="section-header">
+          <h2 class="section-title">All-Day Battery</h2>
+          <p class="section-subtitle">
+            Power that keeps up with your lifestyle
+          </p>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-card highlight">
+            <div class="highlight-badge">LONG LASTING</div>
+            <div class="spec-content">
+              <div class="spec-label">Battery Capacity</div>
+              <div class="spec-value">5000mAh</div>
+              <div class="spec-description">
+                Massive battery for all-day usage without compromise
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 95%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Fast Charging</div>
+              <div class="spec-value">25W Super Fast</div>
+              <div class="spec-description">
+                Quick charge technology gets you powered up fast
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Video Playback</div>
+              <div class="spec-value">Up to 21 hours</div>
+              <div class="spec-description">
+                Binge-watch your favorite shows all day long
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Gaming Time</div>
+              <div class="spec-value">12+ hours</div>
+              <div class="spec-description">
+                Extended gaming sessions without battery anxiety
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Standby Time</div>
+              <div class="spec-value">28 days</div>
+              <div class="spec-description">
+                Incredible standby time for ultimate convenience
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Power Efficiency</div>
+              <div class="spec-value">AI Optimized</div>
+              <div class="spec-description">
+                Smart battery management learns your usage patterns
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="feature-section" id="features">
+        <div class="section-header">
+          <h2 class="section-title">Smart Features</h2>
+          <p class="section-subtitle">Advanced technology at your fingertips</p>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-card highlight">
+            <div class="highlight-badge">LATEST</div>
+            <div class="spec-content">
+              <div class="spec-label">Operating System</div>
+              <div class="spec-value">Android 14 + One UI 6.1</div>
+              <div class="spec-description">
+                Latest Android with Samsung's intuitive interface
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Security</div>
+              <div class="spec-value">Knox Security</div>
+              <div class="spec-description">
+                Military-grade security protecting your data
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Biometrics</div>
+              <div class="spec-value">Side Fingerprint</div>
+              <div class="spec-description">
+                Fast and secure fingerprint unlock
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Connectivity</div>
+              <div class="spec-value">4G LTE + WiFi 5</div>
+              <div class="spec-description">
+                Fast connectivity for streaming and browsing
+              </div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Audio</div>
+              <div class="spec-value">Dolby Atmos</div>
+              <div class="spec-description">Immersive 3D sound experience</div>
+            </div>
+          </div>
+
+          <div class="spec-card">
+            <div class="spec-content">
+              <div class="spec-label">Build Quality</div>
+              <div class="spec-value">Premium Design</div>
+              <div class="spec-description">
+                Sleek and durable construction with modern aesthetics
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews Section -->
+      <section class="feature-section reviews-section" id="reviews">
+        <div class="section-header">
+          <h2 class="section-title">Customer Reviews</h2>
+          <p class="section-subtitle">See what our customers are saying</p>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div
+            style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 1rem;"
+          >
+            <div class="stars">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <span style="font-size: 2rem; font-weight: 800;">4.8/5</span>
+          </div>
+          <p style="color: #94a3b8;">Based on 2,847+ verified reviews</p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-header">
+              <strong>Sarah M.</strong>
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">
+              "Amazing value for money! The camera quality exceeded my
+              expectations, and the battery easily lasts me the whole day. The
+              flexible payment plan made it so affordable."
+            </p>
+            <small style="color: #94a3b8;">Verified Purchase • 2 days ago</small
+            >
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <strong>James K.</strong>
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">
+              "Fast delivery and great build quality. The display is crisp and
+              vibrant. Gaming performance is surprisingly smooth. Highly
+              recommend!"
+            </p>
+            <small style="color: #94a3b8;">Verified Purchase • 5 days ago</small
+            >
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <strong>Mary W.</strong>
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">
+              "The camera is fantastic for social media content. Night mode
+              works really well. The payment plan made it accessible for my
+              budget."
+            </p>
+            <small style="color: #94a3b8;">Verified Purchase • 1 week ago</small
+            >
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <strong>David L.</strong>
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">
+              "Perfect phone for students! Great performance, long battery life,
+              and the flexible payment option was exactly what I needed."
+            </p>
+            <small style="color: #94a3b8;">Verified Purchase • 1 week ago</small
+            >
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <strong>Grace N.</strong>
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">
+              "Sleek design and excellent performance. The 50MP camera takes
+              incredible photos. Best purchase I've made this year!"
+            </p>
+            <small style="color: #94a3b8;"
+              >Verified Purchase • 2 weeks ago</small
+            >
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <strong>Alex T.</strong>
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">
+              "Outstanding value! The display is beautiful, performance is
+              snappy, and the flexible payment made it budget-friendly. Five
+              stars!"
+            </p>
+            <small style="color: #94a3b8;"
+              >Verified Purchase • 2 weeks ago</small
+            >
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <h2 class="cta-title">Limited Time Offer!</h2>
+      <p class="cta-subtitle">
+        Get your Samsung Galaxy A15 with our flexible payment plan
+      </p>
+
+      <div class="urgency-timer">
+        <div class="timer-item">
+          <div class="timer-number" id="hours">23</div>
+          <div class="timer-label">Hours</div>
+        </div>
+        <div class="timer-item">
+          <div class="timer-number" id="minutes">59</div>
+          <div class="timer-label">Minutes</div>
+        </div>
+        <div class="timer-item">
+          <div class="timer-number" id="seconds">45</div>
+          <div class="timer-label">Seconds</div>
+        </div>
+      </div>
+
+      <div
+        style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;"
+      >
+        <button
+          class="btn-primary"
+          onclick="orderNow()"
+          style="font-size: 1.25rem; padding: 1.5rem 3rem;"
+        >
+          🚀 Order Now - Just KES 2,999 Deposit
+        </button>
+        <button
+          class="btn-secondary"
+          onclick="callNow()"
+          style="font-size: 1.25rem; padding: 1.5rem 3rem;"
+        >
+          📞 Call Now: 0700 000 000
+        </button>
+      </div>
+
+      <div
+        style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; color: #94a3b8;"
+      >
+        <span>✓ Free Delivery</span>
+        <span>✓ 1-Year Warranty</span>
+        <span>✓ 30-Day Returns</span>
+        <span>✓ Flexible Payments</span>
+      </div>
+    </section>
+
+    <script>
+      // Smooth scrolling and navigation
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const section = item.getAttribute("data-section");
+          document.getElementById(section).scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+          // Update active nav item
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((nav) => nav.classList.remove("active"));
+          item.classList.add("active");
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+
+            // Animate progress bars
+            const progressBars =
+              entry.target.querySelectorAll(".progress-fill");
+            progressBars.forEach((bar) => {
+              const width = bar.style.width;
+              bar.style.width = "0%";
+              setTimeout(() => {
+                bar.style.width = width;
+              }, 200);
+            });
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".feature-section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Navigation highlighting on scroll
+      window.addEventListener("scroll", () => {
+        const sections = document.querySelectorAll(".feature-section");
+        const navItems = document.querySelectorAll(".nav-item");
+
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navItems.forEach((item) => {
+          item.classList.remove("active");
+          if (item.getAttribute("data-section") === current) {
+            item.classList.add("active");
+          }
+        });
+      });
+
+      // Phone image interaction
+      const phoneImage = document.getElementById("phoneImage");
+      phoneImage.addEventListener("click", () => {
+        phoneImage.style.transform = "scale(1.1) rotateY(15deg)";
+        setTimeout(() => {
+          phoneImage.style.transform = "scale(1.05) rotateY(-5deg)";
+        }, 300);
+      });
+
+      // Comparison tool
+      function showComparison(type) {
+        const toggles = document.querySelectorAll(".toggle-option");
+        toggles.forEach((t) => t.classList.remove("active"));
+        event.target.classList.add("active");
+
+        // You can add different comparison data here
+        if (type === "realworld") {
+          document.querySelector(".comparison-content").innerHTML = `
+                    <div class="comparison-item">
+                        <h4>App Loading</h4>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                        <p>2.3 seconds average</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Multitasking</h4>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 78%"></div></div>
+                        <p>6 apps smoothly</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Gaming</h4>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 82%"></div></div>
+                        <p>High settings 60fps</p>
+                    </div>
+                `;
+        }
+      }
+
+      // Countdown timer
+      function updateTimer() {
+        const now = new Date().getTime();
+        const tomorrow = new Date();
+        tomorrow.setHours(24, 0, 0, 0);
+        const distance = tomorrow.getTime() - now;
+
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("hours").textContent = hours
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("minutes").textContent = minutes
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("seconds").textContent = seconds
+          .toString()
+          .padStart(2, "0");
+      }
+
+      setInterval(updateTimer, 1000);
+      updateTimer();
+
+      // CTA Functions
+      function orderNow() {
+        // Add your order processing logic here
+        alert("🎉 Awesome choice! Redirecting to secure checkout...");
+        // window.location.href = 'your-checkout-url';
+      }
+
+      function callNow() {
+        window.location.href = "tel:0700000000";
+      }
+
+      function scrollToSpecs() {
+        const displaySection = document.getElementById("display");
+        if (displaySection) {
+          displaySection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+
+      // Add some particle effects for extra wow factor
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.style.cssText = `
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1000;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${window.innerHeight}px;
+                opacity: 0.7;
+                animation: float-up 4s linear forwards;
+            `;
+
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+          }
+        }, 4000);
+      }
+
+      // Add CSS for particle animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes float-up {
+                to {
+                    transform: translateY(-${window.innerHeight + 100}px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+      const head = document.head || document.getElementsByTagName("head")[0];
+      if (head) {
+        head.appendChild(style);
+      }
+
+      // Create particles occasionally
+      setInterval(createParticle, 2000);
+
+      // Add loading animation when page loads
+      window.addEventListener("load", () => {
+        if (document.body.style) {
+          document.body.style.opacity = "0";
+          setTimeout(() => {
+            document.body.style.transition = "opacity 1s ease";
+            document.body.style.opacity = "1";
+          }, 100);
+        }
+      });
+
+      // Make functions globally available
+      (window as any).showComparison = showComparison;
+      (window as any).orderNow = orderNow;
+      (window as any).callNow = callNow;
+      (window as any).scrollToSpecs = scrollToSpecs;
+    </script>
+  </body>
+</html>

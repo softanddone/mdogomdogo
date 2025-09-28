@@ -12,6 +12,10 @@ import SamsungProducts from "../components/SamsungProducts.astro";
 import Latest from "../components/Latest.astro";
 import Footer from "../components/Footer.astro";
 import NavTest from "../components/NavTest.astro";
+import Features from "../components/Features.astro";
+import Comparison from "../components/Comparison.astro";
+
+const product1 = products[0]; // or find by ID
 
 const seo = {
   title: "Lipa Mdogo Mdogo Phones in Kenya | Affordable Smartphones",
@@ -25,11 +29,13 @@ const seo = {
 ---
 
 <Layout {...seo}>
+  <!-- <Comparison /> -->
   <Nav />
   <Hero />
   <Welcome />
   <!-- <SamsungProducts /> -->
   <!-- <Promotion /> -->
+  <!-- <Features product={product1} /> -->
   <Footer />
   <!-- <NavTest /> -->
 </Layout>
