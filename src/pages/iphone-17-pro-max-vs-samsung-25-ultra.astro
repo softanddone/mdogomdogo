@@ -1,640 +1,865 @@
----
-// PhoneComparison.astro
-const comparisonData = [
-  {
-    category: "Display & Screen",
-    icon: "📱",
-    features: [
-      {
-        name: "Screen Size",
-        iphone: '6.9" Super Retina XDR OLED',
-        samsung: '6.9" Dynamic AMOLED 2X',
-        winner: "tie",
-      },
-      {
-        name: "Peak Brightness",
-        iphone: "3,000 nits (outdoor)",
-        samsung: "2,600 nits",
-        winner: "iphone",
-      },
-      {
-        name: "Refresh Rate",
-        iphone: "ProMotion 120Hz adaptive",
-        samsung: "LTPO 120Hz adaptive",
-        winner: "tie",
-      },
-      {
-        name: "Always-On Display",
-        iphone: "✓ Available",
-        samsung: "✓ Available",
-        winner: "tie",
-      },
-    ],
-  },
-  {
-    category: "Performance & Power",
-    icon: "⚡",
-    features: [
-      {
-        name: "Processor",
-        iphone: "Apple A19 Pro (3nm)",
-        samsung: "Snapdragon 8 Elite",
-        winner: "iphone",
-      },
-      {
-        name: "RAM",
-        iphone: "12GB unified memory",
-        samsung: "12GB LPDDR5X",
-        winner: "tie",
-      },
-      {
-        name: "Storage Options",
-        iphone: "256GB/512GB/1TB/2TB",
-        samsung: "256GB/512GB/1TB",
-        winner: "iphone",
-      },
-      {
-        name: "Expandable Storage",
-        iphone: "✗ Not supported",
-        samsung: "✗ Not supported",
-        winner: "tie",
-      },
-    ],
-  },
-  {
-    category: "Camera System",
-    icon: "📸",
-    features: [
-      {
-        name: "Main Camera",
-        iphone: "48MP Fusion (f/1.78)",
-        samsung: "200MP Wide (f/1.7)",
-        winner: "samsung",
-      },
-      {
-        name: "Ultra Wide",
-        iphone: "48MP (f/2.2, 120° FOV)",
-        samsung: "50MP (f/1.9, 120° FOV)",
-        winner: "iphone",
-      },
-      {
-        name: "Telephoto Zoom",
-        iphone: "48MP (5x-8x optical)",
-        samsung: "50MP (5x optical)",
-        winner: "iphone",
-      },
-      {
-        name: "Front Camera",
-        iphone: "12MP TrueDepth",
-        samsung: "12MP Selfie",
-        winner: "tie",
-      },
-      {
-        name: "Video Recording",
-        iphone: "4K ProRes, Cinematic Mode",
-        samsung: "8K/4K AI stabilization",
-        winner: "iphone",
-      },
-    ],
-  },
-  {
-    category: "Battery & Charging",
-    icon: "🔋",
-    features: [
-      {
-        name: "Battery Capacity",
-        iphone: "~5,088 mAh",
-        samsung: "5,000 mAh",
-        winner: "iphone",
-      },
-      {
-        name: "Wired Charging",
-        iphone: "USB-C up to 30W",
-        samsung: "45W Super Fast Charging",
-        winner: "samsung",
-      },
-      {
-        name: "Wireless Charging",
-        iphone: "MagSafe 15W + Qi2",
-        samsung: "15W Wireless + Reverse",
-        winner: "tie",
-      },
-      {
-        name: "Battery Life",
-        iphone: "Best iPhone battery ever",
-        samsung: "All-day heavy usage",
-        winner: "iphone",
-      },
-    ],
-  },
-  {
-    category: "Software & AI",
-    icon: "🤖",
-    features: [
-      {
-        name: "Operating System",
-        iphone: "iOS 19",
-        samsung: "Android 15 + One UI 7",
-        winner: "tie",
-      },
-      {
-        name: "AI Features",
-        iphone: "Apple Intelligence",
-        samsung: "Galaxy AI + Gemini Live",
-        winner: "samsung",
-      },
-      {
-        name: "Software Updates",
-        iphone: "5-7 years guaranteed",
-        samsung: "7 major Android upgrades",
-        winner: "samsung",
-      },
-      {
-        name: "Voice Assistant",
-        iphone: "Siri with Apple Intelligence",
-        samsung: "Google Assistant + Bixby",
-        winner: "samsung",
-      },
-    ],
-  },
-  {
-    category: "Design & Build",
-    icon: "🎨",
-    features: [
-      {
-        name: "Materials",
-        iphone: "Aluminum + Ceramic Shield 2",
-        samsung: "Titanium + Gorilla Armor 2",
-        winner: "samsung",
-      },
-      {
-        name: "Weight",
-        iphone: "~220g",
-        samsung: "218g",
-        winner: "samsung",
-      },
-      {
-        name: "Water Resistance",
-        iphone: "IP68 (6m/30min)",
-        samsung: "IP68 (1.5m/30min)",
-        winner: "iphone",
-      },
-      {
-        name: "S Pen / Stylus",
-        iphone: "✗ Not supported",
-        samsung: "✓ Built-in S Pen",
-        winner: "samsung",
-      },
-      {
-        name: "Color Options",
-        iphone: "Cosmic Orange, Deep Blue, Silver",
-        samsung: "Multiple Titanium colors",
-        winner: "tie",
-      },
-    ],
-  },
-];
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      iPhone 17 Pro Max vs Samsung Galaxy S25 Ultra - Ultimate 2025 Comparison
+    </title>
+    <meta
+      name="description"
+      content="Comprehensive comparison between iPhone 17 Pro Max and Samsung Galaxy S25 Ultra. Compare specs, features, and prices to find your perfect flagship phone."
+    />
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-const iphonePrice = "$1,199";
-const samsungPrice = "$1,299";
-const iphonePurchaseLink = "https://amzn.to/470etVe";
-const samsungPurchaseLink = "https://amzn.to/4gTPkPG";
----
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: #1a202c;
+        background: #f8fafc;
+      }
 
-<style>
-  .phone-comparison {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif;
-  }
+      .phone-comparison {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
 
-  .header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+      }
 
-  .header h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #1a202c;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+      .header h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        color: #1a202c;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-  .header p {
-    font-size: 1.25rem;
-    color: #64748b;
-    margin-bottom: 2rem;
-  }
+      .header p {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        color: #64748b;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
-  .phones-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
+      .key-highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
 
-  @media (min-width: 1024px) {
-    .phones-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+      .highlight-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
 
-  .phone-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
+      .highlight-emoji {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
 
-  .phone-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(
-      90deg,
-      var(--brand-color),
-      var(--brand-color-light)
-    );
-  }
+      .highlight-text {
+        font-size: 0.9rem;
+        color: #64748b;
+        font-weight: 500;
+      }
 
-  .phone-card.iphone {
-    --brand-color: #007aff;
-    --brand-color-light: #5ac8fa;
-  }
+      .phones-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
 
-  .phone-card.samsung {
-    --brand-color: #1428a0;
-    --brand-color-light: #7c3aed;
-  }
+      @media (min-width: 1024px) {
+        .phones-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
 
-  .phone-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  }
+      .phone-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
 
-  .phone-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
+      .phone-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(
+          90deg,
+          var(--brand-color),
+          var(--brand-color-light)
+        );
+        border-radius: 24px 24px 0 0;
+      }
 
-  .phone-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
+      .phone-card::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          var(--brand-color) 0%,
+          transparent 70%
+        );
+        opacity: 0.03;
+        z-index: 1;
+      }
 
-  .phone-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #1a202c;
-    margin-bottom: 0.5rem;
-  }
+      .phone-card.iphone {
+        --brand-color: #007aff;
+        --brand-color-light: #5ac8fa;
+      }
 
-  .phone-subtitle {
-    color: #64748b;
-    margin-bottom: 1rem;
-  }
+      .phone-card.samsung {
+        --brand-color: #1428a0;
+        --brand-color-light: #7c3aed;
+      }
 
-  .phone-price {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--brand-color);
-    margin-bottom: 1.5rem;
-  }
+      .phone-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+      }
 
-  .buy-button {
-    width: 100%;
-    background: linear-gradient(
-      135deg,
-      var(--brand-color) 0%,
-      var(--brand-color-light) 100%
-    );
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
+      .phone-content {
+        position: relative;
+        z-index: 2;
+      }
 
-  .buy-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  }
+      .phone-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
 
-  .comparison-section {
-    background: white;
-    border-radius: 16px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  }
+      .phone-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        display: block;
+        animation: float 3s ease-in-out infinite;
+      }
 
-  .section-header {
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-    color: white;
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
 
-  .section-icon {
-    font-size: 1.5rem;
-  }
+      .phone-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1a202c;
+        margin-bottom: 0.5rem;
+      }
 
-  .section-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-  }
+      .phone-subtitle {
+        color: #64748b;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
 
-  .comparison-table {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
+      .phone-price {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--brand-color);
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-  @media (min-width: 768px) {
-    .comparison-table {
-      grid-template-columns: 2fr 2fr 2fr;
-    }
-  }
+      .price-note {
+        font-size: 0.875rem;
+        color: #64748b;
+        margin-bottom: 1.5rem;
+      }
 
-  .table-header {
-    background: #f8fafc;
-    padding: 1rem;
-    font-weight: 600;
-    text-align: center;
-    border-bottom: 1px solid #e2e8f0;
-  }
+      .key-specs {
+        background: rgba(248, 250, 252, 0.8);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
 
-  .feature-row {
-    display: contents;
-  }
+      .key-specs h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--brand-color);
+      }
 
-  .feature-name {
-    padding: 1rem;
-    font-weight: 500;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
-  }
+      .key-specs ul {
+        list-style: none;
+        font-size: 0.875rem;
+        color: #64748b;
+      }
 
-  @media (max-width: 767px) {
-    .feature-name {
-      font-weight: 600;
-      background: #e2e8f0;
-      text-align: center;
-    }
-  }
+      .key-specs li {
+        margin-bottom: 0.25rem;
+        position: relative;
+        padding-left: 1rem;
+      }
 
-  .feature-value {
-    padding: 1rem;
-    border-bottom: 1px solid #e2e8f0;
-    text-align: center;
-    position: relative;
-    transition: background-color 0.3s ease;
-  }
+      .key-specs li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--brand-color);
+        font-weight: bold;
+      }
 
-  .feature-value.winner {
-    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-    font-weight: 600;
-  }
+      .buy-button {
+        width: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--brand-color) 0%,
+          var(--brand-color-light) 100%
+        );
+        color: white;
+        border: none;
+        border-radius: 16px;
+        padding: 1.25rem 2rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
 
-  .feature-value.winner::after {
-    content: "🏆";
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.8rem;
-  }
+      .buy-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
 
-  .feature-value.iphone {
-    border-right: 3px solid #007aff;
-  }
+      .buy-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      }
 
-  .feature-value.samsung {
-    border-right: 3px solid #1428a0;
-  }
+      .buy-button:hover::before {
+        left: 100%;
+      }
 
-  .winner-banner {
-    text-align: center;
-    padding: 3rem 2rem;
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border-radius: 20px;
-    margin: 3rem 0;
-    border: 2px solid #f59e0b;
-  }
+      .comparison-section {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: transform 0.3s ease;
+      }
 
-  .winner-title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #92400e;
-    margin-bottom: 1rem;
-  }
+      .comparison-section:hover {
+        transform: translateY(-2px);
+      }
 
-  .winner-text {
-    font-size: 1.25rem;
-    color: #b45309;
-    margin-bottom: 2rem;
-  }
+      .section-header {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        color: white;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
 
-  .final-cta {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
+      .section-header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -50px;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.1)
+        );
+        transform: skewX(-15deg);
+      }
 
-  @media (min-width: 768px) {
-    .final-cta {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+      .section-icon {
+        font-size: 2rem;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      }
 
-  .cta-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-  }
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+      }
 
-  .cta-card.recommended {
-    border-color: #22c55e;
-    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
-  }
+      .comparison-table {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
 
-  .recommended-badge {
-    background: #22c55e;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    display: inline-block;
-  }
+      @media (min-width: 768px) {
+        .comparison-table {
+          grid-template-columns: 2.5fr 2fr 2fr;
+        }
+      }
 
-  .score-display {
-    text-align: center;
-    margin: 2rem 0;
-    padding: 2rem;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  }
+      .table-header {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 1.25rem;
+        font-weight: 700;
+        text-align: center;
+        border-bottom: 2px solid #e2e8f0;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+      }
 
-  .score-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #1a202c;
-  }
+      .feature-row {
+        display: contents;
+        transition: all 0.3s ease;
+      }
 
-  .scores {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 2rem;
-  }
+      .feature-name {
+        padding: 1.25rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border-bottom: 1px solid #e2e8f0;
+        border-right: 2px solid #e2e8f0;
+        position: relative;
+      }
 
-  .score-item {
-    text-align: center;
-  }
+      .feature-name::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, #667eea, #764ba2);
+        opacity: 0.3;
+      }
 
-  .score-value {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-  }
+      @media (max-width: 767px) {
+        .feature-name {
+          font-weight: 700;
+          background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+          text-align: center;
+          color: #1a202c;
+        }
+      }
 
-  .score-value.iphone {
-    color: #007aff;
-  }
+      .feature-value {
+        padding: 1.25rem;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+      }
 
-  .score-value.samsung {
-    color: #1428a0;
-  }
+      .feature-value:hover {
+        background: rgba(248, 250, 252, 0.8);
+        transform: scale(1.02);
+      }
 
-  .score-label {
-    font-weight: 600;
-    color: #64748b;
-  }
+      .feature-value.winner {
+        background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        font-weight: 700;
+        color: #166534;
+        box-shadow: inset 0 0 0 2px #22c55e;
+      }
 
-  @media (max-width: 767px) {
-    .phone-comparison {
-      padding: 1rem;
-    }
+      .feature-value.winner::after {
+        content: "🏆";
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        animation: bounce 2s infinite;
+      }
 
-    .header h1 {
-      font-size: 2rem;
-    }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(-50%);
+        }
+        40% {
+          transform: translateY(-60%);
+        }
+        60% {
+          transform: translateY(-55%);
+        }
+      }
 
-    .comparison-table {
-      display: block;
-    }
+      .feature-value.iphone {
+        border-right: 4px solid #007aff;
+      }
 
-    .table-header {
-      display: none;
-    }
+      .feature-value.samsung {
+        border-right: 4px solid #1428a0;
+      }
 
-    .feature-row {
-      display: block;
-      margin-bottom: 1rem;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+      .score-display {
+        text-align: center;
+        margin: 3rem 0;
+        padding: 3rem 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
 
-    .feature-value {
-      border-right: none;
-    }
-  }
-</style>
+      .score-display::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(102, 126, 234, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
 
-<div class="phone-comparison">
-  <!-- Header -->
-  <div class="header">
-    <h1>Ultimate Flagship Battle 2025</h1>
-    <p>
-      iPhone 17 Pro Max vs Samsung Galaxy S25 Ultra - Find Your Perfect Match
-    </p>
-  </div>
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-  <!-- Phone Cards with Purchase CTAs -->
-  <div class="phones-grid">
-    <div class="phone-card iphone">
-      <div class="phone-header">
-        <div class="phone-icon">📱</div>
-        <h2 class="phone-title">iPhone 17 Pro Max</h2>
-        <p class="phone-subtitle">Apple's Most Advanced iPhone Ever</p>
-        <div class="phone-price">Starting at $1,199</div>
-        <a href="https://amzn.to/470etVe" class="buy-button" id="iphone-cta">
-          🛒 Buy iPhone 17 Pro Max
-        </a>
+      .score-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        color: #1a202c;
+        position: relative;
+        z-index: 2;
+      }
+
+      .scores {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .score-item {
+        text-align: center;
+        padding: 1.5rem;
+        background: rgba(248, 250, 252, 0.8);
+        border-radius: 16px;
+        min-width: 150px;
+        transition: transform 0.3s ease;
+      }
+
+      .score-item:hover {
+        transform: scale(1.05);
+      }
+
+      .score-value {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .score-value.iphone {
+        color: #007aff;
+      }
+
+      .score-value.samsung {
+        color: #1428a0;
+      }
+
+      .score-label {
+        font-weight: 600;
+        color: #64748b;
+        font-size: 1rem;
+      }
+
+      .winner-banner {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border-radius: 24px;
+        margin: 3rem 0;
+        border: 3px solid #f59e0b;
+        box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+        position: relative;
+        overflow: hidden;
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+        }
+        to {
+          box-shadow: 0 20px 40px rgba(245, 158, 11, 0.5);
+        }
+      }
+
+      .winner-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #92400e;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .winner-text {
+        font-size: 1.375rem;
+        color: #b45309;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .final-cta {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .final-cta {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .cta-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(34, 197, 94, 0.1),
+          transparent
+        );
+        transition: left 0.8s;
+      }
+
+      .cta-card.recommended {
+        border-color: #22c55e;
+        box-shadow:
+          0 0 0 4px rgba(34, 197, 94, 0.1),
+          0 16px 32px rgba(0, 0, 0, 0.1);
+        transform: scale(1.05);
+      }
+
+      .cta-card.recommended:hover::before {
+        left: 100%;
+      }
+
+      .recommended-badge {
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-size: 0.875rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3);
+      }
+
+      .vs-indicator {
+        position: fixed;
+        top: 50%;
+        right: 2rem;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 1rem;
+        border-radius: 50%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #667eea;
+        z-index: 1000;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: translateY(-50%) scale(1);
+        }
+        50% {
+          transform: translateY(-50%) scale(1.1);
+        }
+        100% {
+          transform: translateY(-50%) scale(1);
+        }
+      }
+
+      @media (max-width: 767px) {
+        .phone-comparison {
+          padding: 0.5rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .comparison-table {
+          display: block;
+        }
+
+        .table-header {
+          display: none;
+        }
+
+        .feature-row {
+          display: block;
+          margin-bottom: 1rem;
+          background: white;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-value {
+          border-right: none;
+        }
+
+        .vs-indicator {
+          display: none;
+        }
+      }
+
+      .loading-skeleton {
+        background: linear-gradient(
+          90deg,
+          #f0f0f0 25%,
+          #e0e0e0 50%,
+          #f0f0f0 75%
+        );
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+    </style>
+
+    <div class="phone-comparison">
+      <!-- VS Indicator -->
+      <div class="vs-indicator">VS</div>
+
+      <!-- Header -->
+      <div class="header">
+        <h1>Ultimate Flagship Battle 2025</h1>
+        <p>
+          iPhone 17 Pro Max vs Samsung Galaxy S25 Ultra - Comprehensive Analysis
+          to Find Your Perfect Match
+        </p>
+
+        <div class="key-highlights">
+          <div class="highlight-card">
+            <span class="highlight-emoji">⚡</span>
+            <div class="highlight-text">Latest Flagship Processors</div>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-emoji">📱</span>
+            <div class="highlight-text">6.9" Premium Displays</div>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-emoji">📸</span>
+            <div class="highlight-text">Pro Camera Systems</div>
+          </div>
+          <div class="highlight-card">
+            <span class="highlight-emoji">🔋</span>
+            <div class="highlight-text">All-Day Battery Life</div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="phone-card samsung">
-      <div class="phone-header">
-        <div class="phone-icon">📱</div>
-        <h2 class="phone-title">Galaxy S25 Ultra</h2>
-        <p class="phone-subtitle">Samsung's Productivity Powerhouse</p>
-        <div class="phone-price">Starting at $1,299</div>
-        <a href="https://amzn.to/4gTPkPG" class="buy-button" id="samsung-cta">
-          🛒 Buy Galaxy S25 Ultra
-        </a>
-      </div>
-    </div>
-  </div>
+      <!-- Phone Cards with Purchase CTAs -->
+      <div class="phones-grid">
+        <div class="phone-card iphone">
+          <div class="phone-content">
+            <div class="phone-header">
+              <div class="phone-icon">📱</div>
+              <h2 class="phone-title">iPhone 17 Pro Max</h2>
+              <p class="phone-subtitle">Apple's Most Advanced iPhone Ever</p>
+              <div class="phone-price">$1,199</div>
+              <p class="price-note">Starting price • 256GB</p>
 
-  <!-- Score Display -->
-  <div class="score-display">
-    <h3 class="score-title">Overall Comparison Score</h3>
-    <div class="scores">
-      <div class="score-item">
-        <div class="score-value iphone" id="iphone-score">0</div>
-        <div class="score-label">iPhone 17 Pro Max</div>
-      </div>
-      <div class="score-item">
-        <div class="score-value samsung" id="samsung-score">0</div>
-        <div class="score-label">Galaxy S25 Ultra</div>
-      </div>
-    </div>
-  </div>
+              <div class="key-specs">
+                <h4>Key Highlights</h4>
+                <ul>
+                  <li>A19 Pro chip (3nm)</li>
+                  <li>3,000 nits peak brightness</li>
+                  <li>5x-8x optical zoom</li>
+                  <li>Premium Ceramic Shield 2</li>
+                </ul>
+              </div>
 
-  <!-- Detailed Comparison -->
-  {
-    comparisonData.map((section) => (
+              <a
+                href="https://amzn.to/470etVe"
+                class="buy-button"
+                id="iphone-cta"
+              >
+                🛒 Buy iPhone 17 Pro Max
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone-card samsung">
+          <div class="phone-content">
+            <div class="phone-header">
+              <div class="phone-icon">📱</div>
+              <h2 class="phone-title">Galaxy S25 Ultra</h2>
+              <p class="phone-subtitle">Samsung's Productivity Powerhouse</p>
+              <div class="phone-price">$1,299</div>
+              <p class="price-note">Starting price • 256GB</p>
+
+              <div class="key-specs">
+                <h4>Key Highlights</h4>
+                <ul>
+                  <li>Built-in S Pen stylus</li>
+                  <li>200MP main camera</li>
+                  <li>Titanium construction</li>
+                  <li>Galaxy AI features</li>
+                </ul>
+              </div>
+
+              <a
+                href="https://amzn.to/4gTPkPG"
+                class="buy-button"
+                id="samsung-cta"
+              >
+                🛒 Buy Galaxy S25 Ultra
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score Display -->
+      <div class="score-display">
+        <h3 class="score-title">⚖️ Overall Comparison Score</h3>
+        <div class="scores">
+          <div class="score-item">
+            <div class="score-value iphone" id="iphone-score">0</div>
+            <div class="score-label">iPhone 17 Pro Max</div>
+          </div>
+          <div class="score-item">
+            <div class="score-value samsung" id="samsung-score">0</div>
+            <div class="score-label">Galaxy S25 Ultra</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Comparison Sections -->
       <div class="comparison-section">
         <div class="section-header">
-          <span class="section-icon">{section.icon}</span>
-          <h3 class="section-title">{section.category}</h3>
+          <span class="section-icon">📱</span>
+          <h3 class="section-title">Display & Screen</h3>
         </div>
 
         <div class="comparison-table">
@@ -652,163 +877,600 @@ const samsungPurchaseLink = "https://amzn.to/4gTPkPG";
             Galaxy S25 Ultra
           </div>
 
-          {section.features.map((feature) => (
-            <div class="feature-row">
-              <div class="feature-name">{feature.name}</div>
-              <div
-                class={`feature-value iphone ${feature.winner === "iphone" ? "winner" : ""}`}
-              >
-                {feature.iphone}
-              </div>
-              <div
-                class={`feature-value samsung ${feature.winner === "samsung" ? "winner" : ""}`}
-              >
-                {feature.samsung}
-              </div>
-            </div>
-          ))}
+          <div class="feature-row">
+            <div class="feature-name">Screen Size</div>
+            <div class="feature-value iphone">6.9" Super Retina XDR OLED</div>
+            <div class="feature-value samsung">6.9" Dynamic AMOLED 2X</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Peak Brightness</div>
+            <div class="feature-value iphone winner">3,000 nits (outdoor)</div>
+            <div class="feature-value samsung">2,600 nits</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Refresh Rate</div>
+            <div class="feature-value iphone">ProMotion 120Hz adaptive</div>
+            <div class="feature-value samsung">LTPO 120Hz adaptive</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Always-On Display</div>
+            <div class="feature-value iphone">✓ Available</div>
+            <div class="feature-value samsung">✓ Available</div>
+          </div>
         </div>
       </div>
-    ))
-  }
 
-  <!-- Winner Banner -->
-  <div class="winner-banner" id="winner-banner" style="display: none;">
-    <h2 class="winner-title" id="winner-title">🏆 And The Winner Is...</h2>
-    <p class="winner-text" id="winner-text">
-      Based on our comprehensive analysis
-    </p>
+      <div class="comparison-section">
+        <div class="section-header">
+          <span class="section-icon">⚡</span>
+          <h3 class="section-title">Performance & Power</h3>
+        </div>
 
-    <div class="final-cta">
-      <div class="cta-card" id="winner-cta">
-        <div class="recommended-badge">🏆 RECOMMENDED CHOICE</div>
-        <h3 id="winner-phone">Winner Phone</h3>
-        <p>The best choice based on features and value</p>
-        <a href="#" class="buy-button" id="winner-buy-button">
-          🛒 Get The Winner - Best Value
-        </a>
+        <div class="comparison-table">
+          <div class="table-header">Feature</div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%); color: white;"
+          >
+            iPhone 17 Pro Max
+          </div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #1428A0 0%, #7C3AED 100%); color: white;"
+          >
+            Galaxy S25 Ultra
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Processor</div>
+            <div class="feature-value iphone winner">Apple A19 Pro (3nm)</div>
+            <div class="feature-value samsung">Snapdragon 8 Elite</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">RAM</div>
+            <div class="feature-value iphone">12GB unified memory</div>
+            <div class="feature-value samsung">12GB LPDDR5X</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Storage Options</div>
+            <div class="feature-value iphone winner">256GB/512GB/1TB/2TB</div>
+            <div class="feature-value samsung">256GB/512GB/1TB</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Expandable Storage</div>
+            <div class="feature-value iphone">✗ Not supported</div>
+            <div class="feature-value samsung">✗ Not supported</div>
+          </div>
+        </div>
       </div>
 
-      <div class="cta-card">
-        <h3 id="runner-up-phone">Runner Up</h3>
-        <p>Still an excellent choice with unique strengths</p>
-        <a href="#" class="buy-button" id="runner-up-buy-button">
-          🛒 Or Choose This One
-        </a>
+      <div class="comparison-section">
+        <div class="section-header">
+          <span class="section-icon">📸</span>
+          <h3 class="section-title">Camera System</h3>
+        </div>
+
+        <div class="comparison-table">
+          <div class="table-header">Feature</div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%); color: white;"
+          >
+            iPhone 17 Pro Max
+          </div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #1428A0 0%, #7C3AED 100%); color: white;"
+          >
+            Galaxy S25 Ultra
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Main Camera</div>
+            <div class="feature-value iphone">48MP Fusion (f/1.78)</div>
+            <div class="feature-value samsung winner">200MP Wide (f/1.7)</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Ultra Wide</div>
+            <div class="feature-value iphone winner">
+              48MP (f/2.2, 120° FOV)
+            </div>
+            <div class="feature-value samsung">50MP (f/1.9, 120° FOV)</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Telephoto Zoom</div>
+            <div class="feature-value iphone winner">48MP (5x-8x optical)</div>
+            <div class="feature-value samsung">50MP (5x optical)</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Front Camera</div>
+            <div class="feature-value iphone">12MP TrueDepth</div>
+            <div class="feature-value samsung">12MP Selfie</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Video Recording</div>
+            <div class="feature-value iphone winner">
+              4K ProRes, Cinematic Mode
+            </div>
+            <div class="feature-value samsung">8K/4K AI stabilization</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-section">
+        <div class="section-header">
+          <span class="section-icon">🔋</span>
+          <h3 class="section-title">Battery & Charging</h3>
+        </div>
+
+        <div class="comparison-table">
+          <div class="table-header">Feature</div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%); color: white;"
+          >
+            iPhone 17 Pro Max
+          </div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #1428A0 0%, #7C3AED 100%); color: white;"
+          >
+            Galaxy S25 Ultra
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Battery Capacity</div>
+            <div class="feature-value iphone winner">~5,088 mAh</div>
+            <div class="feature-value samsung">5,000 mAh</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Wired Charging</div>
+            <div class="feature-value iphone">USB-C up to 30W</div>
+            <div class="feature-value samsung winner">
+              45W Super Fast Charging
+            </div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Wireless Charging</div>
+            <div class="feature-value iphone">MagSafe 15W + Qi2</div>
+            <div class="feature-value samsung">15W Wireless + Reverse</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Battery Life</div>
+            <div class="feature-value iphone winner">
+              Best iPhone battery ever
+            </div>
+            <div class="feature-value samsung">All-day heavy usage</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-section">
+        <div class="section-header">
+          <span class="section-icon">🤖</span>
+          <h3 class="section-title">Software & AI</h3>
+        </div>
+
+        <div class="comparison-table">
+          <div class="table-header">Feature</div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%); color: white;"
+          >
+            iPhone 17 Pro Max
+          </div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #1428A0 0%, #7C3AED 100%); color: white;"
+          >
+            Galaxy S25 Ultra
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Operating System</div>
+            <div class="feature-value iphone">iOS 19</div>
+            <div class="feature-value samsung">Android 15 + One UI 7</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">AI Features</div>
+            <div class="feature-value iphone">Apple Intelligence</div>
+            <div class="feature-value samsung winner">
+              Galaxy AI + Gemini Live
+            </div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Software Updates</div>
+            <div class="feature-value iphone">5-7 years guaranteed</div>
+            <div class="feature-value samsung winner">
+              7 major Android upgrades
+            </div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Voice Assistant</div>
+            <div class="feature-value iphone">Siri with Apple Intelligence</div>
+            <div class="feature-value samsung winner">
+              Google Assistant + Bixby
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-section">
+        <div class="section-header">
+          <span class="section-icon">🎨</span>
+          <h3 class="section-title">Design & Build</h3>
+        </div>
+
+        <div class="comparison-table">
+          <div class="table-header">Feature</div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%); color: white;"
+          >
+            iPhone 17 Pro Max
+          </div>
+          <div
+            class="table-header"
+            style="background: linear-gradient(135deg, #1428A0 0%, #7C3AED 100%); color: white;"
+          >
+            Galaxy S25 Ultra
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Materials</div>
+            <div class="feature-value iphone">Aluminum + Ceramic Shield 2</div>
+            <div class="feature-value samsung winner">
+              Titanium + Gorilla Armor 2
+            </div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Weight</div>
+            <div class="feature-value iphone">~220g</div>
+            <div class="feature-value samsung winner">218g</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Water Resistance</div>
+            <div class="feature-value iphone winner">IP68 (6m/30min)</div>
+            <div class="feature-value samsung">IP68 (1.5m/30min)</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">S Pen / Stylus</div>
+            <div class="feature-value iphone">✗ Not supported</div>
+            <div class="feature-value samsung winner">✓ Built-in S Pen</div>
+          </div>
+
+          <div class="feature-row">
+            <div class="feature-name">Color Options</div>
+            <div class="feature-value iphone">
+              Cosmic Orange, Deep Blue, Silver
+            </div>
+            <div class="feature-value samsung">Multiple Titanium colors</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Winner Banner -->
+      <div class="winner-banner" id="winner-banner" style="display: none;">
+        <h2 class="winner-title" id="winner-title">🏆 And The Winner Is...</h2>
+        <p class="winner-text" id="winner-text">
+          Based on our comprehensive analysis across all categories
+        </p>
+
+        <div class="final-cta">
+          <div class="cta-card" id="winner-cta">
+            <div class="recommended-badge">🏆 RECOMMENDED CHOICE</div>
+            <h3 id="winner-phone">Winner Phone</h3>
+            <p>The best choice based on features and value</p>
+            <a href="#" class="buy-button" id="winner-buy-button">
+              🛒 Get The Winner - Best Value
+            </a>
+          </div>
+
+          <div class="cta-card">
+            <h3 id="runner-up-phone">Runner Up</h3>
+            <p>Still an excellent choice with unique strengths</p>
+            <a href="#" class="buy-button" id="runner-up-buy-button">
+              🛒 Or Choose This One
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<script>
-  // Calculate scores and determine winner
-  function calculateScores() {
-    const features = document.querySelectorAll(".feature-value.winner");
-    let iphoneScore = 0;
-    let samsungScore = 0;
+    <script>
+      // Enhanced score calculation and winner determination
+      function calculateScores() {
+        const features = document.querySelectorAll(".feature-value.winner");
+        let iphoneScore = 0;
+        let samsungScore = 0;
 
-    features.forEach((feature) => {
-      if (feature.classList.contains("iphone")) {
-        iphoneScore++;
-      } else if (feature.classList.contains("samsung")) {
-        samsungScore++;
+        features.forEach((feature) => {
+          if (feature.classList.contains("iphone")) {
+            iphoneScore++;
+          } else if (feature.classList.contains("samsung")) {
+            samsungScore++;
+          }
+        });
+
+        // Add visual feedback during calculation
+        const scoreDisplay = document.querySelector(".score-display");
+        if (scoreDisplay) {
+          const scoreElement = scoreDisplay;
+          scoreElement.style.transform = "scale(1.05)";
+          setTimeout(() => {
+            scoreElement.style.transform = "scale(1)";
+          }, 500);
+        }
+
+        // Animate score counting with improved easing
+        animateScore("iphone-score", iphoneScore);
+        animateScore("samsung-score", samsungScore);
+
+        // Determine and display winner with delay for dramatic effect
+        setTimeout(() => {
+          displayWinner(iphoneScore, samsungScore);
+        }, 2500);
       }
-    });
 
-    // Animate score counting
-    animateScore("iphone-score", iphoneScore);
-    animateScore("samsung-score", samsungScore);
+      function animateScore(elementId, targetScore) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
 
-    // Determine and display winner
-    setTimeout(() => {
-      displayWinner(iphoneScore, samsungScore);
-    }, 2000);
-  }
+        let currentScore = 0;
+        const duration = 2000; // 2 seconds
+        const steps = 60;
+        const increment = targetScore / steps;
+        const stepDuration = duration / steps;
 
-  function animateScore(elementId, targetScore) {
-    const element = document.getElementById(elementId);
-    let currentScore = 0;
-    const increment = targetScore / 20;
-
-    const timer = setInterval(() => {
-      currentScore += increment;
-      if (currentScore >= targetScore) {
-        currentScore = targetScore;
-        clearInterval(timer);
+        const timer = setInterval(() => {
+          currentScore += increment;
+          if (currentScore >= targetScore) {
+            currentScore = targetScore;
+            clearInterval(timer);
+            // Add celebration effect for final score
+            element.style.transform = "scale(1.2)";
+            setTimeout(() => {
+              element.style.transform = "scale(1)";
+            }, 300);
+          }
+          element.textContent = Math.floor(currentScore).toString();
+        }, stepDuration);
       }
-      element.textContent = Math.floor(currentScore);
-    }, 100);
-  }
 
-  function displayWinner(iphoneScore, samsungScore) {
-    const winnerBanner = document.getElementById("winner-banner");
-    const winnerTitle = document.getElementById("winner-title");
-    const winnerText = document.getElementById("winner-text");
-    const winnerPhone = document.getElementById("winner-phone");
-    const runnerUpPhone = document.getElementById("runner-up-phone");
-    const winnerCta = document.getElementById("winner-cta");
-    const winnerBuyButton = document.getElementById("winner-buy-button");
-    const runnerUpBuyButton = document.getElementById("runner-up-buy-button");
+      function displayWinner(iphoneScore, samsungScore) {
+        const winnerBanner = document.getElementById("winner-banner");
+        const winnerTitle = document.getElementById("winner-title");
+        const winnerText = document.getElementById("winner-text");
+        const winnerPhone = document.getElementById("winner-phone");
+        const runnerUpPhone = document.getElementById("runner-up-phone");
+        const winnerBuyButton = document.getElementById("winner-buy-button");
+        const runnerUpBuyButton = document.getElementById(
+          "runner-up-buy-button"
+        );
 
-    let winner, runnerUp, winnerLink, runnerUpLink;
+        if (
+          !winnerBanner ||
+          !winnerTitle ||
+          !winnerText ||
+          !winnerPhone ||
+          !runnerUpPhone ||
+          !winnerBuyButton ||
+          !runnerUpBuyButton
+        ) {
+          console.error("Required elements not found");
+          return;
+        }
 
-    if (iphoneScore > samsungScore) {
-      winner = "iPhone 17 Pro Max";
-      runnerUp = "Galaxy S25 Ultra";
-      winnerLink = "https://amzn.to/470etVe";
-      runnerUpLink = "https://amzn.to/4gTPkPG";
-      winnerTitle.textContent = "🏆 iPhone 17 Pro Max Wins!";
-      winnerText.textContent = `Leading with ${iphoneScore} category wins vs ${samsungScore}. Superior display brightness, performance, and camera zoom make it the clear winner.`;
-    } else if (samsungScore > iphoneScore) {
-      winner = "Galaxy S25 Ultra";
-      runnerUp = "iPhone 17 Pro Max";
-      winnerLink = "https://amzn.to/4gTPkPG";
-      runnerUpLink = "https://amzn.to/470etVe";
-      winnerTitle.textContent = "🏆 Galaxy S25 Ultra Wins!";
-      winnerText.textContent = `Dominating with ${samsungScore} category wins vs ${iphoneScore}. S Pen productivity, titanium build, and versatile AI features secure the victory.`;
-    } else {
-      winnerTitle.textContent = "🤝 It's a Tie!";
-      winnerText.textContent = `Both phones excel in ${iphoneScore} categories each. Your choice depends on ecosystem preference.`;
-      winner = "iPhone 17 Pro Max";
-      runnerUp = "Galaxy S25 Ultra";
-      winnerLink = "https://amzn.to/470etVe";
-      runnerUpLink = "https://amzn.to/4gTPkPG";
-    }
+        let winner, runnerUp, winnerLink, runnerUpLink, winnerDescription;
 
-    winnerPhone.textContent = winner;
-    runnerUpPhone.textContent = runnerUp;
-    winnerBuyButton.href = winnerLink;
-    runnerUpBuyButton.href = runnerUpLink;
-    winnerBuyButton.textContent = `🛒 Get ${winner}`;
-    runnerUpBuyButton.textContent = `🛒 Choose ${runnerUp}`;
+        if (iphoneScore > samsungScore) {
+          winner = "iPhone 17 Pro Max";
+          runnerUp = "Galaxy S25 Ultra";
+          winnerLink = "https://amzn.to/470etVe";
+          runnerUpLink = "https://amzn.to/4gTPkPG";
+          winnerTitle.textContent = "🏆 iPhone 17 Pro Max Wins!";
+          winnerDescription = `Leading with ${iphoneScore} category wins vs ${samsungScore}. Superior display brightness, A19 Pro performance, and advanced camera zoom capabilities make it the clear winner for most users.`;
+        } else if (samsungScore > iphoneScore) {
+          winner = "Galaxy S25 Ultra";
+          runnerUp = "iPhone 17 Pro Max";
+          winnerLink = "https://amzn.to/4gTPkPG";
+          runnerUpLink = "https://amzn.to/470etVe";
+          winnerTitle.textContent = "🏆 Galaxy S25 Ultra Wins!";
+          winnerDescription = `Dominating with ${samsungScore} category wins vs ${iphoneScore}. The built-in S Pen, premium titanium build, versatile AI features, and productivity-focused design secure the victory.`;
+        } else {
+          winnerTitle.textContent = "🤝 It's a Perfect Tie!";
+          winnerDescription = `Both phones excel equally with ${iphoneScore} category wins each. Your choice depends on ecosystem preference and specific use cases.`;
+          winner = "iPhone 17 Pro Max";
+          runnerUp = "Galaxy S25 Ultra";
+          winnerLink = "https://amzn.to/470etVe";
+          runnerUpLink = "https://amzn.to/4gTPkPG";
+        }
 
-    winnerBanner.style.display = "block";
-    winnerBanner.scrollIntoView({ behavior: "smooth" });
-  }
+        winnerText.textContent = winnerDescription;
+        winnerPhone.textContent = winner;
+        runnerUpPhone.textContent = runnerUp;
 
-  // Track clicks for conversion optimization
-  function trackPurchaseIntent(phone, source) {
-    // Analytics tracking would go here
-    console.log(`Purchase intent: ${phone} from ${source}`);
+        // Type assertion for anchor elements
+        const winnerBtn = winnerBuyButton;
+        const runnerBtn = runnerUpBuyButton;
 
-    // You could send this data to your analytics platform
-    // gtag('event', 'purchase_intent', {
-    //   'phone_model': phone,
-    //   'click_source': source
-    // });
-  }
+        if (winnerBtn.tagName === "A") {
+          winnerBtn.href = winnerLink;
+        }
+        if (runnerBtn.tagName === "A") {
+          runnerBtn.href = runnerUpLink;
+        }
 
-  // Add click tracking to all CTA buttons
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("iphone-cta").addEventListener("click", () => {
-      trackPurchaseIntent("iPhone 17 Pro Max", "hero_cta");
-    });
+        winnerBuyButton.textContent = `🛒 Get ${winner}`;
+        runnerUpBuyButton.textContent = `🛒 Choose ${runnerUp}`;
 
-    document.getElementById("samsung-cta").addEventListener("click", () => {
-      trackPurchaseIntent("Galaxy S25 Ultra", "hero_cta");
-    });
+        // Show winner banner with animation
+        winnerBanner.style.display = "block";
+        winnerBanner.style.opacity = "0";
+        winnerBanner.style.transform = "translateY(50px)";
 
-    // Calculate scores after DOM is loaded
-    setTimeout(calculateScores, 1000);
-  });
-</script>
+        setTimeout(() => {
+          winnerBanner.style.transition =
+            "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+          winnerBanner.style.opacity = "1";
+          winnerBanner.style.transform = "translateY(0)";
+          winnerBanner.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
+      }
+
+      // Enhanced click tracking with more detailed analytics
+      function trackPurchaseIntent(phone, source, price, clickEvent) {
+        const timestamp = new Date().toISOString();
+        const eventData = {
+          phone_model: phone,
+          click_source: source,
+          price: price,
+          timestamp: timestamp,
+          user_agent: navigator.userAgent,
+          page_url: window.location.href,
+        };
+
+        console.log(`Purchase Intent Tracked:`, eventData);
+
+        // Store in session for potential follow-up tracking
+        try {
+          const existingData = JSON.parse(
+            sessionStorage.getItem("phoneComparisonClicks") || "[]"
+          );
+          existingData.push(eventData);
+          sessionStorage.setItem(
+            "phoneComparisonClicks",
+            JSON.stringify(existingData)
+          );
+        } catch (e) {
+          // Fallback if sessionStorage isn't available
+          console.log(
+            "SessionStorage not available, using console logging only"
+          );
+        }
+
+        // Add visual feedback for user
+        if (clickEvent && clickEvent.target) {
+          const clickedButton = clickEvent.target;
+          const originalText = clickedButton.textContent || "";
+          clickedButton.textContent = "✓ Redirecting...";
+          clickedButton.style.background =
+            "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)";
+
+          setTimeout(() => {
+            clickedButton.textContent = originalText;
+          }, 1000);
+        }
+      }
+
+      // Add intersection observer for scroll animations
+      function initScrollAnimations() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const target = entry.target;
+                target.style.opacity = "1";
+                target.style.transform = "translateY(0)";
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          }
+        );
+
+        // Observe comparison sections
+        document.querySelectorAll(".comparison-section").forEach((section) => {
+          const sectionElement = section;
+          sectionElement.style.opacity = "0";
+          sectionElement.style.transform = "translateY(30px)";
+          sectionElement.style.transition =
+            "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+          observer.observe(section);
+        });
+      }
+
+      // Enhanced mobile responsiveness check
+      function handleResponsiveFeatures() {
+        const isMobile = window.innerWidth < 768;
+        const phoneCards = document.querySelectorAll(".phone-card");
+
+        if (isMobile) {
+          phoneCards.forEach((card) => {
+            const cardElement = card;
+            cardElement.addEventListener("touchstart", () => {
+              cardElement.style.transform = "scale(0.98)";
+            });
+
+            cardElement.addEventListener("touchend", () => {
+              cardElement.style.transform = "scale(1)";
+            });
+          });
+        }
+      }
+
+      // Initialize everything when DOM is loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add click tracking to all CTA buttons
+        const iphoneCta = document.getElementById("iphone-cta");
+        const samsungCta = document.getElementById("samsung-cta");
+
+        if (iphoneCta) {
+          iphoneCta.addEventListener("click", (e) => {
+            trackPurchaseIntent("iPhone 17 Pro Max", "hero_cta", "$1,199", e);
+          });
+        }
+
+        if (samsungCta) {
+          samsungCta.addEventListener("click", (e) => {
+            trackPurchaseIntent("Galaxy S25 Ultra", "hero_cta", "$1,299", e);
+          });
+        }
+
+        // Initialize scroll animations
+        initScrollAnimations();
+
+        // Handle responsive features
+        handleResponsiveFeatures();
+        window.addEventListener("resize", handleResponsiveFeatures);
+
+        // Calculate scores with a slight delay for better UX
+        setTimeout(() => {
+          calculateScores();
+        }, 1000);
+
+        // Add loading completed class for any additional animations
+        setTimeout(() => {
+          document.body.classList.add("loaded");
+        }, 500);
+      });
+
+      // Add error handling for any failed operations
+      window.addEventListener("error", (e) => {
+        console.log("Error caught:", e.error);
+        // Could implement fallback functionality here
+      });
+    </script>
+  </body>
+</html>
