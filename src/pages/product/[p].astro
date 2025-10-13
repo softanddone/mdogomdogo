@@ -2,10 +2,13 @@
 // src/pages/products/[slug].astro
 import Nav from "../../components/Nav.astro";
 import Layout from "../../layouts/Layout.astro";
-import Features from "../../components/Features.astro";
+import Display from "../../components/Display.astro";
 import ProductCard from "../../components/ProductCard.astro";
-import { products } from "../../data/products";
-import { generateProductSchema } from "../../utils/structureData";
+import { products } from "../../data/product2";
+import {
+  generateProductSchema,
+  generateBreadcrumbSchema,
+} from "../../utils/structureData";
 
 export async function getStaticPaths() {
   // Generate paths for all products using their slugs
@@ -14,12 +17,6 @@ export async function getStaticPaths() {
       p: product.slug,
     },
   }));
-
-  // Debug: Log generated paths
-  console.log(
-    "Generated product paths:",
-    paths.map((p) => p.params.slug)
-  );
 
   return paths;
 }
@@ -30,7 +27,7 @@ const { p } = Astro.params;
 const currentProduct = products.find((product) => product.slug === p);
 
 if (!currentProduct) {
-  throw new Error(`Product not found: ${slug}`);
+  throw new Error(`Product not found: ${P}`);
 }
 
 // Generate related products (same brand or category, excluding current product)
@@ -46,10 +43,11 @@ const relatedProducts = products
   .slice(0, 4);
 
 // Generate schema for SEO (if function exists)
-const schemaArray =
-  typeof generateProductSchema === "function"
-    ? [generateProductSchema(currentProduct)]
-    : [];
+
+// const schemaArray =
+//   typeof generateProductSchema === "function"
+//     ? [generateProductSchema(currentProduct)]
+//     : [];
 
 // Extract key features for meta description
 const keyFeatures = [
@@ -57,9 +55,78 @@ const keyFeatures = [
   currentProduct.camera,
   currentProduct.phonedisplay,
   currentProduct.battery,
+  currentProduct.memory,
 ]
   .filter(Boolean)
   .join(", ");
+
+// Generate Product Schema using your existing function
+const productSchemaString = generateProductSchema(currentProduct);
+const productSchema = JSON.parse(productSchemaString);
+
+// Generate Breadcrumb Schema using your existing function
+const breadcrumbSchema = generateBreadcrumbSchema(currentProduct);
+
+// Build FAQ Schema (you can add this to your structureData.ts if you want)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: `How does the credit payment work for ${currentProduct.name}?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Pay ${currentProduct.deposit} deposit, then ${currentProduct.daily} daily until fully paid. No hidden fees. Total price is ${currentProduct.totalPrice}. Available through ${currentProduct.seller} and other credit providers.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is delivery free in Nairobi?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, we offer free same-day delivery within Nairobi CBD. Outer areas may have a small delivery fee. We deliver throughout Kenya.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if I miss a payment?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Contact your provider immediately. Most offer flexible payment options and will work with you to find a solution.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: `Is the ${currentProduct.name} genuine?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Yes, all our ${currentProduct.name} phones are 100% genuine with warranty. We source directly from authorized distributors in Kenya.`,
+      },
+    },
+  ],
+};
+
+// Combine all schemas into an array
+const schemaArray = [productSchema, breadcrumbSchema, faqSchema];
+
+// Build custom keywords for this product
+const productKeywords = [
+  `${currentProduct.name.toLowerCase()} price kenya`,
+  `${currentProduct.name.toLowerCase()} on credit`,
+  `buy ${currentProduct.name.toLowerCase()} nairobi`,
+  `${currentProduct.seller.toLowerCase()} ${currentProduct.brand.toLowerCase()}`,
+  `watu simu ${currentProduct.brand.toLowerCase()}`,
+  `${currentProduct.brand.toLowerCase()} lipa mdogo mdogo`,
+  "lipa mdogo mdogo phones",
+  "simu za kulipa polepole",
+  `${currentProduct.name.toLowerCase()} ${currentProduct.seller.toLowerCase()}`,
+].join(", ");
+
+// Extract price as number for Open Graph
+const priceNumber = currentProduct.totalPrice.replace(/[^\d]/g, "");
+
+// Build SEO data object for Layout
 
 // SEO configuration
 const seo = {
@@ -365,39 +432,8 @@ const breadcrumbs = [
     </div>
   </nav>
 
-  <!-- Product Header with Quick Info -->
-  <div class="product-header">
-    <h1 class="product-title">{currentProduct.name}</h1>
-    <p class="product-subtitle">
-      {currentProduct.brand} • {currentProduct.model} • {
-        currentProduct.condition
-      }
-    </p>
-
-    <div class="quick-info">
-      <div class="quick-info-item">
-        <span class="quick-info-label">Starting From</span>
-        <span class="quick-info-value price-highlight"
-          >{currentProduct.from}</span
-        >
-      </div>
-      <div class="quick-info-item">
-        <span class="quick-info-label">Deposit</span>
-        <span class="quick-info-value">{currentProduct.deposit}</span>
-      </div>
-      <div class="quick-info-item">
-        <span class="quick-info-label">Daily Payment</span>
-        <span class="quick-info-value">{currentProduct.daily}</span>
-      </div>
-      <div class="quick-info-item">
-        <span class="quick-info-label">Total Price</span>
-        <span class="quick-info-value">{currentProduct.totalPrice}</span>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Product Features Component -->
-  <Features product={currentProduct} />
+  <Display {...currentProduct} />
 
   <!-- Related Products Section -->
   {

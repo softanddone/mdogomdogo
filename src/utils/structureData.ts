@@ -817,6 +817,20 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
     })
   };
 
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
   // Website schema  
   const websiteSchema = {
     "@context": "https://schema.org",
@@ -929,6 +943,53 @@ export function generateBreadcrumbSchema(product: FlexibleProduct) {
     ]
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function generateWebsiteSchema() {
   return {
@@ -1062,3 +1123,160 @@ export function generatePageSchema(pageType: 'homepage' | 'product', data: any) 
   }
   
   return null;}
+
+
+
+  // Add this function to your structureData.ts file
+
+export function generateFAQSchema(product: FlexibleProduct, customFAQs?: Array<{question: string, answer: string}>) {
+  // Default FAQs if none provided
+  const defaultFAQs = [
+    {
+      question: `How does the credit payment work for ${product.name}?`,
+      answer: `Pay ${product.deposit} deposit, then ${product.daily} daily until fully paid. No hidden fees. Total price is ${product.totalPrice}. Available through ${product.seller} and other credit providers.`
+    },
+    {
+      question: "Is delivery free in Nairobi?",
+      answer: "Yes, we offer free same-day delivery within Nairobi CBD. Outer areas may have a small delivery fee. We deliver throughout Kenya."
+    },
+    {
+      question: "What if I miss a payment?",
+      answer: "Contact your provider immediately. Most offer flexible payment options and will work with you to find a solution."
+    },
+    {
+      question: `Is the ${product.name} genuine?`,
+      answer: `Yes, all our ${product.name} phones are 100% genuine with warranty. We source directly from authorized distributors in Kenya.`
+    },
+    {
+      question: `What's included with the ${product.name}?`,
+      answer: `The package includes the ${product.name} phone, original charger, USB cable, SIM ejector tool, user manual, and warranty card. All items are brand new and sealed.`
+    },
+    {
+      question: "Can I upgrade my phone later?",
+      answer: "Yes, you can trade in your phone for an upgrade after completing at least 60% of your payment plan. Contact our customer service for trade-in values."
+    }
+  ];
+
+  const faqs = customFAQs || defaultFAQs;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `https://mdogomdogodeals.co.ke/phones/${product.slug}#faq`,
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+}
+
+// Optional: Generate product-specific How-To schema for setup guides
+export function generateHowToSchema(product: FlexibleProduct) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": `https://mdogomdogodeals.co.ke/phones/${product.slug}#howto`,
+    "name": `How to Buy ${product.name} on Credit in Kenya`,
+    "description": `Step-by-step guide to purchasing ${product.name} through our flexible payment plan`,
+    "image": `https://mdogomdogodeals.co.ke${product.source}`,
+    "totalTime": "PT15M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "KES",
+      "value": product.deposit.replace(/[^\d]/g, '')
+    },
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Choose Your Phone",
+        "text": `Select the ${product.name} from our catalog`,
+        "url": `https://mdogomdogodeals.co.ke/phones/${product.slug}`
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Apply for Credit",
+        "text": "Click 'Apply for Credit Now' and fill out the simple application form with your ID and phone number",
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "text": "Provide your national ID number"
+          },
+          {
+            "@type": "HowToDirection",
+            "text": "Enter your M-Pesa registered phone number"
+          }
+        ]
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Get Instant Approval",
+        "text": "Receive approval within minutes via SMS",
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "text": "Wait for SMS confirmation (usually under 5 minutes)"
+          }
+        ]
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Pay Deposit",
+        "text": `Pay the ${product.deposit} deposit via M-Pesa to the number provided in your approval SMS`,
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "text": "Go to M-Pesa menu"
+          },
+          {
+            "@type": "HowToDirection",
+            "text": "Select Lipa na M-Pesa"
+          },
+          {
+            "@type": "HowToDirection",
+            "text": `Enter the paybill and amount ${product.deposit}`
+          }
+        ]
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Receive Your Phone",
+        "text": "Get free delivery within 24 hours in Nairobi or 2-3 days countrywide",
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "text": "Track your delivery via SMS"
+          },
+          {
+            "@type": "HowToDirection",
+            "text": "Receive and inspect your phone upon delivery"
+          }
+        ]
+      },
+      {
+        "@type": "HowToStep",
+        "position": 6,
+        "name": "Start Daily Payments",
+        "text": `Make daily payments of ${product.daily} via M-Pesa until the phone is fully paid`,
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "text": "Receive daily payment reminders via SMS"
+          },
+          {
+            "@type": "HowToDirection",
+            "text": "Pay anytime using M-Pesa to the provided paybill"
+          }
+        ]
+      }
+    ]
+  };
+}

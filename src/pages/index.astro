@@ -14,6 +14,7 @@ import Footer from "../components/Footer.astro";
 import NavTest from "../components/NavTest.astro";
 import Features from "../components/Features.astro";
 import Comparison from "../components/Comparison.astro";
+import Display from "../components/Display.astro";
 
 const product1 = products[0]; // or find by ID
 
@@ -30,13 +31,14 @@ const seo = {
 
 <Layout {...seo}>
   <!-- <Comparison /> -->
-  <Nav />
-  <Hero />
-  <Welcome />
+  <!-- <Nav /> -->
+  <Display {...product1} />
+  <!-- <Hero /> -->
+  <!-- <Welcome /> -->
   <!-- <SamsungProducts /> -->
   <!-- <Promotion /> -->
   <!-- <Features product={product1} /> -->
-  <Footer />
+  <!-- <Footer /> -->
   <!-- <NavTest /> -->
 </Layout>
 <!-- <Layout {...seo}> -->s

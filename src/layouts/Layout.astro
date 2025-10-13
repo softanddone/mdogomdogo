@@ -17,10 +17,19 @@ const {
   product, // For individual product pages
   products, // For homepage with multiple products
   pageType, // 'product' | 'homepage' | 'other'
-  schema, // Optional: pre-generated schema
+  schema, // Optional: pre-generated schema (can be array or string)
+  keywords: customKeywords, // Allow custom keywords from parent
+  // Product-specific meta tags
+  productPrice,
+  productCurrency = "KES",
+  productAvailability = "in stock",
+  productCondition = "new",
+  productBrand,
+  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
 } = Astro.props;
 
-const keywords = [
+// Default keywords
+const defaultKeywords = [
   "lipa mdogo mdogo phones",
   "simu za kulipa polepole",
   "affordable smartphones",
@@ -49,14 +58,28 @@ const keywords = [
   "lipa mdogo mdogo nairobi",
   "kiambu phone offers",
   "installment phones kenya",
-].join(", ");
+];
+
+// Use custom keywords if provided, otherwise use defaults
+const keywords = customKeywords || defaultKeywords.join(", ");
 
 // Generate appropriate schema based on page type
 let generatedSchema = "";
 
 if (schema) {
-  // Use pre-generated schema if provided
-  generatedSchema = schema;
+  // Handle pre-generated schema (can be string or array of schemas)
+  if (Array.isArray(schema)) {
+    // If it's an array of schema objects, stringify each and join
+    generatedSchema = schema
+      .map((s) => (typeof s === "string" ? s : JSON.stringify(s)))
+      .join("");
+  } else if (typeof schema === "string") {
+    // If it's already a string, use it directly
+    generatedSchema = schema;
+  } else {
+    // If it's a single object, stringify it
+    generatedSchema = JSON.stringify(schema);
+  }
 } else if (pageType === "product" && product) {
   // Generate product schema for individual product pages
   generatedSchema = generateProductSchema(product);
@@ -70,6 +93,27 @@ if (schema) {
   // Fallback: if products exist but no pageType specified
   generatedSchema = generateHomepageSchema(products);
 }
+
+// Parse schema if it's a concatenated string of multiple schemas
+let schemaArray = [];
+if (generatedSchema) {
+  try {
+    // Try to split if it looks like concatenated JSON objects
+    if (generatedSchema.includes("}{")) {
+      // Split by }{ and add back the braces
+      const parts = generatedSchema.split("}{").map((part, index, arr) => {
+        if (index === 0) return part + "}";
+        if (index === arr.length - 1) return "{" + part;
+        return "{" + part + "}";
+      });
+      schemaArray = parts;
+    } else {
+      schemaArray = [generatedSchema];
+    }
+  } catch (e) {
+    schemaArray = [generatedSchema];
+  }
+}
 ---
 
 <!doctype html>
@@ -80,6 +124,9 @@ if (schema) {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
+
+    <!-- Robots -->
+    <meta name="robots" content={robots} />
 
     <!-- Canonical -->
     <link rel="canonical" href={canonical} />
@@ -92,6 +139,27 @@ if (schema) {
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:url" content={canonical} />
 
+    <!-- Product-specific Open Graph tags -->
+    {
+      productPrice && (
+        <>
+          <meta property="product:price:amount" content={productPrice} />
+          <meta property="product:price:currency" content={productCurrency} />
+        </>
+      )
+    }
+    {
+      productAvailability && (
+        <meta property="product:availability" content={productAvailability} />
+      )
+    }
+    {
+      productCondition && (
+        <meta property="product:condition" content={productCondition} />
+      )
+    }
+    {productBrand && <meta property="product:brand" content={productBrand} />}
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:title" content={title} />
@@ -100,12 +168,18 @@ if (schema) {
 
     <!-- JSON-LD Structured Data -->
     {
-      generatedSchema && (
-        <script type="application/ld+json" set:html={generatedSchema} />
-      )
+      schemaArray.length > 0 &&
+        schemaArray.map((schemaItem) => (
+          <script type="application/ld+json" set:html={schemaItem} />
+        ))
     }
 
-    <!-- Optional: custom head content from page -->
+    <!-- Allow additional head content from child components -->
+    <slot name="head" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
     <slot name="head" />
 
     <style>
