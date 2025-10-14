@@ -1649,16 +1649,30 @@ export const products = [
   }
 },
 
+
+
+
+
+
+
+
+
+
+
+
+
 {
   id: 12,
   name: "Tecno Phantom V Fold",
   status: "New",
-  image: "/phones/tecno_phantom_v_fold.jpg",
+  image: "/phones/tecnophantom.jpg",
   from: "KSh 120,000",
   deposit: "KSh 35,000",
   daily: "KSh 500",
+    discount: "7%",
+
   totalPrice: "KSh 120,000",
-  source: "/phones/tecno_phantom_v_fold.webp",
+  source: "/phones/tecnophantom.webp",
   display: "block",
   phonedisplay: "7.85″ Foldable AMOLED, 120Hz",
   processor: "Dimensity 9000+",
@@ -1666,8 +1680,14 @@ export const products = [
   memory: "512GB / 12GB RAM",
   battery: "5000mAh, 45W fast charging",
   version: "Android 13, HiOS Fold",
-  slug: "tecno-phantom-v-fold",
-  slugs: "tecno-phantom-v-fold",
+    color: "Mars Orange / Stardust Grey",
+
+  weight: "201g",
+  dimensions: { width: "74.5mm", height: "164.6mm", depth: "9mm" },
+  material: "Eco-friendly back cover (Mars Orange made from recycled materials)",
+  
+  slug: "tecnophantom",
+  slugs: "tecnophantom",
   description: "Tecno’s first foldable smartphone, combining premium design, powerful performance, and innovative display technology at a competitive price.",
   brand: "Tecno",
   seller: "Lipa Mdogo Mdogo",
@@ -1694,8 +1714,8 @@ export const products = [
       }
     ]
   }
-}
-,
+},
+
 {
   id: 13,
   name: "Tecno Spark 8C",
@@ -1703,6 +1723,10 @@ export const products = [
   image: "/phones/tecno_spark_8c.jpg",
   from: "KSh 10,500",
   deposit: "KSh 3,000",
+    discount: "7%",
+      color: "Mars Orange / Stardust Grey",
+
+
   daily: "KSh 100",
   totalPrice: "KSh 10,500",
   source: "/phones/tecno_spark_8c.webp",
@@ -1719,6 +1743,10 @@ export const products = [
   brand: "Tecno",
   seller: "Lipa Mdogo Mdogo",
   model: "Spark 8C",
+  weight: "201g",
+  dimensions: { width: "74.5mm", height: "164.6mm", depth: "9mm" },
+  material: "Eco-friendly back cover (Mars Orange made from recycled materials)",
+  
   storage: "64GB",
   condition: "new",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
@@ -1751,6 +1779,10 @@ export const products = [
   status: "New",
   image: "/phones/tecno_pova_neo2.jpg",
   from: "KSh 19,000",
+    discount: "7%",
+      color: "Mars Orange / Stardust Grey",
+
+
   deposit: "KSh 5,500",
   daily: "KSh 150",
   totalPrice: "KSh 19,000",
@@ -1769,6 +1801,10 @@ export const products = [
   seller: "Lipa Mdogo Mdogo",
   model: "Pova Neo 2",
   storage: "128GB",
+  weight: "201g",
+  dimensions: { width: "74.5mm", height: "164.6mm", depth: "9mm" },
+  material: "Eco-friendly back cover (Mars Orange made from recycled materials)",
+  
   condition: "new",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
   productLine: "Tecno Pova",
@@ -2388,8 +2424,7 @@ export const products = [
       }
     ]
   }
-}
-,
+},
   {
   id: 11,
   name: "Vivo Y27s",
