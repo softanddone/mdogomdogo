@@ -1,6 +1,8 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Nav from "../components/Nav.astro";
+import Nav2 from "../components/Nav2.astro";
+
 import Layout from "../layouts/Layout.astro";
 import { products } from "../data/products"; // Import your homepage products
 import Links from "../components/Links.astro";
@@ -31,7 +33,9 @@ const seo = {
 
 <Layout {...seo}>
   <!-- <Comparison /> -->
-  <Nav />
+  <!-- <Nav /> -->
+
+  <Nav2 />
   <!-- <Display {...product1} /> -->
   <Hero />
   <Welcome />

@@ -342,6 +342,97 @@ const breadcrumbs = [
     color: #059669;
   }
 
+  .product-details {
+    max-width: 850px;
+    margin: 3rem auto;
+    padding: 1rem 2rem;
+    background: #fff;
+    color: #111;
+    font-family: "Inter", "Poppins", sans-serif;
+    line-height: 1.7;
+  }
+
+  .detail-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .detail-section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #000;
+    border-bottom: 2px solid #f2f2f2;
+    padding-bottom: 0.4rem;
+  }
+
+  .detail-section p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .pros,
+  .cons {
+    margin-top: 1.2rem;
+    padding: 1rem 1.25rem;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+  }
+
+  .pros h3,
+  .cons h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #000;
+  }
+
+  .pros ul,
+  .cons ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pros li,
+  .cons li {
+    padding: 0.3rem 0 0.3rem 1.5rem;
+    position: relative;
+    font-size: 0.97rem;
+    color: #333;
+  }
+
+  .pros li::before {
+    content: "✔";
+    color: #28a745;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .cons li::before {
+    content: "✖";
+    color: #e63946;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .product-details {
+      padding: 1rem;
+    }
+
+    .detail-section h2 {
+      font-size: 1.2rem;
+    }
+
+    .detail-section p {
+      font-size: 0.95rem;
+    }
+  }
+
   /* Responsive Design */
   @media screen and (max-width: 768px) {
     .related-grid,
@@ -436,6 +527,42 @@ const breadcrumbs = [
   <Display {...currentProduct} />
 
   <!-- Related Products Section -->
+
+  <section class="product-details">
+    {
+      currentProduct.details &&
+        currentProduct.details.map((section) => (
+          <article class="detail-section">
+            <h2>{section.title}</h2>
+
+            {section.content && <p>{section.content}</p>}
+
+            {section.pros && (
+              <div class="pros">
+                <h3>Pros</h3>
+                <ul>
+                  {section.pros.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {section.cons && (
+              <div class="cons">
+                <h3>Cons</h3>
+                <ul>
+                  {section.cons.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+        ))
+    }
+  </section>
+
   {
     relatedProducts.length > 0 && (
       <section class="related-products">
