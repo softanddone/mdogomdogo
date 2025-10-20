@@ -9,6 +9,7 @@ import {
   generateProductSchema,
   generateBreadcrumbSchema,
 } from "../../utils/structureData";
+import Nav2 from "../../components/Nav2.astro";
 
 export async function getStaticPaths() {
   // Generate paths for all products using their slugs
@@ -497,7 +498,7 @@ const breadcrumbs = [
 </style>
 
 <Layout {...seo}>
-  <Nav />
+  <Nav2 />
 
   <!-- Breadcrumb Navigation -->
   <nav class="breadcrumb" aria-label="Breadcrumb">

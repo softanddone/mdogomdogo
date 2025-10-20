@@ -1,12 +1,9 @@
 ---
-import Nav from '../components/Nav.astro';
-import ProductDetails from '../components/ProductDetails.astro';
-import { products } from '../data/products';
-import Layout from '../layouts/Layout.astro';
-import { generateProductSchema } from '../utils/structureData';
-
-
-
+import Nav2 from "../components/Nav2.astro";
+import ProductDetails from "../components/ProductDetails.astro";
+import { products } from "../data/products";
+import Layout from "../layouts/Layout.astro";
+import { generateProductSchema } from "../utils/structureData";
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -15,8 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const product = products.find(p => p.slug === slug);
-
+const product = products.find((p) => p.slug === slug);
 
 if (!product) {
   throw new Error("Product not found");
@@ -26,21 +22,16 @@ const schema = generateProductSchema(product);
 
 const seo = {
   title: `${product.name} - Buy Now | Lipa Pole Pole`,
-  description: product.description || `Buy ${product.name} at a flexible lipa mdogo mdogo price. Pay small deposit & receive it today.`,
+  description:
+    product.description ||
+    `Buy ${product.name} at a flexible lipa mdogo mdogo price. Pay small deposit & receive it today.`,
   canonical: `https://mdogomdogodeals.co.ke/${product.slug}`,
   ogImage: `https://mdogomdogodeals.co.ke/${product.source}`,
-  schema
-
+  schema,
 };
 ---
 
-
 <Layout {...seo}>
-
-     <Nav/>
-    <ProductDetails {...product} />
-
+  <Nav2 />
+  <ProductDetails {...product} />
 </Layout>
-
-  
-

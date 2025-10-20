@@ -2,8 +2,9 @@ export const products = [
   {
     id: 1,
     name: "Oppo A3x",
+    fullname:"Oppo A3x 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
     status: "New",
-    image: "/phones/oppo_a3x.jpg",
+    image: "/phones/oppo_a3x.webp",
     from: "KSh 2,900",
     deposit: "KSh 3,500",
     daily: "KSh 80",
@@ -27,7 +28,7 @@ export const products = [
     storage: "128GB",
     condition: "new",
     gtin: "",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mkopa"],
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo"],
 
 
 
@@ -132,8 +133,10 @@ export const products = [
   {
   id: 2,
   name: "Oppo A3 Pro",
+      fullname:"Oppo A3 6.67 Inches, 256GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
+
   status: "New",
-  image: "/phones/oppo_a3_pro.jpg",
+  image: "/phones/oppo_a3_pro.webp",
   from: "KSh 3,500",
   deposit: "KSh 4,500",
   daily: "KSh 90",
@@ -157,7 +160,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -255,13 +258,14 @@ export const products = [
 {
   id: 3,
   name: "Oppo A60",
+  fullname:"Oppo A60 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
-  image: "/phones/oppo_a60.jpg",
+  image: "/phones/oppo_a60.webp",
   from: "KSh 4,000",
   deposit: "KSh 5,000",
   daily: "KSh 100",
   totalPrice: "KSh 22,500",
-  source: "/phones/oppo_a60.webp",
+  source: "/phones/oppo-a60-dual3.webp",
   discount: "-10%",
   display: "block",
   phonedisplay: "6.6\" LCD HD+",
@@ -383,8 +387,13 @@ export const products = [
  {
   id: 4,
   name: "Oppo Reno 14",
+  fullname:"Oppo Reno 14 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
+
+
+
+  
   status: "New",
-  image: "/phones/oppo_reno14.jpg",
+  image: "/phones/oppo_reno14.webp",
   from: "KSh 6,500",
   deposit: "KSh 8,000",
   daily: "KSh 150",
@@ -496,6 +505,7 @@ export const products = [
   {
   id: 5,
   name: "Oppo Reno 14 Pro",
+  fullname:"Oppo Reno 14 Pro 6.67 Inches, 512GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/oppo_reno14_pro.jpg",
   from: "KSh 9,000",
@@ -609,6 +619,7 @@ export const products = [
 {
   id: 6,
   name: "Oppo Reno 14F 5G",
+  fullname:"Oppo Reno 14F 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/oppo_reno14f.jpg",
   from: "KSh 7,500",
@@ -723,13 +734,14 @@ export const products = [
   {
   id: 7,
   name: "Redmi Note 14 (6/128GB)",
+  fullname:"Redmi Note 14 14 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/redmi-note-14-6-128.jpg",
   from: "KSh 5,500",
   deposit: "KSh 4,800",
   daily: "KSh 115",
   totalPrice: "KSh 5,500",
-  source: "/phones/redmi-note-14.webp",
+  source: "/phones/redmi-note-14-6-128.webp",
   discount: "-13%",
   display: "block",
   phonedisplay: "6.67″ FHD+ AMOLED, 1080 × 2400",
@@ -832,13 +844,15 @@ export const products = [
 {
   id: 8,
   name: "Infinix Hot 60 Pro (8/128GB)",
+  fullname:"Infinix Hot 60 Pro 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
+
   status: "New",
   image: "/phones/infinix-hot-60-pro-8-128.jpg",
   from: "KSh 19,500",
   deposit: "KSh 5,000",
   daily: "KSh 150",
   totalPrice: "KSh 24,000",
-  source: "/phones/infinix-hot-60-pro.webp",
+  source: "/phones/infinix-hot-60-pro-8-128.webp",
   discount: "-10%",
   display: "block",
   phonedisplay: "6.78″ IPS LCD, 120Hz",
@@ -942,13 +956,14 @@ export const products = [
   {
   id: 9,
   name: "Infinix Hot 60 Pro (8/128GB)",
+  fullname:"Infinix Hot 60 Pro 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
-  image: "/phones/infinix-hot-60-pro-8-128.jpg",
+  image: "/phones/infinix-hot-60-pro-8-128.webp",
   from: "KSh 19,500",
   deposit: "KSh 5,000",
   daily: "KSh 150",
   totalPrice: "KSh 24,000",
-  source: "/phones/infinix-hot-60-pro.webp",
+  source: "/phones/infinix-hot-60-pro-8-128.webp",
   discount: "-5%",
   display: "block",
   phonedisplay: "6.78″ AMOLED, 120Hz",
@@ -1055,13 +1070,14 @@ export const products = [
   {
   id: 10,
   name: "Infinix Note 50 Pro (8/256GB)",
+  fullname:"Infinix Note 50 Pro 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
-  image: "/phones/infinix-note-50-pro-8-256.jpg",
+  image: "/phones/infinix-note-50-pro-8-256.webp",
   from: "KSh 31,999",
   deposit: "KSh 6,000",
   daily: "KSh 180",
   totalPrice: "KSh 38,000",
-  source: "/phones/infinix-note-50-pro.webp",
+  source: "/phones/infinix-hot-50-pro-8-128.webp",
   discount: "-5%",
   display: "block",
   phonedisplay: "6.78″ AMOLED, 144Hz",
@@ -1168,13 +1184,14 @@ export const products = [
   {
   id: 11,
   name: "Infinix Hot 50 Pro (8/128GB)",
+  fullname:"Infinix Hot 50 Pro 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
-  image: "/phones/infinix-hot-50-pro-8-128.jpg",
+  image: "/phones/infinix-hot-50-pro-8-128.webp",
   from: "KSh 19,000",                   
   deposit: "KSh 4,000",
   daily: "KSh 120",
   totalPrice: "KSh 24,000",
-  source: "/phones/infinix-hot-50-pro.webp",
+  source: "/phones/infinix-hot-50-pro-8-128.webp",
   discount: "-0%",
   display: "block",
   phonedisplay: "6.78″ AMOLED, 120Hz",
@@ -1278,6 +1295,7 @@ export const products = [
   {
   id: 4,
   name: "Infinix Hot 60i (8/256GB)",
+  fullname:"Infinix Hot 60i 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/infinix-hot-60i-8-256.jpg",
   from: "KSh 15,500",
@@ -1385,13 +1403,14 @@ export const products = [
 {
   id: 5,
   name: "Infinix Smart 9 (4/128GB)",
+  fullname:"Infinix Smart 9 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
-  image: "/phones/infinix-smart-9-4-128.jpg",
+  image: "/phones/infinix-smart-9-4-128.webp",
   from: "KSh 12,300",
   deposit: "KSh 3,500",
   daily: "KSh 90",
   totalPrice: "KSh 16,000",
-  source: "/phones/infinix-smart-9.webp",
+  source: "/phones/infinix-smart-9-4-128.webp",
   discount: "-0%",
   display: "block",
   phonedisplay: "6.7″ HD+ display",
@@ -1494,13 +1513,14 @@ export const products = [
 {
   id: 6,
   name: "Infinix GT 30 Pro (12/256GB)",
+  fullname:"Infinix GT 30 Pro 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
   image: "/phones/infinix-gt-30-pro-12-256.jpg",
   from: "KSh 39,999",
   deposit: "KSh 10,000",
   daily: "KSh 300",
   totalPrice: "KSh 50,000",
-  source: "/phones/infinix-gt-30-pro.webp",
+  source: "/phones/infinix-gt-30-pro-12-256.webp",
   discount: "-0%",
   display: "block",
   phonedisplay: "6.78″ AMOLED, 144Hz",
@@ -1604,6 +1624,7 @@ export const products = [
   {
   id: 7,
   name: "Infinix Smart 9 HD (3/64GB or 4/64GB)",
+  fullname:"Infinix Smart 9 6.67 Inches, 64GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
   image: "/phones/infinix-smart-9-hd-3-64.jpg",
   from: "KSh 7,999",
@@ -1711,13 +1732,14 @@ export const products = [
   {
   id: 8,
   name: "Infinix Smart 10 (3-4/64-128GB)",
+  fullname:"Infinix Smart 10 6.67 Inches, 64GB ROM + 3-4GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
   image: "/phones/infinix-smart-10-4-64.jpg",
   from: "KSh 9,500",                         
   deposit: "KSh 3,000",                      
   daily: "KSh 90",                           
   totalPrice: "KSh 14,000",                  
-  source: "/phones/infinix-smart-10.webp",
+  source: "/phones/infinix-smart-10-4-64.webp",
   discount: "-5%",                          
   display: "block",
   phonedisplay: "6.67″ IPS LCD",
@@ -1825,13 +1847,14 @@ export const products = [
 {
   id: 9,
   name: "Infinix Note 50S 5G (8/256GB)",
+  fullname:"Infinix Note 50S 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
   image: "/phones/infinix-note-50s-5g-8-256.jpg",
   from: "KSh 32,250",
   deposit: "KSh 8,000",
   daily: "KSh 250",
   totalPrice: "KSh 40,000",
-  source: "/phones/infinix-note-50s-5g.webp",
+  source: "/phones/infinix-note-50s-5g-8-256.webp",
   discount: "-0%",
   display: "block",
   phonedisplay: "6.78″ Curved AMOLED, 144Hz",
@@ -1939,6 +1962,7 @@ export const products = [
   {
   id: 1,
   name: "Tecno Spark 9 Pro (4GB/128GB)",
+  fullname:"Tecno Spark 9 Pro 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
   image: "/phones/tecno_spark_9_pro.jpg",
   from: "KSh 6,400",
@@ -2058,8 +2082,9 @@ export const products = [
   {
   id: 2,
   name: "Tecno Camon 20 Pro (8GB/256GB)",
+  fullname:"Tecno Camon 20 Pro 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
-  image: "/phones/tecno_camon_20_pro.jpg",
+  image: "/phones/tecno_camon_20_pro.webp",
   from: "KSh 23,000",
   deposit: "KSh 6,500",
   daily: "KSh 200",
@@ -2179,6 +2204,7 @@ export const products = [
 {
   id: 1,
   name: "Tecno Spark 9 Pro (4GB/128GB)",
+  fullname:"Tecno Spark 9 Pro  6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
   image: "/phones/tecno_spark_9_pro.jpg",
   from: "KSh 6,400",
@@ -2284,6 +2310,7 @@ export const products = [
   {
   id: 2,
   name: "Tecno Camon 20 (8GB/256GB)",
+  fullname:"Tecno Camon 20  6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
   status: "New",
   image: "/phones/tecno_camon_20.jpg",
   from: "KSh 15,000",
@@ -2388,6 +2415,7 @@ export const products = [
 {
   id: 3,
   name: "Tecno Camon 20 Pro (8GB/256GB)",
+  fullname:"Tecno Camon 20 Pro 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
   status: "New",
   image: "/phones/tecno_camon_20_pro.jpg",
   from: "KSh 23,000",
@@ -2493,6 +2521,8 @@ export const products = [
 {
   id: 4,
   name: "Tecno Camon 20 Premier 5G",
+  fullname:"Tecno Camon 20 5G 6.67 Inches, 512GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+
   status: "New",
   image: "/phones/tecno_camon_20_premier.jpg",
   from: "KSh 30,999",
@@ -2599,6 +2629,7 @@ export const products = [
   {
   id: 5,
   name: "Tecno Spark 20 (8GB/128GB)",
+  fullname:"Tecno Spark 20 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/tecno_spark_20.jpg",
   from: "KSh 9,300",
@@ -2703,6 +2734,8 @@ export const products = [
   {
   id: 6,
   name: "Tecno Spark 20C (4GB/128GB)",
+  fullname:"Tecno Spark 20C 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
+
   status: "New",
   image: "/phones/tecno_spark_20c.jpg",
   from: "KSh 6,800",
@@ -2803,6 +2836,7 @@ export const products = [
   {
   id: 7,
   name: "Tecno Spark 10 Pro (8GB/128GB)",
+  fullname:"Tecno Spark 10 Pro 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/tecno_spark_10_pro.jpg",
   from: "KSh 17,500",
@@ -2904,6 +2938,7 @@ export const products = [
   {
   id: 8,
   name: "Tecno Megaphone 19",
+  fullname:"Tecno Megaphone 19 6.67 Inches, 32GB ROM + 2GB RAM, Battery: 4000mAh (Dual SIM)",
   status: "New",
   image: "/phones/tecno_megaphone_19.jpg",
   from: "KSh 6,500",
@@ -3004,13 +3039,14 @@ export const products = [
   {
   id: 9,
   name: "Tecno Spark 10C",
+  fullname:"Tecno Spark 10C 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/tecno_spark_10c.jpg",
   from: "KSh 11,500",
   deposit: "KSh 3,000",
   daily: "KSh 95",
   totalPrice: "KSh 11,500",
-  source: "/phones/tecno_spark_10c.webp",
+  source: "/phones/tecno_spark_10_pro.webp",
   discount: "7%",
   display: "block",
   phonedisplay: "6.6″ HD+ LCD, 90Hz refresh rate",
@@ -3105,6 +3141,7 @@ export const products = [
 {
   id: 10,
   name: "Tecno Spark Go 2023",
+  fullname:"Tecno Spark Go 2023 5G 6.67 Inches, 64GB ROM + 3GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
   image: "/phones/tecno_spark_go_2023.jpg",
   from: "KSh 9,999",
@@ -3206,6 +3243,7 @@ export const products = [
 {
   id: 11,
   name: "Tecno Phantom X2 Pro",
+  fullname:"Tecno Phantom X2 Pro 6.67 Inches, 256GB 12ROM + 4GB RAM, Battery: 5160mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/tecno_phantom_x2_pro.jpg",
   from: "KSh 68,000",
@@ -3319,13 +3357,13 @@ export const products = [
 {
   id: 12,
   name: "Tecno Phantom V Fold",
+  fullname:"Tecno Phantom V Fold 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/tecnophantom.jpg",
   from: "KSh 120,000",
   deposit: "KSh 35,000",
   daily: "KSh 500",
     discount: "7%",
-
   totalPrice: "KSh 120,000",
   source: "/phones/tecnophantom.webp",
   display: "block",
@@ -3429,14 +3467,13 @@ export const products = [
 {
   id: 13,
   name: "Tecno Spark 8C",
+  fullname:"Tecno Spark 8C 6.67 Inches, 64GB ROM + 3GB RAM, Battery: 5100mAh (Dual SIM) 13MP",
   status: "New",
   image: "/phones/tecno_spark_8c.jpg",
   from: "KSh 10,500",
   deposit: "KSh 3,000",
     discount: "7%",
       color: "Mars Orange / Stardust Grey",
-
-
   daily: "KSh 100",
   totalPrice: "KSh 10,500",
   source: "/phones/tecno_spark_8c.webp",
@@ -3541,13 +3578,12 @@ export const products = [
 {
   id: 14,
   name: "Tecno Pova Neo 2",
+  fullname:"Tecno Pova Neo 2 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 16MP",
   status: "New",
   image: "/phones/tecno_pova_neo2.jpg",
   from: "KSh 19,000",
-    discount: "7%",
-      color: "Mars Orange / Stardust Grey",
-
-
+  discount: "7%",
+  color: "Mars Orange / Stardust Grey",
   deposit: "KSh 5,500",
   daily: "KSh 150",
   totalPrice: "KSh 19,000",
@@ -3658,6 +3694,7 @@ export const products = [
   {
   id: 1,
   name: "Vivo V60 5G",
+  fullname:"Vivo V60 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_v60_5g.jpg",
   from: "KSh 12,900",
@@ -3772,6 +3809,7 @@ export const products = [
   {
   id: 2,
   name: "Vivo V50 Lite 5G",
+  fullname:"Vivo V50 Lite 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_v50_lite_5g.jpg",
   from: "KSh 7,800",
@@ -3887,6 +3925,7 @@ export const products = [
   {
   id: 3,
   name: "Vivo Y04",
+  fullname:"Vivo Y04 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 13MP",
   status: "New",
   image: "/phones/vivo_y04.jpg",
   from: "KSh 3,100",
@@ -4000,6 +4039,7 @@ export const products = [
   {
   id: 4,
   name: "Vivo V50 5G",
+  fullname:"Vivo V50 5G 6.67 Inches, 512GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_v50_5g.jpg",
   from: "KSh 14,000",
@@ -4113,6 +4153,7 @@ export const products = [
   {
   id: 5,
   name: "Vivo Y29",
+  fullname:"Vivo Y29 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_y29.jpg",
   from: "KSh 5,600",
@@ -4226,6 +4267,7 @@ export const products = [
   {
   id: 6,
   name: "Vivo Y19s",
+  fullname:"Vivo Y19s 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_y19s.jpg",
   from: "KSh 4,000",
@@ -4338,6 +4380,7 @@ export const products = [
 ,{
   id: 7,
   name: "Vivo V40",
+  fullname:"Vivo V40 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_v40.jpg",
   from: "KSh 12,400",
@@ -4451,6 +4494,7 @@ export const products = [
   {
   id: 8,
   name: "Vivo Y18",
+  fullname:"Vivo Y18 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_y18.jpg",
   from: "KSh 3,800",
@@ -4564,6 +4608,7 @@ export const products = [
   {
   id: 9,
   name: "Vivo Y03",
+  fullname:"Vivo Y03 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_y03.jpg",
   from: "KSh 2,600",
@@ -4677,6 +4722,7 @@ export const products = [
   {
   id: 10,
   name: "Vivo Y28",
+  fullname:"Vivo Y28 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_y28.jpg",
   from: "KSh 5,600",
@@ -4789,6 +4835,7 @@ export const products = [
   {
   id: 11,
   name: "Vivo Y27s",
+  fullname:"Vivo Y27s 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/vivo_y27s.jpg",
   from: "KSh 5,000",
@@ -4897,9 +4944,3477 @@ export const products = [
       }
     ]
   }
-}
+},
+
+{
+  id: 2,
+  name: "Tecno Spark 40",
+  fullname:"Tecno Spark 40 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/tecno_spark_40.jpg",
+  from: "KSh 3,200",
+  deposit: "KSh 3,800",
+  daily: "KSh 85",
+  totalPrice: "KSh 17,000",
+  source: "/phones/tecno_spark_40.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.6\" HD+ (1612 × 720)",
+  processor: "MediaTek Helio G88 Octa-core",
+  camera: "50MP + AI Lens (rear), 8MP (front)",
+  memory: "128GB / 6GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 33W Fast Charging",
+  version: "Android 14, HiOS 14",
+  depositanddaily: "KSh 3,800 Daily KSh 85",
+  slug: "tecno-spark-40",
+  slugs: "tecno-spark-40",
+  description: "Buy Tecno Spark 40 on credit in Kenya. Affordable lipa mdogo mdogo smartphone with big battery, smooth performance, and a vibrant HD+ display. Available via MKOPA, Watu Simu, and other trusted sellers.",
+  brand: "Tecno",
+  seller: "Watu Simu",
+  model: "KH7",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Watu Simu"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Tecno Spark 40 features a sleek matte finish with rounded corners and a triple-camera ring design inspired by flagship phones. Measuring 163.9 × 75.4 × 8.4mm, it feels comfortable in hand and comes in Gravity Black, Galaxy Blue, and Sunlight Gold.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy an immersive 6.6-inch HD+ display with 90Hz refresh rate for smooth scrolling and gaming. Its 720 × 1612 resolution produces vivid visuals and crisp details, ideal for videos, games, and social media.`,
+    },
+    {
+      title: "Camera System",
+      content: `The Tecno Spark 40 sports a 50MP main camera supported by an AI lens for enhanced clarity and depth. The 8MP selfie camera comes with dual flash and AI portrait features, ensuring sharp selfies even in low light.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the MediaTek Helio G88 processor and 6GB of RAM (expandable via Memory Fusion), the Spark 40 offers lag-free multitasking and gaming. Combined with HiOS 14 optimizations, it ensures responsive and fluid performance.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 14 with HiOS 14, the Spark 40 provides a smart, intuitive experience with improved privacy controls, customizable themes, and AI-powered productivity tools.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `The phone comes with 128GB of storage and 6GB RAM, expandable via MicroSD up to 1TB. Easily store photos, videos, and apps without worrying about space.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 5000mAh battery ensures all-day power with 33W fast charging support. Charge from 0% to 50% in just 28 minutes and enjoy efficient battery management for longer use.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Includes 4G LTE, dual SIM, Wi-Fi, Bluetooth 5.2, GPS, USB Type-C, and a side-mounted fingerprint sensor. Also features Face Unlock, accelerometer, and proximity sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Bright 90Hz HD+ display",
+        "Strong 50MP AI camera",
+        "Fast 33W charging",
+        "Smooth Helio G88 performance",
+        "Large 5000mAh battery"
+      ],
+      cons: [
+        "Plastic body",
+        "No 5G support",
+        "Display not Full HD"
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Tecno Spark 40 combines elegant design, capable performance, and great battery life at an affordable price. Perfect for students, first-time smartphone users, or anyone looking for reliable daily performance.`,
+    },
+  ],
+
+  color: "Gravity Black, Galaxy Blue, Sunlight Gold",
+  weight: "190g",
+  dimensions: {
+    length: "163.9mm",
+    width: "75.4mm",
+    height: "8.4mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Tecno Spark",
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 34,
+    reviews: [
+      {
+        author: "Kevin O.",
+        rating: 5,
+        reviewBody: "The 90Hz screen and camera are impressive for this price range.",
+        datePublished: "2025-02-03"
+      },
+      {
+        author: "Mary N.",
+        rating: 4,
+        reviewBody: "Charges very fast and battery lasts the whole day.",
+        datePublished: "2025-03-12"
+      }
+    ]
+  }
+},
 
 
+{
+  id: 3,
+  name: "Infinix Hot 60i",
+  fullname:"Infinix Hot 60i 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/infinix_hot_60i.jpg",
+  from: "KSh 3,400",
+  deposit: "KSh 4,000",
+  daily: "KSh 90",
+  totalPrice: "KSh 18,500",
+  source: "/phones/infinix_hot_60i.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.6\" HD+ (1612 × 720)",
+  processor: "Unisoc T606 Octa-core",
+  camera: "50MP (rear), 8MP (front)",
+  memory: "128GB / 8GB RAM (4GB+4GB Extended), MicroSD up to 1TB",
+  battery: "5000mAh, 18W Type-C Fast Charging",
+  version: "Android 14, XOS 14",
+  depositanddaily: "KSh 4,000 Daily KSh 90",
+  slug: "infinix-hot-60i",
+  slugs: "infinix-hot-60i",
+  description: "Buy Infinix Hot 60i on credit in Kenya. Lipa mdogo mdogo smartphone with large storage, fast charging, and a smooth 90Hz display. Available from Mkopa, Watu Simu & other approved sellers.",
+  brand: "Infinix",
+  seller: "Mkopa",
+  model: "X6525",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Infinix Hot 60i features a sleek, minimalist design with a geometric pattern on the back. It has a glass-like finish and premium feel, measuring 163.8 × 75.6 × 8.4mm. Available in Glacier Blue, Timber Black, and Palm Green, it balances aesthetics with practicality.`,
+    },
+    {
+      title: "Display",
+      content: `Experience smooth visuals on the 6.6-inch HD+ display featuring a 90Hz refresh rate. The 720 × 1612 resolution provides crisp colors and sharp contrast, making it ideal for streaming, gaming, and browsing.`,
+    },
+    {
+      title: "Camera System",
+      content: `The Infinix Hot 60i comes equipped with a 50MP main AI camera that captures vibrant and detailed shots. The 8MP front camera includes AI beautification, dual flash, and portrait enhancement for quality selfies even in low light.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Unisoc T606 Octa-core processor, the Hot 60i delivers responsive performance for everyday use. With 8GB of RAM (4GB physical + 4GB extended) and XOS 14 optimizations, multitasking and gaming are smooth and efficient.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running on Android 14 with XOS 14, the interface is sleek and feature-packed. Users enjoy enhanced privacy options, game boosters, and battery optimization tools that extend usability throughout the day.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `The Hot 60i offers 128GB of internal storage and supports MicroSD expansion up to 1TB. Store thousands of photos, apps, and videos without running out of space.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `Equipped with a durable 5000mAh battery and 18W Type-C fast charging, the Hot 60i offers full-day power. It charges up to 50% in around 35 minutes, ensuring minimal downtime for active users.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Supports dual 4G SIM, Wi-Fi, Bluetooth 5.0, GPS, and USB Type-C connectivity. Includes side-mounted fingerprint sensor, Face Unlock, accelerometer, and proximity sensors for reliable, secure usability.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Smooth 90Hz HD+ display",
+        "Large 5000mAh battery",
+        "Good 50MP main camera",
+        "Ample 8GB RAM (extended)",
+        "Modern design with Type-C charging"
+      ],
+      cons: [
+        "No 5G connectivity",
+        "Plastic back panel",
+        "Average low-light selfies"
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Infinix Hot 60i is a well-rounded budget smartphone that delivers excellent value with solid performance, stylish looks, and dependable battery life. Ideal for students and professionals who need a reliable daily driver.`,
+    },
+  ],
+
+  color: "Glacier Blue, Palm Green, Timber Black",
+  weight: "192g",
+  dimensions: {
+    length: "163.8mm",
+    width: "75.6mm",
+    height: "8.4mm"
+  },
+  material: "Plastic",
+  pattern: "Geometric",
+  productLine: "Infinix Hot",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 41,
+    reviews: [
+      {
+        author: "Dennis L.",
+        rating: 5,
+        reviewBody: "Fast and reliable for my daily work. Great battery life too.",
+        datePublished: "2025-03-02"
+      },
+      {
+        author: "Faith W.",
+        rating: 4,
+        reviewBody: "I love the smooth screen and camera quality for this price.",
+        datePublished: "2025-03-19"
+      }
+    ]
+  }
+},
+
+
+
+{
+  id: 4,
+  name: "Samsung Galaxy A16",
+  fullname:"Samsung Galaxy A16 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_a16.jpg",
+  from: "KSh 5,200",
+  deposit: "KSh 4,500",
+  daily: "KSh 110",
+  totalPrice: "KSh 22,000",
+  source: "/phones/samsung_galaxy_a16.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.7\" FHD+ Super AMOLED (2400 × 1080)",
+  processor: "MediaTek Helio G99 Octa-core",
+  camera: "50MP + 5MP + 2MP (rear), 13MP (front)",
+  memory: "128GB / 8GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 25W Fast Charging",
+  version: "Android 14, One UI 6.1",
+  depositanddaily: "KSh 4,500 Daily KSh 110",
+  slug: "samsung-galaxy-a16",
+  slugs: "samsung-galaxy-a16",
+  description: "Buy Samsung Galaxy A16 on credit in Kenya. Stylish design, bright AMOLED display, and long-lasting battery. Lipa mdogo mdogo with flexible payments through Mkopa, Watu Simu, and other trusted partners.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-A165F",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy A16 sports a refined matte finish with minimalist triple camera rings on the back. Measuring 163.7 × 77.1 × 8.4mm and weighing 193g, it offers a comfortable grip and modern aesthetic. Available in Black, Mint, and Violet, it brings premium Samsung style to an affordable range.`,
+    },
+    {
+      title: "Display",
+      content: `Experience vivid visuals on the 6.7-inch FHD+ Super AMOLED display with a 90Hz refresh rate. Enjoy deeper blacks, richer colors, and fluid scrolling for immersive gaming and video experiences.`,
+    },
+    {
+      title: "Camera System",
+      content: `The Galaxy A16 features a triple rear camera setup: a 50MP main lens for high-detail shots, a 5MP ultra-wide camera for landscapes, and a 2MP depth sensor for beautiful portrait effects. The 13MP front camera captures stunning selfies with AI optimization.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the efficient MediaTek Helio G99 processor and 8GB RAM, the A16 handles everyday apps, multitasking, and light gaming with ease. Samsung’s One UI ensures optimized performance and smooth animations.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 14 with One UI 6.1, the A16 delivers a polished and intuitive interface. Enjoy advanced customization, privacy dashboard, and Samsung Knox security for data protection.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `The phone includes 128GB of internal storage expandable up to 1TB via MicroSD, giving you ample space for apps, photos, and videos without slowing down performance.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `Stay powered all day with a 5000mAh battery supported by 25W fast charging. The adaptive power management feature intelligently extends battery life and reduces idle drain.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `The Galaxy A16 supports dual 4G SIM, Wi-Fi, Bluetooth 5.3, GPS, and USB Type-C. It includes essential sensors such as accelerometer, proximity, compass, side-mounted fingerprint, and Face Unlock.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Bright 6.7″ FHD+ Super AMOLED display",
+        "Strong Helio G99 processor",
+        "Solid 50MP triple camera setup",
+        "Samsung Knox security features",
+        "Reliable 25W fast charging"
+      ],
+      cons: [
+        "No 5G connectivity",
+        "Plastic back frame",
+        "Slightly heavy at 193g"
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy A16 delivers an excellent balance of performance, style, and display quality at an affordable price point. Ideal for professionals and students who want premium Samsung quality on a budget.`,
+    },
+  ],
+
+  color: "Black, Mint, Violet",
+  weight: "193g",
+  dimensions: {
+    length: "163.7mm",
+    width: "77.1mm",
+    height: "8.4mm"
+  },
+  material: "Plastic Frame, Glass Front",
+  pattern: "Matte Finish",
+  productLine: "Samsung Galaxy A",
+  reviews: {
+    averageRating: 4.8,
+    reviewCount: 53,
+    reviews: [
+      {
+        author: "Brian K.",
+        rating: 5,
+        reviewBody: "Super bright display and long battery life. Worth every shilling!",
+        datePublished: "2025-03-21"
+      },
+      {
+        author: "Lydia N.",
+        rating: 4,
+        reviewBody: "Smooth experience, amazing camera quality for a midrange phone.",
+        datePublished: "2025-04-05"
+      }
+    ]
+  }
+},
+
+
+
+{
+  id: 5,
+  name: "Samsung Galaxy A05",
+  fullname:"Samsung Galaxy A05 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_a05.jpg",
+  from: "KSh 3,900",
+  deposit: "KSh 3,800",
+  daily: "KSh 95",
+  totalPrice: "KSh 19,500",
+  source: "/phones/Samsung-Galaxy-A05.webp",
+  discount: "-9%",
+  display: "block",
+  phonedisplay: "6.7\" PLS LCD HD+ (1600 × 720)",
+  processor: "MediaTek Helio G85 Octa-core",
+  camera: "50MP + 2MP (rear), 8MP (front)",
+  memory: "128GB / 6GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 25W Fast Charging",
+  version: "Android 14, One UI Core 6",
+  depositanddaily: "KSh 3,800 Daily KSh 95",
+  slug: "samsung-galaxy-a05",
+  slugs: "samsung-galaxy-a05",
+  description: "Buy Samsung Galaxy A05 on credit in Kenya. Affordable Samsung phone with a large 6.7-inch screen, smooth performance, and a long-lasting 5000mAh battery. Lipa mdogo mdogo via Mkopa, Watu Simu, or other approved sellers.",
+  brand: "Samsung",
+  seller: "Watu Simu",
+  model: "SM-A055F",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy A05 features a modern design with a clean matte finish and smooth curved edges for a comfortable grip. Measuring 168.8 × 78.2 × 8.8mm, it feels sturdy yet elegant. Available in Black, Silver, and Light Green, it looks premium despite its budget price.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy vibrant visuals on the large 6.7-inch PLS LCD HD+ display. Its 1600 × 720 resolution offers sharp and colorful viewing for streaming, social media, and gaming, making it ideal for entertainment on the go.`,
+    },
+    {
+      title: "Camera System",
+      content: `Capture every moment with the 50MP main rear camera supported by a 2MP depth sensor for portrait shots. The 8MP front camera delivers bright and clear selfies, while Samsung’s AI enhancements optimize photos in real-time.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the MediaTek Helio G85 processor and 6GB RAM, the Galaxy A05 offers stable performance for daily tasks and light gaming. Combined with One UI Core 6, it ensures a responsive and intuitive experience.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running on Android 14 with One UI Core 6, the A05 provides a simple and optimized interface. Enjoy essential Samsung features, improved security, and smooth app transitions.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 128GB of internal storage and supports MicroSD cards up to 1TB. You’ll have plenty of space for apps, photos, and downloads without running into storage issues.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `With its 5000mAh battery and 25W fast charging, the A05 offers dependable all-day power. Recharging from 0% to 50% takes just about 30 minutes, letting you stay connected longer.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Supports dual SIM, 4G LTE, Wi-Fi, Bluetooth 5.3, GPS, and USB Type-C. Equipped with Face Unlock, accelerometer, and proximity sensor for convenience and safety.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Large and bright 6.7″ HD+ display",
+        "Strong 50MP main camera",
+        "Reliable Helio G85 processor",
+        "Solid 5000mAh battery with 25W charging",
+        "Ample 128GB storage with 1TB expansion"
+      ],
+      cons: [
+        "No fingerprint sensor",
+        "Display is HD+ not FHD",
+        "Plastic body design"
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy A05 is an excellent entry-level smartphone combining Samsung’s reliability, smooth performance, and long battery life. A perfect choice for students or anyone upgrading from a feature phone.`,
+    },
+  ],
+
+  color: "Black, Silver, Light Green",
+  weight: "195g",
+  dimensions: {
+    length: "168.8mm",
+    width: "78.2mm",
+    height: "8.8mm"
+  },
+  material: "Plastic Frame, Glass Front",
+  pattern: "Matte Finish",
+  productLine: "Samsung Galaxy A",
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 48,
+    reviews: [
+      {
+        author: "Patrick O.",
+        rating: 5,
+        reviewBody: "Big screen, great battery, and fast charging — love it!",
+        datePublished: "2025-03-17"
+      },
+      {
+        author: "Ruth N.",
+        rating: 4,
+        reviewBody: "Good for daily use, camera performs surprisingly well.",
+        datePublished: "2025-03-29"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 15,
+  name: "Samsung Galaxy A06",
+  fullname:"Samsung Galaxy A06 5G 6.67 Inches, 64GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_a06.jpg",
+  from: "KSh 4,800",
+  deposit: "KSh 3,200",
+  daily: "KSh 92",
+  totalPrice: "KSh 20,000",
+  source: "/phones/Samsung-Galaxy-A06.webp",
+  discount: "-7%",
+  display: "block",
+  phonedisplay: "6.5\" HD+ (1600 × 720)",
+  processor: "Octa-core (2x2.0 GHz + 6x1.8 GHz)",
+  camera: "50MP (main) + 2MP (depth) rear, 8MP front",
+  memory: "64GB / 4GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 15W Fast Charging",
+  version: "Android 14, One UI Core 6",
+  depositanddaily: "KSh 3,200 Daily KSh 92",
+  slug: "samsung-galaxy-a06",
+  slugs: "samsung-galaxy-a06",
+  description: "Buy Samsung Galaxy A06 on credit in Kenya. Affordable, reliable daily driver with a large battery, vivid display and a capable 50MP camera. Lipa mdogo mdogo options available via Mkopa, Watu Simu and other trusted partners.",
+  brand: "Samsung",
+  seller: "Watu Simu",
+  model: "SM-A065F",
+  storage: "64GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy A06 features a clean, modern design with a matte back finish and slim bezels. It measures 164.8 × 76.3 × 8.6mm and weighs 188g, offering a comfortable one-handed grip. Available in Black, Sea Glass Green and Ice Blue, the A06 balances a premium look with a practical plastic build.`
+    },
+    {
+      title: "Display",
+      content: `Enjoy clear visuals on the 6.5-inch HD+ display with a 1600 × 720 resolution. The panel provides good brightness for outdoor use and accurate colors for streaming and browsing, making it suitable for everyday multimedia consumption.`
+    },
+    {
+      title: "Camera System",
+      content: `The A06 comes with a 50MP main rear sensor for detailed daylight shots and a 2MP depth sensor for portrait bokeh. The 8MP front camera handles selfies and video calls reliably with built-in beauty and portrait modes. Low-light performance is decent thanks to software optimizations.`
+    },
+    {
+      title: "Performance",
+      content: `Powered by an efficient octa-core chipset and 4GB RAM, the Galaxy A06 performs well for daily tasks, social apps and light gaming. Memory management in One UI Core 6 keeps background apps responsive while keeping battery use low.`
+    },
+    {
+      title: "Operating System",
+      content: `Runs Android 14 with One UI Core 6, delivering a simplified Samsung experience with essential features, enhanced privacy controls, and Samsung's device care tools to optimize battery and storage.`
+    },
+    {
+      title: "Storage and Memory",
+      content: `Ships with 64GB of internal storage and 4GB RAM, expandable via microSD up to 1TB. This gives users room for apps, photos and media while keeping the base price accessible.`
+    },
+    {
+      title: "Battery and Charging",
+      content: `A 5000mAh battery provides reliable all-day usage under mixed activity. The device supports 15W fast charging through USB-C; typical users can expect a full day of moderate use on a single charge.`
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 4G LTE, dual SIM support, Wi-Fi, Bluetooth 5.0, GPS and USB Type-C. Sensors include an accelerometer, proximity sensor and a rear-mounted fingerprint scanner for secure and quick unlocking.`
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Large 5000mAh battery with reliable endurance",
+        "50MP main camera for sharp daytime photos",
+        "Expandable storage up to 1TB",
+        "Comfortable ergonomic design",
+        "One UI Core for clean Samsung experience"
+      ],
+      cons: [
+        "Display is HD+ not Full HD",
+        "No 5G support",
+        "Plastic construction (not glass)"
+      ]
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy A06 is a practical, budget-friendly smartphone that prioritizes battery life and dependable cameras. It’s an excellent choice for users who want a simple, trustworthy device for daily use without premium pricing.`
+    }
+  ],
+
+  color: "Black, Sea Glass Green, Ice Blue",
+  weight: "188g",
+  dimensions: {
+    length: "164.8mm",
+    width: "76.3mm",
+    height: "8.6mm"
+  },
+  material: "Plastic (back & frame), Glass front",
+  pattern: "Matte",
+  productLine: "Samsung Galaxy A",
+  reviews: {
+    averageRating: 4.4,
+    reviewCount: 18,
+    reviews: [
+      {
+        author: "Alice M.",
+        rating: 5,
+        reviewBody: "Great battery life and the camera is surprisingly good for the price.",
+        datePublished: "2025-04-10"
+      },
+      {
+        author: "Paul K.",
+        rating: 4,
+        reviewBody: "Solid daily driver; display could be sharper but the overall experience is clean.",
+        datePublished: "2025-05-02"
+      }
+    ]
+  }
+},
+
+{
+  id: 16,
+  name: "Samsung Galaxy A07",
+  fullname:"Samsung Galaxy A07 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_a07.jpg",
+  from: "KSh 5,200",
+  deposit: "KSh 3,800",
+  daily: "KSh 98",
+  totalPrice: "KSh 21,000",
+  source: "/phones/samsung_galaxy_a07.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.6\" FHD+ Super AMOLED (2408 × 1080)",
+  processor: "Octa-core (2x2.2 GHz + 6x2.0 GHz)",
+  camera: "50MP (main) + 5MP (ultrawide) + 2MP (depth) rear, 13MP front",
+  memory: "128GB / 6GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 25W Fast Charging",
+  version: "Android 14, One UI Core 6.1",
+  depositanddaily: "KSh 3,800 Daily KSh 98",
+  slug: "samsung-galaxy-a07",
+  slugs: "samsung-galaxy-a07",
+  description: "Buy Samsung Galaxy A07 on credit in Kenya. Enjoy a bright Super AMOLED display, reliable battery, and versatile triple camera system. Lipa mdogo mdogo available through trusted partners like Mkopa and Watu Simu.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-A075F",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy A07 brings a refreshed design with sleek flat edges, a glossy matte back finish, and refined camera housing. It measures 165.1 × 76.8 × 8.4mm and weighs around 190g, offering both comfort and style. Available in Graphite, Lime, and Silver.`
+    },
+    {
+      title: "Display",
+      content: `The device sports a 6.6-inch FHD+ Super AMOLED display with a 90Hz refresh rate, providing vibrant colors and smooth scrolling. Ideal for watching videos, gaming, and social media use.`
+    },
+    {
+      title: "Camera System",
+      content: `Equipped with a triple rear camera setup — a 50MP main lens, 5MP ultrawide, and 2MP depth sensor — the A07 captures versatile shots in different lighting conditions. The 13MP front camera ensures sharp selfies with natural tones.`
+    },
+    {
+      title: "Performance",
+      content: `Powered by an efficient octa-core processor and 6GB of RAM, the Galaxy A07 handles daily multitasking with ease. Apps open quickly and transitions are smooth thanks to Samsung's optimization on One UI Core 6.1.`
+    },
+    {
+      title: "Operating System",
+      content: `Ships with Android 14 and One UI Core 6.1, providing a clean interface, enhanced privacy options, and reliable system performance. Samsung promises at least two years of software updates.`
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 128GB of internal storage, expandable up to 1TB via microSD. Suitable for users who store many photos, videos, and applications.`
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 5000mAh battery ensures full-day power even with heavy use. Supports 25W fast charging through USB-C, allowing quick top-ups for busy users.`
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Features dual SIM slots, 4G LTE connectivity, Bluetooth 5.3, Wi-Fi, GPS, and a USB Type-C port. Includes side-mounted fingerprint sensor, accelerometer, and proximity sensors for reliable daily use.`
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Bright and vibrant Super AMOLED display",
+        "Strong 50MP camera with ultrawide support",
+        "25W fast charging capability",
+        "Excellent storage and memory options",
+        "Modern flat-edge design"
+      ],
+      cons: [
+        "No 5G connectivity",
+        "Plastic back prone to fingerprints",
+        "No stereo speakers"
+      ]
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy A07 is a solid upgrade in Samsung’s budget lineup, offering a high-quality display, dependable performance, and excellent camera flexibility — all at an accessible price. Ideal for users seeking value and long-term reliability.`
+    }
+  ],
+
+  color: "Graphite, Lime, Silver",
+  weight: "190g",
+  dimensions: {
+    length: "165.1mm",
+    width: "76.8mm",
+    height: "8.4mm"
+  },
+  material: "Plastic back & frame, Glass front",
+  pattern: "Glossy matte",
+  productLine: "Samsung Galaxy A",
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 23,
+    reviews: [
+      {
+        author: "John M.",
+        rating: 5,
+        reviewBody: "Loving the AMOLED screen and battery life. Feels premium for the price!",
+        datePublished: "2025-06-14"
+      },
+      {
+        author: "Diana K.",
+        rating: 4,
+        reviewBody: "Smooth performance and great camera, but I wish it had 5G.",
+        datePublished: "2025-07-02"
+      }
+    ]
+  }
+},
+
+{
+  id: 17,
+  name: "Tecno Pop 10",
+  fullname:"Tecno Pop 10 6.67 Inches, 64GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
+  status: "New",
+  image: "/phones/tecno_pop_10.jpg",
+  from: "KSh 3,900",
+  deposit: "KSh 2,000",
+  daily: "KSh 75",
+  totalPrice: "KSh 13,500",
+  source: "/phones/tecno-pop-10.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.56\" HD+ (1612 × 720) IPS LCD",
+  processor: "MediaTek Helio G35 Octa-core",
+  camera: "13MP (main) + AI Lens (rear), 8MP (front)",
+  memory: "64GB / 4GB RAM, MicroSD up to 512GB",
+  battery: "5000mAh, 10W Charging",
+  version: "Android 14 (HiOS 14)",
+  depositanddaily: "KSh 2,000 Daily KSh 75",
+  slug: "tecno-pop-10",
+  slugs: "tecno-pop-10",
+  description: "Buy Tecno Pop 10 on credit in Kenya. A sleek budget smartphone with big battery, large display, and AI-powered camera. Lipa mdogo mdogo available from Mkopa and other partners.",
+  brand: "Tecno",
+  seller: "Mkopa",
+  model: "BE8",
+  storage: "64GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Tecno Pop 10 features a stylish flat-edge design with a smooth gradient back and dual camera housing. It measures 164.4 × 75.8 × 8.7mm, offering a comfortable grip and lightweight build. Available in Ice Blue, Midnight Black, and Mint Green finishes.`
+    },
+    {
+      title: "Display",
+      content: `The 6.56-inch HD+ IPS LCD screen provides bright visuals and natural colors for daily use. Its 90Hz refresh rate makes scrolling and animations fluid, while Eye Care Mode helps reduce blue light strain.`
+    },
+    {
+      title: "Camera System",
+      content: `The Pop 10 packs a 13MP main rear camera with AI enhancements and a secondary AI lens for depth and scene detection. The 8MP front camera delivers detailed selfies with HDR optimization and portrait mode support.`
+    },
+    {
+      title: "Performance",
+      content: `Powered by the MediaTek Helio G35 processor with 4GB RAM, the Pop 10 ensures stable multitasking and efficient app handling. It’s optimized for lightweight gaming, video streaming, and social apps.`
+    },
+    {
+      title: "Operating System",
+      content: `Runs on Android 14 with Tecno's HiOS 14, offering smoother animations, improved security features, and Smart Panel shortcuts for quick access.`
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 64GB of internal storage expandable up to 512GB via MicroSD. Perfect for storing photos, music, and videos without worrying about space.`
+    },
+    {
+      title: "Battery and Charging",
+      content: `The large 5000mAh battery offers full-day usage on a single charge. Supports 10W charging via USB Type-C and includes AI power optimization to extend battery health.`
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Supports dual 4G SIM, Wi-Fi, Bluetooth 5.0, GPS, and FM radio. It also includes a rear-mounted fingerprint sensor, accelerometer, and proximity sensor for everyday convenience.`
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Big 6.56-inch display with 90Hz refresh rate",
+        "Reliable 5000mAh battery life",
+        "Attractive gradient design",
+        "Expandable storage up to 512GB",
+        "Affordable for its features"
+      ],
+      cons: [
+        "Average camera in low light",
+        "No fast charging above 10W",
+        "Plastic body build"
+      ]
+    },
+    {
+      title: "Verdict",
+      content: `The Tecno Pop 10 is a great choice for budget-conscious users looking for style, battery endurance, and a smooth screen experience. Ideal for students, first-time smartphone buyers, or anyone seeking a dependable daily phone.`
+    }
+  ],
+
+  color: "Ice Blue, Midnight Black, Mint Green",
+  weight: "190g",
+  dimensions: {
+    length: "164.4mm",
+    width: "75.8mm",
+    height: "8.7mm"
+  },
+  material: "Plastic back and frame, Glass front",
+  pattern: "Gradient glossy finish",
+  productLine: "Tecno Pop Series",
+  reviews: {
+    averageRating: 4.4,
+    reviewCount: 19,
+    reviews: [
+      {
+        author: "Brian O.",
+        rating: 5,
+        reviewBody: "The phone is stylish, fast, and the battery lasts all day. Very happy with my purchase!",
+        datePublished: "2025-07-20"
+      },
+      {
+        author: "Mary N.",
+        rating: 4,
+        reviewBody: "Nice display and smooth performance for a budget phone. Camera could be better at night though.",
+        datePublished: "2025-08-05"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 18,
+  name: "HMD X2",
+  fullname:"Mkopa HMD X2 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/hmd_x2.jpg",
+  from: "KSh 5,500",
+  deposit: "KSh 3,000",
+  daily: "KSh 95",
+  totalPrice: "KSh 19,000",
+  source: "/phones/HMD-Mkopa-X2.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.56\" HD+ IPS LCD (1612 × 720)",
+  processor: "Unisoc T606 Octa-core",
+  camera: "50MP (main) + 2MP (depth) rear, 8MP front",
+  memory: "128GB / 6GB RAM, MicroSD up to 512GB",
+  battery: "5000mAh, 18W Fast Charging",
+  version: "Android 14 (HMD UI)",
+  depositanddaily: "KSh 3,000 Daily KSh 95",
+  slug: "hmd-x2",
+  slugs: "hmd-x2",
+  description: "Buy HMD X2 by Mkopa on credit in Kenya. Enjoy fast performance, elegant design, and strong battery life with flexible daily payments. Lipa mdogo mdogo made easy with Mkopa.",
+  brand: "HMD",
+  seller: "Mkopa",
+  model: "HMD-X2",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The HMD X2 showcases a modern and sturdy design with a textured matte finish that resists fingerprints. Its body measures 164.6 × 75.8 × 8.6mm and weighs 189g, offering a comfortable and balanced feel in hand. Available in Charcoal, Ocean Blue, and Sand Gold colors.`
+    },
+    {
+      title: "Display",
+      content: `Features a 6.56-inch HD+ IPS LCD display with a 90Hz refresh rate for fluid scrolling and clear visuals. Perfect for browsing, streaming, and gaming, the screen also includes adaptive brightness for outdoor use.`
+    },
+    {
+      title: "Camera System",
+      content: `The HMD X2 includes a 50MP main rear camera supported by a 2MP depth sensor for portrait shots. Its 8MP front camera captures bright, detailed selfies with AI enhancement and HDR support. Video recording supports up to 1080p at 30fps.`
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Unisoc T606 processor and 6GB of RAM, the X2 provides smooth multitasking and lag-free app performance. Ideal for users who enjoy streaming, social media, and light gaming.`
+    },
+    {
+      title: "Operating System",
+      content: `Runs on Android 14 with HMD’s lightweight user interface, offering a clean, ad-free experience and optimized battery management. Regular security updates ensure reliable long-term performance.`
+    },
+    {
+      title: "Storage and Memory",
+      content: `Equipped with 128GB internal storage expandable up to 512GB via MicroSD, providing ample space for your media, apps, and documents.`
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 5000mAh battery ensures full-day power with moderate to heavy use. 18W fast charging support allows you to quickly recharge and stay connected throughout the day.`
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Supports 4G LTE, Bluetooth 5.1, Wi-Fi, GPS, and USB Type-C. Includes essential sensors such as a side-mounted fingerprint scanner, accelerometer, light sensor, and proximity sensor for a secure and convenient user experience.`
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Smooth 90Hz HD+ display",
+        "Strong 50MP camera performance",
+        "Fast 18W charging with large battery",
+        "Clean, ad-free Android experience",
+        "Affordable and durable design"
+      ],
+      cons: [
+        "No 5G support",
+        "Average gaming performance",
+        "Plastic frame and back"
+      ]
+    },
+    {
+      title: "Verdict",
+      content: `The HMD X2 by Mkopa stands out as a dependable smartphone offering a bright display, reliable performance, and a robust battery. It’s ideal for everyday users who want quality, simplicity, and value under a flexible payment plan.`
+    }
+  ],
+
+  color: "Charcoal, Ocean Blue, Sand Gold",
+  weight: "189g",
+  dimensions: {
+    length: "164.6mm",
+    width: "75.8mm",
+    height: "8.6mm"
+  },
+  material: "Plastic back and frame, Glass front",
+  pattern: "Textured matte finish",
+  productLine: "HMD X Series",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 21,
+    reviews: [
+      {
+        author: "Samuel W.",
+        rating: 5,
+        reviewBody: "The HMD X2 is very responsive and battery life is excellent. Works perfectly for daily use.",
+        datePublished: "2025-08-12"
+      },
+      {
+        author: "Lydia M.",
+        rating: 4,
+        reviewBody: "Nice camera and smooth screen, but it heats a bit when gaming. Still worth it!",
+        datePublished: "2025-09-03"
+      }
+    ]
+  }
+},
+
+
+
+
+{
+  id: 16,
+  name: "HMD X20",
+  fullname:"Oppo Reno 14F 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 4470mAh (Dual SIM) 50MP",
+  status: "Mkopa Offer",
+  image: "/phones/hmd_x20.jpg",
+  from: "KSh 4,500",
+  deposit: "KSh 4,500",
+  daily: "KSh 110",
+  totalPrice: "KSh 22,000",
+  source: "/phones/HMD-Mkopa-X20.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.67\" FHD+ (2400 × 1080)",
+  processor: "Qualcomm Snapdragon 480 5G",
+  camera: "64MP + 5MP + 2MP + 2MP (rear), 32MP (front)",
+  memory: "128GB / 6GB RAM, MicroSD up to 512GB",
+  battery: "4470mAh, 18W Fast Charging",
+  version: "Android 11, Android One",
+  depositanddaily: "KSh 4,500 Daily KSh 110",
+  slug: "hmd-x20",
+  slugs: "hmd-x20",
+  description: "Buy HMD X20 5G on credit in Kenya via Mkopa. Enjoy durable design, clean Android One software, long battery life, and 5G-ready performance at a great price.",
+  brand: "HMD",
+  seller: "Mkopa",
+  model: "TA-1341",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The HMD X20 features a sturdy aluminum frame and Gorilla Glass 5 front, giving it a premium and durable finish. Measuring 168.9 × 79.7 × 9.1mm and weighing 220g, it feels solid yet ergonomic in hand. Available in Nordic Blue and Midnight Sun, the matte back resists fingerprints while maintaining elegance.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a large 6.67-inch FHD+ display with a resolution of 2400 × 1080 pixels. The IPS panel delivers vivid colors and wide viewing angles, making it ideal for streaming and work. It also supports Adaptive Brightness for comfortable viewing outdoors.`,
+    },
+    {
+      title: "Camera System",
+      content: `The X20 comes with a versatile quad-camera setup — a 64MP main lens, 5MP ultra-wide, 2MP macro, and 2MP depth sensor. ZEISS optics deliver sharp, balanced images, while the 32MP front camera ensures clear selfies and crisp video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Qualcomm Snapdragon 480 5G processor and paired with 6GB of RAM, the X20 offers smooth performance for multitasking, browsing, and entertainment. With Android One optimizations, it delivers long-lasting speed and efficiency.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 11 under the Android One program, users enjoy a clean interface, guaranteed 2 years of OS updates, and 3 years of security patches. It’s lightweight, secure, and free from bloatware.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `The HMD X20 provides 128GB internal storage with expandable memory support up to 512GB via MicroSD. Store photos, apps, and media without worrying about space limitations.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4470mAh battery ensures up to two days of typical usage. Paired with 18W fast charging via USB Type-C, it delivers efficient power management, letting you charge less and do more.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Features 5G, 4G LTE, dual SIM, Wi-Fi, Bluetooth 5.0, GPS, NFC, and USB Type-C. Includes fingerprint sensor (side-mounted), accelerometer, gyroscope, and face unlock for convenience and security.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "5G connectivity for future-ready use",
+        "Clean Android One experience",
+        "Solid build with aluminum frame",
+        "Good camera performance with ZEISS optics",
+        "Reliable battery life"
+      ],
+      cons: [
+        "No AMOLED display",
+        "Heavier than average phones",
+        "Moderate charging speed",
+        "Limited color options"
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The HMD X20 is a durable and dependable 5G smartphone built for longevity. Its Android One software, solid camera setup, and premium design make it a strong pick for users seeking performance and simplicity in a reliable package.`,
+    },
+  ],
+
+  color: "Nordic Blue, Midnight Sun",
+  weight: "220g",
+  dimensions: {
+    length: "168.9mm",
+    width: "79.7mm",
+    height: "9.1mm"
+  },
+  material: "Aluminum frame, Gorilla Glass 5 front",
+  pattern: "Matte",
+  productLine: "HMD X Series",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 29,
+    reviews: [
+      {
+        author: "Peter N.",
+        rating: 5,
+        reviewBody: "Solid build quality and very clean Android interface.",
+        datePublished: "2025-02-21"
+      },
+      {
+        author: "Janet L.",
+        rating: 4,
+        reviewBody: "Battery lasts long and performance is great for daily use.",
+        datePublished: "2025-03-05"
+      }
+    ]
+  }
+},
+
+{
+  id: 17,
+  name: "HMD X30",
+  fullname:"Mkopa HMD X30 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "Mkopa Offer",
+  image: "/phones/hmd_x30.jpg",
+  from: "KSh 5,000",
+  deposit: "KSh 5,000",
+  daily: "KSh 130",
+  totalPrice: "KSh 25,000",
+  source: "/phones/hmd_x30.webp",
+  discount: "-9%",
+  display: "block",
+  phonedisplay: "6.43\" FHD+ AMOLED (2400 × 1080)",
+  processor: "Qualcomm Snapdragon 695 5G",
+  camera: "50MP + 13MP (rear), 16MP (front)",
+  memory: "256GB / 8GB RAM, MicroSD up to 512GB",
+  battery: "5000mAh, 33W Fast Charging",
+  version: "Android 12, Android One",
+  depositanddaily: "KSh 5,000 Daily KSh 130",
+  slug: "hmd-x30",
+  slugs: "hmd-x30",
+  description: "Buy HMD X30 5G on credit in Kenya via Mkopa. Experience premium performance, vivid AMOLED display, fast charging, and guaranteed Android updates under Android One.",
+  brand: "HMD",
+  seller: "Mkopa",
+  model: "TA-1450",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The HMD X30 boasts an aluminum unibody with Gorilla Glass Victus protection, ensuring durability and a premium finish. Measuring 158.9 × 73.9 × 7.9mm and weighing 185g, it feels sleek and modern. Available in Ice Blue and Cloudy Green, it delivers both strength and elegance.`,
+    },
+    {
+      title: "Display",
+      content: `The 6.43-inch AMOLED display offers Full HD+ resolution (2400 × 1080) and a 90Hz refresh rate for smooth visuals. With HDR10+ support, the screen produces vibrant colors, deep contrast, and excellent brightness for outdoor use.`,
+    },
+    {
+      title: "Camera System",
+      content: `The HMD X30 features a dual rear camera setup co-engineered with ZEISS optics — a 50MP main sensor and a 13MP ultra-wide lens. The 16MP front camera ensures high-quality selfies, while AI enhancements optimize lighting and focus across all conditions.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Qualcomm Snapdragon 695 5G chipset with 8GB RAM, the X30 delivers fast, efficient performance across gaming, multitasking, and streaming. 5G connectivity ensures faster downloads and seamless online experiences.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running on Android 12 under the Android One program, the X30 offers a pure, ad-free interface with guaranteed 3 years of OS updates and monthly security patches. It's lightweight, fast, and privacy-focused.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `The phone packs 128GB of internal storage, expandable up to 512GB via MicroSD. The 8GB RAM (plus Memory Extension) allows smooth multitasking and better performance in demanding apps.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `Equipped with a 4200mAh battery and 33W fast charging support, the HMD X30 charges quickly while maintaining excellent battery health. It can last a full day with mixed use, and adaptive power management extends battery lifespan.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity features include 5G, 4G LTE, dual SIM, Wi-Fi 6, Bluetooth 5.1, NFC, GPS, and USB Type-C. Sensors include a side-mounted fingerprint reader, proximity, accelerometer, and ambient light sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Bright AMOLED display with HDR10+",
+        "5G-ready Snapdragon 695 processor",
+        "Lightweight aluminum design",
+        "Fast 33W charging",
+        "Clean Android One software"
+      ],
+      cons: [
+        "Moderate battery size (4200mAh)",
+        "No headphone jack",
+        "Limited color options",
+        "Non-expandable RAM"
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The HMD X30 offers a flagship-like experience at a mid-range price. With its AMOLED display, fast 5G connectivity, and Android One promise, it’s ideal for users who value speed, reliability, and long-term software support.`,
+    },
+  ],
+
+  color: "Ice Blue, Cloudy Green",
+  weight: "185g",
+  dimensions: {
+    length: "158.9mm",
+    width: "73.9mm",
+    height: "7.9mm"
+  },
+  material: "Aluminum frame, Gorilla Glass Victus front",
+  pattern: "Matte",
+  productLine: "HMD X Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 32,
+    reviews: [
+      {
+        author: "Brian K.",
+        rating: 5,
+        reviewBody: "Beautiful display and super smooth performance. Totally worth it.",
+        datePublished: "2025-02-28"
+      },
+      {
+        author: "Lucy M.",
+        rating: 4,
+        reviewBody: "Charges fast and feels premium in hand. Battery could be slightly bigger.",
+        datePublished: "2025-03-14"
+      }
+    ]
+  }
+},
+
+
+
+  {
+    id: 2,
+    name: "iPhone 14 Pro Max",
+  fullname:"Iphone 14 Pro Max 5G 6.67 Inches, 1TB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 48MP+48MP+12MP",
+    status: "New",
+    image: "/phones/iphone_14_pro_max.jpg",
+    from: "KSh 13,500",
+    deposit: "KSh 25,000",
+    daily: "KSh 350",
+    totalPrice: "KSh 210,000",
+    source: "/phones/iphone_14_pro_max.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: '6.7" Super Retina XDR (2796 × 1290)',
+    processor: "Apple A16 Bionic",
+    camera: "48MP + 12MP + 12MP (rear), 12MP (front)",
+    memory: "1TB / 6GB RAM",
+    battery: "4323mAh, 20W Fast Charging, MagSafe Wireless",
+    version: "iOS 17",
+    depositanddaily: "KSh 25,000 Daily KSh 350",
+    slug: "iphone-14-pro-max-1tb",
+    slugs: "iphone-14-pro-max-1tb",
+    description: "Buy iPhone 14 Pro Max 1TB on credit in Nairobi Kenya. Lipa mdogo mdogo with affordable deposit & daily payments. Available from MKOPA, Watu Simu & more with same-day delivery.",
+    brand: "Apple",
+    seller: "Mkopa",
+    model: "A2894",
+    storage: "1TB",
+    condition: "new",
+    gtin: "194253403176",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "MoPhone"],
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The iPhone 14 Pro Max features a surgical-grade stainless steel frame and textured matte glass back. Its flat-edge design and precision-built corners give it a premium, durable feel. It measures 160.7 × 77.6 × 7.85mm and weighs 240g, available in Deep Purple, Gold, Silver, and Space Black.`,
+      },
+      {
+        title: "Display",
+        content: `Enjoy stunning visuals on a 6.7-inch Super Retina XDR display with a 2796 × 1290 resolution and ProMotion 120Hz refresh rate. The Always-On display and Dynamic Island introduce new levels of interactivity and energy efficiency while maintaining vibrant brightness and color accuracy.`,
+      },
+      {
+        title: "Camera System",
+        content: `The iPhone 14 Pro Max introduces a 48MP main sensor with quad-pixel technology, delivering exceptional detail and clarity. The 12MP ultra-wide and telephoto lenses provide 3x optical zoom, while the 12MP TrueDepth front camera supports autofocus for crisp selfies and cinematic video quality.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by the Apple A16 Bionic chip with a 6-core CPU and 5-core GPU, the iPhone 14 Pro Max ensures seamless multitasking and gaming performance. The Neural Engine handles AI tasks efficiently, enhancing photography, Face ID, and battery optimization.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running on iOS 17, the iPhone 14 Pro Max offers smooth, secure, and intuitive performance with new customization features, Live Voicemail, and improved FaceTime. It ensures future-proof updates and optimized ecosystem integration with other Apple devices.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `This variant comes with 1TB of internal storage and 6GB of RAM, perfect for creators, professionals, and power users who store large photo, video, and app libraries without worrying about space.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `Equipped with a 4323mAh battery, the iPhone 14 Pro Max supports 20W wired fast charging, 15W MagSafe, and 7.5W Qi wireless charging. Expect up to 29 hours of video playback and adaptive power optimization through iOS.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Connectivity options include 5G, Wi-Fi 6, Bluetooth 5.3, GPS, and Lightning (USB-C optional with adapter). It also includes Face ID, LiDAR scanner, dual eSIM support, accelerometer, gyroscope, and barometer for enhanced user experience and AR capabilities.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Super Retina XDR display with Dynamic Island",
+          "Exceptional 48MP camera system",
+          "Ultra-fast A16 Bionic performance",
+          "1TB massive storage capacity",
+          "Premium stainless steel design",
+        ],
+        cons: [
+          "Expensive",
+          "Heavier than most phones",
+          "No major battery upgrade from predecessor",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The iPhone 14 Pro Max 1TB is the ultimate premium smartphone combining power, elegance, and cutting-edge technology. Ideal for professionals, creators, and iOS enthusiasts seeking unmatched performance and long-term reliability.`,
+      },
+    ],
+
+    color: "Deep Purple, Gold, Silver, Space Black",
+    weight: "240g",
+    dimensions: {
+      length: "160.7mm",
+      width: "77.6mm",
+      height: "7.85mm"
+    },
+    material: "Stainless Steel and Glass",
+    pattern: "Matte Finish",
+    productLine: "iPhone 14 Pro",
+    reviews: {
+      averageRating: 4.8,
+      reviewCount: 154,
+      reviews: [
+        {
+          author: "David M.",
+          rating: 5,
+          reviewBody: "Absolutely worth every coin — smooth, fast, and classy!",
+          datePublished: "2025-03-14"
+        },
+        {
+          author: "Lucy W.",
+          rating: 4,
+          reviewBody: "Fantastic camera quality, though slightly heavy to hold.",
+          datePublished: "2025-04-22"
+        }
+      ]
+    }
+  },
+
+
+
+  
+  {
+    id: 3,
+    name: "iPhone 14 Pro Max",
+  fullname:"Iphone 14 Pro Max 5G 6.67 Inches, 512GB ROM + 6GB RAM, Battery: 4323mAh (Dual SIM) 48MP+12MP+12MP",
+    status: "New",
+    image: "/phones/iphone_14_pro_max_512gb.jpg",
+    from: "KSh 12,800",
+    deposit: "KSh 22,000",
+    daily: "KSh 320",
+    totalPrice: "KSh 189,000",
+    source: "/phones/iphone_14_pro_max_512gb.webp",
+    discount: "-12%",
+    display: "block",
+    phonedisplay: '6.7" Super Retina XDR (2796 × 1290)',
+    processor: "Apple A16 Bionic",
+    camera: "48MP + 12MP + 12MP (rear), 12MP (front)",
+    memory: "512GB / 6GB RAM",
+    battery: "4323mAh, 20W Fast Charging, MagSafe Wireless",
+    version: "iOS 17",
+    depositanddaily: "KSh 22,000 Daily KSh 320",
+    slug: "iphone-14-pro-max-512gb",
+    slugs: "iphone-14-pro-max-512gb",
+    description: "Buy iPhone 14 Pro Max 512GB on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Available from Watu Simu, Mkopa & other dealers with fast delivery.",
+    brand: "Apple",
+    seller: "Watu Simu",
+    model: "A2894",
+    storage: "512GB",
+    condition: "new",
+    gtin: "194253408112",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Watu Simu"],
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The iPhone 14 Pro Max 512GB maintains its luxurious stainless steel frame and matte glass back. It measures 160.7 × 77.6 × 7.85mm, weighs 240g, and comes in elegant colors like Deep Purple, Gold, and Silver. Its refined build quality and IP68 water resistance make it as durable as it is beautiful.`,
+      },
+      {
+        title: "Display",
+        content: `Featuring a 6.7-inch Super Retina XDR OLED display with ProMotion 120Hz refresh rate, the visuals are sharp, fluid, and detailed. The Always-On Display and Dynamic Island deliver a smarter user experience, while HDR support ensures vibrant contrast and true-to-life color reproduction.`,
+      },
+      {
+        title: "Camera System",
+        content: `Equipped with a triple 48MP + 12MP + 12MP camera setup, the iPhone 14 Pro Max 512GB captures incredible photos and 4K ProRes videos. The Photonic Engine enhances low-light shots, and the 12MP TrueDepth front camera ensures flawless selfies and Face ID performance.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by the Apple A16 Bionic processor, this device offers incredible efficiency and speed. Whether you're gaming, editing videos, or multitasking, the 6-core CPU and 5-core GPU ensure smooth performance and excellent battery optimization.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running iOS 17, the iPhone 14 Pro Max 512GB provides improved privacy, widgets, and Lock Screen customization. New features like StandBy mode and Contact Posters enhance usability while maintaining Apple’s signature simplicity and reliability.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `With 512GB of internal storage and 6GB of RAM, the iPhone 14 Pro Max 512GB offers the perfect balance for users who need ample space for 4K videos, games, and productivity apps without the premium cost of the 1TB version.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `The 4323mAh battery supports 20W wired charging and 15W MagSafe wireless charging. With adaptive battery optimization, you get up to 28 hours of video playback and reliable all-day power with moderate use.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `This model supports 5G, Wi-Fi 6, Bluetooth 5.3, and GPS for seamless connectivity. It includes Face ID, barometer, proximity sensor, ambient light sensor, and a LiDAR scanner for improved AR experiences.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Super Retina XDR display with Dynamic Island",
+          "Excellent triple camera performance",
+          "Fast A16 Bionic chip",
+          "Ample 512GB storage for creators",
+          "Long-lasting battery with MagSafe support",
+        ],
+        cons: [
+          "Premium price tag",
+          "Still uses Lightning port",
+          "Slightly bulky for small hands",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The iPhone 14 Pro Max 512GB offers elite performance and premium build quality with ample storage for most users. It's an excellent choice for content creators and professionals who want flagship performance without paying for the 1TB tier.`,
+      },
+    ],
+
+    color: "Deep Purple, Gold, Silver",
+    weight: "240g",
+    dimensions: {
+      length: "160.7mm",
+      width: "77.6mm",
+      height: "7.85mm"
+    },
+    material: "Stainless Steel and Glass",
+    pattern: "Matte Finish",
+    productLine: "iPhone 14 Pro",
+    reviews: {
+      averageRating: 4.7,
+      reviewCount: 98,
+      reviews: [
+        {
+          author: "Brian K.",
+          rating: 5,
+          reviewBody: "The performance is insane — storage is more than enough for my photos and videos.",
+          datePublished: "2025-03-25"
+        },
+        {
+          author: "Faith N.",
+          rating: 4,
+          reviewBody: "Beautiful phone, battery could last slightly longer but overall amazing.",
+          datePublished: "2025-04-30"
+        }
+      ]
+    }
+  },
+
+
+  {
+    id: 4,
+    name: "iPhone 14 Pro Max",
+    fullname:"IPhone 14 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 48MP + 48MP",
+    status: "New",
+    image: "/phones/iphone_14_pro_max_256gb.jpg",
+    from: "KSh 11,900",
+    deposit: "KSh 19,000",
+    daily: "KSh 290",
+    totalPrice: "KSh 169,000",
+    source: "/phones/iphone_14_pro_max_256gb.webp",
+    discount: "-14%",
+    display: "block",
+    phonedisplay: '6.7" Super Retina XDR (2796 × 1290)',
+    processor: "Apple A16 Bionic",
+    camera: "48MP + 12MP + 12MP (rear), 12MP (front)",
+    memory: "256GB / 6GB RAM",
+    battery: "4323mAh, 20W Fast Charging, MagSafe Wireless",
+    version: "iOS 17",
+    depositanddaily: "KSh 19,000 Daily KSh 290",
+    slug: "iphone-14-pro-max-256gb",
+    slugs: "iphone-14-pro-max-256gb",
+    description: "Buy iPhone 14 Pro Max 256GB on credit in Nairobi Kenya. Get easy payment options, fast delivery, and flexible daily installments through MKOPA or Watu Simu.",
+    brand: "Apple",
+    seller: "Watu Simu",
+    model: "A2894",
+    storage: "256GB",
+    condition: "new",
+    gtin: "194253401102",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Watu Simu"],
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The iPhone 14 Pro Max 256GB continues Apple’s tradition of premium craftsmanship. Built with surgical-grade stainless steel and matte glass, it’s sleek and durable. Measuring 160.7 × 77.6 × 7.85mm and weighing 240g, it feels solid in hand. Available in Space Black, Silver, Gold, and Deep Purple.`,
+      },
+      {
+        title: "Display",
+        content: `Its 6.7-inch Super Retina XDR OLED display delivers stunning brightness and color accuracy. With ProMotion 120Hz technology, HDR10, and Always-On Display, you’ll enjoy a smooth, vibrant visual experience whether gaming, editing, or streaming content.`,
+      },
+      {
+        title: "Camera System",
+        content: `Capture incredible shots with the triple 48MP + 12MP + 12MP camera setup. The main 48MP sensor produces vivid, detailed photos even in low light. The 12MP telephoto and ultra-wide cameras enhance creativity, while the 12MP front camera ensures natural-looking selfies and video calls.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by Apple’s A16 Bionic chip, the iPhone 14 Pro Max 256GB offers blazing speed and efficiency. It handles demanding tasks like 4K editing and gaming effortlessly, while ensuring smooth performance across apps and multitasking.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running iOS 17, it brings new personalization features, improved Siri, and enhanced security. iOS 17’s ecosystem integration ensures effortless syncing with MacBooks, iPads, and Apple Watch for a seamless Apple experience.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `This 256GB variant provides ample space for most users, balancing storage capacity with affordability. With 6GB of RAM, it ensures fast app loading, smooth multitasking, and lag-free use across intensive tasks.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `Featuring a 4323mAh battery, it supports 20W fast charging and 15W MagSafe wireless charging. You’ll get up to 26 hours of video playback and consistent all-day battery life for heavy users.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Supports 5G, Wi-Fi 6, Bluetooth 5.3, GPS, and dual eSIM. Includes Face ID, LiDAR scanner, barometer, accelerometer, and proximity sensor. The Lightning port enables fast charging and data transfer, while MagSafe accessories snap on easily.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Powerful A16 Bionic chip",
+          "ProMotion 120Hz OLED display",
+          "Excellent 48MP main camera",
+          "Perfect balance between storage and price",
+          "Premium stainless steel design",
+        ],
+        cons: [
+          "Still uses Lightning port",
+          "Heavier than most phones",
+          "Expensive accessories",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The iPhone 14 Pro Max 256GB is the ideal option for users seeking flagship performance, stunning design, and generous storage without overspending on the 512GB or 1TB models. It’s an excellent blend of power, value, and luxury.`,
+      },
+    ],
+
+    color: "Space Black, Gold, Silver, Deep Purple",
+    weight: "240g",
+    dimensions: {
+      length: "160.7mm",
+      width: "77.6mm",
+      height: "7.85mm"
+    },
+    material: "Stainless Steel and Glass",
+    pattern: "Matte Finish",
+    productLine: "iPhone 14 Pro",
+    reviews: {
+      averageRating: 4.6,
+      reviewCount: 85,
+      reviews: [
+        {
+          author: "Kevin O.",
+          rating: 5,
+          reviewBody: "Great phone, handles everything smoothly — perfect storage size for me.",
+          datePublished: "2025-03-08"
+        },
+        {
+          author: "Naomi L.",
+          rating: 4,
+          reviewBody: "Camera is superb and display is stunning, though it’s a bit heavy.",
+          datePublished: "2025-04-11"
+        }
+      ]
+    }
+  },
+
+
+  {
+    id: 5,
+    name: "iPhone 13 Pro Max",
+    fullname:"Iphone 13 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 4352mAh (Dual SIM) 48MP+12MP",
+    status: "New",
+    image: "/phones/iphone_13_pro_max_256gb.jpg",
+    from: "KSh 10,500",
+    deposit: "KSh 17,500",
+    daily: "KSh 270",
+    totalPrice: "KSh 155,000",
+    source: "/phones/iphone_13_pro_max_256gb.webp",
+    discount: "-13%",
+    display: "block",
+    phonedisplay: '6.7" Super Retina XDR (2778 × 1284)',
+    processor: "Apple A15 Bionic",
+    camera: "12MP + 12MP + 12MP (rear), 12MP (front)",
+    memory: "256GB / 6GB RAM",
+    battery: "4352mAh, 20W Fast Charging, MagSafe Wireless",
+    version: "iOS 16 (Upgradable to iOS 17)",
+    depositanddaily: "KSh 17,500 Daily KSh 270",
+    slug: "iphone-13-pro-max-256gb",
+    slugs: "iphone-13-pro-max-256gb",
+    description: "Buy iPhone 13 Pro Max 256GB on credit in Nairobi Kenya. Pay small daily installments with flexible payment plans from MKOPA, Watu Simu, and other partners. Fast nationwide delivery.",
+    brand: "Apple",
+    seller: "Mkopa",
+    model: "A2643",
+    storage: "256GB",
+    condition: "new",
+    gtin: "194252703911",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The iPhone 13 Pro Max features a surgical-grade stainless steel frame and Ceramic Shield front, offering enhanced durability and scratch resistance. Measuring 160.8 × 78.1 × 7.65mm and weighing 238g, it’s slightly lighter than the 14 Pro Max and comes in Graphite, Sierra Blue, Silver, Gold, and Alpine Green.`,
+      },
+      {
+        title: "Display",
+        content: `The 6.7-inch Super Retina XDR OLED display delivers vibrant colors and deep blacks with a 2778 × 1284 resolution. Featuring ProMotion 120Hz refresh rate and HDR10 support, it ensures ultra-smooth scrolling, immersive gaming, and crystal-clear media viewing.`,
+      },
+      {
+        title: "Camera System",
+        content: `The iPhone 13 Pro Max sports a triple 12MP camera setup with wide, ultra-wide, and telephoto lenses. The sensor-shift optical image stabilization ensures stable shots, while the Cinematic Mode allows professional-level video depth control. The 12MP front TrueDepth camera supports Face ID and 4K recording.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by Apple’s A15 Bionic chip, the iPhone 13 Pro Max delivers fast and efficient performance for multitasking, gaming, and creative workflows. The 5-core GPU ensures fluid graphics, while the Neural Engine boosts AI-powered photography and real-time processing.`,
+      },
+      {
+        title: "Operating System",
+        content: `The phone ships with iOS 16 and is upgradable to iOS 17. It includes advanced privacy features, customizable Lock Screen widgets, and improved FaceTime and Focus modes for a seamless Apple ecosystem experience.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `This 256GB variant offers sufficient space for apps, photos, and 4K videos, backed by 6GB RAM for smooth multitasking. Ideal for creators and professionals who need both performance and ample storage without the high price of the 14 series.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `With a 4352mAh battery, the iPhone 13 Pro Max provides up to 28 hours of video playback. It supports 20W wired fast charging and 15W MagSafe wireless charging, offering reliable endurance for heavy use.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Connectivity options include 5G, Wi-Fi 6, Bluetooth 5.0, GPS, and dual eSIM support. Sensors include Face ID, accelerometer, gyroscope, barometer, proximity sensor, and LiDAR for enhanced AR experiences.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Smooth ProMotion 120Hz OLED display",
+          "Powerful A15 Bionic performance",
+          "Excellent triple-camera system",
+          "Long-lasting battery life",
+          "Premium stainless steel and glass design",
+        ],
+        cons: [
+          "No USB-C port",
+          "Heavier design",
+          "Minor differences from iPhone 14 Pro Max",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The iPhone 13 Pro Max 256GB remains one of Apple’s best all-round flagships. With its stellar performance, long battery life, and elegant design, it’s an excellent option for buyers who want premium features at a more affordable price than the latest models.`,
+      },
+    ],
+
+    color: "Graphite, Silver, Gold, Sierra Blue, Alpine Green",
+    weight: "238g",
+    dimensions: {
+      length: "160.8mm",
+      width: "78.1mm",
+      height: "7.65mm"
+    },
+    material: "Stainless Steel and Glass",
+    pattern: "Glossy Finish",
+    productLine: "iPhone 13 Pro",
+    reviews: {
+      averageRating: 4.6,
+      reviewCount: 112,
+      reviews: [
+        {
+          author: "Mark L.",
+          rating: 5,
+          reviewBody: "Battery life and performance are top-notch. Still feels like a brand-new flagship.",
+          datePublished: "2025-03-15"
+        },
+        {
+          author: "Rita N.",
+          rating: 4,
+          reviewBody: "Display and camera are superb. Slightly heavy but overall amazing phone.",
+          datePublished: "2025-04-20"
+        }
+      ]
+    }
+  },
+
+
+
+
+  {
+  id: 6,
+  name: "iPhone 13 Pro Max 128GB",
+  fullname:"IPhone 13 Pro Max 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 12MP+12MP+12MP",
+
+  status: "New",
+  image: "/phones/iphone_13_pro_max_128gb.jpg",
+  from: "KSh 108,000",
+  deposit: "KSh 25,000",
+  daily: "KSh 460",
+  totalPrice: "KSh 146,000",
+  source: "/phones/iphone_13_pro_max_128gb.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.7\" Super Retina XDR (2778 × 1284)",
+  processor: "A15 Bionic Chip (5-core GPU)",
+  camera: "12MP + 12MP + 12MP (rear), 12MP (front)",
+  memory: "128GB / 6GB RAM",
+  battery: "4352mAh, 20W Fast Charging, MagSafe",
+  version: "iOS 17",
+  depositanddaily: "KSh 25,000 Daily KSh 460",
+  slug: "iphone-13-pro-max-128gb",
+  slugs: "iphone-13-pro-max-128gb",
+  description: "Buy iPhone 13 Pro Max 128GB on credit in Nairobi, Kenya. Own it with a small deposit & daily payments. Premium performance, triple cameras, and 5G connectivity from Apple.",
+  brand: "Apple",
+  seller: "Mkopa",
+  model: "A2643",
+  storage: "128GB",
+  condition: "new",
+  gtin: "0194253156482",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The iPhone 13 Pro Max 128GB features a premium surgical-grade stainless steel frame and textured matte glass back. Measuring 160.8 × 78.1 × 7.65mm and weighing 240g, it feels solid yet refined. Available in Sierra Blue, Graphite, Gold, and Silver, its design exudes sophistication and durability.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy immersive visuals on a 6.7-inch Super Retina XDR OLED display with ProMotion technology, offering adaptive refresh rates up to 120Hz. With HDR10 and Dolby Vision support, it delivers ultra-smooth scrolling and breathtaking clarity for movies, games, and everyday use.`,
+    },
+    {
+      title: "Camera System",
+      content: `Equipped with a triple 12MP camera system—wide, ultra-wide, and telephoto—the iPhone 13 Pro Max captures pro-level photos in any lighting. It features Night Mode on all lenses, Cinematic Mode for video, and ProRAW and ProRes support for advanced editing.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the A15 Bionic chip with a 5-core GPU, the iPhone 13 Pro Max ensures industry-leading performance for gaming, multitasking, and creative workflows. Its Neural Engine enhances photo processing, speech recognition, and augmented reality experiences.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running on iOS 17, the iPhone 13 Pro Max delivers smooth performance, new personalization options, improved privacy controls, and optimized app interactions, making it one of the most reliable systems available.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `This model includes 128GB of high-speed internal storage and 6GB RAM, ensuring seamless multitasking, app responsiveness, and ample space for photos, videos, and large applications.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4352mAh battery offers exceptional endurance, delivering up to 28 hours of video playback. It supports 20W fast charging, 15W MagSafe wireless charging, and 7.5W Qi wireless charging for convenient power-ups.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity options include 5G, Wi-Fi 6, Bluetooth 5.0, GPS, and a Lightning port. Sensors include Face ID, accelerometer, gyroscope, proximity sensor, ambient light sensor, and barometer.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Exceptional camera system with ProRAW and Cinematic Mode",
+        "Smooth 120Hz Super Retina XDR display",
+        "Outstanding A15 Bionic performance",
+        "Excellent battery life and build quality",
+        "Long software support from Apple",
+      ],
+      cons: [
+        "No USB-C port",
+        "Heavier than previous models",
+        "Expensive replacement parts",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The iPhone 13 Pro Max 128GB remains a top-tier smartphone for power users who value design, performance, and professional-grade photography. Its blend of speed, endurance, and display quality makes it a long-lasting investment.`,
+    },
+  ],
+
+  color: "Sierra Blue, Gold, Graphite, Silver",
+  weight: "240g",
+  dimensions: {
+    length: "160.8mm",
+    width: "78.1mm",
+    height: "7.65mm",
+  },
+  material: "Stainless Steel and Glass",
+  pattern: "Matte Finish",
+  productLine: "iPhone 13 Pro Series",
+  reviews: {
+    averageRating: 4.8,
+    reviewCount: 54,
+    reviews: [
+      {
+        author: "Kevin O.",
+        rating: 5,
+        reviewBody: "Absolutely love this phone! The camera and display are incredible.",
+        datePublished: "2025-03-10",
+      },
+      {
+        author: "Lydia M.",
+        rating: 4,
+        reviewBody: "Battery life is solid and performance is smooth. Worth every coin.",
+        datePublished: "2025-04-02",
+      },
+    ],
+  },
+},
+
+
+{
+  id: 7,
+  name: "iPhone 12 Pro Max 256GB",
+  fullname:"Iphone 12 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 3687mAh (Dual SIM) 12MP+12MP",
+  status: "New",
+  image: "/phones/iphone_12_pro_max_256gb.jpg",
+  from: "KSh 96,000",
+  deposit: "KSh 22,000",
+  daily: "KSh 420",
+  totalPrice: "KSh 135,000",
+  source: "/phones/iphone_12_pro_max_256gb.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.7\" Super Retina XDR OLED (2778 × 1284)",
+  processor: "A14 Bionic Chip (5nm, 4-core GPU)",
+  camera: "12MP + 12MP + 12MP (rear), 12MP (front)",
+  memory: "256GB / 6GB RAM",
+  battery: "3687mAh, 20W Fast Charging, MagSafe",
+  version: "iOS 17",
+  depositanddaily: "KSh 22,000 Daily KSh 420",
+  slug: "iphone-12-pro-max-256gb",
+  slugs: "iphone-12-pro-max-256gb",
+  description: "Buy iPhone 12 Pro Max 256GB on credit in Nairobi, Kenya. Pay in small daily amounts with a deposit. Experience 5G speed, triple cameras, and Apple’s flagship performance.",
+  brand: "Apple",
+  seller: "Mkopa",
+  model: "A2411",
+  storage: "256GB",
+  condition: "new",
+  gtin: "0194252034171",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The iPhone 12 Pro Max 256GB features a surgical-grade stainless steel frame and a textured matte glass back for a premium feel. With flat edges reminiscent of classic iPhone designs, it measures 160.8 × 78.1 × 7.4mm and weighs 228g. Available in Pacific Blue, Silver, Graphite, and Gold.`,
+    },
+    {
+      title: "Display",
+      content: `The 6.7-inch Super Retina XDR OLED display delivers rich contrast and vibrant colors. With HDR10 and Dolby Vision support, the iPhone 12 Pro Max offers immersive viewing for movies, games, and photography with exceptional brightness and detail.`,
+    },
+    {
+      title: "Camera System",
+      content: `The triple 12MP rear camera system with LiDAR Scanner enhances low-light photography and AR accuracy. It includes wide, ultra-wide, and telephoto lenses, supporting Night Mode, Deep Fusion, and Smart HDR 3 for outstanding image quality. The 12MP front camera supports Night Mode selfies and 4K video.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the A14 Bionic chip built on a 5nm process, the iPhone 12 Pro Max offers blazing-fast performance and efficient power consumption. The Neural Engine handles advanced AI tasks and image processing effortlessly.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running on iOS 17, it introduces customizable widgets, improved FaceTime, and enhanced privacy settings. Apple’s long-term software support ensures this device stays fast and secure for years.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Equipped with 256GB of high-speed storage and 6GB RAM, the iPhone 12 Pro Max provides ample space for apps, photos, and videos while maintaining smooth performance under heavy workloads.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 3687mAh battery supports 20W fast charging and 15W MagSafe wireless charging. Enjoy up to 20 hours of video playback and efficient power optimization with iOS for all-day use.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity features include 5G, Wi-Fi 6, Bluetooth 5.0, NFC, and GPS. Sensors include Face ID, accelerometer, barometer, gyroscope, proximity sensor, and ambient light sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Premium build with stainless steel frame",
+        "Excellent triple camera system with LiDAR",
+        "Powerful A14 Bionic chip",
+        "Gorgeous Super Retina XDR display",
+        "MagSafe accessories support",
+      ],
+      cons: [
+        "No high refresh rate (60Hz only)",
+        "Slightly heavy design",
+        "No charger included in the box",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The iPhone 12 Pro Max 256GB remains a stellar device with flagship-level performance, professional camera features, and a timeless design. A reliable choice for users who prioritize performance and photography.`,
+    },
+  ],
+
+  color: "Pacific Blue, Silver, Graphite, Gold",
+  weight: "228g",
+  dimensions: {
+    length: "160.8mm",
+    width: "78.1mm",
+    height: "7.4mm",
+  },
+  material: "Stainless Steel and Glass",
+  pattern: "Matte Finish",
+  productLine: "iPhone 12 Pro Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 49,
+    reviews: [
+      {
+        author: "Brian K.",
+        rating: 5,
+        reviewBody: "The display and performance are excellent. Still feels brand new even in 2025.",
+        datePublished: "2025-02-21",
+      },
+      {
+        author: "Faith N.",
+        rating: 4,
+        reviewBody: "Amazing camera and design, but the phone is a bit heavy to hold for long periods.",
+        datePublished: "2025-03-03",
+      },
+    ],
+  },
+},
+
+
+{
+  id: 7,
+  name: "iPhone 11 128GB",
+  fullname:"iPhone 11 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 3110mAh (Dual SIM) 12MP +12MP",
+  status: "Used",
+  image: "/phones/iphone_11_128gb.jpg",
+  from: "KSh 4,800",
+  deposit: "KSh 5,500",
+  daily: "KSh 120",
+  totalPrice: "KSh 25,000",
+  source: "/phones/iphone_11_128gb.webp",
+  discount: "-5%",
+  display: "block",
+  phonedisplay: "6.1\" Liquid Retina HD (1792 × 828)",
+  processor: "A13 Bionic Chip (3rd-gen Neural Engine)",
+  camera: "12MP + 12MP (rear), 12MP (front)",
+  memory: "128GB / 4GB RAM",
+  battery: "3110mAh, 18W Fast Charging, Qi Wireless",
+  version: "iOS 17",
+  depositanddaily: "KSh 5,500 Daily KSh 120",
+  slug: "iphone-11-128gb",
+  slugs: "iphone-11-128gb",
+  description: "Buy iPhone 11 128GB on credit in Nairobi, Kenya. Pay a small deposit and daily installments. Capture stunning photos, enjoy fast performance, and experience iOS reliability with this Apple classic.",
+  brand: "Apple",
+  seller: "Mkopa",
+  model: "A2221",
+  storage: "128GB",
+  condition: "used",
+  gtin: "0194252345900",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+
+  details: [
+    {
+      title: "Body and Design",
+      content: `The iPhone 11 features a sleek aluminum and glass body with precision engineering. Measuring 150.9 × 75.7 × 8.3mm and weighing 194g, it’s comfortable to hold and built to last. Available in multiple colors like Black, White, Green, Yellow, Purple, and Red.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy bright and accurate colors on a 6.1-inch Liquid Retina HD display. With True Tone and wide color (P3) support, it delivers consistent visuals for photos, videos, and apps under any lighting condition.`,
+    },
+    {
+      title: "Camera System",
+      content: `The dual 12MP rear cameras (Wide and Ultra Wide) capture stunning detail and depth. Features include Night Mode, 4K video recording up to 60fps, and Smart HDR for balanced images. The 12MP front camera supports Portrait Mode and 4K video, ideal for selfies and FaceTime HD calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by Apple’s A13 Bionic chip, the iPhone 11 delivers smooth multitasking, excellent gaming performance, and efficient energy management. It remains powerful even for modern apps and iOS updates.`,
+    },
+    {
+      title: "Operating System",
+      content: `Runs on iOS 17, offering advanced privacy features, customizable lock screens, and optimized system performance for a seamless experience.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `This model comes with 128GB of fast storage and 4GB of RAM, providing enough space for apps, media, and daily use without performance drops.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `Equipped with a 3110mAh battery, the iPhone 11 offers up to 17 hours of video playback. It supports 18W fast charging via Lightning and Qi wireless charging for convenience.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 4G LTE, Wi-Fi 6, Bluetooth 5.0, GPS, NFC, and Lightning port. Sensors include Face ID, accelerometer, proximity sensor, gyroscope, and ambient light sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Reliable A13 Bionic performance",
+        "Excellent dual-camera system with Night Mode",
+        "Durable and water-resistant build",
+        "iOS updates and security support",
+        "Wireless and fast charging support",
+      ],
+      cons: [
+        "LCD display instead of OLED",
+        "No 5G support",
+        "Slightly bulky design",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The iPhone 11 128GB remains a smart buy in 2025, offering solid performance, great cameras, and Apple’s dependable ecosystem at a reasonable price. Ideal for users seeking a balanced blend of power, style, and longevity.`,
+    },
+  ],
+
+  color: "Black, White, Red, Green, Yellow, Purple",
+  weight: "194g",
+  dimensions: {
+    length: "150.9mm",
+    width: "75.7mm",
+    height: "8.3mm",
+  },
+  material: "Aluminum and Glass",
+  pattern: "Glossy Finish",
+  productLine: "iPhone 11 Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 62,
+    reviews: [
+      {
+        author: "Brian M.",
+        rating: 5,
+        reviewBody: "Perfect condition and performance. Camera quality still stands out!",
+        datePublished: "2025-03-15",
+      },
+      {
+        author: "Ruth K.",
+        rating: 4,
+        reviewBody: "Battery life is decent and works great with daily tasks.",
+        datePublished: "2025-04-12",
+      },
+    ],
+  },
+},
+
+
+{
+  id: 8,
+  name: "Samsung Galaxy S20 128GB",
+  fullname:"Samsung Galaxy S20 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 12MP+64MP",
+  status: "Used",
+  image: "/phones/samsung_galaxy_s20_128gb.jpg",
+  from: "KSh 4,200",
+  deposit: "KSh 5,000",
+  daily: "KSh 110",
+  totalPrice: "KSh 23,000",
+  source: "/phones/samsung_galaxy_s20_128gb.webp",
+  discount: "-6%",
+  display: "block",
+  phonedisplay: "6.2\" Dynamic AMOLED 2X (3200 × 1440, 120Hz)",
+  processor: "Exynos 990 (7nm+) / Snapdragon 865 (7nm+)",
+  camera: "12MP + 64MP + 12MP (rear), 10MP (front)",
+  memory: "128GB / 8GB RAM",
+  battery: "4000mAh, 25W Fast Charging, Wireless Charging",
+  version: "Android 13, One UI 5",
+  depositanddaily: "KSh 5,000 Daily KSh 110",
+  slug: "samsung-galaxy-s20-128gb",
+  slugs: "samsung-galaxy-s20-128gb",
+  description: "Buy Samsung Galaxy S20 128GB on credit in Nairobi, Kenya. Enjoy a sleek design, flagship performance, and pro-level cameras with flexible daily payments.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-G980F",
+  storage: "128GB",
+  condition: "used",
+  gtin: "0887276390981",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy S20 128GB features a slim and elegant design with Gorilla Glass 6 on the front and back and an aluminum frame. Measuring 151.7 × 69.1 × 7.9mm and weighing 163g, it offers a comfortable one-hand experience with a premium build.`,
+    },
+    {
+      title: "Display",
+      content: `Immerse yourself in a 6.2-inch Dynamic AMOLED 2X display offering a smooth 120Hz refresh rate. With HDR10+ support and a QHD+ resolution of 3200 × 1440 pixels, colors and contrast look incredibly vivid and realistic.`,
+    },
+    {
+      title: "Camera System",
+      content: `Equipped with a triple-camera setup—12MP wide, 64MP telephoto, and 12MP ultra-wide—the Galaxy S20 captures stunning details with 3x hybrid zoom and 8K video recording. The 10MP front camera ensures sharp selfies and clear video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Exynos 990 (or Snapdragon 865) processor with 8GB RAM, the Galaxy S20 handles multitasking, gaming, and productivity with ease. It remains smooth and responsive even with demanding applications.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 13 with One UI 5, the Galaxy S20 offers a refined interface, improved privacy settings, enhanced multitasking, and long-term Samsung security updates.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 128GB internal storage and 8GB RAM, expandable via microSD up to 1TB. Ideal for users who store photos, videos, and apps without worrying about space.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4000mAh battery supports 25W fast charging, 15W wireless charging, and 4.5W reverse wireless charging. It offers up to 14 hours of video playback, keeping you powered throughout your day.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 4G LTE, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, proximity, compass, and barometer.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Brilliant 120Hz Dynamic AMOLED 2X display",
+        "Powerful processor and 8GB RAM",
+        "Impressive camera system with 8K video",
+        "Wireless and reverse charging supported",
+        "Premium design and lightweight feel",
+      ],
+      cons: [
+        "Battery drains faster at 120Hz",
+        "No 3.5mm headphone jack",
+        "High resolution mode not available at 120Hz",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy S20 128GB continues to deliver flagship-level performance, stunning visuals, and reliable everyday usability in 2025. It’s a great choice for users seeking a balance of design, speed, and camera quality at a fair price.`,
+    },
+  ],
+
+  color: "Cosmic Gray, Cloud Blue, Cloud Pink",
+  weight: "163g",
+  dimensions: {
+    length: "151.7mm",
+    width: "69.1mm",
+    height: "7.9mm",
+  },
+  material: "Glass and Aluminum",
+  pattern: "Glossy Finish",
+  productLine: "Galaxy S20 Series",
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 48,
+    reviews: [
+      {
+        author: "Denis O.",
+        rating: 5,
+        reviewBody: "Still a great phone in 2025! Excellent display and performance.",
+        datePublished: "2025-03-18",
+      },
+      {
+        author: "Mercy T.",
+        rating: 4,
+        reviewBody: "Camera is amazing, but battery could last a bit longer at 120Hz.",
+        datePublished: "2025-04-09",
+      },
+    ],
+  },
+},
+
+{
+  id: 9,
+  name: "Samsung Galaxy Note 20 Ultra 128GB",
+  fullname:"Samsung Galaxy Note 20 Ultra 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 4500mAh (Dual SIM) 108MP+12MP",
+  status: "Used",
+  image: "/phones/samsung_galaxy_note_20_ultra_128gb.jpg",
+  from: "KSh 5,200",
+  deposit: "KSh 6,500",
+  daily: "KSh 135",
+  totalPrice: "KSh 28,500",
+  source: "/phones/samsung_galaxy_note_20_ultra_128gb.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.9\" Dynamic AMOLED 2X (3088 × 1440, 120Hz)",
+  processor: "Exynos 990 (7nm+) / Snapdragon 865+ (7nm+)",
+  camera: "108MP + 12MP + 12MP (rear), 10MP (front)",
+  memory: "128GB / 12GB RAM",
+  battery: "4500mAh, 25W Fast Charging, Wireless & Reverse Charging",
+  version: "Android 13, One UI 5",
+  depositanddaily: "KSh 6,500 Daily KSh 135",
+  slug: "samsung-galaxy-note-20-ultra-128gb",
+  slugs: "samsung-galaxy-note-20-ultra-128gb",
+  description: "Buy Samsung Galaxy Note 20 Ultra 128GB on credit in Nairobi, Kenya. Enjoy flagship power, premium design, and the precision of the S Pen with flexible daily payments.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-N985F",
+  storage: "128GB",
+  condition: "used",
+  gtin: "0887276419576",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy Note 20 Ultra 128GB exudes luxury with its Gorilla Glass Victus front and back, surrounded by a polished stainless-steel frame. Measuring 164.8 × 77.2 × 8.1mm and weighing 208g, it feels solid, professional, and premium. Available in Mystic Bronze, Mystic Black, and Mystic White, it remains one of the most elegant smartphones Samsung has ever made.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a massive 6.9-inch Dynamic AMOLED 2X display with 120Hz refresh rate and HDR10+ support. The curved WQHD+ panel offers stunning brightness and vivid colors, perfect for creative professionals and entertainment lovers alike.`,
+    },
+    {
+      title: "Camera System",
+      content: `The Note 20 Ultra is equipped with a triple-camera setup: a 108MP wide, 12MP periscope telephoto (5x optical zoom), and 12MP ultra-wide. It captures extraordinary detail with 8K video recording and laser autofocus for precision. The 10MP front camera delivers excellent selfies and crystal-clear video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Exynos 990 (or Snapdragon 865+) processor paired with 12GB RAM, the Note 20 Ultra delivers elite-level performance for productivity, gaming, and multitasking. The vapor chamber cooling ensures consistent power even under load.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 13 with Samsung’s refined One UI 5, the phone offers a smooth, customizable, and feature-rich interface. Enhanced S Pen features, improved multitasking, and DeX wireless mode elevate productivity to PC-like levels.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 128GB internal storage and 12GB RAM, expandable via microSD up to 1TB. Perfect for users handling large files, photos, and professional workloads without lag.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4500mAh battery supports 25W fast charging, 15W wireless charging, and 4.5W reverse wireless charging. Despite the large screen, optimization ensures all-day power for work, streaming, and creative tasks.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity options include 5G, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C 3.2. It also supports Samsung DeX, UWB (Ultra-Wideband), and S Pen Air Gestures. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, barometer, and proximity sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Stunning 6.9-inch 120Hz Dynamic AMOLED 2X display",
+        "Powerful 108MP camera with 5x optical zoom",
+        "High performance with 12GB RAM",
+        "S Pen with ultra-low latency",
+        "Premium glass and metal design",
+      ],
+      cons: [
+        "Battery drains faster in 120Hz WQHD mode",
+        "Large size may not suit all users",
+        "No 3.5mm headphone jack",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy Note 20 Ultra 128GB remains a powerhouse device for professionals and enthusiasts in 2025. With its stunning display, advanced camera, and unmatched S Pen features, it continues to stand tall among flagship smartphones.`,
+    },
+  ],
+
+  color: "Mystic Bronze, Mystic Black, Mystic White",
+  weight: "208g",
+  dimensions: {
+    length: "164.8mm",
+    width: "77.2mm",
+    height: "8.1mm",
+  },
+  material: "Gorilla Glass Victus and Stainless Steel",
+  pattern: "Matte Finish",
+  productLine: "Galaxy Note 20 Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 62,
+    reviews: [
+      {
+        author: "Brian N.",
+        rating: 5,
+        reviewBody: "Still one of the best Samsung phones ever made. The S Pen is incredibly smooth.",
+        datePublished: "2025-04-11",
+      },
+      {
+        author: "Caroline W.",
+        rating: 4,
+        reviewBody: "Display and performance are unmatched, though it’s quite big to hold.",
+        datePublished: "2025-03-27",
+      },
+    ],
+  },
+},
+
+
+{
+  id: 10,
+  name: "Samsung Galaxy S24 256GB",
+  fullname:"Samsung Galaxy S24 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_s24_256gb.jpg",
+  from: "KSh 12,500",
+  deposit: "KSh 18,000",
+  daily: "KSh 390",
+  totalPrice: "KSh 78,000",
+  source: "/phones/samsung_galaxy_s24_256gb.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.2\" Dynamic LTPO AMOLED 2X (2340 × 1080, 120Hz)",
+  processor: "Snapdragon 8 Gen 3 for Galaxy (4nm)",
+  camera: "50MP + 12MP + 10MP (rear), 12MP (front)",
+  memory: "256GB / 8GB RAM",
+  battery: "4000mAh, 25W Fast Charging, Wireless & Reverse Charging",
+  version: "Android 14, One UI 6.1",
+  depositanddaily: "KSh 18,000 Daily KSh 390",
+  slug: "samsung-galaxy-s24-256gb",
+  slugs: "samsung-galaxy-s24-256gb",
+  description: "Buy Samsung Galaxy S24 256GB on credit in Nairobi, Kenya. Experience next-level AI performance, crystal-clear display, and powerful cameras with flexible daily payments.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-S921B",
+  storage: "256GB",
+  condition: "new",
+  gtin: "8806095509803",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy S24 256GB features a sleek Armor Aluminum frame and Gorilla Glass Victus 2 protection on both sides. Measuring 147 × 70.6 × 7.6mm and weighing 168g, it’s compact yet premium. Available in Onyx Black, Marble Gray, Cobalt Violet, and Amber Yellow, the design embodies Samsung’s minimalist flagship style.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a brilliant 6.2-inch Dynamic LTPO AMOLED 2X display with a 120Hz adaptive refresh rate and peak brightness up to 2600 nits. With HDR10+ and Vision Booster, colors stay vivid even in direct sunlight, providing an unmatched viewing experience.`,
+    },
+    {
+      title: "Camera System",
+      content: `The triple rear camera setup includes a 50MP wide, 12MP ultra-wide, and 10MP telephoto lens with 3x optical zoom. AI-powered Nightography enhances low-light photography, while 8K video recording captures incredible detail. The 12MP front camera ensures sharp selfies and professional video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Snapdragon 8 Gen 3 for Galaxy processor and 8GB RAM, the S24 delivers lightning-fast performance, improved ray tracing for gaming, and efficient AI task handling. Whether for work, multitasking, or entertainment, it handles everything effortlessly.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running on Android 14 with Samsung's One UI 6.1, the Galaxy S24 introduces new Galaxy AI tools like Live Translate, Chat Assist, and Note Summaries. Expect a fluid, intuitive experience with seven years of OS and security updates guaranteed.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `This model offers 256GB of UFS 4.0 internal storage and 8GB RAM, ensuring ultra-fast app loading, file transfers, and smooth multitasking without lag.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4000mAh battery supports 25W fast wired charging, 15W wireless charging, and 4.5W reverse wireless charging. With adaptive power management and an efficient chipset, you can easily get a full day of use.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 5G, Wi-Fi 6E, Bluetooth 5.3, GPS, NFC, and USB Type-C 3.2. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, barometer, proximity sensor, and ambient light sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Bright 120Hz AMOLED display with HDR10+",
+        "Powerful Snapdragon 8 Gen 3 performance",
+        "AI features improve productivity and photography",
+        "Compact and premium build quality",
+        "Long-term software support (7 years)",
+      ],
+      cons: [
+        "No microSD card slot",
+        "Battery capacity could be higher",
+        "25W charging speed is modest for 2025",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy S24 256GB offers a perfect balance of design, power, and smart AI features. Ideal for professionals and creators who value performance, camera quality, and long-term reliability in a compact flagship phone.`,
+    },
+  ],
+
+  color: "Onyx Black, Marble Gray, Cobalt Violet, Amber Yellow",
+  weight: "168g",
+  dimensions: {
+    length: "147mm",
+    width: "70.6mm",
+    height: "7.6mm",
+  },
+  material: "Armor Aluminum and Gorilla Glass Victus 2",
+  pattern: "Matte Finish",
+  productLine: "Galaxy S24 Series",
+  reviews: {
+    averageRating: 4.9,
+    reviewCount: 41,
+    reviews: [
+      {
+        author: "Michael K.",
+        rating: 5,
+        reviewBody: "The AI features are next level. Super smooth and compact design!",
+        datePublished: "2025-04-09",
+      },
+      {
+        author: "Diana O.",
+        rating: 4,
+        reviewBody: "Display is stunning and battery lasts the whole day. Worth every shilling.",
+        datePublished: "2025-04-27",
+      },
+    ],
+  },
+},
+
+
+{
+  id: 11,
+  name: "Samsung Galaxy S23 Ultra 256GB",
+  fullname:"Samsung Galaxy S23 Ultra 256GB 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 200MP+12MP",
+
+  status: "New",
+  image: "/phones/samsung_galaxy_s23_ultra_256gb.jpg",
+  from: "KSh 14,200",
+  deposit: "KSh 20,000",
+  daily: "KSh 520",
+  totalPrice: "KSh 260,000",
+  source: "/phones/samsung_galaxy_s23_ultra_256gb.webp",
+  discount: "-9%",
+  display: "block",
+  phonedisplay: "6.8\" QHD+ Dynamic AMOLED 2X (3088 × 1440, 120Hz)",
+  processor: "Snapdragon 8 Gen 2 (4nm)",
+  camera: "200MP + 12MP + 10MP + 10MP (rear), 12MP (front)",
+  memory: "256GB / 12GB RAM",
+  battery: "5000mAh, 45W Fast Charging, Wireless & Reverse Wireless Charging",
+  version: "Android 13, One UI 5",
+  depositanddaily: "KSh 20,000 Daily KSh 520",
+  slug: "samsung-galaxy-s23-ultra-256gb",
+  slugs: "samsung-galaxy-s23-ultra-256gb",
+  description: "Buy Samsung Galaxy S23 Ultra 256GB on credit in Nairobi, Kenya. Flagship performance with an industry-leading camera system, S Pen support, and premium build — available with flexible deposit & daily payment options.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-S918B",
+  storage: "256GB",
+  condition: "new",
+  gtin: "8806095507123",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Galaxy S23 Ultra features an Armor Aluminum frame with Gorilla Glass Victus 2 for front and back protection. It measures 163.4 × 78.1 × 8.9mm and weighs 234g, presenting a refined yet rugged flagship aesthetic. Available colors include Phantom Black, Cream, Green, and Lavender.`,
+    },
+    {
+      title: "Display",
+      content: `Experience a 6.8-inch QHD+ Dynamic AMOLED 2X display with adaptive 1–120Hz refresh rate and peak brightness over 1750 nits. The panel delivers outstanding clarity, HDR10+ support, and ultra-smooth motion for gaming and media consumption.`,
+    },
+    {
+      title: "Camera System",
+      content: `Equipped with a 200MP main sensor, 12MP ultra-wide, and dual 10MP telephoto lenses (3x and 10x optical), the S23 Ultra captures extraordinary detail and long-range shots. Advanced Nightography, AI scene optimizer, and 8K video recording make it a top choice for creators.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Snapdragon 8 Gen 2 and 12GB RAM, the device handles heavy multitasking, high-refresh gaming, and creative workloads with ease. Thermal optimizations maintain sustained performance under load.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 13 with One UI 5, the S23 Ultra includes Galaxy AI features, advanced privacy controls, and improved multitasking. Samsung promises several years of major OS and security updates.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `This model ships with 256GB of UFS storage and 12GB RAM, delivering fast app load times, quick file transfers, and plenty of space for photos, videos, and apps.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 5000mAh battery supports 45W wired fast charging, up to 15W wireless charging, and reverse wireless charging. With adaptive power management, expect reliable all-day use even under heavy workloads.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 5G, Wi-Fi 6E, Bluetooth 5.3, NFC, and USB Type-C. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, barometer, proximity, and ambient light sensors. The S Pen is integrated for productivity and precision input.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Best-in-class 200MP camera system with versatile telephoto options",
+        "Brilliant QHD+ AMOLED 120Hz display",
+        "Powerful Snapdragon 8 Gen 2 performance",
+        "Large 5000mAh battery with fast charging",
+        "Integrated S Pen for productivity",
+      ],
+      cons: [
+        "Premium price",
+        "Large and heavy for one-handed use",
+        "Fast wired charging requires a compatible charger",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy S23 Ultra 256GB is a top-tier flagship that excels in photography, performance, and productivity. It’s an ideal pick for power users and creators who want the most capable Android experience available.`,
+    },
+  ],
+
+  color: "Phantom Black, Cream, Green, Lavender",
+  weight: "234g",
+  dimensions: {
+    length: "163.4mm",
+    width: "78.1mm",
+    height: "8.9mm"
+  },
+  material: "Armor Aluminum and Gorilla Glass Victus 2",
+  pattern: "Matte Finish",
+  productLine: "Galaxy S23 Series",
+  reviews: {
+    averageRating: 4.9,
+    reviewCount: 128,
+    reviews: [
+      {
+        author: "Samuel N.",
+        rating: 5,
+        reviewBody: "Incredible camera and battery life — the S Pen is a huge productivity boost.",
+        datePublished: "2025-03-21"
+      },
+      {
+        author: "Asha W.",
+        rating: 4,
+        reviewBody: "Fantastic display and performance, though it's a big phone to handle comfortably.",
+        datePublished: "2025-04-05"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 12,
+  name: "Samsung Galaxy S22 Ultra 256GB",
+  fullname:"Samsung Galaxy S22 Ultra 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 108MP+12MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_s22_ultra_256gb.jpg",
+  from: "KSh 12,800",
+  deposit: "KSh 18,000",
+  daily: "KSh 490",
+  totalPrice: "KSh 230,000",
+  source: "/phones/samsung_galaxy_s22_ultra_256gb.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.8\" QHD+ Dynamic AMOLED 2X (3088 × 1440, 120Hz)",
+  processor: "Snapdragon 8 Gen 1 (4nm)",
+  camera: "108MP + 12MP + 10MP + 10MP (rear), 40MP (front)",
+  memory: "256GB / 12GB RAM",
+  battery: "5000mAh, 45W Fast Charging, Wireless & Reverse Charging",
+  version: "Android 12, upgradable to Android 14, One UI 6",
+  depositanddaily: "KSh 18,000 Daily KSh 490",
+  slug: "samsung-galaxy-s22-ultra-256gb",
+  slugs: "samsung-galaxy-s22-ultra-256gb",
+  description: "Buy Samsung Galaxy S22 Ultra 256GB on credit in Nairobi, Kenya. Experience top-tier performance, professional-grade cameras, and integrated S Pen support with flexible daily payment plans.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-S908B",
+  storage: "256GB",
+  condition: "new",
+  gtin: "8806092948820",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Galaxy S22 Ultra 256GB combines the Note's legacy with the Galaxy S series' sleek design. Featuring an Armor Aluminum frame and Gorilla Glass Victus+ front and back, it measures 163.3 × 77.9 × 8.9mm and weighs 228g. It’s IP68 water and dust resistant, available in Phantom Black, Burgundy, Green, and White.`,
+    },
+    {
+      title: "Display",
+      content: `It sports a 6.8-inch QHD+ Dynamic AMOLED 2X display with adaptive 1–120Hz refresh rate, HDR10+ support, and up to 1750 nits brightness. The curved edges and razor-sharp resolution ensure vibrant colors and silky-smooth scrolling.`,
+    },
+    {
+      title: "Camera System",
+      content: `The S22 Ultra features a powerful quad camera setup: 108MP wide, 12MP ultra-wide, 10MP 3x telephoto, and 10MP 10x periscope telephoto lenses. It offers up to 100x Space Zoom, Nightography for low-light shots, and 8K video recording with OIS.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Snapdragon 8 Gen 1 processor with 12GB RAM, the S22 Ultra delivers flagship-level speed for gaming, multitasking, and productivity. The integrated S Pen ensures fluid note-taking and creative sketching.`,
+    },
+    {
+      title: "Operating System",
+      content: `Out of the box, it runs Android 12 with Samsung’s One UI 4.1, upgradable to Android 14 with One UI 6. Expect an optimized and feature-rich software experience with enhanced security and multitasking tools.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 256GB of UFS 3.1 internal storage and 12GB RAM for smooth performance and lightning-fast data access, ideal for 8K video recording and app-heavy users.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 5000mAh battery provides excellent endurance, supporting 45W wired fast charging, 15W wireless charging, and reverse wireless charging. A full charge can last over a day of intensive use.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 5G, Wi-Fi 6E, Bluetooth 5.2, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, accelerometer, barometer, proximity, gyro, and compass. The integrated S Pen offers improved latency and precision.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Excellent 108MP quad camera setup with 10x optical zoom",
+        "Built-in S Pen for productivity",
+        "Gorgeous 120Hz AMOLED display",
+        "Powerful Snapdragon 8 Gen 1 processor",
+        "Premium glass and aluminum design",
+      ],
+      cons: [
+        "Expensive price point",
+        "Large size may not suit everyone",
+        "No microSD card slot",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy S22 Ultra 256GB remains one of the best all-round Android flagships, combining stunning design, top performance, and professional-grade camera features. Ideal for power users, creators, and Note series fans.`,
+    },
+  ],
+
+  color: "Phantom Black, Burgundy, Green, White",
+  weight: "228g",
+  dimensions: {
+    length: "163.3mm",
+    width: "77.9mm",
+    height: "8.9mm"
+  },
+  material: "Armor Aluminum and Gorilla Glass Victus+",
+  pattern: "Matte Finish",
+  productLine: "Galaxy S22 Series",
+  reviews: {
+    averageRating: 4.8,
+    reviewCount: 103,
+    reviews: [
+      {
+        author: "Brian K.",
+        rating: 5,
+        reviewBody: "Amazing phone with a stunning display and versatile camera system. Worth every cent.",
+        datePublished: "2025-03-17"
+      },
+      {
+        author: "Nancy L.",
+        rating: 4,
+        reviewBody: "Performance is top-notch and the S Pen makes multitasking seamless.",
+        datePublished: "2025-04-09"
+      }
+    ]
+  }
+},
+
+{
+  id: 13,
+  name: "Samsung Galaxy S21 Ultra 128GB",
+  fullname:"Samsung Galaxy S21 Ultra 6.67 Inches, 128GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 108MP + 12MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_s21_ultra_128gb.jpg",
+  from: "KSh 11,500",
+  deposit: "KSh 16,000",
+  daily: "KSh 470",
+  totalPrice: "KSh 190,000",
+  source: "/phones/samsung_galaxy_s21_ultra_128gb.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.8\" QHD+ Dynamic AMOLED 2X (3200 × 1440, 120Hz)",
+  processor: "Exynos 2100 (5nm) / Snapdragon 888 (5nm)",
+  camera: "108MP + 12MP + 10MP + 10MP (rear), 40MP (front)",
+  memory: "128GB / 12GB RAM",
+  battery: "5000mAh, 25W Fast Charging, Wireless & Reverse Charging",
+  version: "Android 11, upgradable to Android 14, One UI 6",
+  depositanddaily: "KSh 16,000 Daily KSh 470",
+  slug: "samsung-galaxy-s21-ultra-128gb",
+  slugs: "samsung-galaxy-s21-ultra-128gb",
+  description: "Buy Samsung Galaxy S21 Ultra 128GB on credit in Nairobi, Kenya. Enjoy premium design, top-tier performance, and a powerful quad camera system with 100x zoom. Available with flexible daily payments.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-G998B",
+  storage: "128GB",
+  condition: "new",
+  gtin: "8806090884748",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Galaxy S21 Ultra 128GB showcases a premium metal frame with Gorilla Glass Victus front and back. It measures 165.1 × 75.6 × 8.9mm and weighs 227g. Its Contour Cut camera housing blends seamlessly into the frame, available in Phantom Black, Phantom Silver, and Navy.`,
+    },
+    {
+      title: "Display",
+      content: `It features a stunning 6.8-inch QHD+ Dynamic AMOLED 2X display with adaptive 120Hz refresh rate, HDR10+ support, and a peak brightness of 1500 nits. Colors are vibrant and sharp, making it one of the best screens on any smartphone.`,
+    },
+    {
+      title: "Camera System",
+      content: `The S21 Ultra’s quad-camera setup includes a 108MP wide lens, 12MP ultra-wide, 10MP 3x telephoto, and 10MP 10x periscope telephoto. Capable of 100x Space Zoom, 8K video, and incredible low-light performance, it’s built for professional photography and video.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Exynos 2100 or Snapdragon 888 processor (depending on region) and 12GB RAM, the S21 Ultra delivers unmatched multitasking and gaming performance. Its vapor chamber cooling system ensures sustained peak output.`,
+    },
+    {
+      title: "Operating System",
+      content: `The phone launched with Android 11 and is now upgradeable to Android 14 with One UI 6. It delivers smooth animations, improved customization, enhanced multitasking, and extended security support from Samsung.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 128GB of internal UFS 3.1 storage and 12GB RAM. While there’s no microSD slot, the storage and memory combination easily handles large files, 8K videos, and demanding apps.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `Equipped with a 5000mAh battery, the S21 Ultra offers all-day endurance. Supports 25W fast charging, 15W wireless charging, and 4.5W reverse wireless charging to power accessories like Galaxy Buds.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity options include 5G, Wi-Fi 6E, Bluetooth 5.2, NFC, GPS, and USB Type-C. It features an ultrasonic fingerprint sensor, accelerometer, barometer, gyro, proximity, and compass for enhanced security and usability.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Brilliant QHD+ 120Hz AMOLED display",
+        "Outstanding camera performance with 100x zoom",
+        "Flagship build quality and design",
+        "Fast and responsive performance",
+        "S Pen support (sold separately)",
+      ],
+      cons: [
+        "No charger included in the box",
+        "No expandable storage",
+        "Slightly heavy and bulky",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy S21 Ultra 128GB is a premium flagship for users who demand cutting-edge performance, pro-level photography, and stunning display quality. Perfect for professionals and tech enthusiasts who want the best of Samsung innovation.`,
+    },
+  ],
+
+  color: "Phantom Black, Phantom Silver, Navy",
+  weight: "227g",
+  dimensions: {
+    length: "165.1mm",
+    width: "75.6mm",
+    height: "8.9mm"
+  },
+  material: "Aluminum Frame with Gorilla Glass Victus",
+  pattern: "Matte Finish",
+  productLine: "Galaxy S21 Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 96,
+    reviews: [
+      {
+        author: "Dennis M.",
+        rating: 5,
+        reviewBody: "Incredible display and camera system. Easily one of Samsung’s best phones ever.",
+        datePublished: "2025-02-28"
+      },
+      {
+        author: "Faith A.",
+        rating: 4,
+        reviewBody: "Very smooth and powerful. Slightly large, but the screen is worth it.",
+        datePublished: "2025-03-21"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 14,
+  name: "Samsung Galaxy Note 10 Plus 256GB",
+  fullname:"Samsung Galaxy Note 10 Plus 6.67 Inches, 1TB ROM + 12 RAM, Battery: 5100mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_note_10_plus_256gb.jpg",
+  from: "KSh 8,800",
+  deposit: "KSh 10,500",
+  daily: "KSh 250",
+  totalPrice: "KSh 120,000",
+  source: "/phones/samsung_galaxy_note_10_plus_256gb.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.8\" Quad HD+ Dynamic AMOLED (3040 × 1440)",
+  processor: "Exynos 9825 (7nm) / Snapdragon 855 (7nm)",
+  camera: "12MP + 12MP + 16MP + ToF (rear), 10MP (front)",
+  memory: "256GB / 12GB RAM, MicroSD up to 1TB",
+  battery: "4300mAh, 45W Fast Charging, Wireless & Reverse Charging",
+  version: "Android 9, upgradable to Android 13, One UI 5",
+  depositanddaily: "KSh 10,500 Daily KSh 250",
+  slug: "samsung-galaxy-note-10-plus-256gb",
+  slugs: "samsung-galaxy-note-10-plus-256gb",
+  description: "Buy Samsung Galaxy Note 10 Plus 256GB on credit in Nairobi, Kenya. Premium S Pen experience, massive display, and powerful performance with flexible daily payment options.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-N975F",
+  storage: "256GB",
+  condition: "new",
+  gtin: "8806090079427",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Galaxy Note 10 Plus boasts a sleek glass and metal design, measuring 162.3 × 77.2 × 7.9mm and weighing 196g. With an edge-to-edge Infinity-O display and Gorilla Glass 6 protection, it’s available in Aura Glow, Aura White, and Aura Black finishes that exude luxury.`,
+    },
+    {
+      title: "Display",
+      content: `It features a 6.8-inch Quad HD+ Dynamic AMOLED display offering HDR10+ certification and superior brightness. The nearly bezel-less design and sharp contrast levels make it ideal for entertainment, productivity, and design work.`,
+    },
+    {
+      title: "Camera System",
+      content: `Equipped with a triple rear camera setup (12MP wide, 12MP telephoto, 16MP ultra-wide) plus a DepthVision sensor, the Note 10 Plus delivers detailed photos, Live Focus effects, and 4K UHD video recording. The 10MP front camera ensures crisp selfies and professional video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Exynos 9825 (or Snapdragon 855 in select regions) with 12GB RAM, the Note 10 Plus offers desktop-level performance. It’s built for heavy multitasking, gaming, and creative tasks like video editing and drawing with the S Pen.`,
+    },
+    {
+      title: "Operating System",
+      content: `Originally launched on Android 9 Pie, it’s upgradable to Android 13 with One UI 5. It delivers smooth transitions, smart device management, improved S Pen functionality, and enhanced customization options.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `With 256GB UFS 3.0 internal storage and MicroSD support up to 1TB, the Note 10 Plus provides abundant space for apps, photos, and videos while maintaining top read/write speeds.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4300mAh battery supports 45W Super Fast Charging, 15W wireless charging, and 9W reverse wireless charging. It’s designed to last a full day of productivity and creativity with intelligent power optimization.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity features include 4G LTE, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, proximity, gyro, accelerometer, compass, and barometer. The S Pen features Bluetooth remote functions and air gestures for enhanced control.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Massive 6.8-inch AMOLED display with HDR10+",
+        "Powerful performance with 12GB RAM",
+        "S Pen with air gestures and remote control",
+        "Expandable storage up to 1TB",
+        "Premium glass and metal design",
+      ],
+      cons: [
+        "No headphone jack",
+        "High repair costs for display",
+        "Still limited 45W charger availability",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy Note 10 Plus 256GB remains a productivity powerhouse, combining top-tier performance, exceptional display quality, and the creative versatility of the S Pen — perfect for professionals and creators alike.`,
+    },
+  ],
+
+  color: "Aura Glow, Aura White, Aura Black",
+  weight: "196g",
+  dimensions: {
+    length: "162.3mm",
+    width: "77.2mm",
+    height: "7.9mm"
+  },
+  material: "Aluminum Frame with Gorilla Glass 6",
+  pattern: "Glossy Finish",
+  productLine: "Galaxy Note Series",
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 84,
+    reviews: [
+      {
+        author: "Brian N.",
+        rating: 5,
+        reviewBody: "An absolute gem! The display and S Pen are fantastic for my work.",
+        datePublished: "2025-02-12"
+      },
+      {
+        author: "Irene K.",
+        rating: 4,
+        reviewBody: "Battery life is decent, performance top-notch. Still a great buy in 2025.",
+        datePublished: "2025-03-02"
+      }
+    ]
+  }
+},
+
+{
+  id: 15,
+  name: "Samsung Galaxy S21 Plus 5G (128GB)",
+  fullname:"Samsung Galaxy S21 Plus 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4800mAh (Dual SIM) 12MP + 12MP",
+  status: "Used",
+  image: "/phones/samsung_galaxy_s21_plus_5g_128gb.jpg",
+  from: "KSh 6,200",
+  deposit: "KSh 7,000",
+  daily: "KSh 140",
+  totalPrice: "KSh 28,000",
+  source: "/phones/samsung_galaxy_s21_plus_5g_128gb.webp",
+  discount: "-7%",
+  display: "block",
+  phonedisplay: "6.7\" Dynamic AMOLED 2X (2400 × 1080, 120Hz)",
+  processor: "Exynos 2100 (5nm) / Snapdragon 888 (5nm)",
+  camera: "12MP (wide) + 12MP (ultra-wide) + 64MP (telephoto) (rear), 10MP (front)",
+  memory: "128GB / 8GB RAM",
+  battery: "4800mAh, 25W Fast Charging, Wireless Charging, Wireless PowerShare",
+  version: "Android 12, upgradable to Android 14, One UI 6",
+  depositanddaily: "KSh 7,000 Daily KSh 140",
+  slug: "samsung-galaxy-s21-plus-5g-128gb",
+  slugs: "samsung-galaxy-s21-plus-5g-128gb",
+  description: "Buy Samsung Galaxy S21 Plus 5G (128GB) on credit in Nairobi, Kenya. Enjoy a premium 120Hz Dynamic AMOLED display, powerful performance, and versatile triple cameras with flexible deposit & daily payment options.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-G996B",
+  storage: "128GB",
+  condition: "used",
+  gtin: "8806090881235",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Galaxy S21 Plus features a sleek glass front, matte glass back, and an aluminum frame for a premium feel. It measures 161.5 × 75.6 × 7.8mm and weighs 202g. The minimalist design is comfortable to hold and available in Phantom Black, Phantom Silver, Phantom Violet, and Phantom Gold.`,
+    },
+    {
+      title: "Display",
+      content: `A vibrant 6.7-inch Dynamic AMOLED 2X display with adaptive 120Hz refresh rate delivers smooth scrolling and crisp visuals. With HDR10+ support and excellent peak brightness, media and games look outstanding even outdoors.`,
+    },
+    {
+      title: "Camera System",
+      content: `The triple camera setup (12MP wide, 12MP ultra-wide, 64MP telephoto) provides flexible shooting options including 3x hybrid zoom, Night Mode, and 8K video recording. The 10MP front camera ensures clear selfies and video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by Exynos 2100 or Snapdragon 888 and 8GB of RAM, the S21 Plus handles demanding apps, multitasking, and gaming with ease. Thermal management keeps sustained performance stable during extended sessions.`,
+    },
+    {
+      title: "Operating System",
+      content: `Ships with Android 12 and One UI, upgradeable to Android 14 with One UI 6 — offering enhanced privacy controls, improved multitasking, and feature refinements for everyday use.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `This 128GB variant pairs with 8GB RAM, providing solid capacity for apps, photos, and videos. Note: no microSD expansion on S21 series models.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 4800mAh battery supports 25W wired fast charging, 15W wireless charging, and Wireless PowerShare to charge accessories. Expect a full day of mixed use under normal conditions.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity includes 5G, Wi-Fi 6, Bluetooth 5.2, NFC, and USB Type-C. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, proximity, compass, and ambient light sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Smooth 120Hz Dynamic AMOLED display",
+        "Strong everyday performance with Exynos/Snapdragon",
+        "Versatile triple-camera system with good zoom",
+        "Large battery with wireless charging",
+        "Premium build and solid software support",
+      ],
+      cons: [
+        "No microSD card slot",
+        "Charger not included in the box",
+        "Slightly bulky for small-handed users",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy S21 Plus 5G (128GB) is a strong all-rounder — great display, reliable performance, and capable cameras — ideal for users who want near-flagship features without flagship prices.`,
+    },
+  ],
+
+  color: "Phantom Black, Phantom Silver, Phantom Violet, Phantom Gold",
+  weight: "202g",
+  dimensions: {
+    length: "161.5mm",
+    width: "75.6mm",
+    height: "7.8mm"
+  },
+  material: "Glass and Aluminum",
+  pattern: "Matte Finish",
+  productLine: "Galaxy S21 Series",
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 73,
+    reviews: [
+      {
+        author: "Sarah T.",
+        rating: 5,
+        reviewBody: "Excellent screen and battery life — performs great for daily use.",
+        datePublished: "2025-03-02"
+      },
+      {
+        author: "David R.",
+        rating: 4,
+        reviewBody: "Camera is reliable and the phone feels very premium. Would prefer a charger included.",
+        datePublished: "2025-04-14"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 16,
+  name: "Samsung Galaxy A42 5G 128GB",
+  fullname:"Samsung Galaxy A42 Plus 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 48MP + 8MP",
+  
+  status: "New",
+  image: "/phones/samsung_galaxy_a42_5g_128gb.jpg",
+  from: "KSh 3,800",
+  deposit: "KSh 4,500",
+  daily: "KSh 100",
+  totalPrice: "KSh 18,500",
+  source: "/phones/samsung_galaxy_a42_5g_128gb.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.6\" Super AMOLED (720 × 1600)",
+  processor: "Qualcomm Snapdragon 750G (8nm) Octa-core",
+  camera: "48MP + 8MP + 5MP + 5MP (rear), 20MP (front)",
+  memory: "128GB / 6GB RAM",
+  battery: "5000mAh, 15W Fast Charging",
+  version: "Android 11, upgradable to Android 13, One UI 5",
+  depositanddaily: "KSh 4,500 Daily KSh 100",
+  slug: "samsung-galaxy-a42-5g-128gb",
+  slugs: "samsung-galaxy-a42-5g-128gb",
+  description: "Buy Samsung Galaxy A42 5G (128GB) on credit in Nairobi, Kenya. Experience 5G speed, a Super AMOLED display, and long battery life with easy daily payment plans.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-A426B",
+  storage: "128GB",
+  condition: "new",
+  gtin: "8806090708457",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy A42 5G features a stylish prism-patterned back and a lightweight polycarbonate build. Measuring 164.4 × 75.9 × 8.6mm and weighing 193g, it feels comfortable to hold and comes in Prism Dot Black, White, and Gray finishes.`,
+    },
+    {
+      title: "Display",
+      content: `It sports a 6.6-inch Super AMOLED display that delivers rich colors and sharp contrast for everyday tasks, streaming, and browsing. Although it's HD+, the screen remains bright and power-efficient.`,
+    },
+    {
+      title: "Camera System",
+      content: `The quad camera setup includes a 48MP main, 8MP ultra-wide, 5MP depth, and 5MP macro lens. Capture vibrant photos, wide scenic shots, and detailed close-ups. The 20MP front camera delivers clear selfies and smooth video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Snapdragon 750G chipset with Adreno 619 GPU and 6GB RAM, the Galaxy A42 5G offers efficient multitasking, smooth app performance, and reliable gaming for a mid-range phone.`,
+    },
+    {
+      title: "Operating System",
+      content: `Originally shipped with Android 11 and One UI 3.1, this phone is upgradable to Android 13 and One UI 5, featuring improved privacy controls, customization options, and a refreshed interface.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `It offers 128GB internal storage with expandable microSD support up to 1TB, giving users flexibility for photos, videos, and app storage.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 5000mAh battery provides up to 2 days of moderate use and supports 15W fast charging via USB Type-C. Reliable for work, entertainment, and communication throughout the day.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Features 5G connectivity, Wi-Fi 5, Bluetooth 5.0, NFC, and USB Type-C. Sensors include an in-display fingerprint reader, accelerometer, gyro, proximity, and compass.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Strong 5G performance for its price",
+        "Large Super AMOLED display",
+        "Solid battery life with fast charging",
+        "Expandable storage up to 1TB",
+        "Reliable Snapdragon 750G performance",
+      ],
+      cons: [
+        "HD+ resolution instead of Full HD",
+        "Plastic body feels less premium",
+        "No high refresh rate display",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Samsung Galaxy A42 5G 128GB is an excellent mid-range 5G phone combining good performance, long battery life, and dependable cameras, making it ideal for budget-conscious users seeking future-ready connectivity.`,
+    },
+  ],
+
+  color: "Prism Dot Black, Prism Dot White, Prism Dot Gray",
+  weight: "193g",
+  dimensions: {
+    length: "164.4mm",
+    width: "75.9mm",
+    height: "8.6mm"
+  },
+  material: "Polycarbonate",
+  pattern: "Prism Gradient Finish",
+  productLine: "Galaxy A Series",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 62,
+    reviews: [
+      {
+        author: "Brian K.",
+        rating: 5,
+        reviewBody: "Great value 5G phone. Battery lasts long and performs smoothly.",
+        datePublished: "2025-03-21"
+      },
+      {
+        author: "Mercy W.",
+        rating: 4,
+        reviewBody: "Camera quality is decent, and the display looks good outdoors.",
+        datePublished: "2025-04-08"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 17,
+  name: "iPhone 12 Pro 256GB",
+  fullname:"iPhone 12 Pro Max 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 2815mAh (Dual SIM) 12MP + 12MP",
+  status: "New",
+  image: "/phones/iphone_12_pro_256gb.jpg",
+  from: "KSh 8,500",
+  deposit: "KSh 12,000",
+  daily: "KSh 250",
+  totalPrice: "KSh 85,000",
+  source: "/phones/iphone_12_pro_256gb.webp",
+  discount: "-9%",
+  display: "block",
+  phonedisplay: "6.1\" Super Retina XDR (2532 × 1170)",
+  processor: "A14 Bionic Chip (5nm)",
+  camera: "12MP + 12MP + 12MP (rear), 12MP (front)",
+  memory: "256GB / 6GB RAM",
+  battery: "2815mAh, 20W Fast Charging, MagSafe",
+  version: "iOS 17",
+  depositanddaily: "KSh 12,000 Daily KSh 250",
+  slug: "iphone-12-pro-256gb",
+  slugs: "iphone-12-pro-256gb",
+  description: "Buy iPhone 12 Pro 256GB on credit in Nairobi, Kenya. Own the premium Apple experience with triple cameras, A14 Bionic chip, and stunning Super Retina XDR display — all with affordable daily payments.",
+  brand: "Apple",
+  seller: "Mkopa",
+  model: "A2407",
+  storage: "256GB",
+  condition: "new",
+  gtin: "0194252039564",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "iphone","apple", "Mkopa"],
+
+  // 🧩 Structured text sections
+  details: [
+    {
+      title: "Body and Design",
+      content: `The iPhone 12 Pro 256GB features a surgical-grade stainless steel frame and a ceramic shield front cover that’s four times more drop-resistant. Measuring 146.7 × 71.5 × 7.4mm and weighing 189g, it balances durability with elegance. Available in Pacific Blue, Gold, Silver, and Graphite.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a 6.1-inch Super Retina XDR OLED display with HDR10 and Dolby Vision support. Its 1170 × 2532 resolution and 460ppi density ensure sharp detail and vivid color accuracy, making it ideal for media consumption and creative work.`,
+    },
+    {
+      title: "Camera System",
+      content: `The iPhone 12 Pro features a triple 12MP camera system — wide, ultra-wide, and telephoto — plus a LiDAR scanner for depth mapping. Night Mode works across all lenses, and the ProRAW feature gives professionals full creative control. The 12MP front camera supports 4K video recording and Smart HDR 3.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the A14 Bionic chip, built on a 5nm process, this device offers excellent speed, graphics performance, and energy efficiency. It effortlessly handles demanding games, 4K video editing, and multitasking with minimal lag.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running iOS 17, it delivers seamless performance, enhanced customization options, privacy features, and long-term software support from Apple.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Equipped with 256GB of high-speed NVMe storage and 6GB RAM, the iPhone 12 Pro handles data-heavy apps, high-resolution media, and professional workloads smoothly.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The 2815mAh battery offers up to 17 hours of video playback. It supports 20W fast wired charging, 15W MagSafe wireless charging, and 7.5W Qi wireless charging for everyday convenience.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Includes 5G, Wi-Fi 6, Bluetooth 5.0, GPS, NFC, and a Lightning port. Sensors include Face ID, barometer, three-axis gyro, accelerometer, proximity, and ambient light sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Powerful A14 Bionic performance",
+        "Excellent triple camera system with LiDAR",
+        "Premium stainless steel design",
+        "Super Retina XDR display with HDR10",
+        "Long-term iOS updates",
+      ],
+      cons: [
+        "No 120Hz refresh rate",
+        "Slightly smaller battery than Pro Max",
+        "Expensive repairs and accessories",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The iPhone 12 Pro 256GB remains a refined and capable smartphone for users seeking professional camera capabilities, powerful performance, and long-lasting build quality in a more compact form factor than the Pro Max.`,
+    },
+  ],
+
+  color: "Pacific Blue, Gold, Silver, Graphite",
+  weight: "189g",
+  dimensions: {
+    length: "146.7mm",
+    width: "71.5mm",
+    height: "7.4mm"
+  },
+  material: "Stainless Steel and Glass",
+  pattern: "Glossy Finish",
+  productLine: "iPhone 12 Pro Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 47,
+    reviews: [
+      {
+        author: "Derrick M.",
+        rating: 5,
+        reviewBody: "The design feels premium and performance is top-notch even in 2025.",
+        datePublished: "2025-04-12"
+      },
+      {
+        author: "Faith N.",
+        rating: 4,
+        reviewBody: "Battery is okay, camera is brilliant. Still feels very modern.",
+        datePublished: "2025-03-08"
+      }
+    ]
+  }
+},
+
+
+
+
+
+
+
+  {
+    id: 1,
+    name: "Samsung 43U8000F",
+    fullname: "Samsung 43-inch TV Crystal UHD 4K HDR Smart TV ",
+    status: "New",
+    image: "/tvs/samsung_43u8000f.jpg",
+    from: "KSh 5,900",
+    deposit: "KSh 8,000",
+    daily: "KSh 170",
+    totalPrice: "KSh 59,000",
+    source: "/phones/samsung_43u8000f.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: "43\" Crystal UHD 4K (3840 × 2160)",
+    processor: "Crystal Processor 4K",
+    camera: "N/A",
+    memory: "8GB Internal Storage (for apps)",
+    battery: "N/A (AC powered)",
+    version: "Tizen OS Smart TV",
+    depositanddaily: "KSh 8,000 Daily KSh 170",
+    slug: "samsung-43u8000f",
+    slugs: "samsung-43u8000f",
+    description: "Buy Samsung 43-inch Crystal UHD 4K HDR Smart TV on credit in Kenya. Enjoy ultra-clear picture, dynamic crystal color, and voice assistant support with small deposit and easy daily payments.",
+    brand: "Samsung",
+    seller: "Watu Simu",
+    model: "43U8000F",
+    storage: "8GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+
+    details: [
+      {
+        title: "Display and Design",
+        content: `The Samsung 43U8000F features a 43-inch Crystal UHD 4K panel delivering lifelike colors and sharp details. Its slim bezels and AirSlim design ensure a modern, minimalist look that blends seamlessly into any room.`,
+      },
+      {
+        title: "Picture Quality",
+        content: `Enjoy stunning 4K clarity with HDR10+ support, providing bright whites and deep blacks for immersive viewing. The Crystal Processor 4K upscales non-4K content for enhanced detail and contrast.`,
+      },
+      {
+        title: "Smart Features",
+        content: `Powered by Tizen OS, the TV supports apps like Netflix, YouTube, and Showmax. It also includes built-in voice assistants (Bixby, Alexa, Google Assistant) for hands-free control.`,
+      },
+      {
+        title: "Connectivity",
+        content: `Comes equipped with 3 HDMI ports, 2 USB ports, Bluetooth, Wi-Fi, and optical audio output. Perfect for connecting consoles, soundbars, and streaming devices.`,
+      },
+      {
+        title: "Audio",
+        content: `With Dolby Digital Plus and Adaptive Sound technology, you’ll experience balanced, room-filling sound even without external speakers.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Vibrant 4K HDR display",
+          "Slim AirSlim design",
+          "Tizen Smart OS with multiple voice assistants",
+          "Excellent upscaling performance",
+        ],
+        cons: [
+          "No local dimming",
+          "Limited app storage",
+          "Average speaker bass",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `An affordable 4K Smart TV that combines premium design, excellent picture quality, and reliable performance for movies, sports, and streaming.`,
+      },
+    ],
+
+    color: "Black",
+    weight: "8.1kg",
+    dimensions: {
+      length: "960.3mm",
+      width: "598.1mm",
+      height: "193.2mm",
+    },
+    material: "Plastic frame with metal stand",
+    pattern: "AirSlim",
+    productLine: "Samsung Crystal UHD",
+    reviews: {
+      averageRating: 4.6,
+      reviewCount: 19,
+      reviews: [
+        {
+          author: "Jane K.",
+          rating: 5,
+          reviewBody: "Beautiful picture quality and very smart features!",
+          datePublished: "2025-03-01",
+        },
+      ],
+    },
+  },
+
+  {
+    id: 2,
+    name: "Samsung 50U8000F",
+    fullname: "Samsung 50-inch TV Crystal UHD 4K HDR Smart TV",
+    status: "New",
+    image: "/tvs/samsung_50u8000f.jpg",
+    from: "KSh 6,800",
+    deposit: "KSh 9,500",
+    daily: "KSh 190",
+    totalPrice: "KSh 67,000",
+    source: "/phones/samsung_50u8000f.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: "50\" Crystal UHD 4K (3840 × 2160)",
+    processor: "Crystal Processor 4K",
+    memory: "8GB Internal Storage",
+    version: "Tizen OS",
+    depositanddaily: "KSh 9,500 Daily KSh 190",
+    slug: "samsung-50u8000f",
+    slugs: "samsung-50u8000f",
+    description: "Buy Samsung 50-inch Crystal UHD 4K HDR TV in Kenya. Enjoy cinematic visuals, HDR10+, and smooth motion for movies and gaming on credit with daily payments.",
+    brand: "Samsung",
+    seller: "MKOPA",
+    model: "50U8000F",
+    storage: "8GB",
+    condition: "new",
+    categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+
+    details: [
+      {
+        title: "Display and Performance",
+        content: `The 50U8000F offers immersive 4K UHD resolution and Crystal Processor 4K for optimized visuals. Motion Xcelerator technology ensures smooth playback for sports and gaming.`,
+      },
+      {
+        title: "Smart Features",
+        content: `Access popular apps easily with Tizen OS and control the TV using Bixby, Alexa, or Google Assistant. Screen mirroring and Samsung TV Plus are included.`,
+      },
+      {
+        title: "Design and Build",
+        content: `The AirSlim body gives it a sleek appearance with minimal bezels. Wall-mount compatible with cable management features for clean setup.`,
+      },
+      {
+        title: "Audio",
+        content: `Dolby Digital Plus and Adaptive Sound provide balanced, crisp sound suited for movies and music.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Excellent motion clarity",
+          "4K upscaling works great",
+          "Smart Tizen OS",
+        ],
+        cons: [
+          "No Dolby Vision support",
+          "Mid-range brightness",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Samsung 50U8000F provides a balanced 4K experience — excellent visuals, smart connectivity, and modern design for medium-sized living rooms.`,
+      },
+    ],
+    color: "Black",
+    weight: "11.5kg",
+    dimensions: {
+      length: "1116.8mm",
+      width: "716.1mm",
+      height: "228.8mm",
+    },
+    productLine: "Samsung Crystal UHD",
+  },
+
+  {
+    id: 3,
+    name: "Samsung 55U8000F",
+    fullname: "Samsung 55-inch TV Crystal UHD 4K HDR Smart TV ",
+    status: "New",
+    image: "/tvs/samsung_55u8000f.jpg",
+    from: "KSh 7,900",
+    deposit: "KSh 10,500",
+    daily: "KSh 210",
+    totalPrice: "KSh 74,000",
+    source: "/phones/samsung_55u8000f.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: "55\" Crystal UHD 4K (3840 × 2160)",
+    processor: "Crystal Processor 4K",
+    version: "Tizen OS",
+    depositanddaily: "KSh 10,500 Daily KSh 210",
+    slug: "samsung-55u8000f",
+    slugs: "samsung-55u8000f",
+    description: "Buy Samsung 55-inch 4K UHD Smart TV on credit. Enjoy HDR10+ and immersive sound. Perfect for home theaters and family entertainment.",
+    brand: "Samsung",
+    seller: "Watu Simu",
+    model: "55U8000F",
+    storage: "8GB",
+    condition: "new",
+    categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+
+    details: [
+      {
+        title: "Display Quality",
+        content: `The 55U8000F features an expansive 55-inch display with rich colors and deep contrast. HDR10+ support ensures detailed highlights and shadows.`,
+      },
+      {
+        title: "Smart Features",
+        content: `Tizen OS supports Netflix, Disney+, YouTube, and Apple TV apps. Use voice commands or your phone to control the TV.`,
+      },
+      {
+        title: "Design",
+        content: `Ultra-thin bezels with AirSlim build for a seamless appearance. Supports wall mounting and Bluetooth sound systems.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Bright 4K panel with HDR",
+          "Multiple voice assistants",
+          "Great upscaling quality",
+        ],
+        cons: [
+          "No HDMI 2.1",
+          "Standard refresh rate (60Hz)",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `A solid 55-inch smart TV offering excellent visuals, smart controls, and stylish design — perfect for immersive living room entertainment.`,
+      },
+    ],
+    color: "Black",
+    weight: "13.9kg",
+    dimensions: {
+      length: "1227.6mm",
+      width: "783.2mm",
+      height: "228.8mm",
+    },
+  },
+
+  {
+    id: 4,
+    name: "Samsung 65U8000F",
+    fullname: "Samsung 65-inch TV Crystal UHD 4K HDR Smart TV",
+    status: "New",
+    image: "/tvs/samsung_65u8000f.jpg",
+    from: "KSh 9,800",
+    deposit: "KSh 13,000",
+    daily: "KSh 260",
+    totalPrice: "KSh 89,000",
+    source: "/phones/samsung_65u8000f.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: "65\" Crystal UHD 4K (3840 × 2160)",
+    processor: "Crystal Processor 4K",
+    version: "Tizen OS",
+    depositanddaily: "KSh 13,000 Daily KSh 260",
+    slug: "samsung-65u8000f",
+    slugs: "samsung-65u8000f",
+    description: "Get Samsung 65-inch Crystal UHD 4K HDR Smart TV on credit in Kenya. Large immersive screen, HDR10+, AirSlim design, and premium sound.",
+    brand: "Samsung",
+    seller: "MKOPA",
+    model: "65U8000F",
+    storage: "8GB",
+    condition: "new",
+    categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+
+    details: [
+      {
+        title: "Display Excellence",
+        content: `Experience cinematic 4K visuals on the large 65-inch display. HDR10+ enhances dynamic range, while PurColor ensures natural tones and clarity.`,
+      },
+      {
+        title: "Smart and Voice Control",
+        content: `Integrated Tizen OS allows seamless streaming and smart control using Alexa, Bixby, or Google Assistant.`,
+      },
+      {
+        title: "Design",
+        content: `Elegant AirSlim body with a nearly bezel-less screen and central stand — perfect for wall or tabletop setups.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Large immersive 4K screen",
+          "Slim, elegant build",
+          "Smart OS with voice control",
+        ],
+        cons: [
+          "No Dolby Vision",
+          "Standard refresh rate",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Samsung 65U8000F is perfect for home theaters and family entertainment, offering cinematic visuals with intelligent features.`,
+      },
+    ],
+    color: "Black",
+    weight: "21.1kg",
+    dimensions: {
+      length: "1452.7mm",
+      width: "873.6mm",
+      height: "290.2mm",
+    },
+  },
 
 
 
