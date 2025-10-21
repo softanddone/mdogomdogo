@@ -28,9 +28,7 @@ export const products = [
     storage: "128GB",
     condition: "new",
     gtin: "",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo"],
-
-
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
 
     // 🧩 Structured text sections
@@ -160,7 +158,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -284,7 +282,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
 
 
@@ -417,7 +415,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno", "Mogo","Load","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -531,7 +529,7 @@ export const products = [
   storage: "512GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno", "Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -645,7 +643,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno","Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -760,7 +758,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Xiaomi", "Redmi Note Series"],
+  categoryPath: ["Electronics", "Mobile Phones", "Xiaomi", "Redmi Note Series","Mogo","Loan", "Smartphones","Lipa Mdogo Mdogo"],
 
   details: [
   {
@@ -871,7 +869,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Hot Series"],
+  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Hot Series","Mogo","Smartphones","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -982,7 +980,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Hot Series"],
+  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Hot Series","Mogo","Loan","Smartphones","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -1096,7 +1094,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Note Series"],
+  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Note Series","Mogo","Smartphones","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -1210,7 +1208,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","Hot Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","Hot Series","Smartphones","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -1321,7 +1319,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","Hot Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","Hot Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -1429,7 +1427,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -1539,7 +1537,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","GT Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","GT Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -1650,7 +1648,7 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series","Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -1758,7 +1756,7 @@ export const products = [
   storage: "64-128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series","Loan","Lipa Mdogo Mdogo","Smartphones","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -1873,7 +1871,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Infinix","Note Series"],
+  categoryPath: ["Electronics","Mobile Phones","Infinix","Note Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -1988,7 +1986,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Tecno","Spark Series"],
+  categoryPath: ["Electronics","Mobile Phones","Tecno","Spark Series","Mogo","Lipa Mdogo Mdogo","Loan","Smartphones"],
   details: [
   {
     title: "Body and Design",
@@ -2108,7 +2106,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics","Mobile Phones","Tecno","Camon Series"],
+  categoryPath: ["Electronics","Mobile Phones","Tecno","Camon Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -2230,7 +2228,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "4895180765432",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -2336,7 +2334,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "4895180792341",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogp","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -2441,7 +2439,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "4895180792358",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -2548,7 +2546,7 @@ export const products = [
   storage: "512GB",
   condition: "new",
   gtin: "4895180792365",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogo","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
     title: "Body and Design",
@@ -2655,7 +2653,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "4895180794122",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -2761,7 +2759,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -2862,7 +2860,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -3065,7 +3063,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -3167,7 +3165,7 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -3442,7 +3440,7 @@ export const products = [
   model: "Phantom V Fold",
   storage: "512GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   productLine: "Tecno Phantom",
   reviews: {
     averageRating: 4.6,
@@ -3496,7 +3494,7 @@ export const products = [
   
   storage: "64GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
     title: "Body and Design",
@@ -3607,7 +3605,7 @@ export const products = [
   material: "Eco-friendly back cover (Mars Orange made from recycled materials)",
   
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogo","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -3718,7 +3716,7 @@ export const products = [
   model: "V60 5G",
   storage: "256GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
     title: "Body and Design",
@@ -3833,7 +3831,7 @@ export const products = [
   model: "V50 Lite",
   storage: "256GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan", "Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -3949,7 +3947,7 @@ export const products = [
   model: "Y04",
   storage: "128GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
     title: "Body and Design",
@@ -4063,7 +4061,7 @@ export const products = [
   model: "V50",
   storage: "512GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -4177,7 +4175,7 @@ export const products = [
   model: "Y29",
   storage: "256GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -4291,7 +4289,7 @@ export const products = [
   model: "Y19s",
   storage: "128GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
     title: "Body and Design",
@@ -4404,7 +4402,7 @@ export const products = [
   model: "V40",
   storage: "256GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Loan", "Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -4518,7 +4516,7 @@ export const products = [
   model: "Y18",
   storage: "128GB",
   condition: "new",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -4632,7 +4630,7 @@ export const products = [
   model: "Y03",
   storage: "128GB",
   condition: "New",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Mogo","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -4746,7 +4744,7 @@ export const products = [
   model: "Y28",
   storage: "256GB",
   condition: "New",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
     title: "Body and Design",
@@ -4975,7 +4973,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Watu Simu"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo", "Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5092,7 +5090,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix", "Mogo","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5188,8 +5186,8 @@ export const products = [
   status: "New",
   image: "/phones/samsung_galaxy_a16.jpg",
   from: "KSh 5,200",
-  deposit: "KSh 4,500",
-  daily: "KSh 110",
+  deposit: "KSh 6,500",
+  daily: "KSh 137",
   totalPrice: "KSh 22,000",
   source: "/phones/samsung_galaxy_a16.webp",
   discount: "-8%",
@@ -5210,7 +5208,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan","Lipa Mdogo Mdogo" ],
 
   // 🧩 Structured text sections
   details: [
@@ -5328,7 +5326,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5445,7 +5443,7 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5561,7 +5559,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5677,7 +5675,7 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5794,7 +5792,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa","Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -5913,7 +5911,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa", "Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -6030,7 +6028,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -6149,7 +6147,7 @@ export const products = [
     storage: "1TB",
     condition: "new",
     gtin: "194253403176",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "MoPhone"],
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "MoPhones","Loan or Cash","Lipa Mdogo Mdogo"],
 
     // 🧩 Structured text sections
     details: [
@@ -6268,7 +6266,7 @@ export const products = [
     storage: "512GB",
     condition: "new",
     gtin: "194253408112",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Watu Simu"],
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "MoPhones", "Loan or Cash","Lipa Mdogo Mdogo"],
 
     // 🧩 Structured text sections
     details: [
@@ -6385,7 +6383,7 @@ export const products = [
     storage: "256GB",
     condition: "new",
     gtin: "194253401102",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Watu Simu"],
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "Mophones","Loan or Cash"],
 
     // 🧩 Structured text sections
     details: [
@@ -6502,7 +6500,7 @@ export const products = [
     storage: "256GB",
     condition: "new",
     gtin: "194252703911",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "Mophones","Loan or Cash"],
 
     // 🧩 Structured text sections
     details: [
@@ -6622,7 +6620,7 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "0194253156482",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone","Loan or Cash", "MoPhones"],
 
   // 🧩 Structured text sections
   details: [
@@ -6739,7 +6737,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "0194252034171",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Iphones","Iphone","Loan & Cash","Mophones"],
 
   // 🧩 Structured text sections
   details: [
@@ -6856,7 +6854,7 @@ export const products = [
   storage: "128GB",
   condition: "used",
   gtin: "0194252345900",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Iphone","Mophones","Loan or Cash"],
 
   details: [
     {
@@ -6972,7 +6970,7 @@ export const products = [
   storage: "128GB",
   condition: "used",
   gtin: "0887276390981",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash"],
 
   details: [
     {
@@ -7087,7 +7085,7 @@ export const products = [
   storage: "128GB",
   condition: "used",
   gtin: "0887276419576",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7204,7 +7202,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "8806095509803",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "MoPhones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7322,7 +7320,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "8806095507123",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7439,7 +7437,7 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "8806092948820",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7550,12 +7548,12 @@ export const products = [
   slugs: "samsung-galaxy-s21-ultra-128gb",
   description: "Buy Samsung Galaxy S21 Ultra 128GB on credit in Nairobi, Kenya. Enjoy premium design, top-tier performance, and a powerful quad camera system with 100x zoom. Available with flexible daily payments.",
   brand: "Samsung",
-  seller: "Mkopa",
+  seller: "Mophone",
   model: "SM-G998B",
   storage: "128GB",
   condition: "new",
   gtin: "8806090884748",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7667,12 +7665,12 @@ export const products = [
   slugs: "samsung-galaxy-note-10-plus-256gb",
   description: "Buy Samsung Galaxy Note 10 Plus 256GB on credit in Nairobi, Kenya. Premium S Pen experience, massive display, and powerful performance with flexible daily payment options.",
   brand: "Samsung",
-  seller: "Mkopa",
+  seller: "Mophones",
   model: "SM-N975F",
   storage: "256GB",
   condition: "new",
   gtin: "8806090079427",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7783,12 +7781,12 @@ export const products = [
   slugs: "samsung-galaxy-s21-plus-5g-128gb",
   description: "Buy Samsung Galaxy S21 Plus 5G (128GB) on credit in Nairobi, Kenya. Enjoy a premium 120Hz Dynamic AMOLED display, powerful performance, and versatile triple cameras with flexible deposit & daily payment options.",
   brand: "Samsung",
-  seller: "Mkopa",
+  seller: "Mophones",
   model: "SM-G996B",
   storage: "128GB",
   condition: "used",
   gtin: "8806090881235",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -7901,14 +7899,13 @@ export const products = [
   slugs: "samsung-galaxy-a42-5g-128gb",
   description: "Buy Samsung Galaxy A42 5G (128GB) on credit in Nairobi, Kenya. Experience 5G speed, a Super AMOLED display, and long battery life with easy daily payment plans.",
   brand: "Samsung",
-  seller: "Mkopa",
+  seller: "Mophones",
   model: "SM-A426B",
   storage: "128GB",
   condition: "new",
   gtin: "8806090708457",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
-  // 🧩 Structured text sections
   details: [
     {
       title: "Body and Design",
@@ -8018,12 +8015,12 @@ export const products = [
   slugs: "iphone-12-pro-256gb",
   description: "Buy iPhone 12 Pro 256GB on credit in Nairobi, Kenya. Own the premium Apple experience with triple cameras, A14 Bionic chip, and stunning Super Retina XDR display — all with affordable daily payments.",
   brand: "Apple",
-  seller: "Mkopa",
+  seller: "Mophones",
   model: "A2407",
   storage: "256GB",
   condition: "new",
   gtin: "0194252039564",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "iphone","apple", "Mkopa"],
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "iphone","Apple","Loan or Cash", "Mophones","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
   details: [
@@ -8111,6 +8108,103 @@ export const products = [
 },
 
 
+  {
+    id: 1,
+    name: "Samsung 43U8000F",
+    fullname: "Samsung 43-inch TV Crystal UHD 4K HDR Smart TV ",
+    status: "New",
+    image: "/tvs/samsung_43u8000f.jpg",
+    from: "KSh 5,900",
+    deposit: "KSh 8,000",
+    daily: "KSh 170",
+    totalPrice: "KSh 59,000",
+    source: "/phones/samsung_43u8000f.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: "43\" Crystal UHD 4K (3840 × 2160)",
+    processor: "Crystal Processor 4K",
+    camera: "N/A",
+    memory: "8GB Internal Storage (for apps)",
+    battery: "N/A (AC powered)",
+    version: "Tizen OS Smart TV",
+    depositanddaily: "KSh 8,000 Daily KSh 170",
+    slug: "samsung-43u8000f",
+    slugs: "samsung-43u8000f",
+    description: "Buy Samsung 43-inch Crystal UHD 4K HDR Smart TV on credit in Kenya. Enjoy ultra-clear picture, dynamic crystal color, and voice assistant support with small deposit and easy daily payments.",
+    brand: "Samsung",
+    seller: "Watu Simu",
+    model: "43U8000F",
+    storage: "8GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung","Loan","Watu Simu","Lipa Mdogo Mdogo"],
+
+    details: [
+      {
+        title: "Display and Design",
+        content: "The Samsung 43U8000F features a 43-inch Crystal UHD 4K panel delivering lifelike colors and sharp details. Its slim bezels and AirSlim design ensure a modern, minimalist look that blends seamlessly into any room.",
+      },
+      {
+        title: "Picture Quality",
+        content: "Enjoy stunning 4K clarity with HDR10+ support, providing bright whites and deep blacks for immersive viewing. The Crystal Processor 4K upscales non-4K content for enhanced detail and contrast.",
+      },
+      {
+        title: "Smart Features",
+        content: "Powered by Tizen OS, the TV supports apps like Netflix, YouTube, and Showmax. It also includes built-in voice assistants (Bixby, Alexa, Google Assistant) for hands-free control.",
+      },
+      {
+        title: "Connectivity",
+        content: "Comes equipped with 3 HDMI ports, 2 USB ports, Bluetooth, Wi-Fi, and optical audio output. Perfect for connecting consoles, soundbars, and streaming devices.",
+      },
+      {
+        title: "Audio",
+        content: "With Dolby Digital Plus and Adaptive Sound technology, you’ll experience balanced, room-filling sound even without external speakers.",
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Vibrant 4K HDR display",
+          "Slim AirSlim design",
+          "Tizen Smart OS with multiple voice assistants",
+          "Excellent upscaling performance",
+        ],
+        cons: [
+          "No local dimming",
+          "Limited app storage",
+          "Average speaker bass",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: "An affordable 4K Smart TV that combines premium design, excellent picture quality, and reliable performance for movies, sports, and streaming."
+      },
+    ],
+
+    color: "Black",
+    weight: "8.1kg",
+    dimensions: {
+      length: "960.3mm",
+      width: "598.1mm",
+      height: "193.2mm",
+    },
+    material: "Plastic frame with metal stand",
+    pattern: "AirSlim",
+    productLine: "Samsung Crystal UHD",
+    reviews: {
+      averageRating: 4.6,
+      reviewCount: 19,
+      reviews: [
+        {
+          author: "Jane K.",
+          rating: 5,
+          reviewBody: "Beautiful picture quality and very smart features!",
+          datePublished: "2025-03-01",
+        },
+      ],
+    },
+  },
+
+
 
 {
   id: 2,
@@ -8141,7 +8235,7 @@ export const products = [
   storage: "8GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+  categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung","Watu Simu", "Loan","Lipa Mdogo Mdogo"],
 
   details: [
     {
@@ -8238,7 +8332,7 @@ export const products = [
   storage: "8GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+  categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung","Watu Simu", "Loan", "Lipa Mdogo Mdogo"],
 
   details: [
     {
@@ -8336,7 +8430,7 @@ export const products = [
   storage: "8GB",
   condition: "new",
   gtin: "",
-  categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung"],
+  categoryPath: ["Electronics", "Televisions", "Smart TVs", "Samsung","Watu Simu", "Loan", "Lipa Mdogo Mdogo"],
 
   details: [
     {
