@@ -1,0 +1,221 @@
+---
+// PopularBrands.astro
+const brands = [
+  { name: "Itel", icon: "/icons/itel.svg", link: "/brands/itel" },
+  { name: "Infinix", icon: "/icons/infinix.svg", link: "/brands/infinix" },
+  { name: "iPhone", icon: "/icons/iphone.svg", link: "/brands/iphone" },
+  { name: "Oppo", icon: "/icons/oppo.svg", link: "/brands/oppo" },
+  { name: "Philips", icon: "/icons/philips.svg", link: "/brands/philips" },
+  { name: "Realme", icon: "/icons/realme.svg", link: "/brands/realme" },
+  { name: "Redmi", icon: "/icons/redmi.svg", link: "/brands/redmi" },
+  {
+    name: "Safaricom",
+    icon: "/icons/safaricom.svg",
+    link: "/brands/safaricom",
+  },
+  { name: "Samsung", icon: "/icons/samsung.svg", link: "/brands/samsung" },
+  { name: "Tecno", icon: "/icons/tecno.svg", link: "/brands/tecno" },
+  { name: "Vivo", icon: "/icons/vivo.svg", link: "/brands/vivo" },
+  { name: "ZTE", icon: "/icons/zte.svg", link: "/brands/zte" },
+];
+---
+
+<section class="popular-brands" aria-label="Shop phones by brand on credit">
+  <div class="container">
+    <h2 class="section-title">Shop by Brand</h2>
+
+    <nav class="carousel-wrapper" aria-label="Phone brands carousel">
+      <ul class="carousel-track">
+        {
+          brands.map((brand) => (
+            <li class="carousel-item">
+              <a
+                href={brand.link}
+                class="brand-card"
+                aria-label={`Shop ${brand.name} phones on lipa mdogo mdogo`}
+              >
+                <img
+                  src={brand.icon}
+                  alt={`${brand.name} phones on credit in Nairobi`}
+                  class="brand-logo"
+                  width="50"
+                  height="50"
+                  loading="eager"
+                  fetchpriority="high"
+                />
+                <span class="brand-name">{brand.name}</span>
+              </a>
+            </li>
+          ))
+        }
+        <!-- Duplicate for seamless loop -->
+        {
+          brands.map((brand) => (
+            <li class="carousel-item" aria-hidden="true">
+              <a
+                href={brand.link}
+                class="brand-card"
+                tabindex="-1"
+                aria-label={`Shop ${brand.name} phones`}
+              >
+                <img
+                  src={brand.icon}
+                  alt=""
+                  class="brand-logo"
+                  width="50"
+                  height="50"
+                  loading="lazy"
+                />
+                <span class="brand-name">{brand.name}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .popular-brands {
+    padding: 3rem 1rem;
+    background: #f8f8f8;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: scroll 80s linear infinite;
+    width: max-content;
+    will-change: transform;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .carousel-item {
+    display: contents;
+  }
+
+  .brand-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    min-width: 150px;
+    height: 120px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .brand-card:hover,
+  .brand-card:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+    /* outline: 2px solid #0066cc; */
+    outline-offset: 2px;
+  }
+
+  .brand-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.75rem;
+    filter: grayscale(0.2);
+    transition: filter 0.3s ease;
+  }
+
+  .brand-card:hover .brand-logo,
+  .brand-card:focus .brand-logo {
+    filter: grayscale(0);
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+    display: block;
+  }
+
+  @media (min-width: 640px) {
+    .brand-card {
+      min-width: 180px;
+    }
+    .carousel-track {
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-track {
+      gap: 2rem;
+    }
+    .brand-card {
+      min-width: 200px;
+    }
+    .brand-logo {
+      height: 50px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      animation: scroll 120s linear infinite;
+    }
+  }
+</style>

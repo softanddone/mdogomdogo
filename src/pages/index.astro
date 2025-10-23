@@ -2,6 +2,7 @@
 import Welcome from "../components/Welcome.astro";
 import Nav from "../components/Nav.astro";
 import Nav2 from "../components/Nav2.astro";
+import HeadText from "../components/HeadText.astro";
 
 import Layout from "../layouts/Layout.astro";
 import { products } from "../data/products"; // Import your homepage products
@@ -17,6 +18,7 @@ import NavTest from "../components/NavTest.astro";
 import Features from "../components/Features.astro";
 import Comparison from "../components/Comparison.astro";
 import Display from "../components/Display.astro";
+import PopularBrands from "../components/PopularBrands.astro";
 
 const product1 = products[0]; // or find by ID
 
@@ -37,6 +39,8 @@ const seo = {
 
   <Nav2 />
   <!-- <Display {...product1} /> -->
+  <HeadText />
+  <PopularBrands />
   <Hero />
   <Welcome />
   <!-- <SamsungProducts /> -->

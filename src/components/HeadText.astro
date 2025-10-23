@@ -1,0 +1,77 @@
+<style>
+  .header-container {
+    width: 100%;
+    max-width: 1230px;
+    background: transparent;
+    /* border-radius: 20px; */
+    /* padding: 60px 40px; */
+    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
+    /* background: red; */
+    /* text-align: center; */
+    margin: 0 auto;
+  }
+
+  /* Semantic H1 with keyword optimization */
+  .main-heading {
+    /* font-size: clamp(2.5rem, 6vw, 5rem); */
+    /* font-weight: 800; */
+    color: #333;
+    /* letter-spacing: -0.02em; */
+    /* line-height: 1.2; */
+    /* margin: 0; */
+    /* Keyword prominence through styling */
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+
+    /* Accessibility and SEO enhancement */
+    /* word-spacing: 0.05em; */
+    font-size: 14px;
+  }
+
+  /* Visually hidden text for SEO context without visual clutter */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Responsive design for mobile-first indexing */
+  @media (max-width: 768px) {
+    .header-container {
+      padding: 40px 20px;
+    }
+
+    .main-heading {
+      /* font-size: clamp(2rem, 8vw, 3rem); */
+    }
+  }
+
+  /* Print optimization */
+  @media print {
+    body {
+      /* background: white; */
+    }
+
+    .header-container {
+      box-shadow: none;
+      /* background: white; */
+    }
+  }
+</style>
+
+<!-- Semantic header with role for accessibility -->
+<header class="header-container" role="banner">
+  <!-- Primary H1 heading with main keyword phrase -->
+  <h1 class="main-heading">
+    Lipa Mdogo Mdogo Phones
+    <!-- Screen reader context for better accessibility and semantic meaning -->
+    <span class="visually-hidden"
+      >- Affordable installment payment plans for smartphones in Nairobi</span
+    >
+  </h1>
+</header>
