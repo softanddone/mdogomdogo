@@ -1,0 +1,1420 @@
+---
+const {
+  name,
+  image,
+  source,
+  from,
+  deposit,
+  processor,
+  daily,
+  totalPrice,
+  discount,
+  display,
+  slug,
+  screenSize,
+  resolution,
+  version,
+  smartFeatures,
+  description,
+  model,
+  status,
+  seller,
+  brand,
+  color,
+  connectivity,
+  tvDisplay,
+  reviews,
+  weight,
+  categoryPath,
+  dimensions,
+  refreshRate,
+  ports,
+} = Astro.props;
+
+const currentUrl = `https://mdogomdogodeals.co.ke/products/${slug}`;
+
+const colors = color.split(", ");
+const specs = [
+  {
+    icon: "📺",
+    label: "Screen Size",
+    value: tvDisplay,
+    highlight: '43" Smart TV',
+  },
+  {
+    icon: "🎬",
+    label: "Resolution",
+    value: resolution,
+    highlight: "4K UHD",
+  },
+  { icon: "🔄", label: "Refresh Rate", value: refreshRate, highlight: "60Hz" },
+  { icon: "🧠", label: "Smart OS", value: version, highlight: "Tizen OS" },
+  {
+    icon: "🔊",
+    label: "Audio",
+    value: "Dolby Digital Plus",
+    highlight: "20W",
+  },
+  {
+    icon: "🎮",
+    label: "Gaming",
+    value: "Game Mode & Low Latency",
+    highlight: "ALLM",
+  },
+];
+
+const highlights = [
+  {
+    icon: "🎨",
+    title: "Crystal Processor 4K",
+    desc: "Enhanced picture quality with upscaling",
+  },
+  {
+    icon: "🎵",
+    title: "Dolby Audio",
+    desc: "Immersive sound experience",
+  },
+  {
+    icon: "📱",
+    title: "Smart Hub & Apps",
+    desc: "Netflix, YouTube, Prime Video built-in",
+  },
+];
+
+const faqs = [
+  {
+    q: "How does the credit payment work for Samsung TV?",
+    a: "Pay KSh 5,000 deposit, then KSh 150 daily until fully paid. No hidden fees. Total price is KSh 35,000. Available through Mkopa and other credit providers.",
+  },
+  {
+    q: "Is delivery and installation free in Nairobi?",
+    a: "Yes, we offer free same-day delivery within Nairobi CBD with professional installation included. Outer areas may have a small delivery fee. We deliver throughout Kenya.",
+  },
+  {
+    q: "What if I miss a payment?",
+    a: "Contact your provider immediately. Most offer flexible payment options and will work with you to find a solution.",
+  },
+  {
+    q: "Is the Samsung TV genuine?",
+    a: "Yes, all our Samsung TVs are 100% genuine with 2 year manufacturer warranty. We source directly from authorized distributors.",
+  },
+];
+
+const relatedKeywords = [
+  "samsung tv price kenya",
+  "samsung tv on credit",
+  "buy samsung tv nairobi",
+  "mkopa samsung tv",
+  "lipa mdogo mdogo tv",
+  "smart tv kenya credit",
+];
+---
+
+<div class="page-wrapper">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    {
+      categoryPath.map((cat, i) => (
+        <>
+          {i > 0 && (
+            <span class="sep" aria-hidden="true">
+              ›
+            </span>
+          )}
+          <a href={`/${cat.toLowerCase().replace(/\s+/g, "-")}`}>{cat}</a>
+        </>
+      ))
+    }
+  </nav>
+
+  <article itemscope itemtype="https://schema.org/Product">
+    <meta itemprop="name" content={name} />
+    <meta itemprop="description" content={description} />
+    <meta itemprop="sku" content={model} />
+    <meta itemprop="brand" content={brand} />
+    <link itemprop="image" href={source} />
+
+    <div class="product-container">
+      <div class="left-column">
+        <div class="image-wrapper">
+          <div class="badges">
+            {discount && <span class="badge sale">{discount} OFF</span>}
+            {status && <span class="badge new">NEW ARRIVAL</span>}
+          </div>
+          <img
+            src={source}
+            alt={`${name} - ${color} - Buy on Credit in Kenya`}
+            title={`${name} ${screenSize} - Lipa Mdogo Mdogo`}
+            width="600"
+            height="600"
+            loading="eager"
+            fetchpriority="high"
+            itemprop="image"
+          />
+          <div class="image-caption">
+            ✓ 100% Genuine Product | ✓ 2 Year Warranty | ✓ Free Delivery &
+            Installation
+          </div>
+        </div>
+
+        <div class="highlights-grid">
+          {
+            highlights.map((h) => (
+              <div class="highlight-card">
+                <span class="h-icon" aria-hidden="true">
+                  {h.icon}
+                </span>
+                <div>
+                  <strong>{h.title}</strong>
+                  <p>{h.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <section class="product-description">
+          <h2>About {name}</h2>
+          <p>
+            The <strong>{name}</strong> is a premium smart TV designed for entertainment
+            excellence. With its stunning <strong>{resolution}</strong> resolution
+            and <strong>{tvDisplay}</strong> screen, you can enjoy cinema-quality
+            viewing at home. Powered by the advanced <strong>{processor}</strong
+            > processor and equipped with <strong>{version}</strong> smart platform,
+            this TV delivers seamless streaming and smart features.
+          </p>
+          <p>
+            Now available on credit in Kenya through <strong>Mkopa</strong>, <strong
+              >Watu Credit</strong
+            >, and other providers. Pay just <strong>{deposit}</strong> deposit and
+            <strong>{daily}</strong> daily. Get yours delivered and installed within
+            24 hours in Nairobi with flexible payment options.
+          </p>
+        </section>
+      </div>
+
+      <div class="right-column">
+        <div class="sticky-content">
+          <h1 itemprop="name">{name} - Buy on Credit in Kenya</h1>
+
+          <div
+            class="rating-bar"
+            itemprop="aggregateRating"
+            itemscope
+            itemtype="https://schema.org/AggregateRating"
+          >
+            <meta
+              itemprop="ratingValue"
+              content={reviews?.averageRating.toString() || "4.5"}
+            />
+            <meta
+              itemprop="reviewCount"
+              content={reviews?.reviewCount.toString()}
+            />
+            <meta itemprop="bestRating" content="5" />
+            <meta itemprop="worstRating" content="1" />
+            <div
+              class="stars"
+              aria-label={`Rated ${reviews?.averageRating} out of 5 stars`}
+            >
+              {"★".repeat(Math.floor(reviews?.averageRating))}{
+                "☆".repeat(5 - Math.floor(reviews?.averageRating))
+              }
+            </div>
+            <span class="rating-num">{reviews?.averageRating}</span>
+            <span class="review-count"
+              >({reviews?.reviewCount} verified reviews)</span
+            >
+          </div>
+
+          <div
+            class="price-section"
+            itemprop="offers"
+            itemscope
+            itemtype="https://schema.org/Offer"
+          >
+            <meta itemprop="url" content={currentUrl} />
+            <meta itemprop="priceCurrency" content="KES" />
+            <meta itemprop="price" content={totalPrice || "35000"} />
+            <meta
+              itemprop="availability"
+              content="https://schema.org/InStock"
+            />
+            <meta
+              itemprop="itemCondition"
+              content="https://schema.org/NewCondition"
+            />
+            <link itemprop="url" href={currentUrl} />
+
+            <div class="price-header">
+              <h2 class="sr-only">Pricing Options</h2>
+              <div class="price-toggle" role="tablist">
+                <button
+                  class="toggle-btn active"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="credit-plan"
+                  data-plan="credit">💳 Credit Plan</button
+                >
+                <button
+                  class="toggle-btn"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="cash-plan"
+                  data-plan="cash">💰 Cash Payment</button
+                >
+              </div>
+            </div>
+
+            <div
+              class="price-display active"
+              id="credit-plan"
+              role="tabpanel"
+              data-plan="credit"
+            >
+              <div class="main-price">
+                <span class="currency">KSh</span>
+                <span class="amount"
+                  >{deposit?.replace("KSh ", "").replace(",", ",")}</span
+                >
+                <span class="period">deposit only</span>
+              </div>
+              <div class="daily-rate">
+                Then <strong>{daily}</strong> per day (Total: <strong
+                  >{totalPrice}</strong
+                >)
+              </div>
+              <div class="savings-badge">
+                💡 Affordable daily payments - No hidden fees
+              </div>
+              <ul class="benefits-list">
+                <li>✓ Same-day approval</li>
+                <li>✓ No credit check required</li>
+                <li>✓ Free installation included</li>
+              </ul>
+            </div>
+
+            <div
+              class="price-display"
+              id="cash-plan"
+              role="tabpanel"
+              data-plan="cash"
+            >
+              <div class="main-price">
+                <span class="currency">KSh</span>
+                <span class="amount"
+                  >{totalPrice?.replace("KSh ", "").replace(",", ",")}</span
+                >
+                <span class="period">one-time payment</span>
+              </div>
+              <div class="payment-info">
+                Full payment required upfront. Instant delivery and installation
+                after payment confirmation.
+              </div>
+            </div>
+          </div>
+
+          <div class="color-section">
+            <label for="color-select">Available Colors:</label>
+            <div class="color-grid" id="color-select">
+              {
+                colors.map((c, i) => (
+                  <button
+                    class={`color-option ${i === 0 ? "selected" : ""}`}
+                    aria-pressed={i === 0 ? "true" : "false"}
+                    type="button"
+                  >
+                    <span
+                      class="color-dot"
+                      style={`background: ${i === 0 ? "#1a1a1a" : "#4a5568"}`}
+                      aria-hidden="true"
+                    />
+                    {c}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <button
+              class="btn-primary"
+              type="button"
+              aria-label={`Apply for credit to buy ${name}`}
+            >
+              <span>Apply for Credit Now</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                ></path>
+              </svg>
+            </button>
+            <a href="tel:+254700000000" class="btn-secondary">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+                ></path>
+              </svg>
+              Call: 0700 000 000
+            </a>
+          </div>
+
+          <div class="seller-badge">
+            Available from <strong itemprop="seller">{seller}</strong>
+            • Fast Approval ⚡
+          </div>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <span aria-hidden="true">🚚</span>
+              <div>
+                <strong>Free Delivery</strong>
+                <p>Same day in Nairobi CBD</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <span aria-hidden="true">🔧</span>
+              <div>
+                <strong>Free Installation</strong>
+                <p>Professional setup included</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="trust-signals">
+            <p>
+              🔒 <strong>Secure Payment</strong> - Safe & encrypted transactions
+            </p>
+            <p>↩️ <strong>14-Day Return</strong> - Money-back guarantee</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <section class="specs-showcase" aria-labelledby="specs-heading">
+    <h2 id="specs-heading">Technical Specifications - {name}</h2>
+    <div class="specs-grid">
+      {
+        specs.map((s) => (
+          <div class="spec-box">
+            <div class="spec-icon" aria-hidden="true">
+              {s.icon}
+            </div>
+            <div class="spec-text">
+              <span class="spec-label">{s.label}</span>
+              <span class="spec-value">{s.highlight}</span>
+              <span class="spec-detail">{s.value}</span>
+            </div>
+          </div>
+        ))
+      }
+      <div class="spec-box">
+        <div class="spec-icon" aria-hidden="true">📏</div>
+        <div class="spec-text">
+          <span class="spec-label">Dimensions</span>
+          <span class="spec-value">{weight}</span>
+          <span class="spec-detail"
+            >{dimensions?.length} × {dimensions?.width} × {
+              dimensions?.height
+            }</span
+          >
+        </div>
+      </div>
+      <div class="spec-box">
+        <div class="spec-icon" aria-hidden="true">🔌</div>
+        <div class="spec-text">
+          <span class="spec-label">Connectivity</span>
+          <span class="spec-value">HDMI & USB</span>
+          <span class="spec-detail">{connectivity}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-showcase" aria-labelledby="reviews-heading">
+    <div class="review-header">
+      <div>
+        <h2 id="reviews-heading">Customer Reviews - {name}</h2>
+        <p class="subtitle">Real reviews from verified Kenyan buyers</p>
+      </div>
+      <div class="rating-summary">
+        <div class="big-rating">{reviews?.averageRating}</div>
+        <div class="rating-info">
+          <div class="stars large" aria-hidden="true">{"★".repeat(5)}</div>
+          <p>{reviews.reviewCount} Verified Reviews</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      {
+        reviews?.reviews?.map((r) => (
+          <div
+            class="review-box"
+            itemprop="review"
+            itemscope
+            itemtype="https://schema.org/Review"
+          >
+            <meta itemprop="datePublished" content={r.datePublished} />
+            <div class="review-top">
+              <div class="avatar" aria-hidden="true">
+                {r.author[0]}
+              </div>
+              <div class="reviewer-info">
+                <strong
+                  itemprop="author"
+                  itemscope
+                  itemtype="https://schema.org/Person"
+                >
+                  <span itemprop="name">{r.author}</span>
+                </strong>
+                <div class="review-meta">
+                  <span
+                    class="review-stars"
+                    itemprop="reviewRating"
+                    itemscope
+                    itemtype="https://schema.org/Rating"
+                  >
+                    <meta
+                      itemprop="ratingValue"
+                      content={r.rating.toString()}
+                    />
+                    <meta itemprop="bestRating" content="5" />
+                    <span aria-label={`${r.rating} out of 5 stars`}>
+                      {"★".repeat(r.rating)}
+                    </span>
+                  </span>
+                  <time datetime={r.datePublished}>
+                    {new Date(r.datePublished).toLocaleDateString("en-KE", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+              </div>
+            </div>
+            <p class="review-text" itemprop="reviewBody">
+              {r.reviewBody}
+            </p>
+            <button class="helpful" type="button">
+              👍 Helpful (12)
+            </button>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions About {name}</h2>
+    <div class="faq-list">
+      {
+        faqs.map((faq, i) => (
+          <details class="faq-item">
+            <summary>
+              <span class="faq-q">{faq.q}</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </summary>
+            <p class="faq-a">{faq.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="related-searches">
+    <h3>Related Searches</h3>
+    <div class="keywords-grid">
+      {
+        relatedKeywords.map((kw) => (
+          <a href={`/search?q=${encodeURIComponent(kw)}`} class="keyword-tag">
+            {kw}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="final-cta">
+    <div class="cta-inner">
+      <h2>Ready to Own the {name}?</h2>
+      <p>
+        Start today with just <strong>{deposit}</strong> deposit and pay <strong
+          >{daily}</strong
+        > daily
+      </p>
+      <p class="cta-subtext">
+        Join thousands of Kenyans who own premium TVs through flexible credit
+        plans
+      </p>
+      <button class="btn-cta-large" type="button">Get Started Now →</button>
+      <p class="cta-fine">
+        Available in Nairobi, Mombasa, Kisumu, and all major towns across Kenya
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll(".toggle-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const plan = (btn as HTMLElement).dataset.plan;
+      document.querySelectorAll(".toggle-btn").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      document
+        .querySelectorAll(".price-display")
+        .forEach((d) => d.classList.remove("active"));
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      const priceDisplay = document.querySelector(
+        `.price-display[data-plan="${plan}"]`
+      );
+      if (priceDisplay) {
+        priceDisplay.classList.add("active");
+      }
+    });
+  });
+
+  // Color selection
+  document.querySelectorAll(".color-option").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".color-option").forEach((b) => {
+        b.classList.remove("selected");
+        b.setAttribute("aria-pressed", "false");
+      });
+      btn.classList.add("selected");
+      btn.setAttribute("aria-pressed", "true");
+    });
+  });
+</script>
+
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #10b981;
+    --danger: #ef4444;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .page-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: #fff;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    flex-wrap: wrap;
+  }
+  .breadcrumb a {
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .breadcrumb a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+  .sep {
+    color: var(--gray-300);
+  }
+
+  .product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+  }
+
+  .image-wrapper {
+    position: relative;
+    background: linear-gradient(145deg, var(--gray-50) 0%, #fff 100%);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  .badges {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+  }
+  .badge {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge.sale {
+    background: var(--danger);
+    color: white;
+  }
+  .badge.new {
+    background: var(--secondary);
+    color: white;
+  }
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-caption {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .highlights-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .highlight-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--gray-50);
+    border-radius: 12px;
+    border: 1px solid var(--gray-200);
+  }
+  .h-icon {
+    font-size: 2rem;
+  }
+  .highlight-card strong {
+    display: block;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    font-size: 0.9375rem;
+  }
+  .highlight-card p {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+  }
+
+  .product-description {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+  }
+  .product-description h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--gray-900);
+  }
+  .product-description p {
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .product-description p:last-child {
+    margin-bottom: 0;
+  }
+  .product-description strong {
+    color: var(--gray-900);
+    font-weight: 600;
+  }
+
+  .sticky-content {
+    position: sticky;
+    top: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 1.5rem;
+  }
+  .stars {
+    color: #fbbf24;
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+  }
+  .rating-num {
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+  .review-count {
+    color: var(--gray-600);
+    font-size: 0.9375rem;
+  }
+
+  .price-section {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .price-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    background: white;
+    padding: 0.375rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .toggle-btn {
+    padding: 0.75rem;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--gray-600);
+  }
+  .toggle-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  }
+
+  .price-display {
+    display: none;
+  }
+  .price-display.active {
+    display: block;
+  }
+
+  .main-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .currency {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-600);
+  }
+  .amount {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--gray-900);
+    line-height: 1;
+  }
+  .period {
+    font-size: 1rem;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+
+  .daily-rate {
+    color: var(--primary);
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+  .daily-rate strong {
+    font-weight: 700;
+  }
+
+  .savings-badge {
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+  .benefits-list li {
+    padding: 0.5rem 0;
+    color: var(--gray-700);
+    font-size: 0.9375rem;
+  }
+
+  .payment-info {
+    color: var(--gray-600);
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  .color-section {
+    margin-bottom: 2rem;
+  }
+  .color-section label {
+    display: block;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.75rem;
+  }
+  .color-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .color-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .color-option:hover,
+  .color-option.selected {
+    border-color: var(--primary);
+    background: #eff6ff;
+  }
+  .color-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--gray-300);
+  }
+
+  .cta-section {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  button,
+  a {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+  }
+
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .btn-secondary:hover {
+    background: #eff6ff;
+  }
+
+  .seller-badge {
+    text-align: center;
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: 8px;
+    color: var(--gray-600);
+    font-size: 0.9375rem;
+    margin-bottom: 1.5rem;
+  }
+  .seller-badge strong {
+    color: var(--gray-900);
+  }
+
+  .info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .info-card {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: 8px;
+    align-items: center;
+  }
+  .info-card span {
+    font-size: 1.5rem;
+  }
+  .info-card strong {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--gray-900);
+    margin-bottom: 0.125rem;
+  }
+  .info-card p {
+    font-size: 0.8125rem;
+    color: var(--gray-600);
+  }
+
+  .trust-signals {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .trust-signals p {
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+  }
+
+  .specs-showcase {
+    padding: 4rem 0;
+    border-top: 1px solid var(--gray-200);
+  }
+  .specs-showcase h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .spec-box {
+    display: flex;
+    gap: 1.25rem;
+    padding: 2rem;
+    background: var(--gray-50);
+    border-radius: 16px;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+  }
+  .spec-box:hover {
+    background: white;
+    border-color: var(--gray-200);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+  .spec-icon {
+    font-size: 2.5rem;
+  }
+  .spec-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .spec-label {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+  .spec-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+  .spec-detail {
+    font-size: 0.8125rem;
+    color: var(--gray-600);
+  }
+
+  .reviews-showcase {
+    padding: 4rem 0;
+    border-top: 1px solid var(--gray-200);
+  }
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  .review-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    color: var(--gray-600);
+  }
+  .rating-summary {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .big-rating {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--gray-900);
+    line-height: 1;
+  }
+  .stars.large {
+    font-size: 1.5rem;
+    color: #fbbf24;
+    letter-spacing: 2px;
+  }
+  .rating-info p {
+    color: var(--gray-600);
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+  .review-box {
+    padding: 2rem;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    transition: all 0.3s;
+  }
+  .review-box:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+  .review-top {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  .reviewer-info strong {
+    display: block;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+  }
+  .review-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+  .review-stars {
+    color: #fbbf24;
+  }
+  .review-meta time {
+    color: var(--gray-600);
+  }
+  .review-text {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .helpful {
+    background: var(--gray-100);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+  .helpful:hover {
+    background: var(--gray-200);
+  }
+
+  .faq-section {
+    padding: 4rem 0;
+    border-top: 1px solid var(--gray-200);
+  }
+  .faq-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background: white;
+    overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--gray-900);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    transition: all 0.2s;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary:hover {
+    background: var(--gray-50);
+  }
+  .faq-item[open] summary {
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .faq-item[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .faq-item svg {
+    transition: transform 0.3s;
+    color: var(--gray-600);
+    flex-shrink: 0;
+  }
+  .faq-q {
+    flex: 1;
+  }
+  .faq-a {
+    padding: 1.5rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  .related-searches {
+    padding: 3rem 0;
+    border-top: 1px solid var(--gray-200);
+  }
+  .related-searches h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .keywords-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .keyword-tag {
+    padding: 0.75rem 1.25rem;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .keyword-tag:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .final-cta {
+    margin: 5rem 0 3rem;
+  }
+  .cta-inner {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 4rem 3rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
+  }
+  .cta-inner h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+  .cta-inner p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1rem;
+  }
+  .cta-subtext {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  .cta-fine {
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+    opacity: 0.9;
+  }
+  .btn-cta-large {
+    padding: 1.5rem 3rem;
+    background: white;
+    color: var(--primary);
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  .btn-cta-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 1024px) {
+    .product-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .sticky-content {
+      position: static;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .amount {
+      font-size: 2.5rem;
+    }
+    .specs-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page-wrapper {
+      padding: 1rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+    }
+    .image-wrapper {
+      padding: 2rem;
+    }
+    .amount {
+      font-size: 2rem;
+    }
+    .price-section {
+      padding: 1.5rem;
+    }
+    .info-cards {
+      grid-template-columns: 1fr;
+    }
+    .review-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    .cta-inner {
+      padding: 3rem 2rem;
+    }
+    .cta-inner h2 {
+      font-size: 1.75rem;
+    }
+    .btn-cta-large {
+      width: 100%;
+    }
+    .spec-box {
+      padding: 1.5rem;
+    }
+  }
+</style>

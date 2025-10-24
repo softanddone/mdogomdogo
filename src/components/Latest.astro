@@ -24,18 +24,21 @@
       </div>
 
       <div class="images">
-        <div class="img-container">
-          <img src="/phones/tecno.jpg" alt="" />
-        </div>
+        <a href="/tecno">
+          <div class="img-container">
+            <img src="/phones/tecnocamon40pro.webp" alt="" />
+          </div>
+        </a>
       </div>
     </div>
 
     <div class="fonix2">
-      <div class="deals">
-        <h1>Samsung</h1>
-        <!-- <h1>Samsung Phones</h1>
+      <a href="/samsung">
+        <div class="deals">
+          <h1>Samsung</h1>
+          <!-- <h1>Samsung Phones</h1>
         <h1>In Nairobi Kenya</h1> -->
-        <!-- 
+          <!-- 
         <a href="#" class="sleek-button">
           <span class="button-text">
             SHOP NOW
@@ -47,7 +50,8 @@
             </svg>
           </span>
         </a> -->
-      </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
@@ -57,10 +61,13 @@
     display: grid;
     grid-template-columns: 1.5fr 1fr;
   }
+  a {
+    text-decoration: none;
+  }
   .l-container {
     display: flex;
     width: 85%;
-    margin: 0 auto;
+    margin: 50px auto;
   }
 
   .fonix2 {
@@ -72,7 +79,7 @@
     background-size: contain;
     background-attachment: scroll;
     object-fit: cover;
-    width:100%!important;
+    width: 100% !important;
   }
   .deals h1 {
     text-align: center;

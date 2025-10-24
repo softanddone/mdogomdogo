@@ -41,10 +41,10 @@ import PopularBrands from "./PopularBrands.astro";
       </div>
 
       <div class="top-actions">
-        <button class="icon-btn contact-btn" aria-label="Contact">
+        <a href="tel:254722867659" class="phone-link">
           <svg
-            width="22"
-            height="22"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -54,7 +54,8 @@ import PopularBrands from "./PopularBrands.astro";
               d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
             ></path>
           </svg>
-        </button>
+          <span class="phone-number">254 722 867 659</span>
+        </a>
 
         <div class="delivery-badge">
           <svg
@@ -363,19 +364,26 @@ import PopularBrands from "./PopularBrands.astro";
     gap: 14px;
   }
 
-  .icon-btn {
+  .phone-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
     color: var(--dark);
+    text-decoration: none;
+    padding: 8px 12px;
     border-radius: 8px;
     transition: var(--transition);
+    font-weight: 500;
+    font-size: 14px;
   }
 
-  .icon-btn:hover {
+  .phone-link:hover {
     background: #f3f4f6;
-    transform: scale(1.05);
+  }
+
+  .phone-number {
+    white-space: nowrap;
   }
 
   .delivery-badge {
@@ -551,8 +559,13 @@ import PopularBrands from "./PopularBrands.astro";
       gap: 8px;
     }
 
-    .icon-btn {
-      padding: 6px;
+    .phone-number {
+      display: none;
+    }
+
+    .phone-link svg {
+      width: 20px;
+      height: 20px;
     }
 
     .delivery-badge {

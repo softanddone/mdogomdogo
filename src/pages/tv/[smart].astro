@@ -1,0 +1,254 @@
+---
+// src/pages/products/[slug].astro
+
+import Nav2 from "../../components/Nav2.astro";
+import Layout from "../../layouts/Layout.astro";
+import Display from "../../components/Display.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { products } from "../../data/tvproducts";
+import {
+  generateProductSchema,
+  generateBreadcrumbSchema,
+} from "../../utils/structureData";
+import DisplayTv from "../../components/DisplayTv.astro";
+
+export async function getStaticPaths() {
+  const paths = products.map((product) => ({
+    params: { smart: product.slug },
+  }));
+
+  return paths;
+}
+
+const { smart } = Astro.params;
+
+// Find product by slug
+const currentProduct = products.find((product) => product.slug === smart);
+
+if (!currentProduct) {
+  throw new Error(`Product not found: ${smart}`);
+}
+
+// Related TVs (same brand or category)
+const relatedProducts = products
+  .filter(
+    (product) =>
+      product.id !== currentProduct.id &&
+      (product.brand === currentProduct.brand ||
+        product.categoryPath.some((cat) =>
+          currentProduct.categoryPath.includes(cat)
+        ))
+  )
+  .slice(0, 4);
+
+// Build key features for SEO description
+const keyFeatures = [
+  currentProduct.display,
+  currentProduct.processor,
+  currentProduct.version,
+  currentProduct.color,
+  currentProduct.dimensions?.length &&
+    `${currentProduct.dimensions.length} width`,
+]
+  .filter(Boolean)
+  .join(", ");
+
+// Generate Schema
+const productSchemaString = generateProductSchema(currentProduct);
+const productSchema = JSON.parse(productSchemaString);
+const breadcrumbSchema = generateBreadcrumbSchema(currentProduct);
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: `How does the credit payment work for ${currentProduct.name}?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Pay ${currentProduct.deposit} deposit, then ${currentProduct.daily} daily until fully paid. Total price is ${currentProduct.totalPrice}. Available through ${currentProduct.seller}.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is delivery free in Nairobi?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, we offer free same-day delivery within Nairobi. Outer areas may have a small fee. Delivery available countrywide.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: `Is the ${currentProduct.name} genuine?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Yes, all ${currentProduct.brand} TVs sold are 100% genuine with manufacturer warranty and support.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What about warranty and support?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "All TVs come with official warranty from Samsung Kenya. After-sales support available through authorized centers.",
+      },
+    },
+  ],
+};
+
+const schemaArray = [productSchema, breadcrumbSchema, faqSchema];
+
+// SEO setup
+const seo = {
+  title: `${currentProduct.name} - ${currentProduct.from} | Buy on Credit Kenya`,
+  description:
+    currentProduct.description ||
+    `Buy ${currentProduct.name} on credit in Kenya. Enjoy 4K HDR picture, ${keyFeatures}, and flexible payment options. Deposit ${currentProduct.deposit} and pay ${currentProduct.daily} daily.`,
+  canonical: `https://mdogomdogodeals.co.ke/products/${currentProduct.slug}`,
+  ogImage: `https://mdogomdogodeals.co.ke${currentProduct.source}`,
+  schema: schemaArray.map((schema) => JSON.stringify(schema)).join(""),
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Smart TVs", url: "/category/smart-tvs" },
+  {
+    name: currentProduct.brand,
+    url: `/category/${currentProduct.brand.toLowerCase()}`,
+  },
+  { name: currentProduct.name, current: true },
+];
+---
+
+<Layout {...seo}>
+  <Nav2 />
+
+  <!-- Breadcrumb Navigation -->
+  <!-- <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-container">
+      <ol class="breadcrumb-list">
+        {
+          breadcrumbs.map((crumb, index) => (
+            <li class="breadcrumb-item">
+              {crumb.current ? (
+                <span aria-current="page">{crumb.name}</span>
+              ) : (
+                <>
+                  <a href={crumb.url}>{crumb.name}</a>
+                  {index < breadcrumbs.length - 1 && (
+                    <span class="separator">›</span>
+                  )}
+                </>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav> -->
+
+  <!-- Main Product Display -->
+  <DisplayTv {...currentProduct} />
+
+  <!-- Product Details Section -->
+  <section class="product-details">
+    {
+      currentProduct.details &&
+        currentProduct.details.map((section) => (
+          <article class="detail-section">
+            <h2>{section.title}</h2>
+
+            {section.content && <p>{section.content}</p>}
+
+            {section.pros && (
+              <div class="pros">
+                <h3>Pros</h3>
+                <ul>
+                  {section.pros.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {section.cons && (
+              <div class="cons">
+                <h3>Cons</h3>
+                <ul>
+                  {section.cons.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+        ))
+    }
+  </section>
+
+  <!-- Related TVs -->
+  {
+    relatedProducts.length > 0 && (
+      <section class="related-products">
+        <div class="related-container">
+          <h2 class="related-title">You Might Also Like</h2>
+          <div class="related-grid">
+            {relatedProducts.map((relatedProduct) => (
+              <ProductCard {...relatedProduct} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="faq-container">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3 class="faq-question">How does the payment plan work?</h3>
+          <p class="faq-answer">
+            Pay {currentProduct.deposit} deposit and {currentProduct.daily} daily
+            until the total {currentProduct.totalPrice} is completed.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Does it support streaming apps?</h3>
+          <p class="faq-answer">
+            Yes! The {currentProduct.name} runs on {currentProduct.version} and supports
+            Netflix, YouTube, Showmax, and more.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Is wall-mounting possible?</h3>
+          <p class="faq-answer">
+            Yes, the TV comes with wall-mount support and a standard stand in
+            the box.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">What’s included in the box?</h3>
+          <p class="faq-answer">
+            Includes the {currentProduct.name}, remote control, user manual, and
+            power cable.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">What warranty does it have?</h3>
+          <p class="faq-answer">
+            All {currentProduct.brand} TVs include official warranty and support
+            from authorized Samsung centers in Kenya.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
