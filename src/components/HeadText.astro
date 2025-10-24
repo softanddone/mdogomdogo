@@ -1,14 +1,21 @@
 <style>
   .header-container {
     width: 100%;
-    max-width: 1230px;
+    max-width: 91vw;
     background: transparent;
     /* border-radius: 20px; */
     /* padding: 60px 40px; */
     /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
     /* background: red; */
     /* text-align: center; */
+    /* background: red; */
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h1 a {
+    text-decoration: none;
   }
 
   /* Semantic H1 with keyword optimization */
@@ -43,7 +50,7 @@
   /* Responsive design for mobile-first indexing */
   @media (max-width: 768px) {
     .header-container {
-      padding: 40px 20px;
+      /* padding: 40px 20px; */
     }
 
     .main-heading {
@@ -73,5 +80,15 @@
     <span class="visually-hidden"
       >- Affordable installment payment plans for smartphones in Nairobi</span
     >
+  </h1>
+
+  <h1 class="main-heading">
+    <a href="/loan-or-cash">
+      Cash Option
+      <!-- Screen reader context for better accessibility and semantic meaning -->
+      <span class="visually-hidden"
+        >- Buy on Cash plans for smartphones in Nairobi Kenya</span
+      >
+    </a>
   </h1>
 </header>
