@@ -7,6 +7,7 @@ import { generateCategorySchema } from "../utils/structureData";
 import ProductCard from "../components/ProductCard.astro";
 import ShopBy from "../components/ShopBy.astro";
 import CarouselProducts from "../components/CarouselProducts.astro";
+import PopularBrands from "../components/PopularBrands.astro";
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
@@ -217,6 +218,10 @@ const seo = {
     gap: 0.5rem;
   }
 
+  .tecno {
+    margin-left: 80px;
+  }
+
   .brand-chip {
     background: white;
     border: 1px solid #ddd;
@@ -344,7 +349,7 @@ const seo = {
 <Layout {...seo}>
   <Nav2 />
 
-  <div class="headerCategory">
+  <!-- <div class="headerCategory">
     <h1 style="text-transform: capitalize;">
       {displayCategory} Smartphones on Credit in Nairobi
     </h1>
@@ -353,6 +358,11 @@ const seo = {
       {displayCategory} phones with flexible payment options - Pay small deposits
       & daily installments
     </p>
+  </div> -->
+  <PopularBrands />
+
+  <div>
+    <h1 class="tecno">{displayCategory} Smartphones</h1>
   </div>
 
   <main class="main bd-grid">
