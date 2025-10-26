@@ -3,6 +3,7 @@ export const products=[
 {
   id: 1,
   name: "Samsung 43U8000F",
+  inches:"43",
   fullname: "Samsung 43-inch Crystal UHD 4K HDR Smart TV (2024 Model)",
   status: "New",
   image: "/tvs/samsung_43u8000f.jpg",
@@ -18,8 +19,7 @@ export const products=[
   storage: "8GB internal (system + apps)",
   version: "Tizen OS Smart TV (2024 Edition)",
   depositanddaily: "KSh 8,000 deposit, Daily KSh 170",
-  slug: "samsung-43-inches",
-  slugs: "samsung-43u8000f",
+  slug: "tv/samsung-43-inches",
   description:
     "Buy the Samsung 43U8000F Crystal UHD 4K Smart TV on credit in Kenya. Enjoy breathtaking clarity, lifelike colors, and seamless access to your favorite streaming apps. Small deposit, flexible daily payments, and nationwide delivery available.",
   brand: "Samsung",
@@ -144,11 +144,10 @@ export const products=[
 }
 ,
 
-
-
 {
   id: 2,
   name: "Samsung 50U8000F",
+  inches:"50",
   fullname: "Samsung 50-inch Crystal UHD 4K HDR Smart TV (2024 Model)",
   status: "New",
   image: "/tvs/samsung_50u8000f.jpg",
@@ -164,7 +163,7 @@ export const products=[
   storage: "8GB internal (system + apps)",
   version: "Tizen OS Smart TV (2024 Edition)",
   depositanddaily: "KSh 9,500 deposit, Daily KSh 200",
-  slug: "samsung-50u8000f",
+  slug: "tv/samsung-50-inches",
   slugs: "samsung-50u8000f",
   description:
     "Buy Samsung 50U8000F 4K Smart TV on credit in Kenya. Enjoy brilliant 4K UHD quality, HDR10+ clarity, and smooth motion for movies, football, and gaming. Pay small deposit and easy daily installments via Lipa Mdogo Mdogo.",
@@ -290,17 +289,12 @@ export const products=[
 }
 ,
 
-
-
-
-
-
-
 {
   id: 3,
   name: "Samsung 55U8000F",
   fullname: "Samsung 55-inch Crystal UHD 4K HDR Smart TV (2024 Model)",
   status: "New",
+  inches:"55",
   image: "/tvs/samsung_55u8000f.jpg",
   from: "KSh 7,300",
   deposit: "KSh 10,500",
@@ -314,7 +308,7 @@ export const products=[
   storage: "8GB internal (system + apps)",
   version: "Tizen OS Smart TV (2024 Edition)",
   depositanddaily: "KSh 10,500 deposit, Daily KSh 230",
-  slug: "samsung-55u8000f",
+  slug: "tv/samsung-55-inches",
   slugs: "samsung-55u8000f",
   description:
     "Experience cinematic entertainment at home with the Samsung 55U8000F 4K Smart TV. Enjoy lifelike color, HDR10+ brightness, and powerful Dolby sound. Buy on credit in Kenya with a small deposit and flexible daily installments.",
@@ -446,6 +440,7 @@ export const products=[
   name: "Samsung 65U8000F",
   fullname: "Samsung 65-inch Crystal UHD 4K HDR Smart TV (2024 Model)",
   status: "New",
+  inches:"65",
   image: "/tvs/samsung_65u8000f.jpg",
   from: "KSh 8,900",
   deposit: "KSh 12,000",
@@ -459,7 +454,7 @@ export const products=[
   storage: "8GB internal (system + apps)",
   version: "Tizen OS Smart TV (2024 Edition)",
   depositanddaily: "KSh 12,000 deposit, Daily KSh 260",
-  slug: "samsung-65u8000f",
+  slug: "tv/samsung-65-inches",
   slugs: "samsung-65u8000f",
   description:
     "Upgrade your home viewing with the Samsung 65U8000F 4K Smart TV. Enjoy ultra-realistic visuals, deep contrast, and powerful Dolby sound. Buy on credit in Kenya through Lipa Mdogo Mdogo with a small deposit and manageable daily payments.",

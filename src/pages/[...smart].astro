@@ -1,35 +1,25 @@
 ---
-// src/pages/products/[slug].astro
-
-import Nav2 from "../../components/Nav2.astro";
-import Layout from "../../layouts/Layout.astro";
-import Display from "../../components/Display.astro";
-import ProductCard from "../../components/ProductCard.astro";
-import { products } from "../../data/tvproducts";
+import Nav2 from "../components/Nav2.astro";
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { products } from "../data/tvproducts";
 import {
   generateProductSchema,
   generateBreadcrumbSchema,
-} from "../../utils/structureData";
-import DisplayTv from "../../components/DisplayTv.astro";
-
+} from "../utils/structureData";
+import DisplayTv from "../components/DisplayTv.astro";
 export async function getStaticPaths() {
   const paths = products.map((product) => ({
     params: { smart: product.slug },
   }));
-
   return paths;
 }
-
 const { smart } = Astro.params;
-
-// Find product by slug
 const currentProduct = products.find((product) => product.slug === smart);
 
 if (!currentProduct) {
   throw new Error(`Product not found: ${smart}`);
 }
-
-// Related TVs (same brand or category)
 const relatedProducts = products
   .filter(
     (product) =>

@@ -571,7 +571,7 @@ const {
 
   <div class="product-info">
     <h2 class="product-title" itemprop="name">
-      <a href={`/product/${slug}`} aria-describedby={`price-${slug}`}>
+      <a href={`/${slug}`} aria-describedby={`price-${slug}`}>
         {name}
       </a>
     </h2>
@@ -598,7 +598,7 @@ const {
 
     <div class="product-actions">
       <a
-        href={`/checkout/${slugs}`}
+        href={`/product/${slugs}`}
         class="btn btn-primary"
         aria-label={`Order ${name} with ${deposit} deposit`}
       >
