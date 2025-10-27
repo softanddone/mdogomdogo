@@ -3,9 +3,8 @@ import Welcome from "../components/Welcome.astro";
 import Nav from "../components/Nav.astro";
 import Nav2 from "../components/Nav2.astro";
 import HeadText from "../components/HeadText.astro";
-
 import Layout from "../layouts/Layout.astro";
-import { products } from "../data/products"; // Import your homepage products
+import { products } from "../data/product2"; // Import your homepage products
 import Links from "../components/Links.astro";
 import Hero from "../components/Hero.astro";
 import Promotion from "../components/Promotion.astro";
@@ -21,10 +20,8 @@ import Display from "../components/Display.astro";
 import PopularBrands from "../components/PopularBrands.astro";
 import Credit from "../components/Credit.astro";
 
-const product1 = products[0]; // or find by ID
-
 const seo = {
-  title: "Lipa Mdogo Mdogo Phones in Kenya | Affordable Smartphones",
+  title: "Lipa Mdogo Mdogo Phones in Nairobi Kenya | Affordable Smartphones",
   description:
     "Own a smartphone today with a small deposit and pay the rest in flexible installments. Free delivery in Nairobi,Kiambu and its surroundings.",
   canonical: "https://mdogomdogodeals.co.ke/",
@@ -35,26 +32,11 @@ const seo = {
 ---
 
 <Layout {...seo}>
-  <!-- <Comparison /> -->
-  <!-- <Nav /> -->
-
   <Nav2 />
-  <!-- <Display {...product1} /> -->
   <HeadText />
   <PopularBrands />
   <Hero />
   <Welcome />
-  <!-- <SamsungProducts /> -->
-  <!-- <Promotion /> -->
-  <!-- <Features product={product1} /> -->
-  <!-- <Footer /> -->
-  <!-- <NavTest /> -->
+
   <Credit />
 </Layout>
-<!-- <Layout {...seo}> -->
-<!-- <Nav />
-  <Hero />
-
-  <Welcome /> -->
-<!-- <Iphone17promax /> -->
-<!-- </Layout> -->

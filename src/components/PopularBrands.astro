@@ -1,33 +1,71 @@
 ---
 // PopularBrands.astro
 const brands = [
-  { name: "Itel", icon: "/icons/itel.svg", link: "/itel" },
-  { name: "Infinix", icon: "/icons/infinix.svg", link: "/infinix" },
-  { name: "iPhone", icon: "/icons/iphone.svg", link: "/iphone" },
-  { name: "Oppo", icon: "/icons/oppo.svg", link: "/oppo" },
-  { name: "Samsung", icon: "/icons/samsung.svg", link: "/samsung" },
-  { name: "Tecno", icon: "/icons/tecno.svg", link: "/tecno" },
-  { name: "Vivo", icon: "/icons/vivo.svg", link: "/vivo" },
+  {
+    name: "Itel",
+    icon: "/icons/itel.svg",
+    link: "/itel",
+    description: "Affordable Itel smartphones on installment plans",
+  },
+  {
+    name: "Infinix",
+    icon: "/icons/infinix.svg",
+    link: "/infinix",
+    description: "Infinix phones on credit with flexible payment options",
+  },
+  {
+    name: "iPhone",
+    icon: "/icons/iphone.svg",
+    link: "/iphone",
+    description: "Buy iPhone on lipa mdogo mdogo in Nairobi",
+  },
+  {
+    name: "Oppo",
+    icon: "/icons/oppo.svg",
+    link: "/oppo",
+    description: "Oppo smartphones with easy installment payments",
+  },
+  {
+    name: "Samsung",
+    icon: "/icons/samsung.svg",
+    link: "/samsung",
+    description: "Samsung phones on credit - lipa pole pole",
+  },
+  {
+    name: "Tecno",
+    icon: "/icons/tecno.svg",
+    link: "/tecno",
+    description: "Tecno mobile phones on affordable payment plans",
+  },
+  {
+    name: "Vivo",
+    icon: "/icons/vivo.svg",
+    link: "/vivo",
+    description: "Vivo smartphones available on credit in Kenya",
+  },
 ];
 ---
 
-<section class="popular-brands" aria-label="Shop phones by brand on credit">
+<section class="popular-brands" aria-labelledby="brands-heading">
   <div class="container">
-    <h2 class="section-title">Shop by Brand</h2>
+    <h2 id="brands-heading" class="section-title">Shop by Brand</h2>
 
-    <nav class="carousel-wrapper" aria-label="Phone brands carousel">
-      <ul class="carousel-track">
+    <nav
+      class="carousel-wrapper"
+      aria-label="Browse phone brands available on credit"
+    >
+      <ul class="carousel-track" role="list">
         {
           brands.map((brand) => (
             <li class="carousel-item">
               <a
                 href={brand.link}
                 class="brand-card"
-                aria-label={`Shop ${brand.name} phones on lipa mdogo mdogo`}
+                aria-label={`Shop ${brand.name} phones on lipa mdogo mdogo - ${brand.description}`}
               >
                 <img
                   src={brand.icon}
-                  alt={`${brand.name} phones on credit in Nairobi`}
+                  alt={`${brand.name} logo`}
                   class="brand-logo"
                   width="50"
                   height="50"
@@ -35,11 +73,12 @@ const brands = [
                   fetchpriority="high"
                 />
                 <span class="brand-name">{brand.name}</span>
+                <span class="visually-hidden">{brand.description}</span>
               </a>
             </li>
           ))
         }
-        <!-- Duplicate for seamless loop -->
+
         {
           brands.map((brand) => (
             <li class="carousel-item" aria-hidden="true">
@@ -57,7 +96,7 @@ const brands = [
                   height="50"
                   loading="lazy"
                 />
-                <span class="brand-name">{brand.name}</span>
+                <span class="brand-name">{brand.name} Phones</span>
               </a>
             </li>
           ))
@@ -69,20 +108,15 @@ const brands = [
 
 <style>
   .popular-brands {
-    /* padding: 3rem 1rem; */
-    /* background: red; */
     overflow: hidden;
   }
 
   .container {
     max-width: 1400px;
     margin: 0 auto;
-    /* background:yellow; */
   }
 
   .section-title {
-    /* font-size: 1.05rem;
-    font-weight: 700; */
     color: #111;
     text-align: center;
     margin-bottom: 2rem;
@@ -116,7 +150,7 @@ const brands = [
     will-change: transform;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 2rem 0;
   }
 
   .carousel-track:hover {
@@ -158,7 +192,6 @@ const brands = [
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
     z-index: 10;
-    /* outline: 2px solid #0066cc; */
     outline-offset: 2px;
   }
 
@@ -177,11 +210,23 @@ const brands = [
   }
 
   .brand-name {
-    /* font-size: 0.1rem;
-    font-weight: 100; */
     color: #333;
     margin: 0;
     display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
   @media (min-width: 640px) {
@@ -193,15 +238,38 @@ const brands = [
     }
   }
 
+  @media screen and (min-width: 0px) and (max-width: 800px) {
+    .brand-card {
+      width: 110px;
+      min-width: 110px;
+      height: 90px;
+      padding: 1rem;
+    }
+    .brand-logo {
+      height: 35px;
+      margin-bottom: 0.5rem;
+    }
+    .brand-name {
+      font-size: 0.85rem;
+    }
+    .section-description {
+      font-size: 0.9rem;
+    }
+  }
+
   @media (min-width: 1024px) {
     .carousel-track {
       gap: 2rem;
     }
     .brand-card {
       min-width: 200px;
+      height: 130px;
     }
     .brand-logo {
       height: 50px;
+    }
+    .brand-name {
+      font-size: 1rem;
     }
   }
 
