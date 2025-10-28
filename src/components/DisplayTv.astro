@@ -340,9 +340,8 @@ const relatedKeywords = [
             <button
               class="btn-primary"
               type="button"
-              aria-label={`Apply for credit to buy ${name}`}
+              aria-label={`Add ${name} to cart`}
             >
-              <span>Apply for Credit Now</span>
               <svg
                 width="20"
                 height="20"
@@ -351,11 +350,16 @@ const relatedKeywords = [
                 aria-hidden="true"
               >
                 <path
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
                 ></path>
               </svg>
+              <span>Add to Cart</span>
             </button>
-            <a href="tel:+254722867659" class="btn-secondary">
+            <button
+              class="btn-secondary"
+              type="button"
+              aria-label={`Order ${name} now`}
+            >
               <svg
                 width="20"
                 height="20"
@@ -364,10 +368,31 @@ const relatedKeywords = [
                 aria-hidden="true"
               >
                 <path
-                  d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                  clip-rule="evenodd"
                 ></path>
               </svg>
-              Call: 0722867659
+              <span>Order Now</span>
+            </button>
+            <a
+              href="https://wa.me/254722867659"
+              class="btn-whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M10 0C4.477 0 0 4.477 0 10c0 1.89.525 3.66 1.438 5.168L.546 18.2a.75.75 0 00.954.954l3.032-.892A9.96 9.96 0 0010 20c5.523 0 10-4.477 10-10S15.523 0 10 0zm5.016 14.076c-.214.6-1.264 1.107-1.722 1.147-.458.04-.886.207-2.956-.615-2.07-.822-3.386-2.97-3.488-3.105-.102-.135-.833-1.107-.833-2.113 0-1.005.528-1.5.714-1.706.186-.206.407-.257.542-.257.136 0 .271.001.39.007.125.006.293-.047.458.35.165.396.563 1.373.612 1.473.05.1.083.217.017.351-.067.135-.1.218-.2.335-.1.118-.209.262-.299.351-.1.1-.204.208-.088.407.117.2.52.857 1.118 1.388.77.684 1.42.896 1.622.996.2.1.318.084.435-.05.117-.135.502-.586.636-.788.135-.2.27-.167.453-.1.184.066 1.167.55 1.367.65.2.1.333.15.383.234.05.083.05.483-.164 1.083z"
+                ></path>
+              </svg>
+              <span>Order via WhatsApp</span>
             </a>
           </div>
 
@@ -1003,6 +1028,22 @@ const relatedKeywords = [
   }
   .btn-secondary:hover {
     background: #eff6ff;
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    background: #25d366;
+    color: white;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .btn-whatsapp:hover {
+    background: #20ba5a;
   }
 
   .seller-badge {

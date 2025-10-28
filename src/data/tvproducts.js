@@ -1,6 +1,153 @@
 export const products=[
 
+
+
 {
+  id: 4,
+  name: "Samsung 32T5300",
+  fullname: "Samsung 32-inch Full HD Smart TV (2024 Model)",
+  status: "New",
+  inches: "32",
+  image: "/tvs/samsung_32t5300.jpg",
+  from: "KSh 4,500",
+  deposit: "KSh 6,500",
+  daily: "KSh 150",
+  totalPrice: "KSh 44,500",
+  source: "/phones/samsungsmarttv32inch.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "32\" Full HD (1920 × 1080)",
+  processor: "Hyper Real Processor",
+  storage: "4GB internal (system + apps)",
+  version: "Tizen OS Smart TV (2024 Edition)",
+  depositanddaily: "KSh 6,500 deposit, Daily KSh 150",
+  slug: "tv/samsung-32-inches",
+  slugs: "samsung-32t5300",
+  description:
+    "Enjoy crystal-clear picture and vibrant colors with the Samsung 32T5300 Smart TV. Stream your favorite movies and shows in Full HD and connect easily with Wi-Fi or Bluetooth. Buy on credit in Kenya through Lipa Mdogo Mdogo with a small deposit and flexible daily payments.",
+  brand: "Samsung",
+  seller: "Watu Simu",
+  model: "32T5300",
+  condition: "new",
+  gtin: "8806094973258",
+  categoryPath: [
+    "Electronics",
+    "Televisions",
+    "Smart TVs",
+    "Samsung",
+    "Loan",
+    "Watu Simu",
+    "Lipa Mdogo Mdogo"
+  ],
+
+  details: [
+    {
+      title: "Display and Design",
+      content:
+        "The Samsung 32T5300 features a 32-inch Full HD screen that delivers crisp visuals and vivid colors. Its slim design with narrow bezels complements any modern interior."
+    },
+    {
+      title: "Picture Quality",
+      content:
+        "Equipped with HDR, PurColor, and Ultra Clean View technology, this TV enhances color accuracy and reduces distortion for a clearer and more natural viewing experience."
+    },
+    {
+      title: "Smart Features",
+      content:
+        "Running on Tizen OS, enjoy instant access to Netflix, YouTube, Showmax, and more. With screen mirroring, you can easily share content from your smartphone to your TV."
+    },
+    {
+      title: "Connectivity",
+      content:
+        "Comes with 2 HDMI ports, 1 USB port, built-in Wi-Fi, and Bluetooth 5.1, allowing you to connect streaming devices, soundbars, or gaming consoles seamlessly."
+    },
+    {
+      title: "Audio and Immersion",
+      content:
+        "Dolby Digital Plus delivers clear and rich sound quality. Adaptive Sound automatically optimizes audio levels based on the type of content being played."
+    },
+    {
+      title: "Performance and Efficiency",
+      content:
+        "The Hyper Real Processor ensures smooth picture performance and energy efficiency. Eco Sensor adjusts brightness automatically to reduce power usage."
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Sharp Full HD resolution with HDR support",
+        "Compact and elegant slim design",
+        "Smart TV apps like Netflix and YouTube pre-installed",
+        "Energy-efficient with Eco Sensor",
+        "Affordable Lipa Mdogo Mdogo plan available"
+      ],
+      cons: [
+        "Not 4K resolution",
+        "Limited storage for apps",
+        "No HDMI 2.1 support"
+      ]
+    },
+    {
+      title: "Verdict",
+      content:
+        "The Samsung 32T5300 is ideal for bedrooms or small living rooms. It delivers sharp Full HD visuals, smart connectivity, and great value for money — now easily affordable on credit through Lipa Mdogo Mdogo."
+    }
+  ],
+
+  color: "Glossy Black",
+  weight: "4.1 kg (without stand)",
+  dimensions: {
+    length: "737.4mm",
+    width: "438.0mm",
+    height: "150.5mm"
+  },
+  material: "Matte plastic frame with dual stand base",
+  pattern: "Slim Bezel Design",
+  productLine: "Samsung Full HD Smart Series 5",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 28,
+    reviews: [
+      {
+        author: "Peter N.",
+        rating: 5,
+        reviewBody:
+          "Perfect size for my bedroom. The picture quality and smart features are excellent for the price.",
+        datePublished: "2025-03-18"
+      },
+      {
+        author: "Joyce K.",
+        rating: 4,
+        reviewBody:
+          "Very clear and easy to use. Netflix loads fast, and the Lipa Mdogo Mdogo plan made it stress-free.",
+        datePublished: "2025-04-04"
+      },
+      {
+        author: "Brian M.",
+        rating: 5,
+        reviewBody:
+          "Compact, stylish, and performs great. Sound is surprisingly powerful for its size.",
+        datePublished: "2025-05-11"
+      },
+      {
+        author: "Ann W.",
+        rating: 5,
+        reviewBody:
+          "Ideal for small spaces. Easy setup and the smart features work smoothly with my Wi-Fi.",
+        datePublished: "2025-06-02"
+      },
+      {
+        author: "Daniel O.",
+        rating: 4,
+        reviewBody:
+          "Great TV for daily use. Only wish it had more HDMI ports, but overall worth it.",
+        datePublished: "2025-06-26"
+      }
+    ]
+  }
+},
+
+
+  {
   id: 1,
   name: "Samsung 43U8000F",
   inches:"43",
@@ -11,7 +158,7 @@ export const products=[
   deposit: "KSh 8,000",
   daily: "KSh 170",
   totalPrice: "KSh 59,000",
-  source: "/tvs/samsung_43u8000f.webp",
+  source: "/phones/samsungsmarttv43inch.webp",
   discount: "-10%",
   display: "block",
   phonedisplay: "43\" Crystal UHD 4K (3840 × 2160)",
@@ -155,7 +302,7 @@ export const products=[
   deposit: "KSh 9,500",
   daily: "KSh 200",
   totalPrice: "KSh 69,000",
-  source: "/tvs/samsung_50u8000f.webp",
+  source: "/phones/samsungsmarttv50inches.webp",
   discount: "-10%",
   display: "block",
   phonedisplay: "50\" Crystal UHD 4K (3840 × 2160)",
@@ -300,7 +447,7 @@ export const products=[
   deposit: "KSh 10,500",
   daily: "KSh 230",
   totalPrice: "KSh 78,000",
-  source: "/tvs/samsung_55u8000f.webp",
+  source: "/phones/samsungsmarttv55inches.webp",
   discount: "-12%",
   display: "block",
   phonedisplay: "55\" Crystal UHD 4K (3840 × 2160)",
@@ -446,7 +593,7 @@ export const products=[
   deposit: "KSh 12,000",
   daily: "KSh 260",
   totalPrice: "KSh 89,000",
-  source: "/tvs/samsung_65u8000f.webp",
+  source: "/phones/samsungsmarttv65inches.webp",
   discount: "-13%",
   display: "block",
   phonedisplay: "65\" Crystal UHD 4K (3840 × 2160)",
