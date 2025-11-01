@@ -359,7 +359,7 @@ const seo = {
   </div> -->
 
   <div>
-    <h1 class="tecno">{displayCategory} Smartphones</h1>
+    <h1 class="tecno">Samsung Smart {displayCategory}</h1>
   </div>
 
   <main class="main bd-grid">
@@ -369,7 +369,8 @@ const seo = {
   <div class="category-info">
     <div class="category-banner">
       <h2>
-        💰 {displayCategory} from Ksh 3300 | Free Delivery Nairobi
+        💰 {displayCategory} from Ksh {filteredProducts[0]?.deposit ?? 8000} | Free
+        Delivery Nairobi
       </h2>
       <p>Pay small deposit + daily installments | different models available</p>
     </div>
@@ -408,11 +409,11 @@ const seo = {
     <div class="payment-info">
       <div class="payment-card">
         <div class="label">Starting Deposit</div>
-        <div class="amount">Ksh 3,300</div>
+        <div class="amount">{filteredProducts[0]?.deposit ?? 8000}</div>
       </div>
       <div class="payment-card">
         <div class="label">Daily Payment</div>
-        <div class="amount">From Ksh 80</div>
+        <div class="amount">From Ksh {filteredProducts[0]?.daily ?? 115}</div>
       </div>
       <div class="payment-card">
         <div class="label">Delivery</div>
