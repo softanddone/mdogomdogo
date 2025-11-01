@@ -8,6 +8,7 @@ import {
   generateBreadcrumbSchema,
 } from "../utils/structureData";
 import DisplayTv from "../components/DisplayTv.astro";
+import Gift from "../components/Gift.astro";
 export async function getStaticPaths() {
   const paths = products.map((product) => ({
     params: { smart: product.slug },
@@ -113,6 +114,8 @@ const breadcrumbs = [
 ---
 
 <Layout {...seo}>
+  <Gift />
+
   <Nav2 />
 
   <!-- Breadcrumb Navigation -->

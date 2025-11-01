@@ -1,4 +1,6 @@
 ---
+import Display from "../components/Display.astro";
+import Gift from "../components/Gift.astro";
 import Nav2 from "../components/Nav2.astro";
 import ProductDetails from "../components/ProductDetails.astro";
 import { products } from "../data/product2";
@@ -32,6 +34,8 @@ const seo = {
 ---
 
 <Layout {...seo}>
+  
+  <Gift />
   <Nav2 />
-  <ProductDetails {...product} />
+  <Display {...product} />
 </Layout>

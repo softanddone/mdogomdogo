@@ -16,7 +16,7 @@ export const products=[
   source: "/phones/samsungsmarttv32inch.webp",
   discount: "-10%",
   display: "block",
-  phonedisplay: "32\" Full HD (1920 × 1080)",
+  phonedisplay: "32\" Full HD (1920  × 1080)",
   processor: "Hyper Real Processor",
   storage: "4GB internal (system + apps)",
   version: "Tizen OS Smart TV (2024 Edition)",

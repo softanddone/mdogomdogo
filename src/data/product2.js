@@ -4,7 +4,7 @@ export const products = [
     name: "Oppo A3x",
     fullname:"Oppo A3x 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
     status: "New",
-    image: "/phones/oppo_a3x.webp",
+    image: "/product/phones/oppo_a3x.webp",
     from: "KSh 2,900",
     deposit: "KSh 3,500",
     daily: "Ksh 90",
