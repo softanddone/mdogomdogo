@@ -24,7 +24,9 @@ import PopularBrands from "./PopularBrands.astro";
           href="/"
           aria-label="Mdogo Mdogo Deals - Lipa Mdogo Mdogo Phones in Nairobi"
         >
-          <h1 class="logo-text">Mdogo Mdogo Deals<span>.</span></h1>
+          <div class="logo-img">
+            <img src="/phones/logo.png" alt="Mdogo Mdogo Deals Logo" />
+          </div>
         </a>
       </div>
 
@@ -284,7 +286,8 @@ import PopularBrands from "./PopularBrands.astro";
         </li>
         <li>
           <a href="/infinix" title="Infinix lipa mdogo mdogo"
-            >Infinix Mobile Phones</a>
+            >Infinix Mobile Phones</a
+          >
         </li>
         <li>
           <a href="/hmd" title="HMD phones chukua simu lipa pole pole"
@@ -321,6 +324,18 @@ import PopularBrands from "./PopularBrands.astro";
     font-family: "Inter", sans-serif;
     background: #fff;
     color: var(--dark);
+  }
+
+  .logo-img {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+  }
+
+  .logo-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* Visually hidden but accessible to screen readers */
@@ -360,18 +375,6 @@ import PopularBrands from "./PopularBrands.astro";
   .logo a {
     text-decoration: none;
     display: inline-block;
-  }
-
-  .logo-text {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--dark);
-    letter-spacing: -0.5px;
-    margin: 0;
-  }
-
-  .logo span {
-    color: var(--brand);
   }
 
   /* Search */
@@ -729,21 +732,19 @@ import PopularBrands from "./PopularBrands.astro";
   /* Responsive */
   @media (max-width: 768px) {
     .navbar-top .container {
-      padding: 12px 16px;
-    }
-
-    .logo-text {
-      font-size: 1rem;
+      padding: 10px 12px;
+      gap: 8px;
     }
 
     .menu-btn {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 8px;
+      padding: 6px;
+      flex-shrink: 0;
     }
 
     .menu-btn:focus {
@@ -753,33 +754,53 @@ import PopularBrands from "./PopularBrands.astro";
     }
 
     .hamburger {
-      width: 22px;
+      width: 20px;
       height: 2px;
       background: var(--dark);
       border-radius: 2px;
     }
 
     .logo {
-      flex: 1;
-      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: 40px;
     }
 
     .top-actions {
-      gap: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      margin-left: auto;
     }
 
-    .phone-number {
-      display: none;
+    .phone-link {
+      padding: 6px 8px;
+      background: var(--light);
+      border-radius: 6px;
     }
 
     .phone-link svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
+    }
+
+    .phone-number {
+      display: inline;
+      font-size: 12px;
     }
 
     .delivery-badge {
-      padding: 6px 10px;
-      font-size: 12px;
+      padding: 6px 8px;
+      font-size: 11px;
+    }
+
+    .delivery-badge svg {
+      width: 16px;
+      height: 16px;
     }
 
     .delivery-badge span {
@@ -801,13 +822,17 @@ import PopularBrands from "./PopularBrands.astro";
     }
 
     .navbar-bottom .container {
-      padding: 12px 16px;
-      gap: 12px;
+      padding: 10px 12px;
+      gap: 10px;
     }
 
     .search-input {
-      padding: 10px 44px 10px 14px;
+      padding: 9px 42px 9px 12px;
       font-size: 13px;
+    }
+
+    .search-btn {
+      padding: 6px;
     }
 
     .search-result-item {
@@ -826,6 +851,63 @@ import PopularBrands from "./PopularBrands.astro";
 
     .search-result-price {
       font-size: 12px;
+    }
+
+    .cart-btn {
+      padding: 10px 12px;
+      flex-shrink: 0;
+    }
+
+    .cart-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .navbar-top .container {
+      gap: 6px;
+      padding: 10px 8px;
+    }
+
+    .menu-btn {
+      padding: 4px;
+    }
+
+    .logo-img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .phone-link {
+      padding: 5px 6px;
+    }
+
+    .phone-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .phone-number {
+      font-size: 11px;
+    }
+
+    .delivery-badge {
+      padding: 5px 6px;
+    }
+
+    .delivery-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .cart-btn {
+      padding: 8px 10px;
+    }
+
+    .cart-btn svg {
+      width: 18px;
+      height: 18px;
     }
   }
 </style>
