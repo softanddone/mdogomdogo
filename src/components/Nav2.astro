@@ -314,7 +314,7 @@ import PopularBrands from "./PopularBrands.astro";
   </aside>
 </nav>
 
-<style>
+<style is:global>
   :root {
     --brand: #f59e0b;
     --dark: #1f2937;
@@ -612,7 +612,7 @@ import PopularBrands from "./PopularBrands.astro";
 
   .search-result-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 12px;
     border-bottom: 1px solid #f3f4f6;
     cursor: pointer;
@@ -634,8 +634,8 @@ import PopularBrands from "./PopularBrands.astro";
   }
 
   .search-result-image-wrapper {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
     border-radius: 8px;
     overflow: hidden;
@@ -646,7 +646,7 @@ import PopularBrands from "./PopularBrands.astro";
   .search-result-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
 
@@ -655,6 +655,7 @@ import PopularBrands from "./PopularBrands.astro";
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0;
   }
 
   .search-result-name {
@@ -1014,8 +1015,8 @@ import PopularBrands from "./PopularBrands.astro";
     }
 
     .search-result-image-wrapper {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
     }
 
     .search-result-name {
@@ -1082,6 +1083,11 @@ import PopularBrands from "./PopularBrands.astro";
       width: 18px;
       height: 18px;
     }
+
+    .search-result-image-wrapper {
+      width: 45px;
+      height: 45px;
+    }
   }
 </style>
 
@@ -1111,7 +1117,7 @@ import PopularBrands from "./PopularBrands.astro";
       "Choose the best phone..",
     ];
     private currentIndex: number = 0;
-    private interval: number = 3000; // 3 seconds per placeholder
+    private interval: number = 3000;
     private timer: number | null = null;
 
     constructor(configs: Array<{ inputId: string; placeholderId: string }>) {
@@ -1121,7 +1127,6 @@ import PopularBrands from "./PopularBrands.astro";
     private init(
       configs: Array<{ inputId: string; placeholderId: string }>
     ): void {
-      // Gather all input and placeholder pairs
       configs.forEach((config) => {
         const input = document.getElementById(
           config.inputId
@@ -1132,33 +1137,22 @@ import PopularBrands from "./PopularBrands.astro";
 
         if (input && fakePlaceholder) {
           this.elements.push({ input, fakePlaceholder });
-
-          // Set initial placeholder text
           fakePlaceholder.textContent = this.placeholders[0];
-
-          // Add focus/blur handlers
           input.addEventListener("focus", () => this.pause());
           input.addEventListener("blur", () => this.startRotation());
         }
       });
 
       if (this.elements.length === 0) return;
-
-      // Start rotation
       this.startRotation();
     }
 
     private setPlaceholder(index: number): void {
       const text = this.placeholders[index];
-
-      // Determine which animation to use based on index
-      // Each placeholder gets a different animation
       const animationIndex = (index % 3) + 1;
 
       this.elements.forEach(({ input, fakePlaceholder }) => {
-        // Only animate if input is not focused and empty
         if (document.activeElement !== input && input.value === "") {
-          // Remove any existing animation classes
           fakePlaceholder.classList.remove(
             "animation-1-in",
             "animation-1-out",
@@ -1168,21 +1162,16 @@ import PopularBrands from "./PopularBrands.astro";
             "animation-3-out"
           );
 
-          // Add bounce-out animation
           fakePlaceholder.classList.add(`animation-${animationIndex}-out`);
 
-          // Wait for bounce-out to complete, then change text
           const outDuration =
             animationIndex === 1 ? 500 : animationIndex === 2 ? 400 : 500;
 
           setTimeout(() => {
             fakePlaceholder.textContent = text;
             fakePlaceholder.classList.remove(`animation-${animationIndex}-out`);
-
-            // Add bounce-in animation
             fakePlaceholder.classList.add(`animation-${animationIndex}-in`);
 
-            // Clean up after bounce-in completes
             const inDuration =
               animationIndex === 1 ? 700 : animationIndex === 2 ? 700 : 800;
             setTimeout(() => {
@@ -1301,7 +1290,7 @@ import PopularBrands from "./PopularBrands.astro";
         (product: Product) => `
           <a href="/product/${product.slug}" class="search-result-item" role="option">
             <div class="search-result-image-wrapper">
-              <img src="${product.source}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect fill=%22%23f3f4f6%22 width=%2270%22 height=%2270%22/%3E%3C/svg%3E'">
+              <img src="${product.source}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23f3f4f6%22 width=%2260%22 height=%2260%22/%3E%3C/svg%3E'">
             </div>
             <div class="search-result-info">
               <div class="search-result-name">
