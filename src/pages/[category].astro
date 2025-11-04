@@ -8,6 +8,7 @@ import ProductCard from "../components/ProductCard.astro";
 import ShopBy from "../components/ShopBy.astro";
 import CarouselProducts from "../components/CarouselProducts.astro";
 import PopularBrands from "../components/PopularBrands.astro";
+import Gift from "../components/Gift.astro";
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
@@ -110,7 +111,7 @@ const seo = {
 };
 ---
 
-<style is:inline>
+<style>
   .main {
     padding: 2rem 0;
     display: grid;
@@ -347,6 +348,7 @@ const seo = {
 </style>
 
 <Layout {...seo}>
+  <Gift />
   <Nav2 />
 
   <!-- <div class="headerCategory">

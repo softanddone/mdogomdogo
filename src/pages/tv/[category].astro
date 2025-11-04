@@ -6,6 +6,7 @@ import { generateCategorySchema } from "../../utils/structureData";
 import ProductCard from "../../components/ProductCard.astro";
 import ShopBy from "../../components/ShopBy.astro";
 import CarouselProducts from "../../components/CarouselProducts.astro";
+import Gift from "../../components/Gift.astro";
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
@@ -345,6 +346,7 @@ const seo = {
 </style>
 
 <Layout {...seo}>
+  <Gift/>
   <Nav2 />
 
   <!-- <div class="headerCategory">

@@ -10,6 +10,7 @@ import {
   generateBreadcrumbSchema,
 } from "../../utils/structureData";
 import Nav2 from "../../components/Nav2.astro";
+import Gift from "../../components/Gift.astro";
 
 export async function getStaticPaths() {
   // Generate paths for all products using their slugs
@@ -152,7 +153,7 @@ const breadcrumbs = [
 ];
 ---
 
-<style is:inline>
+<style>
   .breadcrumb {
     background: #f8fafc;
     padding: 1rem 0;
@@ -498,6 +499,7 @@ const breadcrumbs = [
 </style>
 
 <Layout {...seo}>
+  <Gift />
   <Nav2 />
 
   <!-- Breadcrumb Navigation -->

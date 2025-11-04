@@ -25,7 +25,7 @@ import PopularBrands from "./PopularBrands.astro";
           aria-label="Mdogo Mdogo Deals - Lipa Mdogo Mdogo Phones in Nairobi"
         >
           <div class="logo-img">
-            <img src="/phones/logo3.png" alt="Mdogo Mdogo Deals Logo" />
+            <img src="/phones/y.png" alt="Mdogo Mdogo Deals Logo" />
           </div>
         </a>
       </div>
@@ -34,17 +34,22 @@ import PopularBrands from "./PopularBrands.astro";
         <label for="searchInput" class="visually-hidden"
           >Search phones on credit - Lipa Mdogo Mdogo</label
         >
-        <input
-          type="search"
-          class="search-input"
-          id="searchInput"
-          name="q"
-          placeholder="Search phones on credit..."
-          aria-label="Search for phones on credit in Nairobi"
-          autocomplete="off"
-          aria-autocomplete="list"
-          aria-controls="searchResults"
-        />
+        <div class="search-input-wrapper">
+          <input
+            type="search"
+            class="search-input"
+            id="searchInput"
+            name="q"
+            placeholder=" "
+            aria-label="Search for phones on credit in Nairobi"
+            autocomplete="off"
+            aria-autocomplete="list"
+            aria-controls="searchResults"
+          />
+          <span class="fake-placeholder" id="fakePlaceholder"
+            >Search phones on credit...</span
+          >
+        </div>
         <button
           class="search-btn"
           id="searchBtn"
@@ -174,17 +179,22 @@ import PopularBrands from "./PopularBrands.astro";
         <label for="searchInputMobile" class="visually-hidden"
           >Search phones on credit - Lipa Mdogo Mdogo</label
         >
-        <input
-          type="search"
-          class="search-input"
-          id="searchInputMobile"
-          name="q"
-          placeholder="Search phones on credit..."
-          aria-label="Search for phones on credit in Nairobi"
-          autocomplete="off"
-          aria-autocomplete="list"
-          aria-controls="searchResultsMobile"
-        />
+        <div class="search-input-wrapper">
+          <input
+            type="search"
+            class="search-input"
+            id="searchInputMobile"
+            name="q"
+            placeholder=" "
+            aria-label="Search for phones on credit in Nairobi"
+            autocomplete="off"
+            aria-autocomplete="list"
+            aria-controls="searchResultsMobile"
+          />
+          <span class="fake-placeholder" id="fakePlaceholderMobile"
+            >Search phones on credit...</span
+          >
+        </div>
         <button
           class="search-btn"
           id="searchBtnMobile"
@@ -384,6 +394,11 @@ import PopularBrands from "./PopularBrands.astro";
     position: relative;
   }
 
+  .search-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
   .search-input {
     width: 100%;
     padding: 12px 48px 12px 16px;
@@ -395,46 +410,161 @@ import PopularBrands from "./PopularBrands.astro";
 
   .search-input:focus {
     border-color: var(--brand);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
     outline: none;
   }
 
-  /* Placeholder bounce animations */
-  @keyframes placeholderBounceIn {
+  /* Hide real placeholder */
+  .search-input::placeholder {
+    opacity: 0;
+  }
+
+  /* Fake placeholder styling */
+  .fake-placeholder {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 14px;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Hide fake placeholder when input has focus or value */
+  .search-input:focus ~ .fake-placeholder,
+  .search-input:not(:placeholder-shown) ~ .fake-placeholder {
+    opacity: 0;
+  }
+
+  /* Animation 1: Bounce from top with elastic effect */
+  @keyframes bounceInFromTop {
     0% {
       opacity: 0;
-      transform: translateY(-30px);
+      transform: translateY(-50%) translateY(-40px) scale(0.8);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translateY(-50%) translateY(10px) scale(1.05);
+    }
+    70% {
+      transform: translateY(-50%) translateY(-5px) scale(0.98);
+    }
+    85% {
+      transform: translateY(-50%) translateY(3px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) translateY(0) scale(1);
+    }
+  }
+
+  @keyframes bounceOutToBottom {
+    0% {
+      opacity: 1;
+      transform: translateY(-50%) translateY(0) scale(1);
+    }
+    30% {
+      opacity: 0.7;
+      transform: translateY(-50%) translateY(-5px) scale(1.02);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) translateY(35px) scale(0.9);
+    }
+  }
+
+  /* Animation 2: Slide and fade from left */
+  @keyframes slideInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(-50px) rotate(-5deg);
     }
     60% {
       opacity: 1;
-      transform: translateY(8px);
+      transform: translateY(-50%) translateX(10px) rotate(2deg);
     }
     80% {
-      transform: translateY(-4px);
+      transform: translateY(-50%) translateX(-5px) rotate(-1deg);
     }
     100% {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(-50%) translateX(0) rotate(0deg);
     }
   }
 
-  @keyframes placeholderBounceOut {
+  @keyframes slideOutToRight {
     0% {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(-50%) translateX(0) rotate(0deg);
     }
     100% {
       opacity: 0;
-      transform: translateY(25px);
+      transform: translateY(-50%) translateX(50px) rotate(5deg);
     }
   }
 
-  .search-input.placeholder-bounce-in::placeholder {
-    animation: placeholderBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Animation 3: Scale and pop effect */
+  @keyframes scalePopIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.3) rotate(-10deg);
+    }
+    50% {
+      opacity: 0.9;
+      transform: translateY(-50%) scale(1.15) rotate(3deg);
+    }
+    70% {
+      transform: translateY(-50%) scale(0.95) rotate(-2deg);
+    }
+    85% {
+      transform: translateY(-50%) scale(1.03) rotate(1deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) scale(1) rotate(0deg);
+    }
   }
 
-  .search-input.placeholder-bounce-out::placeholder {
-    animation: placeholderBounceOut 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  @keyframes scalePopOut {
+    0% {
+      opacity: 1;
+      transform: translateY(-50%) scale(1) rotate(0deg);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(-50%) scale(1.1) rotate(-5deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.3) rotate(10deg);
+    }
+  }
+
+  /* Apply animations to fake placeholder */
+  .fake-placeholder.animation-1-in {
+    animation: bounceInFromTop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .fake-placeholder.animation-1-out {
+    animation: bounceOutToBottom 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+
+  .fake-placeholder.animation-2-in {
+    animation: slideInFromLeft 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  .fake-placeholder.animation-2-out {
+    animation: slideOutToRight 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+
+  .fake-placeholder.animation-3-in {
+    animation: scalePopIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .fake-placeholder.animation-3-out {
+    animation: scalePopOut 0.5s cubic-bezier(0.6, 0.04, 0.98, 0.335);
   }
 
   .search-btn {
@@ -452,7 +582,7 @@ import PopularBrands from "./PopularBrands.astro";
   }
 
   .search-btn:hover {
-    background: #f59e0b;
+    background: #d97706;
   }
 
   .search-btn:focus {
@@ -598,7 +728,7 @@ import PopularBrands from "./PopularBrands.astro";
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #f59e0b;
+    background: #10b981;
     color: white;
     padding: 8px 14px;
     border-radius: var(--radius);
@@ -665,7 +795,7 @@ import PopularBrands from "./PopularBrands.astro";
   }
 
   .cart-btn:hover {
-    background: #f59e0b;
+    background: #d97706;
     transform: translateY(-2px);
   }
 
@@ -869,6 +999,11 @@ import PopularBrands from "./PopularBrands.astro";
       font-size: 13px;
     }
 
+    .fake-placeholder {
+      font-size: 13px;
+      left: 12px;
+    }
+
     .search-btn {
       padding: 6px;
     }
@@ -964,9 +1099,12 @@ import PopularBrands from "./PopularBrands.astro";
     source: string;
   }
 
-  // === ROTATING PLACEHOLDER LOGIC WITH BOUNCE ANIMATION ===
-  class PlaceholderRotator {
-    private inputs: HTMLInputElement[] = [];
+  // === FAKE PLACEHOLDER ROTATOR WITH DIFFERENT ANIMATIONS ===
+  class FakePlaceholderRotator {
+    private elements: Array<{
+      input: HTMLInputElement;
+      fakePlaceholder: HTMLElement;
+    }> = [];
     private placeholders: string[] = [
       "Search phones on credit...",
       "Buy phone on credit",
@@ -976,55 +1114,83 @@ import PopularBrands from "./PopularBrands.astro";
     private interval: number = 3000; // 3 seconds per placeholder
     private timer: number | null = null;
 
-    constructor() {
-      this.init();
+    constructor(configs: Array<{ inputId: string; placeholderId: string }>) {
+      this.init(configs);
     }
 
-    private init(): void {
-      const desktopInput = document.getElementById(
-        "searchInput"
-      ) as HTMLInputElement | null;
-      const mobileInput = document.getElementById(
-        "searchInputMobile"
-      ) as HTMLInputElement | null;
+    private init(
+      configs: Array<{ inputId: string; placeholderId: string }>
+    ): void {
+      // Gather all input and placeholder pairs
+      configs.forEach((config) => {
+        const input = document.getElementById(
+          config.inputId
+        ) as HTMLInputElement | null;
+        const fakePlaceholder = document.getElementById(
+          config.placeholderId
+        ) as HTMLElement | null;
 
-      if (desktopInput) this.inputs.push(desktopInput);
-      if (mobileInput) this.inputs.push(mobileInput);
+        if (input && fakePlaceholder) {
+          this.elements.push({ input, fakePlaceholder });
 
-      if (this.inputs.length === 0) return;
+          // Set initial placeholder text
+          fakePlaceholder.textContent = this.placeholders[0];
 
-      // Start with first placeholder
-      this.setPlaceholder(this.currentIndex);
-
-      // Begin rotation
-      this.startRotation();
-
-      // Pause on focus, resume on blur
-      this.inputs.forEach((input) => {
-        input.addEventListener("focus", () => this.pause());
-        input.addEventListener("blur", () => this.startRotation());
+          // Add focus/blur handlers
+          input.addEventListener("focus", () => this.pause());
+          input.addEventListener("blur", () => this.startRotation());
+        }
       });
+
+      if (this.elements.length === 0) return;
+
+      // Start rotation
+      this.startRotation();
     }
 
     private setPlaceholder(index: number): void {
       const text = this.placeholders[index];
-      this.inputs.forEach((input) => {
-        if (!input.matches(":focus") && input.value === "") {
+
+      // Determine which animation to use based on index
+      // Each placeholder gets a different animation
+      const animationIndex = (index % 3) + 1;
+
+      this.elements.forEach(({ input, fakePlaceholder }) => {
+        // Only animate if input is not focused and empty
+        if (document.activeElement !== input && input.value === "") {
+          // Remove any existing animation classes
+          fakePlaceholder.classList.remove(
+            "animation-1-in",
+            "animation-1-out",
+            "animation-2-in",
+            "animation-2-out",
+            "animation-3-in",
+            "animation-3-out"
+          );
+
           // Add bounce-out animation
-          input.classList.add("placeholder-bounce-out");
+          fakePlaceholder.classList.add(`animation-${animationIndex}-out`);
 
           // Wait for bounce-out to complete, then change text
-          setTimeout(() => {
-            input.setAttribute("placeholder", text);
-            input.classList.remove("placeholder-bounce-out");
-            // Add bounce-in animation
-            input.classList.add("placeholder-bounce-in");
+          const outDuration =
+            animationIndex === 1 ? 500 : animationIndex === 2 ? 400 : 500;
 
-            // Remove bounce-in class after animation completes
+          setTimeout(() => {
+            fakePlaceholder.textContent = text;
+            fakePlaceholder.classList.remove(`animation-${animationIndex}-out`);
+
+            // Add bounce-in animation
+            fakePlaceholder.classList.add(`animation-${animationIndex}-in`);
+
+            // Clean up after bounce-in completes
+            const inDuration =
+              animationIndex === 1 ? 700 : animationIndex === 2 ? 700 : 800;
             setTimeout(() => {
-              input.classList.remove("placeholder-bounce-in");
-            }, 700);
-          }, 400);
+              fakePlaceholder.classList.remove(
+                `animation-${animationIndex}-in`
+              );
+            }, inDuration);
+          }, outDuration);
         }
       });
     }
@@ -1047,7 +1213,7 @@ import PopularBrands from "./PopularBrands.astro";
     }
   }
 
-  // === ORIGINAL NAV LOGIC (unchanged) ===
+  // === ORIGINAL NAV LOGIC ===
   const menuBtn = document.getElementById(
     "menuBtn"
   ) as HTMLButtonElement | null;
@@ -1265,6 +1431,9 @@ import PopularBrands from "./PopularBrands.astro";
 
   // === INITIALIZE PLACEHOLDER ROTATOR ===
   document.addEventListener("DOMContentLoaded", () => {
-    new PlaceholderRotator();
+    new FakePlaceholderRotator([
+      { inputId: "searchInput", placeholderId: "fakePlaceholder" },
+      { inputId: "searchInputMobile", placeholderId: "fakePlaceholderMobile" },
+    ]);
   });
 </script>
