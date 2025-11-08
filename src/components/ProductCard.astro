@@ -11,10 +11,11 @@ const {
   slug,
   slugs,
   index,
+  id,
 } = Astro.props;
 ---
 
-<style is:inline>
+<style>
   :root {
     /* Streamlined design tokens */
     --primary: #ff6b35;
@@ -437,7 +438,7 @@ const {
       /* background: yellow; */
     }
     .product-actions button {
-      display: none;
+      /* display: none; */
     }
 
     .product-image {
@@ -599,16 +600,24 @@ const {
     <div class="product-actions">
       <a
         href={`/${slugs}`}
-        class="btn btn-primary"
+        class="btn btn-primary add-to-cart"
         aria-label={`Order ${name} with ${deposit} deposit`}
+        data-id={id}
+        data-name={name}
+        data-deposit={deposit}
+        class="add-to-cart"
       >
         Order Now
       </a>
+
       <button
-        class="btn btn-secondary"
+        class="btn btn-secondary add-to-cart"
         type="button"
         aria-label={`Add ${name} to cart`}
         title="Add to cart"
+        data-id={id}
+        data-name={name}
+        data-deposit={deposit}
       >
         <svg
           width="20"
@@ -628,3 +637,39 @@ const {
     </div>
   </div>
 </article>
+
+<script>
+  // Add this script to your Product.astro component or in a <script> tag
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+    addToCartButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const productCard = e.target.closest("[data-product]");
+
+        if (!productCard) return;
+
+        const product = {
+          id: productCard.dataset.productId,
+          name: productCard.dataset.productName,
+          price: parseFloat(productCard.dataset.productPrice),
+          image: productCard.dataset.productImage,
+        };
+
+        // Add to cart
+        window.cartManager.addToCart(product);
+
+        // Visual feedback
+        const originalText = button.textContent;
+        button.textContent = "Added!";
+        button.style.backgroundColor = "#10b981";
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.backgroundColor = "";
+        }, 1000);
+      });
+    });
+  });
+</script>

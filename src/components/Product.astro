@@ -1,0 +1,89 @@
+<!-- Product.astro - Example Structure -->
+--- const {product} = Astro.props; ---
+
+<div
+  class="product-card"
+  data-product
+  data-product-id={product.id}
+  data-product-name={product.name}
+  data-product-price={product.price}
+  data-product-image={product.image}
+>
+  <img src={product.image} alt={product.name} class="product-image" />
+  <h3>{product.name}</h3>
+  <p class="price">${product.price}</p>
+  <button class="add-to-cart-btn">Add to Cart</button>
+</div>
+
+<style>
+  .product-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #059669;
+    margin: 0.5rem 0;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .add-to-cart-btn:hover {
+    background: #2563eb;
+  }
+</style>
+
+<script>
+  import cartManager from "../utils/cart.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const card = e.target.closest("[data-product]");
+        if (!card) return;
+
+        const product = {
+          id: card.dataset.productId,
+          name: card.dataset.productName,
+          price: parseFloat(card.dataset.productPrice),
+          image: card.dataset.productImage,
+        };
+
+        window.cartManager.addToCart(product);
+
+        // Visual feedback
+        const btn = e.target;
+        const original = btn.textContent;
+        btn.textContent = "Added!";
+        btn.style.background = "#10b981";
+
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.background = "";
+        }, 1000);
+      });
+    });
+  });
+</script>
