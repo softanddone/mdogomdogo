@@ -15,9 +15,13 @@ interface Slide {
 
 export interface Props {
   slides?: Slide[];
+  heading?: string;
+  subheading?: string;
 }
 
 const {
+  heading = "Best Phone Deals in Kenya",
+  subheading = "Shop smartphones with flexible payment plans and amazing discounts",
   slides = [
     {
       id: 1,
@@ -27,11 +31,10 @@ const {
       deposit: "Ksh 3,500",
       buttonText: "SHOP NOW",
       image: "/phones/samsunga06black.png",
-      alt: "Samsung Galaxy",
+      alt: "Samsung Galaxy A06 smartphone with flexible payment plan starting from Ksh 3,500 deposit in Kenya",
       badgeText: "BIG SALE",
       slug: "/product/samsung-galaxy-a06",
     },
-
     {
       id: 2,
       title: "Tecno Spark 40",
@@ -40,7 +43,7 @@ const {
       deposit: "Ksh 3,999",
       buttonText: "ORDER NOW",
       image: "/phones/tecnospark40.png",
-      alt: "Mkopa X20",
+      alt: "Tecno Spark 40 mobile phone on sale with up to 35% discount, deposit from Ksh 3,999 in Kenya",
       badgeText: "FLASH SALE",
       slug: "/product/tecno-spark-40",
     },
@@ -52,7 +55,7 @@ const {
       deposit: "Ksh 6,500",
       buttonText: "BUY NOW",
       image: "/phones/samsunga16black.png",
-      alt: "Sumsung A16",
+      alt: "Samsung Galaxy A16 smartphone limited time offer, deposit starting at Ksh 6,500 with payment plan in Kenya",
       badgeText: "HOT DEAL",
       slug: "/product/samsung-galaxy-a16",
     },
@@ -60,81 +63,197 @@ const {
 } = Astro.props;
 ---
 
-<div class="card-container">
-  <div class="card-content slide-1">
-    <!-- Floating background elements -->
-    <div class="floating-elements">
-      <div class="floating-circle"></div>
-      <div class="floating-circle"></div>
-      <div class="floating-circle"></div>
-    </div>
+<!-- Preload critical images for better performance -->
+<link rel="preload" as="image" href={slides[0].image} />
 
-    <!-- Progress bar -->
-    <div class="progress-bar"></div>
+<section
+  class="hero-carousel-section"
+  aria-label="Featured smartphone deals and offers"
+  itemscope
+  itemtype="https://schema.org/ProductCollection"
+>
+  <!-- SEO: Hidden but crawlable heading structure -->
+  <div class="visually-hidden">
+    <h1 itemprop="name">{heading}</h1>
+    <p itemprop="description">{subheading}</p>
+  </div>
 
-    <div class="left">
-      {
-        slides.map((slide, index) => (
-          <div
-            class={`hero-content ${index === 0 ? "active" : ""}`}
-            id={`hero${slide.id}`}
-          >
-            <div class="big">
-              <h1>{slide.badgeText}</h1>
-            </div>
-            <h1 class="ai">{slide.title}</h1>
-            <h1 class="ai">{slide.discount}</h1>
-            <h3>{slide.description}</h3>
-            <div class="from">
-              <h3>DEPOSIT</h3>
-              <h1 class="seesaw">{slide.deposit}</h1>
-            </div>
-            <a href={slide.slug}>{slide.buttonText}</a>
-          </div>
-        ))
-      }
-    </div>
+  <div
+    class="card-container"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Product carousel with smartphone deals"
+  >
+    <div class="card-content slide-1">
+      <!-- Floating background elements (decorative, hidden from screen readers) -->
+      <div class="floating-elements" aria-hidden="true">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+      </div>
 
-    <div class="right">
-      <div class="img-container">
+      <!-- Progress bar -->
+      <div
+        class="progress-bar"
+        role="progressbar"
+        aria-label="Carousel progress"
+        aria-valuenow="0"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+      </div>
+
+      <div class="left">
         {
           slides.map((slide, index) => (
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              id={`img${slide.id}`}
-              class={index === 0 ? "active" : ""}
-            />
+            <article
+              class={`hero-content ${index === 0 ? "active" : ""}`}
+              id={`hero${slide.id}`}
+              aria-hidden={index !== 0}
+              itemscope
+              itemtype="https://schema.org/Product"
+            >
+              <div class="big" aria-label={`${slide.badgeText} badge`}>
+                <span
+                  role="text"
+                  itemprop="offers"
+                  itemscope
+                  itemtype="https://schema.org/Offer"
+                >
+                  <meta
+                    itemprop="availability"
+                    content="https://schema.org/InStock"
+                  />
+                  {slide.badgeText}
+                </span>
+              </div>
+
+              <h2 class="ai" itemprop="name">
+                {slide.title}
+              </h2>
+              <p
+                class="ai discount-text"
+                itemprop="offers"
+                itemscope
+                itemtype="https://schema.org/Offer"
+              >
+                <span
+                  itemprop="priceSpecification"
+                  itemscope
+                  itemtype="https://schema.org/PriceSpecification"
+                >
+                  {slide.discount}
+                </span>
+              </p>
+              <p class="description-text">{slide.description}</p>
+
+              <div class="from">
+                <h3>DEPOSIT</h3>
+                <p
+                  class="seesaw"
+                  itemprop="offers"
+                  itemscope
+                  itemtype="https://schema.org/Offer"
+                >
+                  <span itemprop="price">{slide.deposit}</span>
+                  <meta itemprop="priceCurrency" content="KES" />
+                </p>
+              </div>
+
+              <a
+                href={slide.slug}
+                aria-label={`Shop ${slide.title} with ${slide.discount} discount, deposit from ${slide.deposit}`}
+                itemprop="url"
+              >
+                {slide.buttonText}
+              </a>
+            </article>
           ))
         }
       </div>
 
-      <!-- Navigation arrows -->
-      <button class="navigation-arrows prev-arrow" id="prevBtn" type="button"
-        >‹</button
-      >
-      <button class="navigation-arrows next-arrow" id="nextBtn" type="button"
-        >›</button
-      >
-    </div>
+      <aside class="right" aria-label="Product images">
+        <div class="img-container">
+          {
+            slides.map((slide, index) => (
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                id={`img${slide.id}`}
+                class={index === 0 ? "active" : ""}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding={index === 0 ? "sync" : "async"}
+                width="350"
+                height="320"
+                itemprop="image"
+              />
+            ))
+          }
+        </div>
 
-    <!-- State Indicators -->
-    <div class="state-indicators">
-      {
-        slides.map((_, index) => (
-          <div
-            class={`state-dot ${index === 0 ? "active" : ""}`}
-            data-slide={index}
-            role="button"
-            tabindex="0"
-          />
-        ))
-      }
+        <!-- Navigation arrows -->
+        <button
+          class="navigation-arrows prev-arrow"
+          id="prevBtn"
+          type="button"
+          aria-label="View previous phone deal"
+          aria-controls="hero1 hero2 hero3"
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button
+          class="navigation-arrows next-arrow"
+          id="nextBtn"
+          type="button"
+          aria-label="View next phone deal"
+          aria-controls="hero1 hero2 hero3"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </aside>
+
+      <!-- State Indicators -->
+      <nav class="state-indicators" aria-label="Carousel navigation dots">
+        {
+          slides.map((slide, index) => (
+            <button
+              class={`state-dot ${index === 0 ? "active" : ""}`}
+              data-slide={index}
+              type="button"
+              aria-label={`Go to slide ${index + 1}: ${slide.title}`}
+              aria-current={index === 0 ? "true" : "false"}
+            />
+          ))
+        }
+      </nav>
     </div>
   </div>
-</div>
+</section>
 
 <style>
+  /* Visually hidden but accessible to screen readers and crawlers */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .hero-carousel-section {
+    position: relative;
+    width: 100%;
+  }
+
+  .discount-text,
+  .description-text {
+    margin: 0;
+  }
+
   :root {
     --tilt: 6deg;
     --speed: 0.9s;
@@ -146,9 +265,7 @@ const {
 
   .card-container {
     width: 100vw;
-    /* max-width: 1200px; */
     max-width: 950px;
-
     height: 450px;
     position: relative;
     overflow: hidden;
@@ -156,11 +273,12 @@ const {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
     margin: 0 auto;
     margin-top: 80px;
-    /* margin-bottom: 1000px !important; */
   }
 
   h1,
-  h3 {
+  h2,
+  h3,
+  p {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     margin: 0;
@@ -175,9 +293,6 @@ const {
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-  }
-  .slide-1 {
-    /* margin-top: 100px; */
   }
 
   .card-content::before {
@@ -195,24 +310,10 @@ const {
     pointer-events: none;
   }
 
-  .card-content.slide-1 {
-    /* background: linear-gradient(135deg, var(--primary-blue) 0%, #3b82f6 100%); */
-    background: linear-gradient(135deg, var(--primary-red) 0%, #f59e0b 100%);
-
-  }
-
-  .card-content.slide-2 {
-    /* background: linear-gradient(135deg, var(--primary-green) 0%, #10b981 100%); */
-    background: linear-gradient(135deg, var(--primary-red) 0%, #f59e0b 100%);
-
-  }
-
+  .card-content.slide-1,
+  .card-content.slide-2,
   .card-content.slide-3 {
     background: linear-gradient(135deg, var(--primary-red) 0%, #f59e0b 100%);
-  }
-
-  .card-container {
-    /* background: red; */
   }
 
   .floating-elements {
@@ -317,6 +418,11 @@ const {
     background: rgba(255, 255, 255, 0.7);
   }
 
+  .state-dot:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
   .state-dot.active {
     background: white;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
@@ -386,61 +492,49 @@ const {
     }
   }
 
-  .big h1 {
+  .big span {
     font-size: 14px;
     color: white;
     font-weight: bold;
     letter-spacing: 1px;
   }
 
-  button {
-    width: 170px;
-    height: 40px;
+  .navigation-arrows {
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    border-radius: 15px;
-    background: linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.9),
-      rgba(255, 255, 255, 0.7)
-    );
-    color: #333;
-    font-size: 18px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 32px;
     font-weight: bold;
-    margin-top: 20px;
     border: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    position: absolute;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 15;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.5),
-      transparent
-    );
-    transition: left 0.5s;
+  .navigation-arrows:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateY(-50%) scale(1.1);
   }
 
-  button:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  .navigation-arrows:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
   }
 
-  button:hover::before {
-    left: 100%;
+  .prev-arrow {
+    left: 20px;
   }
 
-  button:active {
-    transform: translateY(-1px) scale(1.02);
+  .next-arrow {
+    right: 20px;
   }
 
   .ai {
@@ -451,7 +545,8 @@ const {
     margin: 5px 0;
   }
 
-  h3 {
+  h3,
+  p {
     color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
     font-weight: 500;
@@ -491,7 +586,6 @@ const {
     transform: translateY(-50%) translateX(-100px) rotateY(-15deg);
     filter: blur(10px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    /* FIX: Add z-index and pointer-events */
     z-index: 1;
     pointer-events: none;
   }
@@ -500,7 +594,6 @@ const {
     opacity: 1;
     transform: translateY(-50%) translateX(0) rotateY(0deg);
     filter: blur(0px);
-    /* FIX: Enable pointer events and bring to front */
     z-index: 10;
     pointer-events: auto;
   }
@@ -509,12 +602,10 @@ const {
     opacity: 0;
     transform: translateY(-50%) translateX(100px) rotateY(15deg);
     filter: blur(10px);
-    /* FIX: Disable pointer events and send to back */
     z-index: 1;
     pointer-events: none;
   }
 
-  /* FIX: Ensure the anchor tag is properly styled */
   .hero-content a {
     display: inline-block;
     width: 170px;
@@ -570,16 +661,20 @@ const {
     transform: translateY(-1px) scale(1.02);
   }
 
+  .hero-content a:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 4px;
+  }
+
   .img-container {
     width: 350px;
     height: 320px;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 100px;
     overflow: visible;
     perspective: 1000px;
     position: relative;
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-top: 100px;
   }
 
   .card-content.slide-1 .img-container {
@@ -690,68 +785,35 @@ const {
     overflow: hidden;
   }
 
-  .navigation-arrows {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 15;
-    background: rgba(0, 0, 0, 0.3);
-    border: none;
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .navigation-arrows:hover {
-    background: rgba(0, 0, 0, 0.5);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .prev-arrow {
-    left: 20px;
-  }
-
-  .next-arrow {
-    right: 20px;
-  }
-  @media screen and (min-width:0px) and (max-width:400px){
-    
-   .card-content {
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    .card-content {
       grid-template-columns: 1fr;
       height: 100%;
-      /* background:yellow!important; */
     }
 
-
-    
-    .card-container{
-      height:800px!important;
-            margin-top:20px!important;
-
-      /* margin-top: 100px; */
+    .card-container {
+      height: 800px !important;
+      margin-top: 20px !important;
     }
+
     .left {
       height: 450px;
     }
-    .right{
+
+    .right {
       height: 100%;
     }
+
     .big {
       margin-top: 70px;
     }
+
     .card-container {
       margin: 0 auto;
       margin-top: -50px;
       width: 87%;
       border-radius: 10px !important;
     }
-    .big {
-      /* margin-top: 140px; */
-    }
 
     .card-container {
       height: 100vh;
@@ -777,7 +839,8 @@ const {
       display: block;
     }
 
-    h3 {
+    h3,
+    p {
       text-align: center;
     }
 
@@ -788,35 +851,28 @@ const {
     .navigation-arrows {
       display: none;
     }
-    .right{
-      /* background: yellow; */
-      /* height: 1000px; */
-    }
-  }
   }
 
-  @media screen and (min-width:401px) and (max-width: 768px) {
+  @media screen and (min-width: 401px) and (max-width: 768px) {
     .card-content {
       grid-template-columns: 1fr;
       height: 100%;
-
     }
+
     .left {
       height: 450px;
-      /* background:red; */
     }
+
     .big {
       margin-top: 70px;
     }
+
     .card-container {
       margin: 0 auto;
       margin-top: 20px;
       width: 87%;
       border-radius: 10px !important;
-      margin-top:20px!important;
-    }
-    .big {
-      /* margin-top: 140px; */
+      margin-top: 20px !important;
     }
 
     .card-container {
@@ -843,7 +899,8 @@ const {
       display: block;
     }
 
-    h3 {
+    h3,
+    p {
       text-align: center;
     }
 
@@ -853,10 +910,6 @@ const {
 
     .navigation-arrows {
       display: none;
-    }
-    .right{
-      /* background: yellow; */
-      /* height: 1000px; */
     }
   }
 </style>
@@ -885,7 +938,6 @@ const {
     }
 
     private bindEvents(): void {
-      // Navigation arrows
       const prevBtn = document.getElementById(
         "prevBtn"
       ) as HTMLButtonElement | null;
@@ -897,29 +949,17 @@ const {
         prevBtn.addEventListener("click", () => this.previousSlide());
       if (nextBtn) nextBtn.addEventListener("click", () => this.nextSlide());
 
-      // State indicators
       document.querySelectorAll(".state-dot").forEach((dot, index) => {
         dot.addEventListener("click", () => this.goToSlide(index));
         dot.addEventListener("keydown", (e: Event) => {
           const keyEvent = e as KeyboardEvent;
           if (keyEvent.key === "Enter" || keyEvent.key === " ") {
+            e.preventDefault();
             this.goToSlide(index);
           }
         });
       });
 
-      // Product buttons
-      document.querySelectorAll("button[data-product]").forEach((button) => {
-        button.addEventListener("click", (e: Event) => {
-          const target = e.target as HTMLButtonElement;
-          const productName = target.getAttribute("data-product");
-          if (productName) {
-            this.addToCart(productName, target);
-          }
-        });
-      });
-
-      // Hover pause/resume
       const container = document.querySelector(
         ".card-container"
       ) as HTMLElement | null;
@@ -928,13 +968,11 @@ const {
         container.addEventListener("mouseleave", () => this.startAutoSlide());
       }
 
-      // Keyboard navigation
       document.addEventListener("keydown", (e: KeyboardEvent) => {
         if (e.key === "ArrowLeft") this.previousSlide();
         if (e.key === "ArrowRight") this.nextSlide();
       });
 
-      // Touch/swipe support
       this.setupTouchEvents();
     }
 
@@ -973,6 +1011,7 @@ const {
     private updateStateIndicators(index: number): void {
       document.querySelectorAll(".state-dot").forEach((dot, i) => {
         dot.classList.toggle("active", i === index);
+        dot.setAttribute("aria-current", i === index ? "true" : "false");
       });
     }
 
@@ -982,14 +1021,16 @@ const {
       ) as HTMLElement | null;
       if (progressBar) {
         progressBar.style.animation = "none";
-        progressBar.offsetHeight; // Trigger reflow
+        progressBar.offsetHeight;
         progressBar.style.animation = "progressBar 10s linear forwards";
+        progressBar.setAttribute("aria-valuenow", "0");
       }
     }
 
     private showSlide(index: number): void {
-      document.querySelectorAll(".hero-content").forEach((hero) => {
+      document.querySelectorAll(".hero-content").forEach((hero, i) => {
         hero.classList.remove("active", "exit");
+        hero.setAttribute("aria-hidden", i !== index ? "true" : "false");
       });
       document.querySelectorAll(".img-container img").forEach((img) => {
         img.classList.remove("active", "exit");
@@ -1002,7 +1043,10 @@ const {
         `img${index + 1}`
       ) as HTMLImageElement | null;
 
-      if (heroElement) heroElement.classList.add("active");
+      if (heroElement) {
+        heroElement.classList.add("active");
+        heroElement.setAttribute("aria-hidden", "false");
+      }
       if (imgElement) imgElement.classList.add("active");
     }
 
@@ -1014,7 +1058,10 @@ const {
         `img${index + 1}`
       ) as HTMLImageElement | null;
 
-      if (heroElement) heroElement.classList.add("exit");
+      if (heroElement) {
+        heroElement.classList.add("exit");
+        heroElement.setAttribute("aria-hidden", "true");
+      }
       if (imgElement) imgElement.classList.add("exit");
     }
 
@@ -1068,26 +1115,8 @@ const {
         this.autoSlideTimer = null;
       }
     }
-
-    private addToCart(productName: string, button: HTMLButtonElement): void {
-      // Add haptic feedback effect
-      button.style.transform = "scale(0.95)";
-      setTimeout(() => {
-        button.style.transform = "";
-      }, 150);
-
-      // Dispatch custom event for cart integration
-      const event = new CustomEvent("addToCart", {
-        detail: { productName, slideIndex: this.currentIndex },
-      });
-      document.dispatchEvent(event);
-
-      // Optional: Show notification or handle cart logic here
-      console.log(`${productName} added to cart!`);
-    }
   }
 
-  // Initialize carousel when DOM is loaded
   document.addEventListener("DOMContentLoaded", () => {
     new ShoppingCarousel();
   });
