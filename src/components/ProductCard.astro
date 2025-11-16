@@ -604,8 +604,9 @@ const {
         aria-label={`Order ${name} with ${deposit} deposit`}
         data-id={id}
         data-name={name}
-        data-deposit={deposit}
-        class="add-to-cart"
+        data-price={deposit}
+        data-img={source}
+        onclick="addToCart(this)"
       >
         Order Now
       </a>
@@ -618,6 +619,9 @@ const {
         data-id={id}
         data-name={name}
         data-deposit={deposit}
+        data-price={deposit}
+        data-img={source}
+        onclick="addToCart(this)"
       >
         <svg
           width="20"
@@ -639,37 +643,43 @@ const {
 </article>
 
 <script>
-  // Add this script to your Product.astro component or in a <script> tag
+  // Add a single modal in the DOM if not exists
+  if (!document.getElementById("cart-modal")) {
+    const modal = document.createElement("div");
+    modal.id = "cart-modal";
+    modal.style.cssText =
+      "position:fixed;bottom:20px;right:20px;background:#000;color:#fff;padding:10px 15px;border-radius:8px;opacity:0;transition:opacity .3s ease;z-index:9999;";
+    document.body.appendChild(modal);
+  }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  function showModal(message) {
+    const modal = document.getElementById("cart-modal");
+    modal.textContent = message;
+    modal.style.opacity = "1";
+    setTimeout(() => (modal.style.opacity = "0"), 2000);
+  }
 
-    addToCartButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const productCard = e.target.closest("[data-product]");
+  if (!window.addToCart) {
+    window.addToCart = function (btn) {
+      const id = btn.dataset.id;
+      const name = btn.dataset.name;
+      // const price = parseFloat(btn.dataset.price || 0);
+      const price = parseFloat(btn.dataset.price?.replace(/[^\d.]/g, "") || 0);
 
-        if (!productCard) return;
+      const img = btn.dataset.img;
 
-        const product = {
-          id: productCard.dataset.productId,
-          name: productCard.dataset.productName,
-          price: parseFloat(productCard.dataset.productPrice),
-          image: productCard.dataset.productImage,
-        };
+      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const existing = cart.find((item) => item.id == id);
 
-        // Add to cart
-        window.cartManager.addToCart(product);
+      if (existing) {
+        showModal(`${name} already in cart`);
+        return;
+      }
 
-        // Visual feedback
-        const originalText = button.textContent;
-        button.textContent = "Added!";
-        button.style.backgroundColor = "#10b981";
-
-        setTimeout(() => {
-          button.textContent = originalText;
-          button.style.backgroundColor = "";
-        }, 1000);
-      });
-    });
-  });
+      cart.push({ id, name, price, img, quantity: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.dispatchEvent(new Event("cartUpdated"));
+      showModal(`${name} added to cart`);
+    };
+  }
 </script>

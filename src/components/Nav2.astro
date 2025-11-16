@@ -228,7 +228,7 @@ import PopularBrands from "./PopularBrands.astro";
         id="cartBtn"
         aria-label="View shopping cart with 0 items"
       >
-        <a class="cart-link">
+        <a class="cart-link" href="/cart" id="cart-link">
           <svg
             width="24"
             height="24"
@@ -1113,22 +1113,26 @@ import PopularBrands from "./PopularBrands.astro";
 
   // Add this script to your Nav.astro component or in a <script> tag
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Initialize cart count on page load
-    if (window.cartManager) {
-      window.cartManager.updateCartUI();
+  function updateCartCount() {
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const el = document.getElementById("cart-count");
+      if (el) el.textContent = count;
+    } catch (err) {
+      console.error("updateCartCount error:", err);
     }
+  }
 
-    // Listen for cart updates
-    window.addEventListener("cartUpdated", (e) => {
-      const count = e.detail.count;
-      const cartCountElements = document.querySelectorAll(".cart-count");
+  // initial
+  updateCartCount();
 
-      cartCountElements.forEach((el) => {
-        el.textContent = count;
-        el.style.display = count > 0 ? "block" : "none";
-      });
-    });
+  // listen for updates
+  window.addEventListener("cartUpdated", updateCartCount);
+
+  // optional: update when storage changes (other tabs)
+  window.addEventListener("storage", (ev) => {
+    if (ev.key === "cart") updateCartCount();
   });
 
   // === FAKE PLACEHOLDER ROTATOR WITH DIFFERENT ANIMATIONS ===
