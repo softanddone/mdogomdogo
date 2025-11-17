@@ -1,6 +1,11 @@
+---
+import Nav2 from "../components/Nav2.astro";
+---
+
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>Cart</title>
     <style is:global>
       * {
@@ -394,6 +399,7 @@
   </head>
   <body>
     <main class="cart-page">
+      <Nav2 />
       <div class="cart-header">
         <h2>Cart (<span id="cart-count">0</span>)</h2>
       </div>
@@ -570,9 +576,13 @@
 
         // checkout (clears cart)
         const checkoutBtn = document.getElementById("checkout-btn");
+
         checkoutBtn.addEventListener("click", () => {
-          // you would normally integrate with a payment API here
-          alert("Checkout complete!");
+          // redirect to WhatsApp
+          window.location.href =
+            "https://wa.me/254762790513?text=Hello%2C%20I'm%20interested%20in%20your%20products";
+
+          // optional: clear cart after redirect
           localStorage.removeItem("cart");
           window.renderCart();
           window.dispatchEvent(new Event("cartUpdated"));

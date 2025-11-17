@@ -862,6 +862,7 @@ export const products = [
   depositanddaily: "KSh 5,000 Deposit + KSh 150 Daily",
   slug: "infinix-hot-60-pro-8-128",
   slugs: "infinix-hot-60-pro",
+  
   description: "Buy Infinix Hot 60 Pro (8/128GB) in Nairobi, Kenya. Big display, long-lasting battery, and great performance. Pay in small installments with Lipa Mdogo Mdogo.",
   brand: "Infinix",
   seller: "Authorized Dealer",
