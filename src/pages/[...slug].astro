@@ -1,11 +1,16 @@
 ---
-import Display from "../components/Display.astro";
-import Gift from "../components/Gift.astro";
-import Nav2 from "../components/Nav2.astro";
-import ProductDetails from "../components/ProductDetails.astro";
-import { products } from "../data/product2";
+// src/pages/products/[slug].astro
+import Nav from "../components/Nav.astro";
 import Layout from "../layouts/Layout.astro";
-import { generateProductSchema } from "../utils/structureData";
+import Display from "../components/Display.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { products } from "../data/product2";
+import {
+  generateProductSchema,
+  generateBreadcrumbSchema,
+} from "../utils/structureData";
+import Nav2 from "../components/Nav2.astro";
+import Gift from "../components/Gift.astro";
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -16,26 +21,633 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const product = products.find((p) => p.slug === slug);
 
-if (!product) {
-  throw new Error("Product not found");
+// Find the current product by slug
+const currentProduct = products.find((product) => product.slug === slug);
+
+if (!currentProduct) {
+  throw new Error(`Product not found: ${slug}`);
 }
 
-const schema = generateProductSchema(product);
+// Generate related products (same brand or category, excluding current product)
+const relatedProducts = products
+  .filter(
+    (product) =>
+      product.id !== currentProduct.id &&
+      (product.brand === currentProduct.brand ||
+        product.categoryPath.some((cat) =>
+          currentProduct.categoryPath.includes(cat)
+        ))
+  )
+  .slice(0, 4);
 
-const seo = {
-  title: `${product.name} - Buy Now | Lipa Pole Pole`,
-  description:
-    product.description ||
-    `Buy ${product.name} at a flexible lipa mdogo mdogo price. Pay small deposit & receive it today.`,
-  canonical: `https://mdogomdogodeals.co.ke/${product.slug}`,
-  ogImage: `https://mdogomdogodeals.co.ke/${product.source}`,
-  schema,
+// Generate schema for SEO (if function exists)
+
+// const schemaArray =
+//   typeof generateProductSchema === "function"
+//     ? [generateProductSchema(currentProduct)]
+//     : [];
+
+// Extract key features for meta description
+const keyFeatures = [
+  currentProduct.processor,
+  currentProduct.camera,
+  currentProduct.phonedisplay,
+  currentProduct.battery,
+  currentProduct.memory,
+]
+  .filter(Boolean)
+  .join(", ");
+
+// Generate Product Schema using your existing function
+const productSchemaString = generateProductSchema(currentProduct);
+const productSchema = JSON.parse(productSchemaString);
+
+// Generate Breadcrumb Schema using your existing function
+const breadcrumbSchema = generateBreadcrumbSchema(currentProduct);
+
+// Build FAQ Schema (you can add this to your structureData.ts if you want)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: `How does the credit payment work for ${currentProduct.name}?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Pay ${currentProduct.deposit} deposit, then ${currentProduct.daily} daily until fully paid. No hidden fees.`,
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is delivery free in Nairobi?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, we offer free same-day delivery within Nairobi CBD. Outer areas may have a small delivery fee. We deliver throughout Kenya.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if I miss a payment?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Contact your provider immediately. Most offer flexible payment options and will work with you to find a solution.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: `Is the ${currentProduct.name} genuine?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Yes, all our ${currentProduct.name} phones are 100% genuine with warranty. We source directly from authorized distributors in Kenya.`,
+      },
+    },
+  ],
 };
+
+// Combine all schemas into an array
+const schemaArray = [productSchema, breadcrumbSchema, faqSchema];
+
+// Build custom keywords for this product
+const productKeywords = [
+  `${currentProduct.name.toLowerCase()} price kenya`,
+  `${currentProduct.name.toLowerCase()} on credit`,
+  `buy ${currentProduct.name.toLowerCase()} nairobi`,
+  `${currentProduct.seller.toLowerCase()} ${currentProduct.brand.toLowerCase()}`,
+  `watu simu ${currentProduct.brand.toLowerCase()}`,
+  `${currentProduct.brand.toLowerCase()} lipa mdogo mdogo`,
+  "lipa mdogo mdogo phones",
+  "simu za kulipa polepole",
+  `${currentProduct.name.toLowerCase()} ${currentProduct.seller.toLowerCase()}`,
+].join(", ");
+
+// Extract price as number for Open Graph
+const priceNumber = currentProduct.totalPrice.replace(/[^\d]/g, "");
+
+// Build SEO data object for Layout
+
+// SEO configuration
+const seo = {
+  title: `${currentProduct.name} - ${currentProduct.from} | Buy on Credit Kenya`,
+  description:
+    currentProduct.description ||
+    `Buy ${currentProduct.name} on credit in Kenya. Features: ${keyFeatures}. Pay ${currentProduct.deposit} deposit + ${currentProduct.daily} daily. ${currentProduct.brand} smartphone with flexible payment options.`,
+  canonical: `https://mdogomdogodeals.co.ke/products/${currentProduct.slug}`,
+  ogImage: `https://mdogomdogodeals.co.ke${currentProduct.source}`,
+  schema: schemaArray.map((schema) => JSON.stringify(schema)).join(""),
+
+  // Enhanced SEO meta tags
+  keywords: productKeywords,
+  ogType: "product",
+  ogPrice: priceNumber,
+  ogCurrency: "KES",
+  ogTitle: `${currentProduct.name} - ${currentProduct.from}`,
+  ogDescription:
+    currentProduct.description ||
+    `Buy ${currentProduct.name} on credit in Kenya. Features: ${keyFeatures}. Pay ${currentProduct.deposit} deposit + ${currentProduct.daily} daily.`,
+  twitterCard: "summary_large_image",
+  twitterTitle: `${currentProduct.name} - Pay ${currentProduct.deposit} Deposit`,
+  twitterDescription: `Buy ${currentProduct.name} on credit. Pay ${currentProduct.deposit} deposit + ${currentProduct.daily} daily. Free delivery in Nairobi.`,
+  twitterImage: `https://mdogomdogodeals.co.ke${currentProduct.source}`,
+  twitterImageAlt: `${currentProduct.name} - ${currentProduct.brand} smartphone available on credit in Kenya`,
+  robots:
+    "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  lastModified: currentProduct.updatedAt || new Date().toISOString(),
+  lang: "en-KE",
+};
+
+// Breadcrumb data
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Smartphones", url: "/category/smartphones" },
+  {
+    name: currentProduct.brand,
+    url: `/category/${currentProduct.brand.toLowerCase()}`,
+  },
+  { name: currentProduct.name, current: true },
+];
 ---
 
+<style>
+  .breadcrumb {
+    background: #f8fafc;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-item a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb-item a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  .breadcrumb-item span[aria-current="page"] {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .separator {
+    color: #94a3b8;
+    font-weight: 300;
+  }
+
+  /* Related Products Section */
+  .related-products {
+    padding: 4rem 0;
+    background: #f8fafc;
+    margin-top: 2rem;
+  }
+
+  .related-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .related-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1e293b;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    align-items: center;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    padding: 4rem 0;
+    background: white;
+  }
+
+  .faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .faq-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #1e293b;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .faq-item {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-question {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .faq-answer {
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Product Info Header */
+  .product-header {
+    background: white;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .product-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .product-subtitle {
+    font-size: 1.25rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .quick-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .quick-info-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+  }
+
+  .quick-info-label {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .quick-info-value {
+    font-size: 1.125rem;
+    color: #1e293b;
+    font-weight: 700;
+  }
+
+  .price-highlight {
+    color: #059669;
+  }
+
+  .product-details {
+    max-width: 850px;
+    margin: 3rem auto;
+    padding: 1rem 2rem;
+    background: #fff;
+    color: #111;
+    font-family: "Inter", "Poppins", sans-serif;
+    line-height: 1.7;
+  }
+
+  .detail-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .detail-section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #000;
+    border-bottom: 2px solid #f2f2f2;
+    padding-bottom: 0.4rem;
+  }
+
+  .detail-section p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .pros,
+  .cons {
+    margin-top: 1.2rem;
+    padding: 1rem 1.25rem;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+  }
+
+  .pros h3,
+  .cons h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #000;
+  }
+
+  .pros ul,
+  .cons ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pros li,
+  .cons li {
+    padding: 0.3rem 0 0.3rem 1.5rem;
+    position: relative;
+    font-size: 0.97rem;
+    color: #333;
+  }
+
+  .pros li::before {
+    content: "✔";
+    color: #28a745;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .cons li::before {
+    content: "✖";
+    color: #e63946;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .product-details {
+      padding: 1rem;
+    }
+
+    .detail-section h2 {
+      font-size: 1.2rem;
+    }
+
+    .detail-section p {
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .related-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .breadcrumb-container,
+    .related-container,
+    .faq-container {
+      padding: 0 1rem;
+    }
+
+    .breadcrumb-list {
+      font-size: 0.8rem;
+    }
+
+    .related-title,
+    .faq-title {
+      font-size: 1.75rem;
+    }
+
+    .product-title {
+      font-size: 2rem;
+    }
+
+    .product-header {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .related-products,
+    .faq-section {
+      padding: 3rem 0;
+    }
+
+    .faq-item {
+      padding: 1.25rem;
+    }
+
+    .quick-info {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Match your existing body styles */
+  body {
+    width: 100vw;
+    overflow-x: hidden;
+    margin: 2rem 0 0 0;
+    background-color: #fff;
+    color: var(--dark-color);
+  }
+
+  @media screen and (min-width: 1200px) {
+    body {
+      margin: 3rem 0 0 0;
+    }
+  }
+</style>
+
 <Layout {...seo}>
-  
   <Gift />
   <Nav2 />
-  <Display {...product} />
+
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-container">
+      <ol class="breadcrumb-list">
+        {
+          breadcrumbs.map((crumb, index) => (
+            <li class="breadcrumb-item">
+              {crumb.current ? (
+                <span aria-current="page">{crumb.name}</span>
+              ) : (
+                <>
+                  <a href={crumb.url}>{crumb.name}</a>
+                  {index < breadcrumbs.length - 1 && (
+                    <span class="separator">›</span>
+                  )}
+                </>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Main Product Features Component -->
+  <Display {...currentProduct} />
+
+  <!-- Related Products Section -->
+
+  <section class="product-details">
+    {
+      currentProduct.details &&
+        currentProduct.details.map((section) => (
+          <article class="detail-section">
+            <h2>{section.title}</h2>
+
+            {section.content && <p>{section.content}</p>}
+
+            {section.pros && (
+              <div class="pros">
+                <h3>Pros</h3>
+                <ul>
+                  {section.pros.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {section.cons && (
+              <div class="cons">
+                <h3>Cons</h3>
+                <ul>
+                  {section.cons.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+        ))
+    }
+  </section>
+
+  {
+    relatedProducts.length > 0 && (
+      <section class="related-products">
+        <div class="related-container">
+          <h2 class="related-title">You Might Also Like</h2>
+          <div class="related-grid">
+            {relatedProducts.map((relatedProduct) => (
+              <ProductCard {...relatedProduct} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="faq-container">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3 class="faq-question">How does the payment plan work?</h3>
+          <p class="faq-answer">
+            Pay a small deposit of {currentProduct.deposit} and then {
+              currentProduct.daily
+            } daily until you complete the {currentProduct.totalPrice} total price.
+            No hidden fees!
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Is the {currentProduct.name} brand new?</h3>
+          <p class="faq-answer">
+            Yes, this {currentProduct.name} comes {currentProduct.condition} with
+            full manufacturer warranty and all original accessories.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What's included in the box?</h3>
+          <p class="faq-answer">
+            Your {currentProduct.name} includes the phone, charger, USB cable, user
+            manual, and warranty card from {currentProduct.brand}.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Do you deliver in Nairobi?</h3>
+          <p class="faq-answer">
+            Yes! We offer fast delivery across Nairobi and surrounding areas
+            through {currentProduct.seller}. Delivery typically takes 1-2
+            business days.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What colors are available?</h3>
+          <p class="faq-answer">
+            The {currentProduct.name} is available in: {currentProduct.color}.
+            Choose your favorite color when placing your order.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What about warranty and support?</h3>
+          <p class="faq-answer">
+            All phones come with manufacturer warranty. You'll get full support
+            from both
+            {currentProduct.brand} and {currentProduct.seller} for any issues.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
