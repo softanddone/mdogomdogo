@@ -1,0 +1,401 @@
+<style>
+  .seo-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .hero-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .hero-header h1 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .hero-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .content-wrapper {
+    display: grid;
+    gap: 40px;
+  }
+
+  /* Phone Categories Grid */
+  .phone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .phone-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 30px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .phone-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .phone-card h3 {
+    font-size: 1.4rem;
+    color: #2563eb;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  .phone-list {
+    list-style: none;
+  }
+
+  .phone-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  .phone-list li:last-child {
+    border-bottom: none;
+  }
+
+  .phone-list strong {
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  /* Credit Partners Section */
+  .partners-section {
+    background: linear-gradient(135deg, #f59e0b 0%, #f59e0b 100%);
+    border-radius: 16px;
+    padding: 40px;
+    color: #fff;
+    margin: 40px 0;
+  }
+
+  .partners-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .partners-section p {
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .partner-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .partner-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .partner-card p {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  /* Features Section */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  .feature-card {
+    background: #f8fafc;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    padding: 25px;
+  }
+
+  .feature-card:nth-child(2) {
+    border-left-color: #f59e0b;
+  }
+
+  .feature-card h3 {
+    font-size: 1.3rem;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+  }
+
+  .feature-card p {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+
+  .feature-card .note {
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+  }
+
+  /* SEO Content Block */
+  .seo-content {
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 35px;
+    margin-top: 40px;
+  }
+
+  .seo-content h2 {
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+  }
+
+  .seo-content p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+
+  .keyword-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .keyword-tag {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .hero-header p {
+      font-size: 1rem;
+    }
+
+    .phone-grid,
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .partners-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .seo-section {
+      padding: 40px 15px;
+    }
+
+    .partners-section,
+    .seo-content {
+      padding: 25px;
+    }
+  }
+</style>
+
+<section class="seo-section">
+  <!-- Hero Header -->
+  <div class="hero-header">
+    <h1>Buy Phones on Credit in Nairobi - Lipa Mdogo Mdogo</h1>
+    <p>
+      Own your dream smartphone today with flexible payment plans through
+      trusted partners. Free delivery across Nairobi & Kiambu County.
+    </p>
+  </div>
+
+  <!-- Phone Categories Grid -->
+  <div class="phone-grid">
+    <!-- Samsung Phones -->
+    <div class="phone-card">
+      <h3>
+        <svg class="icon" viewBox="0 0 20 20">
+          <path
+            d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
+          ></path>
+        </svg>
+        Samsung Phones
+      </h3>
+      <ul class="phone-list">
+        <li><strong>Samsung A05</strong> lipa mdogo mdogo</li>
+        <li><strong>Samsung A06</strong> lipa pole pole</li>
+        <li><strong>Samsung A16</strong> on credit</li>
+        <li><strong>Samsung S20</strong> flexible payments</li>
+        <li><strong>Samsung Note 20</strong> available on loan</li>
+      </ul>
+    </div>
+
+    <!-- iPhone Section -->
+    <div class="phone-card">
+      <h3>
+        <svg class="icon" viewBox="0 0 20 20">
+          <path
+            d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+          ></path>
+        </svg>
+        iPhone on Credit
+      </h3>
+      <ul class="phone-list">
+        <li><strong>iPhone 13 Pro Max</strong> lipa mdogo mdogo</li>
+        <li><strong>iPhone 12</strong> available on loan</li>
+        <li>Flexible payment terms available</li>
+        <li>100% genuine Apple products</li>
+        <li>Free delivery in Nairobi</li>
+      </ul>
+    </div>
+
+    <!-- Tecno & Infinix -->
+    <div class="phone-card">
+      <h3>
+        <svg class="icon" viewBox="0 0 20 20">
+          <path
+            fill-rule="evenodd"
+            d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"></path>
+        </svg>
+        Tecno & Infinix
+      </h3>
+      <ul class="phone-list">
+        <li><strong>Tecno Camon 40</strong> lipa pole pole</li>
+        <li><strong>Tecno Spark 40</strong> lipa mdogo mdogo</li>
+        <li><strong>Infinix Hot 60i</strong> on credit</li>
+        <li><strong>Tecno Pop 10</strong> - most affordable</li>
+        <li><strong>Infinix Note 10</strong> in stock</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Credit Partners Section -->
+  <div class="partners-section">
+    <h2>Trusted Credit Partners</h2>
+    <p>
+      We partner with Kenya's leading credit providers: <strong>Mogo</strong>, <strong
+        >Watu Simu</strong
+      >, <strong>M-Kopa</strong>, and <strong>Watu</strong> for fast approval and
+      flexible payment terms.
+    </p>
+
+    <div class="partners-grid">
+      <div class="partner-card">
+        <h4>Mogo</h4>
+        <p>Quick loan approval</p>
+      </div>
+      <div class="partner-card">
+        <h4>Watu Simu</h4>
+        <p>Easy payment terms</p>
+      </div>
+      <div class="partner-card">
+        <h4>M-Kopa</h4>
+        <p>Trusted nationwide</p>
+      </div>
+      <div class="partner-card">
+        <h4>Watu</h4>
+        <p>Fast approval</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Special Features -->
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>Cheapest Phone on Lipa Mdogo Mdogo</h3>
+      <p>
+        Looking for affordable options? We stock <strong>Tecno Pop 10</strong>, <strong
+          >Itel smartphones</strong
+        >, and <strong>Infinix Note 10</strong> starting from just KES 2,500 deposit
+        with flexible monthly installments.
+      </p>
+      <p class="note">Perfect for first-time smartphone buyers in Nairobi!</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Cheapest Curved Screen on Credit</h3>
+      <p>
+        Get premium curved screen phones from Samsung and Infinix on lipa pole
+        pole. Starting from KES 8,000 deposit with convenient monthly payments
+        that fit your budget.
+      </p>
+      <p class="note">Premium design at an affordable price!</p>
+    </div>
+  </div>
+
+  <!-- SEO Content Block -->
+  <div class="seo-content">
+    <h2>Why Choose Lipa Mdogo Mdogo for Phones in Nairobi?</h2>
+    <p>
+      Looking to buy a phone on credit in Nairobi? Our lipa mdogo mdogo service
+      makes it easy to own the latest smartphones from Samsung, iPhone, Tecno,
+      and Infinix without paying the full amount upfront. We partner with
+      trusted credit providers including Mogo, Watu Simu, M-Kopa, and Watu to
+      offer flexible payment plans that fit your budget.
+    </p>
+
+    <p>
+      Whether you're looking for the cheapest phone on lipa pole pole like the
+      Tecno Pop 10, or premium devices like the iPhone 13 Pro Max or Samsung
+      S20, we have options for everyone. All phones come with free delivery
+      across Nairobi and Kiambu County, and our approval process is fast and
+      hassle-free.
+    </p>
+
+    <div class="keyword-tags">
+      <span class="keyword-tag">Lipa Mdogo Mdogo</span>
+      <span class="keyword-tag">Phones on Credit</span>
+      <span class="keyword-tag">Lipa Pole Pole</span>
+      <span class="keyword-tag">Nairobi</span>
+      <span class="keyword-tag">Free Delivery</span>
+      <span class="keyword-tag">Samsung</span>
+      <span class="keyword-tag">iPhone</span>
+      <span class="keyword-tag">Tecno</span>
+      <span class="keyword-tag">Infinix</span>
+    </div>
+  </div>
+</section>
