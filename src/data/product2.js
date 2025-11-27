@@ -8342,6 +8342,130 @@ export const products = [
         }
       ]
     }
+  },
+
+
+  {
+    id: 1,
+    name: "Samsung Galaxy S20+",
+    fullname:"Samsung Galaxy S20+ 6.7 Inches, 128GB ROM + 8GB RAM, Battery: 4500mAh (Dual SIM) 64MP",
+    status: "New",
+    image: "/product/phones/samsung_galaxy_s20_plus.webp",
+    from: "KSh 6,000",
+    deposit: "KSh 6,000",
+    daily: "Ksh 145",
+    totalPrice: "KSh 28,500",
+    source: "/phones/samsung_galaxy_s20_plus.webp",
+    discount: "-15%",
+    display: "block",
+    phonedisplay: "6.7\" QHD+ (3200 × 1440)",
+    processor: "Exynos 990 / Snapdragon 865",
+    camera: "64MP + 12MP Ultra-wide + 12MP Telephoto + DepthVision (rear), 10MP (front)",
+    memory: "128GB / 8GB RAM, MicroSD up to 1TB",
+    battery: "4500mAh, 25W Fast Charging",
+    version: "Android 10, upgradable to Android 13, One UI 5",
+    depositanddaily: "KSh 6,000 Daily KSh 145",
+    slug: "samsung-galaxy-s20-plus",
+    slugs: "samsung-galaxy-s20-plus",
+    description: "Buy Samsung Galaxy S20+ on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
+    brand: "Samsung",
+    seller: "Mkopa",
+    model: "SM-G985F",
+    storage: "128GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The Samsung Galaxy S20+ embodies premium flagship design with a sleek glass and metal construction that exudes sophistication. Measuring 161.9 × 73.7 × 7.8mm and weighing just 186g, it offers a refined, lightweight feel. Available in Cosmic Grey, Cloud Blue, and Cosmic Black, the device features a minimalist punch-hole camera design and nearly bezel-less display that maximizes screen real estate while maintaining an elegant profile.`,
+      },
+      {
+        title: "Display",
+        content: `Immerse yourself in the stunning 6.7-inch Dynamic AMOLED 2X display with QHD+ resolution (3200 × 1440) and buttery-smooth 120Hz refresh rate. Samsung's renowned display technology delivers vibrant colors, infinite contrast, and HDR10+ support for exceptional visual quality. With adaptive refresh rate and Eye Comfort Shield, the screen intelligently adjusts for optimal viewing comfort and battery efficiency throughout the day.`,
+      },
+      {
+        title: "Camera System",
+        content: `The Galaxy S20+ boasts a versatile quad-camera system led by a 64MP telephoto lens with 3x Hybrid Optic Zoom and up to 30x Super Resolution Zoom. The 12MP ultra-wide camera captures expansive landscapes, while the 12MP wide-angle main sensor excels in all lighting conditions with Dual Pixel AF. Enhanced by DepthVision technology and 8K video recording, it's a professional-grade camera system. The 10MP front camera features Dual Pixel AF for razor-sharp selfies and supports 4K video recording.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by the flagship Exynos 990 (or Snapdragon 865 in select markets) processor built on a 7nm process, the Galaxy S20+ delivers exceptional performance for the most demanding applications. Paired with 8GB RAM and 128GB storage, it handles intensive gaming, 8K video editing, and heavy multitasking effortlessly. Advanced vapor chamber cooling ensures sustained peak performance during extended gaming sessions.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running Android 10 (upgradable to Android 13) with Samsung's refined One UI 5, the Galaxy S20+ offers an intuitive, feature-rich experience with extensive customization options. Users benefit from Samsung Knox security, Samsung Pay, Edge Panels for quick access, Bixby routines for automation, and seamless integration with the Samsung ecosystem including Galaxy Buds and Galaxy Watch.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `The Samsung Galaxy S20+ comes equipped with 128GB internal storage and 8GB RAM, providing ample space for apps, photos, and videos. MicroSD expansion support up to 1TB allows users to store extensive 8K video libraries, high-resolution RAW photos, and large game files. Samsung's intelligent storage management keeps the system running smoothly even when nearly full.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `Fueled by a reliable 4500mAh battery with 25W Super Fast Charging, the Galaxy S20+ charges quickly to get you through demanding days. Wireless PowerShare technology allows you to charge other devices on the go, while Fast Wireless Charging 2.0 offers convenient cable-free power. Intelligent battery management with Adaptive Power Saving learns your usage patterns to maximize battery life.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Experience cutting-edge connectivity with 5G support (select models), Wi-Fi 6, Bluetooth 5.0, NFC for Samsung Pay, and USB Type-C 3.2. The comprehensive sensor suite includes ultrasonic in-display fingerprint scanner, facial recognition, accelerometer, gyroscope, proximity sensor, compass, and barometer. IP68 water and dust resistance provides peace of mind in challenging environments.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Stunning 6.7″ QHD+ Dynamic AMOLED display with 120Hz",
+          "Versatile quad-camera system with 8K video recording",
+          "Flagship Exynos 990/Snapdragon 865 performance",
+          "5G connectivity for future-proof speeds",
+          "Premium design with IP68 water resistance",
+          "Wireless PowerShare and Fast Wireless Charging",
+        ],
+        cons: [
+          "Battery life moderate with QHD+ and 120Hz enabled simultaneously",
+          "No headphone jack",
+          "25W charging slower than some competitors",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Samsung Galaxy S20+ stands as a premium flagship smartphone that delivers exceptional value with its combination of stunning display, versatile camera system, and powerful performance. Perfect for photography enthusiasts, content creators, and professionals who demand the best Samsung has to offer. With 5G connectivity, premium build quality, and comprehensive features, it's an excellent choice for those seeking a high-end Android experience with Samsung's renowned reliability and ecosystem integration.`,
+      },
+    ],
+
+    color: "Cosmic Grey, Cloud Blue, Cosmic Black",
+    weight: "186g",
+    dimensions: {
+      length: "161.9mm",
+      width: "73.7mm",
+      height: "7.8mm"
+    },
+    material: "Glass front (Gorilla Glass 6), Glass back (Gorilla Glass 6), Aluminum frame",
+    pattern: "Glossy Premium Finish",
+    productLine: "Samsung Galaxy S",
+    reviews: {
+      averageRating: 4.6,
+      reviewCount: 87,
+      reviews: [
+        {
+          author: "James K.",
+          rating: 5,
+          reviewBody: "Best Samsung phone I've used. The display is absolutely gorgeous!",
+          datePublished: "2025-01-15"
+        },
+        {
+          author: "Sarah M.",
+          rating: 5,
+          reviewBody: "Camera quality is outstanding. 8K video is mind-blowing.",
+          datePublished: "2025-02-05"
+        },
+        {
+          author: "Peter L.",
+          rating: 4,
+          reviewBody: "Great phone overall. 5G speeds are incredibly fast. Battery could be better.",
+          datePublished: "2025-02-22"
+        }
+      ]
+    }
   }
 
 
