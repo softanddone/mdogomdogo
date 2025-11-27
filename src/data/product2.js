@@ -8354,7 +8354,7 @@ export const products = [
     from: "KSh 6,000",
     deposit: "KSh 6,000",
     daily: "Ksh 145",
-    totalPrice: "KSh 28,500",
+    totalPrice: "KSh 32,500",
     source: "/phones/samsung_galaxy_s20_plus.webp",
     discount: "-15%",
     display: "block",
