@@ -8220,6 +8220,131 @@ export const products = [
 },
 
 
+{
+    id: 1,
+    name: "Tecno Spark 40 Pro Plus",
+    fullname:"Tecno Spark 40 Pro Plus 6.78 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 108MP",
+    status: "New",
+    image: "/product/phones/tecno_spark_40_pro_plus.webp",
+    from: "KSh 6,000",
+    deposit: "KSh 6,000",
+    daily: "Ksh 145",
+    totalPrice: "KSh 28,500",
+    source: "/phones/tecno_spark_40_pro_plus.webp",
+    discount: "-12%",
+    display: "block",
+    phonedisplay: "6.78\" FHD+ (2436 × 1080)",
+    processor: "MediaTek Helio G100",
+    camera: "108MP + 2MP Depth + AI Lens (rear), 32MP (front)",
+    memory: "256GB / 8GB RAM, MicroSD up to 1TB",
+    battery: "5000mAh, 33W Fast Charging",
+    version: "Android 14, HiOS 14",
+    depositanddaily: "KSh 6,000 Daily KSh 145",
+    slug: "tecno-spark-40-pro-plus",
+    slugs: "tecno-spark-40-pro-plus",
+    description: "Buy Tecno Spark 40 Pro Plus on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
+    brand: "Tecno",
+    seller: "Mkopa",
+    model: "KL8",
+    storage: "256GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The Tecno Spark 40 Pro Plus showcases a premium design with a matte textured finish and metallic frame that resists fingerprints. Measuring 168.5 × 76.9 × 8.2mm and weighing 195g, it offers a balanced feel in hand. Available in Starfall Grey and Aurora Cloud, the device features a distinctive camera module with LED ring flash that adds a modern, eye-catching aesthetic.`,
+      },
+      {
+        title: "Display",
+        content: `Experience stunning clarity on the 6.78-inch FHD+ AMOLED display with 2436 × 1080 resolution and 120Hz refresh rate. The screen delivers brilliant colors, deep blacks, and exceptional contrast for an immersive viewing experience. With adaptive brightness and DC Dimming technology, it provides comfortable viewing in any lighting condition while protecting your eyes during extended use.`,
+      },
+      {
+        title: "Camera System",
+        content: `The Tecno Spark 40 Pro Plus features a powerful triple rear camera array led by a 108MP primary sensor with PDAF for incredibly detailed photos. Accompanied by a 2MP depth sensor and AI lens, it excels at portrait photography with natural bokeh effects. The 32MP front camera captures stunning selfies with advanced HDR and AI beautification. Enhanced Night Mode with multi-frame processing ensures exceptional low-light photography with minimal noise.`,
+      },
+      {
+        title: "Performance",
+        content: `Driven by the MediaTek Helio G100 processor built on a 6nm process, the Spark 40 Pro Plus delivers flagship-level performance for demanding tasks. Combined with 8GB RAM (expandable to 16GB with Virtual RAM) and 256GB storage, it handles intensive gaming, heavy multitasking, and content creation with ease. The advanced cooling system maintains optimal temperatures during prolonged usage.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running on Android 14 with HiOS 14, the Tecno Spark 40 Pro Plus offers a feature-rich, intuitive interface with extensive customization options. Users benefit from enhanced security features including App Twin, Smart Panel for quick access, and intelligent power management that learns usage patterns for extended battery efficiency.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `The Tecno Spark 40 Pro Plus comes generously equipped with 256GB internal storage and 8GB RAM, with support for MicroSD expansion up to 1TB. Virtual RAM technology can extend memory to 16GB, ensuring seamless multitasking and allowing users to store extensive media libraries, large apps, and high-resolution content without compromise.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `Powered by a robust 5000mAh battery with 33W SuperCharge technology, the Spark 40 Pro Plus reaches 60% charge in just 35 minutes. The intelligent battery management system optimizes power consumption based on usage patterns, easily providing full-day battery life even with heavy use. Ultra Power Saving Mode extends runtime when needed most.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Comprehensive connectivity includes 4G LTE with dual SIM support, Wi-Fi 6, Bluetooth 5.3, NFC for contactless payments, and USB Type-C with OTG support. The device features a full sensor suite including in-display fingerprint scanner, face unlock, gyroscope, ambient light sensor, and e-compass for enhanced functionality and security.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Brilliant 6.78″ FHD+ AMOLED display with 120Hz refresh rate",
+          "Powerful 108MP camera system with excellent detail",
+          "High-performance MediaTek Helio G100 processor",
+          "Generous 256GB storage with 8GB RAM",
+          "Fast 33W charging with long-lasting 5000mAh battery",
+          "Premium design with fingerprint-resistant finish",
+        ],
+        cons: [
+          "No 5G connectivity",
+          "Slightly heavier at 195g",
+          "Video recording limited to 1080p at 30fps",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Tecno Spark 40 Pro Plus represents exceptional value for users seeking premium features at a mid-range price point. With its high-resolution camera, smooth AMOLED display, powerful processor, and ample storage, it's perfect for content creators, mobile gamers, and tech enthusiasts who demand performance and style. An outstanding choice for anyone upgrading from an entry-level device or seeking flagship features without the premium price tag.`,
+      },
+    ],
+
+    color: "Starfall Grey, Aurora Cloud",
+    weight: "195g",
+    dimensions: {
+      length: "168.5mm",
+      width: "76.9mm",
+      height: "8.2mm"
+    },
+    material: "Glass front, Plastic frame and back",
+    pattern: "Matte Textured",
+    productLine: "Tecno Spark",
+    reviews: {
+      averageRating: 4.7,
+      reviewCount: 43,
+      reviews: [
+        {
+          author: "David N.",
+          rating: 5,
+          reviewBody: "The 108MP camera is incredible! Best phone I've owned.",
+          datePublished: "2025-01-20"
+        },
+        {
+          author: "Grace W.",
+          rating: 5,
+          reviewBody: "Display quality is amazing and battery lasts forever.",
+          datePublished: "2025-02-10"
+        },
+        {
+          author: "Mike O.",
+          rating: 4,
+          reviewBody: "Great performance for the price. Fast charging is a plus.",
+          datePublished: "2025-02-18"
+        }
+      ]
+    }
+  }
+
+
 
   
 ];
