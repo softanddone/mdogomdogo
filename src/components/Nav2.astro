@@ -1109,6 +1109,7 @@ import PopularBrands from "./PopularBrands.astro";
     totalPrice: string;
     slug: string;
     source: string;
+    deposit: string;
   }
 
   // Add this script to your Nav.astro component or in a <script> tag
@@ -1327,7 +1328,7 @@ import PopularBrands from "./PopularBrands.astro";
                 ${product.name}
                 <span class="search-result-status">${product.status}</span>
               </div>
-              <div class="search-result-price">${product.totalPrice}</div>
+              <div class="search-result-price">${product.deposit}</div>
             </div>
           </a>
         `
