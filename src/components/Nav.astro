@@ -1,48 +1,18 @@
-<!-- Nav.astro - Example Structure -->
-<nav>
-  <div class="nav-container">
-    <a href="/" class="logo">Store</a>
-    <a href="/cart" class="cart-link">
-      <svg><!-- Cart Icon SVG --></svg>
-      <span class="cart-count">0</span>
-    </a>
-  </div>
+---
+import NavTop from "./nav/NavTop.astro";
+import NavBottom from "./nav/NavBottom.astro";
+import MobileMenu from "./nav/MobileMenu.astro";
+import NavStyles from "./nav/NavStyles.astro";
+import NavScript from "./nav/NavScript.astro";
+---
+
+<style></style>
+
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <NavTop />
+  <NavBottom />
+  <MobileMenu />
 </nav>
 
-<style>
-  .cart-count {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #ef4444;
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: bold;
-  }
-</style>
-
-<script>
-  // Import cart manager at the top of your script
-  import cartManager from "../utils/cart.js";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    window.cartManager.updateCartUI();
-  });
-
-  window.addEventListener("cartUpdated", (e) => {
-    const count = e.detail.count;
-    document.querySelectorAll(".cart-count").forEach((el) => {
-      el.textContent = count;
-      el.style.display = count > 0 ? "flex" : "none";
-    });
-  });
-</script>
-
-
-
+<NavStyles />
+<NavScript />

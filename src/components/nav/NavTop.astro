@@ -1,0 +1,39 @@
+---
+import SearchBar from "./SearchBar.astro";
+import TopActions from "./TopActions.astro";
+---
+
+<div class="navbar-top">
+  <div class="container">
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <span class="hamburger" aria-hidden="true"></span>
+      <span class="hamburger" aria-hidden="true"></span>
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
+
+    <div class="logo">
+      <a
+        href="/"
+        aria-label="Mdogo Mdogo Deals - Lipa Mdogo Mdogo Phones in Nairobi"
+      >
+        <div class="logo-img">
+          <img src="/phones/y2.png" alt="Mdogo Mdogo Deals Logo" />
+        </div>
+      </a>
+    </div>
+
+    <SearchBar
+      id="searchInput"
+      placeholderId="fakePlaceholder"
+      resultsId="searchResults"
+    />
+
+    <TopActions />
+  </div>
+</div>
