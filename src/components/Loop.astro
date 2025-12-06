@@ -5,6 +5,14 @@
     box-sizing: border-box;
   }
 
+  .carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: -100px !important;
+    z-index: -0.9 !important;
+  }
+
   .gradient-orb-1 {
     position: absolute;
     top: 25%;
@@ -17,6 +25,7 @@
     filter: blur(64px);
     opacity: 0.3;
     animation: pulse 4s ease-in-out infinite;
+    pointer-events: none;
   }
 
   .gradient-orb-2 {
@@ -32,6 +41,7 @@
     opacity: 0.3;
     animation: pulse 4s ease-in-out infinite;
     animation-delay: 2s;
+    pointer-events: none;
   }
 
   @keyframes pulse {
@@ -47,14 +57,13 @@
   .hero-section {
     position: relative;
     width: 100%;
-    /* min-height: 50vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 80px;
+    padding-bottom: 80px;
     z-index: 1;
-    /* background: red; */
-    max-height: 80vh;
+    overflow: visible;
   }
 
   .hero-header {
@@ -107,27 +116,26 @@
   .carousel-container {
     position: relative;
     width: 100%;
-    height: 600px;
+    max-width: 100vw;
+    min-height: 650px;
     perspective: 2000px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 80px;
+    overflow: visible;
   }
 
   .carousel {
     position: relative;
     width: 350px;
-    height: 500px;
+    height: 550px;
     transform-style: preserve-3d;
   }
 
   .phone-card {
     position: absolute;
     width: 320px;
-    /* height: 500px; */
-    height: 400px;
-    /* background: rgba(255, 255, 255, 0.8); */
+    height: 480px;
     backdrop-filter: blur(10px);
     border-radius: 24px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
@@ -140,7 +148,8 @@
     backface-visibility: hidden;
     cursor: pointer;
     border: 1px solid rgba(219, 234, 254, 0.6);
-    /* background: red; */
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
   }
 
   .phone-image-container {
@@ -149,15 +158,11 @@
     align-items: center;
     justify-content: center;
     margin: 20px 0;
-    /* background: yellow; */
   }
 
   .phone-mockup {
-    /* width: 180px;
-        height: 360px; */
     width: 200px;
     height: 200px;
-    /* height: 140px; */
     background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
     border-radius: 30px;
     position: relative;
@@ -238,7 +243,7 @@
   }
 
   .phone-card.pos-2 {
-    transform: translateX(0) translateZ(150px) rotateY(0deg) scale(1);
+    transform: translateX(0) translateZ(200px) rotateY(0deg) scale(1);
     opacity: 1;
     z-index: 3;
     box-shadow: 0 30px 80px rgba(37, 99, 235, 0.15);
@@ -258,7 +263,7 @@
 
   .navigation {
     position: absolute;
-    bottom: 40px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -305,24 +310,24 @@
       font-size: 16px;
     }
 
+    .carousel-container {
+      min-height: 550px;
+    }
+
     .carousel {
       width: 250px;
-      height: 400px;
+      height: 450px;
     }
 
     .phone-card {
       width: 240px;
-      height: 400px;
+      height: 420px;
       padding: 30px 20px;
     }
 
     .phone-mockup {
-      /* width: 140px;
-          height: 280px; */
-      /* height: 140px; */
-      /* background: red; */
-      width: 200px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
     }
 
     .phone-card.pos-0 {
@@ -333,6 +338,10 @@
     .phone-card.pos-1 {
       transform: translateX(-140px) translateZ(-100px) rotateY(18deg)
         scale(0.78);
+    }
+
+    .phone-card.pos-2 {
+      transform: translateX(0) translateZ(150px) rotateY(0deg) scale(1);
     }
 
     .phone-card.pos-3 {
@@ -351,199 +360,278 @@
   }
 </style>
 
-<div class="gradient-orb-1"></div>
-<div class="gradient-orb-2"></div>
+<div class="carousel-wrapper">
+  <div class="gradient-orb-1"></div>
+  <div class="gradient-orb-2"></div>
 
-<main class="hero-section">
-  <div class="carousel-container">
-    <section
-      class="carousel"
-      id="carousel"
-      aria-label="Simu za Lipa Mdogo Mdogo Collection"
-    >
-      <article class="phone-card pos-0" data-position="0">
-        <div class="phone-image-container">
-          <div class="phone-mockup">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <img
-                src="/phones/2.jpeg"
-                alt="Samsung A07 - Lipa Mdogo Mdogo Phone"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="phone-info">
-          <h2 class="phone-name">Samsung A07</h2>
-          <p class="phone-tagline">Lipa Pole Pole</p>
-          <p class="phone-price">Deposit Ksh 4200</p>
-        </div>
-      </article>
-
-      <article class="phone-card pos-1" data-position="1">
-        <div class="phone-image-container">
-          <div
-            class="phone-mockup"
-            style="background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%); box-shadow: 0 20px 60px rgba(236, 72, 153, 0.3);"
-          >
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <img src="/phones/3.jpeg" alt="Infinix Hot60i - Lipa Mos Mos" />
-            </div>
-          </div>
-        </div>
-        <div class="phone-info">
-          <h2 class="phone-name">Infinix Hot60i</h2>
-          <p class="phone-tagline">Lipa Pole</p>
-          <p class="phone-price">Deposit Ksh 4500</p>
-        </div>
-      </article>
-
-      <article class="phone-card pos-2" data-position="2">
-        <div class="phone-image-container">
-          <div
-            class="phone-mockup"
-            style="background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); box-shadow: 0 20px 60px rgba(6, 182, 212, 0.3);"
-          >
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <img
-                src="/phones/4.jpeg"
-                alt="Infinix Hot60i Pro - Simu za Lipa Mdogo Mdogo"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="phone-info">
-          <h2 class="phone-name">Infinix Hot60i Pro</h2>
-          <p class="phone-tagline">Lipa Mos Mos</p>
-          <p class="phone-price">Deposit Ksh 6800</p>
-        </div>
-      </article>
-
-      <article class="phone-card pos-3" data-position="3">
-        <div class="phone-image-container">
-          <div
-            class="phone-mockup"
-            style="background: linear-gradient(135deg, #f59e0b 0%, #eab308 100%); box-shadow: 0 20px 60px rgba(245, 158, 11, 0.3);"
-          >
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <img
-                src="/phones/1.jpeg"
-                alt="Tecno Spark 40 Pro - Lipa Mdogo Mdogo Phones"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="phone-info">
-          <h2 class="phone-name">Tecno Spark 40 Pro</h2>
-          <p class="phone-tagline">Lipa Mdogo Mdogo</p>
-          <p class="phone-price">Deposit Ksh 6000</p>
-        </div>
-      </article>
-
-      <article class="phone-card pos-4" data-position="4">
-        <div class="phone-image-container">
-          <div
-            class="phone-mockup"
-            style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3);"
-          >
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <img
-                src="/phones/5.jpeg"
-                alt="Tecno Spark 40 - Samsung A05 Alternative"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="phone-info">
-          <h2 class="phone-name">Tecno Spark 40</h2>
-          <p class="phone-tagline">Lipa Mdogo Mdogo</p>
-          <p class="phone-price">Deposit Ksh 3900</p>
-        </div>
-      </article>
-    </section>
-
-    <nav class="navigation" aria-label="Carousel navigation">
-      <button class="nav-btn" id="prevBtn" aria-label="Previous phone"
-        >&lsaquo;</button
+  <main class="hero-section">
+    <div class="carousel-container">
+      <section
+        class="carousel"
+        id="carousel"
+        role="region"
+        aria-label="Simu za Lipa Mdogo Mdogo Collection"
       >
+        <article class="phone-card pos-0" data-position="0">
+          <div class="phone-image-container">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img
+                  src="/phones/2.jpeg"
+                  alt="Samsung A07 - Lipa Mdogo Mdogo Phone"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="phone-info">
+            <h2 class="phone-name">Samsung A07</h2>
+            <p class="phone-tagline">Lipa Pole Pole</p>
+            <p class="phone-price">Deposit Ksh 4200</p>
+          </div>
+        </article>
 
-      <button class="nav-btn" id="nextBtn" aria-label="Next phone"
-        >&rsaquo;</button
-      >
-    </nav>
-  </div>
-</main>
+        <article class="phone-card pos-1" data-position="1">
+          <div class="phone-image-container">
+            <div
+              class="phone-mockup"
+              style="background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%); box-shadow: 0 20px 60px rgba(236, 72, 153, 0.3);"
+            >
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img
+                  src="/phones/3.jpeg"
+                  alt="Infinix Hot60i - Lipa Mos Mos"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="phone-info">
+            <h2 class="phone-name">Infinix Hot60i</h2>
+            <p class="phone-tagline">Lipa Pole</p>
+            <p class="phone-price">Deposit Ksh 4500</p>
+          </div>
+        </article>
+
+        <article class="phone-card pos-2" data-position="2">
+          <div class="phone-image-container">
+            <div
+              class="phone-mockup"
+              style="background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); box-shadow: 0 20px 60px rgba(6, 182, 212, 0.3);"
+            >
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img
+                  src="/phones/4.jpeg"
+                  alt="Infinix Hot60i Pro - Simu za Lipa Mdogo Mdogo"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="phone-info">
+            <h2 class="phone-name">Infinix Hot60i Pro</h2>
+            <p class="phone-tagline">Lipa Mos Mos</p>
+            <p class="phone-price">Deposit Ksh 6800</p>
+          </div>
+        </article>
+
+        <article class="phone-card pos-3" data-position="3">
+          <div class="phone-image-container">
+            <div
+              class="phone-mockup"
+              style="background: linear-gradient(135deg, #f59e0b 0%, #eab308 100%); box-shadow: 0 20px 60px rgba(245, 158, 11, 0.3);"
+            >
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img
+                  src="/phones/1.jpeg"
+                  alt="Tecno Spark 40 Pro - Lipa Mdogo Mdogo Phones"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="phone-info">
+            <h2 class="phone-name">Tecno Spark 40 Pro</h2>
+            <p class="phone-tagline">Lipa Mdogo Mdogo</p>
+            <p class="phone-price">Deposit Ksh 6000</p>
+          </div>
+        </article>
+
+        <article class="phone-card pos-4" data-position="4">
+          <div class="phone-image-container">
+            <div
+              class="phone-mockup"
+              style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3);"
+            >
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img
+                  src="/phones/5.jpeg"
+                  alt="Tecno Spark 40 - Samsung A05 Alternative"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="phone-info">
+            <h2 class="phone-name">Tecno Spark 40</h2>
+            <p class="phone-tagline">Lipa Mdogo Mdogo</p>
+            <p class="phone-price">Deposit Ksh 3900</p>
+          </div>
+        </article>
+      </section>
+
+      <nav class="navigation" aria-label="Carousel navigation">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous phone"
+          >&lsaquo;</button
+        >
+
+        <button class="nav-btn" id="nextBtn" aria-label="Next phone"
+          >&rsaquo;</button
+        >
+      </nav>
+    </div>
+  </main>
+</div>
 
 <script>
-  const cards = document.querySelectorAll(".phone-card");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
-  let currentPositions = [0, 1, 2, 3, 4];
-  let autoRotateInterval;
+  // Wrap in IIFE to avoid polluting global scope
+  (function () {
+    "use strict";
 
-  function updateCardPositions() {
-    cards.forEach((card, index) => {
-      const pos = currentPositions[index];
-      card.className = `phone-card pos-${pos}`;
-      card.setAttribute("data-position", pos);
-    });
-  }
+    // Single initialization flag
+    if (window.carouselInitialized) return;
+    window.carouselInitialized = true;
 
-  function rotateNext() {
-    currentPositions = currentPositions.map((pos) => (pos + 1) % 5);
-    updateCardPositions();
-  }
+    function initCarousel() {
+      const cards = document.querySelectorAll(".phone-card");
+      const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const carousel = document.getElementById("carousel");
 
-  function rotatePrev() {
-    currentPositions = currentPositions.map((pos) => (pos - 1 + 5) % 5);
-    updateCardPositions();
-  }
-
-  function startAutoRotate() {
-    autoRotateInterval = setInterval(rotateNext, 6000);
-  }
-
-  function stopAutoRotate() {
-    clearInterval(autoRotateInterval);
-  }
-
-  function resetAutoRotate() {
-    stopAutoRotate();
-    startAutoRotate();
-  }
-
-  nextBtn.addEventListener("click", () => {
-    rotateNext();
-    resetAutoRotate();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    rotatePrev();
-    resetAutoRotate();
-  });
-
-  cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const currentPos = parseInt(card.getAttribute("data-position"));
-      if (currentPos === 2) return;
-
-      let steps = 2 - currentPos;
-      if (steps < 0) steps += 5;
-
-      for (let i = 0; i < steps; i++) {
-        setTimeout(() => rotateNext(), i * 200);
+      // Silent fail if elements don't exist
+      if (!cards.length || !nextBtn || !prevBtn || !carousel) {
+        return;
       }
-      resetAutoRotate();
-    });
-  });
 
-  startAutoRotate();
+      let currentPositions = [0, 1, 2, 3, 4];
+      let autoRotateInterval = null;
+      let isAnimating = false;
 
-  const carousel = document.getElementById("carousel");
-  carousel.addEventListener("mouseenter", stopAutoRotate);
-  carousel.addEventListener("mouseleave", startAutoRotate);
+      function updateCardPositions() {
+        // Use requestAnimationFrame for smoother animations
+        requestAnimationFrame(() => {
+          cards.forEach((card, index) => {
+            const pos = currentPositions[index];
+            // Only update if position has changed
+            if (card.getAttribute("data-position") !== String(pos)) {
+              card.className = `phone-card pos-${pos}`;
+              card.setAttribute("data-position", pos);
+            }
+          });
+          isAnimating = false;
+        });
+      }
+
+      function rotateNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        currentPositions = currentPositions.map((pos) => (pos + 1) % 5);
+        updateCardPositions();
+      }
+
+      function rotatePrev() {
+        if (isAnimating) return;
+        isAnimating = true;
+        currentPositions = currentPositions.map((pos) => (pos - 1 + 5) % 5);
+        updateCardPositions();
+      }
+
+      function startAutoRotate() {
+        if (autoRotateInterval) return;
+        autoRotateInterval = setInterval(rotateNext, 6000);
+      }
+
+      function stopAutoRotate() {
+        if (autoRotateInterval) {
+          clearInterval(autoRotateInterval);
+          autoRotateInterval = null;
+        }
+      }
+
+      function resetAutoRotate() {
+        stopAutoRotate();
+        startAutoRotate();
+      }
+
+      // Use passive event listeners for better performance
+      nextBtn.addEventListener(
+        "click",
+        () => {
+          rotateNext();
+          resetAutoRotate();
+        },
+        { passive: true }
+      );
+
+      prevBtn.addEventListener(
+        "click",
+        () => {
+          rotatePrev();
+          resetAutoRotate();
+        },
+        { passive: true }
+      );
+
+      cards.forEach((card) => {
+        card.addEventListener(
+          "click",
+          () => {
+            const currentPos = parseInt(card.getAttribute("data-position"));
+            if (currentPos === 2 || isAnimating) return;
+
+            let steps = 2 - currentPos;
+            if (steps < 0) steps += 5;
+
+            isAnimating = true;
+            for (let i = 0; i < steps; i++) {
+              setTimeout(() => {
+                currentPositions = currentPositions.map((pos) => (pos + 1) % 5);
+                updateCardPositions();
+              }, i * 200);
+            }
+
+            setTimeout(() => {
+              isAnimating = false;
+              resetAutoRotate();
+            }, steps * 200);
+          },
+          { passive: true }
+        );
+      });
+
+      startAutoRotate();
+
+      carousel.addEventListener("mouseenter", stopAutoRotate, {
+        passive: true,
+      });
+      carousel.addEventListener("mouseleave", startAutoRotate, {
+        passive: true,
+      });
+
+      // Cleanup on page unload
+      window.addEventListener("beforeunload", stopAutoRotate);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initCarousel);
+    } else {
+      initCarousel();
+    }
+  })();
 </script>

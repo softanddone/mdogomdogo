@@ -59,11 +59,10 @@ const {
       badgeText: "HOT DEAL",
       slug: "/product/samsung-galaxy-a16",
     },
-  ] as Slide[],
+  ],
 } = Astro.props;
 ---
 
-<!-- Preload critical images for better performance -->
 <link rel="preload" as="image" href={slides[0].image} />
 
 <section
@@ -72,7 +71,6 @@ const {
   itemscope
   itemtype="https://schema.org/ProductCollection"
 >
-  <!-- SEO: Hidden but crawlable heading structure -->
   <div class="visually-hidden">
     <h1 itemprop="name">{heading}</h1>
     <p itemprop="description">{subheading}</p>
@@ -81,18 +79,15 @@ const {
   <div
     class="card-container"
     role="region"
-    aria-roledescription="carousel"
     aria-label="Product carousel with smartphone deals"
   >
     <div class="card-content slide-1">
-      <!-- Floating background elements (decorative, hidden from screen readers) -->
       <div class="floating-elements" aria-hidden="true">
         <div class="floating-circle"></div>
         <div class="floating-circle"></div>
         <div class="floating-circle"></div>
       </div>
 
-      <!-- Progress bar -->
       <div
         class="progress-bar"
         role="progressbar"
@@ -115,7 +110,6 @@ const {
             >
               <div class="big" aria-label={`${slide.badgeText} badge`}>
                 <span
-                  role="text"
                   itemprop="offers"
                   itemscope
                   itemtype="https://schema.org/Offer"
@@ -191,13 +185,11 @@ const {
           }
         </div>
 
-        <!-- Navigation arrows -->
         <button
           class="navigation-arrows prev-arrow"
           id="prevBtn"
           type="button"
           aria-label="View previous phone deal"
-          aria-controls="hero1 hero2 hero3"
         >
           <span aria-hidden="true">‹</span>
         </button>
@@ -206,13 +198,11 @@ const {
           id="nextBtn"
           type="button"
           aria-label="View next phone deal"
-          aria-controls="hero1 hero2 hero3"
         >
           <span aria-hidden="true">›</span>
         </button>
       </aside>
 
-      <!-- State Indicators -->
       <nav class="state-indicators" aria-label="Carousel navigation dots">
         {
           slides.map((slide, index) => (
@@ -231,7 +221,6 @@ const {
 </section>
 
 <style>
-  /* Visually hidden but accessible to screen readers and crawlers */
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -915,10 +904,6 @@ const {
 </style>
 
 <script>
-  interface CustomEvent<T = any> extends Event {
-    detail: T;
-  }
-
   class ShoppingCarousel {
     private currentIndex: number = 0;
     private totalSlides: number = 3;
