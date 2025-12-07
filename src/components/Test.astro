@@ -1,0 +1,241 @@
+---
+// PhoneCarousel.astro
+interface Slide {
+  src: string;
+  alt: string;
+  brand: string;
+}
+
+interface Props {
+  slides?: Slide[];
+}
+
+const { slides = [] } = Astro.props;
+
+// Ensure we have slides to display
+if (slides.length === 0) {
+  console.warn("PhoneCarousel: No slides provided");
+}
+---
+
+{
+  slides.length > 0 && (
+    <div class="carousel-wrapper">
+      <div class="carousel-container" role="region" aria-label="Phone carousel">
+        <div class="carousel-track">
+          {/* Original slides */}
+          {slides.map((slide, index) => (
+            <div class="carousel-slide" tabindex="0" key={`original-${index}`}>
+              <div class="slide-content">
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  loading="lazy"
+                  class="slide-image"
+                />
+                <span class="brand-label">{slide.brand}</span>
+              </div>
+            </div>
+          ))}
+          {/* Duplicate slides for seamless loop */}
+          {slides.map((slide, index) => (
+            <div
+              class="carousel-slide"
+              tabindex="0"
+              aria-hidden="true"
+              key={`duplicate-${index}`}
+            >
+              <div class="slide-content">
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  loading="lazy"
+                  class="slide-image"
+                />
+                <span class="brand-label">{slide.brand}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    will-change: transform;
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .carousel-track:hover,
+  .carousel-track:focus-within {
+    animation-play-state: paused;
+  }
+
+  .carousel-slide {
+    flex-shrink: 0;
+    width: 280px;
+    transition: transform 0.3s ease;
+    outline: none;
+  }
+
+  .carousel-slide:hover,
+  .carousel-slide:focus {
+    transform: scale(1.05);
+  }
+
+  .carousel-slide:focus {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+    border-radius: 1rem;
+  }
+
+  .slide-content {
+    position: relative;
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  .brand-label {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  /* Mobile optimization */
+  @media (max-width: 768px) {
+    .carousel-wrapper {
+      padding: 1rem 0;
+    }
+
+    .carousel-slide {
+      width: 220px;
+    }
+
+    .slide-image {
+      height: 240px;
+    }
+
+    .carousel-track {
+      gap: 1rem;
+    }
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      animation: none;
+    }
+
+    .carousel-slide {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const track = document.querySelector(".carousel-track") as HTMLElement;
+
+  if (track && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let isPaused = false;
+    let startTime: number | null = null;
+    let currentTranslate = 0;
+    const speed = 0.02; // pixels per millisecond
+
+    // Calculate the width of the original content (50% of total)
+    const trackWidth = track.scrollWidth / 2;
+
+    function animate(timestamp: number) {
+      if (!startTime) startTime = timestamp;
+
+      if (!isPaused) {
+        const elapsed = timestamp - startTime;
+        currentTranslate = (elapsed * speed) % trackWidth;
+        track.style.transform = `translateX(-${currentTranslate}px)`;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    // Pause on hover
+    track.addEventListener("mouseenter", () => {
+      isPaused = true;
+    });
+
+    track.addEventListener("mouseleave", () => {
+      isPaused = false;
+    });
+
+    // Pause on focus
+    track.addEventListener("focusin", () => {
+      isPaused = true;
+    });
+
+    track.addEventListener("focusout", () => {
+      isPaused = false;
+    });
+
+    // Start animation
+    requestAnimationFrame(animate);
+  }
+</script>
