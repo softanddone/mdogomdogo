@@ -220,27 +220,27 @@ const {
   </div>
 </section>
 
-<style>
+<style is:inline>
   .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border-width: 0 !important;
   }
 
   .hero-carousel-section {
-    position: relative;
-    width: 100%;
+    position: relative !important;
+    width: 100% !important;
   }
 
   .discount-text,
   .description-text {
-    margin: 0;
+    margin: 0 !important;
   }
 
   :root {
@@ -253,15 +253,15 @@ const {
   }
 
   .card-container {
-    width: 100vw;
-    max-width: 950px;
-    height: 450px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    margin-top: 80px;
+    width: 100vw !important;
+    max-width: 950px !important;
+    height: 450px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2) !important;
+    margin: 0 auto !important;
+    margin-top: 80px !important;
   }
 
   h1,
@@ -269,515 +269,523 @@ const {
   h3,
   p {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    margin: 0;
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+    margin: 0 !important;
   }
 
   .card-content {
-    width: 100%;
-    height: 100%;
-    background: var(--primary-blue);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+    width: 100% !important;
+    height: 100% !important;
+    background: var(--primary-blue) !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   .card-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     background: linear-gradient(
       45deg,
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.05) 100%
-    );
-    pointer-events: none;
+    ) !important;
+    pointer-events: none !important;
   }
 
   .card-content.slide-1,
   .card-content.slide-2,
   .card-content.slide-3 {
-    background: linear-gradient(135deg, var(--primary-red) 0%, #f59e0b 100%);
+    background: linear-gradient(
+      135deg,
+      var(--primary-red) 0%,
+      #f59e0b 100%
+    ) !important;
   }
 
   .floating-elements {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
   }
 
   .floating-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    animation: float 6s ease-in-out infinite;
+    position: absolute !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    animation: float-unique-xyz 6s ease-in-out infinite !important;
   }
 
   .floating-circle:nth-child(1) {
-    width: 80px;
-    height: 80px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
+    width: 80px !important;
+    height: 80px !important;
+    top: 20% !important;
+    left: 10% !important;
+    animation-delay: 0s !important;
   }
 
   .floating-circle:nth-child(2) {
-    width: 60px;
-    height: 60px;
-    top: 60%;
-    left: 5%;
-    animation-delay: 2s;
+    width: 60px !important;
+    height: 60px !important;
+    top: 60% !important;
+    left: 5% !important;
+    animation-delay: 2s !important;
   }
 
   .floating-circle:nth-child(3) {
-    width: 100px;
-    height: 100px;
-    top: 10%;
-    right: 15%;
-    animation-delay: 4s;
+    width: 100px !important;
+    height: 100px !important;
+    top: 10% !important;
+    right: 15% !important;
+    animation-delay: 4s !important;
   }
 
-  @keyframes float {
+  @keyframes float-unique-xyz {
     0%,
     100% {
-      transform: translateY(0px) rotate(0deg);
-      opacity: 0.3;
+      transform: translateY(0px) rotate(0deg) !important;
+      opacity: 0.3 !important;
     }
     50% {
-      transform: translateY(-20px) rotate(180deg);
-      opacity: 0.6;
+      transform: translateY(-20px) rotate(180deg) !important;
+      opacity: 0.6 !important;
     }
   }
 
   .progress-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    z-index: 10;
-    animation: progressBar 10s linear infinite;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: 4px !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    z-index: 10 !important;
+    animation: progressBar-unique-xyz 10s linear infinite !important;
   }
 
-  @keyframes progressBar {
+  @keyframes progressBar-unique-xyz {
     0% {
-      width: 0%;
+      width: 0% !important;
     }
     100% {
-      width: 100%;
+      width: 100% !important;
     }
   }
 
   .state-indicators {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
-    border-radius: 25px;
-    backdrop-filter: blur(10px);
+    position: absolute !important;
+    bottom: 30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 15px !important;
+    z-index: 10 !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    backdrop-filter: blur(10px) !important;
   }
 
   .state-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
-    cursor: pointer;
-    position: relative;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 2px solid transparent !important;
+    cursor: pointer !important;
+    position: relative !important;
   }
 
   .state-dot:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.1) !important;
+    background: rgba(255, 255, 255, 0.7) !important;
   }
 
   .state-dot:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 4px;
+    outline: 2px solid white !important;
+    outline-offset: 4px !important;
   }
 
   .state-dot.active {
-    background: white;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    transform: scale(1.3);
+    background: white !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8) !important;
+    transform: scale(1.3) !important;
   }
 
   .state-dot.active::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    animation: pulse 2s infinite;
+    content: "" !important;
+    position: absolute !important;
+    top: -5px !important;
+    left: -5px !important;
+    right: -5px !important;
+    bottom: -5px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    animation: pulse-unique-xyz 2s infinite !important;
   }
 
-  @keyframes pulse {
+  @keyframes pulse-unique-xyz {
     0% {
-      transform: scale(0.8);
-      opacity: 1;
+      transform: scale(0.8) !important;
+      opacity: 1 !important;
     }
     100% {
-      transform: scale(1.4);
-      opacity: 0;
+      transform: scale(1.4) !important;
+      opacity: 0 !important;
     }
   }
 
   .big {
-    width: 120px;
-    height: 35px;
-    background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    border-radius: 25px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow: hidden;
+    width: 120px !important;
+    height: 35px !important;
+    background: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.5)
+    ) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 40px !important;
+    border-radius: 25px !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   .big::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
     background: linear-gradient(
       90deg,
       transparent,
       rgba(255, 255, 255, 0.3),
       transparent
-    );
-    animation: shimmer 2s infinite;
+    ) !important;
+    animation: shimmer-unique-xyz 2s infinite !important;
   }
 
-  @keyframes shimmer {
+  @keyframes shimmer-unique-xyz {
     0% {
-      left: -100%;
+      left: -100% !important;
     }
     100% {
-      left: 100%;
+      left: 100% !important;
     }
   }
 
   .big span {
-    font-size: 14px;
-    color: white;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-size: 14px !important;
+    color: white !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
   }
 
   .navigation-arrows {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.3);
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    z-index: 15;
-    top: 50%;
-    transform: translateY(-50%);
+    width: 50px !important;
+    height: 50px !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: white !important;
+    font-size: 32px !important;
+    font-weight: bold !important;
+    border: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    z-index: 15 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
   }
 
   .navigation-arrows:hover {
-    background: rgba(0, 0, 0, 0.5);
-    transform: translateY(-50%) scale(1.1);
+    background: rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-50%) scale(1.1) !important;
   }
 
   .navigation-arrows:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 4px;
+    outline: 2px solid white !important;
+    outline-offset: 4px !important;
   }
 
   .prev-arrow {
-    left: 20px;
+    left: 20px !important;
   }
 
   .next-arrow {
-    right: 20px;
+    right: 20px !important;
   }
 
   .ai {
-    color: white;
-    font-size: 32px;
-    font-weight: 900;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 5px 0;
+    color: white !important;
+    font-size: 32px !important;
+    font-weight: 900 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+    margin: 5px 0 !important;
   }
 
   h3,
   p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    margin: 10px 0;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    margin: 10px 0 !important;
   }
 
   .from {
-    display: flex;
-    gap: 15px;
-    height: 60px;
-    align-items: center;
-    margin: 15px 0;
+    display: flex !important;
+    gap: 15px !important;
+    height: 60px !important;
+    align-items: center !important;
+    margin: 15px 0 !important;
   }
 
   .from h3 {
-    margin: 0;
-    font-size: 12px;
-    opacity: 0.8;
+    margin: 0 !important;
+    font-size: 12px !important;
+    opacity: 0.8 !important;
   }
 
   .left {
-    overflow: hidden;
-    position: relative;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    z-index: 5;
+    overflow: hidden !important;
+    position: relative !important;
+    padding: 0 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    z-index: 5 !important;
   }
 
   .hero-content {
-    position: absolute;
-    top: 50%;
-    left: 40px;
-    width: calc(100% - 80px);
-    opacity: 0;
-    transform: translateY(-50%) translateX(-100px) rotateY(-15deg);
-    filter: blur(10px);
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-    pointer-events: none;
+    position: absolute !important;
+    top: 50% !important;
+    left: 40px !important;
+    width: calc(100% - 80px) !important;
+    opacity: 0 !important;
+    transform: translateY(-50%) translateX(-100px) rotateY(-15deg) !important;
+    filter: blur(10px) !important;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
   }
 
   .hero-content.active {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0) rotateY(0deg);
-    filter: blur(0px);
-    z-index: 10;
-    pointer-events: auto;
+    opacity: 1 !important;
+    transform: translateY(-50%) translateX(0) rotateY(0deg) !important;
+    filter: blur(0px) !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
   }
 
   .hero-content.exit {
-    opacity: 0;
-    transform: translateY(-50%) translateX(100px) rotateY(15deg);
-    filter: blur(10px);
-    z-index: 1;
-    pointer-events: none;
+    opacity: 0 !important;
+    transform: translateY(-50%) translateX(100px) rotateY(15deg) !important;
+    filter: blur(10px) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
   }
 
   .hero-content a {
-    display: inline-block;
-    width: 170px;
-    height: 40px;
-    cursor: pointer;
-    border-radius: 15px;
+    display: inline-block !important;
+    width: 170px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+    border-radius: 15px !important;
     background: linear-gradient(
       45deg,
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.7)
-    );
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    text-align: center;
-    line-height: 40px;
-    z-index: 20;
+    ) !important;
+    color: #333 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-top: 20px !important;
+    border: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    line-height: 40px !important;
+    z-index: 20 !important;
   }
 
   .hero-content a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
     background: linear-gradient(
       90deg,
       transparent,
       rgba(255, 255, 255, 0.5),
       transparent
-    );
-    transition: left 0.5s;
+    ) !important;
+    transition: left 0.5s !important;
   }
 
   .hero-content a:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
   }
 
   .hero-content a:hover::before {
-    left: 100%;
+    left: 100% !important;
   }
 
   .hero-content a:active {
-    transform: translateY(-1px) scale(1.02);
+    transform: translateY(-1px) scale(1.02) !important;
   }
 
   .hero-content a:focus-visible {
-    outline: 3px solid white;
-    outline-offset: 4px;
+    outline: 3px solid white !important;
+    outline-offset: 4px !important;
   }
 
   .img-container {
-    width: 350px;
-    height: 320px;
-    margin: auto;
-    margin-top: 100px;
-    overflow: visible;
-    perspective: 1000px;
-    position: relative;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 350px !important;
+    height: 320px !important;
+    margin: auto !important;
+    margin-top: 100px !important;
+    overflow: visible !important;
+    perspective: 1000px !important;
+    position: relative !important;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   .card-content.slide-1 .img-container {
-    width: 320px;
-    height: 280px;
+    width: 320px !important;
+    height: 280px !important;
   }
 
   .card-content.slide-2 .img-container {
-    width: 300px;
-    height: 340px;
+    width: 300px !important;
+    height: 340px !important;
   }
 
   .card-content.slide-3 .img-container {
-    width: 280px;
-    height: 300px;
+    width: 280px !important;
+    height: 300px !important;
   }
 
   .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transform: translateZ(-300px) rotateX(45deg) scale(0.8);
-    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 15px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    opacity: 0 !important;
+    transform: translateZ(-300px) rotateX(45deg) scale(0.8) !important;
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)) !important;
   }
 
   .img-container img.active {
-    opacity: 1;
-    transform: translateZ(0) rotateX(0deg) scale(1);
-    animation: phoneFloat 4s ease-in-out infinite;
+    opacity: 1 !important;
+    transform: translateZ(0) rotateX(0deg) scale(1) !important;
+    animation: phoneFloat-unique-xyz 4s ease-in-out infinite !important;
   }
 
-  @keyframes phoneFloat {
+  @keyframes phoneFloat-unique-xyz {
     0%,
     100% {
-      transform: translateZ(0) rotateX(0deg) scale(1) translateY(0px);
+      transform: translateZ(0) rotateX(0deg) scale(1) translateY(0px) !important;
     }
     50% {
-      transform: translateZ(0) rotateX(0deg) scale(1) translateY(-10px);
+      transform: translateZ(0) rotateX(0deg) scale(1) translateY(-10px) !important;
     }
   }
 
   .img-container img.exit {
-    opacity: 0;
-    transform: translateZ(-300px) rotateX(-45deg) scale(0.8);
+    opacity: 0 !important;
+    transform: translateZ(-300px) rotateX(-45deg) scale(0.8) !important;
   }
 
   .img-container #img2.active {
     animation:
-      phoneFloat 4s ease-in-out infinite,
-      phoneRotate 8s linear infinite;
+      phoneFloat-unique-xyz 4s ease-in-out infinite,
+      phoneRotate-unique-xyz 8s linear infinite !important;
   }
 
-  @keyframes phoneRotate {
+  @keyframes phoneRotate-unique-xyz {
     0% {
-      transform: translateZ(0) rotateY(0deg) scale(1) translateY(0px);
+      transform: translateZ(0) rotateY(0deg) scale(1) translateY(0px) !important;
     }
     25% {
-      transform: translateZ(0) rotateY(5deg) scale(1) translateY(-5px);
+      transform: translateZ(0) rotateY(5deg) scale(1) translateY(-5px) !important;
     }
     50% {
-      transform: translateZ(0) rotateY(0deg) scale(1) translateY(-10px);
+      transform: translateZ(0) rotateY(0deg) scale(1) translateY(-10px) !important;
     }
     75% {
-      transform: translateZ(0) rotateY(-5deg) scale(1) translateY(-5px);
+      transform: translateZ(0) rotateY(-5deg) scale(1) translateY(-5px) !important;
     }
     100% {
-      transform: translateZ(0) rotateY(0deg) scale(1) translateY(0px);
+      transform: translateZ(0) rotateY(0deg) scale(1) translateY(0px) !important;
     }
   }
 
   .img-container #img2.exit {
-    transform: translateX(-400px) translateZ(-200px) rotateY(-45deg) scale(0.8);
+    transform: translateX(-400px) translateZ(-200px) rotateY(-45deg) scale(0.8) !important;
   }
 
   .seesaw {
-    display: inline-block;
-    transform-origin: 50% 50%;
-    animation: seesaw var(--speed) ease-in-out infinite;
-    will-change: transform;
-    margin-top: -4px;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: inline-block !important;
+    transform-origin: 50% 50% !important;
+    animation: seesaw-unique-xyz var(--speed) ease-in-out infinite !important;
+    will-change: transform !important;
+    margin-top: -4px !important;
+    color: white !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
   }
 
-  @keyframes seesaw {
+  @keyframes seesaw-unique-xyz {
     0% {
-      transform: rotate(-var(--tilt)) scale(1);
+      transform: rotate(-var(--tilt)) scale(1) !important;
     }
     50% {
-      transform: rotate(var(--tilt)) scale(1.1);
+      transform: rotate(var(--tilt)) scale(1.1) !important;
     }
     100% {
-      transform: rotate(-var(--tilt)) scale(1);
+      transform: rotate(-var(--tilt)) scale(1) !important;
     }
   }
 
   .right {
-    position: relative;
-    overflow: hidden;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   @media screen and (min-width: 0px) and (max-width: 400px) {
     .card-content {
-      grid-template-columns: 1fr;
-      height: 100%;
+      grid-template-columns: 1fr !important;
+      height: 100% !important;
     }
 
     .card-container {
@@ -786,119 +794,119 @@ const {
     }
 
     .left {
-      height: 450px;
+      height: 450px !important;
     }
 
     .right {
-      height: 100%;
+      height: 100% !important;
     }
 
     .big {
-      margin-top: 70px;
+      margin-top: 70px !important;
     }
 
     .card-container {
-      margin: 0 auto;
-      margin-top: -50px;
-      width: 87%;
+      margin: 0 auto !important;
+      margin-top: -50px !important;
+      width: 87% !important;
       border-radius: 10px !important;
     }
 
     .card-container {
-      height: 100vh;
-      border-radius: 0;
+      height: 100vh !important;
+      border-radius: 0 !important;
     }
 
     .left {
-      padding: 20px;
+      padding: 20px !important;
     }
 
     .ai {
-      text-align: center;
-      font-size: 28px;
+      text-align: center !important;
+      font-size: 28px !important;
     }
 
     .from {
-      justify-content: center;
-      width: 100%;
+      justify-content: center !important;
+      width: 100% !important;
     }
 
     .hero-content a {
-      margin: 20px auto;
-      display: block;
+      margin: 20px auto !important;
+      display: block !important;
     }
 
     h3,
     p {
-      text-align: center;
+      text-align: center !important;
     }
 
     .img-container {
-      margin-top: 10px;
+      margin-top: 10px !important;
     }
 
     .navigation-arrows {
-      display: none;
+      display: none !important;
     }
   }
 
   @media screen and (min-width: 401px) and (max-width: 768px) {
     .card-content {
-      grid-template-columns: 1fr;
-      height: 100%;
+      grid-template-columns: 1fr !important;
+      height: 100% !important;
     }
 
     .left {
-      height: 450px;
+      height: 450px !important;
     }
 
     .big {
-      margin-top: 70px;
+      margin-top: 70px !important;
     }
 
     .card-container {
-      margin: 0 auto;
-      margin-top: 20px;
-      width: 87%;
+      margin: 0 auto !important;
+      margin-top: 20px !important;
+      width: 87% !important;
       border-radius: 10px !important;
       margin-top: 20px !important;
     }
 
     .card-container {
-      height: 100vh;
-      border-radius: 0;
+      height: 100vh !important;
+      border-radius: 0 !important;
     }
 
     .left {
-      padding: 20px;
+      padding: 20px !important;
     }
 
     .ai {
-      text-align: center;
-      font-size: 28px;
+      text-align: center !important;
+      font-size: 28px !important;
     }
 
     .from {
-      justify-content: center;
-      width: 100%;
+      justify-content: center !important;
+      width: 100% !important;
     }
 
     .hero-content a {
-      margin: 20px auto;
-      display: block;
+      margin: 20px auto !important;
+      display: block !important;
     }
 
     h3,
     p {
-      text-align: center;
+      text-align: center !important;
     }
 
     .img-container {
-      margin-top: 10px;
+      margin-top: 10px !important;
     }
 
     .navigation-arrows {
-      display: none;
+      display: none !important;
     }
   }
 </style>
@@ -1007,7 +1015,8 @@ const {
       if (progressBar) {
         progressBar.style.animation = "none";
         progressBar.offsetHeight;
-        progressBar.style.animation = "progressBar 10s linear forwards";
+        progressBar.style.animation =
+          "progressBar-unique-xyz 10s linear forwards";
         progressBar.setAttribute("aria-valuenow", "0");
       }
     }
