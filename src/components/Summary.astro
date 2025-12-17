@@ -1,777 +1,884 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simu za Lipa Mdogo Mdogo - Phones on Credit Nairobi</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: #f9fafb;
-        color: #1f2937;
-      }
-
-      .ecommerce-section {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 80px 24px;
-      }
-
-      /* Hero Section */
-      .hero {
-        text-align: center;
-        margin-bottom: 70px;
-        animation: fadeInUp 0.8s ease;
-      }
-
-      .hero h1 {
-        font-size: 3.5rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 20px;
-        line-height: 1.1;
-      }
-
-      .hero .subtitle {
-        font-size: 1.3rem;
-        color: #6b7280;
-        max-width: 800px;
-        margin: 0 auto 30px;
-      }
-
-      .trust-badges {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        flex-wrap: wrap;
-        margin-top: 30px;
-      }
-
-      .badge {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: #059669;
-        font-weight: 600;
-        font-size: 0.95rem;
-      }
-
-      .badge svg {
-        width: 24px;
-        height: 24px;
-        fill: currentColor;
-      }
-
-      /* Product Grid */
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 30px;
-        margin-bottom: 70px;
-      }
-
-      .product-card {
-        background: white;
-        border-radius: 20px;
-        padding: 35px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2px solid transparent;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .product-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #f59e0b, #d97706);
-        transform: scaleX(0);
-        transition: transform 0.4s ease;
-      }
-
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15);
-        border-color: #f59e0b;
-      }
-
-      .product-card:hover::before {
-        transform: scaleX(1);
-      }
-
-      .card-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 25px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #f3f4f6;
-      }
-
-      .card-icon {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #fef3c7, #fde68a);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      .card-icon svg {
-        width: 28px;
-        height: 28px;
-        fill: #d97706;
-      }
-
-      .card-header h3 {
-        font-size: 1.6rem;
-        color: #111827;
-        font-weight: 700;
-      }
-
-      .phone-list {
-        list-style: none;
-      }
-
-      .phone-list li {
-        padding: 14px 0;
-        color: #4b5563;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        border-bottom: 1px solid #f3f4f6;
-      }
-
-      .phone-list li:last-child {
-        border-bottom: none;
-      }
-
-      .phone-list li::before {
-        content: "✓";
-        background: #d1fae5;
-        color: #059669;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: bold;
-        flex-shrink: 0;
-      }
-
-      .phone-list strong {
-        color: #111827;
-        font-weight: 600;
-      }
-
-      /* Partners Section */
-      .partners-section {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        border-radius: 24px;
-        padding: 60px 50px;
-        margin: 70px 0;
-        box-shadow: 0 20px 50px rgba(245, 158, 11, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .partners-section::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.1) 0%,
-          transparent 70%
-        );
-        border-radius: 50%;
-      }
-
-      .partners-section h2 {
-        text-align: center;
-        font-size: 2.5rem;
-        color: white;
-        margin-bottom: 15px;
-        font-weight: 800;
-        position: relative;
-        z-index: 1;
-      }
-
-      .partners-section > p {
-        text-align: center;
-        color: rgba(255, 255, 255, 0.95);
-        font-size: 1.1rem;
-        max-width: 700px;
-        margin: 0 auto 40px;
-        line-height: 1.7;
-        position: relative;
-        z-index: 1;
-      }
-
-      .partners-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        max-width: 900px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-      }
-
-      .partner-card {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(12px);
-        border: 2px solid rgba(255, 255, 255, 0.25);
-        border-radius: 16px;
-        padding: 30px 20px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .partner-card:hover {
-        background: rgba(255, 255, 255, 0.25);
-        transform: scale(1.05);
-      }
-
-      .partner-card h4 {
-        font-size: 1.4rem;
-        color: white;
-        margin-bottom: 8px;
-        font-weight: 700;
-      }
-
-      .partner-card p {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.95rem;
-      }
-
-      /* Features Grid */
-      .features-section {
-        margin: 70px 0;
-      }
-
-      .features-section h2 {
-        font-size: 2.5rem;
-        text-align: center;
-        margin-bottom: 50px;
-        color: #111827;
-        font-weight: 800;
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-      }
-
-      .feature-card {
-        background: white;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        border-left: 6px solid #f59e0b;
-        transition: all 0.3s ease;
-      }
-
-      .feature-card:hover {
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-        transform: translateX(5px);
-      }
-
-      .feature-card h3 {
-        font-size: 1.5rem;
-        color: #111827;
-        margin-bottom: 15px;
-        font-weight: 700;
-      }
-
-      .feature-card p {
-        color: #4b5563;
-        line-height: 1.7;
-        margin-bottom: 12px;
-        font-size: 1rem;
-      }
-
-      .feature-card .highlight {
-        color: #f59e0b;
-        font-weight: 600;
-      }
-
-      .feature-card .note {
-        font-size: 0.9rem;
-        color: #6b7280;
-        font-style: italic;
-        padding-top: 10px;
-        border-top: 1px solid #f3f4f6;
-        margin-top: 15px;
-      }
-
-      /* SEO Content */
-      .seo-content {
-        background: white;
-        border-radius: 24px;
-        padding: 60px;
-        margin-top: 70px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      }
-
-      .seo-content h2 {
-        font-size: 2.2rem;
-        color: #111827;
-        margin-bottom: 25px;
-        font-weight: 800;
-      }
-
-      .seo-content p {
-        color: #4b5563;
-        line-height: 1.9;
-        margin-bottom: 20px;
-        font-size: 1.05rem;
-      }
-
-      .seo-content strong {
-        color: #f59e0b;
-        font-weight: 600;
-      }
-
-      .keyword-cloud {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 35px;
-        padding-top: 30px;
-        border-top: 2px solid #f3f4f6;
-      }
-
-      .keyword-tag {
-        background: linear-gradient(135deg, #fef3c7, #fde68a);
-        color: #92400e;
-        padding: 10px 20px;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-      }
-
-      .keyword-tag:hover {
-        background: #f59e0b;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-      }
-
-      /* CTA Section */
-      .cta-section {
-        text-align: center;
-        margin: 70px 0 50px;
-        padding: 60px 30px;
-        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-        border-radius: 24px;
-        color: white;
-      }
-
-      .cta-section h2 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        font-weight: 800;
-      }
-
-      .cta-section p {
-        font-size: 1.2rem;
-        margin-bottom: 35px;
-        color: #d1d5db;
-      }
-
-      .cta-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        padding: 16px 40px;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
-        display: inline-block;
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, #f59e0b, #d97706);
-        color: white;
-        box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: white;
-        border: 2px solid white;
-      }
-
-      .btn-secondary:hover {
-        background: white;
-        color: #111827;
-      }
-
-      /* Animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        .ecommerce-section {
-          padding: 50px 16px;
-        }
-
-        .hero h1 {
-          font-size: 2.2rem;
-        }
-
-        .hero .subtitle {
-          font-size: 1.1rem;
-        }
-
-        .trust-badges {
-          gap: 20px;
-        }
-
-        .products-grid,
-        .features-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .partners-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .partners-section,
-        .seo-content {
-          padding: 40px 25px;
-        }
-
-        .cta-section {
-          padding: 40px 20px;
-        }
-
-        .cta-section h2 {
-          font-size: 1.8rem;
-        }
-
-        .cta-buttons {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .btn {
-          width: 100%;
-          max-width: 300px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="ecommerce-section">
-      <!-- Hero Section -->
-      <div class="hero">
-        <h1>Simu za Lipa Mdogo Mdogo - Phones on Credit Kenya</h1>
-        <p class="subtitle">
-          Own the latest smartphones today with flexible lipa pole pole payment
-          plans. From Samsung to iPhone, Tecno to Infinix - we offer mkopa
-          phones and affordable phones on credit in Nairobi and Kiambu with as
-          low as KES 1,000 deposit.
-        </p>
-        <div class="trust-badges">
-          <div class="badge">
-            <svg viewBox="0 0 20 20"
-              ><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path
-                fill-rule="evenodd"
-                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"></path></svg
-            >
-            Fast Approval
-          </div>
-          <div class="badge">
-            <svg viewBox="0 0 20 20"
-              ><path
-                d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
-              ></path><path
-                d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"
-              ></path></svg
-            >
-            Free Delivery Nairobi
-          </div>
-          <div class="badge">
-            <svg viewBox="0 0 20 20"
-              ><path
-                fill-rule="evenodd"
-                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"></path></svg
-            >
-            100% Genuine Phones
-          </div>
-        </div>
+<style is:inline>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fafb;
+    color: #1f2937;
+  }
+
+  .lmd-ecommerce-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+
+  /* Hero Section */
+  .lmd-hero {
+    text-align: center;
+    margin-bottom: 70px;
+    animation: lmd-fadeInUp 0.8s ease;
+  }
+
+  .lmd-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .lmd-hero .lmd-subtitle {
+    font-size: 1.3rem;
+    color: #6b7280;
+    max-width: 800px;
+    margin: 0 auto 30px;
+  }
+
+  .lmd-trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .lmd-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .lmd-badge svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* Product Grid */
+  .lmd-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 70px;
+  }
+
+  .lmd-product-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lmd-product-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981, #059669);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .lmd-product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+  }
+
+  .lmd-product-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .lmd-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f3f4f6;
+  }
+
+  .lmd-card-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .lmd-card-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: #059669;
+  }
+
+  .lmd-card-header h3 {
+    font-size: 1.6rem;
+    color: #111827;
+    font-weight: 700;
+  }
+
+  .lmd-phone-list {
+    list-style: none;
+  }
+
+  .lmd-phone-list li {
+    padding: 14px 0;
+    color: #4b5563;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .lmd-phone-list li:last-child {
+    border-bottom: none;
+  }
+
+  .lmd-phone-list li::before {
+    content: "✓";
+    background: #d1fae5;
+    color: #059669;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .lmd-phone-list strong {
+    color: #111827;
+    font-weight: 600;
+  }
+
+  /* Partners Section */
+  .lmd-partners-section {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    border-radius: 24px;
+    padding: 60px 50px;
+    margin: 70px 0;
+    box-shadow: 0 20px 50px rgba(220, 38, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lmd-partners-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+  }
+
+  .lmd-partners-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmd-partners-section > p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmd-partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmd-partner-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .lmd-partner-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+  }
+
+  .lmd-partner-card h4 {
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .lmd-partner-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+  }
+
+  /* Features Grid */
+  .lmd-features-section {
+    margin: 70px 0;
+  }
+
+  .lmd-features-section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #111827;
+    font-weight: 800;
+  }
+
+  .lmd-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .lmd-feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid #10b981;
+    transition: all 0.3s ease;
+  }
+
+  .lmd-feature-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+  }
+
+  .lmd-feature-card h3 {
+    font-size: 1.5rem;
+    color: #111827;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .lmd-feature-card p {
+    color: #4b5563;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    font-size: 1rem;
+  }
+
+  .lmd-feature-card .lmd-highlight {
+    color: #10b981;
+    font-weight: 600;
+  }
+
+  .lmd-feature-card .lmd-note {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-style: italic;
+    padding-top: 10px;
+    border-top: 1px solid #f3f4f6;
+    margin-top: 15px;
+  }
+
+  /* SEO Content */
+  .lmd-seo-content {
+    background: white;
+    border-radius: 24px;
+    padding: 60px;
+    margin-top: 70px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .lmd-seo-content h2 {
+    font-size: 2.2rem;
+    color: #111827;
+    margin-bottom: 25px;
+    font-weight: 800;
+  }
+
+  .lmd-seo-content p {
+    color: #4b5563;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+  }
+
+  .lmd-seo-content strong {
+    color: #10b981;
+    font-weight: 600;
+  }
+
+  .lmd-keyword-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 35px;
+    padding-top: 30px;
+    border-top: 2px solid #f3f4f6;
+  }
+
+  .lmd-keyword-tag {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .lmd-keyword-tag:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  /* CTA Section */
+  .lmd-cta-section {
+    text-align: center;
+    margin: 70px 0 50px;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-radius: 24px;
+    color: white;
+  }
+
+  .lmd-cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+
+  .lmd-cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+    color: #dbeafe;
+  }
+
+  .lmd-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .lmd-btn {
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .lmd-btn-primary {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  }
+
+  .lmd-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+  }
+
+  .lmd-btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .lmd-btn-secondary:hover {
+    background: white;
+    color: #1e3a8a;
+  }
+
+  /* Animations */
+  @keyframes lmd-fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .lmd-ecommerce-section {
+      padding: 50px 16px;
+    }
+
+    .lmd-hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .lmd-hero .lmd-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .lmd-trust-badges {
+      gap: 20px;
+    }
+
+    .lmd-products-grid,
+    .lmd-features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .lmd-partners-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lmd-partners-section,
+    .lmd-seo-content {
+      padding: 40px 25px;
+    }
+
+    .lmd-cta-section {
+      padding: 40px 20px;
+    }
+
+    .lmd-cta-section h2 {
+      font-size: 1.8rem;
+    }
+
+    .lmd-cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lmd-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
+
+<div class="lmd-ecommerce-section">
+  <!-- Hero Section -->
+  <div class="lmd-hero">
+    <h1>Simu za Lipa Mdogo Mdogo - Phones on Credit Kenya</h1>
+    <p class="lmd-subtitle">
+      Own the latest smartphones today with flexible lipa pole pole payment
+      plans. From Samsung to iPhone, Tecno to Infinix - we offer mkopa phones
+      and affordable phones on credit in Nairobi and Kiambu with as low as KES
+      1,000 deposit.
+    </p>
+    <div class="lmd-trust-badges">
+      <div class="lmd-badge">
+        <svg viewBox="0 0 20 20"
+          ><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path
+            fill-rule="evenodd"
+            d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"></path></svg
+        >
+        Fast Approval
       </div>
-
-      <!-- Product Categories -->
-      <div class="products-grid">
-        <!-- Samsung Lipa Mdogo Mdogo -->
-        <div class="product-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 20 20"
-                ><path
-                  d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-                ></path></svg
-              >
-            </div>
-            <h3>Lipa Mdogo Mdogo Samsung</h3>
-          </div>
-          <ul class="phone-list">
-            <li>
-              <strong>Samsung A05</strong> - lipa mdogo mdogo prices from KES 2,000
-              deposit
-            </li>
-            <li>
-              <strong>Samsung A06</strong> - available on mkopa phones alternative
-            </li>
-            <li><strong>Samsung A16</strong> - phones on credit Nairobi</li>
-            <li><strong>Samsung S20</strong> - premium lipa polepole phones</li>
-            <li>
-              <strong>Samsung Galaxy</strong> series - pay on delivery phones Nairobi
-            </li>
-          </ul>
-        </div>
-
-        <!-- Lipa Mdogo Mdogo iPhone -->
-        <div class="product-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 20 20"
-                ><path
-                  d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
-                ></path></svg
-              >
-            </div>
-            <h3>Lipa Mdogo Mdogo iPhone</h3>
-          </div>
-          <ul class="phone-list">
-            <li>
-              <strong>iPhone 13 Pro Max</strong> - lipa mdogo mdogo iPhone prices
-            </li>
-            <li><strong>iPhone 12</strong> - phones on credit Kenya</li>
-            <li>
-              <strong>iPhone 11</strong> - affordable lipa mdogo mdogo phones
-            </li>
-            <li>100% genuine Apple products with warranty</li>
-            <li>
-              Flexible monthly payments for lipa mdogo mdogo phones Nairobi
-            </li>
-          </ul>
-        </div>
-
-        <!-- Lipa Mdogo Mdogo Tecno -->
-        <div class="product-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 20 20"
-                ><path
-                  fill-rule="evenodd"
-                  d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                  clip-rule="evenodd"></path></svg
-              >
-            </div>
-            <h3>Lipa Mdogo Mdogo Tecno</h3>
-          </div>
-          <ul class="phone-list">
-            <li>
-              <strong>Tecno Camon 40</strong> - lipa mdogo mdogo Tecno prices
-            </li>
-            <li>
-              <strong>Tecno Spark 40</strong> - cheap lipa mdogo mdogo phones
-            </li>
-            <li>
-              <strong>Tecno Pop 10</strong> - lipa mdogo mdogo deposit 1,000
-            </li>
-            <li>
-              <strong>Tecno Pova</strong> - phones on credit Nairobi & Kiambu
-            </li>
-            <li>Most affordable simu za lipa mdogo mdogo in Kenya</li>
-          </ul>
-        </div>
-
-        <!-- Lipa Mdogo Mdogo Infinix -->
-        <div class="product-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 20 20"
-                ><path
-                  fill-rule="evenodd"
-                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path></svg
-              >
-            </div>
-            <h3>Lipa Mdogo Mdogo Infinix</h3>
-          </div>
-          <ul class="phone-list">
-            <li><strong>Infinix Hot 60i</strong> - lipa mdogo mdogo Infinix</li>
-            <li><strong>Infinix Note 40</strong> - lipa polepole phones</li>
-            <li>
-              <strong>Infinix Zero</strong> series - phones on credit Kenya
-            </li>
-            <li>Latest models with curved screens available</li>
-            <li>From KES 1,500 deposit - lipa mdogo mdogo phones Kiambu</li>
-          </ul>
-        </div>
-
-        <!-- Lipa Mdogo Mdogo Oppo -->
-        <div class="product-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 20 20"
-                ><path
-                  d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
-                ></path></svg
-              >
-            </div>
-            <h3>Lipa Mdogo Mdogo Oppo</h3>
-          </div>
-          <ul class="phone-list">
-            <li>
-              <strong>Oppo A Series</strong> - lipa mdogo mdogo Oppo prices
-            </li>
-            <li><strong>Oppo Reno</strong> - premium phones on credit</li>
-            <li>Fast charging technology included</li>
-            <li>Available through jumia lipa mdogo mdogo phones alternative</li>
-            <li>Flexible payment plans - mkopa alternative phones</li>
-          </ul>
-        </div>
-
-        <!-- Budget Options -->
-        <div class="product-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 20 20"
-                ><path
-                  fill-rule="evenodd"
-                  d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                  clip-rule="evenodd"></path></svg
-              >
-            </div>
-            <h3>Affordable Simu za Lipa Mdogo Mdogo</h3>
-          </div>
-          <ul class="phone-list">
-            <li>
-              <strong>Itel Smartphones</strong> - cheapest lipa mdogo mdogo phones
-            </li>
-            <li>
-              <strong>Budget Tecno</strong> - simu za lipa mdogo mdogo prices from
-              KES 1,000
-            </li>
-            <li>Perfect for first-time buyers in Nairobi</li>
-            <li>All phones verified and quality checked</li>
-            <li>Start with lipa mdogo mdogo deposit 1,000 only</li>
-          </ul>
-        </div>
+      <div class="lmd-badge">
+        <svg viewBox="0 0 20 20"
+          ><path
+            d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+          ></path><path
+            d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"
+          ></path></svg
+        >
+        Free Delivery Nairobi
       </div>
+      <div class="lmd-badge">
+        <svg viewBox="0 0 20 20"
+          ><path
+            fill-rule="evenodd"
+            d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"></path></svg
+        >
+        100% Genuine Phones
+      </div>
+    </div>
+  </div>
 
-      <!-- Credit Partners Section -->
-      <div class="partners-section">
-        <h2>Trusted Credit Partners for Lipa Mdogo Mdogo Phones</h2>
+  <!-- Product Categories -->
+  <div class="lmd-products-grid">
+    <!-- Samsung Lipa Mdogo Mdogo -->
+    <div class="lmd-product-card">
+      <div class="lmd-card-header">
+        <div class="lmd-card-icon">
+          <svg viewBox="0 0 20 20"
+            ><path
+              d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+            ></path></svg
+          >
+        </div>
+        <h3>Lipa Mdogo Mdogo Samsung</h3>
+      </div>
+      <ul class="lmd-phone-list">
+        <li>
+          <strong>Samsung A05</strong> - lipa mdogo mdogo prices from KES 2,000 deposit
+        </li>
+        <li>
+          <strong>Samsung A06</strong> - available on mkopa phones alternative
+        </li>
+        <li><strong>Samsung A16</strong> - phones on credit Nairobi</li>
+        <li><strong>Samsung S20</strong> - premium lipa polepole phones</li>
+        <li>
+          <strong>Samsung Galaxy</strong> series - pay on delivery phones Nairobi
+        </li>
+      </ul>
+    </div>
+
+    <!-- Lipa Mdogo Mdogo iPhone -->
+    <div class="lmd-product-card">
+      <div class="lmd-card-header">
+        <div class="lmd-card-icon">
+          <svg viewBox="0 0 20 20"
+            ><path
+              d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
+            ></path></svg
+          >
+        </div>
+        <h3>Lipa Mdogo Mdogo iPhone</h3>
+      </div>
+      <ul class="lmd-phone-list">
+        <li>
+          <strong>iPhone 13 Pro Max</strong> - lipa mdogo mdogo iPhone prices
+        </li>
+        <li><strong>iPhone 12</strong> - phones on credit Kenya</li>
+        <li>
+          <strong>iPhone 11</strong> - affordable lipa mdogo mdogo phones
+        </li>
+        <li>100% genuine Apple products with warranty</li>
+        <li>Flexible monthly payments for lipa mdogo mdogo phones Nairobi</li>
+      </ul>
+    </div>
+
+    <!-- Lipa Mdogo Mdogo Tecno -->
+    <div class="lmd-product-card">
+      <div class="lmd-card-header">
+        <div class="lmd-card-icon">
+          <svg viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+              clip-rule="evenodd"></path></svg
+          >
+        </div>
+        <h3>Lipa Mdogo Mdogo Tecno</h3>
+      </div>
+      <ul class="lmd-phone-list">
+        <li>
+          <strong>Tecno Camon 40</strong> - lipa mdogo mdogo Tecno prices
+        </li>
+        <li>
+          <strong>Tecno Spark 40</strong> - cheap lipa mdogo mdogo phones
+        </li>
+        <li>
+          <strong>Tecno Pop 10</strong> - lipa mdogo mdogo deposit 1,000
+        </li>
+        <li>
+          <strong>Tecno Pova</strong> - phones on credit Nairobi & Kiambu
+        </li>
+        <li>Most affordable simu za lipa mdogo mdogo in Kenya</li>
+      </ul>
+    </div>
+
+    <!-- Lipa Mdogo Mdogo Infinix -->
+    <div class="lmd-product-card">
+      <div class="lmd-card-header">
+        <div class="lmd-card-icon">
+          <svg viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"></path></svg
+          >
+        </div>
+        <h3>Lipa Mdogo Mdogo Infinix</h3>
+      </div>
+      <ul class="lmd-phone-list">
+        <li><strong>Infinix Hot 60i</strong> - lipa mdogo mdogo Infinix</li>
+        <li><strong>Infinix Note 40</strong> - lipa polepole phones</li>
+        <li>
+          <strong>Infinix Zero</strong> series - phones on credit Kenya
+        </li>
+        <li>Latest models with curved screens available</li>
+        <li>From KES 1,500 deposit - lipa mdogo mdogo phones Kiambu</li>
+      </ul>
+    </div>
+
+    <!-- Lipa Mdogo Mdogo Oppo -->
+    <div class="lmd-product-card">
+      <div class="lmd-card-header">
+        <div class="lmd-card-icon">
+          <svg viewBox="0 0 20 20"
+            ><path
+              d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+            ></path></svg
+          >
+        </div>
+        <h3>Lipa Mdogo Mdogo Oppo</h3>
+      </div>
+      <ul class="lmd-phone-list">
+        <li>
+          <strong>Oppo A Series</strong> - lipa mdogo mdogo Oppo prices
+        </li>
+        <li><strong>Oppo Reno</strong> - premium phones on credit</li>
+        <li>Fast charging technology included</li>
+        <li>Available through jumia lipa mdogo mdogo phones alternative</li>
+        <li>Flexible payment plans - mkopa alternative phones</li>
+      </ul>
+    </div>
+
+    <!-- Budget Options -->
+    <div class="lmd-product-card">
+      <div class="lmd-card-header">
+        <div class="lmd-card-icon">
+          <svg viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+              clip-rule="evenodd"></path></svg
+          >
+        </div>
+        <h3>Affordable Simu za Lipa Mdogo Mdogo</h3>
+      </div>
+      <ul class="lmd-phone-list">
+        <li>
+          <strong>Itel Smartphones</strong> - cheapest lipa mdogo mdogo phones
+        </li>
+        <li>
+          <strong>Budget Tecno</strong> - simu za lipa mdogo mdogo prices from KES
+          1,000
+        </li>
+        <li>Perfect for first-time buyers in Nairobi</li>
+        <li>All phones verified and quality checked</li>
+        <li>Start with lipa mdogo mdogo deposit 1,000 only</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Credit Partners Section -->
+  <div class="lmd-partners-section">
+    <h2>Trusted Credit Partners for Lipa Mdogo Mdogo Phones</h2>
+    <p>
+      We partner with Kenya's leading credit providers including <strong
+        >Mogo</strong
+      >, <strong>Watu Simu</strong>, <strong>M-Kopa</strong>, and <strong
+        >Watu</strong
+      > to bring you the best simu za lipa mdogo mdogo deals. Fast approval, flexible
+      terms, and mkopa phones lipa mdogo mdogo alternatives available across Nairobi
+      and Kiambu County.
+    </p>
+    <div class="lmd-partners-grid">
+      <div class="lmd-partner-card">
+        <h4>Mogo Kenya</h4>
+        <p>Quick loan approval for phones on credit</p>
+      </div>
+      <div class="lmd-partner-card">
+        <h4>Watu Simu</h4>
+        <p>Easy lipa polepole payment terms</p>
+      </div>
+      <div class="lmd-partner-card">
+        <h4>M-Kopa</h4>
+        <p>Trusted mkopa phones nationwide</p>
+      </div>
+      <div class="lmd-partner-card">
+        <h4>Watu Credit</h4>
+        <p>Fast approval lipa mdogo mdogo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="lmd-features-section">
+    <h2>Why Choose Our Lipa Mdogo Mdogo Service?</h2>
+    <div class="lmd-features-grid">
+      <div class="lmd-feature-card">
+        <h3>Cheapest Simu za Lipa Mdogo Mdogo</h3>
         <p>
-          We partner with Kenya's leading credit providers including <strong
-            >Mogo</strong
-          >, <strong>Watu Simu</strong>, <strong>M-Kopa</strong>, and <strong
-            >Watu</strong
-          > to bring you the best simu za lipa mdogo mdogo deals. Fast approval,
-          flexible terms, and mkopa phones lipa mdogo mdogo alternatives available
-          across Nairobi and Kiambu County.
+          Looking for <span class="lmd-highlight"
+            >cheap lipa mdogo mdogo phones</span
+          >? We stock the most affordable options including Tecno Pop 10, Itel
+          smartphones, and budget Infinix models. Get started with as little as <span
+            class="lmd-highlight">KES 1,000 deposit</span
+          >
+          and own your phone with flexible monthly payments.
         </p>
-        <div class="partners-grid">
-          <div class="partner-card">
-            <h4>Mogo Kenya</h4>
-            <p>Quick loan approval for phones on credit</p>
-          </div>
-          <div class="partner-card">
-            <h4>Watu Simu</h4>
-            <p>Easy lipa polepole payment terms</p>
-          </div>
-          <div class="partner-card">
-            <h4>M-Kopa</h4>
-            <p>Trusted mkopa phones nationwide</p>
-          </div>
-          <div class="partner-card">
-            <h4>Watu Credit</h4>
-            <p>Fast approval lipa mdogo mdogo</p>
-          </div>
-        </div>
+        <p class="lmd-note">
+          Perfect for students and first-time smartphone buyers in Nairobi and
+          Kiambu!
+        </p>
       </div>
 
-      <!-- Features Section -->
-      <div class="features-section">
-        <h2>Why Choose Our Lipa Mdogo Mdogo Service?</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <h3>Cheapest Simu za Lipa Mdogo Mdogo</h3>
-            <p>
-              Looking for <span class="highlight"
-                >cheap lipa mdogo mdogo phones</span
-              >? We stock the most affordable options including <strong
-                >Tecno Pop 10</strong
-              >, <strong>Itel smartphones</strong>, and budget Infinix models.
-              Get started with as little as <span class="highlight"
-                >KES 1,000 deposit</span
-              > and own your phone with flexible monthly payments.
-            </p>
-            <p class="note">
-              Perfect for students and first-time smartphone buyers in Nairobi
-              and Kiambu!
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <h3>Premium Phones on Credit</h3>
-          </div>
-        </div>
+      <div class="lmd-feature-card">
+        <h3>Premium Phones on Credit</h3>
+        <p>
+          Want a flagship phone? We offer <span class="lmd-highlight"
+            >iPhone lipa mdogo mdogo</span
+          >
+          including iPhone 13 Pro Max, iPhone 12, and iPhone 11. Also available: Samsung
+          Galaxy S20, Oppo Reno series, all with warranty and genuine accessories.
+        </p>
+        <p class="lmd-note">Pay on delivery in Nairobi with M-Pesa or cash!</p>
       </div>
-    </div></body>
-</html>
+
+      <div class="lmd-feature-card">
+        <h3>Fast Approval Process</h3>
+        <p>
+          Get approved in minutes! Our partners <span class="lmd-highlight"
+            >Mogo, Watu Simu, and M-Kopa</span
+          >
+          offer instant credit checks. No complex paperwork - just your ID and proof
+          of income. Walk into our Nairobi showroom and leave with your phone the
+          same day.
+        </p>
+        <p class="lmd-note">Over 10,000 satisfied customers across Kenya!</p>
+      </div>
+
+      <div class="lmd-feature-card">
+        <h3>Flexible Payment Plans</h3>
+        <p>
+          Choose payment terms that work for you: 3, 6, 12, or 24 months.
+          <span class="lmd-highlight">No hidden charges</span> - we're transparent
+          about all costs. Pay via M-Pesa, bank transfer, or cash at any of our Nairobi
+          branches.
+        </p>
+        <p class="lmd-note">Early payment discounts available!</p>
+      </div>
+
+      <div class="lmd-feature-card">
+        <h3>Free Delivery in Nairobi</h3>
+        <p>
+          Order online and get <span class="lmd-highlight"
+            >free same-day delivery</span
+          > anywhere in Nairobi County. Kiambu, Thika, and nearby areas covered too.
+          All phones come pre-configured and ready to use with free screen protector
+          and case.
+        </p>
+        <p class="lmd-note">Track your delivery in real-time via SMS!</p>
+      </div>
+
+      <div class="lmd-feature-card">
+        <h3>Trade-In Program</h3>
+        <p>
+          Have an old phone? <span class="lmd-highlight">Trade it in</span> and reduce
+          your deposit! We accept all brands in any condition. Get instant valuation
+          and use the value towards your new lipa mdogo mdogo phone purchase.
+        </p>
+        <p class="lmd-note">Trade-ins can reduce your deposit by up to 50%!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO Content Section -->
+  <div class="lmd-seo-content">
+    <h2>Complete Guide to Lipa Mdogo Mdogo Phones in Kenya</h2>
+    <p>
+      Are you searching for <strong>simu za lipa mdogo mdogo</strong> in Nairobi?
+      We offer the most comprehensive selection of smartphones on credit across Kenya.
+      Whether you're looking for budget-friendly options like Tecno and Infinix or
+      premium devices like iPhone and Samsung Galaxy, our <strong
+        >lipa pole pole</strong
+      > payment plans make it easy to own your dream phone.
+    </p>
+    <p>
+      Our service covers all major areas including Nairobi CBD, Westlands,
+      Eastleigh, Kasarani, Embakasi, Kiambu, Thika, and Ruiru. We partner with
+      trusted credit providers like
+      <strong>Mogo Kenya</strong>, <strong>Watu Simu</strong>, <strong
+        >M-Kopa</strong
+      >, and <strong>Watu Credit</strong> to ensure fast approval and flexible terms.
+      Most applications are approved within 30 minutes!
+    </p>
+    <p>
+      What makes us different? We offer the <strong
+        >cheapest lipa mdogo mdogo phones</strong
+      >
+      in Kenya with deposits starting from just KES 1,000. Our selection includes
+      the latest models: Samsung A05, A06, A16, iPhone 13, iPhone 12, Tecno Camon
+      40, Infinix Hot 60i, Oppo Reno, and many more. All phones are 100% genuine with
+      manufacturer warranty.
+    </p>
+    <p>
+      Looking for <strong>mkopa phones</strong> alternative? We provide better terms,
+      faster approval, and more phone options. Our customer service team speaks English,
+      Kiswahili, and Sheng to ensure you're comfortable throughout the process. Visit
+      our showrooms in Nairobi or order online with free same-day delivery.
+    </p>
+
+    <div class="lmd-keyword-cloud">
+      <span class="lmd-keyword-tag">Lipa Mdogo Mdogo Phones</span>
+      <span class="lmd-keyword-tag">Simu za Lipa Mdogo Mdogo</span>
+      <span class="lmd-keyword-tag">Phones on Credit Nairobi</span>
+      <span class="lmd-keyword-tag">Mkopa Phones</span>
+      <span class="lmd-keyword-tag">Lipa Polepole</span>
+      <span class="lmd-keyword-tag">Cheap Phones Kenya</span>
+      <span class="lmd-keyword-tag">iPhone Lipa Mdogo Mdogo</span>
+      <span class="lmd-keyword-tag">Samsung on Credit</span>
+      <span class="lmd-keyword-tag">Watu Simu</span>
+      <span class="lmd-keyword-tag">Mogo Kenya</span>
+      <span class="lmd-keyword-tag">Phones Kiambu</span>
+      <span class="lmd-keyword-tag">Pay on Delivery</span>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="lmd-cta-section">
+    <h2>Ready to Own Your Dream Phone?</h2>
+    <p>
+      Join thousands of satisfied customers across Nairobi. Get approved in
+      minutes and walk away with your new smartphone today!
+    </p>
+    <div class="lmd-cta-buttons">
+      <a href="#" class="lmd-btn lmd-btn-primary">Apply Now - Free!</a>
+      <a href="#" class="lmd-btn lmd-btn-secondary">Visit Our Showroom</a>
+    </div>
+  </div>
+</div>

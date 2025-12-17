@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Your Match - Quick Personality Check</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #fff;
+            color: #111;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 1px solid #f0f0f0;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .live-count {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f5f5f5;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .progress-step {
+            height: 4px;
+            flex: 1;
+            background: #e5e5e5;
+            border-radius: 50px;
+            transition: background 0.3s;
+        }
+
+        .progress-step.active {
+            background: #111;
+        }
+
+        /* Quiz Card */
+        .quiz-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 650px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.25rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 0.75rem;
+            background: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            border-color: #111;
+            background: #fafafa;
+        }
+
+        .option-btn svg {
+            width: 20px;
+            height: 20px;
+            color: #999;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover svg {
+            color: #111;
+            transform: translateX(4px);
+        }
+
+        /* Trust Signals */
+        .trust-signals {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Results Section */
+        .results-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #dcfce7;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #166534;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .offer-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .offer-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: -8px;
+            right: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .offer-payout {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #059669;
+            background: #d1fae5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .offer-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .offer-desc {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .offer-meta {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            font-size: 0.75rem;
+            color: #666;
+            background: #f5f5f5;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .offer-link {
+            display: block;
+            text-align: center;
+            padding: 0.875rem;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .offer-link:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        /* Secondary CTA */
+        .secondary-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 1rem;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            color: white;
+        }
+
+        .secondary-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .secondary-cta p {
+            opacity: 0.9;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #f0f0f0;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #111;
+        }
+
+        .reset-link {
+            color: #666;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .reset-link:hover {
+            color: #111;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.125rem;
+            }
+
+            .question {
+                font-size: 1.25rem;
+            }
+
+            .quiz-card {
+                padding: 1.5rem;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .secondary-cta {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PersonalityMatch</div>
+                <div class="live-count">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span id="viewerCount">892</span> taking quiz
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="quizSection">
+            <div class="hero">
+                <div class="badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    Less than 90 seconds
+                </div>
+                <h1>What matches your vibe?</h1>
+                <p class="subtitle">Quick personality check to find content, tools, and experiences that actually fit you</p>
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-step active"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+            </div>
+
+            <div class="quiz-card">
+                <h2 class="question" id="question"></h2>
+                <div class="options" id="options"></div>
+            </div>
+
+            <div class="trust-signals">
+                <div class="trust-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    100% free
+                </div>
+                <span>•</span>
+                <span>No signup needed</span>
+                <span>•</span>
+                <span>Instant results</span>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="hidden">
+            <div class="hero">
+                <div class="results-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Your matches are ready
+                </div>
+                <h1>Here's what fits your profile</h1>
+                <p class="subtitle">Based on your answers, these are available to explore now</p>
+            </div>
+
+            <div class="offers-grid" id="offersGrid">
+                <!-- Offers will be inserted here by JavaScript -->
+            </div>
+
+            <div class="secondary-cta">
+                <h3>Want even more personalized matches?</h3>
+                <p>Get access to exclusive content and rewards tailored specifically to your interests</p>
+                <a href="https://www.cpalead.com/lander/?lp=1&1782=9607" class="cta-btn">
+                    Unlock exclusive access
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-number">47k+</div>
+                    <div>Completed this month</div>
+                </div>
+                <div>
+                    <div class="stat-number">92%</div>
+                    <div>Found a match</div>
+                </div>
+                <div>
+                    <div class="stat-number">1.5 min</div>
+                    <div>Average time</div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <span class="reset-link" onclick="resetQuiz()">Retake quiz with different answers</span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Curated recommendations based on your preferences. We may earn from some selections.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy</a>
+                <span>•</span>
+                <a href="#terms">Terms</a>
+                <span>•</span>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                q: "What kind of content speaks to you?",
+                options: [
+                    "Deep, thought-provoking stuff",
+                    "Fun and lighthearted vibes",
+                    "Creative and artistic expression",
+                    "Practical and useful information"
+                ]
+            },
+            {
+                q: "How do you prefer to discover new things?",
+                options: [
+                    "Through personality-based suggestions",
+                    "Based on what's trending",
+                    "Random exploration and surprises",
+                    "Curated recommendations"
+                ]
+            },
+            {
+                q: "What are you most interested in right now?",
+                options: [
+                    "Understanding myself better",
+                    "Entertainment and fun",
+                    "Self-improvement and growth",
+                    "Just browsing and exploring"
+                ]
+            }
+        ];
+
+        const offers = [
+            {
+                title: "What Color Best Matches Your Aura?",
+                desc: "Discover the color that represents your unique energy and personality traits",
+                payout: "$1.20",
+                tags: ["All devices", "AD, AE, AF, AG"],
+                badge: "Rank #5",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9599"
+            },
+            {
+                title: "What's Your Spirit Animal?",
+                desc: "Find out which animal best represents your personality and life approach",
+                payout: "$1.20",
+                tags: ["All devices", "AD, AE, AF, AG"],
+                badge: "Rank #6",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9600"
+            },
+            {
+                title: "What Kind of Book Would You Be?",
+                desc: "Uncover what literary genre matches your character and story",
+                payout: "$1.20",
+                tags: ["All devices", "AD, AE, AF, AG"],
+                badge: "Rank #7",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9601"
+            },
+            {
+                title: "What Kind of Music Defines You?",
+                desc: "Learn which music genre perfectly captures your essence and mood",
+                payout: "$1.20",
+                tags: ["All devices", "AD, AE, AF, AG"],
+                badge: "Rank #8",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9602"
+            },
+            {
+                title: "Discover Your Inner Villain",
+                desc: "Find out which fictional antagonist mirrors your darker personality traits",
+                payout: "$1.20",
+                tags: ["All devices", "AD, AE, AF, AG"],
+                badge: "Popular",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9603"
+            },
+            {
+                title: "What Element Represents You?",
+                desc: "Discover if you're fire, water, earth, or air based on your core personality",
+                payout: "$1.20",
+                tags: ["All devices", "AD, AE, AF, AG"],
+                badge: "Trending",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9604"
+            },
+            {
+                title: "Join Now for Exclusive Rewards",
+                desc: "Get instant access to prizes, exclusive content, and member-only perks",
+                payout: "$0.12",
+                tags: ["All devices", "PH only"],
+                badge: "New",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9607"
+            },
+            {
+                title: "Unlock Prizes & Special Access",
+                desc: "Mobile-exclusive rewards program with instant prizes and bonus content",
+                payout: "$0.12",
+                tags: ["Mobile only", "PH only"],
+                badge: "Mobile",
+                link: "https://www.cpalead.com/lander/?lp=1&1782=9608"
+            }
+        ];
+
+        let currentStep = 0;
+        let answers = {};
+
+        function renderQuestion() {
+            const question = questions[currentStep];
+            document.getElementById('question').textContent = question.q;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `
+                    <span>${option}</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                `;
+                btn.onclick = () => handleAnswer(option);
+                optionsContainer.appendChild(btn);
+            });
+
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const steps = document.querySelectorAll('.progress-step');
+            steps.forEach((step, index) => {
+                if (index <= currentStep) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+
+        function handleAnswer(answer) {
+            answers[currentStep] = answer;
+            
+            if (currentStep < questions.length - 1) {
+                currentStep++;
+                setTimeout(renderQuestion, 200);
+            } else {
+                setTimeout(showResults, 400);
+            }
+        }
+
+        function showResults() {
+            // Render offers
+            const offersGrid = document.getElementById('offersGrid');
+            offersGrid.innerHTML = '';
+            
+            offers.forEach(offer => {
+                const card = document.createElement('div');
+                card.className = 'offer-card';
+                card.innerHTML = `
+                    <div class="offer-badge">${offer.badge}</div>
+                    <div class="offer-payout">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        ${offer.payout} match
+                    </div>
+                    <h3 class="offer-title">${offer.title}</h3>
+                    <p class="offer-desc">${offer.desc}</p>
+                    <div class="offer-meta">
+                        ${offer.tags.map(tag => `<span class="meta-tag">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${offer.link}" class="offer-link" target="_blank" rel="noopener">
+                        Start now →
+                    </a>
+                `;
+                offersGrid.appendChild(card);
+            });
+
+            document.getElementById('quizSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            currentStep = 0;
+            answers = {};
+            document.getElementById('quizSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Viewer count animation
+        let viewerCount = 892;
+        setInterval(() => {
+            viewerCount += Math.floor(Math.random() * 3);
+            document.getElementById('viewerCount').textContent = viewerCount;
+        }, 3200);
+
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>
