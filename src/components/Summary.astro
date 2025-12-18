@@ -5,12 +5,6 @@
     box-sizing: border-box;
   }
 
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9fafb;
-    color: #1f2937;
-  }
-
   .lmd-ecommerce-section {
     max-width: 1400px;
     margin: 0 auto;
@@ -27,7 +21,7 @@
   .lmd-hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -37,7 +31,7 @@
 
   .lmd-hero .lmd-subtitle {
     font-size: 1.3rem;
-    color: #6b7280;
+    color: #475569;
     max-width: 800px;
     margin: 0 auto 30px;
   }
@@ -54,7 +48,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #dc2626;
+    color: #b91c1c;
     font-weight: 600;
     font-size: 0.95rem;
   }
@@ -79,7 +73,7 @@
     padding: 35px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
+    border: 2px solid #e2e8f0;
     position: relative;
     overflow: hidden;
   }
@@ -91,15 +85,15 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #10b981, #059669);
+    background: linear-gradient(90deg, #ff6b35, #e55a2b);
     transform: scaleX(0);
     transition: transform 0.4s ease;
   }
 
   .lmd-product-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
-    border-color: #10b981;
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15);
+    border-color: #ff6b35;
   }
 
   .lmd-product-card:hover::before {
@@ -112,13 +106,13 @@
     gap: 15px;
     margin-bottom: 25px;
     padding-bottom: 20px;
-    border-bottom: 2px solid #f3f4f6;
+    border-bottom: 2px solid #e2e8f0;
   }
 
   .lmd-card-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -129,12 +123,12 @@
   .lmd-card-icon svg {
     width: 28px;
     height: 28px;
-    fill: #059669;
+    fill: #c2410c;
   }
 
   .lmd-card-header h3 {
     font-size: 1.6rem;
-    color: #111827;
+    color: #0f172a !important;
     font-weight: 700;
   }
 
@@ -144,12 +138,12 @@
 
   .lmd-phone-list li {
     padding: 14px 0;
-    color: #4b5563;
+    color: #334155 !important;
     font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 12px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid #e2e8f0;
   }
 
   .lmd-phone-list li:last-child {
@@ -158,8 +152,8 @@
 
   .lmd-phone-list li::before {
     content: "✓";
-    background: #d1fae5;
-    color: #059669;
+    background: #fed7aa;
+    color: #c2410c;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -172,17 +166,18 @@
   }
 
   .lmd-phone-list strong {
-    color: #111827;
+    color: #0f172a !important;
     font-weight: 600;
   }
 
   /* Partners Section */
   .lmd-partners-section {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    /* background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%); */
+    background: #ff6b35;
     border-radius: 24px;
     padding: 60px 50px;
     margin: 70px 0;
-    box-shadow: 0 20px 50px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 20px 50px rgba(185, 28, 28, 0.3);
     position: relative;
     overflow: hidden;
   }
@@ -205,7 +200,7 @@
   .lmd-partners-section h2 {
     text-align: center;
     font-size: 2.5rem;
-    color: white;
+    color: white !important;
     margin-bottom: 15px;
     font-weight: 800;
     position: relative;
@@ -214,7 +209,7 @@
 
   .lmd-partners-section > p {
     text-align: center;
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.95) !important;
     font-size: 1.1rem;
     max-width: 700px;
     margin: 0 auto 40px;
@@ -250,13 +245,13 @@
 
   .lmd-partner-card h4 {
     font-size: 1.4rem;
-    color: white;
+    color: white !important;
     margin-bottom: 8px;
     font-weight: 700;
   }
 
   .lmd-partner-card p {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9) !important;
     font-size: 0.95rem;
   }
 
@@ -269,7 +264,7 @@
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 50px;
-    color: #111827;
+    color: #0f172a !important;
     font-weight: 800;
   }
 
@@ -284,7 +279,7 @@
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border-left: 6px solid #10b981;
+    border-left: 6px solid #ff6b35;
     transition: all 0.3s ease;
   }
 
@@ -295,29 +290,29 @@
 
   .lmd-feature-card h3 {
     font-size: 1.5rem;
-    color: #111827;
+    color: #0f172a !important;
     margin-bottom: 15px;
     font-weight: 700;
   }
 
   .lmd-feature-card p {
-    color: #4b5563;
+    color: #334155 !important;
     line-height: 1.7;
     margin-bottom: 12px;
     font-size: 1rem;
   }
 
   .lmd-feature-card .lmd-highlight {
-    color: #10b981;
+    color: #ff6b35 !important;
     font-weight: 600;
   }
 
   .lmd-feature-card .lmd-note {
     font-size: 0.9rem;
-    color: #6b7280;
+    color: #475569 !important;
     font-style: italic;
     padding-top: 10px;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid #e2e8f0;
     margin-top: 15px;
   }
 
@@ -332,20 +327,20 @@
 
   .lmd-seo-content h2 {
     font-size: 2.2rem;
-    color: #111827;
+    color: #0f172a !important;
     margin-bottom: 25px;
     font-weight: 800;
   }
 
   .lmd-seo-content p {
-    color: #4b5563;
+    color: #334155 !important;
     line-height: 1.9;
     margin-bottom: 20px;
     font-size: 1.05rem;
   }
 
   .lmd-seo-content strong {
-    color: #10b981;
+    color: #ff6b35 !important;
     font-weight: 600;
   }
 
@@ -355,12 +350,12 @@
     gap: 12px;
     margin-top: 35px;
     padding-top: 30px;
-    border-top: 2px solid #f3f4f6;
+    border-top: 2px solid #e2e8f0;
   }
 
   .lmd-keyword-tag {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-    color: #065f46;
+    background: linear-gradient(135deg, #fed7aa, #fdba74);
+    color: #7c2d12;
     padding: 10px 20px;
     border-radius: 25px;
     font-size: 0.9rem;
@@ -370,10 +365,10 @@
   }
 
   .lmd-keyword-tag:hover {
-    background: #10b981;
+    background: #ff6b35;
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
   }
 
   /* CTA Section */
@@ -381,7 +376,8 @@
     text-align: center;
     margin: 70px 0 50px;
     padding: 60px 30px;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    /* background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); */
+    background: #ff6b35;
     border-radius: 24px;
     color: white;
   }
@@ -390,12 +386,13 @@
     font-size: 2.5rem;
     margin-bottom: 20px;
     font-weight: 800;
+    color: white !important;
   }
 
   .lmd-cta-section p {
     font-size: 1.2rem;
     margin-bottom: 35px;
-    color: #dbeafe;
+    color: #dbeafe !important;
   }
 
   .lmd-cta-buttons {
@@ -418,14 +415,14 @@
   }
 
   .lmd-btn-primary {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #ff6b35, #e55a2b);
     color: white;
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
   }
 
   .lmd-btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.4);
   }
 
   .lmd-btn-secondary {
@@ -436,7 +433,7 @@
 
   .lmd-btn-secondary:hover {
     background: white;
-    color: #1e3a8a;
+    color: #2563eb;
   }
 
   /* Animations */
