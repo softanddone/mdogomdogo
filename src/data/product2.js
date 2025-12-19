@@ -374,14 +374,6 @@ export const products = [
   }},
 
 
-
-
-
-
-
-
-
-
  {
   id: 4,
   name: "Oppo Reno 14",
@@ -8466,7 +8458,129 @@ export const products = [
         }
       ]
     }
+  },
+
+  {
+  id: 1,
+  name: "Tecno Camon 40 Pro",
+  fullname:"Tecno Camon 40 Pro 6.78 Inches, 256GB ROM + 12GB RAM, Battery: 5200mAh (Dual SIM) 50MP OIS",
+  status: "New",
+  image: "/product/phones/Tecno-Camon-40-Pro.webp",
+  from: "KSh 5,500",
+  deposit: "KSh 5,500",
+  daily: "Ksh 135",
+  totalPrice: "KSh 29,500",
+  source: "/phones/Tecno-Camon-40-Pro.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.78\" AMOLED FHD+ (2436 × 1080) 120Hz",
+  processor: "MediaTek Helio G100 Ultimate",
+  camera: "50MP OIS + 8MP Ultra-wide (rear), 50MP AF (front)",
+  memory: "256GB / 12GB RAM, No MicroSD",
+  battery: "5200mAh, 45W Super Charge",
+  version: "Android 14, HiOS 14",
+  depositanddaily: "KSh 5,500 Daily KSh 135",
+  slug: "tecno-camon-40-pro",
+  slugs: "tecno-camon-40-pro",
+  description: "Buy Tecno Camon 40 Pro on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & affordable daily payments. Fast delivery available",
+  brand: "Tecno",
+  seller: "Watu Simu",
+  model: "Camon 40 Pro",
+  storage: "256GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Watu","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Tecno Camon 40 Pro features a modern slim design with a curved-edge finish that feels premium in hand. Measuring approximately 164.6 × 74.6 × 7.8mm and weighing about 190g, it balances comfort and style. The phone comes in elegant color options such as Emerald Lake Green and Starry Black, with a refined matte-gloss hybrid finish that resists fingerprints.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a large 6.78-inch AMOLED display with Full HD+ resolution (2436 × 1080) and a smooth 120Hz refresh rate. The screen delivers vibrant colors, deep blacks, and excellent brightness for outdoor visibility. With a high touch sampling rate and eye-care mode, it’s ideal for gaming, streaming, and long browsing sessions.`,
+    },
+    {
+      title: "Camera System",
+      content: `The Camon 40 Pro features a 50MP main rear camera with Optical Image Stabilization (OIS) paired with an 8MP ultra-wide lens for versatile photography. The 50MP front camera with autofocus (AF) delivers sharp selfies and high-quality video calls, enhanced by AI and night portrait features.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the MediaTek Helio G100 Ultimate chipset, the Tecno Camon 40 Pro delivers reliable performance for daily tasks, multitasking, and casual gaming. With 12GB RAM and virtual RAM expansion, apps stay responsive and switching between tasks is smooth.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 14 with Tecno’s HiOS 14, the Camon 40 Pro offers a clean, customizable user experience with enhanced privacy controls, smart power management, and AI features.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `With 256GB of internal storage and 12GB RAM, the Tecno Camon 40 Pro provides ample space for photos, videos, apps, and games, supported by memory fusion for smoother multitasking.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The Camon 40 Pro packs a durable 5200mAh battery designed for long-term reliability. With 45W Super Charge support, the phone powers up quickly and keeps you going throughout the day.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity options include 2G/3G/4G LTE, dual SIM support, Wi-Fi, Bluetooth, GPS, USB Type-C, and stereo dual speakers with Dolby Atmos. Security features include an in-display fingerprint scanner and face unlock.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "6.78″ AMOLED display with 120Hz refresh rate",
+        "50MP OIS rear camera and 50MP AF front camera",
+        "Powerful Helio G100 Ultimate processor",
+        "5200mAh long-life battery",
+        "45W Super Charge support",
+        "Dolby Atmos stereo dual speakers",
+      ],
+      cons: [
+        "No 5G support",
+        "No microSD card expansion",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Tecno Camon 40 Pro is a well-rounded mid-range smartphone focused on camera quality, display smoothness, audio experience, and battery longevity. It is an excellent choice for users seeking premium features at an affordable lipa mdogo mdogo price.`,
+    },
+  ],
+
+  color: "Emerald Lake Green, Starry Black",
+  weight: "190g",
+  dimensions: {
+    length: "164.6mm",
+    width: "74.6mm",
+    height: "7.8mm"
+  },
+  material: "Glass front, Plastic back, Plastic frame",
+  pattern: "Matte Gloss Finish",
+  productLine: "Tecno Camon Series",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 64,
+    reviews: [
+      {
+        author: "Brian O.",
+        rating: 5,
+        reviewBody: "Amazing camera and display for the price. Battery lasts all day.",
+        datePublished: "2025-02-10"
+      },
+      {
+        author: "Lucy W.",
+        rating: 4,
+        reviewBody: "Fast charging is impressive and the screen is very smooth.",
+        datePublished: "2025-03-01"
+      },
+      {
+        author: "Kevin M.",
+        rating: 4,
+        reviewBody: "Great value phone. Performance is solid for daily use.",
+        datePublished: "2025-03-12"
+      }
+    ]
   }
+}
+
 
 
 
