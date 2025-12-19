@@ -1,0 +1,90 @@
+---
+import ProductCard from "./ProductCard.astro";
+import { products } from "../data/product2.js";
+import ShopBy from "./ShopBy.astro";
+---
+
+<style>
+  :root {
+    --dark-color: #161616;
+    --accent-color: #ff5151;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .product-container {
+    max-width: 1200px;
+    margin: 0 2.5rem;
+  }
+
+  .product-container h1 {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-serif;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .product-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (max-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .product-container {
+      margin: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .product-container {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>
+
+<div class="product-container">
+  <h1>Trending Phones on Lipa Mdogo Mdogo in Kenya</h1>
+
+  <div class="product-grid">
+    {
+      products.map((product, index) => (
+        <div class="product-item">
+          <ProductCard {...product} index={index} />
+        </div>
+      ))
+    }
+  </div>
+</div>

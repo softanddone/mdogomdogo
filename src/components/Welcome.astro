@@ -4,6 +4,7 @@ import { products } from "../data/product2.js";
 import ShopBy from "./ShopBy.astro";
 import CarouselProducts from "./CarouselProducts.astro";
 import Latest from "./Latest.astro";
+import ListedProducts from "./ListedPoducts.astro";
 ---
 
 <style is:inline>
@@ -118,11 +119,12 @@ import Latest from "./Latest.astro";
 
 <h1 class="smartphones">Get Your Dream Smartphone today on Lipa Mdogo Mdogo</h1>
 <div class="set">
-  {
+  <!-- {
     products.map((product, index) => (
       <div class="item">
         <ProductCard {...product} index={index} />
       </div>
     ))
-  }
+  } -->
+  <ListedProducts />
 </div>
