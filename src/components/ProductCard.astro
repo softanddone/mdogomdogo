@@ -29,8 +29,8 @@ const {
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
     --text-primary: #0f172a;
-    --text-secondary: #334155; /* Darker for better contrast (was #475569) */
-    --text-muted: #475569; /* Darker for better contrast (was #64748b) */
+    --text-secondary: #334155;
+    --text-muted: #475569;
     --border: #e2e8f0;
     --border-focus: #cbd5e1;
 
@@ -75,12 +75,15 @@ const {
     box-sizing: border-box;
   }
 
-  /* Main card container */
+  /* ✅ CRITICAL FIX: Main card container */
   .product-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    /* width: 280px; */
+    /* ✅ REMOVED fixed width - let grid control this */
+    width: 100%;
+    max-width: 100%;
+    min-width: 0; /* Critical for CSS Grid */
     background: var(--bg-primary);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
@@ -88,10 +91,10 @@ const {
     box-shadow: var(--shadow);
     transition: var(--transition);
     cursor: pointer;
-    /* Improve paint performance */
     will-change: transform;
     contain: layout;
   }
+
   h2 {
     font-family:
       "Inter",
@@ -105,15 +108,15 @@ const {
   .product-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
-    /* border-color: var(--primary); */
     border-color: wheat;
   }
 
-  /* Image container with aspect ratio */
+  /* ✅ Image container with aspect ratio */
   .product-image {
     position: relative;
     aspect-ratio: 1;
     height: 200px;
+    width: 100%; /* Ensure it respects card width */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,9 +137,9 @@ const {
   .product-image img {
     width: 140px;
     height: 140px;
+    max-width: 90%; /* Prevent image from breaking bounds */
     object-fit: contain;
     transition: var(--transition-transform);
-    /* Improve rendering */
     image-rendering: auto;
   }
 
@@ -144,7 +147,7 @@ const {
     transform: scale(1.05);
   }
 
-  /* Badges with WCAG AA compliant colors */
+  /* ✅ CRITICAL FIX: Badges with max-width */
   .badge {
     position: absolute;
     top: var(--space-3);
@@ -158,8 +161,12 @@ const {
     text-transform: uppercase;
     backdrop-filter: blur(8px);
     animation: slideIn 0.3s ease-out;
-    /* Ensure badges have solid backgrounds for contrast */
     box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
+    /* ✅ Prevent badges from pushing beyond card width */
+    max-width: calc(100% - var(--space-6));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @keyframes slideIn {
@@ -174,42 +181,40 @@ const {
   }
 
   .discount-badge {
-    /* Darker red for better contrast: 4.51:1 ratio with white text */
-    /* background: #dc2626; */
-    /* background: #ff6b35; */
     background: rgb(1, 51, 1);
-    /* left: var(--space-3); */
     left: 2px;
   }
 
   .hot-badge {
-    /* Much darker orange/brown for better contrast: 8.35:1 ratio with white text */
     background: #92400e;
     top: 60px !important;
-
-    /* left: var(--space-3); */
     left: 2px;
   }
 
-  /* Content area */
+  /* ✅ Content area */
   .product-info {
     padding: var(--space-4);
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    width: 100%;
+    min-width: 0; /* Allow content to shrink */
   }
 
-  /* Typography improvements */
+  /* ✅ CRITICAL FIX: Typography with text wrapping */
   .product-title {
     margin: 0;
     font-size: var(--font-lg);
     font-weight: var(--font-semibold);
     color: var(--text-primary);
     line-height: 1.4;
-    /* Better text rendering */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    /* ✅ Ensure text wraps instead of overflowing */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .product-title a {
@@ -221,9 +226,12 @@ const {
     transition: var(--transition);
     position: relative;
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* ✅ REMOVED: overflow: hidden and text-overflow: ellipsis */
+    /* ✅ REMOVED: white-space: nowrap - this was causing overflow! */
+    /* Allow text to wrap naturally */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
   }
 
   .product-title a::after {
@@ -251,17 +259,17 @@ const {
     outline-offset: 2px;
   }
 
-  /* Pricing section with better contrast */
+  /* ✅ Pricing section */
   .product-pricing {
     display: flex;
     align-items: baseline;
     gap: var(--space-2);
+    flex-wrap: wrap; /* Allow wrapping on very narrow screens */
   }
 
   .deposit-price {
     font-size: var(--font-sm);
     font-weight: var(--font-bold);
-    /* Darker red for better contrast: 7.73:1 ratio with white background */
     color: #b91c1c;
     letter-spacing: -0.02em;
     font-family:
@@ -271,6 +279,7 @@ const {
       "Segoe UI",
       Roboto,
       sans-serif;
+    word-break: break-word; /* Prevent long prices from overflowing */
   }
 
   .original-price {
@@ -278,22 +287,22 @@ const {
     color: var(--text-muted);
     text-decoration: line-through;
     font-weight: var(--font-medium);
+    word-break: break-word;
   }
 
-  /* Stock status with enhanced contrast */
+  /* Stock status */
   .stock-status {
     display: flex;
     align-items: center;
     gap: var(--space-2);
     font-size: var(--font-sm);
-    /* Darker green for better contrast: 4.79:1 ratio */
     color: #047857;
     font-weight: var(--font-medium);
-    /* Stronger background for better badge contrast */
     background: rgb(16 185 129 / 0.15);
     padding: var(--space-2) var(--space-3);
     border-radius: var(--radius);
     width: fit-content;
+    max-width: 100%; /* Prevent overflow */
     border: 1px solid rgb(16 185 129 / 0.3);
   }
 
@@ -310,8 +319,8 @@ const {
   .stock-indicator {
     width: 8px;
     height: 8px;
+    flex-shrink: 0; /* Prevent indicator from shrinking */
     border-radius: 50%;
-    /* Match the darker green */
     background: #047857;
     animation: pulse 2s infinite;
   }
@@ -326,11 +335,12 @@ const {
     }
   }
 
-  /* Action buttons with better hierarchy */
+  /* ✅ Action buttons */
   .product-actions {
     display: flex;
     gap: var(--space-2);
     margin-top: auto;
+    width: 100%;
   }
 
   .btn {
@@ -352,6 +362,8 @@ const {
       "Segoe UI",
       Roboto,
       sans-serif;
+    /* ✅ Ensure buttons respect container width */
+    max-width: 100%;
   }
 
   .btn::before {
@@ -378,8 +390,11 @@ const {
     color: white;
     padding: var(--space-2) var(--space-3);
     font-size: var(--font-base);
-    /* min-height: 44px; */
     min-height: 40px;
+    /* ✅ Prevent button text from overflowing */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .btn-primary:hover {
@@ -421,39 +436,35 @@ const {
     border: 0 !important;
   }
 
-  /* Responsive design */
+  /* ✅ Responsive design */
   @media (max-width: 768px) {
     .product-card {
-      /* width: 100%; 
-      max-width: 320px;  */
+      /* ✅ REMOVED fixed width and max-width */
+      width: 100%;
+      max-width: 100%;
     }
+
     .original-price {
       display: none;
-    }
-    .product-info {
-      /* background: pink; */
-      /* gap: -50px!important; */
-    }
-    .product-actions {
-      /* background: yellow; */
-    }
-    .product-actions button {
-      /* display: none; */
     }
 
     .product-image {
       height: 180px;
     }
+
     .product-image img {
       width: 120px;
       height: 120px;
     }
+
     .product-info {
       padding: var(--space-3);
     }
+
     .product-title {
       font-size: var(--font-base);
     }
+
     .deposit-price {
       font-size: var(--font-base);
     }
@@ -479,7 +490,7 @@ const {
     }
   }
 
-  /* High contrast mode support with enhanced accessibility */
+  /* High contrast mode support */
   @media (prefers-contrast: high) {
     .product-card,
     .btn,
@@ -488,13 +499,12 @@ const {
       border-width: 2px;
     }
 
-    /* Enhance contrast further in high contrast mode */
     .deposit-price {
-      color: #991b1b; /* Even darker red: 9.14:1 ratio */
+      color: #991b1b;
     }
 
     .stock-status {
-      color: #065f46; /* Darker green: 6.24:1 ratio */
+      color: #065f46;
       background: rgb(16 185 129 / 0.25);
       border-color: rgb(16 185 129 / 0.5);
     }
@@ -504,16 +514,15 @@ const {
     }
 
     .badge {
-      /* Ensure maximum contrast for badges */
       text-shadow: 0 1px 2px rgb(0 0 0 / 0.8);
     }
 
     .discount-badge {
-      background: #991b1b; /* 9.14:1 ratio */
+      background: #991b1b;
     }
 
     .hot-badge {
-      background: #78350f; /* Even darker: 10.89:1 ratio */
+      background: #78350f;
     }
   }
 
@@ -663,9 +672,7 @@ const {
     window.addToCart = function (btn) {
       const id = btn.dataset.id;
       const name = btn.dataset.name;
-      // const price = parseFloat(btn.dataset.price || 0);
       const price = parseFloat(btn.dataset.price?.replace(/[^\d.]/g, "") || 0);
-
       const img = btn.dataset.img;
 
       let cart = JSON.parse(localStorage.getItem("cart") || "[]");
