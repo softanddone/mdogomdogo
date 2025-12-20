@@ -81,7 +81,6 @@ import ListedProducts from "./ListedPoducts.astro";
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    font-size: 24px;
     text-decoration: none;
     box-shadow:
       0 10px 25px rgba(0, 0, 0, 0.25),
@@ -89,6 +88,12 @@ import ListedProducts from "./ListedPoducts.astro";
     transition:
       transform 0.25s ease,
       box-shadow 0.25s ease;
+  }
+
+  .fab svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
   }
 
   .fab:hover {
@@ -104,10 +109,6 @@ import ListedProducts from "./ListedPoducts.astro";
 
   .fab-call {
     background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  }
-
-  .fab i {
-    line-height: 1;
   }
 
   .fab-label {
@@ -159,13 +160,28 @@ import ListedProducts from "./ListedPoducts.astro";
       aria-label="Chat on WhatsApp"
     >
       <span class="fab-label">Chat on WhatsApp</span>
-      <i class="fa-brands fa-whatsapp"></i>
+
+      <!-- WhatsApp SVG -->
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path
+          d="M16 3C9.372 3 4 8.373 4 15c0 2.642.866 5.081 2.332 7.058L4 29l7.143-2.288A11.94 11.94 0 0016 27c6.628 0 12-5.373 12-12S22.628 3 16 3zm0 21.5a9.45 9.45 0 01-4.819-1.31l-.344-.205-4.244 1.358 1.383-4.136-.224-.365A9.455 9.455 0 0116 5.5a9.5 9.5 0 010 19z"
+        ></path>
+        <path
+          d="M21.26 18.53c-.29-.145-1.716-.846-1.982-.943-.265-.096-.458-.145-.651.145-.193.29-.748.943-.916 1.135-.169.193-.337.217-.627.073-.29-.145-1.224-.451-2.33-1.438-.861-.768-1.443-1.715-1.611-2.005-.169-.29-.018-.447.127-.592.13-.129.29-.338.434-.507.145-.169.193-.29.29-.483.097-.193.048-.362-.024-.507-.072-.145-.651-1.57-.893-2.149-.236-.568-.476-.491-.651-.5h-.557c-.193 0-.507.073-.772.362-.265.29-1.01.986-1.01 2.406s1.035 2.792 1.18 2.985c.145.193 2.038 3.112 4.938 4.362.69.298 1.228.476 1.648.609.693.221 1.325.19 1.823.115.557-.083 1.716-.7 1.958-1.378.241-.676.241-1.256.169-1.378-.072-.121-.265-.193-.555-.338z"
+        ></path>
+      </svg>
     </a>
 
     <!-- Call -->
     <a href="tel:+254720202167" class="fab fab-call" aria-label="Call us">
       <span class="fab-label">+254720202167</span>
-      <i class="fa-solid fa-phone"></i>
+
+      <!-- Phone SVG -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.07 22 2 13.93 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
+        ></path>
+      </svg>
     </a>
   </div>
 </main>
