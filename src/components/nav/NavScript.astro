@@ -209,7 +209,7 @@
     const html: string = filtered
       .map(
         (product: Product) => `
-          <a href="/product/${product.slug}" class="search-result-item" role="option">
+          <a href="/${product.slug}" class="search-result-item" role="option">
             <div class="search-result-image-wrapper">
               <img src="${product.source}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23f3f4f6%22 width=%2260%22 height=%2260%22/%3E%3C/svg%3E'">
             </div>

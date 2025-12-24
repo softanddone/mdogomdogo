@@ -81,8 +81,8 @@ for (const product of filteredProducts) {
   }
 }
 
-// Generate schema for SEO
-const schemaArray = generateCategorySchema(
+// Generate schema for SEO (this returns a JSON string)
+const schemaString = generateCategorySchema(
   category,
   filteredProducts,
   displayCategory
@@ -102,11 +102,11 @@ const brands = [...new Set(filteredProducts.map((p) => p.brand))];
 const seo = {
   title: `Buy ${displayCategory} on Credit in Nairobi | Lipa Mdogo Mdogo - Free Delivery`,
   description: `Shop ${displayCategory} smartphones on flexible payment plans in Nairobi. Pay small deposit from Ksh ${minPrice.toLocaleString()} & daily installments. Free delivery across Nairobi. ${filteredProducts.length}+ models available from ${brands.join(", ")}.`,
-  canonical: `https://mdogomdogodeals.co.ke/category/${category}`,
+  canonical: `https://mdogomdogodeals.co.ke/${category}`,
   ogImage: filteredProducts[0]
     ? `https://mdogomdogodeals.co.ke${filteredProducts[0].source}`
     : "https://mdogomdogodeals.co.ke/default-og-image.jpg",
-  schema: schemaArray.map((schema) => JSON.stringify(schema)).join(""),
+  schema: schemaString,
   keywords: `${displayCategory} on credit Nairobi, buy ${displayCategory} lipa mdogo mdogo, ${displayCategory} installments Kenya, cheap ${displayCategory} Nairobi, ${brands.join(" ")}, smartphone credit payment, phone financing Nairobi`,
 };
 ---
