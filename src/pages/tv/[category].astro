@@ -80,7 +80,7 @@ for (const product of filteredProducts) {
 }
 
 // Generate schema for SEO
-const schemaArray = generateCategorySchema(
+const schemaString = generateCategorySchema(
   category,
   filteredProducts,
   displayCategory
@@ -104,7 +104,7 @@ const seo = {
   ogImage: filteredProducts[0]
     ? `https://mdogomdogodeals.co.ke${filteredProducts[0].source}`
     : "https://mdogomdogodeals.co.ke/default-og-image.jpg",
-  schema: schemaArray.map((schema) => JSON.stringify(schema)).join(""),
+  schema: schemaString,
   keywords: `${displayCategory} on credit Nairobi, buy ${displayCategory} lipa mdogo mdogo, ${displayCategory} installments Kenya, cheap ${displayCategory} Nairobi, ${brands.join(" ")}, smartphone credit payment, phone financing Nairobi`,
 };
 ---
