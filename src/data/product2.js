@@ -944,122 +944,10 @@ export const products = [
 
 
   
+  
+
   {
   id: 9,
-  name: "Infinix Hot 60 Pro (8/128GB)",
-  fullname:"Infinix Hot 60 Pro 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
-  status: "New",
-  image: "/phones/infinix-hot-60-pro-8-128.webp",
-  from: "KSh 19,500",
-  deposit: "KSh 5,200",
-  daily: "KSh 140",
-  totalPrice: "KSh 24,000",
-  source: "/phones/infinix-hot-60-pro-8-128.webp",
-  discount: "-5%",
-  display: "block",
-  phonedisplay: "6.78″ AMOLED, 120Hz",
-  processor: "MediaTek Helio G99",
-  camera: "50MP (rear), 13MP (front)",
-  memory: "8GB RAM / 128GB Storage",
-  battery: "5160mAh, 45W Fast Charging",
-  version: "Android 15, XOS",
-  depositanddaily: "KSh 5,000 Deposit + KSh 150 Daily",
-  slug: "infinix-hot-60-pro-8-128",
-  slugs: "infinix-hot-60-pro",
-  description: "Buy Infinix Hot 60 Pro (8/128GB) in Kenya. Premium AMOLED display, smooth performance, and long-lasting battery. Pay with a small deposit and affordable daily installments.",
-  brand: "Infinix",
-  seller: "Authorized Dealer",
-  model: "Hot 60 Pro",
-  storage: "128GB",
-  condition: "new",
-  gtin: "",
-  categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Hot Series","Mogo","Loan","Smartphones","Lipa Mdogo Mdogo"],
-  details: [
-  {
-    title: "Body and Design",
-    content: `The Infinix Hot 60 Pro combines elegant styling with a durable build, giving it a premium look and feel. It sports a smooth matte finish with refined curves for a comfortable grip. Measuring 168.5 × 76.5 × 8.5mm and weighing around 200g, it strikes a good balance between size and comfort. Available in attractive colors like Horizon Blue, Starlit Black, and Sunset Gold, this device easily stands out as one of the most stylish phones in its price range.`,
-  },
-  {
-    title: "Display",
-    content: `Immerse yourself in a 6.78-inch Full HD+ punch-hole display with a crisp 2460 × 1080 resolution. The 120Hz refresh rate ensures ultra-smooth scrolling and lag-free visuals, whether you’re watching videos or gaming. Thanks to its slim bezels and bright IPS panel, you’ll enjoy a truly cinematic experience. The Eye Care Mode reduces blue light, keeping your eyes comfortable during long sessions of use.`,
-  },
-  {
-    title: "Camera System",
-    content: `Capture your best moments in stunning detail with the Hot 60 Pro’s 108MP AI-powered dual rear camera system. The main lens ensures clear and vivid shots in all lighting conditions, while the depth sensor adds natural background blur for portraits. The 32MP front camera, enhanced with AI Beautification and HDR, delivers sharp selfies and smooth video calls even in challenging lighting.`,
-  },
-  {
-    title: "Performance",
-    content: `Running on the reliable MediaTek Helio G99 processor, the Infinix Hot 60 Pro is built for speed and stability. Its octa-core CPU, combined with 8GB of RAM, provides effortless multitasking and consistent gaming performance. The 128GB internal storage gives you ample room for apps, media, and downloads, while RAM expansion technology boosts performance up to 16GB for smoother app switching.`,
-  },
-  {
-    title: "Operating System",
-    content: `The device runs on Android 14 powered by Infinix’s XOS 14 interface, offering a clean, smooth, and customizable experience. You’ll enjoy useful features like Smart Panel, Lightning Multi-Window, and advanced privacy controls, making everyday use efficient and secure.`,
-  },
-  {
-    title: "Storage and Memory",
-    content: `With 128GB of built-in storage and 8GB of physical RAM, the Infinix Hot 60 Pro offers generous space and speed for daily use. You can expand storage up to 1TB via MicroSD, ensuring you never run out of room for your photos, videos, and favorite apps.`,
-  },
-  {
-    title: "Battery and Charging",
-    content: `A massive 5000mAh battery powers the Hot 60 Pro, giving you long hours of active use on a single charge. The 33W Super Charge support via USB Type-C ensures you can quickly recharge — from 0% to 50% in about 30 minutes. Plus, Infinix’s Power Marathon Mode helps extend usage time when your battery is running low.`,
-  },
-  {
-    title: "Connectivity and Sensors",
-    content: `Enjoy reliable connectivity with 4G LTE, Wi-Fi, Bluetooth 5.1, GPS, and a USB Type-C port. The phone also features a side-mounted fingerprint sensor and AI face unlock for fast and secure access. Other sensors include a proximity sensor, compass, gyroscope, and accelerometer for enhanced functionality.`,
-  },
-  {
-    title: "Pros and Cons",
-    pros: [
-      "Smooth 120Hz Full HD+ display",
-      "Powerful 108MP AI main camera",
-      "Strong Helio G99 chipset with expandable RAM",
-      "33W fast charging with long-lasting 5000mAh battery",
-      "Large 128GB storage expandable to 1TB",
-    ],
-    cons: [
-      "No 5G network support",
-      "Plastic build can feel less premium",
-      "Slightly bulky for small hands",
-    ],
-  },
-  {
-    title: "Verdict",
-    content: `The Infinix Hot 60 Pro (8GB/128GB) offers an outstanding balance between performance, display quality, and camera innovation. It’s ideal for users seeking a stylish yet powerful smartphone with strong battery life and fast charging. Perfect for students, professionals, and everyday users who want premium features without overspending. A top choice in the midrange category and available on lipa mdogo mdogo plans at Mdogomdogo Deals.`,
-  },
-],
-
-  color: "Palm Blue, Horizon Gold, Starfall Green, Starlit Black",
-  weight: "199g",
-  dimensions: {
-    length: "168.6mm",
-    width: "76.6mm",
-    height: "8.3mm"
-  },
-  material: "Glass front, Plastic frame & back",
-  pattern: "Glossy",
-  productLine: "Hot",
-  reviews: {
-    averageRating: 4.3,
-    reviewCount: 20,
-    reviews: [
-      {
-        author: "User A",
-        rating: 5,
-        reviewBody: "Great display and battery life.",
-        datePublished: "2025-07-10"
-      },
-      {
-        author: "Linda M.",
-        rating: 4,
-        reviewBody: "Smooth performance, but a bit heavy.",
-        datePublished: "2025-08-03"
-      }
-    ]
-  }
-},
-
-  {
-  id: 10,
   name: "Infinix Note 50 Pro (8/256GB)",
   fullname:"Infinix Note 50 Pro 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -1173,7 +1061,7 @@ export const products = [
 },
 
   {
-  id: 11,
+  id: 10,
   name: "Infinix Hot 50 Pro (8/128GB)",
   fullname:"Infinix Hot 50 Pro 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -1284,7 +1172,7 @@ export const products = [
 
 
   {
-  id: 12,
+  id: 11,
   name: "Infinix Hot 60i (6/129GB)",
   fullname:"Infinix Hot 60i 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -1392,7 +1280,7 @@ export const products = [
 },
 
 {
-  id: 13,
+  id: 12,
   name: "Infinix Smart 9 (4/128GB)",
   fullname:"Infinix Smart 9 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
@@ -1502,7 +1390,7 @@ export const products = [
 
 
 {
-  id: 14,
+  id: 13,
   name: "Infinix GT 30 Pro (12/256GB)",
   fullname:"Infinix GT 30 Pro 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
@@ -1613,7 +1501,7 @@ export const products = [
   
 
   {
-  id: 15,
+  id: 14,
   name: "Infinix Smart 9 HD (3/64GB or 4/64GB)",
   fullname:"Infinix Smart 9 6.67 Inches, 64GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
@@ -1721,7 +1609,7 @@ export const products = [
 },
 
   {
-  id: 16,
+  id: 15,
   name: "Infinix Smart 10 (3-4/64-128GB)",
   fullname:"Infinix Smart 10 6.67 Inches, 64GB ROM + 3-4GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
@@ -1836,7 +1724,7 @@ export const products = [
 ,
   
 {
-  id: 17,
+  id: 16,
   name: "Infinix Note 50S 5G (8/256GB)",
   fullname:"Infinix Note 50S 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
@@ -1951,7 +1839,7 @@ export const products = [
 },
 
   {
-  id: 18,
+  id: 17,
   name: "Tecno Spark 9 Pro (4GB/128GB)",
   fullname:"Tecno Spark 9 Pro 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
@@ -2071,7 +1959,7 @@ export const products = [
 },
 
   {
-  id: 19,
+  id: 18,
   name: "Tecno Camon 20 Pro (8GB/256GB)",
   fullname:"Tecno Camon 20 Pro 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM)",
   status: "New",
@@ -2193,7 +2081,7 @@ export const products = [
 
 
 {
-  id: 20,
+  id: 19,
   name: "Tecno Spark 9 Pro (4GB/128GB)",
   fullname:"Tecno Spark 9 Pro  6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
@@ -2299,7 +2187,7 @@ export const products = [
 
 
   {
-  id: 21,
+  id: 20,
   name: "Tecno Camon 20 (8GB/256GB)",
   fullname:"Tecno Camon 20  6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
   status: "New",
@@ -2404,7 +2292,7 @@ export const products = [
  
 
 {
-  id: 22,
+  id: 21,
   name: "Tecno Camon 20 Pro (8GB/256GB)",
   fullname:"Tecno Camon 20 Pro 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
   status: "New",
@@ -2510,7 +2398,7 @@ export const products = [
 
 
 {
-  id: 23,
+  id: 22,
   name: "Tecno Camon 20 Premier 5G",
   fullname:"Tecno Camon 20 5G 6.67 Inches, 512GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
 
@@ -2618,7 +2506,7 @@ export const products = [
 },
 
   {
-  id: 24,
+  id: 23,
   name: "Tecno Spark 20 (8GB/128GB)",
   fullname:"Tecno Spark 20 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -2723,7 +2611,7 @@ export const products = [
 },
 
   {
-  id: 25,
+  id: 24,
   name: "Tecno Spark 20C (4GB/128GB)",
   fullname:"Tecno Spark 20C 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
 
@@ -2825,7 +2713,7 @@ export const products = [
 },
 
   {
-  id: 26,
+  id: 25,
   name: "Tecno Spark 10 Pro (8GB/128GB)",
   fullname:"Tecno Spark 10 Pro 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -2927,7 +2815,7 @@ export const products = [
 },
 
   {
-  id: 27,
+  id: 26,
   name: "Tecno Megaphone 19",
   fullname:"Tecno Megaphone 19 6.67 Inches, 32GB ROM + 2GB RAM, Battery: 4000mAh (Dual SIM)",
   status: "New",
@@ -3028,7 +2916,7 @@ export const products = [
 }
 ,
   {
-  id: 28,
+  id: 27,
   name: "Tecno Spark 10C",
   fullname:"Tecno Spark 10C 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -3130,7 +3018,7 @@ export const products = [
 }
 ,
 {
-  id: 29,
+  id: 28,
   name: "Tecno Spark Go 2023",
   fullname:"Tecno Spark Go 2023 5G 6.67 Inches, 64GB ROM + 3GB RAM, Battery: 5100mAh (Dual SIM)",
   status: "New",
@@ -3232,7 +3120,7 @@ export const products = [
 },
 
 {
-  id: 30,
+  id: 29,
   name: "Tecno Phantom X2 Pro",
   fullname:"Tecno Phantom X2 Pro 6.67 Inches, 256GB 12ROM + 4GB RAM, Battery: 5160mAh (Dual SIM) 50MP",
   status: "New",
@@ -3346,7 +3234,7 @@ export const products = [
 
 
 {
-  id: 31,
+  id: 30,
   name: "Tecno Phantom V Fold",
   fullname:"Tecno Phantom V Fold 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -3456,7 +3344,7 @@ export const products = [
 },
 
 {
-  id: 32,
+  id: 31,
   name: "Tecno Spark 8C",
   fullname:"Tecno Spark 8C 6.67 Inches, 64GB ROM + 3GB RAM, Battery: 5100mAh (Dual SIM) 13MP",
   status: "New",
@@ -3567,7 +3455,7 @@ export const products = [
 
 
 {
-  id: 33,
+  id: 32,
   name: "Tecno Pova Neo 2",
   fullname:"Tecno Pova Neo 2 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 16MP",
   status: "New",
@@ -3677,7 +3565,7 @@ export const products = [
 ,
 
   {
-  id: 34,
+  id: 33,
   name: "Vivo V60 5G",
   fullname:"Vivo V60 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -3792,7 +3680,7 @@ export const products = [
 }
 ,
   {
-  id: 35,
+  id: 34,
   name: "Vivo V50 Lite 5G",
   fullname:"Vivo V50 Lite 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -3908,7 +3796,7 @@ export const products = [
 
 
   {
-  id: 36,
+  id: 35,
   name: "Vivo Y04",
   fullname:"Vivo Y04 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 13MP",
   status: "New",
@@ -4022,7 +3910,7 @@ export const products = [
 }
 ,
   {
-  id: 37,
+  id: 36,
   name: "Vivo V50 5G",
   fullname:"Vivo V50 5G 6.67 Inches, 512GB ROM + 12GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -4136,7 +4024,7 @@ export const products = [
 },
 
   {
-  id: 38,
+  id: 37,
   name: "Vivo Y29",
   fullname:"Vivo Y29 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -4250,7 +4138,7 @@ export const products = [
 }
 ,
   {
-  id: 39,
+  id: 38,
   name: "Vivo Y19s",
   fullname:"Vivo Y19s 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -4363,7 +4251,7 @@ export const products = [
   }
 }
 ,{
-  id: 40,
+  id: 39,
   name: "Vivo V40",
   fullname:"Vivo V40 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -4477,7 +4365,7 @@ export const products = [
 }
 ,
   {
-  id: 41,
+  id: 40,
   name: "Vivo Y18",
   fullname:"Vivo Y18 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -4591,7 +4479,7 @@ export const products = [
 }
 ,
   {
-  id: 42,
+  id: 41,
   name: "Vivo Y03",
   fullname:"Vivo Y03 5G 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -4705,7 +4593,7 @@ export const products = [
 }
 ,
   {
-  id: 43,
+  id: 42,
   name: "Vivo Y28",
   fullname:"Vivo Y28 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -4818,7 +4706,7 @@ export const products = [
   }
 },
   {
-  id: 44,
+  id: 43,
   name: "Vivo Y27s",
   fullname:"Vivo Y27s 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -4932,7 +4820,7 @@ export const products = [
 },
 
 {
-  id: 45,
+  id: 44,
   name: "Tecno Spark 40",
   fullname:"Tecno Spark 40 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5049,7 +4937,7 @@ export const products = [
 
 
 {
-  id: 46,
+  id: 45,
   name: "Infinix Hot 60i",
   fullname:"Infinix Hot 60i 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5167,7 +5055,7 @@ export const products = [
 
 
 {
-  id: 47,
+  id: 46,
   name: "Samsung Galaxy A16",
   fullname:"Samsung Galaxy A16 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5285,7 +5173,7 @@ export const products = [
 
 
 {
-  id: 48,
+  id: 47,
   name: "Samsung Galaxy A05",
   fullname:"Samsung Galaxy A05 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5402,7 +5290,7 @@ export const products = [
 
 
 {
-  id: 49,
+  id: 48,
   name: "Samsung Galaxy A06",
   fullname:"Samsung Galaxy A06 5G 6.67 Inches, 64GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5518,7 +5406,7 @@ export const products = [
 },
 
 {
-  id: 50,
+  id: 49,
   name: "Samsung Galaxy A07",
   fullname:"Samsung Galaxy A07 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5634,7 +5522,7 @@ export const products = [
 },
 
 {
-  id: 51,
+  id: 50,
   name: "Tecno Pop 10",
   fullname:"Tecno Pop 10 6.67 Inches, 64GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
   status: "New",
@@ -5751,7 +5639,7 @@ export const products = [
 
 
 {
-  id: 52,
+  id: 51,
   name: "HMD X2",
   fullname:"Mkopa HMD X2 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -5870,7 +5758,7 @@ export const products = [
 
 
 {
-  id: 53,
+  id: 52,
   name: "HMD X20",
   fullname:"Oppo Reno 14F 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 4470mAh (Dual SIM) 50MP",
   status: "Mkopa Offer",
@@ -5987,7 +5875,7 @@ export const products = [
 },
 
 {
-  id: 54,
+  id: 53,
   name: "HMD X30",
   fullname:"Mkopa HMD X30 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "Mkopa Offer",
@@ -6106,7 +5994,7 @@ export const products = [
 
 
   {
-    id: 55,
+    id: 54,
     name: "iPhone 14 Pro Max",
   fullname:"Iphone 14 Pro Max 5G 6.67 Inches, 1TB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 48MP+48MP+12MP",
     status: "New",
@@ -6225,7 +6113,7 @@ export const products = [
 
   
   {
-    id: 56,
+    id: 55,
     name: "iPhone 14 Pro Max",
   fullname:"Iphone 14 Pro Max 5G 6.67 Inches, 512GB ROM + 6GB RAM, Battery: 4323mAh (Dual SIM) 48MP+12MP+12MP",
     status: "New",
@@ -6342,7 +6230,7 @@ export const products = [
 
 
   {
-    id: 57,
+    id: 56,
     name: "iPhone 14 Pro Max",
     fullname:"IPhone 14 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 48MP + 48MP",
     status: "New",
@@ -6459,7 +6347,7 @@ export const products = [
 
 
   {
-    id: 58,
+    id: 57,
     name: "iPhone 13 Pro Max",
     fullname:"Iphone 13 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 4352mAh (Dual SIM) 48MP+12MP",
     status: "New",
@@ -6578,7 +6466,7 @@ export const products = [
 
 
   {
-  id: 59,
+  id: 58,
   name: "iPhone 13 Pro Max 128GB",
   fullname:"IPhone 13 Pro Max 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 12MP+12MP+12MP",
 
@@ -6696,7 +6584,7 @@ export const products = [
 
 
 {
-  id: 60,
+  id: 59,
   name: "iPhone 12 Pro Max 256GB",
   fullname:"Iphone 12 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 3687mAh (Dual SIM) 12MP+12MP",
   status: "New",
@@ -6813,7 +6701,7 @@ export const products = [
 
 
 {
-  id: 61,
+  id: 60,
   name: "iPhone 11 128GB",
   fullname:"iPhone 11 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 3110mAh (Dual SIM) 12MP +12MP",
   status: "Used",
@@ -6929,7 +6817,7 @@ export const products = [
 
 
 {
-  id: 62,
+  id: 61,
   name: "Samsung Galaxy S20 128GB",
   fullname:"Samsung Galaxy S20 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 12MP+64MP",
   status: "Used",
@@ -7044,7 +6932,7 @@ export const products = [
 },
 
 {
-  id: 63,
+  id: 62,
   name: "Samsung Galaxy Note 20 Ultra 128GB",
   fullname:"Samsung Galaxy Note 20 Ultra 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 4500mAh (Dual SIM) 108MP+12MP",
   status: "Used",
@@ -7161,7 +7049,7 @@ export const products = [
 
 
 {
-  id: 64,
+  id: 63,
   name: "Samsung Galaxy S24 256GB",
   fullname:"Samsung Galaxy S24 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 50MP",
   status: "New",
@@ -7278,7 +7166,7 @@ export const products = [
 
 
 {
-  id: 65,
+  id: 64,
   name: "Samsung Galaxy S23 Ultra 256GB",
   fullname:"Samsung Galaxy S23 Ultra 256GB 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 200MP+12MP",
 
@@ -7396,7 +7284,7 @@ export const products = [
 
 
 {
-  id: 66,
+  id: 65,
   name: "Samsung Galaxy S22 Ultra 256GB",
   fullname:"Samsung Galaxy S22 Ultra 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 108MP+12MP",
   status: "New",
@@ -7512,7 +7400,7 @@ export const products = [
 },
 
 {
-  id: 67,
+  id: 66,
   name: "Samsung Galaxy S21 Ultra 128GB",
   fullname:"Samsung Galaxy S21 Ultra 6.67 Inches, 128GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 108MP + 12MP",
   status: "New",
@@ -7629,7 +7517,7 @@ export const products = [
 
 
 {
-  id: 68,
+  id: 67,
   name: "Samsung Galaxy Note 10 Plus 256GB",
   fullname:"Samsung Galaxy Note 10 Plus 6.67 Inches, 1TB ROM + 12 RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
@@ -7745,7 +7633,7 @@ export const products = [
 },
 
 {
-  id: 69,
+  id: 68,
   name: "Samsung Galaxy S21 Plus 5G (128GB)",
   fullname:"Samsung Galaxy S21 Plus 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4800mAh (Dual SIM) 12MP + 12MP",
   status: "Used",
@@ -7862,7 +7750,7 @@ export const products = [
 
 
 {
-  id: 70,
+  id: 69,
   name: "Samsung Galaxy A42 5G 128GB",
   fullname:"Samsung Galaxy A42 Plus 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 48MP + 8MP",
   
@@ -7979,7 +7867,7 @@ export const products = [
 
 
 {
-  id: 71,
+  id: 70,
   name: "iPhone 12 Pro 256GB",
   fullname:"iPhone 12 Pro Max 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 2815mAh (Dual SIM) 12MP + 12MP",
   status: "New",
@@ -8096,7 +7984,7 @@ export const products = [
 
 
 {
-  id: 72,
+  id: 71,
   name: "Itel A90",
   fullname: "Itel A90 6.6 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
   status: "New",
@@ -8213,7 +8101,7 @@ export const products = [
 
 
 {
-    id: 73,
+    id: 72,
     name: "Tecno Spark 40 Pro Plus",
     fullname:"Tecno Spark 40 Pro Plus 6.78 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 108MP",
     status: "New",
@@ -8338,7 +8226,7 @@ export const products = [
 
 
   {
-    id: 74,
+    id: 73,
     name: "Samsung Galaxy S20+",
     fullname:"Samsung Galaxy S20+ 6.7 Inches, 128GB ROM + 8GB RAM, Battery: 4500mAh (Dual SIM) 64MP",
     status: "New",
@@ -8461,7 +8349,7 @@ export const products = [
   },
 
   {
-  id: 75,
+  id: 74,
   name: "Tecno Camon 40 Pro",
   fullname:"Tecno Camon 40 Pro 6.78 Inches, 256GB ROM + 12GB RAM, Battery: 5200mAh (Dual SIM) 50MP OIS",
   status: "New",
