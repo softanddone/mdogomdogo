@@ -11,7 +11,7 @@ import {
   generateProductSchema,
   generateBreadcrumbSchema,
 } from "../utils/structureData";
-import Nav2 from "../components/Nav2.astro";
+import Nav from "../components/Nav.astro";
 import Gift from "../components/Gift.astro";
 
 export async function getStaticPaths() {
@@ -517,7 +517,7 @@ const breadcrumbs = [
 
 <Layout {...seo}>
   <Gift />
-  <Nav2 />
+  <Nav />
 
   <!-- Breadcrumb Navigation -->
   <nav class="breadcrumb" aria-label="Breadcrumb">

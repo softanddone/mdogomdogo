@@ -1,5 +1,5 @@
 ---
-import Nav2 from "../components/Nav2.astro";
+import Nav from "../components/Nav.astro";
 ---
 
 <html>
@@ -16,8 +16,9 @@ import Nav2 from "../components/Nav2.astro";
 
       body {
         background: #f4f4f4;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-          "Helvetica", "Arial", sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica",
+          "Arial", sans-serif;
         color: #333;
       }
 
@@ -399,7 +400,7 @@ import Nav2 from "../components/Nav2.astro";
   </head>
   <body>
     <main class="cart-page">
-      <Nav2 />
+      <Nav />
       <div class="cart-header">
         <h2>Cart (<span id="cart-count">0</span>)</h2>
       </div>
