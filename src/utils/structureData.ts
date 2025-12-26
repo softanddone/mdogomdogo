@@ -214,7 +214,6 @@ const SHARED_DELIVERY_TIME = {
 };
 
 const generateDeliveryTime = () => SHARED_DELIVERY_TIME;
-
 // FIXED: Generate unique, product-specific descriptions
 const generateUniqueDescription = (product: FlexibleProduct, depositAmount: number, dailyAmount: number, totalDays: number): string => {
   const features = [];
@@ -229,7 +228,6 @@ const generateUniqueDescription = (product: FlexibleProduct, depositAmount: numb
   
   return `Buy the ${product.brand} ${product.name} in Kenya through our flexible Lipa Mdogo Mdogo payment plan.${featureText} Pay only KES ${depositAmount.toLocaleString()} deposit, then KES ${dailyAmount.toLocaleString()} daily for ${totalDays} days. Genuine ${product.brand} phone with 2-year warranty. Free same-day delivery in Nairobi, 1-2 days countrywide. ${product.condition === 'new' ? 'Brand new, factory sealed.' : 'Pre-owned, fully tested.'} Available now at Mdogo Mdogo Deals - Kenya's trusted phone retailer since 2018.`;
 };
-
 // FIXED: Main Product Schema using @graph structure
 export function generateProductSchema(product: FlexibleProduct) {
   const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
@@ -237,7 +235,7 @@ export function generateProductSchema(product: FlexibleProduct) {
   const dailyAmount = parseFloat(product.daily.replace(/[^\d.]/g, ''));
   const totalDays = Math.ceil((price - depositAmount) / dailyAmount);
 
-  const productId = `https://mdogomdogodeals.co.ke/phones/${product.slug}`;
+  const productId = `https://mdogomdogodeals.co.ke/${product.slug}`;
   const offerId = `${productId}#offer`;
   const organizationId = 'https://mdogomdogodeals.co.ke#organization';
 
@@ -246,34 +244,20 @@ export function generateProductSchema(product: FlexibleProduct) {
     logo: `https://logo.clearbit.com/${product.brand.toLowerCase()}.com`
   };
 
-  // FIXED: Use actual product images only, no fake URLs
-  const baseImage = `https://mdogomdogodeals.co.ke${product.source}`;
+  const baseImage = `https://mdogomdogodeals.co.ke/phones/${product.source}`;
   const imageArray = [baseImage];
 
-  // FIXED: Generate or validate GTIN
   const validGTIN = product.gtin && product.gtin.trim() !== '' && product.gtin !== 'placeholder' && /^\d{8,14}$/.test(product.gtin)
     ? product.gtin
     : generateGTIN(product.id, product.brand);
 
-  // FIXED: Generate unique description
   const uniqueDescription = product.description && product.description.length > 50
     ? product.description
     : generateUniqueDescription(product, depositAmount, dailyAmount, totalDays);
 
-  const seoKeywords = [
-    `${product.brand} ${product.name}`,
-    `${product.name} Kenya`,
-    `Buy ${product.name} Nairobi`,
-    `Lipa Mdogo Mdogo ${product.brand}`,
-    `Affordable ${product.brand} phones`,
-    `${product.brand} installments Kenya`,
-    `Mobile phones Kenya`,
-    `Smartphone deals Kenya`,
-    `${product.brand} price Kenya`,
-    `Phone financing Kenya`
-  ];
+  // Primary category for Google (ONE clear category)
+  const primaryCategory = 'Mobile Phones';
 
-  // FIXED: Using @graph to combine all schemas
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -294,7 +278,16 @@ export function generateProductSchema(product: FlexibleProduct) {
         gtin: validGTIN,
         mpn: product.model || `${product.brand}-${product.id}`,
         productID: product.id.toString(),
-        
+
+        // Main entity of page
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': productId
+        },
+
+        // Single primary category (Google preference)
+        category: primaryCategory,
+
         brand: {
           '@type': 'Brand',
           '@id': `${brandInfo.url}#brand`,
@@ -307,17 +300,23 @@ export function generateProductSchema(product: FlexibleProduct) {
           description: `Official ${product.brand} products available in Kenya through authorized dealers.`
         },
 
-        category: [
-          'Electronics',
-          'Mobile Phones',
-          'Smartphones',
-          `${product.brand} Phones`,
-          product.categoryPath ? product.categoryPath.join(' > ') : 'Mobile Phones'
-        ],
-
         itemCondition: product.condition === 'new' ? 'https://schema.org/NewCondition' :
                        product.condition === 'refurbished' ? 'https://schema.org/RefurbishedCondition' :
                        'https://schema.org/UsedCondition',
+
+        // Accessory/Spare part relationship
+        
+
+        // Local audience targeting
+        audience: {
+          '@type': 'PeopleAudience',
+          geographicArea: {
+            '@type': 'Country',
+            name: 'Kenya'
+          }
+        },
+
+        // Energy consumption details
 
         ...(product.productLine && { productLine: product.productLine }),
         ...(product.material && { material: product.material }),
@@ -390,19 +389,25 @@ export function generateProductSchema(product: FlexibleProduct) {
               '@type': 'UnitPriceSpecification',
               price: price,
               priceCurrency: 'KES',
-              name: 'Total Price'
+              name: 'Total Price',
+              description: 'The total price to be paid for the whole loan duration'
+
             },
             {
               '@type': 'UnitPriceSpecification',
               price: depositAmount,
               priceCurrency: 'KES',
-              name: 'Deposit Amount'
+              name: 'Deposit Amount',
+              description: 'Deposit to get the phone  under Lipa Mdogo Mdogo plan'
+
             },
             {
               '@type': 'UnitPriceSpecification',
               price: dailyAmount,
               priceCurrency: 'KES',
-              name: 'Daily Payment'
+              name: 'Daily Payment',
+              description: 'Daily installment payment under Lipa Mdogo Mdogo plan'
+
             }
           ],
 
@@ -410,8 +415,9 @@ export function generateProductSchema(product: FlexibleProduct) {
                          product.condition === 'refurbished' ? 'https://schema.org/RefurbishedCondition' :
                          'https://schema.org/UsedCondition',
           
+          // All products in stock
           availability: 'https://schema.org/InStock',
-          inventoryLevel: product.stock || 50,
+          availabilityStarts: new Date().toISOString(),
 
           seller: {
             '@type': 'Organization',
@@ -513,8 +519,7 @@ export function generateProductSchema(product: FlexibleProduct) {
         url: productId,
         sameAs: [
           productId,
-          `https://mdogomdogodeals.co.ke/products/${product.slug}`,
-          `https://mdogomdogodeals.co.ke/mobile-phones/${product.slug}`
+          `https://mdogomdogodeals.co.ke/${product.slug}`
         ],
 
         dateCreated: product.dateCreated || new Date().toISOString(),
@@ -529,11 +534,7 @@ export function generateProductSchema(product: FlexibleProduct) {
             '@type': 'PostalAddress',
             addressCountry: 'KE'
           }
-        },
-
-        keywords: seoKeywords,
-        applicationCategory: 'MobileApplication',
-        operatingSystem: product.version || 'Android'
+        }
       },
 
       // Organization Schema
@@ -542,8 +543,8 @@ export function generateProductSchema(product: FlexibleProduct) {
         '@id': organizationId,
         name: product.seller,
         url: 'https://mdogomdogodeals.co.ke',
-        logo: 'https://mdogomdogodeals.co.ke/assets/logo.png',
-        image: 'https://mdogomdogodeals.co.ke/assets/logo.png',
+        logo: 'https://mdogomdogodeals.co.ke/phones/y2.png',
+        image: 'https://mdogomdogodeals.co.ke/phones/y2.png',
         
         description: 'Kenya\'s leading mobile phone retailer offering flexible payment plans through Lipa Mdogo Mdogo system.',
         
@@ -599,7 +600,7 @@ export function generateProductSchema(product: FlexibleProduct) {
             '@type': 'ListItem',
             position: 3,
             name: product.brand,
-            item: `https://mdogomdogodeals.co.ke/brands/${product.brand.toLowerCase()}`
+            item: `https://mdogomdogodeals.co.ke/${product.brand.toLowerCase()}`
           },
           {
             '@type': 'ListItem',
@@ -620,7 +621,6 @@ export function generateProductSchema(product: FlexibleProduct) {
 
   return JSON.stringify(graphData, null, 2);
 }
-
 // FIXED: Category schema with @graph
 export function generateCategorySchema(category: string, products: FlexibleProduct[], displayCategory: string) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
@@ -628,41 +628,52 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
+      // Breadcrumb as separate entity (Google's preference)
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${baseUrl}/${category}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: baseUrl
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Categories',
+            item: `${baseUrl}/categories`
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: displayCategory,
+            item: `${baseUrl}/${category}`
+          }
+        ]
+      },
+      // Collection Page
       {
         '@type': 'CollectionPage',
         '@id': `${baseUrl}/${category}#page`,
         name: `${displayCategory} Products - MdogoMdogoDeals`,
         description: `Explore our ${displayCategory} collection with flexible payment options. Pay small deposits and daily installments.`,
         url: `${baseUrl}/${category}`,
+        // Link to breadcrumb by reference
         breadcrumb: {
-          '@type': 'BreadcrumbList',
-          '@id': `${baseUrl}/${category}#breadcrumb`,
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Home',
-              item: baseUrl
-            },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'Categories',
-              item: `${baseUrl}/categories`
-            },
-            {
-              '@type': 'ListItem',
-              position: 3,
-              name: displayCategory,
-              item: `${baseUrl}/${category}`
-            }
-          ]
+          '@id': `${baseUrl}/${category}#breadcrumb`
+        },
+        // Link to ItemList as main entity
+        mainEntity: {
+          '@id': `${baseUrl}/${category}#list`
         },
         publisher: {
           '@type': 'Organization',
           '@id': `${baseUrl}#organization`
         }
       },
+      // ItemList
       {
         '@type': 'ItemList',
         '@id': `${baseUrl}/${category}#list`,
@@ -686,15 +697,25 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
             },
             offers: {
               '@type': 'Offer',
+              url: `${baseUrl}/${product.slug}`,
               priceCurrency: 'KES',
               price: parseFloat(product.totalPrice.replace(/[^\d.-]/g, '')),
+              // Use priceSpecification for better price details
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                priceCurrency: 'KES',
+                price: parseFloat(product.totalPrice.replace(/[^\d.-]/g, ''))
+              },
               priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
               availability: 'https://schema.org/InStock',
+              itemCondition: 'https://schema.org/NewCondition',
               seller: {
                 '@type': 'Organization',
                 '@id': `${baseUrl}#organization`
               },
-              hasMerchantReturnPolicy: { '@id': 'https://mdogomdogodeals.co.ke#returnpolicy' },
+              hasMerchantReturnPolicy: { 
+                '@id': 'https://mdogomdogodeals.co.ke#returnpolicy' 
+              },
               shippingDetails: {
                 '@type': 'OfferShippingDetails',
                 shippingRate: {
@@ -702,7 +723,13 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
                   value: '0.00',
                   currency: 'KES'
                 },
-                deliveryTime: { '@id': 'https://mdogomdogodeals.co.ke#deliverytime' }
+                shippingDestination: {
+                  '@type': 'DefinedRegion',
+                  addressCountry: 'KE'
+                },
+                deliveryTime: { 
+                  '@id': 'https://mdogomdogodeals.co.ke#deliverytime' 
+                }
               }
             },
             ...(product.reviews && product.reviews.reviewCount > 0 && {
@@ -722,11 +749,8 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
     ]
   };
 
-  return JSON.stringify(graphData, null, 2);
-
-
+  return graphData;
 }
-
 // FIXED: Homepage schema with @graph
 export function generateHomepageSchema(products: FlexibleProduct[]) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
@@ -734,19 +758,87 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
+      // Primary WebPage entity for homepage
+      {
+        '@type': 'WebPage',
+        '@id': `${baseUrl}#webpage`,
+        url: baseUrl,
+        name: 'Lipa Mdogo Mdogo Phones Kenya | Buy Smartphones on Daily Installments',
+        description: 'Buy smartphones on Lipa Mdogo Mdogo in Kenya with daily payments from KES 50. Get the latest phones from Samsung, iPhone, Tecno, Infinix and more with flexible installment plans. Free delivery in Nairobi and nationwide shipping.',
+        isPartOf: {
+          '@id': `${baseUrl}#website`
+        },
+        about: {
+          '@id': `${baseUrl}#organization`
+        },
+        mainEntity: {
+          '@id': `${baseUrl}#featured-products`
+        },
+        publisher: {
+          '@id': `${baseUrl}#organization`
+        },
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: `${baseUrl}/phones/hero.webp`,
+          contentUrl: `${baseUrl}/phones/hero.webp`
+        },
+        inLanguage: 'en-KE',
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          '@id': `${baseUrl}#breadcrumb`,
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: baseUrl
+            }
+          ]
+        }
+      },
+      
+      // WebSite entity with SearchAction
+      {
+        '@type': 'WebSite',
+        '@id': `${baseUrl}#website`, 
+        url: baseUrl,
+        name: 'Lipa Mdogo Mdogo Phones Kenya',
+        alternateName: 'Mdogo Mdogo Deals',
+        description: 'Kenya\'s premier destination for buying smartphones on flexible Lipa Mdogo Mdogo payment plans with daily installments',
+        publisher: {
+          '@id': `${baseUrl}#organization`
+        },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${baseUrl}/search?q={search_term_string}`
+          },
+          'query-input': 'required name=search_term_string'
+        },
+        inLanguage: 'en-KE'
+      },
+      
+      // Organization entity
       {
         '@type': 'Organization',
         '@id': `${baseUrl}#organization`,
-        name: 'Lipa Mdogo Mdogo Phones',
+        name: 'Lipa Mdogo Mdogo Phones Kenya',
         alternateName: ['Mdogo Mdogo Deals', 'MMD Kenya'],
         url: baseUrl,
         logo: {
           '@type': 'ImageObject',
-          url: `${baseUrl}/assets/logo.png`,
+          '@id': `${baseUrl}#logo`,
+          url: `${baseUrl}/phones/y2.png`,
+          contentUrl: `${baseUrl}/phones/y2.png`,
           width: 300,
-          height: 150
+          height: 150,
+          caption: 'Lipa Mdogo Mdogo Phones Kenya Logo'
         },
-        description: 'Kenya\'s leading mobile phone retailer offering flexible payment plans through Lipa Mdogo Mdogo system. Buy smartphones with daily payments starting from KES 50.',
+        image: {
+          '@id': `${baseUrl}#logo`
+        },
+        description: 'Kenya\'s leading mobile phone retailer offering flexible Lipa Mdogo Mdogo payment plans. Buy smartphones with daily installments starting from KES 50. Shop Samsung, iPhone, Tecno, Infinix, Oppo, Vivo and more brands with affordable deposits and nationwide delivery.',
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'CBD Center',
@@ -762,135 +854,58 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+254-720-202-167',
+          telephone: '+254720202167',
           contactType: 'customer service',
           availableLanguage: ['English', 'Swahili'],
           areaServed: 'KE'
         },
         sameAs: [
-          'https://www.facebook.com/mdogomdogodeals',
-          'https://twitter.com/mdogomdogodeals', 
-          'https://www.instagram.com/mdogomdogodeals'
+          'https://www.facebook.com/profile.php?id=61578574354368',
+          'https://x.com/mdogomdogodeals', 
+          'https://www.instagram.com/mdogomdogodeals_/'
         ],
-        areaServed: kenyaLocationData.counties.map(county => ({
-          '@type': 'AdministrativeArea',
-          name: county,
-          addressCountry: 'KE'
-        }))
+        areaServed: {
+          '@type': 'Country',
+          name: 'Kenya',
+          '@id': 'https://en.wikipedia.org/wiki/Kenya'
+        }
       },
-      {
-        '@type': 'WebSite',
-        '@id': `${baseUrl}#website`, 
-        url: baseUrl,
-        name: 'Lipa Mdogo Mdogo Phones',
-        description: 'Kenya\'s premier mobile phone retailer offering flexible payment plans',
-        publisher: {
-          '@id': `${baseUrl}#organization`
-        },
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${baseUrl}/search?q={search_term_string}`
-          },
-          'query-input': 'required name=search_term_string'
-        },
-        inLanguage: 'en-KE'
-      },
+      
       {
         '@type': 'ItemList',
-        '@id': `${baseUrl}#products`,
-        name: 'Featured Mobile Phones - Lipa Mdogo Mdogo',
-        description: 'Browse our featured collection of smartphones with flexible payment options in Kenya',
-        url: baseUrl,
-        numberOfItems: products.length,
-        itemListElement: products.slice(0, 12).map((product, index) => {
-          const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
-          const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
-          const dailyAmount = parseFloat(product.daily.replace(/[^\d.]/g, ''));
-          
-          return {
-            '@type': 'ListItem', 
-            position: index + 1,
-            item: {
-              '@type': 'Product',
-              '@id': `${baseUrl}/phones/${product.slug}`,
-              name: product.name,
-              description: product.description || `${product.name} available with flexible payment options in Kenya`,
-              image: `${baseUrl}${product.source}`,
-              url: `${baseUrl}/phones/${product.slug}`,
-              sku: generateValidSKU(product.slug, product.id),
-              brand: {
-                '@type': 'Brand',
-                name: product.brand
-              },
-              category: 'Mobile Phones',
-              offers: {
-                '@type': 'Offer',
-                '@id': `${baseUrl}/phones/${product.slug}#offer`,
-                priceCurrency: 'KES',
-                price: price,
-                priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                availability: 'https://schema.org/InStock',
-                itemCondition: 'https://schema.org/NewCondition',
-                seller: {
-                  '@type': 'Organization', 
-                  '@id': `${baseUrl}#organization`
-                },
-                hasMerchantReturnPolicy: { '@id': 'https://mdogomdogodeals.co.ke#returnpolicy' },
-                priceSpecification: [
-                  {
-                    '@type': 'UnitPriceSpecification',
-                    price: depositAmount,
-                    priceCurrency: 'KES', 
-                    name: 'Deposit Amount'
-                  },
-                  {
-                    '@type': 'UnitPriceSpecification',
-                    price: dailyAmount,
-                    priceCurrency: 'KES',
-                    name: 'Daily Payment'
-                  }
-                ],
-                shippingDetails: {
-                  '@type': 'OfferShippingDetails',
-                  shippingRate: {
-                    '@type': 'MonetaryAmount',
-                    value: '0',
-                    currency: 'KES'
-                  },
-                  deliveryTime: { '@id': 'https://mdogomdogodeals.co.ke#deliverytime' }
-                },
-                acceptedPaymentMethod: [
-                  'https://schema.org/CreditCard',
-                  'https://schema.org/PaymentMethodCreditCard',
-                  {
-                    '@type': 'PaymentMethod',
-                    name: 'M-Pesa'
-                  }
-                ]
-              },
-              ...(product.reviews && product.reviews.reviewCount > 0 && {
-                aggregateRating: {
-                  '@type': 'AggregateRating',
-                  ratingValue: product.reviews.averageRating,
-                  reviewCount: product.reviews.reviewCount,
-                  bestRating: '5',
-                  worstRating: '1'
-                }
-              })
+        '@id': `${baseUrl}#featured-products`,
+        name: 'Featured Smartphones on Lipa Mdogo Mdogo',
+        description: 'Top-selling smartphones available on flexible Lipa Mdogo Mdogo payment plans in Kenya',
+        numberOfItems: Math.min(3, products.length),
+        itemListElement: products.slice(0, 3).map((product, index) => ({
+          '@type': 'ListItem', 
+          position: index + 1,
+          item: {
+            '@type': 'Product',
+            '@id': `${baseUrl}/${product.slug}`,
+            name: product.name,
+            description: product.description || `${product.name} available on Lipa Mdogo Mdogo flexible payment plans in Kenya`,
+            image: `${baseUrl}${product.source}`,
+            url: `${baseUrl}/${product.slug}`,
+            brand: {
+              '@type': 'Brand',
+              name: product.brand
+            },
+            offers: {
+              '@type': 'Offer',
+              priceCurrency: 'KES',
+              price: parseFloat(product.totalPrice?.replace(/[^\d.]/g, '') || product.price),
+              availability: 'https://schema.org/InStock',
+              url: `${baseUrl}/${product.slug}`
             }
-          };
-        })
-      },
-      SHARED_RETURN_POLICY,
-      SHARED_DELIVERY_TIME
+          }
+        }))
+      }
     ]
   };
 
   return JSON.stringify(graphData, null, 2);
 }
-
 export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
   if (!eventData) return null;
 
@@ -1088,7 +1103,6 @@ export function generateOrganizationSchema() {
     }
   }, null, 2);
 }
-
 export function generatePageSchema(pageType: 'homepage' | 'product', data: any) {
   if (pageType === 'homepage') {
     return generateHomepageSchema(data.products);

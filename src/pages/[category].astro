@@ -1,50 +1,36 @@
 ---
-import CategoryComp from "../components/CategoryComp.astro";
-import Nav from "../components/Nav.astro";
-import Layout from "../layouts/Layout.astro";
+import CategoryLayout from "../layouts/CategoryLayout.astro";
 import { products } from "../data/product2";
-import { generateCategorySchema } from "../utils/structureData";
 import ProductCard from "../components/ProductCard.astro";
-import ShopBy from "../components/ShopBy.astro";
-import CarouselProducts from "../components/CarouselProducts.astro";
 import PopularBrands from "../components/PopularBrands.astro";
-import Gift from "../components/Gift.astro";
 
 export async function getStaticPaths() {
   const allCategories = new Set<string>();
 
-  // Extract all category levels from all products
   products.forEach((product) => {
     const categoryPath = product.categoryPath as string[];
     categoryPath.forEach((category) => {
-      // Convert to lowercase, replace spaces with hyphens, and handle existing hyphens
       const slug = category
         .toLowerCase()
-        .replace(/\s+/g, "-") // Replace spaces with hyphens
-        .replace(/[^\w-]/g, "-") // Replace any non-word, non-hyphen characters with hyphens
-        .replace(/-+/g, "-") // Replace multiple consecutive hyphens with single hyphen
-        .replace(/^-|-$/g, ""); // Remove leading/trailing hyphens
+        .replace(/\s+/g, "-")
+        .replace(/[^\w-]/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
       allCategories.add(slug);
     });
   });
 
   const categories = Array.from(allCategories);
-
-  // Debug: Log the generated categories
-  console.log("Generated categories:", categories);
-
   const paths = categories.map((category) => ({
     params: { category },
   }));
-
-  console.log("Generated paths:", paths);
 
   return paths;
 }
 
 const { category } = Astro.params;
 
-// Filter products that contain this category in their categoryPath
+// Filter products
 const filteredProducts = products.filter((product) => {
   const categoryPath = product.categoryPath as string[];
   return categoryPath.some((cat) => {
@@ -62,7 +48,7 @@ if (filteredProducts.length === 0) {
   throw new Error(`No products found in the category: ${category}`);
 }
 
-// Get the display name (find the original case version of the category)
+// Get display name
 let displayCategory = category;
 for (const product of filteredProducts) {
   const categoryPath = product.categoryPath as string[];
@@ -81,351 +67,225 @@ for (const product of filteredProducts) {
   }
 }
 
-// Generate schema for SEO (this returns a JSON string)
-const schemaString = generateCategorySchema(
-  category,
-  filteredProducts,
-  displayCategory
-);
-
-// Get price range for category
+// Get price range
 const prices = filteredProducts.map((p) =>
   parseInt(p.totalPrice.replace(/[^\d]/g, ""))
 );
 const minPrice = Math.min(...prices);
 const maxPrice = Math.max(...prices);
 
-// Get unique brands in this category
-const brands = [...new Set(filteredProducts.map((p) => p.brand))];
-
-// Enhanced SEO configuration
-const seo = {
-  title: `Buy ${displayCategory} on Credit in Nairobi | Lipa Mdogo Mdogo - Free Delivery`,
-  description: `Shop ${displayCategory} smartphones on flexible payment plans in Nairobi. Pay small deposit from Ksh ${minPrice.toLocaleString()} & daily installments. Free delivery across Nairobi. ${filteredProducts.length}+ models available from ${brands.join(", ")}.`,
-  canonical: `https://mdogomdogodeals.co.ke/${category}`,
-  ogImage: filteredProducts[0]
-    ? `https://mdogomdogodeals.co.ke${filteredProducts[0].source}`
-    : "https://mdogomdogodeals.co.ke/default-og-image.jpg",
-  schema: schemaString,
-  keywords: `${displayCategory} on credit Nairobi, buy ${displayCategory} lipa mdogo mdogo, ${displayCategory} installments Kenya, cheap ${displayCategory} Nairobi, ${brands.join(" ")}, smartphone credit payment, phone financing Nairobi`,
+// Props for CategoryLayout
+const layoutProps = {
+  category: category,
+  displayCategory: displayCategory,
+  products: filteredProducts,
 };
 ---
 
-<style>
-  .main {
-    padding: 2rem 0;
-    display: grid;
-  }
+<CategoryLayout {...layoutProps}>
+  <link rel="stylesheet" href="/styles/category.css" slot="head" />
 
-  .headerCategory {
-    display: flex;
-    width: 68vw;
-    margin: 0 auto;
-    flex-direction: column;
-    margin-top: 20px;
-  }
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="separator">›</span>
+    <a href="/categories">Categories</a>
+    <span class="separator">›</span>
+    <span>{displayCategory}</span>
+  </nav>
 
-  .category-info {
-    max-width: 1200px;
-    margin: 1rem auto;
-    padding: 0 1rem;
-  }
-
-  .category-banner {
-    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
-    margin: 1rem 0;
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
-  }
-
-  .category-banner h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-
-  .category-banner p {
-    margin: 0;
-    opacity: 0.95;
-  }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-
-  .benefit-item {
-    background: white;
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: box-shadow 0.2s;
-  }
-
-  .benefit-item:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .benefit-icon {
-    width: 40px;
-    height: 40px;
-    background: #fff3e0;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  .benefit-text h4 {
-    margin: 0 0 0.2rem 0;
-    font-size: 0.9rem;
-    color: #333;
-    font-weight: 600;
-  }
-
-  .benefit-text p {
-    margin: 0;
-    font-size: 0.8rem;
-    color: #666;
-    line-height: 1.3;
-  }
-
-  .brands-section {
-    background: #fafafa;
-    padding: 1rem;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-  }
-
-  .brands-section h3 {
-    margin: 0 0 0.8rem 0;
-    font-size: 1.1rem;
-    color: #333;
-  }
-
-  .brands-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .tecno {
-    margin-left: 80px;
-  }
-
-  .brand-chip {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    color: #555;
-    font-weight: 500;
-  }
-
-  .quick-info {
-    background: #e8f5e8;
-    border-left: 4px solid #4caf50;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
-  }
-
-  .quick-info p {
-    margin: 0;
-    color: #2e7d32;
-    font-weight: 500;
-    font-size: 0.9rem;
-  }
-
-  .payment-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-  }
-
-  .payment-card {
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  .payment-card .amount {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #ff6b35;
-    margin: 0.5rem 0;
-  }
-
-  .payment-card .label {
-    font-size: 0.85rem;
-    color: #666;
-    margin: 0;
-  }
-
-  .bd-grid {
-    display: grid;
-    max-width: 1200px;
-    margin: 0 2.5rem;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 30px;
-  }
-
-  @media screen and (min-width: 1200px) {
-    .bd-grid {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-
-  /* Small devices (phones, less than 600px) */
-  @media screen and (max-width: 599px) {
-    .bd-grid {
-      grid-template-columns: 1fr;
-    }
-    .headerCategory {
-      width: 90vw;
-    }
-    .category-info {
-      width: 95%;
-      padding: 0 1rem;
-    }
-    .benefits-grid {
-      grid-template-columns: 1fr;
-    }
-    .payment-info {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Medium devices (tablets, 600px to 899px) */
-  @media screen and (min-width: 600px) and (max-width: 899px) {
-    .bd-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* Large devices (desktops, 900px to 1199px) */
-  @media screen and (min-width: 900px) and (max-width: 1199px) {
-    .bd-grid {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-
-  /* Extra large devices (1200px and up) */
-  @media screen and (min-width: 1200px) {
-    .bd-grid {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-  }
-</style>
-
-<Layout {...seo}>
-  <Gift />
-  <Nav />
-
-  <!-- <div class="headerCategory">
-    <h1 style="text-transform: capitalize;">
-      {displayCategory} Smartphones on Credit in Nairobi
-    </h1>
-    <p>
-      Shop
-      {displayCategory} phones with flexible payment options - Pay small deposits
-      & daily installments
-    </p>
-  </div> -->
   <PopularBrands />
 
-  <div>
-    <h1 class="tecno">{displayCategory} Smartphones</h1>
-  </div>
+  <div class="category-container">
+    <header class="category-header">
+      <h1>{displayCategory} Phones on Lipa Mdogo Mdogo in Kenya</h1>
+      <p class="category-intro">
+        Buy genuine <strong>{displayCategory}</strong> smartphones in Kenya with our
+        flexible
+        <strong>Lipa Mdogo Mdogo</strong> payment plan. Pay a small deposit and continue
+        with affordable daily installments from <strong>Ksh 80 per day</strong>.
+        We have
+        <strong>{filteredProducts.length} {displayCategory} models</strong> ranging
+        from Ksh {minPrice.toLocaleString()} to Ksh {maxPrice.toLocaleString()},
+        all with 100% original warranties and free same-day delivery in Nairobi,
+        Kiambu, and surrounding areas.
+      </p>
+    </header>
 
-  <main class="main bd-grid">
-    {filteredProducts.map((product) => <ProductCard {...product} />)}
-  </main>
-
-  <div class="category-info">
-    <div class="category-banner">
-      <h2>
-        💰 {displayCategory} from Ksh 3300 | Free Delivery Nairobi
-      </h2>
-      <p>Pay small deposit + daily installments | different models available</p>
-    </div>
-
-    <div class="benefits-grid">
-      <div class="benefit-item">
-        <div class="benefit-icon">🚚</div>
-        <div class="benefit-text">
-          <h4>Free Delivery</h4>
-          <p>Same day delivery within Nairobi, Kiambu & its surroundings</p>
+    <aside class="trust-block">
+      <div class="trust-item">
+        <span class="icon">🚚</span>
+        <div>
+          <strong>Free Delivery</strong>
+          <p>Same-day in Nairobi</p>
         </div>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">💳</div>
-        <div class="benefit-text">
-          <h4>Lipa Mdogo Mdogo</h4>
-          <p>Daily payments from Ksh 80</p>
+      <div class="trust-item">
+        <span class="icon">💳</span>
+        <div>
+          <strong>Daily Payments</strong>
+          <p>From Ksh 80/day</p>
         </div>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">⚡</div>
-        <div class="benefit-text">
-          <h4>Quick Approval</h4>
+      <div class="trust-item">
+        <span class="icon">⚡</span>
+        <div>
+          <strong>Quick Approval</strong>
           <p>Get approved in minutes</p>
         </div>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">✅</div>
-        <div class="benefit-text">
-          <h4>Genuine Products</h4>
+      <div class="trust-item">
+        <span class="icon">✅</span>
+        <div>
+          <strong>Genuine Products</strong>
           <p>100% original with warranty</p>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <div class="payment-info">
-      <div class="payment-card">
-        <div class="label">Starting Deposit</div>
-        <div class="amount">Ksh 3,300</div>
+    <section class="products-section">
+      <h2>Available {displayCategory} Phones</h2>
+      <div class="product-grid">
+        {filteredProducts.map((product) => <ProductCard {...product} />)}
       </div>
-      <div class="payment-card">
-        <div class="label">Daily Payment</div>
-        <div class="amount">From Ksh 80</div>
-      </div>
-      <div class="payment-card">
-        <div class="label">Delivery</div>
-        <div class="amount">FREE in Nairobi</div>
-      </div>
-    </div>
-
-    <div class="brands-section">
-      <h3>Available Brands</h3>
-      <div class="brands-list">
-        {brands.map((brand) => <span class="brand-chip">{brand}</span>)}
-      </div>
-    </div>
-
-    <div class="quick-info">
-      <p>
-        💡 All {displayCategory.toLowerCase()} phones come with original warranties
-        and free setup. Pay easily via M-Pesa.
-      </p>
-    </div>
-    <ShopBy />
-    <CarouselProducts />
+    </section>
   </div>
-</Layout>
+</CategoryLayout>
+
+<style>
+  .breadcrumb {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .breadcrumb a {
+    color: #ff6b35;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+  }
+
+  .category-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .category-header {
+    margin: 2rem 0 1.5rem;
+  }
+
+  .category-header h1 {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .category-intro {
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .category-intro strong {
+    color: #ff6b35;
+  }
+
+  .trust-block {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .trust-item strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.1rem;
+  }
+
+  .trust-item p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .products-section {
+    margin: 2rem 0;
+  }
+
+  .products-section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1.5rem 0;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (max-width: 599px) {
+    .category-header h1 {
+      font-size: 1.5rem;
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .trust-block {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 899px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 900px) and (max-width: 1199px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .product-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

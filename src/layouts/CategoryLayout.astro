@@ -1,0 +1,157 @@
+---
+import { generateCategorySchema } from "../utils/structureData";
+import Nav from "../components/Nav.astro";
+import Gift from "../components/Gift.astro";
+
+const {
+  category,
+  displayCategory,
+  products = [],
+  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+} = Astro.props;
+
+// Generate category schema with CollectionPage + ItemList
+const schemaData = generateCategorySchema(category, products, displayCategory);
+
+// Derive SEO from schema (single source of truth)
+const collectionPage =
+  schemaData["@graph"]?.find((item) => item["@type"] === "CollectionPage") ||
+  {};
+const title =
+  collectionPage.name ||
+  `${displayCategory} Phones Kenya - Buy on Lipa Mdogo Mdogo | Flexible Payment Plans`;
+const description =
+  collectionPage.description ||
+  `Shop ${displayCategory} phones in Kenya with flexible daily payments. Pay small deposits and affordable daily installments. Genuine ${displayCategory} smartphones with warranty and free delivery in Nairobi.`;
+const canonical = `https://mdogomdogodeals.co.ke/${category}`;
+
+// Get OG image from first product
+const ogImage = products[0]?.source
+  ? `https://mdogomdogodeals.co.ke${products[0].source}`
+  : "https://mdogomdogodeals.co.ke/phones/y2.png";
+
+// Generate category schema JSON
+const categorySchema = JSON.stringify(schemaData, null, 2);
+---
+
+<!doctype html>
+<html lang="en-KE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_KE" />
+    <meta property="og:site_name" content="Lipa Mdogo Mdogo Phones Kenya" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#f59e0b" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/phones/y2.png" />
+    <link rel="apple-touch-icon" href="/phones/y2.png" />
+
+    <!-- Preconnect for Performance -->
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
+    <link
+      rel="preconnect"
+      href="https://www.google-analytics.com"
+      crossorigin
+    />
+
+    <!-- JSON-LD Structured Data (CollectionPage + ItemList) -->
+    <script type="application/ld+json" set:html={categorySchema} />
+
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+
+    <slot name="head" />
+
+    <style is:global>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        max-width: 100vw;
+        overflow-x: hidden;
+        background: #fef5e7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      body {
+        min-height: 100vh;
+        font-display: swap;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .product-card-image {
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        background: #fff;
+      }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4143W8VTJ3"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-4143W8VTJ3", {
+        send_page_view: true,
+        anonymize_ip: true,
+        page_path: window.location.pathname,
+      });
+
+      gtag("event", "view_item_list", {
+        item_list_id: window.location.pathname.split("/").pop(),
+        item_list_name: document.title.split("-")[0].trim(),
+      });
+    </script>
+  </head>
+  <body>
+    <Gift />
+    <Nav />
+    <slot />
+  </body>
+</html>

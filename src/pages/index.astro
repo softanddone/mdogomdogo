@@ -2,43 +2,33 @@
 import Welcome from "../components/Welcome.astro";
 import Nav from "../components/Nav.astro";
 import HeadText from "../components/HeadText.astro";
-import Layout from "../layouts/Layout.astro";
-import { products } from "../data/product2";
+import HomeLayout from "../layouts/HomeLayout.astro";
 import Hero from "../components/Hero.astro";
 import PopularBrands from "../components/PopularBrands.astro";
 import Credit from "../components/Credit.astro";
 import Gift from "../components/Gift.astro";
 import Summary from "../components/Summary.astro";
 import Loop from "../components/Loop.astro";
-import Nav2 from "../components/Nav2.astro";
-import Test from "../components/Test.astro";
-import Land from "../components/land.astro";
 
 const seo = {
   title:
     "Lipa Mdogo Mdogo Phones Kenya | Buy Samsung, iPhone, Tecno on Credit Nairobi",
   description:
-    "Lipa mdogo mdogo na lipa pole pole! Buy smartphones on credit in Nairobi, Kenya. Samsung A05, A06, A16,S20, iPhone 14,13,12,11 Tecno Camon 40, Spark 40,Infinix Hot60i,Itel on easy installments. Partner with Mogo, Watu Simu, M-Kopa, Onfon. Free delivery. Affordable monthly payments - nunua simu lipa pole pole.",
+    "Lipa mdogo mdogo na lipa pole pole! Buy smartphones on credit in Nairobi, Kenya.Buy Phones on Credit in Nairobi. Partner with Mogo, Watu Simu, M-Kopa, Onfon. Free delivery. Affordable monthly payments - nunua simu lipa pole pole.",
   canonical: "https://mdogomdogodeals.co.ke/",
   ogImage: "https://mdogomdogodeals.co.ke/phones/y2.png",
   pageType: "homepage",
-  products: products,
 };
 ---
 
-<Layout {...seo}>
-  <!-- <Test /> -->
+<HomeLayout {...seo}>
   <Gift />
-
   <Nav />
   <HeadText />
   <PopularBrands />
   <Loop />
-
   <Hero />
-
   <Welcome />
   <Summary />
-
   <Credit />
-</Layout>
+</HomeLayout>

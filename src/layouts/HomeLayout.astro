@@ -1,0 +1,233 @@
+---
+// Import homepage schema generator
+import { generateHomepageSchema } from "../utils/structureData";
+
+const {
+  products = [], // Array of products for homepage
+  keywords: customKeywords, // Allow custom keywords (for reference only, not used in meta)
+  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+} = Astro.props;
+
+// CRITICAL: Generate schema FIRST - it's the source of truth
+const schemaData = generateHomepageSchema(products);
+const schemaParsed = JSON.parse(schemaData);
+
+// Extract data from schema @graph to ensure consistency
+const webPageSchema = schemaParsed["@graph"].find(
+  (item) => item["@type"] === "WebPage"
+);
+const websiteSchema = schemaParsed["@graph"].find(
+  (item) => item["@type"] === "WebSite"
+);
+const organizationSchema = schemaParsed["@graph"].find(
+  (item) => item["@type"] === "Organization"
+);
+
+// Use schema data as source of truth for meta tags - ALIGNED
+const title =
+  webPageSchema?.name ||
+  "Lipa Mdogo Mdogo Phones Kenya | Buy Smartphones on Daily Installments";
+const description =
+  webPageSchema?.description ||
+  "Buy smartphones on Lipa Mdogo Mdogo in Kenya with daily payments from KES 50. Get the latest phones from Samsung, iPhone, Tecno, Infinix and more with flexible installment plans. Free delivery in Nairobi and nationwide shipping.";
+const canonical = webPageSchema?.url || "https://mdogomdogodeals.co.ke";
+const ogImage =
+  webPageSchema?.primaryImageOfPage?.url ||
+  "https://mdogomdogodeals.co.ke/phones/hero.webp";
+const siteName = websiteSchema?.name || "Lipa Mdogo Mdogo Phones Kenya";
+const organizationName =
+  organizationSchema?.name || "Lipa Mdogo Mdogo Phones Kenya";
+
+// Add FAQ Schema for rich snippets
+const faqSchema = {
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I buy phones on credit in Kenya?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, you can buy smartphones on Lipa Mdogo Mdogo with daily payments from KES 50. We offer flexible payment plans for all major brands including Samsung, iPhone, Tecno, and Infinix with free delivery in Nairobi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Lipa Mdogo Mdogo payment plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lipa Mdogo Mdogo is a flexible payment plan that allows you to buy smartphones and pay in small daily or weekly installments. You can get the latest phones with affordable payments starting from KES 50 per day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer free delivery in Nairobi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we offer free delivery for all phone orders within Nairobi and its environs including Kiambu. We also provide nationwide shipping across Kenya."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What phone brands are available on installment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer all major smartphone brands on installment including Samsung, iPhone, Tecno, Infinix, Itel, Oppo, and more. All phones come with flexible Lipa Mdogo Mdogo payment plans."
+      }
+    }
+  ]
+};
+
+// Clean, minimal schema with only what matters
+const cleanSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // Keep only essential schemas from your generator
+    ...schemaParsed["@graph"].filter(item => 
+      ["WebPage", "WebSite", "Organization"].includes(item["@type"])
+    ),
+    // Add FAQ for rich snippets
+    faqSchema
+  ]
+};
+
+// Stringify schema for output
+const homepageSchema = JSON.stringify(cleanSchema, null, 2);
+
+// Extract featured products info
+const hasProducts = products.length > 0;
+
+// Keep description aligned with schema - NO dynamic additions that cause drift
+const finalDescription = description;
+const finalTitle = title;
+---
+
+<!doctype html>
+<html lang="en-KE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags - ALIGNED WITH SCHEMA -->
+    <title>{finalTitle}</title>
+    <meta name="description" content={finalDescription} />
+    <meta name="author" content={organizationName} />
+
+    <!-- Robots - Single directive is enough -->
+    <meta name="robots" content={robots} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Affordable smartphones with Lipa Mdogo Mdogo payment plans in Kenya" />
+    <meta property="og:locale" content="en_KE" />
+    <meta property="og:site_name" content={siteName} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalTitle} />
+    <meta name="twitter:description" content={finalDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Affordable smartphones with Lipa Mdogo Mdogo payment plans in Kenya" />
+
+    <!-- Mobile & Theme -->
+    <meta name="theme-color" content="#f59e0b" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="MMD Kenya" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href={organizationSchema?.logo?.url || "/phones/y2.png"} />
+    <link rel="icon" type="image/png" sizes="16x16" href={organizationSchema?.logo?.url || "/phones/y2.png"} />
+    <link rel="apple-touch-icon" sizes="180x180" href={organizationSchema?.logo?.url || "/phones/y2.png"} />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Preconnect for Performance - Only critical resources -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- JSON-LD Structured Data - Clean @graph -->
+    <script type="application/ld+json" set:html={homepageSchema} />
+
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Allow additional head content from child components -->
+    <slot name="head" />
+
+    <style>
+      :global(html),
+      :global(body) {
+        margin: 0;
+        padding: 0;
+        max-width: 100vw;
+      }
+
+      html,
+      body {
+        max-width: 100vw;
+        overflow-x: hidden;
+        background: #fef5e7;
+      }
+
+      :global(*) {
+        box-sizing: border-box;
+      }
+
+      /* Core Web Vitals optimization */
+      :global(img) {
+        max-width: 100%;
+        height: auto;
+      }
+
+      :global(body) {
+        min-height: 100vh;
+        font-display: swap;
+      }
+
+      /* Smooth scrolling */
+      :global(html) {
+        scroll-behavior: smooth;
+      }
+
+      /* Reduce CLS */
+      :global(.product-card) {
+        contain: layout;
+      }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4143W8VTJ3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-4143W8VTJ3", {
+        send_page_view: true,
+        anonymize_ip: true,
+        page_path: window.location.pathname,
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Accessibility skip link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only">
+      Skip to main content
+    </a>
+
+    <main id="main-content">
+      <slot />
+    </main>
+  </body>
+</html>
