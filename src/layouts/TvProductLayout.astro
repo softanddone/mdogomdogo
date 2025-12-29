@@ -1,0 +1,210 @@
+---
+import { generateTVProductSchema } from "../utils/structureData";
+
+// import { generateTVProductSchema } from "../util/tvStructureData";
+
+const {
+  product, // TV Product object - REQUIRED
+  additionalSchemas = [], // Optional: FAQPage, HowTo, etc.
+  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+} = Astro.props;
+
+// ============================================================================
+// SCHEMA GENERATION - Single Source of Truth
+// ============================================================================
+const schemaData = generateTVProductSchema(product);
+const schemaParsed = JSON.parse(schemaData);
+
+// Extract entities from @graph
+const productSchema = schemaParsed["@graph"].find((item) =>
+  item["@type"]?.includes("Product")
+);
+const organizationSchema = schemaParsed["@graph"].find(
+  (item) => item["@type"] === "Organization"
+);
+const breadcrumbSchema = schemaParsed["@graph"].find(
+  (item) => item["@type"] === "BreadcrumbList"
+);
+const offerSchema = productSchema?.offers;
+
+// ============================================================================
+// META TAG VALUES - Derived from Schema (Single Source of Truth)
+// ============================================================================
+const title = `${productSchema?.name} - From KES ${product.daily}/day | ${productSchema?.brand?.name}`;
+const description =
+  productSchema?.description ||
+  `Buy ${product.name} Smart TV in Kenya with flexible payments from KES ${product.daily}/day. Free delivery. 2-year warranty.`;
+const canonical = productSchema?.url;
+const ogImage = productSchema?.image?.[0];
+const brandName = productSchema?.brand?.name;
+const priceAmount = offerSchema?.price;
+const availability = offerSchema?.availability?.includes("InStock")
+  ? "in stock"
+  : "out of stock";
+const condition = product.condition || "new";
+
+// Extract screen size for additional meta
+const screenSize = productSchema?.size || product.screenSize;
+const resolution = productSchema?.videoQuality || product.resolution;
+
+// ============================================================================
+// FINAL SCHEMA OUTPUT - Combine all schemas
+// ============================================================================
+const allSchemas = [
+  schemaParsed, // Contains @graph with Product, Organization, Breadcrumb, ReturnPolicy
+  ...additionalSchemas, // FAQPage, HowTo, etc. passed from page
+];
+
+const finalSchemaString =
+  allSchemas.length === 1
+    ? JSON.stringify(schemaParsed, null, 2)
+    : JSON.stringify(allSchemas, null, 2);
+---
+
+<!doctype html>
+<html lang="en-KE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${productSchema?.name} - ${brandName} Smart TV`}
+    />
+    <meta property="og:locale" content="en_KE" />
+    <meta property="og:site_name" content={organizationSchema?.name} />
+
+    <!-- Product-specific Open Graph (Google Shopping) -->
+    <meta property="product:price:amount" content={priceAmount?.toString()} />
+    <meta property="product:price:currency" content="KES" />
+    <meta property="product:availability" content={availability} />
+    <meta property="product:condition" content={condition} />
+    <meta property="product:brand" content={brandName} />
+    {screenSize && <meta property="product:size" content={screenSize} />}
+    {resolution && <meta property="product:resolution" content={resolution} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta
+      name="twitter:image:alt"
+      content={`${productSchema?.name} - ${brandName} Smart TV`}
+    />
+
+    <!-- Mobile -->
+    <meta name="theme-color" content="#f59e0b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="MMD Kenya TVs" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="/tvs/logo.png" />
+    <link rel="apple-touch-icon" href="/tvs/logo.png" />
+
+    <!-- Performance -->
+    <link rel="preload" as="image" href={ogImage} />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+    <!-- JSON-LD Structured Data - ALL SCHEMAS -->
+    <script type="application/ld+json" set:html={finalSchemaString} />
+
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+
+    <slot name="head" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        max-width: 100vw;
+        overflow-x: hidden;
+        background: #fef5e7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      body {
+        min-height: 100vh;
+        font-display: swap;
+      }
+
+      .tv-image {
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background: #fff;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4143W8VTJ3"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-4143W8VTJ3", {
+        send_page_view: true,
+        anonymize_ip: true,
+      });
+
+      // Enhanced ecommerce - view_item event for TV
+      gtag("event", "view_item", {
+        currency: "KES",
+        value: parseFloat(
+          document.querySelector('meta[property="product:price:amount"]')
+            ?.content || 0
+        ),
+        items: [
+          {
+            item_id: window.location.pathname.split("/").pop(),
+            item_name: document.title.split("-")[0].trim(),
+            item_brand:
+              document.querySelector('meta[property="product:brand"]')
+                ?.content || "",
+            item_category: "Smart TVs",
+            price: parseFloat(
+              document.querySelector('meta[property="product:price:amount"]')
+                ?.content || 0
+            ),
+          },
+        ],
+      });
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

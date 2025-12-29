@@ -1,26 +1,25 @@
 ---
 import Nav from "../components/Nav.astro";
-import Layout from "../layouts/Layout.astro";
+import TvProductLayout from "../layouts/TvProductLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { products } from "../data/tvproducts";
-import {
-  generateProductSchema,
-  generateBreadcrumbSchema,
-} from "../utils/structureData";
 import DisplayTv from "../components/DisplayTv.astro";
 import Gift from "../components/Gift.astro";
+
 export async function getStaticPaths() {
   const paths = products.map((product) => ({
     params: { smart: product.slug },
   }));
   return paths;
 }
+
 const { smart } = Astro.params;
 const currentProduct = products.find((product) => product.slug === smart);
 
 if (!currentProduct) {
   throw new Error(`Product not found: ${smart}`);
 }
+
 const relatedProducts = products
   .filter(
     (product) =>
@@ -32,23 +31,9 @@ const relatedProducts = products
   )
   .slice(0, 4);
 
-// Build key features for SEO description
-const keyFeatures = [
-  currentProduct.display,
-  currentProduct.processor,
-  currentProduct.version,
-  currentProduct.color,
-  currentProduct.dimensions?.length &&
-    `${currentProduct.dimensions.length} width`,
-]
-  .filter(Boolean)
-  .join(", ");
-
-// Generate Schema
-const productSchemaString = generateProductSchema(currentProduct);
-const productSchema = JSON.parse(productSchemaString);
-const breadcrumbSchema = generateBreadcrumbSchema(currentProduct);
-
+// ============================================================================
+// ADDITIONAL SCHEMAS - Pass to Layout
+// ============================================================================
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -87,60 +72,11 @@ const faqSchema = {
     },
   ],
 };
-
-const schemaArray = [productSchema, breadcrumbSchema, faqSchema];
-
-// SEO setup
-const seo = {
-  title: `${currentProduct.name} - ${currentProduct.from} | Buy on Credit Kenya`,
-  description:
-    currentProduct.description ||
-    `Buy ${currentProduct.name} on credit in Kenya. Enjoy 4K HDR picture, ${keyFeatures}, and flexible payment options. Deposit ${currentProduct.deposit} and pay ${currentProduct.daily} daily.`,
-  canonical: `https://mdogomdogodeals.co.ke/products/${currentProduct.slug}`,
-  ogImage: `https://mdogomdogodeals.co.ke${currentProduct.source}`,
-  schema: schemaArray.map((schema) => JSON.stringify(schema)).join(""),
-};
-
-// Breadcrumbs
-const breadcrumbs = [
-  { name: "Home", url: "/" },
-  { name: "Smart TVs", url: "/tv/televisions" },
-  {
-    name: currentProduct.brand,
-    url: `/tv/${currentProduct.brand.toLowerCase()}`,
-  },
-  { name: currentProduct.name, current: true },
-];
 ---
 
-<Layout {...seo}>
+<TvProductLayout product={currentProduct} additionalSchemas={[faqSchema]}>
   <Gift />
-
   <Nav />
-
-  <!-- Breadcrumb Navigation -->
-  <!-- <nav class="breadcrumb" aria-label="Breadcrumb">
-    <div class="breadcrumb-container">
-      <ol class="breadcrumb-list">
-        {
-          breadcrumbs.map((crumb, index) => (
-            <li class="breadcrumb-item">
-              {crumb.current ? (
-                <span aria-current="page">{crumb.name}</span>
-              ) : (
-                <>
-                  <a href={crumb.url}>{crumb.name}</a>
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="separator">›</span>
-                  )}
-                </>
-              )}
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </nav> -->
 
   <!-- Main Product Display -->
   <DisplayTv {...currentProduct} />
@@ -227,7 +163,7 @@ const breadcrumbs = [
         </div>
 
         <div class="faq-item">
-          <h3 class="faq-question">What’s included in the box?</h3>
+          <h3 class="faq-question">What's included in the box?</h3>
           <p class="faq-answer">
             Includes the {currentProduct.name}, remote control, user manual, and
             power cable.
@@ -244,4 +180,184 @@ const breadcrumbs = [
       </div>
     </div>
   </section>
-</Layout>
+</TvProductLayout>
+
+<style>
+  /* Product Details Section */
+  .product-details {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  .detail-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .detail-section h2 {
+    color: #1a202c;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #f59e0b;
+    padding-bottom: 0.5rem;
+  }
+
+  .detail-section p {
+    color: #4a5568;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .pros,
+  .cons {
+    margin-top: 1.5rem;
+  }
+
+  .pros h3 {
+    color: #059669;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cons h3 {
+    color: #dc2626;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .pros ul,
+  .cons ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .pros li,
+  .cons li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #4a5568;
+  }
+
+  .pros li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #059669;
+    font-weight: bold;
+  }
+
+  .cons li::before {
+    content: "✗";
+    position: absolute;
+    left: 0;
+    color: #dc2626;
+    font-weight: bold;
+  }
+
+  /* Related Products Section */
+  .related-products {
+    background: #f7fafc;
+    padding: 3rem 0;
+    margin-top: 3rem;
+  }
+
+  .related-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .related-title {
+    font-size: 2rem;
+    color: #1a202c;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  .faq-container {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-title {
+    font-size: 2rem;
+    color: #1a202c;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 3px solid #f59e0b;
+    padding-bottom: 1rem;
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .faq-item {
+    padding: 1.5rem;
+    border-left: 4px solid #f59e0b;
+    background: #fef5e7;
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+
+  .faq-item:hover {
+    transform: translateX(8px);
+  }
+
+  .faq-question {
+    color: #1a202c;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .faq-answer {
+    color: #4a5568;
+    line-height: 1.8;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .detail-section {
+      padding: 1.5rem;
+    }
+
+    .detail-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .related-title,
+    .faq-title {
+      font-size: 1.5rem;
+    }
+
+    .faq-container {
+      padding: 2rem 1.5rem;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

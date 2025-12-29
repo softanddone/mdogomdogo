@@ -231,6 +231,7 @@ const generateUniqueDescription = (product: FlexibleProduct, depositAmount: numb
 // FIXED: Main Product Schema using @graph structure
 export function generateProductSchema(product: FlexibleProduct) {
   const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
+
   const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
   const dailyAmount = parseFloat(product.daily.replace(/[^\d.]/g, ''));
   const totalDays = Math.ceil((price - depositAmount) / dailyAmount);
@@ -621,6 +622,411 @@ export function generateProductSchema(product: FlexibleProduct) {
 
   return JSON.stringify(graphData, null, 2);
 }
+
+
+
+
+export function generateTVProductSchema(product: FlexibleProduct) {
+  const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
+  const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
+  const dailyAmount = parseFloat(product.daily.replace(/[^\d.]/g, ''));
+  const totalDays = Math.ceil((price - depositAmount) / dailyAmount);
+
+  const productId = `https://mdogomdogodeals.co.ke/tv/${product.slug}`;
+  const offerId = `${productId}#offer`;
+  const organizationId = 'https://mdogomdogodeals.co.ke#organization';
+
+  const brandInfo = brandData[product.brand] || {
+    url: `https://www.${product.brand.toLowerCase()}.com`,
+    logo: `https://logo.clearbit.com/${product.brand.toLowerCase()}.com`
+  };
+
+  const baseImage = `https://mdogomdogodeals.co.ke/tvs/${product.source}`;
+  const imageArray = [baseImage];
+
+  const validGTIN = product.gtin && product.gtin.trim() !== '' && product.gtin !== 'placeholder' && /^\d{8,14}$/.test(product.gtin)
+    ? product.gtin
+    : generateGTIN(product.id, product.brand);
+
+  const uniqueDescription = product.description && product.description.length > 50
+    ? product.description
+    : generateUniqueTVDescription(product, depositAmount, dailyAmount, totalDays);
+
+  // Primary category for Google (ONE clear category)
+  const primaryCategory = 'Smart TVs';
+
+  const graphData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      // Main Product Schema
+      {
+        '@type': 'Product',
+        additionalType: 'https://schema.org/ConsumerElectronics',
+        '@id': productId,
+        name: product.name,
+        alternateName: [
+          `${product.brand} ${product.model || ''} Smart TV`.trim(),
+          `${product.name} Kenya`,
+          `${product.name} Nairobi`,
+          `${product.brand} ${product.screenSize || ''} inch TV`.trim()
+        ].filter(Boolean),
+        description: uniqueDescription,
+        disambiguatingDescription: `Official ${product.brand} ${product.name} Smart TV available through Mdogo Mdogo Deals Kenya's flexible payment system. Authentic televisions with warranty and free delivery.`,
+        image: imageArray,
+        sku: generateValidSKU(product.slug, product.id),
+        gtin: validGTIN,
+        mpn: product.model || `${product.brand}-TV-${product.id}`,
+        productID: product.id.toString(),
+
+        // Main entity of page
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': productId
+        },
+
+        // Single primary category (Google preference)
+        category: primaryCategory,
+
+        brand: {
+          '@type': 'Brand',
+          '@id': `${brandInfo.url}#brand`,
+          name: product.brand,
+          url: brandInfo.url,
+          logo: brandInfo.logo,
+          ...(brandInfo.sameAs && { sameAs: brandInfo.sameAs }),
+          ...(brandInfo.foundingDate && { foundingDate: brandInfo.foundingDate }),
+          ...(brandInfo.founder && { founder: brandInfo.founder }),
+          description: `Official ${product.brand} Smart TVs available in Kenya through authorized dealers.`
+        },
+
+        itemCondition: product.condition === 'new' ? 'https://schema.org/NewCondition' :
+                       product.condition === 'refurbished' ? 'https://schema.org/RefurbishedCondition' :
+                       'https://schema.org/UsedCondition',
+
+        // Local audience targeting
+        audience: {
+          '@type': 'PeopleAudience',
+          geographicArea: {
+            '@type': 'Country',
+            name: 'Kenya'
+          }
+        },
+
+        // TV-specific properties
+        ...(product.screenSize && { 
+          size: `${product.screenSize} inches`
+        }),
+        ...(product.resolution && { videoQuality: product.resolution }),
+        ...(product.displayTechnology && { material: product.displayTechnology }),
+        ...(product.smartTV !== undefined && { 
+          featureList: product.smartTV ? 'Smart TV, WiFi Enabled, Streaming Apps' : 'Standard TV'
+        }),
+        ...(product.productLine && { productLine: product.productLine }),
+        ...(product.color && { color: product.color }),
+        ...(product.model && { model: product.model }),
+
+        hasWarranty: {
+          '@type': 'WarrantyPromise',
+          durationOfWarranty: {
+            '@type': 'QuantitativeValue',
+            value: 2,
+            unitCode: 'ANN'
+          }
+        },
+
+        ...(product.reviews && product.reviews.reviewCount > 0 && {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            '@id': `${productId}#aggregaterating`,
+            ratingValue: product.reviews.averageRating.toString(),
+            bestRating: '5',
+            worstRating: '1',
+            reviewCount: product.reviews.reviewCount.toString(),
+            ratingExplanation: `Based on ${product.reviews.reviewCount} customer reviews`
+          },
+          ...(product.reviews.reviews && product.reviews.reviews.length > 0 && {
+            review: product.reviews.reviews.map((review: any, index: number) => ({
+              '@type': 'Review',
+              '@id': `${productId}#review${index + 1}`,
+              author: {
+                '@type': 'Person',
+                name: review.author,
+                location: {
+                  '@type': 'Place',
+                  name: 'Kenya'
+                }
+              },
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: review.rating.toString(),
+                bestRating: '5',
+                worstRating: '1'
+              },
+              reviewBody: review.reviewBody,
+              datePublished: review.datePublished,
+              inLanguage: 'en-KE'
+            }))
+          })
+        }),
+
+        offers: {
+          '@type': 'Offer',
+          '@id': offerId,
+          url: productId,
+          priceCurrency: 'KES',
+          price: price,
+          priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+
+          priceSpecification: [
+            {
+              '@type': 'UnitPriceSpecification',
+              price: price,
+              priceCurrency: 'KES',
+              name: 'Total Price',
+              description: 'The total price to be paid for the whole loan duration'
+            },
+            {
+              '@type': 'UnitPriceSpecification',
+              price: depositAmount,
+              priceCurrency: 'KES',
+              name: 'Deposit Amount',
+              description: 'Deposit to get the Smart TV under Lipa Mdogo Mdogo plan'
+            },
+            {
+              '@type': 'UnitPriceSpecification',
+              price: dailyAmount,
+              priceCurrency: 'KES',
+              name: 'Daily Payment',
+              description: 'Daily installment payment under Lipa Mdogo Mdogo plan'
+            }
+          ],
+
+          itemCondition: product.condition === 'new' ? 'https://schema.org/NewCondition' :
+                         product.condition === 'refurbished' ? 'https://schema.org/RefurbishedCondition' :
+                         'https://schema.org/UsedCondition',
+          
+          // All products in stock
+          availability: 'https://schema.org/InStock',
+          availabilityStarts: new Date().toISOString(),
+
+          seller: {
+            '@type': 'Organization',
+            '@id': organizationId
+          },
+
+          hasMerchantReturnPolicy: { '@id': 'https://mdogomdogodeals.co.ke#returnpolicy' },
+
+          shippingDetails: {
+            '@type': 'OfferShippingDetails',
+            shippingRate: {
+              '@type': 'MonetaryAmount',
+              value: '0',
+              currency: 'KES'
+            },
+            freeShippingThreshold: {
+              '@type': 'MonetaryAmount',
+              value: '0',
+              currency: 'KES'
+            },
+            deliveryTime: { '@id': 'https://mdogomdogodeals.co.ke#deliverytime' },
+            shippingDestination: {
+              '@type': 'DefinedRegion',
+              addressCountry: 'KE',
+              addressRegion: kenyaLocationData.counties
+            }
+          },
+
+          availableAtOrFrom: kenyaLocationData.counties.map(county => ({
+            '@type': 'Place',
+            name: county,
+            addressCountry: 'KE'
+          })),
+
+          validFrom: new Date().toISOString(),
+          eligibleRegion: {
+            '@type': 'Country',
+            name: 'Kenya',
+            identifier: 'KE'
+          }
+        },
+
+        additionalProperty: [
+          {
+            '@type': 'PropertyValue',
+            '@id': `${productId}#paymentplan`,
+            name: 'Payment Plan Type',
+            value: 'Installment Plan - Lipa Mdogo Mdogo',
+            description: 'Flexible daily payment system for affordable Smart TV ownership'
+          },
+          {
+            '@type': 'PropertyValue',
+            name: 'Deposit Amount',
+            value: `KES ${depositAmount.toLocaleString()}`,
+            unitCode: 'KES'
+          },
+          {
+            '@type': 'PropertyValue',
+            name: 'Daily Payment',
+            value: `KES ${dailyAmount.toLocaleString()}`,
+            unitCode: 'KES'
+          },
+          {
+            '@type': 'PropertyValue',
+            name: 'Payment Duration',
+            value: `${totalDays} days`,
+            unitCode: 'DAY'
+          },
+          ...(product.screenSize ? [{
+            '@type': 'PropertyValue',
+            name: 'Screen Size',
+            value: `${product.screenSize} inches`,
+            unitCode: 'INH'
+          }] : []),
+          ...(product.resolution ? [{
+            '@type': 'PropertyValue',
+            name: 'Resolution',
+            value: product.resolution
+          }] : []),
+          ...(product.hdmiPorts ? [{
+            '@type': 'PropertyValue',
+            name: 'HDMI Ports',
+            value: product.hdmiPorts.toString()
+          }] : []),
+          ...(product.usbPorts ? [{
+            '@type': 'PropertyValue',
+            name: 'USB Ports',
+            value: product.usbPorts.toString()
+          }] : [])
+        ],
+
+        url: productId,
+        sameAs: [
+          productId,
+          `https://mdogomdogodeals.co.ke/tv/${product.slug}`
+        ],
+
+        dateCreated: product.dateCreated || new Date().toISOString(),
+        dateModified: product.dateModified || new Date().toISOString(),
+        datePublished: product.datePublished || new Date().toISOString(),
+        
+        inLanguage: 'en-KE',
+        contentLocation: {
+          '@type': 'Place',
+          name: 'Kenya',
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: 'KE'
+          }
+        }
+      },
+
+      // Organization Schema
+      {
+        '@type': 'Organization',
+        '@id': organizationId,
+        name: product.seller,
+        url: 'https://mdogomdogodeals.co.ke',
+        logo: 'https://mdogomdogodeals.co.ke/tvs/logo.png',
+        image: 'https://mdogomdogodeals.co.ke/tvs/logo.png',
+        
+        description: 'Kenya\'s leading Smart TV retailer offering flexible payment plans through Lipa Mdogo Mdogo system.',
+        
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Nairobi',
+          addressRegion: 'Nairobi County',
+          addressCountry: 'KE',
+          streetAddress: 'CBD, Nairobi',
+          postalCode: '00100'
+        },
+        
+        geo: kenyaLocationData.nairobi.geo,
+        areaServed: kenyaLocationData.counties.map(county => ({
+          '@type': 'AdministrativeArea',
+          name: county,
+          addressCountry: 'KE'
+        })),
+        
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+254-720-202-167',
+          contactType: 'customer service',
+          availableLanguage: ['English', 'Swahili'],
+          areaServed: 'KE'
+        },
+
+        paymentAccepted: 'M-Pesa, Credit Card, Debit Card, Bank Transfer',
+        
+        sameAs: [
+          'https://www.facebook.com/mdogomdogodeals',
+          'https://twitter.com/mdogomdogodeals',
+          'https://www.instagram.com/mdogomdogodeals'
+        ]
+      },
+
+      // Breadcrumb Schema
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${productId}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://mdogomdogodeals.co.ke'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Smart TVs',
+            item: 'https://mdogomdogodeals.co.ke/tvs'
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: product.brand,
+            item: `https://mdogomdogodeals.co.ke/tvs/${product.brand.toLowerCase()}`
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: product.name,
+            item: productId
+          }
+        ]
+      },
+
+      // Return Policy
+      SHARED_RETURN_POLICY,
+
+      // Delivery Time
+      SHARED_DELIVERY_TIME
+    ]
+  };
+
+  return JSON.stringify(graphData, null, 2);
+}
+
+// Helper function to generate unique TV descriptions
+function generateUniqueTVDescription(
+  product: FlexibleProduct,
+  depositAmount: number,
+  dailyAmount: number,
+  totalDays: number
+): string {
+  const features = [];
+  
+  if (product.screenSize) features.push(`${product.screenSize}" display`);
+  if (product.resolution) features.push(product.resolution);
+  if (product.smartTV) features.push('Smart TV with WiFi');
+  
+  const featureText = features.length > 0 ? ` featuring ${features.join(', ')}` : '';
+  
+  return `Get the ${product.brand} ${product.name} Smart TV${featureText} through Mdogo Mdogo Deals' flexible payment plan. Pay only KES ${depositAmount.toLocaleString()} deposit and KES ${dailyAmount.toLocaleString()} daily for ${totalDays} days. Authentic ${product.brand} Smart TV with 2-year warranty and free delivery across Kenya. Experience premium entertainment with affordable daily installments.`;
+}
+
+
+
 // FIXED: Category schema with @graph
 export function generateCategorySchema(category: string, products: FlexibleProduct[], displayCategory: string) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
