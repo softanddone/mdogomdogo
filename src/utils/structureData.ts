@@ -1158,35 +1158,34 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
   return graphData;
 }
 // FIXED: Homepage schema with @graph
-export function generateHomepageSchema(products: FlexibleProduct[]) {
+
+
+export function generateHomepageSchema(products: FlexibleProduct[], seoData: any) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
   
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
-      // Primary WebPage entity for homepage
+      // WebPage - uses seoData passed from HomeLayout
       {
         '@type': 'WebPage',
         '@id': `${baseUrl}#webpage`,
-        url: baseUrl,
-        name: 'Lipa Mdogo Mdogo Phones Kenya | Buy Smartphones on Daily Installments',
-        description: 'Buy smartphones on Lipa Mdogo Mdogo in Kenya with daily payments from KES 50. Get the latest phones from Samsung, iPhone, Tecno, Infinix and more with flexible installment plans. Free delivery in Nairobi and nationwide shipping.',
+        url: seoData.canonical,
+        name: seoData.title,
+        description: seoData.description,
         isPartOf: {
           '@id': `${baseUrl}#website`
         },
         about: {
           '@id': `${baseUrl}#organization`
         },
-        mainEntity: {
-          '@id': `${baseUrl}#featured-products`
-        },
         publisher: {
           '@id': `${baseUrl}#organization`
         },
         primaryImageOfPage: {
           '@type': 'ImageObject',
-          url: `${baseUrl}/phones/hero.webp`,
-          contentUrl: `${baseUrl}/phones/hero.webp`
+          url: seoData.ogImage,
+          contentUrl: seoData.ogImage
         },
         inLanguage: 'en-KE',
         breadcrumb: {
@@ -1203,14 +1202,14 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
         }
       },
       
-      // WebSite entity with SearchAction
+      // WebSite
       {
         '@type': 'WebSite',
         '@id': `${baseUrl}#website`, 
         url: baseUrl,
-        name: 'Lipa Mdogo Mdogo Phones Kenya',
-        alternateName: 'Mdogo Mdogo Deals',
-        description: 'Kenya\'s premier destination for buying smartphones on flexible Lipa Mdogo Mdogo payment plans with daily installments',
+        name: seoData.siteName,
+        alternateName: 'MMD Kenya',
+        description: 'Buy phones on Lipa Mdogo Mdogo payment plans in Nairobi and across Kenya',
         publisher: {
           '@id': `${baseUrl}#organization`
         },
@@ -1225,12 +1224,12 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
         inLanguage: 'en-KE'
       },
       
-      // Organization entity
+      // Organization
       {
         '@type': 'Organization',
         '@id': `${baseUrl}#organization`,
-        name: 'Lipa Mdogo Mdogo Phones Kenya',
-        alternateName: ['Mdogo Mdogo Deals', 'MMD Kenya'],
+        name: seoData.organizationName,
+        alternateName: ['MMD Kenya', 'Mdogo Mdogo Deals'],
         url: baseUrl,
         logo: {
           '@type': 'ImageObject',
@@ -1239,12 +1238,12 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
           contentUrl: `${baseUrl}/phones/y2.png`,
           width: 300,
           height: 150,
-          caption: 'Lipa Mdogo Mdogo Phones Kenya Logo'
+          caption: 'Mdogo Mdogo Deals Kenya Logo'
         },
         image: {
           '@id': `${baseUrl}#logo`
         },
-        description: 'Kenya\'s leading mobile phone retailer offering flexible Lipa Mdogo Mdogo payment plans. Buy smartphones with daily installments starting from KES 50. Shop Samsung, iPhone, Tecno, Infinix, Oppo, Vivo and more brands with affordable deposits and nationwide delivery.',
+        description: 'Mobile phone retailer in Nairobi offering flexible payment plans for smartphones. Daily installments from KES 50.',
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'CBD Center',
@@ -1272,46 +1271,61 @@ export function generateHomepageSchema(products: FlexibleProduct[]) {
         ],
         areaServed: {
           '@type': 'Country',
-          name: 'Kenya',
-          '@id': 'https://en.wikipedia.org/wiki/Kenya'
+          name: 'Kenya'
         }
       },
       
+      // FAQ - Neutral and informational
       {
-        '@type': 'ItemList',
-        '@id': `${baseUrl}#featured-products`,
-        name: 'Featured Smartphones on Lipa Mdogo Mdogo',
-        description: 'Top-selling smartphones available on flexible Lipa Mdogo Mdogo payment plans in Kenya',
-        numberOfItems: Math.min(3, products.length),
-        itemListElement: products.slice(0, 3).map((product, index) => ({
-          '@type': 'ListItem', 
-          position: index + 1,
-          item: {
-            '@type': 'Product',
-            '@id': `${baseUrl}/${product.slug}`,
-            name: product.name,
-            description: product.description || `${product.name} available on Lipa Mdogo Mdogo flexible payment plans in Kenya`,
-            image: `${baseUrl}${product.source}`,
-            url: `${baseUrl}/${product.slug}`,
-            brand: {
-              '@type': 'Brand',
-              name: product.brand
-            },
-            offers: {
-              '@type': 'Offer',
-              priceCurrency: 'KES',
-              price: parseFloat(product.totalPrice?.replace(/[^\d.]/g, '') || product.price),
-              availability: 'https://schema.org/InStock',
-              url: `${baseUrl}/${product.slug}`
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How do installment payment plans work?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Installment plans allow you to pay for a phone in smaller amounts over time instead of the full price upfront. Payment frequency can be daily, weekly, or monthly depending on the plan.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'What documents are required to buy on credit?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Typically, you need a valid ID, proof of income or business activity, and contact information. Specific requirements may vary by payment provider.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'Is delivery available in Nairobi?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes, delivery is available within Nairobi and surrounding areas. Some providers also offer nationwide shipping options.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'Which phone brands can I buy on installment?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Most major smartphone brands are available including Samsung, Tecno, Infinix, Oppo, and others. Availability depends on current stock.'
             }
           }
-        }))
+        ]
       }
     ]
   };
 
   return JSON.stringify(graphData, null, 2);
 }
+
+
+
+
+
+
+
+
 export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
   if (!eventData) return null;
 
