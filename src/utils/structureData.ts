@@ -229,15 +229,17 @@ const generateUniqueDescription = (product: FlexibleProduct, depositAmount: numb
   return `Buy the ${product.brand} ${product.name} in Kenya through our flexible Lipa Mdogo Mdogo payment plan.${featureText} Pay only KES ${depositAmount.toLocaleString()} deposit, then KES ${dailyAmount.toLocaleString()} daily for ${totalDays} days. Genuine ${product.brand} phone with 2-year warranty. Free same-day delivery in Nairobi, 1-2 days countrywide. ${product.condition === 'new' ? 'Brand new, factory sealed.' : 'Pre-owned, fully tested.'} Available now at Mdogo Mdogo Deals - Kenya's trusted phone retailer since 2018.`;
 };
 // FIXED: Main Product Schema using @graph structure
+
+
+// utils/structureData.ts - SIMPLIFIED & GOOGLE-COMPLIANT
+
 export function generateProductSchema(product: FlexibleProduct) {
   const price = parseFloat(product.totalPrice.replace(/[^\d.]/g, ''));
-
   const depositAmount = parseFloat(product.deposit.replace(/[^\d.]/g, ''));
   const dailyAmount = parseFloat(product.daily.replace(/[^\d.]/g, ''));
-  const totalDays = Math.ceil((price - depositAmount) / dailyAmount);
 
-  const productId = `https://mdogomdogodeals.co.ke/${product.slug}`;
-  const offerId = `${productId}#offer`;
+  // Hardcoded canonical URL
+  const productUrl = `https://mdogomdogodeals.co.ke/${product.slug}`;
   const organizationId = 'https://mdogomdogodeals.co.ke#organization';
 
   const brandInfo = brandData[product.brand] || {
@@ -246,344 +248,99 @@ export function generateProductSchema(product: FlexibleProduct) {
   };
 
   const baseImage = `https://mdogomdogodeals.co.ke/phones/${product.source}`;
-  const imageArray = [baseImage];
 
-  const validGTIN = product.gtin && product.gtin.trim() !== '' && product.gtin !== 'placeholder' && /^\d{8,14}$/.test(product.gtin)
+  const validGTIN = product.gtin && /^\d{8,14}$/.test(product.gtin)
     ? product.gtin
     : generateGTIN(product.id, product.brand);
 
-  const uniqueDescription = product.description && product.description.length > 50
+  const uniqueDescription = product.description?.length > 50
     ? product.description
-    : generateUniqueDescription(product, depositAmount, dailyAmount, totalDays);
+    : `Buy ${product.name} in Kenya with Lipa Mdogo Mdogo flexible payments. Pay KES ${depositAmount.toLocaleString()} deposit + KES ${dailyAmount}/day. Free delivery in Nairobi. 2-year warranty. Genuine ${product.brand} phones.`;
 
-  // Primary category for Google (ONE clear category)
-  const primaryCategory = 'Mobile Phones';
-
-  const graphData = {
+  // ============================================================================
+  // SINGLE @CONTEXT + @GRAPH - GOOGLE STANDARD
+  // ============================================================================
+  return JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
-      // Main Product Schema
+      // 1. PRODUCT SCHEMA - CLEAN & GOOGLE-APPROVED
       {
-        '@type': ['Product', 'MobilePhone'],
-        '@id': productId,
+        '@type': 'Product', // ONLY Product, no MobilePhone
+        '@id': productUrl,
         name: product.name,
-        alternateName: [
-          `${product.brand} ${product.model || ''}`.trim(),
-          `${product.name} Kenya`,
-          `${product.name} Nairobi`
-        ].filter(Boolean),
         description: uniqueDescription,
-        disambiguatingDescription: `Official ${product.brand} ${product.name} available through Mdogo Mdogo Deals Kenya's flexible payment system. Authentic smartphones with warranty and free delivery.`,
-        image: imageArray,
+        image: [baseImage],
         sku: generateValidSKU(product.slug, product.id),
         gtin: validGTIN,
         mpn: product.model || `${product.brand}-${product.id}`,
-        productID: product.id.toString(),
-
-        // Main entity of page
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': productId
-        },
-
-        // Single primary category (Google preference)
-        category: primaryCategory,
-
+        
         brand: {
           '@type': 'Brand',
-          '@id': `${brandInfo.url}#brand`,
           name: product.brand,
-          url: brandInfo.url,
-          logo: brandInfo.logo,
-          ...(brandInfo.sameAs && { sameAs: brandInfo.sameAs }),
-          ...(brandInfo.foundingDate && { foundingDate: brandInfo.foundingDate }),
-          ...(brandInfo.founder && { founder: brandInfo.founder }),
-          description: `Official ${product.brand} products available in Kenya through authorized dealers.`
+          url: brandInfo.url
         },
 
-        itemCondition: product.condition === 'new' ? 'https://schema.org/NewCondition' :
-                       product.condition === 'refurbished' ? 'https://schema.org/RefurbishedCondition' :
-                       'https://schema.org/UsedCondition',
+        category: 'Mobile Phones', // Single clear category
 
-        // Accessory/Spare part relationship
-        
+        itemCondition: product.condition === 'new' 
+          ? 'https://schema.org/NewCondition'
+          : product.condition === 'refurbished' 
+          ? 'https://schema.org/RefurbishedCondition'
+          : 'https://schema.org/UsedCondition',
 
-        // Local audience targeting
-        audience: {
-          '@type': 'PeopleAudience',
-          geographicArea: {
-            '@type': 'Country',
-            name: 'Kenya'
-          }
-        },
-
-        // Energy consumption details
-
-        ...(product.productLine && { productLine: product.productLine }),
-        ...(product.material && { material: product.material }),
-        ...(product.pattern && { pattern: product.pattern }),
-        ...(product.color && { color: product.color }),
-        ...(product.model && { model: product.model }),
-
-        warranty: {
-          '@type': 'WarrantyPromise',
-          durationOfWarranty: {
-            '@type': 'QuantitativeValue',
-            value: 2,
-            unitCode: 'ANN'
-          },
-          warrantyScope: 'https://schema.org/WarrantyPromise',
-          warrantee: {
-            '@type': 'Organization',
-            name: product.brand,
-            url: brandInfo.url
-          }
-        },
-
-        ...(product.reviews && product.reviews.reviewCount > 0 && {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            '@id': `${productId}#aggregaterating`,
-            ratingValue: product.reviews.averageRating.toString(),
-            bestRating: '5',
-            worstRating: '1',
-            reviewCount: product.reviews.reviewCount.toString(),
-            ratingExplanation: `Based on ${product.reviews.reviewCount} customer reviews`
-          },
-          ...(product.reviews.reviews && product.reviews.reviews.length > 0 && {
-            review: product.reviews.reviews.map((review: any, index: number) => ({
-              '@type': 'Review',
-              '@id': `${productId}#review${index + 1}`,
-              author: {
-                '@type': 'Person',
-                name: review.author,
-                location: {
-                  '@type': 'Place',
-                  name: 'Kenya'
-                }
-              },
-              reviewRating: {
-                '@type': 'Rating',
-                ratingValue: review.rating.toString(),
-                bestRating: '5',
-                worstRating: '1'
-              },
-              reviewBody: review.reviewBody,
-              datePublished: review.datePublished,
-              inLanguage: 'en-KE'
-            }))
-          })
-        }),
-
+        // SIMPLIFIED OFFER - GOOGLE ESSENTIALS ONLY
         offers: {
           '@type': 'Offer',
-          '@id': offerId,
-          url: productId,
+          url: productUrl,
           priceCurrency: 'KES',
-          price: price,
-          lowPrice: price,
-          highPrice: price,
-          priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-
-          priceSpecification: [
-            {
-              '@type': 'UnitPriceSpecification',
-              price: price,
-              priceCurrency: 'KES',
-              name: 'Total Price',
-              description: 'The total price to be paid for the whole loan duration'
-
-            },
-            {
-              '@type': 'UnitPriceSpecification',
-              price: depositAmount,
-              priceCurrency: 'KES',
-              name: 'Deposit Amount',
-              description: 'Deposit to get the phone  under Lipa Mdogo Mdogo plan'
-
-            },
-            {
-              '@type': 'UnitPriceSpecification',
-              price: dailyAmount,
-              priceCurrency: 'KES',
-              name: 'Daily Payment',
-              description: 'Daily installment payment under Lipa Mdogo Mdogo plan'
-
-            }
-          ],
-
-          itemCondition: product.condition === 'new' ? 'https://schema.org/NewCondition' :
-                         product.condition === 'refurbished' ? 'https://schema.org/RefurbishedCondition' :
-                         'https://schema.org/UsedCondition',
-          
-          // All products in stock
+          price: price.toString(),
           availability: 'https://schema.org/InStock',
-          availabilityStarts: new Date().toISOString(),
-
+          itemCondition: product.condition === 'new' 
+            ? 'https://schema.org/NewCondition'
+            : 'https://schema.org/RefurbishedCondition',
+          
           seller: {
             '@type': 'Organization',
-            '@id': organizationId
-          },
-
-          acceptedPaymentMethod: [
-            {
-              '@type': 'PaymentMethod',
-              '@id': 'https://schema.org/CreditCard',
-              name: 'Credit Card'
-            },
-            {
-              '@type': 'PaymentMethod',
-              '@id': 'https://schema.org/PaymentMethodCreditCard',
-              name: 'Debit Card'
-            },
-            {
-              '@type': 'PaymentMethod',
-              name: 'M-Pesa',
-              identifier: 'MPESA'
-            },
-            {
-              '@type': 'PaymentMethod',
-              name: 'Bank Transfer',
-              identifier: 'BANK_TRANSFER'
-            }
-          ],
-
-          hasMerchantReturnPolicy: { '@id': 'https://mdogomdogodeals.co.ke#returnpolicy' },
-
-          shippingDetails: {
-            '@type': 'OfferShippingDetails',
-            shippingRate: {
-              '@type': 'MonetaryAmount',
-              value: '0',
-              currency: 'KES'
-            },
-            freeShippingThreshold: {
-              '@type': 'MonetaryAmount',
-              value: '0',
-              currency: 'KES'
-            },
-            deliveryTime: { '@id': 'https://mdogomdogodeals.co.ke#deliverytime' },
-            shippingDestination: {
-              '@type': 'DefinedRegion',
-              addressCountry: 'KE',
-              addressRegion: kenyaLocationData.counties
-            }
-          },
-
-          availableAtOrFrom: kenyaLocationData.counties.map(county => ({
-            '@type': 'Place',
-            name: county,
-            addressCountry: 'KE'
-          })),
-
-          validFrom: new Date().toISOString(),
-          eligibleRegion: {
-            '@type': 'Country',
-            name: 'Kenya',
-            identifier: 'KE'
-          },
-
-          eligibleCustomerType: {
-            '@type': 'BusinessEntityType',
-            name: 'Individual Consumers'
+            '@id': organizationId,
+            name: product.seller
           }
         },
 
-        additionalProperty: [
-          {
-            '@type': 'PropertyValue',
-            '@id': `${productId}#paymentplan`,
-            name: 'Payment Plan Type',
-            value: 'Installment Plan - Lipa Mdogo Mdogo',
-            description: 'Flexible daily payment system for affordable smartphone ownership'
-          },
-          {
-            '@type': 'PropertyValue',
-            name: 'Deposit Amount',
-            value: `KES ${depositAmount.toLocaleString()}`,
-            unitCode: 'KES'
-          },
-          {
-            '@type': 'PropertyValue',
-            name: 'Daily Payment',
-            value: `KES ${dailyAmount.toLocaleString()}`,
-            unitCode: 'KES'
-          },
-          {
-            '@type': 'PropertyValue',
-            name: 'Payment Duration',
-            value: `${totalDays} days`,
-            unitCode: 'DAY'
+        // Optional but recommended
+        ...(product.reviews?.reviewCount > 0 && {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: product.reviews.averageRating.toString(),
+            reviewCount: product.reviews.reviewCount.toString()
           }
-        ],
-
-        url: productId,
-        sameAs: [
-          productId,
-          `https://mdogomdogodeals.co.ke/${product.slug}`
-        ],
-
-        dateCreated: product.dateCreated || new Date().toISOString(),
-        dateModified: product.dateModified || new Date().toISOString(),
-        datePublished: product.datePublished || new Date().toISOString(),
-        
-        inLanguage: 'en-KE',
-        contentLocation: {
-          '@type': 'Place',
-          name: 'Kenya',
-          address: {
-            '@type': 'PostalAddress',
-            addressCountry: 'KE'
-          }
-        }
+        })
       },
 
-      // Organization Schema
+      // 2. ORGANIZATION SCHEMA
       {
         '@type': 'Organization',
         '@id': organizationId,
         name: product.seller,
         url: 'https://mdogomdogodeals.co.ke',
         logo: 'https://mdogomdogodeals.co.ke/phones/y2.png',
-        image: 'https://mdogomdogodeals.co.ke/phones/y2.png',
-        
-        description: 'Kenya\'s leading mobile phone retailer offering flexible payment plans through Lipa Mdogo Mdogo system.',
         
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Nairobi',
-          addressRegion: 'Nairobi County',
-          addressCountry: 'KE',
-          streetAddress: 'CBD, Nairobi',
-          postalCode: '00100'
-        },
-        
-        geo: kenyaLocationData.nairobi.geo,
-        areaServed: kenyaLocationData.counties.map(county => ({
-          '@type': 'AdministrativeArea',
-          name: county,
           addressCountry: 'KE'
-        })),
+        },
         
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: '+254-720-202-167',
           contactType: 'customer service',
-          availableLanguage: ['English', 'Swahili'],
           areaServed: 'KE'
-        },
-        
-        sameAs: [
-          'https://www.facebook.com/mdogomdogodeals',
-          'https://twitter.com/mdogomdogodeals',
-          'https://www.instagram.com/mdogomdogodeals'
-        ]
+        }
       },
 
-      // Breadcrumb Schema
+      // 3. BREADCRUMB SCHEMA
       {
         '@type': 'BreadcrumbList',
-        '@id': `${productId}#breadcrumb`,
         itemListElement: [
           {
             '@type': 'ListItem',
@@ -607,22 +364,13 @@ export function generateProductSchema(product: FlexibleProduct) {
             '@type': 'ListItem',
             position: 4,
             name: product.name,
-            item: productId
+            item: productUrl
           }
         ]
-      },
-
-      // Return Policy
-      SHARED_RETURN_POLICY,
-
-      // Delivery Time
-      SHARED_DELIVERY_TIME
+      }
     ]
-  };
-
-  return JSON.stringify(graphData, null, 2);
+  }, null, 2);
 }
-
 
 
 

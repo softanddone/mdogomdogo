@@ -1,4 +1,5 @@
 ---
+// pages/[product].astro - CLEAN FAQ IMPLEMENTATION
 export const prerender = true;
 
 import ProductLayout from "../layouts/ProductLayout.astro";
@@ -21,9 +22,6 @@ if (!currentProduct) {
   return Astro.redirect("/404");
 }
 
-// ============================================================================
-// RELATED PRODUCTS - Business Logic Only
-// ============================================================================
 const relatedProducts = products
   .filter(
     (p) =>
@@ -33,56 +31,38 @@ const relatedProducts = products
   )
   .slice(0, 4);
 
-// ============================================================================
-// BREADCRUMBS - Single Source of Truth (matches schema in ProductLayout)
-// ============================================================================
-const breadcrumbs = [
-  { name: "Home", url: "https://mdogomdogodeals.co.ke" },
-  { name: "Mobile Phones", url: "https://mdogomdogodeals.co.ke/phones" },
-  {
-    name: currentProduct.brand,
-    url: `https://mdogomdogodeals.co.ke/${currentProduct.brand.toLowerCase()}`,
-  },
-  { name: currentProduct.name, current: true },
-];
-
-// ============================================================================
-// FAQ DATA - Single Source of Truth (will match schema)
-// ============================================================================
+// FAQ DATA
 const faqs = [
   {
-    question: `How does the credit payment work for ${currentProduct.name}?`,
-    answer: `Pay ${currentProduct.deposit} deposit, then ${currentProduct.daily} daily until fully paid. No hidden fees.`,
+    question: `How does Lipa Mdogo Mdogo work for ${currentProduct.name}?`,
+    answer: `Pay KES ${currentProduct.deposit} deposit, then KES ${currentProduct.daily} daily until fully paid. No hidden fees. Get your ${currentProduct.name} immediately after deposit.`,
   },
   {
-    question: "Is delivery free in Nairobi?",
+    question: `Is delivery free in Kenya for ${currentProduct.name}?`,
     answer:
-      "Yes, we offer free same-day delivery within Nairobi CBD. Outer areas may have a small delivery fee. We deliver throughout Kenya.",
+      "Yes, free same-day delivery in Nairobi CBD. Outer Nairobi and other counties may have small delivery fees. We deliver nationwide.",
   },
   {
     question: "What if I miss a payment?",
     answer:
-      "Contact your provider immediately. Most offer flexible payment options and will work with you to find a solution.",
+      "Contact your provider immediately. Most offer grace periods and flexible payment options.",
   },
   {
-    question: `Is the ${currentProduct.name} genuine?`,
-    answer: `Yes, all our ${currentProduct.name} phones are 100% genuine with warranty. We source directly from authorized distributors in Kenya.`,
+    question: `Is this ${currentProduct.name} genuine?`,
+    answer: `Yes, 100% genuine ${currentProduct.brand} ${currentProduct.name} with manufacturer warranty. Sourced from authorized distributors in Kenya.`,
   },
   {
-    question: `What colors are available for ${currentProduct.name}?`,
-    answer: `The ${currentProduct.name} is available in: ${currentProduct.color}. Choose your favorite when ordering.`,
+    question: `What colors are available for ${currentProduct.name} in Kenya?`,
+    answer: `Available in: ${currentProduct.color}. Choose your preferred color when ordering.`,
   },
   {
-    question: "What about warranty and support?",
-    answer: `All phones come with manufacturer warranty. You'll get full support from both ${currentProduct.brand} and ${currentProduct.seller}.`,
+    question: "What warranty comes with the phone?",
+    answer: `All phones include 2-year manufacturer warranty with full support from ${currentProduct.brand} and ${currentProduct.seller}.`,
   },
 ];
 
-// ============================================================================
-// FAQ SCHEMA - Generated from FAQ data to ensure perfect match
-// ============================================================================
+// FAQ SCHEMA - ONLY JSON-LD (No HTML microdata)
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: faqs.map((faq) => ({
     "@type": "Question",
@@ -93,63 +73,41 @@ const faqSchema = {
     },
   })),
 };
-
-// ============================================================================
-// PASS EVERYTHING TO LAYOUT - Let it handle all schema generation
-// ============================================================================
-// ProductLayout will generate: Product, Organization, Breadcrumb, ReturnPolicy
-// We only add FAQ schema here since it's page-specific
 ---
 
 <ProductLayout product={currentProduct} additionalSchemas={[faqSchema]}>
   <Gift />
   <Nav />
 
-  <!-- Breadcrumb Navigation - Matches schema exactly -->
+  <!-- BREADCRUMB - NO MICRODATA (Schema handles it) -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="breadcrumb-container">
-      <ol
-        class="breadcrumb-list"
-        itemscope
-        itemtype="https://schema.org/BreadcrumbList"
-      >
-        {
-          breadcrumbs.map((crumb, index) => (
-            <li
-              class="breadcrumb-item"
-              itemprop="itemListElement"
-              itemscope
-              itemtype="https://schema.org/ListItem"
-            >
-              {crumb.current ? (
-                <>
-                  <span aria-current="page" itemprop="name">
-                    {crumb.name}
-                  </span>
-                  <meta itemprop="position" content={(index + 1).toString()} />
-                </>
-              ) : (
-                <>
-                  <a href={crumb.url} itemprop="item">
-                    <span itemprop="name">{crumb.name}</span>
-                  </a>
-                  <meta itemprop="position" content={(index + 1).toString()} />
-                  {index < breadcrumbs.length - 1 && (
-                    <span class="separator">›</span>
-                  )}
-                </>
-              )}
-            </li>
-          ))
-        }
+      <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+          <a href="https://mdogomdogodeals.co.ke">Home</a>
+          <span class="separator">›</span>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="https://mdogomdogodeals.co.ke/phones">Mobile Phones</a>
+          <span class="separator">›</span>
+        </li>
+        <li class="breadcrumb-item">
+          <a
+            href={`https://mdogomdogodeals.co.ke/${currentProduct.brand.toLowerCase()}`}
+          >
+            {currentProduct.brand}
+          </a>
+          <span class="separator">›</span>
+        </li>
+        <li class="breadcrumb-item">
+          <span aria-current="page">{currentProduct.name}</span>
+        </li>
       </ol>
     </div>
   </nav>
 
-  <!-- Main Product Display -->
   <Display {...currentProduct} />
 
-  <!-- Product Details Section -->
   {
     currentProduct.details && currentProduct.details.length > 0 && (
       <section class="product-details">
@@ -185,12 +143,11 @@ const faqSchema = {
     )
   }
 
-  <!-- Related Products -->
   {
     relatedProducts.length > 0 && (
       <section class="related-products">
         <div class="related-container">
-          <h2 class="related-title">You Might Also Like</h2>
+          <h2 class="related-title">Similar Phones You Might Like</h2>
           <div class="related-grid">
             {relatedProducts.map((product) => (
               <ProductCard {...product} />
@@ -201,31 +158,18 @@ const faqSchema = {
     )
   }
 
-  <!-- FAQ Section - Matches schema exactly -->
-  <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+  <!-- FAQ SECTION - CLEAN HTML (No microdata, schema handles it) -->
+  <section class="faq-section">
     <div class="faq-container">
-      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <h2 class="faq-title">
+        Frequently Asked Questions About {currentProduct.name}
+      </h2>
       <div class="faq-grid">
         {
           faqs.map((faq) => (
-            <div
-              class="faq-item"
-              itemscope
-              itemprop="mainEntity"
-              itemtype="https://schema.org/Question"
-            >
-              <h3 class="faq-question" itemprop="name">
-                {faq.question}
-              </h3>
-              <div
-                itemscope
-                itemprop="acceptedAnswer"
-                itemtype="https://schema.org/Answer"
-              >
-                <p class="faq-answer" itemprop="text">
-                  {faq.answer}
-                </p>
-              </div>
+            <div class="faq-item">
+              <h3 class="faq-question">{faq.question}</h3>
+              <p class="faq-answer">{faq.answer}</p>
             </div>
           ))
         }
@@ -235,7 +179,6 @@ const faqSchema = {
 </ProductLayout>
 
 <style>
-  /* Breadcrumb Styles */
   .breadcrumb {
     background: #f8fafc;
     padding: 1rem 0;
@@ -284,10 +227,8 @@ const faqSchema = {
 
   .separator {
     color: #94a3b8;
-    font-weight: 300;
   }
 
-  /* Product Details */
   .product-details {
     max-width: 850px;
     margin: 3rem auto;
@@ -309,18 +250,11 @@ const faqSchema = {
     padding-bottom: 0.4rem;
   }
 
-  .detail-section p {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 1.5rem;
-  }
-
   .pros,
   .cons {
     margin-top: 1.2rem;
     padding: 1rem 1.25rem;
     background: #fafafa;
-    border: 1px solid #eee;
     border-radius: 6px;
   }
 
@@ -329,45 +263,23 @@ const faqSchema = {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #000;
-  }
-
-  .pros ul,
-  .cons ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .pros li,
-  .cons li {
-    padding: 0.3rem 0 0.3rem 1.5rem;
-    position: relative;
-    font-size: 0.97rem;
-    color: #333;
   }
 
   .pros li::before {
     content: "✔";
     color: #28a745;
-    position: absolute;
-    left: 0;
-    font-weight: bold;
+    margin-right: 0.5rem;
   }
 
   .cons li::before {
     content: "✖";
     color: #e63946;
-    position: absolute;
-    left: 0;
-    font-weight: bold;
+    margin-right: 0.5rem;
   }
 
-  /* Related Products */
   .related-products {
     padding: 4rem 0;
     background: #f8fafc;
-    margin-top: 2rem;
   }
 
   .related-container {
@@ -390,7 +302,6 @@ const faqSchema = {
     gap: 2rem;
   }
 
-  /* FAQ Section */
   .faq-section {
     padding: 4rem 0;
     background: white;
@@ -444,7 +355,6 @@ const faqSchema = {
     margin: 0;
   }
 
-  /* Responsive Design */
   @media screen and (max-width: 768px) {
     .related-grid,
     .faq-grid {
@@ -455,34 +365,6 @@ const faqSchema = {
     .related-container,
     .faq-container {
       padding: 0 1rem;
-    }
-
-    .breadcrumb-list {
-      font-size: 0.8rem;
-    }
-
-    .related-title,
-    .faq-title {
-      font-size: 1.75rem;
-    }
-
-    .product-details {
-      padding: 1rem;
-    }
-
-    .detail-section h2 {
-      font-size: 1.2rem;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .related-products,
-    .faq-section {
-      padding: 3rem 0;
-    }
-
-    .faq-item {
-      padding: 1.25rem;
     }
   }
 </style>

@@ -1,58 +1,47 @@
 ---
+// layouts/ProductLayout.astro - SIMPLIFIED SEO
 import { generateProductSchema } from "../utils/structureData";
 
 const {
-  product, // Product object - REQUIRED
-  additionalSchemas = [], // Optional: FAQPage, HowTo, etc.
-  robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  product,
+  additionalSchemas = [], // Only FAQPage from individual pages
+  robots = "index, follow, max-image-preview:large",
 } = Astro.props;
 
 // ============================================================================
-// SCHEMA GENERATION - Single Source of Truth
+// SCHEMA GENERATION - Single @graph
 // ============================================================================
-const schemaData = generateProductSchema(product);
-const schemaParsed = JSON.parse(schemaData);
+const productSchemaData = generateProductSchema(product);
+const productSchemaParsed = JSON.parse(productSchemaData);
 
-// Extract entities from @graph
-const productSchema = schemaParsed["@graph"].find((item) =>
-  item["@type"]?.includes("Product")
+// Merge additional schemas (FAQ) into main @graph
+if (additionalSchemas.length > 0) {
+  additionalSchemas.forEach((schema) => {
+    productSchemaParsed["@graph"].push(schema);
+  });
+}
+
+// Single JSON-LD output
+const finalSchema = JSON.stringify(productSchemaParsed, null, 2);
+
+// Extract data for meta tags (from @graph)
+const productNode = productSchemaParsed["@graph"].find(
+  (item) => item["@type"] === "Product"
 );
-const organizationSchema = schemaParsed["@graph"].find(
+const orgNode = productSchemaParsed["@graph"].find(
   (item) => item["@type"] === "Organization"
 );
-const breadcrumbSchema = schemaParsed["@graph"].find(
-  (item) => item["@type"] === "BreadcrumbList"
-);
-const offerSchema = productSchema?.offers;
 
 // ============================================================================
-// META TAG VALUES - Derived from Schema (Single Source of Truth)
+// HARDCODED CANONICAL URL
 // ============================================================================
-const title = `${productSchema?.name} - From KES ${product.daily}/day | ${productSchema?.brand?.name}`;
-const description =
-  productSchema?.description ||
-  `Buy ${product.name} in Kenya with flexible payments from KES ${product.daily}/day. Free delivery. 2-year warranty.`;
-const canonical = productSchema?.url;
-const ogImage = productSchema?.image?.[0];
-const brandName = productSchema?.brand?.name;
-const priceAmount = offerSchema?.price;
-const availability = offerSchema?.availability?.includes("InStock")
-  ? "in stock"
-  : "out of stock";
-const condition = product.condition || "new";
+const canonical = `https://mdogomdogodeals.co.ke/${product.slug}`;
 
 // ============================================================================
-// FINAL SCHEMA OUTPUT - Combine all schemas
+// KENYA-OPTIMIZED META TAGS
 // ============================================================================
-const allSchemas = [
-  schemaParsed, // Contains @graph with Product, Organization, Breadcrumb, ReturnPolicy
-  ...additionalSchemas, // FAQPage, HowTo, etc. passed from page
-];
-
-const finalSchemaString =
-  allSchemas.length === 1
-    ? JSON.stringify(schemaParsed, null, 2)
-    : JSON.stringify(allSchemas, null, 2);
+const title = `${product.name} Price in Kenya - From KES ${product.daily}/day | Lipa Mdogo Mdogo`;
+const description = `Buy ${product.name} in Kenya with flexible Lipa Mdogo Mdogo payments. Pay KES ${product.deposit} deposit + KES ${product.daily}/day. Free delivery Nairobi. 2-year warranty. Shop now!`;
 ---
 
 <!doctype html>
@@ -61,64 +50,64 @@ const finalSchemaString =
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
+    <!-- PRIMARY META - KENYA-OPTIMIZED -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
-
-    <!-- Canonical -->
     <link rel="canonical" href={canonical} />
 
-    <!-- Open Graph / Facebook -->
+    <!-- OPEN GRAPH -->
     <meta property="og:type" content="product" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={productNode?.image?.[0]} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content={`${productSchema?.name} - ${brandName}`}
+      content={`${product.name} - ${product.brand}`}
     />
     <meta property="og:locale" content="en_KE" />
-    <meta property="og:site_name" content={organizationSchema?.name} />
+    <meta property="og:site_name" content={orgNode?.name} />
 
-    <!-- Product-specific Open Graph (Google Shopping) -->
-    <meta property="product:price:amount" content={priceAmount?.toString()} />
+    <!-- PRODUCT META -->
+    <meta
+      property="product:price:amount"
+      content={productNode?.offers?.price}
+    />
     <meta property="product:price:currency" content="KES" />
-    <meta property="product:availability" content={availability} />
-    <meta property="product:condition" content={condition} />
-    <meta property="product:brand" content={brandName} />
+    <meta property="product:availability" content="in stock" />
+    <meta property="product:condition" content={product.condition || "new"} />
+    <meta property="product:brand" content={product.brand} />
 
-    <!-- Twitter Card -->
+    <!-- TWITTER -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={productNode?.image?.[0]} />
     <meta
       name="twitter:image:alt"
-      content={`${productSchema?.name} - ${brandName}`}
+      content={`${product.name} - ${product.brand}`}
     />
 
-    <!-- Mobile -->
+    <!-- MOBILE -->
     <meta name="theme-color" content="#f59e0b" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="MMD Kenya" />
 
-    <!-- Icons -->
+    <!-- ICONS -->
     <link rel="icon" type="image/png" href="/phones/y2.png" />
     <link rel="apple-touch-icon" href="/phones/y2.png" />
 
-    <!-- Performance -->
-    <link rel="preload" as="image" href={ogImage} />
+    <!-- PERFORMANCE -->
+    <link rel="preload" as="image" href={productNode?.image?.[0]} />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-    <!-- JSON-LD Structured Data - ALL SCHEMAS -->
-    <script type="application/ld+json" set:html={finalSchemaString} />
+    <!-- SINGLE JSON-LD - ALL SCHEMAS IN ONE @GRAPH -->
+    <script type="application/ld+json" set:html={finalSchema} />
 
-    <!-- Generator -->
     <meta name="generator" content={Astro.generator} />
 
     <slot name="head" />
@@ -158,7 +147,7 @@ const finalSchemaString =
       }
     </style>
 
-    <!-- Google Analytics -->
+    <!-- GOOGLE ANALYTICS -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4143W8VTJ3"
     ></script>
     <script is:inline>
