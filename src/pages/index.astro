@@ -9,17 +9,19 @@ import Credit from "../components/Credit.astro";
 import Gift from "../components/Gift.astro";
 import Summary from "../components/Summary.astro";
 import Loop from "../components/Loop.astro";
+import Brands from "../components/Brands.astro";
 
 // NO seo object here - all SEO is in HomeLayout
 ---
 
 <HomeLayout>
+  <!-- <Brands /> -->
   <Gift />
   <Nav />
+  <HeadText />
 
   <!-- Hero and H1 early in DOM for better SEO -->
   <Hero />
-  <HeadText />
 
   <PopularBrands />
   <Loop />

@@ -1,5 +1,4 @@
 ---
-// pages/[product].astro - CLEAN FAQ IMPLEMENTATION
 export const prerender = true;
 
 import ProductLayout from "../layouts/ProductLayout.astro";
@@ -61,7 +60,7 @@ const faqs = [
   },
 ];
 
-// FAQ SCHEMA - ONLY JSON-LD (No HTML microdata)
+// FAQ SCHEMA
 const faqSchema = {
   "@type": "FAQPage",
   mainEntity: faqs.map((faq) => ({
@@ -73,298 +72,1304 @@ const faqSchema = {
     },
   })),
 };
+
+// Calculate values
+const deposit = parseFloat(currentProduct.deposit.replace(/[^\d.]/g, ""));
+const daily = parseFloat(currentProduct.daily.replace(/[^\d.]/g, ""));
+
+// Key features extraction (customize based on your product data structure)
+const keyFeatures = [
+  currentProduct.ram ? `${currentProduct.ram} RAM` : null,
+  currentProduct.storage ? `${currentProduct.storage} Storage` : null,
+  currentProduct.camera ? `${currentProduct.camera} Camera` : null,
+  currentProduct.battery ? `${currentProduct.battery} Battery` : null,
+  currentProduct.display ? `${currentProduct.display} Display` : null,
+  currentProduct.processor ? `${currentProduct.processor} Processor` : null,
+].filter(Boolean);
+
+// Enhanced specifications for SEO
+const detailedSpecs = {
+  general: [
+    { label: "Brand", value: currentProduct.brand },
+    { label: "Model", value: currentProduct.name },
+    { label: "Release Year", value: currentProduct.releaseYear || "2024" },
+    { label: "Operating System", value: currentProduct.os || "Android" },
+    {
+      label: "SIM Type",
+      value: currentProduct.simType || "Dual SIM (Nano-SIM)",
+    },
+    { label: "Color Options", value: currentProduct.color },
+    { label: "Condition", value: currentProduct.condition || "New" },
+    { label: "Warranty", value: "2 Years Manufacturer Warranty" },
+  ],
+  display: [
+    {
+      label: "Screen Size",
+      value: currentProduct.display || currentProduct.screenSize,
+    },
+    { label: "Display Type", value: currentProduct.displayType || "AMOLED" },
+    { label: "Resolution", value: currentProduct.resolution || "Full HD+" },
+    { label: "Refresh Rate", value: currentProduct.refreshRate || "60Hz" },
+    {
+      label: "Protection",
+      value: currentProduct.screenProtection || "Corning Gorilla Glass",
+    },
+  ],
+  performance: [
+    {
+      label: "Processor",
+      value: currentProduct.processor || currentProduct.chipset,
+    },
+    { label: "CPU", value: currentProduct.cpu || "Octa-core" },
+    { label: "GPU", value: currentProduct.gpu || "Integrated" },
+    { label: "RAM", value: currentProduct.ram },
+    { label: "Internal Storage", value: currentProduct.storage },
+    {
+      label: "Expandable Storage",
+      value: currentProduct.expandableStorage || "Up to 512GB via microSD",
+    },
+  ],
+  camera: [
+    {
+      label: "Rear Camera",
+      value: currentProduct.camera || currentProduct.rearCamera,
+    },
+    {
+      label: "Front Camera",
+      value: currentProduct.frontCamera || currentProduct.selfieCamera,
+    },
+    {
+      label: "Video Recording",
+      value: currentProduct.videoRecording || "4K @ 30fps",
+    },
+    {
+      label: "Camera Features",
+      value:
+        currentProduct.cameraFeatures || "LED Flash, HDR, Panorama, Night Mode",
+    },
+  ],
+  battery: [
+    {
+      label: "Battery Capacity",
+      value: currentProduct.battery || currentProduct.batteryCapacity,
+    },
+    {
+      label: "Charging",
+      value: currentProduct.charging || "Fast Charging 33W",
+    },
+    {
+      label: "Wireless Charging",
+      value: currentProduct.wirelessCharging || "Not Available",
+    },
+    { label: "Battery Type", value: "Li-Po, Non-removable" },
+  ],
+  connectivity: [
+    { label: "Network", value: "2G, 3G, 4G LTE" },
+    { label: "Wi-Fi", value: currentProduct.wifi || "Wi-Fi 802.11 a/b/g/n/ac" },
+    { label: "Bluetooth", value: currentProduct.bluetooth || "Bluetooth 5.0" },
+    { label: "GPS", value: "Yes, with A-GPS, GLONASS" },
+    { label: "NFC", value: currentProduct.nfc || "Yes" },
+    { label: "USB", value: currentProduct.usb || "USB Type-C" },
+    { label: "Audio Jack", value: currentProduct.audioJack || "No" },
+  ],
+  physical: [
+    { label: "Dimensions", value: currentProduct.dimensions || "N/A" },
+    { label: "Weight", value: currentProduct.weight || "N/A" },
+    {
+      label: "Build Material",
+      value: currentProduct.buildMaterial || "Glass front, Plastic back",
+    },
+    {
+      label: "Water Resistance",
+      value: currentProduct.waterResistance || "Splash Resistant",
+    },
+  ],
+  compatibility: [
+    { label: "Kenyan Networks", value: "Safaricom, Airtel, Telkom Kenya" },
+    { label: "International Roaming", value: "Yes" },
+    { label: "VoLTE Support", value: "Yes" },
+    { label: "Wi-Fi Calling", value: "Yes" },
+  ],
+};
 ---
 
 <ProductLayout product={currentProduct} additionalSchemas={[faqSchema]}>
-  <Gift />
   <Nav />
 
-  <!-- BREADCRUMB - NO MICRODATA (Schema handles it) -->
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <div class="breadcrumb-container">
-      <ol class="breadcrumb-list">
-        <li class="breadcrumb-item">
-          <a href="https://mdogomdogodeals.co.ke">Home</a>
-          <span class="separator">›</span>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="https://mdogomdogodeals.co.ke/phones">Mobile Phones</a>
-          <span class="separator">›</span>
-        </li>
-        <li class="breadcrumb-item">
-          <a
-            href={`https://mdogomdogodeals.co.ke/${currentProduct.brand.toLowerCase()}`}
-          >
-            {currentProduct.brand}
-          </a>
-          <span class="separator">›</span>
-        </li>
-        <li class="breadcrumb-item">
-          <span aria-current="page">{currentProduct.name}</span>
-        </li>
-      </ol>
-    </div>
-  </nav>
+  <main class="product-page">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/phones">Mobile Phones</a>
+      <span>/</span>
+      <a href={`/${currentProduct.brand.toLowerCase()}`}
+        >{currentProduct.brand}</a
+      >
+      <span>/</span>
+      <span aria-current="page">{currentProduct.name}</span>
+    </nav>
 
-  <Display {...currentProduct} />
-
-  {
-    currentProduct.details && currentProduct.details.length > 0 && (
-      <section class="product-details">
-        {currentProduct.details.map((section) => (
-          <article class="detail-section">
-            <h2>{section.title}</h2>
-            {section.content && <p>{section.content}</p>}
-
-            {section.pros && (
-              <div class="pros">
-                <h3>Pros</h3>
-                <ul>
-                  {section.pros.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {section.cons && (
-              <div class="cons">
-                <h3>Cons</h3>
-                <ul>
-                  {section.cons.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </article>
-        ))}
-      </section>
-    )
-  }
-
-  {
-    relatedProducts.length > 0 && (
-      <section class="related-products">
-        <div class="related-container">
-          <h2 class="related-title">Similar Phones You Might Like</h2>
-          <div class="related-grid">
-            {relatedProducts.map((product) => (
-              <ProductCard {...product} />
-            ))}
+    <!-- Product Section -->
+    <section class="product-container">
+      <div class="product-grid">
+        <!-- Image Gallery -->
+        <div class="product-images">
+          <div class="main-image">
+            <img
+              src={`${currentProduct.source}`}
+              alt={`${currentProduct.name} - ${currentProduct.brand} ${currentProduct.color}`}
+              class="product-image"
+              loading="eager"
+              width="600"
+              height="600"
+            />
+            {
+              currentProduct.condition === "new" && (
+                <span class="badge-new">New</span>
+              )
+            }
           </div>
         </div>
-      </section>
-    )
-  }
 
-  <!-- FAQ SECTION - CLEAN HTML (No microdata, schema handles it) -->
-  <section class="faq-section">
-    <div class="faq-container">
-      <h2 class="faq-title">
-        Frequently Asked Questions About {currentProduct.name}
-      </h2>
-      <div class="faq-grid">
-        {
-          faqs.map((faq) => (
-            <div class="faq-item">
-              <h3 class="faq-question">{faq.question}</h3>
-              <p class="faq-answer">{faq.answer}</p>
+        <!-- Product Info -->
+        <div class="product-info">
+          <h1 class="product-title">{currentProduct.name}</h1>
+
+          <div class="product-meta">
+            <span class="brand-badge">{currentProduct.brand}</span>
+            <span class="stock-badge">In Stock</span>
+            {
+              currentProduct.reviews?.reviewCount > 0 && (
+                <div class="rating">
+                  <span class="stars">★★★★★</span>
+                  <span class="review-count">
+                    ({currentProduct.reviews.reviewCount} reviews)
+                  </span>
+                </div>
+              )
+            }
+          </div>
+
+          <!-- Pricing Section -->
+          <div class="pricing-section">
+            <div class="price-highlight">
+              <div class="deposit-price">
+                <span class="price-label">Initial Deposit</span>
+                <span class="price-value">{currentProduct.deposit}</span>
+              </div>
+              <div class="daily-price">
+                <span class="price-label">Daily Payment</span>
+                <span class="price-value"
+                  >{currentProduct.daily}<span class="period">/day</span></span
+                >
+              </div>
             </div>
-          ))
-        }
+            <p class="payment-note">
+              ✓ No hidden fees • Get phone immediately after deposit
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          {
+            keyFeatures.length > 0 && (
+              <div class="key-features">
+                <h3>Key Features</h3>
+                <ul>
+                  {keyFeatures.map((feature) => (
+                    <li>✓ {feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+
+          <!-- Color Selection -->
+          <div class="color-selection">
+            <h3>Available Colors</h3>
+            <div class="colors">
+              <span class="color-option selected">{currentProduct.color}</span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="cta-section">
+            <a href={`tel:+254720202167`} class="btn-primary">
+              📞 Call to Order Now
+            </a>
+            <a
+              href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.name}`}
+              class="btn-whatsapp"
+              target="_blank"
+              rel="noopener"
+            >
+              💬 WhatsApp Order
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="trust-badges">
+            <div class="badge">
+              <span class="icon">🚚</span>
+              <span>Free Delivery<br />Nairobi CBD</span>
+            </div>
+            <div class="badge">
+              <span class="icon">✓</span>
+              <span>100% Genuine<br />Products</span>
+            </div>
+            <div class="badge">
+              <span class="icon">🛡️</span>
+              <span>2-Year<br />Warranty</span>
+            </div>
+            <div class="badge">
+              <span class="icon">💳</span>
+              <span>Flexible<br />Payments</span>
+            </div>
+          </div>
+
+          <!-- Seller Info -->
+          <div class="seller-info">
+            <p><strong>Sold by:</strong> {currentProduct.seller}</p>
+            <p><strong>Location:</strong> Nairobi, Kenya</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Product Description -->
+    <section class="product-details">
+      <div class="details-container">
+        <h2>About {currentProduct.name}</h2>
+        <div class="description-content">
+          <p>
+            {
+              currentProduct.description ||
+                `Buy the latest ${currentProduct.brand} ${currentProduct.name} in Kenya with flexible Lipa Mdogo Mdogo payment plans. This genuine ${currentProduct.brand} smartphone comes with manufacturer warranty and free delivery in Nairobi.`
+            }
+          </p>
+
+          <p>
+            The {currentProduct.name} is perfect for Kenyan users looking for quality
+            and affordability. With Lipa Mdogo Mdogo, you can own this premium device
+            without straining your budget.
+          </p>
+
+          <h3>Why Buy {currentProduct.name} in Kenya?</h3>
+          <ul>
+            <li>
+              🇰🇪 Sourced from authorized {currentProduct.brand} distributors in Kenya
+            </li>
+            <li>💯 100% genuine products with manufacturer warranty</li>
+            <li>📱 Latest {currentProduct.brand} technology and features</li>
+            <li>🔋 Long-lasting battery perfect for Kenyan lifestyle</li>
+            <li>📸 Excellent camera for capturing memories</li>
+            <li>
+              🌐 Compatible with all Kenyan networks (Safaricom, Airtel, Telkom)
+            </li>
+          </ul>
+
+          <h3>Key Highlights of {currentProduct.name}</h3>
+          <p>
+            Experience the power and performance of the {currentProduct.name},
+            designed to meet the demands of modern smartphone users in Kenya.
+            Whether you're streaming videos, taking photos, or staying connected
+            on social media, this device delivers exceptional performance.
+          </p>
+
+          {
+            currentProduct.ram && (
+              <p>
+                <strong>Performance:</strong> With {currentProduct.ram} of RAM,
+                multitask seamlessly between apps, browse the web, and enjoy
+                smooth gaming experiences without lag.
+              </p>
+            )
+          }
+
+          {
+            currentProduct.storage && (
+              <p>
+                <strong>Storage:</strong> Store thousands of photos, videos,
+                apps, and files with {currentProduct.storage} of internal
+                storage. Never worry about running out of space for your
+                precious memories.
+              </p>
+            )
+          }
+
+          {
+            currentProduct.camera && (
+              <p>
+                <strong>Photography:</strong> Capture stunning photos and videos
+                with the {currentProduct.camera} camera system. Perfect for
+                content creators, photography enthusiasts, and anyone who loves
+                sharing moments on social media.
+              </p>
+            )
+          }
+
+          {
+            currentProduct.battery && (
+              <p>
+                <strong>Battery Life:</strong> The {currentProduct.battery}{" "}
+                battery keeps you connected all day long. Ideal for busy
+                professionals and students who need reliable power throughout
+                the day.
+              </p>
+            )
+          }
+
+          {
+            currentProduct.display && (
+              <p>
+                <strong>Display:</strong> Enjoy immersive viewing on the{" "}
+                {currentProduct.display} display. Perfect for watching movies,
+                browsing social media, and video calls with crystal-clear
+                clarity.
+              </p>
+            )
+          }
+
+          <h3>Perfect For Kenyan Users</h3>
+          <p>The {currentProduct.name} is specifically great for:</p>
+          <ul>
+            <li>
+              <strong>Students & Learners:</strong> Online classes, research, and
+              educational apps run smoothly
+            </li>
+            <li>
+              <strong>Business Professionals:</strong> Handle emails, video conferences,
+              and productivity apps efficiently
+            </li>
+            <li>
+              <strong>Content Creators:</strong> High-quality camera and processing
+              power for social media content
+            </li>
+            <li>
+              <strong>Mobile Gamers:</strong> Enjoy popular games with smooth performance
+            </li>
+            <li>
+              <strong>Social Media Enthusiasts:</strong> Stay connected on WhatsApp,
+              Facebook, Instagram, Twitter, and TikTok
+            </li>
+            <li>
+              <strong>Photography Lovers:</strong> Capture Kenya's beautiful landscapes
+              and memorable moments
+            </li>
+          </ul>
+
+          <h3>Delivery Information</h3>
+          <p>
+            <strong>Same-day delivery</strong> available in Nairobi CBD. We also deliver
+            to all counties across Kenya including Mombasa, Kisumu, Nakuru, Eldoret,
+            Thika, Machakos, Kiambu, and more. Delivery times vary by location.
+          </p>
+
+          <p>
+            <strong>Delivery Areas:</strong> Nairobi (CBD, Westlands, Kilimani, Parklands,
+            Eastleigh, Kasarani, Embakasi), Mombasa, Kisumu, Nakuru, Eldoret, Thika,
+            Machakos, Kitale, Malindi, Kakamega, Nyeri, Meru, and all other major
+            towns in Kenya.
+          </p>
+
+          <h3>Lipa Mdogo Mdogo Payment Process</h3>
+          <p>
+            Own your {currentProduct.name} today with our flexible payment plan:
+          </p>
+          <ol>
+            <li>
+              <strong>Step 1:</strong> Pay initial deposit of KES {
+                currentProduct.deposit
+              } via M-Pesa or bank transfer
+            </li>
+            <li>
+              <strong>Step 2:</strong> Receive your {currentProduct.name} immediately
+              after deposit confirmation
+            </li>
+            <li>
+              <strong>Step 3:</strong> Pay KES {currentProduct.daily} daily through
+              M-Pesa (Paybill or Till Number)
+            </li>
+            <li>
+              <strong>Step 4:</strong> Complete all payments and own your phone outright
+            </li>
+          </ol>
+
+          <p><strong>Benefits of Lipa Mdogo Mdogo:</strong></p>
+          <ul>
+            <li>No interest charges or hidden fees</li>
+            <li>Flexible payment schedule</li>
+            <li>Get your phone immediately</li>
+            <li>No credit checks required</li>
+            <li>Pay at your own pace</li>
+            <li>M-Pesa payments accepted</li>
+          </ul>
+
+          <h3>What's in the Box?</h3>
+          <ul>
+            <li>1x {currentProduct.name} handset</li>
+            <li>1x USB charging cable</li>
+            <li>1x Charging adapter</li>
+            <li>1x SIM ejector pin</li>
+            <li>1x User manual</li>
+            <li>1x Warranty card</li>
+            <li>Original retail packaging</li>
+          </ul>
+
+          <h3>Warranty & Support</h3>
+          <p>
+            Every {currentProduct.name} comes with a comprehensive 2-year manufacturer
+            warranty covering manufacturing defects. Get support from both {
+              currentProduct.brand
+            } and {currentProduct.seller} for any issues. Our customer service team
+            in Nairobi is ready to assist you.
+          </p>
+
+          <p>
+            <strong>Warranty covers:</strong> Manufacturing defects, hardware malfunctions,
+            battery issues, display problems, and more.
+          </p>
+          <p>
+            <strong>Warranty does not cover:</strong> Physical damage, water damage
+            (unless IP-rated), unauthorized repairs, or software modifications.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specifications Table -->
+    <section class="specifications">
+      <div class="details-container">
+        <h2>Complete Technical Specifications</h2>
+
+        <!-- General Specifications -->
+        <div class="spec-category">
+          <h3>📱 General Information</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.general.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Display Specifications -->
+        <div class="spec-category">
+          <h3>🖥️ Display & Screen</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.display.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Performance Specifications -->
+        <div class="spec-category">
+          <h3>⚡ Performance & Storage</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.performance.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Camera Specifications -->
+        <div class="spec-category">
+          <h3>📷 Camera System</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.camera.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Battery Specifications -->
+        <div class="spec-category">
+          <h3>🔋 Battery & Charging</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.battery.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Connectivity Specifications -->
+        <div class="spec-category">
+          <h3>🌐 Connectivity & Network</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.connectivity.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Physical Specifications -->
+        <div class="spec-category">
+          <h3>📐 Physical Dimensions</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.physical.map(
+                  (spec) =>
+                    spec.value && (
+                      <tr>
+                        <td>{spec.label}</td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Kenyan Network Compatibility -->
+        <div class="spec-category">
+          <h3>🇰🇪 Kenya Network Compatibility</h3>
+          <table class="spec-table">
+            <tbody>
+              {
+                detailedSpecs.compatibility.map((spec) => (
+                  <tr>
+                    <td>{spec.label}</td>
+                    <td>{spec.value}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <div class="network-note">
+            <p>
+              <strong>Note:</strong> This {currentProduct.name} is fully compatible
+              with all major Kenyan mobile networks including Safaricom 4G/LTE, Airtel
+              4G, and Telkom Kenya. Enjoy fast internet speeds, crystal-clear voice
+              calls, and seamless connectivity across Kenya.
+            </p>
+          </div>
+        </div>
+
+        <!-- Additional Features -->
+        <div class="spec-category">
+          <h3>✨ Additional Features</h3>
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="feature-icon">🔐</span>
+              <div>
+                <strong>Security</strong>
+                <p>Fingerprint sensor, Face unlock, PIN/Pattern lock</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔊</span>
+              <div>
+                <strong>Audio</strong>
+                <p>Stereo speakers, Dolby Atmos, Hi-Res audio</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🎮</span>
+              <div>
+                <strong>Gaming</strong>
+                <p>Game mode, GPU turbo, Optimized performance</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🌙</span>
+              <div>
+                <strong>Display Features</strong>
+                <p>Night mode, Reading mode, Eye comfort shield</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">📡</span>
+              <div>
+                <strong>Sensors</strong>
+                <p>Accelerometer, Gyroscope, Proximity, Compass</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🎯</span>
+              <div>
+                <strong>Smart Features</strong>
+                <p>AI Assistant, Smart gestures, Split screen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="details-container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          {
+            faqs.map((faq) => (
+              <details class="faq-item">
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    {
+      relatedProducts.length > 0 && (
+        <section class="related-products">
+          <div class="details-container">
+            <h2>Related Products</h2>
+            <div class="products-grid">
+              {relatedProducts.map((product) => (
+                <ProductCard product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Bottom CTA -->
+    <section class="bottom-cta">
+      <div class="cta-content">
+        <h2>Ready to Own {currentProduct.name}?</h2>
+        <p>Start with just KES {currentProduct.deposit} deposit today!</p>
+        <div class="cta-buttons">
+          <a href={`tel:+254720202167`} class="btn-primary">Call Now</a>
+          <a
+            href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.name}`}
+            class="btn-whatsapp"
+            target="_blank"
+            rel="noopener">WhatsApp Us</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Gift />
 </ProductLayout>
 
 <style>
-  .breadcrumb {
-    background: #f8fafc;
-    padding: 1rem 0;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 2rem;
-  }
-
-  .breadcrumb-container {
-    max-width: 1200px;
+  /* Layout */
+  .product-page {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 1rem;
   }
 
-  .breadcrumb-list {
+  .breadcrumb {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: 0.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    padding: 1rem 0;
     font-size: 0.875rem;
+    color: #666;
+    flex-wrap: wrap;
   }
 
-  .breadcrumb-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .breadcrumb-item a {
-    color: #3b82f6;
+  .breadcrumb a {
+    color: #f59e0b;
     text-decoration: none;
-    transition: color 0.2s;
   }
 
-  .breadcrumb-item a:hover {
-    color: #1d4ed8;
+  .breadcrumb a:hover {
     text-decoration: underline;
   }
 
-  .breadcrumb-item span[aria-current="page"] {
-    color: #64748b;
-    font-weight: 500;
-  }
-
-  .separator {
-    color: #94a3b8;
-  }
-
-  .product-details {
-    max-width: 850px;
-    margin: 3rem auto;
-    padding: 1rem 2rem;
-    background: #fff;
-    line-height: 1.7;
-  }
-
-  .detail-section {
-    margin-bottom: 2.5rem;
-  }
-
-  .detail-section h2 {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #000;
-    border-bottom: 2px solid #f2f2f2;
-    padding-bottom: 0.4rem;
-  }
-
-  .pros,
-  .cons {
-    margin-top: 1.2rem;
-    padding: 1rem 1.25rem;
-    background: #fafafa;
-    border-radius: 6px;
-  }
-
-  .pros h3,
-  .cons h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .pros li::before {
-    content: "✔";
-    color: #28a745;
-    margin-right: 0.5rem;
-  }
-
-  .cons li::before {
-    content: "✖";
-    color: #e63946;
-    margin-right: 0.5rem;
-  }
-
-  .related-products {
-    padding: 4rem 0;
-    background: #f8fafc;
-  }
-
-  .related-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .related-title {
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #1e293b;
-  }
-
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-
-  .faq-section {
-    padding: 4rem 0;
+  /* Product Grid */
+  .product-container {
     background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .faq-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
   }
 
-  .faq-title {
+  @media (max-width: 968px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* Images */
+  .product-images {
+    position: sticky;
+    top: 1rem;
+    height: fit-content;
+  }
+
+  .main-image {
+    position: relative;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .badge-new {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #10b981;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  /* Product Info */
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .product-title {
     font-size: 2rem;
     font-weight: 700;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #1e293b;
-  }
-
-  .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  .faq-item {
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 1rem;
-    border: 1px solid #e2e8f0;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .faq-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  }
-
-  .faq-question {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 1rem;
-  }
-
-  .faq-answer {
-    color: #64748b;
-    line-height: 1.6;
+    color: #1f2937;
+    line-height: 1.2;
     margin: 0;
   }
 
-  @media screen and (max-width: 768px) {
-    .related-grid,
-    .faq-grid {
+  .product-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .brand-badge {
+    background: #f59e0b;
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .stock-badge {
+    background: #10b981;
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .stars {
+    color: #fbbf24;
+    font-size: 1.125rem;
+  }
+
+  .review-count {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  /* Pricing */
+  .pricing-section {
+    background: #fef3c7;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #f59e0b;
+  }
+
+  .price-highlight {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .price-highlight {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .daily-price,
+  .deposit-price {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-label {
+    font-size: 0.875rem;
+    color: #78350f;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .price-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #92400e;
+  }
+
+  .period {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .payment-note {
+    color: #78350f;
+    font-size: 0.875rem;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Key Features */
+  .key-features h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #1f2937;
+  }
+
+  .key-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .key-features ul {
       grid-template-columns: 1fr;
     }
+  }
 
-    .breadcrumb-container,
-    .related-container,
-    .faq-container {
-      padding: 0 1rem;
+  .key-features li {
+    color: #4b5563;
+    font-size: 0.9375rem;
+  }
+
+  /* Color Selection */
+  .color-selection h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #1f2937;
+  }
+
+  .colors {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .color-option {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .color-option.selected {
+    border-color: #f59e0b;
+    background: #fef3c7;
+    font-weight: 600;
+  }
+
+  /* CTA Buttons */
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn-primary,
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .btn-primary:hover,
+  .btn-whatsapp:hover {
+    transform: scale(1.02);
+  }
+
+  .btn-primary {
+    background: #f59e0b;
+    color: white;
+  }
+
+  .btn-whatsapp {
+    background: #25d366;
+    color: white;
+  }
+
+  /* Trust Badges */
+  .trust-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f9fafb;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .trust-badges {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .trust-badges .badge {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #4b5563;
+  }
+
+  .trust-badges .icon {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Seller Info */
+  .seller-info {
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  .seller-info p {
+    margin: 0.25rem 0;
+    color: #4b5563;
+  }
+
+  /* Details Sections */
+  .product-details,
+  .specifications,
+  .faq-section,
+  .related-products {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .details-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .details-container h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+  }
+
+  .details-container h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .description-content p {
+    color: #4b5563;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .description-content ul,
+  .description-content ol {
+    color: #4b5563;
+    line-height: 1.7;
+    padding-left: 1.5rem;
+  }
+
+  .description-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Specifications Table */
+  .spec-category {
+    margin-bottom: 2.5rem;
+  }
+
+  .spec-category h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f59e0b;
+    display: inline-block;
+  }
+
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+
+  .spec-table tr {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .spec-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .spec-table td {
+    padding: 1rem;
+    color: #4b5563;
+  }
+
+  .spec-table td:first-child {
+    font-weight: 600;
+    width: 40%;
+    color: #1f2937;
+  }
+
+  @media (max-width: 640px) {
+    .spec-table td:first-child {
+      width: 45%;
+    }
+  }
+
+  .network-note {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 4px;
+  }
+
+  .network-note p {
+    margin: 0;
+    color: #78350f;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    align-items: start;
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .feature-item strong {
+    display: block;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .feature-item p {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .faq-item summary {
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .faq-item p {
+    margin-top: 0.75rem;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  /* Related Products */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Bottom CTA */
+  .bottom-cta {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border-radius: 8px;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-whatsapp {
+    min-width: 200px;
   }
 </style>
