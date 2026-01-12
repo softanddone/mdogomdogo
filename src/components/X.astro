@@ -1,0 +1,329 @@
+---
+// Example product data
+const products = [
+  {
+    id: 1,
+    name: "Tecno Camon 40 Pro",
+    price: 45000,
+    image:
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop",
+  },
+  {
+    id: 2,
+    name: "Tecno Spark 30",
+    price: 28000,
+    image:
+      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop",
+  },
+  {
+    id: 3,
+    name: "Realme 12 Pro",
+    price: 52000,
+    image:
+      "https://images.unsplash.com/photo-1592286927505-2fd0fcb1866d?w=400&h=400&fit=crop",
+  },
+];
+---
+
+<section class="ecommerce-section">
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="hero-content">
+        <h1>Shop Phones at Lipa Mdogo Mdogo</h1>
+        <p class="subtitle">
+          Buy your favorite phone with flexible payment plans. Pay in
+          installments and own your dream device today.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <span class="icon">📱</span>
+            <span>Latest Models</span>
+          </div>
+          <div class="feature">
+            <span class="icon">💳</span>
+            <span>Flexible Payments</span>
+          </div>
+          <div class="feature">
+            <span class="icon">✨</span>
+            <span>Easy Process</span>
+          </div>
+        </div>
+
+        <div class="cta-buttons">
+          <button class="primary-btn">Browse Phones</button>
+          <button class="secondary-btn">Learn More</button>
+        </div>
+      </div>
+
+      <div class="image-showcase">
+        {
+          products.map((product, index) => (
+            <div class="phone-image" style={`animation-delay: ${index * 0.2}s`}>
+              <img src={product.image} alt={product.name} />
+              <div class="phone-label">
+                <span class="phone-name">{product.name}</span>
+                <span class="phone-price">
+                  KSh {product.price.toLocaleString()}
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .ecommerce-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 20px;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, sans-serif;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-content {
+    color: white;
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    line-height: 1.6;
+  }
+
+  .features {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px 25px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .icon {
+    font-size: 1.5rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .primary-btn {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .secondary-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+  }
+
+  .image-showcase {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-image {
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .phone-image:nth-child(2) {
+    transform: scale(1.15);
+    z-index: 2;
+  }
+
+  .phone-image:nth-child(1),
+  .phone-image:nth-child(3) {
+    opacity: 0.85;
+    transform: scale(0.95);
+  }
+
+  .phone-image img {
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .phone-image:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+  }
+
+  .phone-label {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 12px 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    min-width: 200px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .phone-image:hover .phone-label {
+    opacity: 1;
+  }
+
+  .phone-name {
+    display: block;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+  }
+
+  .phone-price {
+    display: block;
+    color: #667eea;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+      gap: 60px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    .features {
+      justify-content: center;
+    }
+
+    .cta-buttons {
+      justify-content: center;
+    }
+
+    .image-showcase {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .phone-image img {
+      width: 140px;
+      height: 190px;
+    }
+
+    .image-showcase {
+      gap: 15px;
+    }
+  }
+</style>
+
+<script>
+  // Add smooth scroll behavior for Browse Phones button
+  const primaryBtn = document.querySelector(".primary-btn");
+  primaryBtn?.addEventListener("click", () => {
+    console.log("Browse phones clicked");
+    // Add your navigation logic here
+  });
+
+  const secondaryBtn = document.querySelector(".secondary-btn");
+  secondaryBtn?.addEventListener("click", () => {
+    console.log("Learn more clicked");
+    // Add your navigation logic here
+  });
+</script>
