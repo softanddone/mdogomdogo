@@ -26,7 +26,9 @@ const relatedProducts = products
     (p) =>
       p.id !== currentProduct.id &&
       (p.brand === currentProduct.brand ||
-        p.categoryPath.some((cat) => currentProduct.categoryPath.includes(cat)))
+        p.categoryPath.some((cat) =>
+          currentProduct.categoryPath.includes(cat),
+        )),
   )
   .slice(0, 4);
 
@@ -194,6 +196,7 @@ const detailedSpecs = {
 ---
 
 <ProductLayout product={currentProduct} additionalSchemas={[faqSchema]}>
+  <Gift />
   <Nav />
 
   <main class="product-page">
@@ -555,7 +558,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -575,7 +578,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -595,7 +598,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -615,7 +618,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -635,7 +638,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -655,7 +658,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -675,7 +678,7 @@ const detailedSpecs = {
                         <td>{spec.label}</td>
                         <td>{spec.value}</td>
                       </tr>
-                    )
+                    ),
                 )
               }
             </tbody>
@@ -808,8 +811,6 @@ const detailedSpecs = {
       </div>
     </section>
   </main>
-
-  <Gift />
 </ProductLayout>
 
 <style>
