@@ -10,15 +10,18 @@ import Gift from "../components/Gift.astro";
 import Summary from "../components/Summary.astro";
 import Loop from "../components/Loop.astro";
 import Brands from "../components/Brands.astro";
+import THead from "../components/THead.astro";
 // import X from "../components/X.astro";
 
 // NO seo object here - all SEO is in HomeLayout
 ---
 
 <HomeLayout>
-  <!-- <Brands />  -->
   <Gift />
+
   <Nav />
+  <THead />
+
   <HeadText />
 
   <Hero />
