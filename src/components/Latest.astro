@@ -1,296 +1,191 @@
 <style>
-  .phonex {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-  }
-  a {
-    text-decoration: none;
-  }
-  .l-container {
-    display: flex;
-    width: 85%;
-    margin: 50px auto;
+  :root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-red: #ff4757;
+    --text-dark: #2d3436;
+    --text-gray: #636e72;
+    --white: #ffffff;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
-  .fonix2 {
-    display: flex;
-    flex-direction: column;
-    background-image: url("/phones/p1.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    background-attachment: scroll;
-    object-fit: cover;
-    width: 100% !important;
-  }
-  .deals h1 {
-    text-align: center;
-    margin: 0 auto;
+  /* Layout Container */
+  .promo-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
-  .deals a {
-    text-align: center;
-    align-items: center;
-    margin: 0 auto;
-    display: flex;
-    width: 200px;
-  }
-
-  .amaze {
-    margin: 10px 0px;
-    margin-bottom: 20px;
-    font-size: 15px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-  .deals h1 {
-    width: 100px;
-    background: white;
-  }
-  .img-container {
-    width: 270px;
-    height: 300px;
-    overflow: hidden;
-    display: block !important;
-  }
-  .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  h1 span {
-    font-weight: bold;
-  }
-  .hot {
-    font-size: 23px;
-    /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
-
-    /* color: red; */
-
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-      Arial, sans-serif;
-    font-weight: 100;
-  }
-  .late {
-    font-size: 36px;
-    font-weight: 900;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
-  .phonextext {
-    /* margin-left: 70px; */
-    /* background: red; */
-  }
-  .latest {
-    width: 100vw;
-    box-sizing: border-box; /* ensures padding/borders don't cause overflow */
-    /* height: 400px; */
+  .promo-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
+    gap: 20px;
   }
 
-  .sleek-button {
+  /* Main Promo Card */
+  .card-main {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    background: #f9f9f9;
+    border-radius: 15px;
+    padding: 40px;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Side Promo Card */
+  .card-side {
+    background: #eee url("/phones/p1.png") no-content center/contain no-repeat;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .card-side:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Typography */
+  .badge {
+    display: inline-block;
+    background: var(--accent-red);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .promo-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.2;
+    margin: 10px 0;
+    color: var(--text-dark);
+    font-weight: 800;
+  }
+
+  .promo-subtitle {
+    font-size: 1rem;
+    color: var(--text-gray);
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+  }
+
+  /* Product Image */
+  .product-img-wrapper {
     position: relative;
+    transition: var(--transition);
+  }
+
+  .product-img-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+  }
+
+  .product-img-wrapper:hover {
+    transform: scale(1.05);
+  }
+
+  /* Interactive Button */
+  .btn-shop {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 9px 18px;
-    font-size: 16px;
-    font-weight: 600;
+    gap: 10px;
+    padding: 12px 28px;
+    background: var(--primary-gradient);
+    color: white;
     text-decoration: none;
-    color: #ffffff;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 2px solid transparent;
-    border-radius: 5px;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    transition: var(--transition);
   }
 
-  .sleek-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.6s ease;
+  .btn-shop:hover {
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
   }
 
-  .sleek-button::after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    border-radius: 48px;
-    z-index: -1;
+  .btn-shop svg {
+    width: 18px;
+    transition: var(--transition);
+  }
+  .btn-shop:hover svg {
+    transform: translateX(5px);
   }
 
-  .sleek-button:hover {
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-    border-color: rgba(255, 255, 255, 0.3);
+  /* Small Card Style */
+  .brand-label {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: var(--text-dark);
+    text-decoration: none;
   }
 
-  .sleek-button:hover::before {
-    left: 100%;
-  }
-
-  .sleek-button:active {
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-    transition: all 0.1s ease;
-  }
-
-  .image2-container {
-    /* background: yellow; */
-  }
-
-  .button-text {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .button-icon {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.3s ease;
-  }
-
-  .sleek-button:hover .button-icon {
-    transform: translateX(4px);
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-    }
-    50% {
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
-    }
-  }
-
-  .sleek-button {
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  .sleek-button:hover {
-    animation: none;
-  }
-
-  @media screen and (min-width: 0) and (max-width: 760px) {
-    .latest {
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .promo-grid {
       grid-template-columns: 1fr;
-      /* background: blue; */
-      place-items: center;
-      margin: 0 auto;
-      width: 100% !important;
     }
-    .phonextext {
-      /* background: red; */
-      margin: 0 auto;
-      width: 100% !important;
-    }
-    .phonextext h1 {
-      font-size: 20px;
-    }
-    .phonex {
-      /* grid-row: 2; */
-      /* grid-template-columns: 1fr; */
-      grid-template-columns: 1fr;
-      /* place-items: center; */
-    }
+  }
 
-    .sleek-button {
+  @media (max-width: 600px) {
+    .card-main {
+      grid-template-columns: 1fr;
       text-align: center;
-      margin-left: 100px;
+      padding: 30px 20px;
     }
-    .phonex h1,
-    h2 {
-      text-align: center;
-    }
-    a {
-      text-align: center;
-      margin: 0 auto;
-      display: flex;
-    }
-    .fonix2 {
-      grid-row: 1;
-      /* background: yellow; */
-      height: 300px;
-      width: 380px;
-      margin: 0 auto;
+    .product-img-wrapper {
+      order: -1;
+      margin-bottom: 20px;
     }
   }
 </style>
 
-<div class="l-container">
-  <div class="latest">
-    <div class="phonex">
-      <div class="phonextext">
-        <h1 class="hot">Hot <span> SALE%</span></h1>
+<section class="promo-section">
+  <div class="promo-grid">
+    <article class="card-main">
+      <div class="content">
+        <span class="badge">HOT SALE %</span>
+        <h1 class="promo-title">Latest Tecno on<br />Lipa Mdogo Mdogo</h1>
+        <p class="promo-subtitle">Amazing Discounts in Nairobi</p>
 
-        <h1 class="late">
-          Latest Tecno on Lipa <br /> Mdogo Mdogo <br />in Nairobi
-        </h1>
-
-        <h2 class="amaze">AMAZING DISCOUNTS <br /> And DEALS</h2>
-
-        <a href="#" class="sleek-button">
-          <span class="button-text">
-            SHOP NOW
-            <svg class="button-icon" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </span>
+        <a href="#" class="btn-shop">
+          SHOP NOW
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
         </a>
       </div>
 
-      <div class="images">
+      <div class="product-img-wrapper">
         <a href="/tecno">
-          <div class="img-container">
-            <img src="/phones/tecnocamon40pro.webp" alt="" />
-          </div>
+          <img src="/phones/tecnocamon40pro.webp" alt="Tecno Camon 40 Pro" />
         </a>
       </div>
-    </div>
+    </article>
 
-    <div class="fonix2">
-      <a href="/samsung">
-        <div class="deals">
-          <h1>Samsung</h1>
-          <!-- <h1>Samsung Phones</h1>
-        <h1>In Nairobi Kenya</h1> -->
-          <!-- 
-        <a href="#" class="sleek-button">
-          <span class="button-text">
-            SHOP NOW
-            <svg class="button-icon" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </span>
-        </a> -->
-        </div>
-      </a>
-    </div>
+    <a href="/samsung" class="card-side">
+      <span class="brand-label">Shop Samsung</span>
+    </a>
   </div>
-</div>
+</section>

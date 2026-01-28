@@ -1,28 +1,12 @@
 ---
 import ProductCard from "./ProductCard.astro";
 import { products } from "../data/product2.js";
-import ShopBy from "./ShopBy.astro";
+
+// We pass all products to the client, but the script will handle the "rows"
+const itemsPerPage = 10;
 ---
 
 <style>
-  :root {
-    --dark-color: #161616;
-    --accent-color: #ff5151;
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* ✅ Container */
   .product-container {
     width: 100%;
     max-width: 1200px;
@@ -30,63 +14,131 @@ import ShopBy from "./ShopBy.astro";
     padding-inline: 1rem;
   }
 
-  /* Heading */
-  .product-container h1 {
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-      sans-serif;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    font-size: 18px;
-    text-align: center;
-  }
-
-  /* ✅ Grid – MOBILE FIRST */
+  /* Grid Logic */
   .product-grid {
     display: grid;
-    grid-template-columns: 1fr; /* default: 1 column */
-    gap: 0.75rem;
-    width: 100%;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr); /* Mobile */
   }
 
-  /* Phones (most devices) */
-  @media (min-width: 360px) {
-    .product-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  /* Tablets */
   @media (min-width: 768px) {
     .product-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
     }
   }
-
-  /* Small laptops */
   @media (min-width: 1024px) {
     .product-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
-
-  /* Large screens */
   @media (min-width: 1280px) {
     .product-grid {
       grid-template-columns: repeat(5, 1fr);
     }
   }
+
+  /* Hide items that aren't on the current page */
+  .product-item.hidden {
+    display: none;
+  }
+
+  /* Pagination UI */
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    font-family: sans-serif;
+  }
+
+  .page-btn {
+    padding: 8px 16px;
+    border: 1px solid #161616;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .page-btn:hover:not(:disabled) {
+    background: #161616;
+    color: white;
+  }
 </style>
 
 <div class="product-container">
-  <div class="product-grid">
+  <h1>Our Products</h1>
+
+  <div class="product-grid" id="product-grid">
     {
       products.map((product, index) => (
-        <div class="product-item">
+        <div class="product-item" data-index={index}>
           <ProductCard {...product} index={index} />
         </div>
       ))
     }
   </div>
+
+  <div class="pagination-controls">
+    <button id="prev-btn" class="page-btn" disabled>Previous</button>
+    <span id="page-info">Page 1</span>
+    <button id="next-btn" class="page-btn">Next</button>
+  </div>
 </div>
+
+<script define:vars={{ itemsPerPage, totalProducts: products.length }}>
+  let currentPage = 1;
+  const totalPages = Math.ceil(totalProducts / itemsPerPage);
+
+  const gridItems = document.querySelectorAll(".product-item");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const pageInfo = document.getElementById("page-info");
+
+  function updateDisplay() {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    gridItems.forEach((item, index) => {
+      if (index >= start && index < end) {
+        item.classList.remove("hidden");
+      } else {
+        item.classList.add("hidden");
+      }
+    });
+
+    // Update UI
+    pageInfo.innerText = `Page ${currentPage} of ${totalPages}`;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+
+    // Smooth scroll back to top of grid when page changes
+    if (currentPage !== 1) {
+      document
+        .getElementById("product-grid")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateDisplay();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      updateDisplay();
+    }
+  });
+
+  // Initialize
+  updateDisplay();
+</script>
