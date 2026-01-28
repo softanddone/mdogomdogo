@@ -36,25 +36,41 @@ import ListedProducts from "./ListedPoducts.astro";
   .set {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 20px;
+    /* padding: 20px; */
+    padding: auto;
+    /* background: red; */
+    display: flex;
+
+    /* padding: auto; */
+    /* background: red; */
+    display: flex;
   }
 
   @media (max-width: 1024px) {
     .set {
       grid-template-columns: 1fr 1fr;
+      padding: auto;
+      /* background: red; */
+      display: flex;
     }
   }
 
   @media (max-width: 768px) {
     .set {
       grid-template-columns: 1fr 1fr;
+      padding: auto;
+      /* background: red; */
+      display: flex;
     }
   }
 
   @media screen and (min-width: 1200px) {
     .set {
       grid-template-columns: repeat(5, 1fr);
-      padding: 100px;
+      /* padding: 100px; */
+      padding: auto;
+      /* background: red; */
+      display: flex;
     }
   }
 
@@ -191,5 +207,5 @@ import ListedProducts from "./ListedPoducts.astro";
 <h1 class="smartphones">Get Your Dream Smartphone today on Lipa Mdogo Mdogo</h1>
 
 <div class="set">
-  <!-- <ListedProducts /> -->
+  <ListedProducts />
 </div>
