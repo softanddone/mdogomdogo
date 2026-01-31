@@ -1,5 +1,5 @@
 ---
-// ProductGrid.astro - Complete with SEO and Social Sharing
+// ProductGrid.astro
 interface Product {
   id: string;
   name: string;
@@ -20,6 +20,7 @@ interface Props {
 
 const { products } = Astro.props;
 
+// Default products if none provided
 const defaultProducts: Product[] = [
   {
     id: "2",
@@ -30,7 +31,8 @@ const defaultProducts: Product[] = [
     dailyPayment: 91,
     paymentDays: 90,
     whatsappNumber: "+254720202167",
-    description: "Brand new — sealed box with protective case, original charger, and all accessories",
+    description:
+      "Brand new — sealed box with protective case, original charger, and all accessories",
     features: [
       "Large HD+ display",
       "Storage: 64GB ROM / 3GB RAM",
@@ -42,9 +44,10 @@ const defaultProducts: Product[] = [
     ],
   },
 
+
   {
     id: "5",
-    name: "itel A1000",
+    name: "itel A100",
     storage: "128GB",
     images: ["/phones/wa1.jpeg", "/phones/wa2.jpeg", "/phones/wa3.jpeg"],
     deposit: 2900,
@@ -445,177 +448,291 @@ const defaultProducts: Product[] = [
   },
 
   
-
 ];
 
 const productList = products || defaultProducts;
-const featuredProduct = productList[0];
-
-const baseUrl = import.meta.env.SITE || Astro.url.origin;
-const ogImage = `${baseUrl}${featuredProduct.images[0]}`;
-const pageUrl = Astro.url.href;
-const seoTitle = `${featuredProduct.name} (${featuredProduct.storage}) - Lipa Mdogo Mdogo`;
-const seoDescription = `Get ${featuredProduct.name} - Deposit: KES ${featuredProduct.deposit.toLocaleString()}, Daily: KES ${featuredProduct.dailyPayment}. Payment after delivery! Brand new with warranty.`;
 ---
-
-<Fragment>
-  <title>{seoTitle}</title>
-  <meta name="description" content={seoDescription} />
-  <meta property="og:type" content="product" />
-  <meta property="og:url" content={pageUrl} />
-  <meta property="og:title" content={seoTitle} />
-  <meta property="og:description" content={seoDescription} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="og:image:secure_url" content={ogImage} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Lipa Mdogo Mdogo" />
-  <meta property="product:price:amount" content={featuredProduct.deposit.toString()} />
-  <meta property="product:price:currency" content="KES" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={seoTitle} />
-  <meta name="twitter:description" content={seoDescription} />
-  <meta name="twitter:image" content={ogImage} />
-</Fragment>
 
 <div class="products-wrapper">
   <div class="products-grid">
-    {productList.map((product) => (
-      <div class="product-card" data-product-id={product.id}>
-        <div class="product-header">
-          <div class="header-content">
-            <div>
-              <h2 class="product-name">{product.name}</h2>
-              <p class="payment">Payment after delivery</p>
+    {
+      productList.map((product) => (
+        <div class="product-card" data-product-id={product.id}>
+          {/* Product Name */}
+          <div class="product-header">
+            <div class="header-content">
+              <div>
+                <h2 class="product-name">{product.name}</h2>
+                <p class="payment">Payment after delivery</p>
+              </div>
+              <button
+                class="share-btn"
+                aria-label="Share product"
+                data-product-name={product.name}
+                data-product-storage={product.storage}
+                data-product-deposit={product.deposit}
+                data-product-daily={product.dailyPayment}
+              >
+                <svg
+                  class="share-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                  />
+                </svg>
+              </button>
             </div>
-            <button class="share-btn" data-product-name={product.name} data-product-storage={product.storage} data-product-deposit={product.deposit} data-product-daily={product.dailyPayment}>
-              <svg class="share-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+          </div>
+
+          {/* Image Section */}
+          <div class="image-section">
+            <div class="image-container">
+              {product.images.map((image, idx) => (
+                <img
+                  src={image}
+                  alt={`${product.name} - Image ${idx + 1}`}
+                  class={`product-image ${idx === 0 ? "active" : ""}`}
+                  data-index={idx}
+                />
+              ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <button class="nav-btn prev-btn" aria-label="Previous image">
+              <svg
+                class="icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
-          </div>
-        </div>
 
-        <div class="image-section">
-          <div class="image-container">
-            {product.images.map((image, idx) => (
-              <img src={image} alt={`${product.name} - Image ${idx + 1}`} class={`product-image ${idx === 0 ? "active" : ""}`} data-index={idx} />
-            ))}
-          </div>
-          <button class="nav-btn prev-btn"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-          <button class="nav-btn next-btn"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
-          <div class="indicators">
-            {product.images.map((_, idx) => <button class={`indicator ${idx === 0 ? "active" : ""}`} data-index={idx} />)}
-          </div>
-          <div class="badge">Lipa Mdogo Mdogo</div>
-        </div>
-
-        <div class="content-section">
-          <div class="pricing-summary">
-            <div class="price-item">
-              <span class="price-label">Deposit</span>
-              <span class="price-value">KES {product.deposit.toLocaleString()}</span>
-            </div>
-            <div class="price-divider" />
-            <div class="price-item">
-              <span class="price-label">Daily</span>
-              <span class="price-value">KES {product.dailyPayment}</span>
-            </div>
-          </div>
-
-          <button class="show-more-btn">
-            <span class="show-more-text" />
-            <svg class="chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          <div class="hidden-details">
-            <div class="features-section">
-              <h3 class="features-title">Key Features</h3>
-              <ul class="features-list">
-                {product.features.map((feature) => (
-                  <li class="feature-item">
-                    <svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div class="product-description">
-              <svg class="description-icon" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            <button class="nav-btn next-btn" aria-label="Next image">
+              <svg
+                class="icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
-              <p class="description-text">{product.description}</p>
+            </button>
+
+            {/* Image Indicators */}
+            <div class="indicators">
+              {product.images.map((_, idx) => (
+                <button
+                  class={`indicator ${idx === 0 ? "active" : ""}`}
+                  data-index={idx}
+                  aria-label={`Go to image ${idx + 1}`}
+                />
+              ))}
             </div>
 
-            <div class="pricing-card">
-              <div class="price-row">
+            {/* Badge */}
+            <div class="badge">Lipa Mdogo Mdogo</div>
+          </div>
+
+          {/* Content Section */}
+          <div class="content-section">
+            {/* Always Visible Pricing */}
+            <div class="pricing-summary">
+              <div class="price-item">
                 <span class="price-label">Deposit</span>
-                <span class="price-value deposit">KES {product.deposit.toLocaleString()}</span>
+                <span class="price-value">
+                  KES {product.deposit.toLocaleString()}
+                </span>
               </div>
-              <div class="divider" />
-              <div class="price-row">
-                <span class="price-label">Daily Payment</span>
-                <div class="daily-payment">
-                  <div class="daily-amount">KES {product.dailyPayment}</div>
+              <div class="price-divider" />
+              <div class="price-item">
+                <span class="price-label">Daily</span>
+                <span class="price-value">KES {product.dailyPayment}</span>
+              </div>
+            </div>
+
+            {/* Show More Button */}
+            <button class="show-more-btn">
+              <span class="show-more-text" />
+              <svg
+                class="chevron-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Hidden Details */}
+            <div class="hidden-details">
+              {/* Key Features */}
+              <div class="features-section">
+                <h3 class="features-title">Key Features</h3>
+                <ul class="features-list">
+                  {product.features.map((feature) => (
+                    <li class="feature-item">
+                      <svg
+                        class="feature-icon"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Product Description */}
+              <div class="product-description">
+                <svg
+                  class="description-icon"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <p class="description-text">{product.description}</p>
+              </div>
+
+              {/* Full Pricing Card */}
+              <div class="pricing-card">
+                <div class="price-row">
+                  <span class="price-label">Deposit</span>
+                  <span class="price-value deposit">
+                    KES {product.deposit.toLocaleString()}
+                  </span>
+                </div>
+
+                <div class="divider" />
+
+                <div class="price-row">
+                  <span class="price-label">Daily Payment</span>
+                  <div class="daily-payment">
+                    <div class="daily-amount">KES {product.dailyPayment}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Service Area Notice */}
+              <div class="service-area">
+                <svg
+                  class="location-icon"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <div>
+                  <p class="service-title">Service Areas</p>
+                  <p class="service-text">
+                    We only serve Nairobi, Kiambu and surrounding areas
+                  </p>
+                </div>
+              </div>
+
+              {/* Trust Indicators */}
+              <div class="trust-indicators">
+                <div class="trust-item">
+                  <svg
+                    class="trust-icon"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>Payment After Delivery</span>
+                </div>
+                <div class="dot" />
+                <div class="trust-item">
+                  <svg
+                    class="trust-icon"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+                  </svg>
+                  <span>Fast Delivery</span>
                 </div>
               </div>
             </div>
 
-            <div class="service-area">
-              <svg class="location-icon" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+            {/* Bottom WhatsApp Button */}
+            <a
+              href={`https://wa.me/${product.whatsappNumber}?text=${encodeURIComponent(`Hi, I'm interested in ordering the ${product.name} (${product.storage}) with:\nDeposit: KES ${product.deposit.toLocaleString()}\nDaily Payment: KES ${product.dailyPayment}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="whatsapp-btn-bottom"
+            >
+              <svg viewBox="0 0 24 24" class="whatsapp-icon">
+                <path
+                  fill="currentColor"
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                />
               </svg>
-              <div>
-                <p class="service-title">Service Areas</p>
-                <p class="service-text">We only serve Nairobi, Kiambu and surrounding areas</p>
-              </div>
-            </div>
-
-            <div class="trust-indicators">
-              <div class="trust-item">
-                <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span>Payment After Delivery</span>
-              </div>
-              <div class="dot" />
-              <div class="trust-item">
-                <svg class="trust-icon" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                  <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
-                </svg>
-                <span>Fast Delivery</span>
-              </div>
-            </div>
+              <span>Order via WhatsApp</span>
+            </a>
           </div>
-
-          <a href={`https://wa.me/${product.whatsappNumber}?text=${encodeURIComponent(`Hi, I'm interested in ordering the ${product.name} (${product.storage}) with:\nDeposit: KES ${product.deposit.toLocaleString()}\nDaily Payment: KES ${product.dailyPayment}`)}`} target="_blank" rel="noopener noreferrer" class="whatsapp-btn-bottom">
-            <svg viewBox="0 0 24 24" class="whatsapp-icon">
-              <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-            </svg>
-            <span>Order via WhatsApp</span>
-          </a>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 
+  {/* Share Modal */}
   <div class="share-modal-overlay" id="shareModal">
     <div class="share-modal">
       <div class="share-modal-header">
         <h3 class="share-modal-title">Share this product</h3>
-        <button class="close-modal-btn">
+        <button class="close-modal-btn" aria-label="Close share menu">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="close-icon">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
+      
       <div class="share-options">
+        <!-- WhatsApp -->
         <button class="share-option whatsapp" data-platform="whatsapp">
           <div class="share-option-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -627,6 +744,8 @@ const seoDescription = `Get ${featuredProduct.name} - Deposit: KES ${featuredPro
             <span class="share-option-description">Share via WhatsApp</span>
           </div>
         </button>
+
+        <!-- Facebook -->
         <button class="share-option facebook" data-platform="facebook">
           <div class="share-option-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -638,6 +757,8 @@ const seoDescription = `Get ${featuredProduct.name} - Deposit: KES ${featuredPro
             <span class="share-option-description">Share on Facebook</span>
           </div>
         </button>
+
+        <!-- Twitter/X -->
         <button class="share-option twitter" data-platform="twitter">
           <div class="share-option-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -649,6 +770,8 @@ const seoDescription = `Get ${featuredProduct.name} - Deposit: KES ${featuredPro
             <span class="share-option-description">Share on Twitter</span>
           </div>
         </button>
+
+        <!-- Instagram (opens Instagram app or web) -->
         <button class="share-option instagram" data-platform="instagram">
           <div class="share-option-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -660,6 +783,8 @@ const seoDescription = `Get ${featuredProduct.name} - Deposit: KES ${featuredPro
             <span class="share-option-description">Open in Instagram</span>
           </div>
         </button>
+
+        <!-- Copy Link -->
         <button class="share-option copy-link" data-platform="copy">
           <div class="share-option-icon">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -675,18 +800,962 @@ const seoDescription = `Get ${featuredProduct.name} - Deposit: KES ${featuredPro
     </div>
   </div>
 
+  {/* Share Toast Notification */}
   <div class="share-toast" id="shareToast">
     <svg class="toast-icon" fill="currentColor" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+      <path
+        fill-rule="evenodd"
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+        clip-rule="evenodd"></path>
     </svg>
     <span id="toastMessage">Link copied to clipboard!</span>
   </div>
 </div>
 
 <style>
-  .products-wrapper{min-height:100vh;background:linear-gradient(135deg,rgb(248,250,252) 0%,rgb(239,246,255) 50%,rgb(238,242,255) 100%);padding:2rem 1rem}.products-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}@media(max-width:640px){.products-grid{grid-template-columns:1fr}}.product-card{background:white;border-radius:1.5rem;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);overflow:hidden;transition:all 0.3s ease}.product-card:hover{box-shadow:0 30px 60px -15px rgba(0,0,0,0.3);transform:translateY(-4px)}.product-header{padding:1.5rem 1.5rem 1rem 1.5rem;background:white}.header-content{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}.product-name{font-size:1.5rem;font-weight:700;color:rgb(15,23,42);margin:0 0 0.25rem 0}.payment{font-size:0.875rem;color:rgb(100,116,139);margin:0}.share-btn{background:linear-gradient(135deg,rgb(249,250,251),rgb(243,244,246));border:1px solid rgb(229,231,235);border-radius:0.75rem;padding:0.625rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;flex-shrink:0}.share-btn:hover{background:linear-gradient(135deg,rgb(243,244,246),rgb(229,231,235));transform:scale(1.05)}.share-btn:active{transform:scale(0.95)}.share-icon{width:1.25rem;height:1.25rem;color:rgb(71,85,105)}.share-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease}.share-modal-overlay.active{opacity:1;pointer-events:auto}.share-modal{background:white;border-radius:1.5rem 1.5rem 0 0;width:100%;max-width:500px;padding:1.5rem;transform:translateY(100%);transition:transform 0.3s ease;box-shadow:0 -10px 40px rgba(0,0,0,0.2)}.share-modal-overlay.active .share-modal{transform:translateY(0)}@media(min-width:640px){.share-modal-overlay{align-items:center}.share-modal{border-radius:1.5rem;transform:translateY(0) scale(0.9);opacity:0}.share-modal-overlay.active .share-modal{transform:translateY(0) scale(1);opacity:1}}.share-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}.share-modal-title{font-size:1.25rem;font-weight:700;color:rgb(15,23,42);margin:0}.close-modal-btn{background:rgb(248,250,252);border:none;border-radius:0.5rem;padding:0.5rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center}.close-modal-btn:hover{background:rgb(241,245,249)}.close-icon{width:1.25rem;height:1.25rem;color:rgb(71,85,105)}.share-options{display:flex;flex-direction:column;gap:0.75rem}.share-option{display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:1rem;border:none;background:rgb(248,250,252);cursor:pointer;transition:all 0.2s ease;width:100%;text-align:left}.share-option:hover{background:rgb(241,245,249);transform:translateX(4px)}.share-option:active{transform:translateX(2px) scale(0.98)}.share-option-icon{width:3rem;height:3rem;border-radius:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}.share-option-icon svg{width:1.75rem;height:1.75rem}.share-option.whatsapp .share-option-icon{background:linear-gradient(135deg,rgb(34,197,94),rgb(22,163,74));color:white}.share-option.facebook .share-option-icon{background:linear-gradient(135deg,rgb(59,130,246),rgb(37,99,235));color:white}.share-option.twitter .share-option-icon{background:linear-gradient(135deg,rgb(71,85,105),rgb(51,65,85));color:white}.share-option.instagram .share-option-icon{background:linear-gradient(135deg,rgb(236,72,153),rgb(239,68,68),rgb(251,146,60));color:white}.share-option.copy-link .share-option-icon{background:linear-gradient(135deg,rgb(148,163,184),rgb(100,116,139));color:white}.share-option-content{display:flex;flex-direction:column;gap:0.125rem}.share-option-title{font-size:1rem;font-weight:600;color:rgb(15,23,42)}.share-option-description{font-size:0.75rem;color:rgb(100,116,139)}.share-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:rgb(15,23,42);color:white;padding:1rem 1.5rem;border-radius:0.75rem;display:flex;align-items:center;gap:0.75rem;box-shadow:0 20px 25px -5px rgba(0,0,0,0.3);z-index:10000;opacity:0;transition:all 0.3s ease}.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast-icon{width:1.25rem;height:1.25rem;color:rgb(16,185,129);flex-shrink:0}.image-section{position:relative;background:linear-gradient(135deg,rgb(241,245,249),rgb(226,232,240));aspect-ratio:1}.image-container{width:100%;height:100%;position:relative;overflow:hidden}.product-image{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0;transform:scale(1.1);transition:opacity 0.6s ease,transform 0.6s ease}.product-image.active{opacity:1;transform:scale(1)}.nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);backdrop-filter:blur(8px);padding:0.5rem;border-radius:9999px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);border:none;cursor:pointer;transition:all 0.2s ease;z-index:10}.nav-btn:hover{background:white}.prev-btn{left:0.75rem}.next-btn{right:0.75rem}.nav-btn .icon{width:1.25rem;height:1.25rem;color:rgb(51,65,85)}.indicators{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10}.indicator{height:0.375rem;width:0.375rem;border-radius:9999px;background:rgba(255,255,255,0.5);border:none;cursor:pointer;transition:all 0.3s ease;padding:0}.indicator.active{width:2rem;background:white}.indicator:hover{background:rgba(255,255,255,0.75)}.badge{position:absolute;top:1rem;left:1rem;background:linear-gradient(135deg,rgb(16,185,129),rgb(20,184,166));color:white;padding:0.375rem 1rem;border-radius:9999px;font-size:0.875rem;font-weight:600;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1)}.content-section{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}.pricing-summary{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgb(248,250,252),rgb(239,246,255));border-radius:1rem;padding:1rem 1.25rem;border:1px solid rgb(226,232,240)}.price-item{display:flex;flex-direction:column;gap:0.25rem}.price-label{font-size:0.75rem;color:rgb(100,116,139);font-weight:500}.price-value{font-size:1.25rem;font-weight:700;color:rgb(15,23,42)}.price-divider{width:1px;height:2.5rem;background:rgb(226,232,240)}.show-more-btn{width:100%;background:white;border:2px solid rgb(226,232,240);color:rgb(71,85,105);font-weight:600;padding:0.875rem 1.5rem;border-radius:1rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;gap:0.5rem;font-size:0.875rem}.show-more-btn:hover{background:rgb(248,250,252);border-color:rgb(203,213,225)}.chevron-icon{width:1.25rem;height:1.25rem;transition:transform 0.3s ease}.show-more-btn.expanded .chevron-icon{transform:rotate(180deg)}.show-more-btn.expanded .show-more-text::before{content:"Show Less Details"}.show-more-text::before{content:"Show More Details"}.hidden-details{display:none;flex-direction:column;gap:1.25rem;animation:slideDown 0.3s ease}.hidden-details.visible{display:flex}@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}.pricing-card{background:linear-gradient(135deg,rgb(248,250,252),rgb(239,246,255));border-radius:1rem;padding:1.25rem;border:1px solid rgb(226,232,240)}.price-row{display:flex;justify-content:space-between;align-items:center}.price-value.deposit{font-size:1.5rem;font-weight:700;color:rgb(15,23,42)}.divider{height:1px;background:rgb(226,232,240);margin:0.75rem 0}.daily-payment{text-align:right}.daily-amount{font-size:1.25rem;font-weight:700;color:rgb(16,185,129)}.service-area{background:rgb(239,246,255);border:1px solid rgb(191,219,254);border-radius:0.75rem;padding:1rem;display:flex;gap:0.75rem}.location-icon{width:1.25rem;height:1.25rem;color:rgb(37,99,235);flex-shrink:0;margin-top:0.125rem}.service-title{font-size:0.875rem;font-weight:600;color:rgb(30,58,138);margin:0 0 0.25rem 0}.service-text{font-size:0.75rem;color:rgb(29,78,216);margin:0}.product-description{background:rgb(254,252,232);border:1px solid rgb(253,230,138);border-radius:0.75rem;padding:1rem;display:flex;gap:0.75rem;align-items:start}.description-icon{width:1.25rem;height:1.25rem;color:rgb(217,119,6);flex-shrink:0;margin-top:0.125rem}.description-text{font-size:0.875rem;color:rgb(120,53,15);line-height:1.5;margin:0}.features-section{background:white;border:1px solid rgb(226,232,240);border-radius:1rem;padding:1.25rem}.features-title{font-size:1rem;font-weight:700;color:rgb(15,23,42);margin:0 0 1rem 0}.features-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.75rem}.feature-item{display:flex;align-items:start;gap:0.625rem;font-size:0.875rem;color:rgb(51,65,85);line-height:1.5}.feature-icon{width:1.25rem;height:1.25rem;color:rgb(16,185,129);flex-shrink:0;margin-top:0.125rem}.whatsapp-btn-bottom{width:87%;background:linear-gradient(135deg,rgb(34,197,94),rgb(16,185,129));color:white;font-weight:700;padding:1rem 1.5rem;border-radius:1rem;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);border:none;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;gap:0.75rem;text-decoration:none;font-size:1.125rem;margin-top:1rem}.whatsapp-btn-bottom:hover{background:linear-gradient(135deg,rgb(22,163,74),rgb(5,150,105));box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);transform:scale(1.02)}.whatsapp-btn-bottom:active{transform:scale(0.98)}.whatsapp-icon{width:1.5rem;height:1.5rem}.trust-indicators{display:flex;align-items:center;justify-content:center;gap:1rem;font-size:0.75rem;color:rgb(100,116,139);padding-top:0.5rem}.trust-item{display:flex;align-items:center;gap:0.25rem}.trust-icon{width:1rem;height:1rem;color:rgb(16,185,129)}.dot{width:0.25rem;height:0.25rem;border-radius:9999px;background:rgb(203,213,225)}
+  .products-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(
+      135deg,
+      rgb(248, 250, 252) 0%,
+      rgb(239, 246, 255) 50%,
+      rgb(238, 242, 255) 100%
+    );
+    padding: 2rem 1rem;
+  }
+
+  .products-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+  }
+
+  /* Product Header */
+  .product-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    background: white;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .payment {
+    font-size: 0.875rem;
+    color: rgb(100, 116, 139);
+    margin: 0;
+  }
+
+  /* Share Button */
+  .share-btn {
+    background: linear-gradient(135deg, rgb(249, 250, 251), rgb(243, 244, 246));
+    border: 1px solid rgb(229, 231, 235);
+    border-radius: 0.75rem;
+    padding: 0.625rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .share-btn:hover {
+    background: linear-gradient(135deg, rgb(243, 244, 246), rgb(229, 231, 235));
+    transform: scale(1.05);
+  }
+
+  .share-btn:active {
+    transform: scale(0.95);
+  }
+
+  .share-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(71, 85, 105);
+  }
+
+  /* Share Modal */
+  .share-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .share-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .share-modal {
+    background: white;
+    border-radius: 1.5rem 1.5rem 0 0;
+    width: 100%;
+    max-width: 500px;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .share-modal-overlay.active .share-modal {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 640px) {
+    .share-modal-overlay {
+      align-items: center;
+    }
+
+    .share-modal {
+      border-radius: 1.5rem;
+      transform: translateY(0) scale(0.9);
+      opacity: 0;
+    }
+
+    .share-modal-overlay.active .share-modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .share-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .share-modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+    margin: 0;
+  }
+
+  .close-modal-btn {
+    background: rgb(248, 250, 252);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-modal-btn:hover {
+    background: rgb(241, 245, 249);
+  }
+
+  .close-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(71, 85, 105);
+  }
+
+  .share-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .share-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    background: rgb(248, 250, 252);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+  }
+
+  .share-option:hover {
+    background: rgb(241, 245, 249);
+    transform: translateX(4px);
+  }
+
+  .share-option:active {
+    transform: translateX(2px) scale(0.98);
+  }
+
+  .share-option-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .share-option-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .share-option.whatsapp .share-option-icon {
+    background: linear-gradient(135deg, rgb(34, 197, 94), rgb(22, 163, 74));
+    color: white;
+  }
+
+  .share-option.facebook .share-option-icon {
+    background: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235));
+    color: white;
+  }
+
+  .share-option.twitter .share-option-icon {
+    background: linear-gradient(135deg, rgb(71, 85, 105), rgb(51, 65, 85));
+    color: white;
+  }
+
+  .share-option.instagram .share-option-icon {
+    background: linear-gradient(135deg, rgb(236, 72, 153), rgb(239, 68, 68), rgb(251, 146, 60));
+    color: white;
+  }
+
+  .share-option.copy-link .share-option-icon {
+    background: linear-gradient(135deg, rgb(148, 163, 184), rgb(100, 116, 139));
+    color: white;
+  }
+
+  .share-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .share-option-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(15, 23, 42);
+  }
+
+  .share-option-description {
+    font-size: 0.75rem;
+    color: rgb(100, 116, 139);
+  }
+
+  /* Share Toast */
+  .share-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgb(15, 23, 42);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .share-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .toast-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(16, 185, 129);
+    flex-shrink: 0;
+  }
+
+  /* Image Section */
+  .image-section {
+    position: relative;
+    background: linear-gradient(135deg, rgb(241, 245, 249), rgb(226, 232, 240));
+    aspect-ratio: 1;
+  }
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: scale(1.1);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  .product-image.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 0.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .nav-btn:hover {
+    background: white;
+  }
+
+  .prev-btn {
+    left: 0.75rem;
+  }
+
+  .next-btn {
+    right: 0.75rem;
+  }
+
+  .nav-btn .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(51, 65, 85);
+  }
+
+  .indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+
+  .indicator {
+    height: 0.375rem;
+    width: 0.375rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .indicator.active {
+    width: 2rem;
+    background: white;
+  }
+
+  .indicator:hover {
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: linear-gradient(135deg, rgb(16, 185, 129), rgb(20, 184, 166));
+    color: white;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Content Section */
+  .content-section {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Pricing Summary - Always Visible */
+  .pricing-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgb(248, 250, 252), rgb(239, 246, 255));
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgb(226, 232, 240);
+  }
+
+  .price-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .price-label {
+    font-size: 0.75rem;
+    color: rgb(100, 116, 139);
+    font-weight: 500;
+  }
+
+  .price-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+  }
+
+  .price-divider {
+    width: 1px;
+    height: 2.5rem;
+    background: rgb(226, 232, 240);
+  }
+
+  /* Show More Button */
+  .show-more-btn {
+    width: 100%;
+    background: white;
+    border: 2px solid rgb(226, 232, 240);
+    color: rgb(71, 85, 105);
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .show-more-btn:hover {
+    background: rgb(248, 250, 252);
+    border-color: rgb(203, 213, 225);
+  }
+
+  .chevron-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .show-more-btn.expanded .chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  .show-more-btn.expanded .show-more-text::before {
+    content: "Show Less Details";
+  }
+
+  .show-more-text::before {
+    content: "Show More Details";
+  }
+
+  /* Hidden Details */
+  .hidden-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.25rem;
+    animation: slideDown 0.3s ease;
+  }
+
+  .hidden-details.visible {
+    display: flex;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .pricing-card {
+    background: linear-gradient(135deg, rgb(248, 250, 252), rgb(239, 246, 255));
+    border-radius: 1rem;
+    padding: 1.25rem;
+    border: 1px solid rgb(226, 232, 240);
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price-value.deposit {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+  }
+
+  .divider {
+    height: 1px;
+    background: rgb(226, 232, 240);
+    margin: 0.75rem 0;
+  }
+
+  .daily-payment {
+    text-align: right;
+  }
+
+  .daily-amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgb(16, 185, 129);
+  }
+
+  .daily-duration {
+    font-size: 0.75rem;
+    color: rgb(100, 116, 139);
+  }
+
+  .service-area {
+    background: rgb(239, 246, 255);
+    border: 1px solid rgb(191, 219, 254);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .location-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(37, 99, 235);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  .service-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(30, 58, 138);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .service-text {
+    font-size: 0.75rem;
+    color: rgb(29, 78, 216);
+    margin: 0;
+  }
+
+  /* Product Description */
+  .product-description {
+    background: rgb(254, 252, 232);
+    border: 1px solid rgb(253, 230, 138);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .description-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(217, 119, 6);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  .description-text {
+    font-size: 0.875rem;
+    color: rgb(120, 53, 15);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Key Features */
+  .features-section {
+    background: white;
+    border: 1px solid rgb(226, 232, 240);
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+
+  .features-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+    margin: 0 0 1rem 0;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: start;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    color: rgb(51, 65, 85);
+    line-height: 1.5;
+  }
+
+  .feature-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(16, 185, 129);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  /* Bottom WhatsApp Button */
+  .whatsapp-btn-bottom {
+    width: 87%;
+    background: linear-gradient(135deg, rgb(34, 197, 94), rgb(16, 185, 129));
+    color: white;
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    font-size: 1.125rem;
+    margin-top: 1rem;
+  }
+
+  .whatsapp-btn-bottom:hover {
+    background: linear-gradient(135deg, rgb(22, 163, 74), rgb(5, 150, 105));
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+  }
+
+  .whatsapp-btn-bottom:active {
+    transform: scale(0.98);
+  }
+
+  .whatsapp-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .trust-indicators {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: rgb(100, 116, 139);
+    padding-top: 0.5rem;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .trust-icon {
+    width: 1rem;
+    height: 1rem;
+    color: rgb(16, 185, 129);
+  }
+
+  .dot {
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 9999px;
+    background: rgb(203, 213, 225);
+  }
 </style>
 
 <script>
-  let currentShareData=null;function showToast(message){const toast=document.getElementById("shareToast");const toastMessage=document.getElementById("toastMessage");if(toast&&toastMessage){toastMessage.textContent=message;toast.classList.add("show");setTimeout(()=>{toast.classList.remove("show")},3000)}}function openShareModal(data){currentShareData=data;const modal=document.getElementById("shareModal");if(modal){modal.classList.add("active");document.body.style.overflow="hidden"}}function closeShareModal(){const modal=document.getElementById("shareModal");if(modal){modal.classList.remove("active");document.body.style.overflow=""}}function getShareText(){if(!currentShareData)return"";return`Check out this amazing deal! ${currentShareData.productName} (${currentShareData.productStorage})\n\nDeposit: KES ${currentShareData.deposit}\nDaily Payment: KES ${currentShareData.daily}\n\nPayment after delivery! 📱`}function getShareUrl(){return window.location.href}document.querySelectorAll(".share-btn").forEach((btn)=>{btn.addEventListener("click",()=>{const productName=btn.getAttribute("data-product-name")||"";const productStorage=btn.getAttribute("data-product-storage")||"";const deposit=btn.getAttribute("data-product-deposit")||"";const daily=btn.getAttribute("data-product-daily")||"";openShareModal({productName,productStorage,deposit,daily})})});document.querySelector(".close-modal-btn")?.addEventListener("click",closeShareModal);document.getElementById("shareModal")?.addEventListener("click",(e)=>{if(e.target===e.currentTarget){closeShareModal()}});document.querySelectorAll(".share-option").forEach((option)=>{option.addEventListener("click",async()=>{const platform=option.getAttribute("data-platform");const shareText=getShareText();const shareUrl=getShareUrl();switch(platform){case"whatsapp":window.open(`https://wa.me/?text=${encodeURIComponent(shareText+"\n\n"+shareUrl)}`,"_blank");closeShareModal();break;case"facebook":window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,"_blank","width=600,height=400");closeShareModal();break;case"twitter":window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,"_blank","width=600,height=400");closeShareModal();break;case"instagram":try{await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);showToast("Link copied! Open Instagram and paste in your story or post");closeShareModal()}catch(err){showToast("Please copy the link manually to share on Instagram")}break;case"copy":try{await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);showToast("Link copied to clipboard!");closeShareModal()}catch(err){const textArea=document.createElement("textarea");textArea.value=`${shareText}\n\n${shareUrl}`;textArea.style.position="fixed";textArea.style.left="-999999px";document.body.appendChild(textArea);textArea.select();try{document.execCommand("copy");showToast("Link copied to clipboard!");closeShareModal()}catch(err){showToast("Failed to copy link")}document.body.removeChild(textArea)}break}})});document.querySelectorAll(".product-card").forEach((card)=>{const images=card.querySelectorAll(".product-image");const indicators=card.querySelectorAll(".indicator");const prevBtn=card.querySelector(".prev-btn");const nextBtn=card.querySelector(".next-btn");const totalImages=images.length;let currentIndex=0;let autoPlayInterval;function showImage(index){images.forEach((img,i)=>{img.classList.toggle("active",i===index)});indicators.forEach((ind,i)=>{ind.classList.toggle("active",i===index)});currentIndex=index}function nextImage(){const nextIndex=(currentIndex+1)%totalImages;showImage(nextIndex)}function prevImage(){const prevIndex=(currentIndex-1+totalImages)%totalImages;showImage(prevIndex)}function startAutoPlay(){autoPlayInterval=window.setInterval(()=>{nextImage()},3000)}function stopAutoPlay(){clearInterval(autoPlayInterval)}startAutoPlay();card.addEventListener("mouseenter",stopAutoPlay);card.addEventListener("mouseleave",startAutoPlay);nextBtn?.addEventListener("click",()=>{stopAutoPlay();nextImage();startAutoPlay()});prevBtn?.addEventListener("click",()=>{stopAutoPlay();prevImage();startAutoPlay()});indicators.forEach((indicator,index)=>{indicator.addEventListener("click",()=>{stopAutoPlay();showImage(index);startAutoPlay()})});const showMoreBtn=card.querySelector(".show-more-btn");const hiddenDetails=card.querySelector(".hidden-details");showMoreBtn?.addEventListener("click",()=>{const isExpanded=hiddenDetails?.classList.contains("visible");if(isExpanded){hiddenDetails?.classList.remove("visible");showMoreBtn.classList.remove("expanded")}else{hiddenDetails?.classList.add("visible");showMoreBtn.classList.add("expanded")}})});
+  // Share Modal Management
+  let currentShareData: {
+    productName: string;
+    productStorage: string;
+    deposit: string;
+    daily: string;
+  } | null = null;
+
+  function showToast(message: string) {
+    const toast = document.getElementById("shareToast");
+    const toastMessage = document.getElementById("toastMessage");
+    if (toast && toastMessage) {
+      toastMessage.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+  }
+
+  function openShareModal(data: typeof currentShareData) {
+    currentShareData = data;
+    const modal = document.getElementById("shareModal");
+    if (modal) {
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeShareModal() {
+    const modal = document.getElementById("shareModal");
+    if (modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
+
+  function getShareText() {
+    if (!currentShareData) return "";
+    return `Check out this amazing deal! ${currentShareData.productName} (${currentShareData.productStorage})\n\nDeposit: KES ${currentShareData.deposit}\nDaily Payment: KES ${currentShareData.daily}\n\nPayment after delivery! 📱`;
+  }
+
+  function getShareUrl() {
+    return window.location.href;
+  }
+
+  // Add event listeners to all share buttons
+  document.querySelectorAll(".share-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const productName = btn.getAttribute("data-product-name") || "";
+      const productStorage = btn.getAttribute("data-product-storage") || "";
+      const deposit = btn.getAttribute("data-product-deposit") || "";
+      const daily = btn.getAttribute("data-product-daily") || "";
+
+      openShareModal({ productName, productStorage, deposit, daily });
+    });
+  });
+
+  // Close modal button
+  document.querySelector(".close-modal-btn")?.addEventListener("click", closeShareModal);
+
+  // Close modal when clicking overlay
+  document.getElementById("shareModal")?.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+      closeShareModal();
+    }
+  });
+
+  // Share platform handlers
+  document.querySelectorAll(".share-option").forEach((option) => {
+    option.addEventListener("click", async () => {
+      const platform = option.getAttribute("data-platform");
+      const shareText = getShareText();
+      const shareUrl = getShareUrl();
+
+      switch (platform) {
+        case "whatsapp":
+          window.open(
+            `https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`,
+            "_blank"
+          );
+          closeShareModal();
+          break;
+
+        case "facebook":
+          window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+            "_blank",
+            "width=600,height=400"
+          );
+          closeShareModal();
+          break;
+
+        case "twitter":
+          window.open(
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+            "_blank",
+            "width=600,height=400"
+          );
+          closeShareModal();
+          break;
+
+        case "instagram":
+          // Instagram doesn't have a direct share URL, so we copy the link and show instructions
+          try {
+            await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+            showToast("Link copied! Open Instagram and paste in your story or post");
+            closeShareModal();
+          } catch (err) {
+            showToast("Please copy the link manually to share on Instagram");
+          }
+          break;
+
+        case "copy":
+          try {
+            await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+            showToast("Link copied to clipboard!");
+            closeShareModal();
+          } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = `${shareText}\n\n${shareUrl}`;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+              document.execCommand("copy");
+              showToast("Link copied to clipboard!");
+              closeShareModal();
+            } catch (err) {
+              showToast("Failed to copy link");
+            }
+            document.body.removeChild(textArea);
+          }
+          break;
+      }
+    });
+  });
+
+  // Image carousel functionality for all product cards
+  document.querySelectorAll(".product-card").forEach((card) => {
+    const images = card.querySelectorAll(".product-image");
+    const indicators = card.querySelectorAll(".indicator");
+    const prevBtn = card.querySelector(".prev-btn");
+    const nextBtn = card.querySelector(".next-btn");
+    const totalImages = images.length;
+    let currentIndex = 0;
+    let autoPlayInterval: number;
+
+    function showImage(index: number) {
+      images.forEach((img, i) => {
+        img.classList.toggle("active", i === index);
+      });
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle("active", i === index);
+      });
+      currentIndex = index;
+    }
+
+    function nextImage() {
+      const nextIndex = (currentIndex + 1) % totalImages;
+      showImage(nextIndex);
+    }
+
+    function prevImage() {
+      const prevIndex = (currentIndex - 1 + totalImages) % totalImages;
+      showImage(prevIndex);
+    }
+
+    // Auto-play carousel every 3 seconds
+    function startAutoPlay() {
+      autoPlayInterval = window.setInterval(() => {
+        nextImage();
+      }, 3000);
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // Start auto-play
+    startAutoPlay();
+
+    // Pause auto-play on hover
+    card.addEventListener("mouseenter", stopAutoPlay);
+    card.addEventListener("mouseleave", startAutoPlay);
+
+    // Next button
+    nextBtn?.addEventListener("click", () => {
+      stopAutoPlay();
+      nextImage();
+      startAutoPlay();
+    });
+
+    // Previous button
+    prevBtn?.addEventListener("click", () => {
+      stopAutoPlay();
+      prevImage();
+      startAutoPlay();
+    });
+
+    // Indicator buttons
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener("click", () => {
+        stopAutoPlay();
+        showImage(index);
+        startAutoPlay();
+      });
+    });
+
+    // Show More / Show Less functionality
+    const showMoreBtn = card.querySelector(".show-more-btn");
+    const hiddenDetails = card.querySelector(".hidden-details");
+
+    showMoreBtn?.addEventListener("click", () => {
+      const isExpanded = hiddenDetails?.classList.contains("visible");
+
+      if (isExpanded) {
+        hiddenDetails?.classList.remove("visible");
+        showMoreBtn.classList.remove("expanded");
+      } else {
+        hiddenDetails?.classList.add("visible");
+        showMoreBtn.classList.add("expanded");
+      }
+    });
+  });
 </script>
