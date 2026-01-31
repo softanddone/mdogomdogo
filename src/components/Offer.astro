@@ -44,6 +44,7 @@ const defaultProducts: Product[] = [
     ],
   },
 
+
   {
     id: "5",
     name: "itel A100",
@@ -445,6 +446,8 @@ const defaultProducts: Product[] = [
       "Complete accessories included",
     ],
   },
+
+  
 ];
 
 const productList = products || defaultProducts;
@@ -716,6 +719,87 @@ const productList = products || defaultProducts;
     }
   </div>
 
+  {/* Share Modal */}
+  <div class="share-modal-overlay" id="shareModal">
+    <div class="share-modal">
+      <div class="share-modal-header">
+        <h3 class="share-modal-title">Share this product</h3>
+        <button class="close-modal-btn" aria-label="Close share menu">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="close-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="share-options">
+        <!-- WhatsApp -->
+        <button class="share-option whatsapp" data-platform="whatsapp">
+          <div class="share-option-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            </svg>
+          </div>
+          <div class="share-option-content">
+            <span class="share-option-title">WhatsApp</span>
+            <span class="share-option-description">Share via WhatsApp</span>
+          </div>
+        </button>
+
+        <!-- Facebook -->
+        <button class="share-option facebook" data-platform="facebook">
+          <div class="share-option-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </div>
+          <div class="share-option-content">
+            <span class="share-option-title">Facebook</span>
+            <span class="share-option-description">Share on Facebook</span>
+          </div>
+        </button>
+
+        <!-- Twitter/X -->
+        <button class="share-option twitter" data-platform="twitter">
+          <div class="share-option-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </div>
+          <div class="share-option-content">
+            <span class="share-option-title">Twitter</span>
+            <span class="share-option-description">Share on Twitter</span>
+          </div>
+        </button>
+
+        <!-- Instagram (opens Instagram app or web) -->
+        <button class="share-option instagram" data-platform="instagram">
+          <div class="share-option-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </div>
+          <div class="share-option-content">
+            <span class="share-option-title">Instagram</span>
+            <span class="share-option-description">Open in Instagram</span>
+          </div>
+        </button>
+
+        <!-- Copy Link -->
+        <button class="share-option copy-link" data-platform="copy">
+          <div class="share-option-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="share-option-content">
+            <span class="share-option-title">Copy Link</span>
+            <span class="share-option-description">Copy link to clipboard</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
   {/* Share Toast Notification */}
   <div class="share-toast" id="shareToast">
     <svg class="toast-icon" fill="currentColor" viewBox="0 0 20 20">
@@ -822,6 +906,180 @@ const productList = products || defaultProducts;
     color: rgb(71, 85, 105);
   }
 
+  /* Share Modal */
+  .share-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .share-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .share-modal {
+    background: white;
+    border-radius: 1.5rem 1.5rem 0 0;
+    width: 100%;
+    max-width: 500px;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .share-modal-overlay.active .share-modal {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 640px) {
+    .share-modal-overlay {
+      align-items: center;
+    }
+
+    .share-modal {
+      border-radius: 1.5rem;
+      transform: translateY(0) scale(0.9);
+      opacity: 0;
+    }
+
+    .share-modal-overlay.active .share-modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .share-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .share-modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+    margin: 0;
+  }
+
+  .close-modal-btn {
+    background: rgb(248, 250, 252);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-modal-btn:hover {
+    background: rgb(241, 245, 249);
+  }
+
+  .close-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(71, 85, 105);
+  }
+
+  .share-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .share-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    background: rgb(248, 250, 252);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+  }
+
+  .share-option:hover {
+    background: rgb(241, 245, 249);
+    transform: translateX(4px);
+  }
+
+  .share-option:active {
+    transform: translateX(2px) scale(0.98);
+  }
+
+  .share-option-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .share-option-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .share-option.whatsapp .share-option-icon {
+    background: linear-gradient(135deg, rgb(34, 197, 94), rgb(22, 163, 74));
+    color: white;
+  }
+
+  .share-option.facebook .share-option-icon {
+    background: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235));
+    color: white;
+  }
+
+  .share-option.twitter .share-option-icon {
+    background: linear-gradient(135deg, rgb(71, 85, 105), rgb(51, 65, 85));
+    color: white;
+  }
+
+  .share-option.instagram .share-option-icon {
+    background: linear-gradient(135deg, rgb(236, 72, 153), rgb(239, 68, 68), rgb(251, 146, 60));
+    color: white;
+  }
+
+  .share-option.copy-link .share-option-icon {
+    background: linear-gradient(135deg, rgb(148, 163, 184), rgb(100, 116, 139));
+    color: white;
+  }
+
+  .share-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .share-option-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(15, 23, 42);
+  }
+
+  .share-option-description {
+    font-size: 0.75rem;
+    color: rgb(100, 116, 139);
+  }
+
   /* Share Toast */
   .share-toast {
     position: fixed;
@@ -836,7 +1094,7 @@ const productList = products || defaultProducts;
     align-items: center;
     gap: 0.75rem;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    z-index: 10000;
     opacity: 0;
     transition: all 0.3s ease;
   }
@@ -1273,7 +1531,14 @@ const productList = products || defaultProducts;
 </style>
 
 <script>
-  // Share functionality
+  // Share Modal Management
+  let currentShareData: {
+    productName: string;
+    productStorage: string;
+    deposit: string;
+    daily: string;
+  } | null = null;
+
   function showToast(message: string) {
     const toast = document.getElementById("shareToast");
     const toastMessage = document.getElementById("toastMessage");
@@ -1286,50 +1551,122 @@ const productList = products || defaultProducts;
     }
   }
 
+  function openShareModal(data: typeof currentShareData) {
+    currentShareData = data;
+    const modal = document.getElementById("shareModal");
+    if (modal) {
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeShareModal() {
+    const modal = document.getElementById("shareModal");
+    if (modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
+
+  function getShareText() {
+    if (!currentShareData) return "";
+    return `Check out this amazing deal! ${currentShareData.productName} (${currentShareData.productStorage})\n\nDeposit: KES ${currentShareData.deposit}\nDaily Payment: KES ${currentShareData.daily}\n\nPayment after delivery! 📱`;
+  }
+
+  function getShareUrl() {
+    return window.location.href;
+  }
+
   // Add event listeners to all share buttons
   document.querySelectorAll(".share-btn").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const productName = btn.getAttribute("data-product-name");
-      const productStorage = btn.getAttribute("data-product-storage");
-      const deposit = btn.getAttribute("data-product-deposit");
-      const daily = btn.getAttribute("data-product-daily");
+    btn.addEventListener("click", () => {
+      const productName = btn.getAttribute("data-product-name") || "";
+      const productStorage = btn.getAttribute("data-product-storage") || "";
+      const deposit = btn.getAttribute("data-product-deposit") || "";
+      const daily = btn.getAttribute("data-product-daily") || "";
 
-      const shareText = `Check out this amazing deal! ${productName} (${productStorage})\n\nDeposit: KES ${deposit}\nDaily Payment: KES ${daily}\n\nPayment after delivery! 📱`;
-      const shareUrl = window.location.href;
+      openShareModal({ productName, productStorage, deposit, daily });
+    });
+  });
 
-      // Check if Web Share API is available
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: `${productName} - Lipa Mdogo Mdogo`,
-            text: shareText,
-            url: shareUrl,
-          });
-        } catch (err) {
-          // User cancelled or error occurred
-          console.log("Share cancelled or failed:", err);
-        }
-      } else {
-        // Fallback: Copy to clipboard
-        try {
-          await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
-          showToast("Link copied to clipboard!");
-        } catch (err) {
-          // Fallback for older browsers
-          const textArea = document.createElement("textarea");
-          textArea.value = `${shareText}\n\n${shareUrl}`;
-          textArea.style.position = "fixed";
-          textArea.style.left = "-999999px";
-          document.body.appendChild(textArea);
-          textArea.select();
+  // Close modal button
+  document.querySelector(".close-modal-btn")?.addEventListener("click", closeShareModal);
+
+  // Close modal when clicking overlay
+  document.getElementById("shareModal")?.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+      closeShareModal();
+    }
+  });
+
+  // Share platform handlers
+  document.querySelectorAll(".share-option").forEach((option) => {
+    option.addEventListener("click", async () => {
+      const platform = option.getAttribute("data-platform");
+      const shareText = getShareText();
+      const shareUrl = getShareUrl();
+
+      switch (platform) {
+        case "whatsapp":
+          window.open(
+            `https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`,
+            "_blank"
+          );
+          closeShareModal();
+          break;
+
+        case "facebook":
+          window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+            "_blank",
+            "width=600,height=400"
+          );
+          closeShareModal();
+          break;
+
+        case "twitter":
+          window.open(
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+            "_blank",
+            "width=600,height=400"
+          );
+          closeShareModal();
+          break;
+
+        case "instagram":
+          // Instagram doesn't have a direct share URL, so we copy the link and show instructions
           try {
-            document.execCommand("copy");
-            showToast("Link copied to clipboard!");
+            await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+            showToast("Link copied! Open Instagram and paste in your story or post");
+            closeShareModal();
           } catch (err) {
-            showToast("Failed to copy link");
+            showToast("Please copy the link manually to share on Instagram");
           }
-          document.body.removeChild(textArea);
-        }
+          break;
+
+        case "copy":
+          try {
+            await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+            showToast("Link copied to clipboard!");
+            closeShareModal();
+          } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = `${shareText}\n\n${shareUrl}`;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+              document.execCommand("copy");
+              showToast("Link copied to clipboard!");
+              closeShareModal();
+            } catch (err) {
+              showToast("Failed to copy link");
+            }
+            document.body.removeChild(textArea);
+          }
+          break;
       }
     });
   });
