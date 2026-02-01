@@ -4,8 +4,6 @@ import HomeLayout from "../layouts/HomeLayout.astro";
 import Offer from "../components/Offer.astro";
 import GilFooter from "../components/GilFooter.astro";
 import HeadOffer from "../components/HeadOffer.astro";
-
-// NO seo object here - all SEO is in HomeLayout
 ---
 
 <!doctype html>
@@ -15,8 +13,16 @@ import HeadOffer from "../components/HeadOffer.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pay after Delivery</title>
     
-    <!-- Open Graph Image -->
-    <meta property="og:image" content="/phones/og.png" />
+    <!-- Open Graph Image - absolute URL required -->
+    <meta property="og:image" content="https://mdogomdogodeals.co.ke/phones/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Additional recommended OG tags -->
+    <meta property="og:title" content="Pay after Delivery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mdogomdogodeals.co.ke" />
+    <meta property="og:description" content="Shop smartphones with pay after delivery option" />
   </head>
   <body>
     <!-- <HeadOffer /> -->
