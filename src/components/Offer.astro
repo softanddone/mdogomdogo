@@ -23,6 +23,26 @@ const { products } = Astro.props;
 // Default products if none provided
 const defaultProducts: Product[] = [
   {
+    id: "7",
+    name: "Samsung Galaxy A05",
+    storage: "128GB/64GB",
+    images: ["/phones/s1.jpg", "/phones/s2.jpg", "/phones/s3.jpg"],
+    deposit: 2500,
+    dailyPayment: 85,
+    paymentDays: 90,
+    whatsappNumber: "+254720202167",
+    description:
+      "Brand new — sealed box with charger, cable, and all original accessories",
+    features: [
+      "Clean Samsung One UI experience",
+      "Storage: 128GB/64GB ROM / 4GB RAM",
+      "Camera: 50MP main rear camera",
+      "Large 5000mAh battery",
+      "Brand new (not refurb/used)",
+      "Original Samsung accessories included",
+    ],
+  },
+  {
     id: "2",
     name: "Tecno Pop 10",
     storage: "64GB",
@@ -66,6 +86,33 @@ const defaultProducts: Product[] = [
       "Complete accessories included",
     ],
   },
+
+  {
+  id: "3",
+  name: "itel S256 Ultra",
+  storage: "256GB",
+  images: [
+    "/phones/it1.png",
+    "/phones/it2.png",
+    
+  ],
+  deposit: 5000,
+  dailyPayment: 128,
+  paymentDays: 90,
+  whatsappNumber: "+254720202167",
+  description:
+    "Brand new — comes with protective case and original charger",
+  features: [
+    "Display: Large HD+ display",
+    "Storage: 256GB ROM / 8GB RAM",
+    "Camera: 50MP AI main camera",
+    "Battery: 5000mAh long-lasting battery",
+    "Security: Side fingerprint & Face Unlock",
+    "Warranty: 2 years",
+    "Brand new sealed",
+  ],
+},
+
 
   {
     id: "3",
@@ -273,26 +320,7 @@ const defaultProducts: Product[] = [
     ],
   },
 
-  {
-    id: "7",
-    name: "Samsung Galaxy A05",
-    storage: "128GB",
-    images: ["/phones/s1.jpg", "/phones/s2.jpg", "/phones/s3.jpg"],
-    deposit: 3200,
-    dailyPayment: 85,
-    paymentDays: 90,
-    whatsappNumber: "+254720202167",
-    description:
-      "Brand new — sealed box with charger, cable, and all original accessories",
-    features: [
-      "Clean Samsung One UI experience",
-      "Storage: 128GB ROM / 4GB RAM",
-      "Camera: 50MP main rear camera",
-      "Large 5000mAh battery",
-      "Brand new (not refurb/used)",
-      "Original Samsung accessories included",
-    ],
-  },
+  
 
   {
     id: "8",
