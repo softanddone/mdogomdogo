@@ -25,7 +25,24 @@ const productList = [currentProduct];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  
+  <title>{currentProduct.name} | Lipa Mdogo Mdogo Kenya</title>
+<meta name="description" content="Buy {currentProduct.name} on Lipa Mdogo Mdogo in Nairobi & Kiambu. Pay slowly, own it easily. Home delivery available." />
+<link rel="canonical" href="https://mdogomdogodeals.co.ke/{product.slug}" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="product" />
+<meta property="og:title" content="{product.name} | Lipa Mdogo Mdogo Kenya" />
+<meta property="og:description" content="Buy {product.name} on Lipa Mdogo Mdogo. Pay slowly, own it easily." />
+<meta property="og:image" content="{product.images[0]}" />
+<meta property="og:url" content="https://mdogomdogodeals.co.ke/product.slug}" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{product.name} | Lipa Mdogo Mdogo Kenya" />
+<meta name="twitter:description" content="Buy {product.name} on Lipa Mdogo Mdogo. Pay slowly, own it easily." />
+<meta name="twitter:image" content="{product.images[0]}" />
+
 </head>
 <body>
   
@@ -42,10 +59,22 @@ const productList = [currentProduct];
       {/* Left Side - Image Carousel */}
       <div class="image-section">
 
+<div class="top">
+<button 
+  class="call"
+  onclick="window.location.href='tel:+254720202167'"
+>
+  Call +254720202167
+</button>
+          <div></div>
+
 <button class="share-button" id="shareBtn">
             <span class="share-icon">↗</span>
             Share
           </button>
+
+
+</div>
 
 
         <div class="image-carousel">
@@ -310,7 +339,7 @@ const productList = [currentProduct];
           <span class="sticky-daily">+ KES {product.dailyPayment}/day</span>
         </div>
         <a 
-          href={`https://wa.me/254745913574?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+          href={`https://wa.me/254720202167?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
           class="sticky-whatsapp-btn"
           target="_blank"
           rel="noopener noreferrer"
@@ -362,6 +391,19 @@ const productList = [currentProduct];
 
 <style>
   /* ===== CSS VARIABLES ===== */
+
+  .top{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .call{
+    border:none;
+    text-decoration: none;
+    background:white;
+    font-size: 13px;
+
+
+  }
   :root {
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -857,13 +899,15 @@ const productList = [currentProduct];
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: var(--surface-light);
+    /* background: var(--surface-light); */
+    background: transparent;
     color: var(--text-primary);
     padding: 16px 20px;
     border-radius: var(--radius-md);
     font-size: 14px;
     font-weight: 700;
-    border: 1px solid var(--border-light);
+    /* border: 1px solid var(--border-light); */
+    border:none;
     cursor: pointer;
     transition: all 0.3s var(--transition-smooth);
     box-shadow: var(--shadow-sm);
