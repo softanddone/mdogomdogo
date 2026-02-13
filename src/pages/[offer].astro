@@ -31,9 +31,23 @@ const productList = [currentProduct];
   
   {productList.map((product) => (
   <div class="product-page-container">
+
+
+
+    
     <div class="product-grid">
+
+
+
       {/* Left Side - Image Carousel */}
       <div class="image-section">
+
+<button class="share-button" id="shareBtn">
+            <span class="share-icon">↗</span>
+            Share
+          </button>
+
+
         <div class="image-carousel">
           {product.images.map((image, idx) => (
             <div class={`carousel-image ${idx === 0 ? 'active' : ''}`} data-index={idx}>
@@ -149,7 +163,7 @@ const productList = [currentProduct];
             <div class="pricing-benefits">
               <div class="benefit-item">
                 <span class="check-icon">✓</span>
-                <span>No interest charges</span>
+                <span>No hidden charges</span>
               </div>
               <div class="benefit-item">
                 <span class="check-icon">✓</span>
@@ -166,7 +180,7 @@ const productList = [currentProduct];
         {/* Main CTA Button - Desktop */}
         <div class="cta-section desktop-only">
           <a 
-            href={`https://wa.me/254745913574?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+            href={`https://wa.me/254720202167?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
             class="cta-button-main"
             target="_blank"
             rel="noopener noreferrer"
@@ -201,12 +215,12 @@ const productList = [currentProduct];
                 <div class="step-number">02</div>
                 <h4>We Deliver</h4>
               </div>
-              <p>Receive your product within 24-48 hours</p>
+              <p>Receive your product within 5 hours</p>
             </div>
             <div class="step-card">
               <div class="step-header">
                 <div class="step-number">03</div>
-                <h4>Pay After</h4>
+                <h4>Pay Deposit After Delivery</h4>
               </div>
               <p>Inspect first, then pay your deposit</p>
             </div>
@@ -215,7 +229,7 @@ const productList = [currentProduct];
                 <div class="step-number">04</div>
                 <h4>Daily Payments</h4>
               </div>
-              <p>Complete with small daily installments</p>
+              <p>Start daily payment after the free period</p>
             </div>
           </div>
         </div>
