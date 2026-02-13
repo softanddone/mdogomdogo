@@ -1,0 +1,1638 @@
+---
+export const prerender = true;
+
+import { products } from "../data/offerproduct";
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { offer: product.slug },
+  }));
+}
+
+const { offer } = Astro.params;
+const currentProduct = products.find((p) => p.slug === offer);
+
+if (!currentProduct) {
+  return Astro.redirect("/404");
+}
+
+const productList = [currentProduct];
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  {productList.map((product) => (
+  <div class="product-page-container">
+    <div class="product-grid">
+      {/* Left Side - Image Carousel */}
+      <div class="image-section">
+        <div class="image-carousel">
+          {product.images.map((image, idx) => (
+            <div class={`carousel-image ${idx === 0 ? 'active' : ''}`} data-index={idx}>
+              <img 
+                src={image} 
+                alt={`${product.name} - Image ${idx + 1}`}
+                class="product-image"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+          ))}
+
+          {/* Navigation Buttons */}
+          {product.images.length > 1 && (
+            <>
+              <button class="carousel-btn prev" aria-label="Previous image">
+                <span class="arrow-icon">‹</span>
+              </button>
+              <button class="carousel-btn next" aria-label="Next image">
+                <span class="arrow-icon">›</span>
+              </button>
+            </>
+          )}
+
+          {/* Image Indicators */}
+          {product.images.length > 1 && (
+            <div class="carousel-indicators">
+              {product.images.map((_, idx) => (
+                <button 
+                  class={`indicator ${idx === 0 ? 'active' : ''}`} 
+                  data-index={idx}
+                  aria-label={`Go to image ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Trust Badges - Below Images on Mobile */}
+        <div class="trust-badges-mobile">
+          <div class="trust-badge">
+            <div class="badge-icon">✓</div>
+            <span>Verified Products</span>
+          </div>
+          <div class="trust-badge">
+            <div class="badge-icon">💳</div>
+            <span>Pay After Delivery</span>
+          </div>
+          <div class="trust-badge">
+            <div class="badge-icon">👥</div>
+            <span>500+ Happy Customers</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side - Product Details */}
+      <div class="details-section">
+        {/* Product Header */}
+        <div class="product-header">
+          <h1 class="product-title">{product.name}</h1>
+          <div class="payment-badges">
+            <span class="badge badge-primary">
+              <span class="badge-icon-inline">✓</span>
+              Payment After Delivery
+            </span>
+            <span class="badge badge-secondary">
+              <span class="badge-icon-inline">💰</span>
+              Lipa Mdogo Mdogo
+            </span>
+          </div>
+        </div>
+
+        {/* Modern Pricing Card */}
+        <div class="pricing-card-modern">
+          <div class="pricing-glow"></div>
+          <div class="pricing-content">
+            <div class="pricing-header">
+              <h2>Flexible Payment Plan</h2>
+              <p class="pricing-subtitle">Pay in installments with zero hidden fees</p>
+            </div>
+            
+            <div class="pricing-options">
+              <div class="pricing-option deposit">
+                <div class="option-label">
+                  <span class="label-text">Initial Deposit</span>
+                  <span class="label-badge">One-time</span>
+                </div>
+                <div class="option-amount">
+                  <span class="currency">KES</span>
+                  <span class="amount">{product.deposit.toLocaleString()}</span>
+                </div>
+              </div>
+              
+              <div class="pricing-separator">
+                <div class="separator-line"></div>
+                <span class="separator-text">then</span>
+                <div class="separator-line"></div>
+              </div>
+              
+              <div class="pricing-option daily">
+                <div class="option-label">
+                  <span class="label-text">Daily Payment</span>
+                  <span class="label-badge">Flexible</span>
+                </div>
+                <div class="option-amount">
+                  <span class="currency">KES</span>
+                  <span class="amount">{product.dailyPayment}</span>
+                  <span class="period">/day</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pricing-benefits">
+              <div class="benefit-item">
+                <span class="check-icon">✓</span>
+                <span>No interest charges</span>
+              </div>
+              <div class="benefit-item">
+                <span class="check-icon">✓</span>
+                <span>Pause anytime</span>
+              </div>
+              <div class="benefit-item">
+                <span class="check-icon">✓</span>
+                <span>100% transparent pricing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main CTA Button - Desktop */}
+        <div class="cta-section desktop-only">
+          <a 
+            href={`https://wa.me/254745913574?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+            class="cta-button-main"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="whatsapp-icon">📱</span>
+            <span>Order via WhatsApp</span>
+            <span class="arrow-icon">→</span>
+          </a>
+          
+          <button class="share-button" id="shareBtn">
+            <span class="share-icon">↗</span>
+            Share
+          </button>
+        </div>
+
+        {/* How It Works Section */}
+        <div class="how-it-works">
+          <h3 class="section-title">
+            <span class="title-decoration"></span>
+            How It Works
+          </h3>
+          <div class="steps-container">
+            <div class="step-card">
+              <div class="step-header">
+                <div class="step-number">01</div>
+                <h4>Order Now</h4>
+              </div>
+              <p>Click the WhatsApp button to place your order instantly</p>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <div class="step-number">02</div>
+                <h4>We Deliver</h4>
+              </div>
+              <p>Receive your product within 24-48 hours</p>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <div class="step-number">03</div>
+                <h4>Pay After</h4>
+              </div>
+              <p>Inspect first, then pay your deposit</p>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <div class="step-number">04</div>
+                <h4>Daily Payments</h4>
+              </div>
+              <p>Complete with small daily installments</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Description */}
+        <div class="product-description">
+          <h3 class="section-title">
+            <span class="title-decoration"></span>
+            About This Product
+          </h3>
+          <p class="description-text">{product.description}</p>
+        </div>
+
+        {/* Key Features */}
+        <div class="product-features">
+          <h3 class="section-title">
+            <span class="title-decoration"></span>
+            Key Features
+          </h3>
+          <div class="features-grid">
+            {product.features.map((feature) => (
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Delivery Information */}
+        <div class="delivery-card">
+          <div class="delivery-icon">🚚</div>
+          <div class="delivery-content">
+            <h4>Fast & Free Delivery</h4>
+            <p><strong>Coverage:</strong> Nairobi, Kiambu & surrounding areas</p>
+            <p><strong>Timeline:</strong> 24-48 hours from order confirmation</p>
+            <div class="delivery-highlight">
+              <span class="check-icon">✓</span>
+              <span>Free delivery • Inspect before payment</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Indicators - Desktop */}
+        <div class="trust-section desktop-only">
+          <div class="trust-card">
+            <div class="trust-icon-wrapper">🛡️</div>
+            <div class="trust-text">
+              <h4>100% Authentic</h4>
+              <p>Genuine products guaranteed</p>
+            </div>
+          </div>
+
+          <div class="trust-card">
+            <div class="trust-icon-wrapper">💳</div>
+            <div class="trust-text">
+              <h4>Flexible Payments</h4>
+              <p>Pay at your own pace</p>
+            </div>
+          </div>
+
+          <div class="trust-card">
+            <div class="trust-icon-wrapper">⭐</div>
+            <div class="trust-text">
+              <h4>500+ Happy Customers</h4>
+              <p>Join our satisfied community</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile Sticky WhatsApp Bar */}
+    <div class="mobile-sticky-cta">
+      <div class="sticky-cta-content">
+        <div class="sticky-price-info">
+          <span class="sticky-deposit">KES {product.deposit.toLocaleString()}</span>
+          <span class="sticky-daily">+ KES {product.dailyPayment}/day</span>
+        </div>
+        <a 
+          href={`https://wa.me/254745913574?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+          class="sticky-whatsapp-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="whatsapp-icon">📱</span>
+          Order Now
+        </a>
+      </div>
+    </div>
+  </div>
+))}
+
+{/* Share Modal */}
+<div class="share-modal" id="shareModal">
+  <div class="share-modal-overlay"></div>
+  <div class="share-modal-content">
+    <div class="share-modal-header">
+      <h3>Share this product</h3>
+      <button class="close-modal" id="closeModal">
+        <span class="close-icon">×</span>
+      </button>
+    </div>
+    <div class="share-options">
+      <a href="#" class="share-option whatsapp-share" id="whatsappShare">
+        <div class="share-icon whatsapp">📱</div>
+        <span>Share via WhatsApp</span>
+      </a>
+      <a href="#" class="share-option facebook-share" id="facebookShare">
+        <div class="share-icon facebook">👍</div>
+        <span>Share on Facebook</span>
+      </a>
+      <a href="#" class="share-option twitter-share" id="twitterShare">
+        <div class="share-icon twitter">🐦</div>
+        <span>Share on Twitter</span>
+      </a>
+      <button class="share-option copy-link" id="copyLink">
+        <div class="share-icon copy">🔗</div>
+        <span>Copy Link</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+{/* Toast Notification */}
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span>Link copied to clipboard!</span>
+</div>
+
+<style>
+  /* ===== CSS VARIABLES ===== */
+  :root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --whatsapp-gradient: linear-gradient(135deg, #25D366 0%, #20ba5a 100%);
+    --surface-light: #ffffff;
+    --surface-gray: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-light: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ===== GLOBAL RESET ===== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--surface-gray);
+    /* width:90vw!important; */
+    /* background: red!important; */
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+  }
+
+  .product-page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 16px 120px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* ===== IMAGE CAROUSEL ===== */
+  .image-section {
+    position: relative;
+    width: 100%;
+  }
+
+  .image-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--surface-light);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+  }
+
+  .carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-image.active {
+    opacity: 1;
+    animation: fadeIn 0.6s var(--transition-smooth);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s var(--transition-smooth);
+    z-index: 10;
+  }
+
+  .carousel-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .carousel-btn .arrow-icon {
+    font-size: 32px;
+    line-height: 1;
+    color: var(--text-primary);
+    font-weight: 300;
+  }
+
+  .carousel-btn.prev {
+    left: 12px;
+  }
+
+  .carousel-btn.next {
+    right: 12px;
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    padding: 8px 12px;
+    border-radius: 50px;
+  }
+
+  .indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-smooth);
+    padding: 0;
+  }
+
+  .indicator.active {
+    background: white;
+    width: 20px;
+    border-radius: 3px;
+  }
+
+  /* ===== TRUST BADGES MOBILE ===== */
+  .trust-badges-mobile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface-light);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s var(--transition-smooth);
+  }
+
+  .trust-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .badge-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+
+  .trust-badge span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* ===== DETAILS SECTION ===== */
+  .details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .product-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .payment-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .badge-icon-inline {
+    font-size: 14px;
+  }
+
+  .badge-primary {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    color: #166534;
+  }
+
+  .badge-secondary {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+  }
+
+  /* ===== MODERN PRICING CARD ===== */
+  .pricing-card-modern {
+    position: relative;
+    background: var(--surface-light);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .pricing-glow {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .pricing-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-header {
+    margin-bottom: 20px;
+  }
+
+  .pricing-header h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .pricing-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .pricing-options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .pricing-option {
+    background: var(--surface-gray);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    border: 2px solid transparent;
+    transition: all 0.3s var(--transition-smooth);
+  }
+
+  .pricing-option:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .pricing-option.deposit {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-color: #bae6fd;
+  }
+
+  .pricing-option.daily {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #bbf7d0;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .label-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .label-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 50px;
+    color: var(--text-secondary);
+  }
+
+  .option-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .currency {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+
+  .amount {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+  }
+
+  .period {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .pricing-separator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+  }
+
+  .separator-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  .separator-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pricing-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .check-icon {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135d, #d1fae5 0%, #a7f3d0 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 900;
+    color: #059669;
+  }
+
+  /* ===== CTA SECTION ===== */
+  .cta-section {
+    display: flex;
+    gap: 10px;
+  }
+
+  .cta-button-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--whatsapp-gradient);
+    color: white;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+    transition: all 0.3s var(--transition-smooth);
+    border: none;
+  }
+
+  .cta-button-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+  }
+
+  .cta-button-main:active {
+    transform: translateY(0);
+  }
+
+  .whatsapp-icon {
+    font-size: 20px;
+  }
+
+  .arrow-icon {
+    font-size: 18px;
+  }
+
+  .share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--surface-light);
+    color: var(--text-primary);
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: all 0.3s var(--transition-smooth);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .share-button:hover {
+    background: var(--surface-gray);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .share-icon {
+    font-size: 16px;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-it-works {
+    background: var(--surface-light);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .title-decoration {
+    width: 4px;
+    height: 20px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+  }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .step-card {
+    background: var(--surface-gray);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    border: 1px solid var(--border-light);
+    transition: all 0.3s var(--transition-smooth);
+  }
+
+  .step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: #cbd5e1;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .step-number {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-gradient);
+    color: white;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .step-header h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .step-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-left: 44px;
+  }
+
+  /* ===== PRODUCT DESCRIPTION ===== */
+  .product-description {
+    background: var(--surface-light);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .description-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  /* ===== FEATURES ===== */
+  .product-features {
+    background: var(--surface-light);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: var(--surface-gray);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+  }
+
+  .feature-item:hover {
+    background: #f1f5f9;
+    transform: translateX(4px);
+  }
+
+  .feature-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 900;
+    color: #059669;
+  }
+
+  .feature-item span {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 500;
+    padding-top: 4px;
+  }
+
+  /* ===== DELIVERY CARD ===== */
+  .delivery-card {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+  }
+
+  .delivery-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 24px;
+  }
+
+  .delivery-content h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1e40af;
+    margin-bottom: 10px;
+  }
+
+  .delivery-content p {
+    font-size: 13px;
+    color: #1e40af;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .delivery-content strong {
+    font-weight: 700;
+  }
+
+  .delivery-highlight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #bfdbfe;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e40af;
+  }
+
+  /* ===== TRUST SECTION ===== */
+  .trust-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .trust-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: var(--surface-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    transition: all 0.3s var(--transition-smooth);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .trust-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .trust-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: var(--primary-gradient);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 24px;
+  }
+
+  .trust-text h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .trust-text p {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* ===== MOBILE STICKY CTA ===== */
+  .mobile-sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-light);
+    padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    display: block;
+  }
+
+  .sticky-cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .sticky-price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sticky-deposit {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .sticky-daily {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .sticky-whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--whatsapp-gradient);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+    transition: all 0.3s var(--transition-smooth);
+    flex-shrink: 0;
+  }
+
+  .sticky-whatsapp-btn:active {
+    transform: scale(0.96);
+  }
+
+  /* ===== SHARE MODAL ===== */
+  .share-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .share-modal.active {
+    display: flex;
+  }
+
+  .share-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .share-modal-content {
+    position: relative;
+    background: var(--surface-light);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: var(--shadow-xl);
+    animation: modalSlideUp 0.3s var(--transition-smooth);
+  }
+
+  @keyframes modalSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .share-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .share-modal-header h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .close-modal {
+    background: var(--surface-gray);
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
+  .close-modal:hover {
+    background: #e2e8f0;
+    color: var(--text-primary);
+  }
+
+  .close-icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .share-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .share-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s var(--transition-smooth);
+    cursor: pointer;
+    background: var(--surface-light);
+  }
+
+  .share-option:hover {
+    background: var(--surface-gray);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .share-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+
+  .share-icon.whatsapp {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  }
+
+  .share-icon.facebook {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  }
+
+  .share-icon.twitter {
+    background: linear-gradient(135deg, #dbeafe 0%, #bae6fd 100%);
+  }
+
+  .share-icon.copy {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--text-primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.4s var(--transition-smooth);
+    z-index: 3000;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .toast-icon {
+    font-size: 16px;
+  }
+
+  /* ===== RESPONSIVE TABLET ===== */
+  @media (min-width: 640px) {
+    .product-page-container {
+      padding: 20px 20px 120px;
+    }
+    body{
+    width:90vw!important;
+
+    }
+
+    .product-grid {
+      gap: 24px;
+    }
+
+    .product-title {
+      font-size: 28px;
+    }
+
+    .pricing-card-modern {
+      padding: 28px;
+    }
+
+    .amount {
+      font-size: 32px;
+    }
+
+    .steps-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .trust-badges-mobile {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+  }
+
+  /* ===== RESPONSIVE DESKTOP ===== */
+  @media (min-width: 768px) {
+    .product-page-container {
+      padding: 32px 24px;
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .trust-badges-mobile {
+      display: none;
+    }
+
+    .mobile-sticky-cta {
+      display: none;
+    }
+
+    .desktop-only {
+      display: block;
+    }
+
+    .product-title {
+      font-size: 32px;
+    }
+
+    .pricing-header h2 {
+      font-size: 22px;
+    }
+
+    .amount {
+      font-size: 36px;
+    }
+
+    .image-carousel {
+      position: sticky;
+      top: 24px;
+    }
+
+    .delivery-card {
+      padding: 24px;
+    }
+
+    .trust-section {
+      grid-template-columns: 1fr;
+    }
+
+    .carousel-btn {
+      width: 48px;
+      height: 48px;
+    }
+
+    .carousel-btn .arrow-icon {
+      font-size: 36px;
+    }
+
+    .product-image {
+      padding: 32px;
+    }
+
+    body{
+    width:90vw!important;
+
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: 560px 1fr;
+      gap: 48px;
+    }
+
+    .details-section {
+      gap: 24px;
+    }
+    body{
+    width:100vw!important;
+
+    }
+
+    .steps-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .desktop-only {
+      display: none;
+    }
+  }
+</style>
+
+
+
+
+<script>
+  // Auto-Carousel with manual controls
+  const carouselImages = document.querySelectorAll('.carousel-image');
+  const indicators = document.querySelectorAll('.indicator');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+  
+  let currentIndex = 0;
+  let autoplayInterval: number | null = null;
+
+  function showImage(index: number) {
+    carouselImages.forEach((img, i) => {
+      img.classList.toggle('active', i === index);
+    });
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % carouselImages.length;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+    showImage(currentIndex);
+  }
+
+  function startAutoplay() {
+    if (carouselImages.length > 1) {
+      autoplayInterval = window.setInterval(nextImage, 3000); // Auto-advance every 3 seconds
+    }
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Manual controls
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevImage();
+      resetAutoplay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      nextImage();
+      resetAutoplay();
+    });
+  }
+
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      currentIndex = index;
+      showImage(currentIndex);
+      resetAutoplay();
+    });
+  });
+
+  // Pause on hover, resume on leave
+  const carousel = document.querySelector('.image-carousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+  }
+
+  // Start autoplay on page load
+  startAutoplay();
+
+  // Share Modal
+  const shareBtn = document.getElementById('shareBtn');
+  const shareModal = document.getElementById('shareModal');
+  const closeModal = document.getElementById('closeModal');
+  const copyLinkBtn = document.getElementById('copyLink');
+  const toast = document.getElementById('toast');
+  const modalOverlay = document.querySelector('.share-modal-overlay');
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      shareModal?.classList.add('active');
+    });
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener('click', () => {
+      shareModal?.classList.remove('active');
+    });
+  }
+
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', () => {
+      shareModal?.classList.remove('active');
+    });
+  }
+
+  // Share Options
+  const whatsappShare = document.getElementById('whatsappShare');
+  const facebookShare = document.getElementById('facebookShare');
+  const twitterShare = document.getElementById('twitterShare');
+
+  const pageUrl = encodeURIComponent(window.location.href);
+  const pageTitle = encodeURIComponent(document.title);
+
+  if (whatsappShare) {
+    whatsappShare.setAttribute('href', `https://wa.me/?text=${pageTitle}%20${pageUrl}`);
+  }
+
+  if (facebookShare) {
+    facebookShare.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`);
+  }
+
+  if (twitterShare) {
+    twitterShare.setAttribute('href', `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`);
+  }
+
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast?.classList.add('show');
+        setTimeout(() => {
+          toast?.classList.remove('show');
+        }, 3000);
+        shareModal?.classList.remove('active');
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  }
+</script>
+
+
+
+</body>
+</html>
+
+
