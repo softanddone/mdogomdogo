@@ -28,26 +28,24 @@ const productList = [currentProduct];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-<title>{currentProduct.name} | Lipa Mdogo Mdogo Kenya</title>
+  <title>{currentProduct.name + " | Lipa Mdogo Mdogo Kenya"}</title>
 
-<meta name="description" content={`Buy ${currentProduct.name} on Lipa Mdogo Mdogo in Nairobi & Kiambu. Pay slowly, own it easily. Home delivery available.`} />
+  <meta name="description" content={`Buy ${currentProduct.name} on Lipa Mdogo Mdogo in Nairobi & Kiambu. Pay slowly, own it easily. Home delivery available.`} />
 
-<link rel="canonical" href={`https://mdogomdogodeals.co.ke/${currentProduct.slug}`} />
+  <link rel="canonical" href={`https://mdogomdogodeals.co.ke/${currentProduct.slug}`} />
 
-<!-- Open Graph -->
-<meta property="og:type" content="product" />
-<meta property="og:title" content={`${currentProduct.name} | Lipa Mdogo Mdogo Kenya`} />
-<meta property="og:description" content={`Buy ${currentProduct.name} on Lipa Mdogo Mdogo. Pay slowly, own it easily.`} />
-<meta property="og:image" content={currentProduct.images[0]} />
-<meta property="og:url" content={`https://mdogomdogodeals.co.ke/${currentProduct.slug}`} />
+  <!-- Open Graph -->
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content={`${currentProduct.name} | Lipa Mdogo Mdogo Kenya`} />
+  <meta property="og:description" content={`Buy ${currentProduct.name} on Lipa Mdogo Mdogo. Pay slowly, own it easily.`} />
+  <meta property="og:image" content={currentProduct.images[0]} />
+  <meta property="og:url" content={`https://mdogomdogodeals.co.ke/${currentProduct.slug}`} />
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={`${currentProduct.name} | Lipa Mdogo Mdogo Kenya`} />
-<meta name="twitter:description" content={`Buy ${currentProduct.name} on Lipa Mdogo Mdogo. Pay slowly, own it easily.`} />
-<meta name="twitter:image" content={currentProduct.images[0]} />
-
-
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${currentProduct.name} | Lipa Mdogo Mdogo Kenya`} />
+  <meta name="twitter:description" content={`Buy ${currentProduct.name} on Lipa Mdogo Mdogo. Pay slowly, own it easily.`} />
+  <meta name="twitter:image" content={currentProduct.images[0]} />
 </head>
 <body>
   
