@@ -374,497 +374,601 @@ const products = [
 ];
 ---
 
-<div class="product-slider-container">
-  <div class="slider-header">
-    <h2 class="slider-title">Featured Phones</h2>
-    <div class="slider-controls">
-      <button class="slider-btn prev-btn" aria-label="Previous">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 18l-6-6 6-6"/>
-        </svg>
-      </button>
-      <button class="slider-btn next-btn" aria-label="Next">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9 18l6-6-6-6"/>
-        </svg>
-      </button>
+<!-- 
+  IMPORTANT: This component is fully self-contained.
+  All class names are prefixed with "fps__" (featured-phones-slider)
+  to prevent any CSS collisions with parent or sibling components.
+  The outer wrapper uses position:relative and contains all overflow internally.
+-->
+<section class="fps__section">
+  <div class="fps__inner">
+    <div class="fps__header">
+      <h2 class="fps__title">Featured Phones</h2>
+      <div class="fps__controls">
+        <button class="fps__btn fps__btn--prev" aria-label="Previous slide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button class="fps__btn fps__btn--next" aria-label="Next slide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="slider-wrapper">
-    <div class="product-slider">
-      {products.map((product) => (
-        <div class="product-card">
-          <div class="product-image-wrapper">
-            <img 
-              src={product.images[0]} 
-              alt={product.name}
-              class="product-image"
-              loading="lazy"
-            />
-            <div class="product-badge">NEW</div>
-          </div>
-          
-          <div class="product-info">
-            <h3 class="product-name">{product.name}</h3>
-            <p class="product-storage">{product.storage}</p>
-            
-            <div class="product-pricing">
-              <div class="price-item">
-                <span class="price-label">Deposit</span>
-                <span class="price-value">KSh {product.deposit.toLocaleString()}</span>
-              </div>
-              <div class="price-item">
-                <span class="price-label">Daily</span>
-                <span class="price-value">KSh {product.dailyPayment}/day</span>
-              </div>
+    <!-- 
+      fps__viewport: the visible window — overflow:hidden is set here only,
+      keeping it isolated from ancestor layout.
+    -->
+    <div class="fps__viewport">
+      <div class="fps__track" data-fps-track>
+        {products.map((product) => (
+          <div class="fps__card" data-fps-card>
+            <div class="fps__img-wrap">
+              <img
+                src={product.images[0]}
+                alt={product.name}
+                class="fps__img"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="fps__badge">NEW</span>
             </div>
 
-            <p class="product-description">{product.description}</p>
+            <div class="fps__body">
+              <div>
+                <h3 class="fps__name">{product.name}</h3>
+                <p class="fps__storage">{product.storage}</p>
+              </div>
 
-            <div class="product-features">
-              {product.features.slice(0, 3).map((feature) => (
-                <div class="feature-item">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 6L9 17l-5-5"/>
-                  </svg>
-                  <span>{feature}</span>
+              <div class="fps__pricing">
+                <div class="fps__price-cell">
+                  <span class="fps__price-label">Deposit</span>
+                  <span class="fps__price-val">KSh {product.deposit.toLocaleString()}</span>
                 </div>
-              ))}
+                <div class="fps__price-cell">
+                  <span class="fps__price-label">Daily</span>
+                  <span class="fps__price-val">KSh {product.dailyPayment}/day</span>
+                </div>
+              </div>
+
+              <p class="fps__desc">{product.description}</p>
+
+              <ul class="fps__features">
+                {product.features.slice(0, 3).map((feature) => (
+                  <li class="fps__feature">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={`https://wa.me/${product.whatsappNumber}?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
+                class="fps__cta"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Order via WhatsApp
+              </a>
             </div>
-
-            <a 
-              href={`https://wa.me/${product.whatsappNumber}?text=Hi, I'm interested in ${encodeURIComponent(product.name)}`}
-              class="cta-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Order via WhatsApp
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-              </svg>
-            </a>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
 
-  <div class="slider-dots"></div>
-</div>
+    <div class="fps__dots" data-fps-dots></div>
+  </div>
+</section>
 
 <style>
-  .product-slider-container {
+  /* ============================================================
+     ALL STYLES SCOPED UNDER .fps__ PREFIX
+     No global resets. No bare element selectors.
+     Fully isolated — safe to use alongside any other component.
+     ============================================================ */
+
+  .fps__section {
+    /* Block-level container — does NOT set overflow on itself.
+       Overflow is contained within fps__viewport only. */
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .fps__inner {
     max-width: 1400px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
-    overflow: hidden;
+    box-sizing: border-box;
+    /* No overflow property here — this lets the page scroll normally */
   }
 
-  .slider-header {
+  /* ---- Header ---- */
+  .fps__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
   }
 
-  .slider-title {
+  .fps__title {
     font-size: 2rem;
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
+    line-height: 1.2;
   }
 
-  .slider-controls {
+  .fps__controls {
     display: flex;
     gap: 0.5rem;
   }
 
-  .slider-btn {
-    width: 48px;
-    height: 48px;
+  .fps__btn {
+    width: 44px;
+    height: 44px;
     border: none;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.25s ease, transform 0.2s ease, background 0.2s ease;
     color: #333;
+    flex-shrink: 0;
   }
 
-  .slider-btn:hover {
-    background: #f8f9fa;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  .fps__btn:hover {
+    background: #f4f4f4;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
     transform: translateY(-2px);
   }
 
-  .slider-btn:active {
+  .fps__btn:active {
     transform: translateY(0);
   }
 
-  .slider-wrapper {
-    position: relative;
+  /* ---- Viewport: THE ONLY overflow:hidden in this component ---- */
+  .fps__viewport {
+    /* This is the clipping window. Period. Nothing else clips. */
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .product-slider {
+  /* ---- Track: the scrollable row of cards ---- */
+  .fps__track {
     display: flex;
-    gap: 1.5rem;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 1.25rem;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    /* No width set here — width is driven by card sizes */
+    will-change: transform;
+    align-items: stretch;
   }
 
-  .product-card {
-    min-width: 320px;
-    max-width: 320px;
-    background: #fff;
+  /* ---- Card ---- */
+  .fps__card {
+    /*
+      flex-shrink: 0 is critical — prevents cards from collapsing.
+      Width is set via JS to match exactly one viewport width on mobile
+      or a fixed 300px on desktop, ensuring no partial cards bleed out.
+    */
+    flex-shrink: 0;
+    width: 300px; /* desktop default, overridden by JS on mobile */
+    background: #ffffff;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
   }
 
-  .product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  .fps__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.13);
   }
 
-  .product-image-wrapper {
+  /* ---- Image ---- */
+  .fps__img-wrap {
     position: relative;
     width: 100%;
-    height: 280px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    height: 260px;
+    background: linear-gradient(135deg, #f0f2f5 0%, #d4dde8 100%);
     overflow: hidden;
+    flex-shrink: 0;
   }
 
-  .product-image {
+  .fps__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     transition: transform 0.5s ease;
   }
 
-  .product-card:hover .product-image {
-    transform: scale(1.05);
+  .fps__card:hover .fps__img {
+    transform: scale(1.04);
   }
 
-  .product-badge {
+  .fps__badge {
     position: absolute;
     top: 12px;
     right: 12px;
     background: #10b981;
-    color: white;
-    padding: 0.375rem 0.75rem;
+    color: #fff;
+    padding: 0.3rem 0.65rem;
     border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
   }
 
-  .product-info {
-    padding: 1.5rem;
+  /* ---- Card body ---- */
+  .fps__body {
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.875rem;
     flex: 1;
   }
 
-  .product-name {
-    font-size: 1.25rem;
+  .fps__name {
+    font-size: 1.1rem;
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
     line-height: 1.3;
   }
 
-  .product-storage {
-    font-size: 0.875rem;
+  .fps__storage {
+    font-size: 0.8rem;
     color: #6b7280;
-    margin: 0;
+    margin: 0.2rem 0 0;
   }
 
-  .product-pricing {
+  /* ---- Pricing grid ---- */
+  .fps__pricing {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 0.75rem;
     background: #f9fafb;
-    border-radius: 12px;
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
   }
 
-  .price-item {
+  .fps__price-cell {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.2rem;
   }
 
-  .price-label {
-    font-size: 0.75rem;
-    color: #6b7280;
+  .fps__price-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #9ca3af;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-weight: 600;
   }
 
-  .price-value {
-    font-size: 1rem;
+  .fps__price-val {
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #111827;
   }
 
-  .product-description {
-    font-size: 0.875rem;
+  /* ---- Description ---- */
+  .fps__desc {
+    font-size: 0.8rem;
     color: #4b5563;
-    line-height: 1.6;
+    line-height: 1.55;
     margin: 0;
   }
 
-  .product-features {
+  /* ---- Features list ---- */
+  .fps__features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
-  .feature-item {
+  .fps__feature {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
-    color: #4b5563;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-size: 0.775rem;
+    color: #374151;
+    line-height: 1.4;
   }
 
-  .feature-item svg {
+  .fps__feature svg {
     flex-shrink: 0;
     color: #10b981;
+    margin-top: 1px;
   }
 
-  .cta-button {
+  /* ---- CTA button ---- */
+  .fps__cta {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    padding: 0.875rem 1.5rem;
+    padding: 0.8rem 1rem;
     background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-    color: white;
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 0.9375rem;
-    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     margin-top: auto;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+    box-sizing: border-box;
   }
 
-  .cta-button:hover {
+  .fps__cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.38);
   }
 
-  .cta-button svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .slider-dots {
+  /* ---- Dots ---- */
+  .fps__dots {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
+    gap: 0.45rem;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
   }
 
-  .slider-dot {
+  .fps__dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: #d1d5db;
+    border: none;
+    padding: 0;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, width 0.3s ease, border-radius 0.3s ease;
+    flex-shrink: 0;
   }
 
-  .slider-dot.active {
+  .fps__dot.fps__dot--active {
     background: #10b981;
-    width: 24px;
+    width: 22px;
     border-radius: 4px;
   }
 
+  /* ---- Responsive ---- */
   @media (max-width: 768px) {
-    .product-slider-container {
+    .fps__inner {
       padding: 2rem 1rem;
     }
 
-    .slider-title {
-      font-size: 1.5rem;
+    .fps__title {
+      font-size: 1.4rem;
     }
 
-    .slider-controls {
+    /* Hide arrow buttons on mobile — swipe is the primary nav */
+    .fps__controls {
       display: none;
     }
 
-    .product-card {
-      min-width: 280px;
-      max-width: 280px;
-    }
-
-    .product-image-wrapper {
-      height: 240px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .product-card {
-      min-width: calc(100vw - 3rem);
-      max-width: calc(100vw - 3rem);
+    .fps__img-wrap {
+      height: 220px;
     }
   }
 </style>
 
 <script>
-  class ProductSlider {
-    constructor() {
-      this.slider = document.querySelector('.product-slider');
-      this.cards = document.querySelectorAll('.product-card');
-      this.prevBtn = document.querySelector('.prev-btn');
-      this.nextBtn = document.querySelector('.next-btn');
-      this.dotsContainer = document.querySelector('.slider-dots');
-      
-      this.currentIndex = 0;
-      this.cardWidth = 320 + 24; // card width + gap
-      this.autoPlayInterval = null;
-      this.autoPlayDelay = 4000;
-      
-      this.init();
+  // Namespaced to avoid any collision with other slider scripts on the page
+  (function fpsSliderInit() {
+    const section = document.querySelector('.fps__section');
+    if (!section) return;
+
+    const track      = section.querySelector('[data-fps-track]');
+    const cards      = Array.from(section.querySelectorAll('[data-fps-card]'));
+    const prevBtn    = section.querySelector('.fps__btn--prev');
+    const nextBtn    = section.querySelector('.fps__btn--next');
+    const dotsWrap   = section.querySelector('[data-fps-dots]');
+    const viewport   = section.querySelector('.fps__viewport');
+
+    if (!track || !cards.length || !dotsWrap || !viewport) return;
+
+    const GAP           = 20;   // px — matches CSS gap (1.25rem ~ 20px)
+    const AUTO_DELAY    = 4000; // ms
+    const DESKTOP_W     = 300;  // px card width on desktop
+
+    let currentIndex   = 0;
+    let autoPlayTimer  = null;
+    let isMobile       = false;
+
+    // ------------------------------------------------------------------
+    // Card sizing: on mobile each card = viewport width (minus inner padding).
+    // On desktop cards are fixed 300px.
+    // ------------------------------------------------------------------
+    function getCardWidth() {
+      return isMobile ? viewport.offsetWidth : DESKTOP_W;
     }
 
-    init() {
-      this.createDots();
-      this.attachEventListeners();
-      this.startAutoPlay();
-      this.updateSliderPosition();
+    function getStep() {
+      // Mobile: 1 card at a time. Desktop: 1 card at a time.
+      return 1;
     }
 
-    createDots() {
-      const visibleCards = this.getVisibleCards();
-      const totalDots = Math.ceil(this.cards.length / visibleCards);
-      
-      for (let i = 0; i < totalDots; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('slider-dot');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => this.goToSlide(i * visibleCards));
-        this.dotsContainer.appendChild(dot);
-      }
+    function getMaxIndex() {
+      return Math.max(0, cards.length - getVisibleCount());
     }
 
-    getVisibleCards() {
-      const containerWidth = this.slider.parentElement.offsetWidth;
-      return Math.floor(containerWidth / this.cardWidth) || 1;
+    function getVisibleCount() {
+      if (isMobile) return 1;
+      const vw = viewport.offsetWidth;
+      return Math.max(1, Math.floor((vw + GAP) / (DESKTOP_W + GAP)));
     }
 
-    attachEventListeners() {
-      this.prevBtn?.addEventListener('click', () => this.prev());
-      this.nextBtn?.addEventListener('click', () => this.next());
-      
-      // Touch events for mobile
-      let touchStartX = 0;
-      let touchEndX = 0;
-      
-      this.slider.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        this.stopAutoPlay();
-      });
-      
-      this.slider.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        this.handleSwipe(touchStartX, touchEndX);
-        this.startAutoPlay();
-      });
-
-      // Pause on hover
-      this.slider.addEventListener('mouseenter', () => this.stopAutoPlay());
-      this.slider.addEventListener('mouseleave', () => this.startAutoPlay());
-
-      // Handle window resize
-      window.addEventListener('resize', () => this.updateSliderPosition());
-    }
-
-    handleSwipe(startX, endX) {
-      const diff = startX - endX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          this.next();
-        } else {
-          this.prev();
-        }
-      }
-    }
-
-    next() {
-      const visibleCards = this.getVisibleCards();
-      const maxIndex = Math.max(0, this.cards.length - visibleCards);
-      
-      this.currentIndex = Math.min(this.currentIndex + 1, maxIndex);
-      this.updateSliderPosition();
-    }
-
-    prev() {
-      this.currentIndex = Math.max(this.currentIndex - 1, 0);
-      this.updateSliderPosition();
-    }
-
-    goToSlide(index) {
-      this.currentIndex = index;
-      this.updateSliderPosition();
-      this.stopAutoPlay();
-      this.startAutoPlay();
-    }
-
-    updateSliderPosition() {
-      const offset = -this.currentIndex * this.cardWidth;
-      this.slider.style.transform = `translateX(${offset}px)`;
-      this.updateDots();
-    }
-
-    updateDots() {
-      const dots = this.dotsContainer.querySelectorAll('.slider-dot');
-      const visibleCards = this.getVisibleCards();
-      const activeDot = Math.floor(this.currentIndex / visibleCards);
-      
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === activeDot);
+    function sizeCards() {
+      const w = getCardWidth();
+      cards.forEach(card => {
+        card.style.width = w + 'px';
+        card.style.minWidth = w + 'px';
       });
     }
 
-    startAutoPlay() {
-      this.stopAutoPlay();
-      this.autoPlayInterval = setInterval(() => {
-        const visibleCards = this.getVisibleCards();
-        const maxIndex = Math.max(0, this.cards.length - visibleCards);
-        
-        if (this.currentIndex >= maxIndex) {
-          this.currentIndex = 0;
-        } else {
-          this.next();
-        }
-      }, this.autoPlayDelay);
+    function detectMobile() {
+      isMobile = window.innerWidth <= 768;
     }
 
-    stopAutoPlay() {
-      if (this.autoPlayInterval) {
-        clearInterval(this.autoPlayInterval);
-        this.autoPlayInterval = null;
+    // ------------------------------------------------------------------
+    // Dots
+    // ------------------------------------------------------------------
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      const total = cards.length;
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'fps__dot';
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => {
+          goTo(i);
+          resetAutoplay();
+        });
+        dotsWrap.appendChild(dot);
+      }
+      syncDots();
+    }
+
+    function syncDots() {
+      const dots = dotsWrap.querySelectorAll('.fps__dot');
+      dots.forEach((d, i) => {
+        d.classList.toggle('fps__dot--active', i === currentIndex);
+      });
+    }
+
+    // ------------------------------------------------------------------
+    // Movement
+    // ------------------------------------------------------------------
+    function goTo(index) {
+      const max = getMaxIndex();
+      currentIndex = Math.max(0, Math.min(index, max));
+      const cardW = getCardWidth();
+      const offset = currentIndex * (cardW + GAP);
+      track.style.transform = `translateX(-${offset}px)`;
+      syncDots();
+    }
+
+    function next() {
+      const max = getMaxIndex();
+      goTo(currentIndex >= max ? 0 : currentIndex + 1);
+    }
+
+    function prev() {
+      const max = getMaxIndex();
+      goTo(currentIndex <= 0 ? max : currentIndex - 1);
+    }
+
+    // ------------------------------------------------------------------
+    // Autoplay
+    // ------------------------------------------------------------------
+    function startAutoplay() {
+      stopAutoplay();
+      autoPlayTimer = setInterval(next, AUTO_DELAY);
+    }
+
+    function stopAutoplay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
       }
     }
-  }
 
-  // Initialize slider when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => new ProductSlider());
-  } else {
-    new ProductSlider();
-  }
+    function resetAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    // ------------------------------------------------------------------
+    // Touch / swipe
+    // ------------------------------------------------------------------
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isSwiping   = false;
+
+    track.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
+      isSwiping = true;
+      stopAutoplay();
+    }, { passive: true });
+
+    track.addEventListener('touchmove', (e) => {
+      if (!isSwiping) return;
+      // If scrolling vertically more than horizontally, cancel swipe to let page scroll
+      const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      if (dy > dx) {
+        isSwiping = false;
+      }
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      if (!isSwiping) { startAutoplay(); return; }
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) {
+        dx < 0 ? next() : prev();
+      }
+      isSwiping = false;
+      startAutoplay();
+    }, { passive: true });
+
+    // ------------------------------------------------------------------
+    // Button events
+    // ------------------------------------------------------------------
+    prevBtn?.addEventListener('click', () => { prev(); resetAutoplay(); });
+    nextBtn?.addEventListener('click', () => { next(); resetAutoplay(); });
+
+    // Pause autoplay on hover (desktop)
+    viewport.addEventListener('mouseenter', stopAutoplay);
+    viewport.addEventListener('mouseleave', startAutoplay);
+
+    // ------------------------------------------------------------------
+    // Resize handling — debounced
+    // ------------------------------------------------------------------
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        detectMobile();
+        sizeCards();
+        // Re-clamp currentIndex in case visible count changed
+        const max = getMaxIndex();
+        if (currentIndex > max) currentIndex = max;
+        goTo(currentIndex);
+        buildDots();
+      }, 150);
+    });
+
+    // ------------------------------------------------------------------
+    // Init
+    // ------------------------------------------------------------------
+    detectMobile();
+    sizeCards();
+    buildDots();
+    goTo(0);
+    startAutoplay();
+  })();
 </script>
