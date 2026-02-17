@@ -98,7 +98,7 @@ export const products = [
 
   {
   id: "3",
-  name: "itel S256 Ultra",
+  name: "itel S26 Ultra",
   slug:"itels26offer",
   storage: "256GB",
   images: [
