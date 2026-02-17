@@ -50,27 +50,7 @@ const defaultProducts: Product[] = [
   },
 
 
-  //    {
-  //   id: "7",
-  //   name: "Samsung Galaxy A05",
-  //   slug:"samsunga05offer",
-  //   storage: "128GB/64GB",
-  //   images: ["/phones/s3.jpg", "/phones/s2.jpg", "/phones/s1.jpg"],
-  //   deposit: 2500,
-  //   dailyPayment: 85,
-  //   paymentDays: 90,
-  //   whatsappNumber: "+254720202167",
-  //   description:
-  //     "Brand new — sealed box with charger, cable, and all original accessories",
-  //   features: [
-  //     "Clean Samsung One UI experience",
-  //     "Storage: 128GB/64GB ROM / 4GB RAM",
-  //     "Camera: 50MP main rear camera",
-  //     "Large 5000mAh battery",
-  //     "Brand new (not refurb/used)",
-  //     "Original Samsung accessories included",
-  //   ],
-  // },
+  
   {
     id: "2",
     name: "Tecno Pop 10",
@@ -360,29 +340,7 @@ const defaultProducts: Product[] = [
     ],
   },
 
-  
 
-  // {
-  //   id: "8",
-  //   name: "Samsung Galaxy A06",
-  //   slug:"samsunga06offer",
-  //   storage: "128GB",
-  //   images: ["/phones/a61.jfif", "/phones/a62.jpg", "/phones/a63.jpg"],
-  //   deposit: 3600,
-  //   dailyPayment: 95,
-  //   paymentDays: 90,
-  //   whatsappNumber: "+254720202167",
-  //   description:
-  //     "Brand new — sealed box with charger, cable, and all original accessories",
-  //   features: [
-  //     "Modern Samsung design",
-  //     "Storage: 128GB ROM / 4GB RAM",
-  //     "Camera: 50MP AI rear camera",
-  //     "Long-lasting battery performance",
-  //     "Brand new (not refurb/used)",
-  //     "Original Samsung accessories included",
-  //   ],
-  // },
 
   
   {
@@ -571,8 +529,6 @@ const defaultProducts: Product[] = [
   ],
 }
 
-
-  
 ];
 
 const productList = products || defaultProducts;
@@ -1656,6 +1612,21 @@ const productList = products || defaultProducts;
 </style>
 
 <script>
+
+
+
+
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  document.addEventListener("dragstart", e => {
+    if (e.target.tagName === "IMG") e.preventDefault();
+  });
+
+
+
+
+
+
   // Share Modal Management
   let currentShareData: {
     productName: string;
