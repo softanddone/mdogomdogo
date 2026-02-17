@@ -155,7 +155,7 @@ export const products = [
     storage: "256GB",
     images: [
       "/phones/camon1.jpeg",
-      "/phones/camon2.jpeg",
+      // "/phones/camon2.jpeg",
       "/phones/camon3.jpeg",
       "/phones/camon4.jpg",
     ],
