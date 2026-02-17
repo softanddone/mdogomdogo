@@ -1,27 +1,54 @@
 export const products = [
 
-
-     {
-    id: "7",
-    name: "Samsung Galaxy A05",
-    slug:"samsunga05offer",
-    storage: "128GB/64GB",
-    images: ["/phones/s1.jpg", "/phones/s2.jpg", "/phones/s3.jpg"],
-    deposit: 2500,
-    dailyPayment: 85,
+  {
+    id: "9",
+    name: "Samsung Galaxy A07",
+    slug:"samsunga07offer",
+    storage: "128GB",
+    images: [
+      "/phones/aa1.jpg",
+      "/phones/aa2.jpg",
+      "/phones/aa3.jpg",
+      "/phones/aa4.jpg",
+    ],
+    deposit: 3300,
+    dailyPayment: 89,
     paymentDays: 90,
     whatsappNumber: "+254720202167",
     description:
       "Brand new — sealed box with charger, cable, and all original accessories",
     features: [
-      "Clean Samsung One UI experience",
-      "Storage: 128GB/64GB ROM / 4GB RAM",
-      "Camera: 50MP main rear camera",
-      "Large 5000mAh battery",
+      "Refined Samsung Galaxy design",
+      "Storage: 64GB ROM / 6GB RAM",
+      "Camera: 50MP AI rear camera",
+      "Large battery for all-day use",
       "Brand new (not refurb/used)",
       "Original Samsung accessories included",
     ],
   },
+
+
+  //    {
+  //   id: "7",
+  //   name: "Samsung Galaxy A05",
+  //   slug:"samsunga05offer",
+  //   storage: "128GB/64GB",
+  //   images: ["/phones/s3.jpg", "/phones/s2.jpg", "/phones/s1.jpg"],
+  //   deposit: 2500,
+  //   dailyPayment: 85,
+  //   paymentDays: 90,
+  //   whatsappNumber: "+254720202167",
+  //   description:
+  //     "Brand new — sealed box with charger, cable, and all original accessories",
+  //   features: [
+  //     "Clean Samsung One UI experience",
+  //     "Storage: 128GB/64GB ROM / 4GB RAM",
+  //     "Camera: 50MP main rear camera",
+  //     "Large 5000mAh battery",
+  //     "Brand new (not refurb/used)",
+  //     "Original Samsung accessories included",
+  //   ],
+  // },
   {
     id: "2",
     name: "Tecno Pop 10",
@@ -48,7 +75,7 @@ export const products = [
 
   {
     id: "5",
-    name: "itel A100",
+    name: "itel City 100",
     slug:"itela100offer",
     storage: "128GB",
     images: ["/phones/wa1.jpeg", "/phones/wa2.jpeg", "/phones/wa3.jpeg"],
@@ -313,55 +340,29 @@ export const products = [
 
   
 
-  {
-    id: "8",
-    name: "Samsung Galaxy A06",
-    slug:"samsunga06offer",
-    storage: "128GB",
-    images: ["/phones/a61.jfif", "/phones/a62.jpg", "/phones/a63.jpg"],
-    deposit: 3600,
-    dailyPayment: 95,
-    paymentDays: 90,
-    whatsappNumber: "+254720202167",
-    description:
-      "Brand new — sealed box with charger, cable, and all original accessories",
-    features: [
-      "Modern Samsung design",
-      "Storage: 128GB ROM / 4GB RAM",
-      "Camera: 50MP AI rear camera",
-      "Long-lasting battery performance",
-      "Brand new (not refurb/used)",
-      "Original Samsung accessories included",
-    ],
-  },
+  // {
+  //   id: "8",
+  //   name: "Samsung Galaxy A06",
+  //   slug:"samsunga06offer",
+  //   storage: "128GB",
+  //   images: ["/phones/a61.jfif", "/phones/a62.jpg", "/phones/a63.jpg"],
+  //   deposit: 3600,
+  //   dailyPayment: 95,
+  //   paymentDays: 90,
+  //   whatsappNumber: "+254720202167",
+  //   description:
+  //     "Brand new — sealed box with charger, cable, and all original accessories",
+  //   features: [
+  //     "Modern Samsung design",
+  //     "Storage: 128GB ROM / 4GB RAM",
+  //     "Camera: 50MP AI rear camera",
+  //     "Long-lasting battery performance",
+  //     "Brand new (not refurb/used)",
+  //     "Original Samsung accessories included",
+  //   ],
+  // },
 
-  {
-    id: "9",
-    name: "Samsung Galaxy A07",
-    slug:"samsunga07offer",
-    storage: "128GB",
-    images: [
-      "/phones/aa1.jpg",
-      "/phones/aa2.jpg",
-      "/phones/aa3.jpg",
-      "/phones/aa4.jpg",
-    ],
-    deposit: 3900,
-    dailyPayment: 100,
-    paymentDays: 90,
-    whatsappNumber: "+254720202167",
-    description:
-      "Brand new — sealed box with charger, cable, and all original accessories",
-    features: [
-      "Refined Samsung Galaxy design",
-      "Storage: 128GB ROM / 6GB RAM",
-      "Camera: 50MP AI rear camera",
-      "Large battery for all-day use",
-      "Brand new (not refurb/used)",
-      "Original Samsung accessories included",
-    ],
-  },
-
+  
   {
     id: "10",
     name: "Samsung Galaxy A16",
@@ -472,5 +473,83 @@ export const products = [
       "Complete accessories included",
     ],
   },
+
+
+
+  {
+  id: "5",
+  name: "Oppo A3x",
+  slug: "oppoa3xoffer",
+  storage: "64GB",
+  images: ["/phones/oppoa3x1.webp", "/phones/oppoa3x2.webp", "/phones/oppoa3x3.jpg"],
+  deposit: 2900,
+  dailyPayment: 80,
+  paymentDays: 90,
+  whatsappNumber: "+254720202167",
+  description:
+    "Brand new — sealed box with protective case, original charger, and full accessories included",
+  features: [
+    "6.67-inch HD+ display with smooth refresh rate",
+    "Storage: 64GB ROM / 4GB RAM",
+    "50MP AI rear camera for clear photos",
+    "5000mAh long-lasting battery",
+    "Fast charging support",
+    "Warranty: 1 year",
+    "Brand new (not refurbished or used)",
+    "Complete accessories included",
+  ],
+},
+
+{
+  id: "6",
+  name: "Oppo A5",
+  slug: "oppoa5xoffer",
+  storage: "128GB",
+  images: ["/phones/oppoa5x1.jpg", "/phones/oppoa5x2.jpg", "/phones/oppoa5x3.jpg"],
+  deposit: 5000,
+  dailyPayment: 128,
+  paymentDays: 90,
+  whatsappNumber: "+254720202167",
+  description:
+    "Brand new — sealed box with protective case, original charger, and complete accessories included",
+  features: [
+    "6.67-inch HD+ display with smooth performance",
+    "Storage: 128GB ROM / 4GB RAM",
+    "AI dual rear camera for sharp photos",
+    "5000mAh battery for all-day use",
+    "Fast charging supported",
+    "Warranty: 1 year",
+    "Brand new (not refurbished or used)",
+    "All original accessories included",
+  ],
+}
+,
+
+{
+  id: "7",
+  name: "Oppo A6x",
+  slug: "oppoa6xoffer",
+  storage: "128GB",
+  images: ["/phones/oppoa6x1.jpg", "/phones/oppoa6x2.webp", "/phones/oppoa6x3.jpg"],
+  deposit: 3500,
+  dailyPayment: 96,
+  paymentDays: 90,
+  whatsappNumber: "+254720202167",
+  description:
+    "Brand new — sealed box with original charger, protective case, and full accessories included",
+  features: [
+    "6.7-inch HD+ display with smooth visuals",
+    "Storage: 128GB ROM / 4GB RAM",
+    "AI dual rear camera system",
+    "5000mAh battery for extended daily use",
+    "Fast charging support",
+    "Warranty: 1 year",
+    "Brand new (not refurbished or used)",
+    "All original accessories included",
+  ],
+}
+
+
+
 
 ]
