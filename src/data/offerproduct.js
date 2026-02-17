@@ -206,7 +206,7 @@ export const products = [
     slug:"infinixhot60ioffer",
     storage: "128GB",
     images: [
-      "/phones/infinix1.jpeg",
+      // "/phones/infinix1.jpeg",
       "/phones/infinix2.jpg",
       "/phones/infinix3.jpg",
       "/phones/infinix4.jpg",
