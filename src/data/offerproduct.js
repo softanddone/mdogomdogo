@@ -182,7 +182,7 @@ export const products = [
     images: [
       "/phones/spark1.jpeg",
       "/phones/spark2.jpeg",
-      "/phones/spark3.jpeg",
+      "/phones/spark3.jpg",
     ],
     deposit: 2900,
     dailyPayment: 104,
