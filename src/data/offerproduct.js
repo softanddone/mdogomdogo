@@ -87,7 +87,7 @@ export const products = [
       "Brand new — sealed box with protective case, original charger, and all accessories",
     features: [
       "Large HD+ display",
-      "Storage: 64GB ROM / 3GB RAM",
+      "Storage: 128GB ROM / 4GB RAM",
       "Camera: 8MP back camera",
       "Long-lasting battery",
       "Warranty: 1 year",
@@ -181,7 +181,7 @@ export const products = [
     storage: "128GB",
     images: [
       "/phones/spark1.jpeg",
-      "/phones/spark2.jpeg",
+      // "/phones/spark2.jpeg",
       "/phones/spark3.jpg",
     ],
     deposit: 2900,
