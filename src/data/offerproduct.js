@@ -14,7 +14,7 @@ export const products = [
     deposit: 3300,
     dailyPayment: 89,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with charger, cable, and all original accessories",
     features: [
@@ -37,7 +37,7 @@ export const products = [
   //   deposit: 2500,
   //   dailyPayment: 85,
   //   paymentDays: 90,
-  //   whatsappNumber: "+254720202167",
+  //   whatsappNumber: "+254100028823",
   //   description:
   //     "Brand new — sealed box with charger, cable, and all original accessories",
   //   features: [
@@ -58,7 +58,7 @@ export const products = [
     deposit: 2800,
     dailyPayment: 91,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with protective case, original charger, and all accessories",
     features: [
@@ -82,7 +82,7 @@ export const products = [
     deposit: 2900,
     dailyPayment: 87,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with protective case, original charger, and all accessories",
     features: [
@@ -109,7 +109,7 @@ export const products = [
   deposit: 5000,
   dailyPayment: 128,
   paymentDays: 90,
-  whatsappNumber: "+254720202167",
+  whatsappNumber: "+254100028823",
   description:
     "Brand new — comes with protective case and original charger",
   features: [
@@ -133,7 +133,7 @@ export const products = [
     deposit: 3100,
     dailyPayment: 95,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with protective case, original charger, and all accessories",
     features: [
@@ -151,7 +151,7 @@ export const products = [
   {
     id: "1",
     name: "Camon 40 Pro Max",
-    slug:"camn40prooffer",
+    slug:"camon40prooffer",
     storage: "256GB",
     images: [
       "/phones/camon1.jpeg",
@@ -162,7 +162,7 @@ export const products = [
     deposit: 7200,
     dailyPayment: 180,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Fresh in the box — includes cover, fast charger, and all accessories",
     features: [
@@ -187,7 +187,7 @@ export const products = [
     deposit: 2900,
     dailyPayment: 104,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — comes with protective case, original charger, and earphones",
     features: [
@@ -216,7 +216,7 @@ export const products = [
     deposit: 3000,
     dailyPayment: 111,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — comes with protective case, original charger, and earphones",
     features: [
@@ -245,7 +245,7 @@ export const products = [
     deposit: 5400,
     dailyPayment: 147,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — fresh sealed box with cover, fast charger, and all original accessories",
     features: [
@@ -273,7 +273,7 @@ export const products = [
     deposit: 7000,
     dailyPayment: 165,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — fresh sealed box with cover, fast charger, and all original accessories",
     features: [
@@ -300,7 +300,7 @@ export const products = [
     deposit: 3100,
     dailyPayment: 75,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with cover, charger, and all original accessories",
     features: [
@@ -327,7 +327,7 @@ export const products = [
     deposit: 5700,
     dailyPayment: 135,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with cover, charger, and all original accessories",
     features: [
@@ -351,7 +351,7 @@ export const products = [
   //   deposit: 3600,
   //   dailyPayment: 95,
   //   paymentDays: 90,
-  //   whatsappNumber: "+254720202167",
+  //   whatsappNumber: "+254100028823",
   //   description:
   //     "Brand new — sealed box with charger, cable, and all original accessories",
   //   features: [
@@ -374,7 +374,7 @@ export const products = [
     deposit: 4800,
     dailyPayment: 120,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with charger, cable, and all original accessories",
     features: [
@@ -396,7 +396,7 @@ export const products = [
     deposit: 9000,
     dailyPayment: 220,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Premium device — clean condition with S Pen, charger, and original accessories",
     features: [
@@ -418,7 +418,7 @@ export const products = [
     deposit: 8500,
     dailyPayment: 210,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Premium flagship — clean condition with charger and original accessories",
     features: [
@@ -440,7 +440,7 @@ export const products = [
     deposit: 9500,
     dailyPayment: 235,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Premium flagship — clean condition with charger and original accessories",
     features: [
@@ -462,7 +462,7 @@ export const products = [
     deposit: 2200,
     dailyPayment: 55,
     paymentDays: 90,
-    whatsappNumber: "+254720202167",
+    whatsappNumber: "+254100028823",
     description:
       "Brand new — sealed box with protective case, original charger, and all accessories",
     features: [
@@ -487,7 +487,7 @@ export const products = [
   deposit: 2900,
   dailyPayment: 80,
   paymentDays: 90,
-  whatsappNumber: "+254720202167",
+  whatsappNumber: "+254100028823",
   description:
     "Brand new — sealed box with protective case, original charger, and full accessories included",
   features: [
@@ -511,7 +511,7 @@ export const products = [
   deposit: 5000,
   dailyPayment: 128,
   paymentDays: 90,
-  whatsappNumber: "+254720202167",
+  whatsappNumber: "+254100028823",
   description:
     "Brand new — sealed box with protective case, original charger, and complete accessories included",
   features: [
@@ -536,7 +536,7 @@ export const products = [
   deposit: 3500,
   dailyPayment: 96,
   paymentDays: 90,
-  whatsappNumber: "+254720202167",
+  whatsappNumber: "+254100028823",
   description:
     "Brand new — sealed box with original charger, protective case, and full accessories included",
   features: [
