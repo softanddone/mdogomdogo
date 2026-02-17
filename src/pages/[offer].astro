@@ -1548,6 +1548,15 @@ const productList = [currentProduct];
 
 
 <script>
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+  document.addEventListener("dragstart", e => {
+    if (e.target.tagName === "IMG") e.preventDefault();
+  });
+
+
+
   // Auto-Carousel with manual controls
   const carouselImages = document.querySelectorAll('.main-carousel-image');
   const indicators = document.querySelectorAll('.main-indicator');
