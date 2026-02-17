@@ -207,9 +207,11 @@ export const products = [
     storage: "128GB",
     images: [
       // "/phones/infinix1.jpeg",
-      "/phones/infinix2.jpg",
-      "/phones/infinix3.jpg",
       "/phones/infinix4.jpg",
+      "/phones/infinix3.jpg",
+      "/phones/infinix2.jpg",
+
+
     ],
     deposit: 3000,
     dailyPayment: 111,
