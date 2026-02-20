@@ -5171,6 +5171,121 @@ export const products = [
 },
 
 
+{
+    id: 1,
+    name: "Samsung A17",
+    fullname:"Samsung Galaxy A17 6.6 Inches, 128GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+    status: "New",
+    image: "/product/phones/samsung_a17.webp",
+    from: "KSh 3,200",
+    deposit: "KSh 4,000",
+    daily: "Ksh 95",
+    totalPrice: "KSh 18,500",
+    source: "/phones/samsung_a17.webp",
+    discount: "-12%",
+    display: "block",
+    phonedisplay: "6.6\" FHD+ (2408 × 1080) PLS LCD",
+    processor: "MediaTek Helio G85",
+    camera: "50MP + 2MP Depth (rear), 8MP (front)",
+    memory: "128GB / 4GB RAM, MicroSD up to 1TB",
+    battery: "5000mAh, 25W Fast Charging",
+    version: "Android 14, One UI Core",
+    depositanddaily: "KSh 4,000 Daily KSh 95",
+    slug: "samsung-a17",
+    slugs: "samsung-a17",
+    description: "Buy Samsung Galaxy A17 on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
+    brand: "Samsung",
+    seller: "Mkopa",
+    model: "SM-A175F",
+    storage: "128GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+    // 🧩 Structured text sections
+    details: [
+      {
+        title: "Body and Design",
+        content: `The Samsung Galaxy A17 features a clean, modern Samsung design with a matte textured finish for better grip and durability. It measures approximately 167.5 × 77 × 8.3mm and weighs about 195g. Available in Black, Light Blue, and Silver, it offers a premium feel at an affordable price point.`,
+      },
+      {
+        title: "Display",
+        content: `Enjoy clear visuals on a 6.6-inch FHD+ display with a resolution of 2408 × 1080 pixels. The large screen delivers sharp images, smooth scrolling, and excellent brightness for streaming, browsing, and gaming.`,
+      },
+      {
+        title: "Camera System",
+        content: `The Galaxy A17 comes with a 50MP main rear camera paired with a depth sensor for portrait shots. The 8MP front camera produces clear selfies and video calls. Samsung image processing ensures vibrant colors and balanced exposure in different lighting conditions.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by the MediaTek Helio G85 processor, the A17 handles everyday apps, multitasking, and casual gaming smoothly. Combined with 4GB RAM and optimized One UI software, the device delivers reliable performance for daily use.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running on Android 14 with Samsung One UI Core, the Galaxy A17 offers a simple, smooth, and secure user experience. It includes privacy controls, device optimization tools, and Samsung ecosystem integration.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `With 128GB internal storage and 4GB RAM, the Galaxy A17 provides enough space for apps, photos, and videos. Storage can be expanded up to 1TB using a MicroSD card.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `A powerful 5000mAh battery keeps the phone running all day on a single charge. The 25W fast-charging support ensures quick top-ups so you stay connected longer.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Connectivity includes 4G LTE, Wi-Fi, Bluetooth 5.0, GPS, and USB-C. Security features include face unlock and a side-mounted fingerprint scanner, plus standard sensors like accelerometer and proximity.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Sharp 6.6″ FHD+ display",
+          "Reliable Samsung software experience",
+          "Long-lasting 5000mAh battery",
+          "Expandable storage support",
+          "Trusted Samsung build quality",
+        ],
+        cons: [
+          "No AMOLED display",
+          "Standard charging speed",
+          "Not designed for heavy gaming",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Samsung Galaxy A17 is a dependable everyday smartphone ideal for users who want Samsung reliability, a large display, and long battery life at an affordable Lipa Mdogo Mdogo plan.`,
+      },
+    ],
+
+    color: "Black, Light Blue, Silver",
+    weight: "195g",
+    dimensions: {
+      length: "167.5mm",
+      width: "77mm",
+      height: "8.3mm"
+    },
+    material: "Plastic",
+    pattern: "Matte",
+    productLine: "Samsung Galaxy A",
+    reviews: {
+      averageRating: 4.6,
+      reviewCount: 31,
+      reviews: [
+        {
+          author: "Kevin O.",
+          rating: 5,
+          reviewBody: "Great Samsung phone for daily use and strong battery.",
+          datePublished: "2025-02-10"
+        },
+        {
+          author: "Mary N.",
+          rating: 4,
+          reviewBody: "Good screen and smooth performance for the price.",
+          datePublished: "2025-03-02"
+        }
+      ]
+    }
+},
 
 {
   id: 47,
