@@ -8582,6 +8582,131 @@ export const products = [
       }
     ]
   }
+},
+
+
+
+
+
+{
+  id: 74,
+  name: "Tecno Camon 50 Pro Max",
+  fullname:"Tecno Camon 50 Pro Max 6.82 Inches, 512GB ROM + 12GB RAM, Battery: 5500mAh (Dual SIM) 64MP OIS",
+  status: "New",
+  image: "/product/phones/camon50pro.webp",
+  from: "KSh 7,500",
+  deposit: "KSh 9,500",
+  daily: "Ksh 200",
+  totalPrice: "KSh 39,500",
+  source: "/phones/camon50pro.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.82\" AMOLED FHD+ (2720 × 1220) 144Hz",
+  processor: "MediaTek Dimensity 8200 Ultimate",
+  camera: "64MP OIS + 13MP Ultra-wide + 2MP Macro (rear), 50MP AF (front)",
+  memory: "512GB / 12GB RAM, No MicroSD",
+  battery: "5500mAh, 70W Ultra Charge",
+  version: "Android 15, HiOS 15",
+  depositanddaily: "KSh 7,500 Daily KSh 185",
+  slug: "tecno-camon-50-pro-max",
+  slugs: "tecno-camon-50-pro-max",
+  description: "Buy Tecno Camon 50 Pro Max on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & affordable daily payments. Fast delivery available",
+  brand: "Tecno",
+  seller: "Watu Simu",
+  model: "Camon 50 Pro Max",
+  storage: "512GB",
+  condition: "new",
+  gtin: "",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Watu","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Tecno Camon 50 Pro Max features a premium ultra-slim design with a curved glass finish and polished aluminum-style frame. Measuring approximately 167.8 × 76.9 × 7.9mm and weighing about 198g, it delivers a flagship feel with improved durability and grip. Available in colors like Glacier Silver, Midnight Black, and Aurora Green with a refined anti-fingerprint coating.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a massive 6.82-inch AMOLED display with sharp 2720 × 1220 resolution and ultra-smooth 144Hz refresh rate. The panel offers HDR support, deep contrast, high brightness, and eye-comfort protection, making it perfect for gaming, streaming, and productivity.`,
+    },
+    {
+      title: "Camera System",
+      content: `The Camon 50 Pro Max features a powerful 64MP main camera with Optical Image Stabilization, supported by a 13MP ultra-wide lens and macro sensor for versatile photography. The 50MP autofocus selfie camera delivers flagship-level portraits, clear video calls, and enhanced AI night photography.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the MediaTek Dimensity 8200 Ultimate chipset, the Tecno Camon 50 Pro Max offers fast flagship-class performance. Multitasking, gaming, and heavy apps run smoothly thanks to 12GB RAM with memory expansion technology.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 15 with Tecno’s HiOS 15, the phone offers improved customization, enhanced privacy controls, AI optimization features, and better power management for smoother everyday use.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `With massive 512GB internal storage and 12GB RAM, the Camon 50 Pro Max provides huge space for videos, photos, apps, and games, ensuring long-term usability without storage worries.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The Camon 50 Pro Max packs a large 5500mAh battery built for extended usage. With 70W Ultra Charge support, the device can power up rapidly, giving you hours of usage from a short charge.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Connectivity options include 2G/3G/4G/5G support, dual SIM, Wi-Fi 6, Bluetooth, GPS, USB-C, stereo speakers with Dolby Atmos, in-display fingerprint scanner, and face unlock for secure access.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Huge 6.82″ AMOLED 144Hz display",
+        "64MP OIS flagship camera system",
+        "5G Dimensity processor performance",
+        "5500mAh long-lasting battery",
+        "70W fast charging",
+        "Large 512GB storage capacity",
+      ],
+      cons: [
+        "No microSD expansion",
+        "Large size may not suit small hands",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The Tecno Camon 50 Pro Max is a premium upper-midrange smartphone built for users who want flagship-level display, performance, and camera quality at a lipa mdogo mdogo price. It is ideal for heavy users, gamers, and content creators looking for power and storage.`,
+    },
+  ],
+
+  color: "Glacier Silver, Midnight Black, Aurora Green",
+  weight: "198g",
+  dimensions: {
+    length: "167.8mm",
+    width: "76.9mm",
+    height: "7.9mm"
+  },
+  material: "Glass front, Glass back, Reinforced frame",
+  pattern: "Glossy Gradient Finish",
+  productLine: "Tecno Camon Series",
+  reviews: {
+    averageRating: 4.7,
+    reviewCount: 38,
+    reviews: [
+      {
+        author: "Dennis K.",
+        rating: 5,
+        reviewBody: "Very fast phone with huge storage and amazing display.",
+        datePublished: "2025-04-18"
+      },
+      {
+        author: "Faith N.",
+        rating: 4,
+        reviewBody: "Battery lasts long and charging is super fast.",
+        datePublished: "2025-05-03"
+      },
+      {
+        author: "Mark J.",
+        rating: 5,
+        reviewBody: "Camera quality is excellent, feels like a flagship device.",
+        datePublished: "2025-05-11"
+      }
+    ]
+  }
 }
 
 

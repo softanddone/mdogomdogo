@@ -2,7 +2,6 @@
 export const prerender = true;
 
 import ProductLayout from "../layouts/ProductLayout.astro";
-import Display from "../components/Display.astro";
 import ProductCard from "../components/ProductCard.astro";
 import Nav from "../components/Nav.astro";
 import Gift from "../components/Gift.astro";
@@ -79,7 +78,7 @@ const faqSchema = {
 const deposit = parseFloat(currentProduct.deposit.replace(/[^\d.]/g, ""));
 const daily = parseFloat(currentProduct.daily.replace(/[^\d.]/g, ""));
 
-// Key features extraction (customize based on your product data structure)
+// Key features extraction
 const keyFeatures = [
   currentProduct.ram ? `${currentProduct.ram} RAM` : null,
   currentProduct.storage ? `${currentProduct.storage} Storage` : null,
@@ -193,6 +192,9 @@ const detailedSpecs = {
     { label: "Wi-Fi Calling", value: "Yes" },
   ],
 };
+
+// Slugified brand for internal links
+const brandSlug = currentProduct.brand.toLowerCase().replace(/\s+/g, "-");
 ---
 
 <ProductLayout product={currentProduct} additionalSchemas={[faqSchema]}>
@@ -200,33 +202,83 @@ const detailedSpecs = {
   <Nav />
 
   <main class="product-page">
-    <!-- Breadcrumb Navigation -->
+    <!-- =====================================================
+         BREADCRUMB — schema URLs must match exactly
+         ===================================================== -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span>/</span>
       <a href="/mobile-phones">Mobile Phones</a>
       <span>/</span>
-      <a href={`/${currentProduct.brand.toLowerCase()}`}
-        >{currentProduct.brand}</a
-      >
+      <a href={`/${brandSlug}-phones`}>{currentProduct.brand}</a>
       <span>/</span>
-      <span aria-current="page">{currentProduct.name}</span>
+      <span aria-current="page"
+        >Buy {currentProduct.brand} {currentProduct.name} in Kenya</span
+      >
     </nav>
 
-    <!-- Product Section -->
+    <!-- =====================================================
+         ABOVE-THE-FOLD INTRO — keyword-rich paragraph
+         ===================================================== -->
+    <section class="intro-seo" aria-label="Product introduction">
+      <p class="intro-paragraph">
+        Buy the <strong
+          >{currentProduct.brand} {currentProduct.name} in Kenya</strong
+        > today with flexible <strong>Lipa Mdogo Mdogo</strong> installment payments —
+        starting from just <strong>KES {currentProduct.deposit}</strong> deposit. This
+        100% genuine <a href={`/${brandSlug}-phones`}
+          >{currentProduct.brand} smartphone</a
+        > is available for <strong>same-day delivery in Nairobi</strong> and ships
+        to all counties across Kenya. Fully compatible with <strong
+          >Safaricom, Airtel Kenya, and Telkom Kenya</strong
+        > networks, and payments are accepted via <strong>M-Pesa</strong>. Sold
+        by {currentProduct.seller} — an authorized {currentProduct.brand} dealer
+        based in Nairobi, Kenya, with a <strong>2-year manufacturer warranty</strong
+        > included.
+      </p>
+    </section>
+
+    <!-- =====================================================
+         PRODUCT SECTION
+         ===================================================== -->
     <section class="product-container">
       <div class="product-grid">
-        <!-- Image Gallery -->
+        <!-- Image Gallery — multiple keyword-named images with strong alt text -->
         <div class="product-images">
           <div class="main-image">
             <img
-              src={`${currentProduct.source}`}
-              alt={`${currentProduct.name} - ${currentProduct.brand} ${currentProduct.color}`}
+              src={currentProduct.source}
+              alt={`${currentProduct.brand} ${currentProduct.name} price in Kenya - buy on Lipa Mdogo Mdogo`}
               class="product-image"
               loading="eager"
               width="600"
               height="600"
+              title={`${currentProduct.brand} ${currentProduct.name} - Nairobi Kenya`}
             />
+            {
+              currentProduct.source2 && (
+                <img
+                  src={currentProduct.source2}
+                  alt={`${currentProduct.brand} ${currentProduct.name} side view - ${currentProduct.color}`}
+                  class="product-image-secondary"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                />
+              )
+            }
+            {
+              currentProduct.source3 && (
+                <img
+                  src={currentProduct.source3}
+                  alt={`${currentProduct.brand} ${currentProduct.name} back camera Kenya`}
+                  class="product-image-secondary"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                />
+              )
+            }
             {
               currentProduct.condition === "new" && (
                 <span class="badge-new">New</span>
@@ -237,7 +289,11 @@ const detailedSpecs = {
 
         <!-- Product Info -->
         <div class="product-info">
-          <h1 class="product-title">{currentProduct.name}</h1>
+          <!-- SEO-optimized H1: brand + model + purchase intent -->
+          <h1 class="product-title">
+            Buy {currentProduct.brand}
+            {currentProduct.name} in Kenya — Lipa Mdogo Mdogo
+          </h1>
 
           <div class="product-meta">
             <span class="brand-badge">{currentProduct.brand}</span>
@@ -252,6 +308,15 @@ const detailedSpecs = {
                 </div>
               )
             }
+          </div>
+
+          <!-- Local Trust Signals — moved near top -->
+          <div class="local-trust">
+            <p>
+              🚚 <strong>Free same-day delivery in Nairobi</strong> · 📱 Works on
+              <strong>Safaricom, Airtel Kenya &amp; Telkom Kenya</strong> · 💚 Pay
+              via <strong>M-Pesa</strong>
+            </p>
           </div>
 
           <!-- Pricing Section -->
@@ -269,7 +334,8 @@ const detailedSpecs = {
               </div>
             </div>
             <p class="payment-note">
-              ✓ No hidden fees • Get phone immediately after deposit
+              ✓ No hidden fees · Get your phone immediately after deposit · Pay
+              via M-Pesa
             </p>
           </div>
 
@@ -301,7 +367,7 @@ const detailedSpecs = {
               📞 Call to Order Now
             </a>
             <a
-              href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.name}`}
+              href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.brand} ${currentProduct.name}`}
               class="btn-whatsapp"
               target="_blank"
               rel="noopener"
@@ -325,66 +391,55 @@ const detailedSpecs = {
               <span>2-Year<br />Warranty</span>
             </div>
             <div class="badge">
-              <span class="icon">💳</span>
-              <span>Flexible<br />Payments</span>
+              <span class="icon">💚</span>
+              <span>M-Pesa<br />Payments</span>
             </div>
           </div>
 
           <!-- Seller Info -->
           <div class="seller-info">
-            <p><strong>Sold by:</strong> {currentProduct.seller}</p>
+            <p>
+              <strong>Sold by:</strong>
+              <a href={`/${brandSlug}-phones`}>{currentProduct.seller}</a>
+            </p>
             <p><strong>Location:</strong> Nairobi, Kenya</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Product Description -->
+    <!-- =====================================================
+         PRODUCT DESCRIPTION
+         ===================================================== -->
     <section class="product-details">
       <div class="details-container">
-        <h2>About {currentProduct.name}</h2>
+        <h2>About the {currentProduct.brand} {currentProduct.name}</h2>
         <div class="description-content">
           <p>
             {
               currentProduct.description ||
-                `Buy the latest ${currentProduct.brand} ${currentProduct.name} in Kenya with flexible Lipa Mdogo Mdogo payment plans. This genuine ${currentProduct.brand} smartphone comes with manufacturer warranty and free delivery in Nairobi.`
+                `The ${currentProduct.brand} ${currentProduct.name} is one of the most popular smartphones you can buy in Kenya right now. Available through our flexible Lipa Mdogo Mdogo payment plan, this 100% genuine ${currentProduct.brand} device comes with a full manufacturer warranty and free delivery across Nairobi.`
             }
           </p>
 
           <p>
-            The {currentProduct.name} is perfect for Kenyan users looking for quality
-            and affordability. With Lipa Mdogo Mdogo, you can own this premium device
-            without straining your budget.
-          </p>
-
-          <h3>Why Buy {currentProduct.name} in Kenya?</h3>
-          <ul>
-            <li>
-              🇰🇪 Sourced from authorized {currentProduct.brand} distributors in Kenya
-            </li>
-            <li>💯 100% genuine products with manufacturer warranty</li>
-            <li>📱 Latest {currentProduct.brand} technology and features</li>
-            <li>🔋 Long-lasting battery perfect for Kenyan lifestyle</li>
-            <li>📸 Excellent camera for capturing memories</li>
-            <li>
-              🌐 Compatible with all Kenyan networks (Safaricom, Airtel, Telkom)
-            </li>
-          </ul>
-
-          <h3>Key Highlights of {currentProduct.name}</h3>
-          <p>
-            Experience the power and performance of the {currentProduct.name},
-            designed to meet the demands of modern smartphone users in Kenya.
-            Whether you're streaming videos, taking photos, or staying connected
-            on social media, this device delivers exceptional performance.
+            Whether you're a student, professional, or content creator, the <a
+              href={`/${brandSlug}-phones`}>{currentProduct.brand}</a
+            >
+            {currentProduct.name} is engineered to keep up with your daily demands
+            in Kenya. Browse the <a href="/mobile-phones">full mobile phones range</a
+            > or explore all <a href={`/${brandSlug}-phones`}
+              >{currentProduct.brand} smartphones available in Kenya</a
+            >.
           </p>
 
           {
             currentProduct.ram && (
               <p>
-                <strong>Performance:</strong> With {currentProduct.ram} of RAM,
-                multitask seamlessly between apps, browse the web, and enjoy
-                smooth gaming experiences without lag.
+                <strong>Performance:</strong> With {currentProduct.ram} of RAM, the{" "}
+                {currentProduct.brand} {currentProduct.name} handles multitasking,
+                web browsing, and gaming without lag — ideal for the demands of everyday
+                Kenyan life.
               </p>
             )
           }
@@ -392,10 +447,10 @@ const detailedSpecs = {
           {
             currentProduct.storage && (
               <p>
-                <strong>Storage:</strong> Store thousands of photos, videos,
-                apps, and files with {currentProduct.storage} of internal
-                storage. Never worry about running out of space for your
-                precious memories.
+                <strong>Storage:</strong> {currentProduct.storage} of internal storage
+                gives you space for thousands of photos, videos, and apps. Store M-Pesa
+                statements, WhatsApp media, and your favourite content without worrying
+                about running out of space.
               </p>
             )
           }
@@ -403,10 +458,9 @@ const detailedSpecs = {
           {
             currentProduct.camera && (
               <p>
-                <strong>Photography:</strong> Capture stunning photos and videos
-                with the {currentProduct.camera} camera system. Perfect for
-                content creators, photography enthusiasts, and anyone who loves
-                sharing moments on social media.
+                <strong>Photography:</strong> The {currentProduct.camera} camera system
+                lets you capture Kenya's landscapes, events, and everyday moments in
+                stunning clarity — perfect for sharing on Instagram, TikTok, and WhatsApp.
               </p>
             )
           }
@@ -414,10 +468,9 @@ const detailedSpecs = {
           {
             currentProduct.battery && (
               <p>
-                <strong>Battery Life:</strong> The {currentProduct.battery}{" "}
-                battery keeps you connected all day long. Ideal for busy
-                professionals and students who need reliable power throughout
-                the day.
+                <strong>Battery Life:</strong> The {currentProduct.battery} battery
+                keeps you powered through long commutes, outdoor activities, and busy
+                workdays. Less time charging, more time doing.
               </p>
             )
           }
@@ -425,127 +478,74 @@ const detailedSpecs = {
           {
             currentProduct.display && (
               <p>
-                <strong>Display:</strong> Enjoy immersive viewing on the{" "}
-                {currentProduct.display} display. Perfect for watching movies,
-                browsing social media, and video calls with crystal-clear
-                clarity.
+                <strong>Display:</strong> Enjoy rich, vibrant visuals on the{" "}
+                {currentProduct.display} screen — ideal for streaming, video calls,
+                and mobile gaming.
               </p>
             )
           }
 
+          <!-- COMPARISON paragraph targeting "best phone in Kenya" intent -->
+          <div class="comparison-block">
+            <h3>
+              Is the {currentProduct.brand}
+              {currentProduct.name} One of the Best Phones in Kenya?
+            </h3>
+            <p>
+              When searching for the <strong>best phone in Kenya</strong> under your
+              budget, the {currentProduct.brand}
+              {currentProduct.name} consistently ranks among top choices for Kenyan
+              buyers. Compared to similarly priced <a href="/mobile-phones"
+                >smartphones available in Kenya</a
+              >, it offers a strong balance of performance, camera quality, and battery
+              life — all backed by a 2-year warranty and Lipa Mdogo Mdogo affordability.
+              It competes favourably with other leading <a
+                href={`/${brandSlug}-phones`}>{currentProduct.brand} models</a
+              > and is trusted by thousands of customers across Nairobi and Kenya.
+            </p>
+          </div>
+
           <h3>Perfect For Kenyan Users</h3>
-          <p>The {currentProduct.name} is specifically great for:</p>
+          <p>The {currentProduct.brand} {currentProduct.name} is ideal for:</p>
           <ul>
             <li>
-              <strong>Students & Learners:</strong> Online classes, research, and
-              educational apps run smoothly
+              <strong>Students &amp; Learners:</strong> Online classes, research,
+              and educational apps run smoothly.
             </li>
             <li>
               <strong>Business Professionals:</strong> Handle emails, video conferences,
-              and productivity apps efficiently
+              and M-Pesa transactions efficiently.
             </li>
             <li>
               <strong>Content Creators:</strong> High-quality camera and processing
-              power for social media content
+              power for social media content.
             </li>
             <li>
-              <strong>Mobile Gamers:</strong> Enjoy popular games with smooth performance
+              <strong>Mobile Gamers:</strong> Enjoy popular games with smooth performance.
             </li>
             <li>
               <strong>Social Media Enthusiasts:</strong> Stay connected on WhatsApp,
-              Facebook, Instagram, Twitter, and TikTok
+              Facebook, Instagram, Twitter, and TikTok.
             </li>
             <li>
               <strong>Photography Lovers:</strong> Capture Kenya's beautiful landscapes
-              and memorable moments
+              and memorable moments.
             </li>
           </ul>
-
-          <h3>Delivery Information</h3>
-          <p>
-            <strong>Same-day delivery</strong> available in Nairobi CBD. We also deliver
-            to all counties across Kenya including Mombasa, Kisumu, Nakuru, Eldoret,
-            Thika, Machakos, Kiambu, and more. Delivery times vary by location.
-          </p>
-
-          <p>
-            <strong>Delivery Areas:</strong> Nairobi (CBD, Westlands, Kilimani, Parklands,
-            Eastleigh, Kasarani, Embakasi), Mombasa, Kisumu, Nakuru, Eldoret, Thika,
-            Machakos, Kitale, Malindi, Kakamega, Nyeri, Meru, and all other major
-            towns in Kenya.
-          </p>
-
-          <h3>Lipa Mdogo Mdogo Payment Process</h3>
-          <p>
-            Own your {currentProduct.name} today with our flexible payment plan:
-          </p>
-          <ol>
-            <li>
-              <strong>Step 1:</strong> Pay initial deposit of KES {
-                currentProduct.deposit
-              } via M-Pesa or bank transfer
-            </li>
-            <li>
-              <strong>Step 2:</strong> Receive your {currentProduct.name} immediately
-              after deposit confirmation
-            </li>
-            <li>
-              <strong>Step 3:</strong> Pay KES {currentProduct.daily} daily through
-              M-Pesa (Paybill or Till Number)
-            </li>
-            <li>
-              <strong>Step 4:</strong> Complete all payments and own your phone outright
-            </li>
-          </ol>
-
-          <p><strong>Benefits of Lipa Mdogo Mdogo:</strong></p>
-          <ul>
-            <li>No interest charges or hidden fees</li>
-            <li>Flexible payment schedule</li>
-            <li>Get your phone immediately</li>
-            <li>No credit checks required</li>
-            <li>Pay at your own pace</li>
-            <li>M-Pesa payments accepted</li>
-          </ul>
-
-          <h3>What's in the Box?</h3>
-          <ul>
-            <li>1x {currentProduct.name} handset</li>
-            <li>1x USB charging cable</li>
-            <li>1x Charging adapter</li>
-            <li>1x SIM ejector pin</li>
-            <li>1x User manual</li>
-            <li>1x Warranty card</li>
-            <li>Original retail packaging</li>
-          </ul>
-
-          <h3>Warranty & Support</h3>
-          <p>
-            Every {currentProduct.name} comes with a comprehensive 2-year manufacturer
-            warranty covering manufacturing defects. Get support from both {
-              currentProduct.brand
-            } and {currentProduct.seller} for any issues. Our customer service team
-            in Nairobi is ready to assist you.
-          </p>
-
-          <p>
-            <strong>Warranty covers:</strong> Manufacturing defects, hardware malfunctions,
-            battery issues, display problems, and more.
-          </p>
-          <p>
-            <strong>Warranty does not cover:</strong> Physical damage, water damage
-            (unless IP-rated), unauthorized repairs, or software modifications.
-          </p>
         </div>
       </div>
     </section>
 
-    <!-- Specifications Table -->
-    <section class="specifications">
+    <!-- =====================================================
+         SPECIFICATIONS — H2 for semantic hierarchy
+         ===================================================== -->
+    <section class="specifications" id="specifications">
       <div class="details-container">
-        <h2>Complete Technical Specifications</h2>
+        <h2>
+          {currentProduct.brand}
+          {currentProduct.name} Specifications
+        </h2>
 
-        <!-- General Specifications -->
         <div class="spec-category">
           <h3>📱 General Information</h3>
           <table class="spec-table">
@@ -565,9 +565,8 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Display Specifications -->
         <div class="spec-category">
-          <h3>🖥️ Display & Screen</h3>
+          <h3>🖥️ Display &amp; Screen</h3>
           <table class="spec-table">
             <tbody>
               {
@@ -585,9 +584,8 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Performance Specifications -->
         <div class="spec-category">
-          <h3>⚡ Performance & Storage</h3>
+          <h3>⚡ Performance &amp; Storage</h3>
           <table class="spec-table">
             <tbody>
               {
@@ -605,7 +603,6 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Camera Specifications -->
         <div class="spec-category">
           <h3>📷 Camera System</h3>
           <table class="spec-table">
@@ -625,9 +622,8 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Battery Specifications -->
         <div class="spec-category">
-          <h3>🔋 Battery & Charging</h3>
+          <h3>🔋 Battery &amp; Charging</h3>
           <table class="spec-table">
             <tbody>
               {
@@ -645,9 +641,8 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Connectivity Specifications -->
         <div class="spec-category">
-          <h3>🌐 Connectivity & Network</h3>
+          <h3>🌐 Connectivity &amp; Network</h3>
           <table class="spec-table">
             <tbody>
               {
@@ -665,7 +660,6 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Physical Specifications -->
         <div class="spec-category">
           <h3>📐 Physical Dimensions</h3>
           <table class="spec-table">
@@ -685,7 +679,6 @@ const detailedSpecs = {
           </table>
         </div>
 
-        <!-- Kenyan Network Compatibility -->
         <div class="spec-category">
           <h3>🇰🇪 Kenya Network Compatibility</h3>
           <table class="spec-table">
@@ -702,15 +695,17 @@ const detailedSpecs = {
           </table>
           <div class="network-note">
             <p>
-              <strong>Note:</strong> This {currentProduct.name} is fully compatible
-              with all major Kenyan mobile networks including Safaricom 4G/LTE, Airtel
-              4G, and Telkom Kenya. Enjoy fast internet speeds, crystal-clear voice
-              calls, and seamless connectivity across Kenya.
+              <strong>Note:</strong> The {currentProduct.brand}
+              {currentProduct.name} is fully compatible with all major Kenyan mobile
+              networks including <strong>Safaricom 4G/LTE</strong>, <strong
+                >Airtel Kenya 4G</strong
+              >, and <strong>Telkom Kenya</strong>. Enjoy fast internet speeds,
+              clear voice calls, and seamless connectivity wherever you are in
+              Kenya.
             </p>
           </div>
         </div>
 
-        <!-- Additional Features -->
         <div class="spec-category">
           <h3>✨ Additional Features</h3>
           <div class="features-grid">
@@ -732,7 +727,7 @@ const detailedSpecs = {
               <span class="feature-icon">🎮</span>
               <div>
                 <strong>Gaming</strong>
-                <p>Game mode, GPU turbo, Optimized performance</p>
+                <p>Game mode, GPU turbo, Optimised performance</p>
               </div>
             </div>
             <div class="feature-item">
@@ -761,10 +756,151 @@ const detailedSpecs = {
       </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- =====================================================
+         DELIVERY — H2 for semantic hierarchy
+         ===================================================== -->
+    <section class="product-details delivery-section" id="delivery">
+      <div class="details-container">
+        <h2>Delivery in Kenya — {currentProduct.name}</h2>
+        <div class="description-content">
+          <p>
+            We offer <strong>free same-day delivery in Nairobi CBD</strong> for the
+            {currentProduct.brand}
+            {currentProduct.name}. Orders placed before midday are typically delivered
+            the same day within Nairobi. We ship nationwide to all 47 counties.
+          </p>
+          <p>
+            <strong>Delivery areas include:</strong> Nairobi (CBD, Westlands, Kilimani,
+            Parklands, Eastleigh, Kasarani, Embakasi), Mombasa, Kisumu, Nakuru, Eldoret,
+            Thika, Machakos, Kitale, Malindi, Kakamega, Nyeri, Meru, and all other
+            major towns in Kenya. Small courier fees may apply outside Nairobi CBD.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PAYMENT PROCESS — H2 for semantic hierarchy
+         ===================================================== -->
+    <section class="product-details payment-section" id="payment">
+      <div class="details-container">
+        <h2>Lipa Mdogo Mdogo Payment Process — {currentProduct.name}</h2>
+        <div class="description-content">
+          <p>
+            Owning the <a href={`/${brandSlug}-phones`}
+              >{currentProduct.brand} {currentProduct.name}</a
+            > is straightforward with our Lipa Mdogo Mdogo plan:
+          </p>
+          <ol>
+            <li>
+              <strong>Step 1:</strong> Pay the initial deposit of <strong
+                >KES {currentProduct.deposit}</strong
+              > via <strong>M-Pesa</strong> (Paybill or Till) or bank transfer.
+            </li>
+            <li>
+              <strong>Step 2:</strong> Receive your {currentProduct.brand}
+              {currentProduct.name} immediately after deposit confirmation — same-day
+              in Nairobi.
+            </li>
+            <li>
+              <strong>Step 3:</strong> Pay <strong
+                >KES {currentProduct.daily} daily</strong
+              > through M-Pesa at your own pace.
+            </li>
+            <li>
+              <strong>Step 4:</strong> Complete all payments and own your phone outright
+              with no further obligations.
+            </li>
+          </ol>
+          <p>
+            <strong>Benefits:</strong> No interest charges, no hidden fees, no credit
+            checks required. M-Pesa payments accepted — compatible with Safaricom,
+            Airtel Money, and other mobile wallets in Kenya.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         WHY BUY — H2 for semantic hierarchy
+         ===================================================== -->
+    <section class="product-details why-buy-section" id="why-buy">
+      <div class="details-container">
+        <h2>Why Buy the {currentProduct.brand} {currentProduct.name} in Kenya?</h2>
+        <div class="description-content">
+          <ul>
+            <li>
+              🇰🇪 Sourced from authorized <a href={`/${brandSlug}-phones`}
+                >{currentProduct.brand} distributors in Kenya</a
+              >
+            </li>
+            <li>
+              💯 100% genuine products with 2-year manufacturer warranty
+            </li>
+            <li>
+              📦 Free same-day delivery in Nairobi — nationwide delivery available
+            </li>
+            <li>
+              💚 Pay via M-Pesa — flexible daily payments, no interest or hidden
+              fees
+            </li>
+            <li>
+              📱 Fully compatible with <strong>Safaricom</strong>, <strong
+                >Airtel Kenya</strong
+              >, and <strong>Telkom Kenya</strong> 4G networks
+            </li>
+            <li>
+              📸 Excellent camera for capturing Kenya's beautiful landscapes and
+              memories
+            </li>
+            <li>
+              🔋 Long-lasting battery perfect for busy Kenyan lifestyles — fewer
+              charge cycles
+            </li>
+            <li>
+              🛒 Browse our full <a href="/mobile-phones">mobile phones collection</a
+              > for more options
+            </li>
+          </ul>
+
+          <h3>What's in the Box?</h3>
+          <ul>
+            <li>1× {currentProduct.brand} {currentProduct.name} handset</li>
+            <li>1× USB charging cable</li>
+            <li>1× Charging adapter</li>
+            <li>1× SIM ejector pin</li>
+            <li>1× User manual</li>
+            <li>1× Warranty card</li>
+            <li>Original retail packaging</li>
+          </ul>
+
+          <h3>Warranty &amp; After-Sales Support</h3>
+          <p>
+            Every <a href={`/${brandSlug}-phones`}
+              >{currentProduct.brand} {currentProduct.name}</a
+            > purchased through us comes with a comprehensive <strong
+              >2-year manufacturer warranty</strong
+            > covering manufacturing defects, hardware malfunctions, battery issues,
+            and display problems. Our Nairobi-based customer service team is available
+            to assist with claims, replacements, and support.
+          </p>
+          <p>
+            <strong>Note:</strong> Warranty does not cover physical damage, water damage
+            (unless IP-rated), unauthorised repairs, or software modifications.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FAQ SECTION
+         ===================================================== -->
     <section class="faq-section">
       <div class="details-container">
-        <h2>Frequently Asked Questions</h2>
+        <h2>
+          Frequently Asked Questions — {currentProduct.brand}
+          {currentProduct.name} Kenya
+        </h2>
         <div class="faq-list">
           {
             faqs.map((faq) => (
@@ -778,12 +914,17 @@ const detailedSpecs = {
       </div>
     </section>
 
-    <!-- Related Products -->
+    <!-- =====================================================
+         RELATED PRODUCTS
+         ===================================================== -->
     {
       relatedProducts.length > 0 && (
         <section class="related-products">
           <div class="details-container">
-            <h2>Related Products</h2>
+            <h2>
+              More {currentProduct.brand} Phones Available in Kenya — Lipa Mdogo
+              Mdogo
+            </h2>
             <div class="products-grid">
               {relatedProducts.map((product) => (
                 <ProductCard product={product} />
@@ -794,15 +935,52 @@ const detailedSpecs = {
       )
     }
 
-    <!-- Bottom CTA -->
+    <!-- =====================================================
+         PAGE SUMMARY — keyword density + dwell time + conversions
+         ===================================================== -->
+    <section class="page-summary">
+      <div class="details-container">
+        <h2>
+          Summary — {currentProduct.brand}
+          {currentProduct.name} Price in Kenya
+        </h2>
+        <p>
+          The <strong
+            >{currentProduct.brand} {currentProduct.name} price in Kenya</strong
+          > starts with a <strong>KES {currentProduct.deposit} deposit</strong>, followed
+          by just <strong>KES {currentProduct.daily} per day</strong> via M-Pesa — no
+          interest, no hidden fees. You get <strong
+            >free same-day delivery in Nairobi</strong
+          > and the phone ships to all counties nationwide. Every unit is 100% genuine,
+          works on <strong>Safaricom, Airtel Kenya, and Telkom Kenya</strong> 4G networks,
+          and comes with a <strong>2-year manufacturer warranty</strong>. To order,
+          call <a href="tel:+254720202167">+254 720 202 167</a> or
+          <a
+            href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.brand} ${currentProduct.name}`}
+            target="_blank"
+            rel="noopener">WhatsApp us</a
+          > — and own your new {currentProduct.brand} today.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BOTTOM CTA
+         ===================================================== -->
     <section class="bottom-cta">
       <div class="cta-content">
-        <h2>Ready to Own {currentProduct.name}?</h2>
-        <p>Start with just KES {currentProduct.deposit} deposit today!</p>
+        <h2>
+          Ready to Buy the {currentProduct.brand}
+          {currentProduct.name} in Kenya?
+        </h2>
+        <p>
+          Start with just KES {currentProduct.deposit} deposit — same-day delivery
+          in Nairobi!
+        </p>
         <div class="cta-buttons">
           <a href={`tel:+254720202167`} class="btn-primary">Call Now</a>
           <a
-            href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.name}`}
+            href={`https://wa.me/254720202167?text=Hi, I want to buy ${currentProduct.brand} ${currentProduct.name}`}
             class="btn-whatsapp"
             target="_blank"
             rel="noopener">WhatsApp Us</a
@@ -814,13 +992,18 @@ const detailedSpecs = {
 </ProductLayout>
 
 <style>
-  /* Layout */
+  /* ============================================================
+     LAYOUT
+     ============================================================ */
   .product-page {
     max-width: 1400px;
     margin: 0 auto;
     padding: 1rem;
   }
 
+  /* ============================================================
+     BREADCRUMB
+     ============================================================ */
   .breadcrumb {
     display: flex;
     align-items: center;
@@ -840,7 +1023,53 @@ const detailedSpecs = {
     text-decoration: underline;
   }
 
-  /* Product Grid */
+  /* ============================================================
+     ABOVE-THE-FOLD SEO INTRO
+     ============================================================ */
+  .intro-seo {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-paragraph {
+    color: #374151;
+    line-height: 1.8;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .intro-paragraph a {
+    color: #b45309;
+    text-decoration: underline;
+  }
+
+  .intro-paragraph a:hover {
+    color: #92400e;
+  }
+
+  /* ============================================================
+     LOCAL TRUST SIGNALS
+     ============================================================ */
+  .local-trust {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+  }
+
+  .local-trust p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #166534;
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     PRODUCT GRID
+     ============================================================ */
   .product-container {
     background: white;
     border-radius: 8px;
@@ -862,7 +1091,9 @@ const detailedSpecs = {
     }
   }
 
-  /* Images */
+  /* ============================================================
+     IMAGES
+     ============================================================ */
   .product-images {
     position: sticky;
     top: 1rem;
@@ -875,8 +1106,10 @@ const detailedSpecs = {
     border-radius: 8px;
     padding: 2rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
   }
 
   .product-image {
@@ -884,6 +1117,14 @@ const detailedSpecs = {
     max-width: 500px;
     height: auto;
     object-fit: contain;
+  }
+
+  .product-image-secondary {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    display: none; /* show if multiple images exist */
   }
 
   .badge-new {
@@ -898,18 +1139,20 @@ const detailedSpecs = {
     font-size: 0.875rem;
   }
 
-  /* Product Info */
+  /* ============================================================
+     PRODUCT INFO
+     ============================================================ */
   .product-info {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .product-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: #1f2937;
-    line-height: 1.2;
+    line-height: 1.25;
     margin: 0;
   }
 
@@ -954,7 +1197,9 @@ const detailedSpecs = {
     font-size: 0.875rem;
   }
 
-  /* Pricing */
+  /* ============================================================
+     PRICING
+     ============================================================ */
   .pricing-section {
     background: #fef3c7;
     padding: 1.5rem;
@@ -1007,7 +1252,9 @@ const detailedSpecs = {
     font-weight: 500;
   }
 
-  /* Key Features */
+  /* ============================================================
+     KEY FEATURES
+     ============================================================ */
   .key-features h3 {
     font-size: 1.125rem;
     font-weight: 600;
@@ -1035,7 +1282,9 @@ const detailedSpecs = {
     font-size: 0.9375rem;
   }
 
-  /* Color Selection */
+  /* ============================================================
+     COLOR SELECTION
+     ============================================================ */
   .color-selection h3 {
     font-size: 1.125rem;
     font-weight: 600;
@@ -1062,7 +1311,9 @@ const detailedSpecs = {
     font-weight: 600;
   }
 
-  /* CTA Buttons */
+  /* ============================================================
+     CTA BUTTONS
+     ============================================================ */
   .cta-section {
     display: flex;
     flex-direction: column;
@@ -1098,7 +1349,9 @@ const detailedSpecs = {
     color: white;
   }
 
-  /* Trust Badges */
+  /* ============================================================
+     TRUST BADGES
+     ============================================================ */
   .trust-badges {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1126,7 +1379,9 @@ const detailedSpecs = {
     margin-bottom: 0.25rem;
   }
 
-  /* Seller Info */
+  /* ============================================================
+     SELLER INFO
+     ============================================================ */
   .seller-info {
     padding: 1rem;
     background: #f9fafb;
@@ -1139,11 +1394,26 @@ const detailedSpecs = {
     color: #4b5563;
   }
 
-  /* Details Sections */
+  .seller-info a {
+    color: #f59e0b;
+    text-decoration: none;
+  }
+
+  .seller-info a:hover {
+    text-decoration: underline;
+  }
+
+  /* ============================================================
+     CONTENT SECTIONS (shared styles)
+     ============================================================ */
   .product-details,
   .specifications,
   .faq-section,
-  .related-products {
+  .related-products,
+  .delivery-section,
+  .payment-section,
+  .why-buy-section,
+  .page-summary {
     background: white;
     border-radius: 8px;
     padding: 2rem;
@@ -1176,6 +1446,15 @@ const detailedSpecs = {
     margin-bottom: 1rem;
   }
 
+  .description-content a {
+    color: #b45309;
+    text-decoration: underline;
+  }
+
+  .description-content a:hover {
+    color: #92400e;
+  }
+
   .description-content ul,
   .description-content ol {
     color: #4b5563;
@@ -1187,7 +1466,53 @@ const detailedSpecs = {
     margin-bottom: 0.5rem;
   }
 
-  /* Specifications Table */
+  /* ============================================================
+     COMPARISON BLOCK
+     ============================================================ */
+  .comparison-block {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid #f59e0b;
+  }
+
+  .comparison-block h3 {
+    margin-top: 0;
+    color: #1f2937;
+  }
+
+  .comparison-block p {
+    margin-bottom: 0;
+  }
+
+  /* ============================================================
+     PAGE SUMMARY
+     ============================================================ */
+  .page-summary {
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+  }
+
+  .page-summary p {
+    color: #374151;
+    line-height: 1.8;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .page-summary a {
+    color: #b45309;
+    text-decoration: underline;
+  }
+
+  .page-summary a:hover {
+    color: #92400e;
+  }
+
+  /* ============================================================
+     SPECIFICATIONS TABLE
+     ============================================================ */
   .spec-category {
     margin-bottom: 2.5rem;
   }
@@ -1289,7 +1614,9 @@ const detailedSpecs = {
     line-height: 1.5;
   }
 
-  /* FAQ */
+  /* ============================================================
+     FAQ
+     ============================================================ */
   .faq-list {
     display: flex;
     flex-direction: column;
@@ -1315,7 +1642,9 @@ const detailedSpecs = {
     line-height: 1.6;
   }
 
-  /* Related Products */
+  /* ============================================================
+     RELATED PRODUCTS
+     ============================================================ */
   .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1340,7 +1669,9 @@ const detailedSpecs = {
     }
   }
 
-  /* Bottom CTA */
+  /* ============================================================
+     BOTTOM CTA
+     ============================================================ */
   .bottom-cta {
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     border-radius: 8px;
