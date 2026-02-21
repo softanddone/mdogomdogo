@@ -57,7 +57,10 @@ const callLink = `tel:${phone}`;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    z-index: 9999;
+    z-index: 2147483647; /* max possible z-index value */
+    isolation: isolate;  /* creates its own stacking context */
+    transform: translateZ(0); /* force GPU layer, escape parent stacking contexts */
+    will-change: transform;
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
