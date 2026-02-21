@@ -397,6 +397,33 @@ export const products = [
   //   ],
   // },
 
+
+{
+  id: "10",
+  name: "Samsung Galaxy A17",
+  slug: "samsungA17offer",
+  storage: "128GB",
+  images: ["/phones/a171.jpg", "/phones/a172.jpg"],
+  deposit: 5200,
+  dailyPayment: 130,
+  paymentDays: 90,
+  whatsappNumber: "+254100028823",
+  description:
+    "Brand new — sealed box with charger, cable, and all original accessories",
+  features: [
+    "Latest Samsung Galaxy A17 modern design",
+    "Storage: 128GB ROM / 6GB RAM",
+    "Camera: 50MP AI dual rear camera",
+    "Large 5000mAh battery for long daily use",
+    "Smooth performance for apps, social media & gaming",
+    "Brand new (not refurb/used)",
+    "Original Samsung accessories included",
+  ],
+},
+
+
+
+
   
   {
     id: "10",
