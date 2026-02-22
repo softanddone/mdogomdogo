@@ -6,7 +6,7 @@ interface Props {
 }
 const { phone = "+254100028823" } = Astro.props;
 const cleanPhone = phone.replace(/\D/g, "");
-const message = "Hello, I’m interested in ordering a phone through Lipa Mdogo Mdogo with a deposit of about 3k. Kindly assist me with the process.";
+const message = "Hello, I'm interested in ordering a phone through Lipa Mdogo Mdogo with a deposit of about 3k. Kindly assist me with the process.";
 const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 
 // const waLink = `https://wa.me/${cleanPhone}`;
@@ -62,8 +62,9 @@ const callLink = `tel:${phone}`;
     right: 2rem;
     z-index: 2147483647; /* max possible z-index value */
     isolation: isolate;  /* creates its own stacking context */
-    transform: translateZ(0); /* force GPU layer, escape parent stacking contexts */
-    will-change: transform;
+    /* NOTE: transform: translateZ(0) intentionally removed —
+       CSS transforms break position: fixed on mobile browsers */
+    will-change: bottom;
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
@@ -229,7 +230,7 @@ const callLink = `tel:${phone}`;
 </style>
 
 <script>
-  const float = document.getElementById('contactFloat');
+  const float = document.getElementById('contactFloat') as HTMLElement | null;
   const toggle = document.getElementById('contactToggle');
 
   toggle?.addEventListener('click', () => {
@@ -242,4 +243,28 @@ const callLink = `tel:${phone}`;
       float.classList.remove('open');
     }
   });
+
+  // ── Mobile viewport fix ──────────────────────────────────────────────────
+  // Mobile browsers (Chrome/Safari) shrink the visual viewport when their UI
+  // chrome (address bar, nav bar) appears/disappears during scroll. This makes
+  // position:fixed elements appear to shift. The Visual Viewport API lets us
+  // track the actual visible area and correct the position in real time.
+
+  const BASE_BOTTOM_PX = window.innerWidth <= 480 ? 20 : 32; // matches 1.25rem / 2rem
+  const BASE_RIGHT_PX  = window.innerWidth <= 480 ? 20 : 32;
+
+  function pinToVisualViewport() {
+    if (!float || !window.visualViewport) return;
+    const vv = window.visualViewport;
+    // How much the visual viewport's bottom edge is offset from the layout viewport's bottom
+    const bottomShift = window.innerHeight - (vv.offsetTop + vv.height);
+    float.style.bottom = `${BASE_BOTTOM_PX + bottomShift}px`;
+    float.style.right  = `${BASE_RIGHT_PX}px`;
+  }
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('scroll', pinToVisualViewport);
+    window.visualViewport.addEventListener('resize', pinToVisualViewport);
+    pinToVisualViewport(); // apply immediately on load
+  }
 </script>
