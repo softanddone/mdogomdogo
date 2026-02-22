@@ -6,7 +6,10 @@ interface Props {
 }
 const { phone = "+254100028823" } = Astro.props;
 const cleanPhone = phone.replace(/\D/g, "");
-const waLink = `https://wa.me/${cleanPhone}`;
+const message = "Hello, I’m interested in ordering a phone through Lipa Mdogo Mdogo with a deposit of about 3k. Kindly assist me with the process.";
+const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+
+// const waLink = `https://wa.me/${cleanPhone}`;
 const callLink = `tel:${phone}`;
 ---
 
@@ -76,7 +79,7 @@ const callLink = `tel:${phone}`;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    background: #0f0f0f;
+    background: rgb(2, 136, 2);
     color: #f5f0e8;
     display: flex;
     align-items: center;
