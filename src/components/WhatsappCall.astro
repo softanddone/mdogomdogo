@@ -60,11 +60,10 @@ const callLink = `tel:${phone}`;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    z-index: 2147483647; /* max possible z-index value */
-    isolation: isolate;  /* creates its own stacking context */
-    /* NOTE: transform: translateZ(0) intentionally removed —
-       CSS transforms break position: fixed on mobile browsers */
-    will-change: bottom;
+    z-index: 2147483647;
+    isolation: isolate;
+    /* NO transform here — any CSS transform on a fixed element breaks
+       position:fixed on mobile WebKit/Blink */
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
@@ -233,38 +232,68 @@ const callLink = `tel:${phone}`;
   const float = document.getElementById('contactFloat') as HTMLElement | null;
   const toggle = document.getElementById('contactToggle');
 
+  // ── Toggle open/close ────────────────────────────────────────────────────
   toggle?.addEventListener('click', () => {
     float?.classList.toggle('open');
   });
 
-  // Close on outside click
   document.addEventListener('click', (e) => {
     if (float && !float.contains(e.target as Node)) {
       float.classList.remove('open');
     }
   });
 
-  // ── Mobile viewport fix ──────────────────────────────────────────────────
-  // Mobile browsers (Chrome/Safari) shrink the visual viewport when their UI
-  // chrome (address bar, nav bar) appears/disappears during scroll. This makes
-  // position:fixed elements appear to shift. The Visual Viewport API lets us
-  // track the actual visible area and correct the position in real time.
+  // ── Mobile viewport pinning ──────────────────────────────────────────────
+  //
+  // Root cause: Mobile browsers animate their UI chrome (address bar / bottom
+  // nav) in/out during scroll direction changes. While this animation plays,
+  // the *layout* viewport stays fixed in size but the *visual* viewport
+  // shrinks/grows frame by frame. `position:fixed` is anchored to the layout
+  // viewport, so it appears to drift.
+  //
+  // Fix strategy:
+  //   1. Use `top` + `left` (not `bottom` + `right`) — avoids a compounding
+  //      offset bug where both element height and viewport height change at
+  //      the same time, which makes `bottom`-based positioning unstable.
+  //   2. Derive position from `window.visualViewport` so we track the actual
+  //      visible screen area, not the layout viewport.
+  //   3. Wrap the DOM write in `requestAnimationFrame` so it lands in the
+  //      same paint cycle as the browser's own frame — eliminating the 1-frame
+  //      lag that causes the visible jump.
+  //   4. Listen to `touchmove` in addition to visualViewport events to catch
+  //      the chrome transition as early as possible (vv events can lag behind).
 
-  const BASE_BOTTOM_PX = window.innerWidth <= 480 ? 20 : 32; // matches 1.25rem / 2rem
-  const BASE_RIGHT_PX  = window.innerWidth <= 480 ? 20 : 32;
+  const vv = window.visualViewport;
 
-  function pinToVisualViewport() {
-    if (!float || !window.visualViewport) return;
-    const vv = window.visualViewport;
-    // How much the visual viewport's bottom edge is offset from the layout viewport's bottom
-    const bottomShift = window.innerHeight - (vv.offsetTop + vv.height);
-    float.style.bottom = `${BASE_BOTTOM_PX + bottomShift}px`;
-    float.style.right  = `${BASE_RIGHT_PX}px`;
-  }
+  if (vv && float) {
+    const MARGIN = window.innerWidth <= 480 ? 20 : 32; // px — matches 1.25rem / 2rem in CSS
 
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('scroll', pinToVisualViewport);
-    window.visualViewport.addEventListener('resize', pinToVisualViewport);
-    pinToVisualViewport(); // apply immediately on load
+    // Disable CSS bottom/right so JS top/left has full control
+    float.style.bottom = 'auto';
+    float.style.right  = 'auto';
+
+    let rafId = 0;
+
+    function pin() {
+      if (!float || !vv) return;
+      // vv.offsetTop/Left = visual viewport's position within the layout viewport
+      // We want the element flush to the visual viewport's bottom-right corner
+      const top  = vv.offsetTop  + vv.height - MARGIN - float.offsetHeight;
+      const left = vv.offsetLeft + vv.width  - MARGIN - float.offsetWidth;
+      float.style.top  = `${top}px`;
+      float.style.left = `${left}px`;
+    }
+
+    function schedulePin() {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(pin);
+    }
+
+    vv.addEventListener('scroll', schedulePin);
+    vv.addEventListener('resize', schedulePin);
+    // touchmove fires earlier than vv events during chrome transitions
+    document.addEventListener('touchmove', schedulePin, { passive: true });
+
+    pin(); // set correct position before first paint
   }
 </script>
