@@ -11,7 +11,7 @@ export const products = [
       "/phones/aa3.jpg",
       "/phones/aa4.jpg",
     ],
-    deposit: 3300,
+    deposit: 2900,
     dailyPayment: 89,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
