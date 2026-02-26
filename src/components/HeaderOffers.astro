@@ -11,7 +11,7 @@ const whatsappNumber = "254100028823";
     <div class="announce-track">
       <span class="announce-item">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Free Delivery 
+        Free Delivery Nationwide
       </span>
       <span class="announce-sep" aria-hidden="true">✦</span>
       <span class="announce-item">
@@ -42,13 +42,21 @@ const whatsappNumber = "254100028823";
     </div>
   </div>
 
+  <!-- ── Bonus Banner ── -->
+  <div class="bonus-banner">
+    <div class="bonus-inner">
+      <span class="bonus-badge">🎁 Bonus</span>
+      <span class="bonus-text">Get <strong>1 week free</strong> before starting daily payment</span>
+    </div>
+  </div>
+
   <!-- ── Main Header ── -->
   <div class="main-header">
     <div class="container">
 
       <!-- Logo row (always visible) -->
       <div class="logo-row">
-        <a class="logo" aria-label="Nairobi Mobile Hub — Home">
+        <a href="/" class="logo" aria-label="Nairobi Mobile Hub — Home">
           <div class="logo-icon">
             <img src="/phones/logo.jpeg" alt="" width="46" height="46" />
           </div>
@@ -125,7 +133,7 @@ const whatsappNumber = "254100028823";
             <li class="step">
               <div class="step-num" aria-hidden="true">3</div>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              Inspect, then pay deposit
+              Inspect, then pay
             </li>
 
           </ol>
@@ -251,8 +259,62 @@ const whatsappNumber = "254100028823";
   }
 
   /* ════════════════════════════
-     MAIN HEADER
+     BONUS BANNER
   ════════════════════════════ */
+  .bonus-banner {
+    background: linear-gradient(90deg, #FFF8E7 0%, #FFFBEF 50%, #FFF8E7 100%);
+    border-bottom: 1px solid #F0D080;
+    border-top: 1px solid #F5E090;
+  }
+
+  .bonus-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.48rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .bonus-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #F5C518;
+    color: #7A4900;
+    font-size: 0.625rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.18rem 0.55rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(200,140,0,0.25);
+  }
+
+  .bonus-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6B4E00;
+    letter-spacing: 0.01em;
+  }
+
+  .bonus-text strong {
+    font-weight: 800;
+    color: #4A3400;
+  }
+
+  @media (max-width: 600px) {
+    .bonus-inner {
+      gap: 0.45rem;
+      padding: 0.42rem 1rem;
+    }
+    .bonus-text { font-size: 0.72rem; }
+  }
+
+
   .main-header { background: var(--white); }
 
   .main-header .container {
