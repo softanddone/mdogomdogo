@@ -8,7 +8,7 @@ export const products = [
     images: [
       "/phones/aa1.jpg",
       "/phones/aa2.jpg",
-      "/phones/aa3.jpg",
+      // "/phones/aa3.jpg",
       "/phones/aa4.jpg",
     ],
     deposit: 2900,
