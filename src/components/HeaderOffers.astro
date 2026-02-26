@@ -46,18 +46,26 @@ const whatsappNumber = "254100028823";
   <div class="main-header">
     <div class="container">
 
-      <!-- Logo -->
-      <a href="/" class="logo" aria-label="Nairobi Mobile Hub — Home">
-        <div class="logo-icon">
-          <img src="/phones/logo.jpeg" alt="" width="46" height="46" />
-        </div>
-        <div class="logo-words">
-          <span class="logo-brand">Nairobi Mobile Hub</span>
-          <span class="logo-sub">Trusted Deliveries</span>
-        </div>
-      </a>
+      <!-- Logo row (always visible) -->
+      <div class="logo-row">
+        <a href="/" class="logo" aria-label="Nairobi Mobile Hub — Home">
+          <div class="logo-icon">
+            <img src="/phones/logo.jpeg" alt="" width="46" height="46" />
+          </div>
+          <div class="logo-words">
+            <span class="logo-brand">Nairobi Mobile Hub</span>
+            <span class="logo-sub">Trusted Deliveries</span>
+          </div>
+        </a>
 
-      <!-- Contact CTAs -->
+        <!-- Mobile collapse toggle -->
+        <button class="collapse-toggle" id="headerToggle" aria-expanded="true" aria-controls="headerCollapsible" aria-label="Toggle header details">
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+
+      <!-- Contact CTAs — wrapped for mobile collapse -->
+      <div class="header-collapsible" id="headerCollapsible">
       <div class="cta-group">
 
         <a
@@ -90,41 +98,44 @@ const whatsappNumber = "254100028823";
           </span>
         </a>
 
-      </div>
+      </div><!-- /.cta-group -->
+
+      <!-- How It Works — also collapses on mobile -->
+      <nav class="how-bar" aria-label="How ordering works">
+        <div class="how-container">
+          <p class="how-title">How it works</p>
+          <ol class="steps">
+
+            <li class="step">
+              <div class="step-num" aria-hidden="true">1</div>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+              Order via WhatsApp or Call
+            </li>
+
+            <li class="step-arrow" aria-hidden="true">›</li>
+
+            <li class="step">
+              <div class="step-num" aria-hidden="true">2</div>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              We deliver to your door
+            </li>
+
+            <li class="step-arrow" aria-hidden="true">›</li>
+
+            <li class="step">
+              <div class="step-num" aria-hidden="true">3</div>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              Inspect, then pay
+            </li>
+
+          </ol>
+        </div>
+      </nav>
+
+      </div><!-- /.header-collapsible -->
     </div>
   </div>
 
-  <!-- ── How It Works Bar ── -->
-  <nav class="how-bar" aria-label="How ordering works">
-    <div class="container how-container">
-      <p class="how-title">How it works</p>
-      <ol class="steps">
-
-        <li class="step">
-          <div class="step-num" aria-hidden="true">1</div>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
-          Order via WhatsApp or Call
-        </li>
-
-        <li class="step-arrow" aria-hidden="true">›</li>
-
-        <li class="step">
-          <div class="step-num" aria-hidden="true">2</div>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          We deliver to your door
-        </li>
-
-        <li class="step-arrow" aria-hidden="true">›</li>
-
-        <li class="step">
-          <div class="step-num" aria-hidden="true">3</div>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-          Inspect, then pay
-        </li>
-
-      </ol>
-    </div>
-  </nav>
 
 </header>
 
@@ -455,8 +466,37 @@ const whatsappNumber = "254100028823";
   }
 
   /* ════════════════════════════
-     RESPONSIVE — TABLET ≤ 860px
+     COLLAPSE TOGGLE (mobile only)
   ════════════════════════════ */
+  .collapse-toggle {
+    display: none; /* hidden on desktop */
+  }
+
+  /* collapsible: no constraints on desktop */
+  .header-collapsible {
+    display: contents; /* transparent wrapper on desktop */
+  }
+
+  /* how-bar inside collapsible on mobile needs its own styles */
+  .header-collapsible .how-bar {
+    background: var(--warm-bg);
+    border-top: 1px solid var(--warm-line);
+    padding: 0.6rem 1.25rem;
+  }
+
+  .header-collapsible .how-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+
+  /* logo-row: transparent on desktop, becomes a real flex row on mobile */
+  .logo-row { display: contents; }
+
+
   @media (max-width: 860px) {
     .logo-sub   { display: none; }
     .cta-label  { display: none; }
@@ -470,19 +510,77 @@ const whatsappNumber = "254100028823";
   ════════════════════════════ */
   @media (max-width: 600px) {
 
-    /* Stack: logo on top, CTAs below */
+    /* Logo row: flex so toggle sits on the right */
     .main-header .container {
       flex-direction: column;
       align-items: stretch;
-      gap: 0.65rem;
-      padding-top: 0.8rem;
-      padding-bottom: 0.8rem;
+      gap: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
-    .logo { align-self: flex-start; }
+    /* Logo + toggle always-visible row */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+    }
+
+    .logo { align-self: auto; }
     .logo-icon  { width: 40px; height: 40px; }
     .logo-brand { font-size: 1.18rem; }
     .logo-sub   { display: block; }
+
+    /* Collapse toggle button */
+    .collapse-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--warm-line);
+      background: var(--warm-bg);
+      color: var(--stone);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+    .collapse-toggle:hover {
+      background: var(--sage-light);
+      border-color: var(--sage-mid);
+      color: var(--sage-deep);
+    }
+
+    .chevron {
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Collapsed state: chevron flips down */
+    .collapse-toggle[aria-expanded="false"] .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Collapsible panel */
+    .header-collapsible {
+      display: block;
+      overflow: hidden;
+      max-height: 300px; /* generous max for open state */
+      transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      opacity: 1;
+    }
+
+    .header-collapsible.is-collapsed {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    /* Inner padding for collapsible content */
+    .header-collapsible > .cta-group {
+      padding-bottom: 0.75rem;
+    }
 
     /* Two equal CTA buttons */
     .cta-group {
@@ -501,7 +599,7 @@ const whatsappNumber = "254100028823";
     .cta-label { display: none; }
     .cta-main  { font-size: 0.84rem; }
 
-    /* WhatsApp button: solid green on mobile for max tap-ability */
+    /* WhatsApp solid green on mobile */
     .cta--whatsapp {
       background: #1A7040;
       color: #fff;
@@ -510,9 +608,20 @@ const whatsappNumber = "254100028823";
     }
     .cta--whatsapp:hover { background: #155c35; }
 
-    /* How bar: number pills, no icons, no arrows */
-    .how-bar      { padding: 0.5rem 1rem; }
-    .how-container { justify-content: flex-start; flex-direction: column; align-items: flex-start; gap: 0.45rem; }
+    /* How bar inside collapsible */
+    .header-collapsible .how-bar {
+      padding: 0.5rem 0;
+      border-top: 1px solid var(--warm-line);
+      background: transparent;
+    }
+
+    .header-collapsible .how-container {
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.45rem;
+    }
+
     .how-title    { display: block; }
     .steps        { gap: 0.35rem; flex-wrap: wrap; justify-content: flex-start; }
 
@@ -540,3 +649,33 @@ const whatsappNumber = "254100028823";
     .step       { font-size: 0.62rem; }
   }
 </style>
+
+<script>
+  const toggle = document.getElementById('headerToggle');
+  const panel  = document.getElementById('headerCollapsible');
+
+  if (toggle && panel) {
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isExpanded));
+      panel.classList.toggle('is-collapsed', isExpanded);
+    });
+
+    // Auto-collapse on scroll down, re-expand when near top (mobile only)
+    let lastY = 0;
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth > 600) return;
+      const y = window.scrollY;
+      if (y > 60 && y > lastY && !panel.classList.contains('is-collapsed')) {
+        // scrolling down past threshold → collapse
+        panel.classList.add('is-collapsed');
+        toggle.setAttribute('aria-expanded', 'false');
+      } else if (y < 10 && panel.classList.contains('is-collapsed')) {
+        // back at top → re-expand
+        panel.classList.remove('is-collapsed');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      lastY = y;
+    }, { passive: true });
+  }
+</script>
