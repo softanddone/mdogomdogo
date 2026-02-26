@@ -1,0 +1,541 @@
+---
+// Header.astro — Nairobi Mobile Hub
+const phone = "+254100028823";
+const whatsappNumber = "254100028823";
+---
+
+<header class="site-header">
+
+  <!-- ── Announcement Strip ── -->
+  <div class="announce-strip" aria-label="Store highlights">
+    <div class="announce-track">
+      <span class="announce-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Free Delivery Nationwide
+      </span>
+      <span class="announce-sep" aria-hidden="true">✦</span>
+      <span class="announce-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        1-Year Warranty on All Products
+      </span>
+      <span class="announce-sep" aria-hidden="true">✦</span>
+      <span class="announce-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Inspect Before You Pay
+      </span>
+      <!-- Duplicate for seamless scroll on mobile -->
+      <span class="announce-sep" aria-hidden="true">✦</span>
+      <span class="announce-item" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Free Delivery Nationwide
+      </span>
+      <span class="announce-sep" aria-hidden="true">✦</span>
+      <span class="announce-item" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        1-Year Warranty on All Products
+      </span>
+      <span class="announce-sep" aria-hidden="true">✦</span>
+      <span class="announce-item" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Inspect Before You Pay
+      </span>
+    </div>
+  </div>
+
+  <!-- ── Main Header ── -->
+  <div class="main-header">
+    <div class="container">
+
+      <!-- Logo -->
+      <a href="/" class="logo" aria-label="Nairobi Mobile Hub — Home">
+        <div class="logo-icon">
+          <img src="/phones/logo.jpeg" alt="" width="46" height="46" />
+        </div>
+        <div class="logo-words">
+          <span class="logo-brand">Nairobi Mobile Hub</span>
+          <span class="logo-sub">Trusted Deliveries</span>
+        </div>
+      </a>
+
+      <!-- Contact CTAs -->
+      <div class="cta-group">
+
+        <a
+          href={`https://wa.me/${whatsappNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta cta--whatsapp"
+          aria-label="Order on WhatsApp"
+        >
+          <span class="cta-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </span>
+          <span class="cta-text">
+            <span class="cta-label">Order on</span>
+            <span class="cta-main">WhatsApp</span>
+          </span>
+        </a>
+
+        <a href={`tel:${phone.replace(/\s/g,'')}`} class="cta cta--call" aria-label="Call us to order">
+          <span class="cta-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+            </svg>
+          </span>
+          <span class="cta-text">
+            <span class="cta-label">Call us now</span>
+            <span class="cta-main">{phone}</span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── How It Works Bar ── -->
+  <nav class="how-bar" aria-label="How ordering works">
+    <div class="container how-container">
+      <p class="how-title">How it works</p>
+      <ol class="steps">
+
+        <li class="step">
+          <div class="step-num" aria-hidden="true">1</div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          Order via WhatsApp or Call
+        </li>
+
+        <li class="step-arrow" aria-hidden="true">›</li>
+
+        <li class="step">
+          <div class="step-num" aria-hidden="true">2</div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          We deliver to your door
+        </li>
+
+        <li class="step-arrow" aria-hidden="true">›</li>
+
+        <li class="step">
+          <div class="step-num" aria-hidden="true">3</div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Inspect, then pay
+        </li>
+
+      </ol>
+    </div>
+  </nav>
+
+</header>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,500&display=swap');
+
+  /* ── Design Tokens ── */
+  :root {
+    --sage:        #2E7D5E;
+    --sage-light:  #ECF7F1;
+    --sage-mid:    #A8D5C2;
+    --sage-deep:   #1D5C43;
+    --warm-bg:     #F9F8F5;
+    --warm-line:   #ECEAE3;
+    --stone:       #7A7268;
+    --ink:         #1E1C19;
+    --wa-bg:       #EDFAF3;
+    --wa-border:   #85D4A8;
+    --wa-text:     #166534;
+    --wa-hover:    #D7F5E6;
+    --wa-shadow:   rgba(22,101,52,0.18);
+    --white:       #FFFFFF;
+    --r-sm:        8px;
+    --r-md:        12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ════════════════════════════
+     WRAPPER
+  ════════════════════════════ */
+  .site-header {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--white);
+    box-shadow:
+      0 1px 0 var(--warm-line),
+      0 4px 24px rgba(0,0,0,0.06),
+      0 1px 4px rgba(46,125,94,0.06);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* ════════════════════════════
+     ANNOUNCEMENT STRIP
+  ════════════════════════════ */
+  .announce-strip {
+    background: linear-gradient(90deg, #E5F4EC 0%, #EBF7F1 50%, #E5F4EC 100%);
+    border-bottom: 1px solid var(--sage-mid);
+    overflow: hidden;
+    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  .announce-track {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    white-space: nowrap;
+    /* Always scrolling — clean on all sizes */
+    animation: marquee 24s linear infinite;
+    padding-left: 2rem;
+  }
+
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* On wide screens: pause animation, center the strip */
+  @media (min-width: 700px) {
+    .announce-strip {
+      justify-content: center;
+    }
+    .announce-track {
+      animation: none;
+      padding-left: 0;
+      justify-content: center;
+    }
+    /* Hide the duplicate set on desktop */
+    .announce-track .announce-item:nth-child(n+5),
+    .announce-track .announce-sep:nth-child(n+5) {
+      display: none;
+    }
+  }
+
+  .announce-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    font-size: 0.685rem;
+    font-weight: 700;
+    color: var(--sage-deep);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .announce-item svg { color: var(--sage); flex-shrink: 0; }
+
+  .announce-sep {
+    font-size: 0.45rem;
+    color: var(--sage-mid);
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════
+     MAIN HEADER
+  ════════════════════════════ */
+  .main-header { background: var(--white); }
+
+  .main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+
+  /* ── Logo ── */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .logo-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .logo:hover .logo-icon { transform: scale(1.07) rotate(-3deg); }
+
+  .logo-words {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    min-width: 0;
+  }
+
+  .logo-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.38rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .logo:hover .logo-brand { color: var(--sage-deep); }
+
+  .logo-sub {
+    font-size: 0.595rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+  }
+
+  /* ── CTA Group ── */
+  .cta-group {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.58rem 1.05rem;
+    border-radius: var(--r-md);
+    text-decoration: none;
+    transition:
+      transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
+      box-shadow 0.2s ease,
+      background 0.15s ease;
+  }
+
+  .cta:hover  { transform: translateY(-2px); }
+  .cta:active { transform: scale(0.97); }
+
+  .cta-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cta-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .cta-label {
+    font-size: 0.565rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    opacity: 0.55;
+  }
+
+  .cta-main {
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+  }
+
+  .cta--whatsapp {
+    background: var(--wa-bg);
+    color: var(--wa-text);
+    border: 1.5px solid var(--wa-border);
+    box-shadow: 0 2px 12px var(--wa-shadow);
+  }
+
+  .cta--whatsapp:hover {
+    background: var(--wa-hover);
+    box-shadow: 0 6px 20px var(--wa-shadow);
+  }
+
+  .cta--call {
+    background: var(--warm-bg);
+    color: var(--ink);
+    border: 1.5px solid var(--warm-line);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .cta--call:hover {
+    background: #EEEAE2;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.09);
+  }
+
+  /* ════════════════════════════
+     HOW IT WORKS BAR
+  ════════════════════════════ */
+  .how-bar {
+    background: var(--warm-bg);
+    border-top: 1px solid var(--warm-line);
+    padding: 0.6rem 1.25rem;
+  }
+
+  .how-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .how-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--stone);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .steps {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+
+  .step-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--sage);
+    color: var(--white);
+    font-size: 0.62rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .step-arrow {
+    color: var(--sage-mid);
+    font-size: 1.15rem;
+    line-height: 1;
+    list-style: none;
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════
+     RESPONSIVE — TABLET ≤ 860px
+  ════════════════════════════ */
+  @media (max-width: 860px) {
+    .logo-sub   { display: none; }
+    .cta-label  { display: none; }
+    .cta        { padding: 0.52rem 0.85rem; }
+    .cta-main   { font-size: 0.82rem; }
+    .how-title  { display: none; }
+  }
+
+  /* ════════════════════════════
+     RESPONSIVE — MOBILE ≤ 600px
+  ════════════════════════════ */
+  @media (max-width: 600px) {
+
+    /* Stack: logo on top, CTAs below */
+    .main-header .container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.65rem;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+    }
+
+    .logo { align-self: flex-start; }
+    .logo-icon  { width: 40px; height: 40px; }
+    .logo-brand { font-size: 1.18rem; }
+    .logo-sub   { display: block; }
+
+    /* Two equal CTA buttons */
+    .cta-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .cta {
+      justify-content: center;
+      padding: 0.72rem 0.5rem;
+      border-radius: var(--r-sm);
+      gap: 0.4rem;
+    }
+
+    .cta-label { display: none; }
+    .cta-main  { font-size: 0.84rem; }
+
+    /* WhatsApp button: solid green on mobile for max tap-ability */
+    .cta--whatsapp {
+      background: #1A7040;
+      color: #fff;
+      border-color: #1A7040;
+      box-shadow: 0 3px 14px rgba(22,101,52,0.28);
+    }
+    .cta--whatsapp:hover { background: #155c35; }
+
+    /* How bar: number pills, no icons, no arrows */
+    .how-bar      { padding: 0.5rem 1rem; }
+    .how-title    { display: none; }
+    .steps        { gap: 0.35rem; flex-wrap: wrap; justify-content: center; }
+
+    .step {
+      font-size: 0.68rem;
+      gap: 0.3rem;
+      background: var(--white);
+      border: 1.5px solid var(--warm-line);
+      padding: 0.22rem 0.6rem 0.22rem 0.3rem;
+      border-radius: 20px;
+    }
+
+    .step-num   { width: 18px; height: 18px; font-size: 0.58rem; }
+    .step svg   { display: none; }
+    .step-arrow { display: none; }
+  }
+
+  /* ════════════════════════════
+     RESPONSIVE — SMALL ≤ 380px
+  ════════════════════════════ */
+  @media (max-width: 380px) {
+    .logo-brand { font-size: 1.05rem; }
+    .logo-sub   { display: none; }
+    .cta-main   { font-size: 0.78rem; }
+    .step       { font-size: 0.62rem; }
+  }
+</style>
