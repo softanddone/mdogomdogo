@@ -6,10 +6,12 @@ export const products = [
     slug:"samsunga07offer",
     storage: "128GB",
     images: [
-      "/phones/aa1.jpg",
-      "/phones/aa2.jpg",
-      // "/phones/aa3.jpg",
+      // "/phones/aa1.jpg",
+      // "/phones/aa2.jpg",s
+      // "/phones/aa3.jpg",s
       "/phones/aa4.jpg",
+      "/phones/aa6.jpg",
+
     ],
     deposit: 2900,
     dailyPayment: 89,
@@ -54,7 +56,7 @@ export const products = [
     name: "Tecno Pop 10",
     slug:"tecnopop10offer",
     storage: "64GB",
-    images: ["/phones/u1.jpeg", "/phones/u2.jpeg", "/phones/u3.jpeg"],
+    images: ["/phones/u1.jpeg", "/phones/u2.png", "/phones/u3.jpeg"],
     deposit: 2800,
     dailyPayment: 91,
     paymentDays: 90,
@@ -78,7 +80,11 @@ export const products = [
     name: "itel City 100",
     slug:"itela100offer",
     storage: "128GB",
-    images: ["/phones/wa1.jpeg", "/phones/wa2.jpeg", "/phones/wa3.jpeg"],
+    images: ["/phones/wa1.jpeg", 
+
+      // "/phones/wa2.jpeg", 
+      
+      "/phones/wa3.jpeg"],
     deposit: 2900,
     dailyPayment: 87,
     paymentDays: 90,
@@ -105,7 +111,7 @@ export const products = [
   storage: "256GB",
   images: [
     "/phones/it1.png",
-    "/phones/it2.png",
+    "/phones/it2.jpg",
     
   ],
   deposit: 5000,
