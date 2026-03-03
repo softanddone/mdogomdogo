@@ -56,7 +56,18 @@ export const products = [
     name: "Tecno Pop 10",
     slug:"tecnopop10offer",
     storage: "64GB",
-    images: ["/phones/u1.jpeg", "/phones/u2.png", "/phones/u3.jpeg"],
+    images: [
+      
+      // "/phones/u1.jpeg", 
+      
+      "/phones/u2.png", 
+      
+      // "/phones/u3.jpeg"
+
+     "/phones/v.png"
+
+    
+    ],
     deposit: 2800,
     dailyPayment: 91,
     paymentDays: 90,
@@ -121,6 +132,7 @@ export const products = [
   description:
     "Brand new — comes with protective case and original charger",
   features: [
+    "Curved screen display",
     "Display: Large HD+ display",
     "Storage: 256GB ROM / 8GB RAM",
     "Camera: 50MP AI main camera",
@@ -183,9 +195,6 @@ export const products = [
     "Brand new sealed unit (not refurbished or used)",
   ],
 },
-
-
-
 
 
   {
@@ -257,7 +266,7 @@ export const products = [
       "/phones/plus5.jpeg",
     ],
     deposit: 5400,
-    dailyPayment: 147,
+    dailyPayment: 160,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:

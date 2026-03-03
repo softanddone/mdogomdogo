@@ -128,6 +128,8 @@ const kenyaLocationData = {
     '@type': 'City',
     name: 'Nairobi',
     addressRegion: 'Nairobi County',
+    "addressLocality": "Nairobi",
+
     addressCountry: 'KE',
     geo: {
       '@type': 'GeoCoordinates',
@@ -137,8 +139,7 @@ const kenyaLocationData = {
   },
   counties: [
     'Nairobi County', 'Kiambu County', 'Machakos County', 'Kajiado County', 
-    'Murang\'a County', 'Kirinyaga County', 'Nyeri County', 'Nyandarua County',
-    'Laikipia County', 'Nakuru County', 'Mombasa County', 'Kisumu County'
+    
   ]
 };
 
@@ -580,6 +581,8 @@ export function generateTVProductSchema(product: FlexibleProduct) {
             shippingDestination: {
               '@type': 'DefinedRegion',
               addressCountry: 'KE',
+              "addressLocality": "Nairobi",
+
               addressRegion: kenyaLocationData.counties
             }
           },
@@ -1066,13 +1069,6 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
 
   return JSON.stringify(graphData, null, 2);
 }
-
-
-
-
-
-
-
 
 export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
   if (!eventData) return null;
