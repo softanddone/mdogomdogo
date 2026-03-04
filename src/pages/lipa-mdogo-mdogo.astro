@@ -1,641 +1,1149 @@
+---
+// phones.astro - Lipa Mdogo Mdogo Phones Listing Page
+// Import your products from your data file
+// import { products } from '../data/products.js';
+
+// For demo, using the provided products array inline
+const products = [
+  {
+    id: 1,
+    name: "Oppo A3x",
+    fullname: "Oppo A3x 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
+    status: "New",
+    image: "/product/phones/oppo_a3x.webp",
+    from: "KSh 2,900",
+    deposit: "KSh 3,500",
+    daily: "Ksh 90",
+    totalPrice: "KSh 16,500",
+    discount: "-15%",
+    slug: "oppo-a3x",
+    description: "Buy Oppo A3x on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments.",
+    brand: "Oppo",
+    storage: "128GB",
+    condition: "new",
+    reviews: { averageRating: 4.5, reviewCount: 27 }
+  },
+  {
+    id: 2,
+    name: "Oppo A3 Pro",
+    fullname: "Oppo A3 Pro 6.7 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 64MP",
+    status: "New",
+    image: "/phones/oppo_a3_pro.webp",
+    from: "KSh 3,500",
+    deposit: "KSh 3,900",
+    daily: "KSh 90",
+    totalPrice: "KSh 19,999",
+    discount: "-12%",
+    slug: "oppo-a3-pro",
+    description: "Buy Oppo A3 Pro on credit in Kenya. Affordable installments with Lipa Mdogo Mdogo.",
+    brand: "Oppo",
+    storage: "256GB",
+    condition: "new",
+    reviews: { averageRating: 4.6, reviewCount: 31 }
+  }
+];
+
+const pageTitle = "Lipa Mdogo Mdogo Phones Nairobi | Buy Phones on Credit Kenya";
+const pageDescription = "Buy smartphones on credit in Nairobi, Kenya. Lipa mdogo mdogo with small deposit and daily/weekly payments. Latest Oppo, Samsung, Tecno, Infinix phones. Fast delivery. No hidden fees.";
+const canonicalURL = "https://mdogomdogodeals.co.ke/phones";
+
+// Collect unique storage values
+const allStorages = [...new Set(products.map(p => p.storage).filter(Boolean))].sort((a,b) => {
+  const numA = parseInt(a); const numB = parseInt(b);
+  return numB - numA;
+});
+
+// Deposit ranges
+const depositRanges = [
+  { label: "Under 2k", value: "under-2k", max: 2000 },
+  { label: "Under 3k", value: "under-3k", max: 3000 },
+  { label: "Under 4k", value: "under-4k", max: 4000 },
+  { label: "Under 5k", value: "under-5k", max: 5000 },
+  { label: "Under 10k", value: "under-10k", max: 10000 },
+];
+---
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-KE">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Phones | Lipa Mdogo Mdogo Nairobi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --or:#F68B1E;
-  --or2:#e07a10;
-  --or-bg:#FFF4E6;
-  --blk:#1A1A1A;
-  --tx:#222;
-  --tx2:#555;
-  --tx3:#999;
-  --bd:#E8E8E8;
-  --bd2:#F2F2F2;
-  --bg:#F5F5F5;
-  --wh:#fff;
-  --grn:#00A850;
-  --red:#D0021B;
-  --sw:228px;
-  --font:'Open Sans',sans-serif;
-}
-html,body{font-family:var(--font);color:var(--tx);background:var(--bg);font-size:13px;line-height:1.5;min-height:100vh}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
+  <meta name="keywords" content="lipa mdogo mdogo phones, buy phone on credit nairobi, smartphones kenya installments, phone loan nairobi, mkopa phones, watu simu kenya, cheap phones nairobi" />
+  <link rel="canonical" href={canonicalURL} />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:locale" content="en_KE" />
+  <meta property="og:site_name" content="Mdogo Mdogo Deals" />
 
-/* ─ HEADER ─ */
-.hdr{background:var(--or);padding:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-.hdr-in{max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
-.logo{font-size:20px;font-weight:800;color:#fff;text-decoration:none;white-space:nowrap;letter-spacing:-.5px}
-.logo span{background:#fff;color:var(--or);border-radius:3px;padding:1px 5px;margin-right:2px;font-size:17px}
-.hdr-search{flex:1;display:flex;max-width:520px}
-.hdr-search input{flex:1;padding:0 12px;height:38px;border:none;border-radius:3px 0 0 3px;font-family:var(--font);font-size:13px;outline:none;color:var(--tx)}
-.hdr-search button{background:#c96800;color:#fff;border:none;padding:0 18px;height:38px;border-radius:0 3px 3px 0;font-family:var(--font);font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
-.hdr-search button:hover{background:#a85500}
-.hdr-acts{display:flex;align-items:center;gap:4px;margin-left:auto}
-.hdr-act{display:flex;flex-direction:column;align-items:center;gap:1px;color:#fff;text-decoration:none;padding:4px 10px;border-radius:3px;font-size:10px;font-weight:600;border:none;background:none;cursor:pointer;font-family:var(--font)}
-.hdr-act:hover{background:rgba(0,0,0,.15)}
-.hdr-act svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
 
-/* ─ LAYOUT ─ */
-.wrap{max-width:1280px;margin:0 auto;padding:12px 12px 80px;display:flex;gap:10px;align-items:flex-start}
+  <!-- Geo -->
+  <meta name="geo.region" content="KE-30" />
+  <meta name="geo.placename" content="Nairobi" />
 
-/* ─ SIDEBAR ─ */
-.sidebar{width:var(--sw);flex-shrink:0;position:sticky;top:66px;max-height:calc(100vh - 76px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--bd) transparent}
-.sidebar::-webkit-scrollbar{width:4px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
-.sb-box{background:var(--wh);border:1px solid var(--bd);border-radius:3px;overflow:hidden;margin-bottom:8px}
-.sb-hd{padding:10px 14px;font-size:13px;font-weight:700;color:var(--tx);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;background:var(--wh)}
-.sb-hd .page-title{font-size:15px;font-weight:700}
-.clear-btn{font-size:11px;color:var(--or);background:none;border:none;cursor:pointer;font-weight:600;text-decoration:underline;padding:0;font-family:var(--font)}
-.fsec{border-bottom:1px solid var(--bd2)}
-.fsec:last-child{border-bottom:none}
-.fsec-hd{padding:10px 14px 9px;font-size:12px;font-weight:700;color:var(--tx);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;letter-spacing:.01em}
-.fsec-hd:hover{color:var(--or)}
-.fsec-hd svg{width:12px;height:12px;stroke:var(--tx3);fill:none;stroke-width:2.5;transition:transform .2s;flex-shrink:0}
-.fsec-hd.col svg{transform:rotate(-90deg)}
-.fopts{padding:2px 0 6px}
-.fopts.hide{display:none}
-.fopt{display:flex;align-items:center;padding:5px 14px;cursor:pointer;gap:0}
-.fopt:hover{background:var(--bg)}
-.fopt label{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--tx);flex:1}
-.fopt input[type=checkbox]{accent-color:var(--or);width:14px;height:14px;cursor:pointer;flex-shrink:0}
-.fcnt{font-size:11px;color:var(--tx3);min-width:16px;text-align:right}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-/* ─ DRAWER (mobile) ─ */
-.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:400}
-.ovl.on{display:block}
-.drw{position:fixed;left:0;top:0;bottom:0;width:285px;background:var(--wh);z-index:401;transform:translateX(-100%);transition:transform .28s ease;overflow-y:auto;display:flex;flex-direction:column}
-.drw.on{transform:translateX(0)}
-.drw-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--wh);z-index:2;flex-shrink:0}
-.drw-top h3{font-size:14px;font-weight:700}
-.drw-close{background:none;border:none;cursor:pointer;color:var(--tx2);padding:4px;display:flex;border-radius:3px}
-.drw-close:hover{background:var(--bg)}
-.drw-body{flex:1;overflow-y:auto}
-.drw-foot{padding:12px 16px;border-top:1px solid var(--bd);position:sticky;bottom:0;background:var(--wh);flex-shrink:0}
-.btn-show{width:100%;padding:11px;background:var(--or);color:#fff;border:none;border-radius:3px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer}
-.btn-show:hover{background:var(--or2)}
+  <!-- Structured Data: ItemList -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Lipa Mdogo Mdogo Phones in Nairobi",
+    "description": pageDescription,
+    "url": canonicalURL,
+    "numberOfItems": products.length,
+    "itemListElement": products.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "url": `https://mdogomdogodeals.co.ke/${p.slug}`,
+      "name": p.name
+    }))
+  })} />
 
-/* ─ MAIN ─ */
-.main{flex:1;min-width:0}
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "url": canonicalURL,
+    "inLanguage": "en-KE",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mdogomdogodeals.co.ke" },
+        { "@type": "ListItem", "position": 2, "name": "Phones", "item": canonicalURL }
+      ]
+    }
+  })} />
 
-/* ─ TOOLBAR ─ */
-.toolbar{background:var(--wh);border:1px solid var(--bd);border-radius:3px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;flex-wrap:wrap}
-.tb-l{display:flex;align-items:center;gap:8px}
-.tb-r{display:flex;align-items:center;gap:8px}
-.mob-filter-btn{display:none;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--bd);border-radius:3px;font-family:var(--font);font-size:12px;font-weight:700;background:var(--wh);color:var(--tx);cursor:pointer}
-.mob-filter-btn:hover{border-color:var(--or);color:var(--or)}
-.fcount-badge{background:var(--or);color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center;line-height:1}
-.pg-title{font-size:14px;font-weight:700;color:var(--tx)}
-.res-ct{font-size:12px;color:var(--tx3)}
-.show-lbl{font-size:12px;color:var(--tx2);white-space:nowrap}
-.show-nums{display:flex;gap:0}
-.snum{padding:4px 8px;font-size:12px;font-weight:600;color:var(--tx2);border:1px solid var(--bd);border-right:none;background:var(--wh);cursor:pointer;font-family:var(--font);transition:all .12s}
-.snum:last-child{border-right:1px solid var(--bd)}
-.snum:hover,.snum.on{background:var(--or);color:#fff;border-color:var(--or)}
-.sort-sel{padding:5px 24px 5px 9px;border:1px solid var(--bd);border-radius:3px;font-family:var(--font);font-size:12px;color:var(--tx);background:var(--wh) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;appearance:none;outline:none;cursor:pointer}
-.sort-sel:focus{border-color:var(--or)}
-.vbtns{display:flex;border:1px solid var(--bd);border-radius:3px;overflow:hidden}
-.vbtn{padding:5px 8px;background:var(--wh);border:none;cursor:pointer;color:var(--tx3);display:flex;align-items:center;transition:all .12s}
-.vbtn+.vbtn{border-left:1px solid var(--bd)}
-.vbtn:hover,.vbtn.on{background:var(--or-bg);color:var(--or)}
-.vbtn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─ ACTIVE FILTER TAGS ─ */
-.atags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
-.atag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:var(--or-bg);border:1px solid rgba(246,139,30,.3);color:var(--or2);border-radius:2px;font-size:11px;font-weight:600}
-.atag button{background:none;border:none;cursor:pointer;color:var(--or);font-size:15px;line-height:1;padding:0 0 0 1px;display:flex;align-items:center;margin-top:-1px}
+    :root {
+      --green: #00c853;
+      --green-dark: #009624;
+      --green-light: #e8f5e9;
+      --accent: #ff6f00;
+      --accent-light: #fff3e0;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f8f9fa;
+      --white: #ffffff;
+      --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.14);
+      --radius: 14px;
+      --sidebar-w: 230px;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
 
-/* ─ PRODUCT GRID ─ */
-.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--bd);border:1px solid var(--bd);border-radius:3px;overflow:hidden}
-.pgrid.lv{grid-template-columns:1fr}
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-/* ─ CARD ─ */
-.card{background:var(--wh);display:flex;flex-direction:column;position:relative;cursor:pointer;transition:box-shadow .18s}
-.card:hover{box-shadow:inset 0 0 0 2px var(--or);z-index:2}
-.card-link{display:flex;flex-direction:column;flex:1;text-decoration:none;color:inherit}
+    /* ===== LAYOUT ===== */
+    .page-wrapper {
+      display: flex;
+      gap: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 16px 100px;
+      align-items: flex-start;
+    }
 
-/* Image area — large so phone is well visible */
-.cimg{position:relative;background:#fff;aspect-ratio:1/1.05;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:10% 14%}
-.cimg img{width:100%;height:100%;object-fit:contain;transition:transform .32s ease}
-.card:hover .cimg img{transform:scale(1.06)}
-.b-new{position:absolute;top:8px;left:8px;background:var(--or);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.03em}
-.b-disc{position:absolute;top:8px;right:8px;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:2px}
-.wishbtn{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.92);border:1px solid var(--bd);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .18s;color:var(--tx3)}
-.card:hover .wishbtn{opacity:1}
-.wishbtn:hover{border-color:var(--red);color:var(--red)}
-.wishbtn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2}
+    /* ===== SIDEBAR DESKTOP ===== */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: 16px;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 20px 16px;
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .sidebar { display: block; }
+    }
 
-.cbody{padding:10px 12px 12px;border-top:1px solid var(--bd2);flex:1;display:flex;flex-direction:column}
-.cname{font-size:12px;font-weight:600;color:var(--tx);line-height:1.4;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.cspecs{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
-.cspec{font-size:10px;padding:1px 5px;background:var(--bg);color:var(--tx3);border-radius:2px;border:1px solid var(--bd2);white-space:nowrap}
+    .sidebar-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
 
-.cprices{margin-top:auto}
-.cprice-was{font-size:10px;color:var(--tx3);text-decoration:line-through;margin-bottom:1px}
-.cprice-main{font-size:15px;font-weight:800;color:var(--or);line-height:1.2;margin-bottom:6px}
-.cprice-sub{font-size:10px;font-weight:400;color:var(--tx3)}
-.cplans{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.cplan{background:var(--bg);border-radius:2px;padding:5px 7px;border:1px solid var(--bd2)}
-.cplan-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);font-weight:600;margin-bottom:1px}
-.cplan-val{font-size:12px;font-weight:700;color:var(--blk)}
+    .filter-section { margin-bottom: 20px; }
+    .filter-section-title {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
 
-.cfoot{margin-top:8px;padding-top:7px;border-top:1px solid var(--bd2);display:flex;align-items:center;justify-content:space-between}
-.cseller{font-size:10px;color:var(--tx3);display:flex;align-items:center;gap:3px}
-.cseller svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2}
-.cstars{display:flex;align-items:center;gap:2px}
-.cstars-s{color:var(--or);font-size:10px;letter-spacing:.5px}
-.cstars-n{font-size:10px;color:var(--tx3)}
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .filter-option:hover { background: var(--green-light); }
+    .filter-option input[type="checkbox"] {
+      accent-color: var(--green);
+      width: 15px; height: 15px;
+      cursor: pointer;
+    }
+    .filter-option label {
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+    .filter-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 1px 6px;
+      border-radius: 20px;
+    }
 
-/* LIST VIEW */
-.pgrid.lv .card{flex-direction:row}
-.pgrid.lv .card-link{flex-direction:row}
-.pgrid.lv .cimg{width:180px;flex-shrink:0;aspect-ratio:unset;min-height:170px;padding:8% 10%}
-.pgrid.lv .cbody{border-top:none;border-left:1px solid var(--bd2);padding:14px 18px}
-.pgrid.lv .cname{font-size:13px;-webkit-line-clamp:3}
-.pgrid.lv .cplans{max-width:260px}
+    /* ===== MAIN CONTENT ===== */
+    .main-content { flex: 1; min-width: 0; padding: 0 0 0 0; }
+    @media (min-width: 768px) { .main-content { padding-left: 20px; } }
 
-/* EMPTY */
-.empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--tx3)}
-.empty h3{font-size:14px;font-weight:700;color:var(--tx);margin:14px 0 6px}
-.empty p{font-size:12px;margin-bottom:14px}
-.empty button{padding:8px 20px;background:var(--or);color:#fff;border:none;border-radius:3px;font-family:var(--font);font-weight:700;cursor:pointer;font-size:12px}
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-/* ─ PAGINATION ─ */
-.pagi{display:flex;align-items:center;justify-content:center;gap:3px;margin-top:14px;flex-wrap:wrap}
-.ppage{min-width:34px;height:34px;padding:0 6px;display:flex;align-items:center;justify-content:center;border:1px solid var(--bd);border-radius:3px;font-family:var(--font);font-size:12px;font-weight:600;background:var(--wh);color:var(--tx);cursor:pointer;text-decoration:none;transition:all .12s}
-.ppage:hover{border-color:var(--or);color:var(--or)}
-.ppage.on{background:var(--or);border-color:var(--or);color:#fff}
-.ppage.dis{opacity:.35;cursor:default;pointer-events:none}
+    .page-heading {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 800;
+      color: var(--text);
+    }
+    .page-heading span { color: var(--green); }
 
-/* ─ SEO SECTION ─ */
-.seo{background:var(--wh);border:1px solid var(--bd);border-radius:3px;padding:18px 20px;margin-top:10px}
-.seo h2{font-size:13px;font-weight:700;margin-bottom:7px}
-.seo p{font-size:12px;color:var(--tx2);line-height:1.7;margin-bottom:6px}
-.seo h3{font-size:12px;font-weight:700;margin:10px 0 5px}
-.seo-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.seo-tag{padding:4px 9px;background:var(--bg);border-radius:2px;font-size:11px;color:var(--tx2);border:1px solid var(--bd);text-decoration:none}
-.seo-tag:hover{border-color:var(--or);color:var(--or)}
+    .results-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
 
-/* ─ MOBILE BOTTOM BAR ─ */
-.mbar{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--wh);border-top:2px solid var(--bd);z-index:100}
-.mbar-in{display:flex}
-.mbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;color:var(--tx3);font-family:var(--font);font-size:10px;font-weight:600;padding:8px 0;text-decoration:none;transition:color .12s;border-right:1px solid var(--bd2)}
-.mbtn:last-child{border-right:none}
-.mbtn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
-.mbtn:hover,.mbtn.act{color:var(--or)}
-.mbtn.act{border-top:2px solid var(--or);margin-top:-2px}
+    .sort-select {
+      font-family: var(--font-body);
+      font-size: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      background: var(--white);
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
 
-/* ─ RESPONSIVE ─ */
-@media(max-width:1100px){.pgrid:not(.lv){grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){
-  .sidebar{display:none}
-  .pgrid:not(.lv){grid-template-columns:repeat(2,1fr)}
-  .mob-filter-btn{display:flex}
-  .mbar{display:block}
-  .wrap{padding:8px 8px 80px}
-  .show-nums,.vbtns,.show-lbl{display:none}
-}
-@media(max-width:580px){
-  .hdr-in{gap:8px}
-  .hdr-acts{gap:0}
-  .pgrid:not(.lv){grid-template-columns:repeat(2,1fr)}
-  .cimg{padding:8% 10%}
-  .cbody{padding:8px 9px 10px}
-  .cname{font-size:11px}
-  .cprice-main{font-size:14px}
-  .cspec{font-size:9px}
-  .pgrid.lv .card{flex-direction:column}
-  .pgrid.lv .card-link{flex-direction:column}
-  .pgrid.lv .cimg{width:100%;min-height:unset;aspect-ratio:1/1.05}
-  .pgrid.lv .cbody{border-left:none;border-top:1px solid var(--bd2)}
-}
+    /* ===== ACTIVE FILTERS ===== */
+    .active-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .filter-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 1px solid #a5d6a7;
+      transition: background 0.15s;
+    }
+    .filter-tag:hover { background: #c8e6c9; }
+    .filter-tag .remove { font-size: 14px; line-height: 1; }
+    .clear-all {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #ffcc80;
+      background: var(--accent-light);
+    }
 
-/* ─ ANIMATE ─ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.card{animation:fadeUp .2s ease both}
-</style>
+    /* ===== PRODUCT GRID ===== */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    }
+    @media (min-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    }
+
+    /* ===== PRODUCT CARD ===== */
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .product-card a { text-decoration: none; color: inherit; display: flex; flex-direction: column; flex: 1; }
+
+    .badge-new {
+      position: absolute;
+      top: 8px; left: 8px;
+      background: var(--green);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--font-display);
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      z-index: 2;
+    }
+    .badge-discount {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--font-display);
+      padding: 2px 8px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    .card-image-wrap {
+      position: relative;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e8f5e9 100%);
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .card-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover .card-image-wrap img {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 10px 11px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: clamp(12px, 2.5vw, 14px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-storage {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg);
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-weight: 500;
+      width: fit-content;
+    }
+
+    .card-pricing {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .price-from {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .price-deposit {
+      font-family: var(--font-display);
+      font-size: clamp(15px, 3vw, 18px);
+      font-weight: 800;
+      color: var(--green-dark);
+      line-height: 1;
+    }
+
+    .price-daily {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .price-total {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .card-cta {
+      margin-top: 8px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      letter-spacing: 0.03em;
+      transition: background 0.15s;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+    .card-cta:hover { background: var(--green-dark); }
+
+    .stars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+    }
+    .stars-icons { color: #f59e0b; letter-spacing: -1px; }
+    .stars-count { color: var(--text-muted); }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .empty-state h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .empty-state p { font-size: 14px; color: var(--text-muted); }
+
+    /* ===== PAGINATION ===== */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      font-size: 14px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .page-btn:hover:not(:disabled) { border-color: var(--green); color: var(--green); }
+    .page-btn.active { background: var(--green); color: white; border-color: var(--green); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .page-info { font-size: 13px; color: var(--text-muted); padding: 0 8px; }
+
+    /* ===== MOBILE FILTER BOTTOM SHEET ===== */
+    .mobile-filter-fab {
+      display: flex;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 10px 20px;
+      gap: 10px;
+    }
+    @media (min-width: 768px) { .mobile-filter-fab { display: none; } }
+
+    .fab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--text);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+    }
+    .fab-btn.secondary {
+      background: var(--white);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .fab-count {
+      background: var(--green);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== MOBILE BOTTOM SHEET OVERLAY ===== */
+    .sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      backdrop-filter: blur(2px);
+    }
+    .sheet-overlay.open { display: block; }
+
+    .filter-sheet {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-radius: 20px 20px 0 0;
+      z-index: 201;
+      padding: 0 20px 30px;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .filter-sheet.open { transform: translateY(0); }
+
+    .sheet-handle {
+      width: 40px; height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 14px auto 18px;
+    }
+    .sheet-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .sheet-heading {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .sheet-close {
+      background: var(--bg);
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .sheet-apply {
+      width: 100%;
+      margin-top: 20px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    /* SEO text section */
+    .seo-intro {
+      padding: 20px 0 4px;
+    }
+    .seo-intro h1 {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 3.5vw, 26px);
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .seo-intro p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--green); }
+    .breadcrumb .sep { color: var(--border); }
+    .breadcrumb .current { color: var(--text); font-weight: 600; }
+
+    /* URL params indicator */
+    .url-filter-bar {
+      background: var(--green-light);
+      border: 1px solid #a5d6a7;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: var(--green-dark);
+      font-weight: 500;
+      display: none;
+    }
+    .url-filter-bar.show { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="hdr">
-  <div class="hdr-in">
-    <a href="/" class="logo"><span>M</span>dogoMdogo</a>
-    <div class="hdr-search">
-      <input type="search" id="searchInput" placeholder="Search phones — Oppo, Samsung, Tecno…" autocomplete="off"/>
-      <button onclick="doSearch()">SEARCH</button>
-    </div>
-    <div class="hdr-acts">
-      <a href="/cart" class="hdr-act">
-        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Cart
-      </a>
-      <a href="#" class="hdr-act">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Account
-      </a>
-    </div>
-  </div>
-</header>
+<div style="padding: 20px 16px 0; max-width: 1400px; margin: 0 auto;">
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">›</span>
+    <span class="current">Lipa Mdogo Mdogo Phones</span>
+  </nav>
 
-<!-- OVERLAY + DRAWER -->
-<div class="ovl" id="ovl" onclick="closeSidebar()"></div>
-<div class="drw" id="drw">
-  <div class="drw-top">
-    <h3>Filter Phones</h3>
-    <button class="drw-close" onclick="closeSidebar()">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <div class="drw-body" id="drwBody"></div>
-  <div class="drw-foot">
-    <button class="btn-show" onclick="closeSidebar()">↑ Close &amp; Show Results</button>
+  <!-- SEO H1 -->
+  <div class="seo-intro">
+    <h1>Buy Phones on Credit in Nairobi — Lipa Mdogo Mdogo</h1>
+    <p>Shop the latest smartphones with flexible installment payments. Small deposit, daily or weekly payments. Oppo, Samsung, Tecno, Infinix & more. Delivered in Nairobi same day.</p>
   </div>
 </div>
 
-<!-- PAGE WRAP -->
-<div class="wrap">
+<!-- URL Filter Indicator -->
+<div style="max-width: 1400px; margin: 0 auto; padding: 0 16px;">
+  <div class="url-filter-bar" id="urlFilterBar">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+    <span id="urlFilterText"></span>
+  </div>
+</div>
 
-  <!-- DESKTOP SIDEBAR -->
-  <aside class="sidebar" id="deskSb" aria-label="Filters"></aside>
+<div class="page-wrapper">
+  <!-- Desktop Sidebar -->
+  <aside class="sidebar" aria-label="Filter products">
+    <div class="sidebar-title">Filters</div>
+    <div id="desktopFilters">
+      <!-- Filters rendered by JS -->
+    </div>
+  </aside>
 
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- TOOLBAR -->
-    <div class="toolbar">
-      <div class="tb-l">
-        <button class="mob-filter-btn" id="mfBtn" onclick="openSidebar()">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-          Show sidebar
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left:2px"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-          <span class="fcount-badge" id="fcbadge">0</span>
-        </button>
-        <span class="pg-title">Phones</span>
-        <span class="res-ct" id="resCt"></span>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div>
+        <span class="page-heading">Phones <span id="resultCount" class="results-count"></span></span>
       </div>
-      <div class="tb-r">
-        <span class="show-lbl">Show: 9 / 12 / 18 / 24</span>
-        <div class="show-nums">
-          <button class="snum" onclick="setPP(this,9)">9</button>
-          <button class="snum on" onclick="setPP(this,20)">20</button>
-          <button class="snum" onclick="setPP(this,40)">40</button>
-          <button class="snum" onclick="setPP(this,60)">60</button>
-        </div>
-        <div class="vbtns">
-          <button class="vbtn on" id="vgrid" title="Grid" onclick="setView('grid')">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          </button>
-          <button class="vbtn" id="vlist" title="List" onclick="setView('list')">
-            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><circle cx="3" cy="18" r="1" fill="currentColor"/></svg>
-          </button>
-        </div>
-        <select class="sort-sel" id="sortSel">
-          <option value="latest">Sort by latest</option>
-          <option value="popularity">Sort by popularity</option>
-          <option value="rating">Sort by average rating</option>
-          <option value="price_asc">Sort by price: low to high</option>
-          <option value="price_desc">Sort by price: high to low</option>
-        </select>
-      </div>
+      <select class="sort-select" id="sortSelect" aria-label="Sort products">
+        <option value="default">Sort by latest</option>
+        <option value="rating">Sort by rating</option>
+        <option value="deposit-low">Deposit: Low to High</option>
+        <option value="deposit-high">Deposit: High to Low</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+      </select>
     </div>
 
-    <!-- ACTIVE TAGS -->
-    <div class="atags" id="aTags"></div>
+    <!-- Active Filters -->
+    <div class="active-filters" id="activeFilters"></div>
 
-    <!-- GRID -->
-    <div class="pgrid" id="pgrid" role="list"></div>
+    <!-- Product Grid -->
+    <div class="products-grid" id="productsGrid" role="list" aria-label="Phone products"></div>
 
-    <!-- PAGINATION -->
-    <nav class="pagi" id="pagi"></nav>
-
-    <!-- SEO -->
-    <article class="seo">
-      <h2>Buy Phones on Lipa Mdogo Mdogo in Nairobi, Kenya</h2>
-      <p>Affordable smartphones on installments — pay a small deposit and spread the balance in easy daily payments via M-Pesa. Powered by MKopa, Watu Simu &amp; more. Free delivery in Nairobi.</p>
-      <h3>Popular Searches</h3>
-      <div class="seo-tags">
-        <a href="?brand=Samsung" class="seo-tag">Samsung on credit Nairobi</a>
-        <a href="?brand=Oppo" class="seo-tag">Oppo lipa mdogo mdogo</a>
-        <a href="?brand=Tecno" class="seo-tag">Tecno installments Kenya</a>
-        <a href="?brand=Infinix" class="seo-tag">Infinix phone loan</a>
-        <a href="?storage=128GB" class="seo-tag">128GB phones Kenya</a>
-        <a href="?storage=256GB" class="seo-tag">256GB smartphones</a>
-        <a href="?seller=Mkopa" class="seo-tag">MKopa phones</a>
-        <a href="?seller=Watu" class="seo-tag">Watu Simu Kenya</a>
-      </div>
-    </article>
-
+    <!-- Pagination -->
+    <nav class="pagination" id="pagination" aria-label="Product pages"></nav>
   </main>
 </div>
 
-<!-- MOBILE BOTTOM BAR -->
-<nav class="mbar">
-  <div class="mbar-in">
-    <button class="mbtn act" onclick="openSidebar()">
-      <svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-      Filters
-    </button>
-    <a href="/cart" class="mbtn">
-      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      Cart
-    </a>
-    <a href="/" class="mbtn">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Home
-    </a>
-    <a href="/phones" class="mbtn">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      Shop
-    </a>
+<!-- Mobile Bottom Bar -->
+<div class="mobile-filter-fab">
+  <button class="fab-btn" onclick="openFilterSheet()" aria-label="Open filters">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+    Filters
+    <span class="fab-count" id="filterCountBadge" style="display:none">0</span>
+  </button>
+  <button class="fab-btn secondary" onclick="clearAllFilters()" aria-label="Clear all filters">Clear</button>
+</div>
+
+<!-- Mobile Filter Sheet -->
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeFilterSheet()"></div>
+<div class="filter-sheet" id="filterSheet" role="dialog" aria-modal="true" aria-label="Filter options">
+  <div class="sheet-handle"></div>
+  <div class="sheet-top">
+    <span class="sheet-heading">Filter Phones</span>
+    <button class="sheet-close" onclick="closeFilterSheet()">Close ✕</button>
   </div>
-</nav>
+  <div id="mobileFilters"></div>
+  <button class="sheet-apply" onclick="applyMobileFilters()">Show Results</button>
+</div>
 
-<script>
-/* ── PRODUCTS ── */
-const products=[
-  {id:1,name:"Oppo A3x",fullname:"Oppo A3x 6.67\", 128GB+4GB RAM, 5100mAh",status:"New",image:"",from:"KSh 2,900",deposit:"KSh 3,500",daily:"KSh 90",totalPrice:"KSh 16,500",discount:"-15%",display:'6.67" HD+',battery:"5100mAh",slug:"oppo-a3x",brand:"Oppo",seller:"Mkopa",storage:"128GB",reviews:{averageRating:4.5,reviewCount:27}},
-  {id:2,name:"Oppo A3 Pro",fullname:"Oppo A3 Pro 6.7\" AMOLED, 256GB+8GB",status:"New",image:"",from:"KSh 3,500",deposit:"KSh 3,900",daily:"KSh 90",totalPrice:"KSh 19,999",discount:"-12%",display:'6.7" AMOLED',battery:"5000mAh",slug:"oppo-a3-pro",brand:"Oppo",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.6,reviewCount:31}},
-  {id:3,name:"Samsung Galaxy A15",fullname:"Samsung Galaxy A15 6.5\", 128GB+4GB",status:"New",image:"",from:"KSh 3,200",deposit:"KSh 4,000",daily:"KSh 95",totalPrice:"KSh 18,500",discount:"-10%",display:'6.5" AMOLED',battery:"5000mAh",slug:"samsung-galaxy-a15",brand:"Samsung",seller:"Watu",storage:"128GB",reviews:{averageRating:4.4,reviewCount:45}},
-  {id:4,name:"Tecno Camon 30",fullname:"Tecno Camon 30 6.78\", 256GB+8GB",status:"New",image:"",from:"KSh 4,500",deposit:"KSh 5,000",daily:"KSh 110",totalPrice:"KSh 24,999",discount:"-8%",display:'6.78" AMOLED',battery:"5000mAh",slug:"tecno-camon-30",brand:"Tecno",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.3,reviewCount:38}},
-  {id:5,name:"Infinix Hot 40 Pro",fullname:"Infinix Hot 40 Pro 6.78\", 128GB+8GB",status:"New",image:"",from:"KSh 2,500",deposit:"KSh 3,200",daily:"KSh 80",totalPrice:"KSh 14,999",discount:"-18%",display:'6.78" FHD+',battery:"5000mAh",slug:"infinix-hot-40-pro",brand:"Infinix",seller:"Watu",storage:"128GB",reviews:{averageRating:4.2,reviewCount:52}},
-  {id:6,name:"Samsung Galaxy A25 5G",fullname:"Samsung Galaxy A25 5G, 256GB+8GB",status:"New",image:"",from:"KSh 5,000",deposit:"KSh 6,500",daily:"KSh 130",totalPrice:"KSh 29,999",discount:"-5%",display:'6.5" AMOLED',battery:"5000mAh",slug:"samsung-a25-5g",brand:"Samsung",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.5,reviewCount:29}},
-  {id:7,name:"Tecno Spark 20 Pro",fullname:"Tecno Spark 20 Pro 6.78\", 128GB+8GB",status:"New",image:"",from:"KSh 2,800",deposit:"KSh 3,600",daily:"KSh 85",totalPrice:"KSh 15,999",discount:"-12%",display:'6.78" IPS',battery:"5000mAh",slug:"tecno-spark-20-pro",brand:"Tecno",seller:"Watu",storage:"128GB",reviews:{averageRating:4.1,reviewCount:41}},
-  {id:8,name:"Infinix Note 40",fullname:"Infinix Note 40 6.78\", 256GB+8GB",status:"New",image:"",from:"KSh 4,200",deposit:"KSh 5,500",daily:"KSh 120",totalPrice:"KSh 26,999",discount:"-7%",display:'6.78" AMOLED',battery:"5000mAh",slug:"infinix-note-40",brand:"Infinix",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.4,reviewCount:33}},
-  {id:9,name:"Oppo Reno 11F",fullname:"Oppo Reno 11F 5G 6.7\", 256GB+8GB",status:"New",image:"",from:"KSh 6,000",deposit:"KSh 8,000",daily:"KSh 160",totalPrice:"KSh 38,999",discount:"-6%",display:'6.7" AMOLED',battery:"5000mAh",slug:"oppo-reno-11f",brand:"Oppo",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.6,reviewCount:19}},
-  {id:10,name:"Itel P55 Plus",fullname:"Itel P55 Plus 6.6\", 128GB+4GB RAM",status:"New",image:"",from:"KSh 1,800",deposit:"KSh 2,500",daily:"KSh 65",totalPrice:"KSh 11,999",discount:"-20%",display:'6.6" HD+',battery:"6000mAh",slug:"itel-p55-plus",brand:"Itel",seller:"Watu",storage:"128GB",reviews:{averageRating:4.0,reviewCount:67}},
-  {id:11,name:"Samsung Galaxy A05s",fullname:"Samsung Galaxy A05s 6.7\", 128GB+4GB",status:"New",image:"",from:"KSh 2,600",deposit:"KSh 3,300",daily:"KSh 82",totalPrice:"KSh 15,499",discount:"-11%",display:'6.7" LCD',battery:"5000mAh",slug:"samsung-a05s",brand:"Samsung",seller:"Mkopa",storage:"128GB",reviews:{averageRating:4.2,reviewCount:55}},
-  {id:12,name:"Tecno Camon 20 Pro",fullname:"Tecno Camon 20 Pro 6.67\", 256GB+8GB",status:"New",image:"",from:"KSh 4,000",deposit:"KSh 5,200",daily:"KSh 105",totalPrice:"KSh 22,999",discount:"-9%",display:'6.67" AMOLED',battery:"5000mAh",slug:"tecno-camon-20-pro",brand:"Tecno",seller:"Watu",storage:"256GB",reviews:{averageRating:4.3,reviewCount:44}},
-  {id:13,name:"Infinix Smart 8",fullname:"Infinix Smart 8 6.6\", 64GB+4GB",status:"New",image:"",from:"KSh 1,500",deposit:"KSh 2,000",daily:"KSh 55",totalPrice:"KSh 9,999",discount:"-15%",display:'6.6" HD+',battery:"5000mAh",slug:"infinix-smart-8",brand:"Infinix",seller:"Watu",storage:"64GB",reviews:{averageRating:3.9,reviewCount:80}},
-  {id:14,name:"Samsung Galaxy A35",fullname:"Samsung Galaxy A35 5G, 128GB+6GB",status:"New",image:"",from:"KSh 6,500",deposit:"KSh 8,500",daily:"KSh 170",totalPrice:"KSh 42,999",discount:"-4%",display:'6.6" AMOLED',battery:"5000mAh",slug:"samsung-a35",brand:"Samsung",seller:"Mkopa",storage:"128GB",reviews:{averageRating:4.6,reviewCount:22}},
-  {id:15,name:"Oppo A18",fullname:"Oppo A18 6.56\", 128GB+4GB RAM",status:"New",image:"",from:"KSh 2,200",deposit:"KSh 2,900",daily:"KSh 72",totalPrice:"KSh 12,999",discount:"-13%",display:'6.56" HD+',battery:"5000mAh",slug:"oppo-a18",brand:"Oppo",seller:"Watu",storage:"128GB",reviews:{averageRating:4.1,reviewCount:36}},
-  {id:16,name:"Tecno Pova 6 Pro",fullname:"Tecno Pova 6 Pro 6.78\", 256GB+8GB",status:"New",image:"",from:"KSh 5,500",deposit:"KSh 7,000",daily:"KSh 145",totalPrice:"KSh 34,999",discount:"-6%",display:'6.78" AMOLED',battery:"6000mAh",slug:"tecno-pova-6-pro",brand:"Tecno",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.4,reviewCount:28}},
-  {id:17,name:"Itel A70",fullname:"Itel A70 6.6\", 128GB+4GB RAM",status:"New",image:"",from:"KSh 1,600",deposit:"KSh 2,200",daily:"KSh 58",totalPrice:"KSh 10,499",discount:"-17%",display:'6.6" HD+',battery:"5000mAh",slug:"itel-a70",brand:"Itel",seller:"Watu",storage:"128GB",reviews:{averageRating:4.0,reviewCount:61}},
-  {id:18,name:"Infinix Zero 30 5G",fullname:"Infinix Zero 30 5G 6.78\", 256GB+8GB",status:"New",image:"",from:"KSh 7,000",deposit:"KSh 9,000",daily:"KSh 180",totalPrice:"KSh 49,999",discount:"-5%",display:'6.78" AMOLED',battery:"5000mAh",slug:"infinix-zero-30-5g",brand:"Infinix",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.5,reviewCount:17}},
-  {id:19,name:"Samsung Galaxy M15",fullname:"Samsung Galaxy M15 6.5\", 128GB+4GB",status:"New",image:"",from:"KSh 3,800",deposit:"KSh 4,800",daily:"KSh 100",totalPrice:"KSh 20,999",discount:"-9%",display:'6.5" AMOLED',battery:"6000mAh",slug:"samsung-m15",brand:"Samsung",seller:"Watu",storage:"128GB",reviews:{averageRating:4.3,reviewCount:39}},
-  {id:20,name:"Oppo A79 5G",fullname:"Oppo A79 5G 6.72\", 256GB+8GB",status:"New",image:"",from:"KSh 5,800",deposit:"KSh 7,500",daily:"KSh 155",totalPrice:"KSh 37,999",discount:"-5%",display:'6.72" LCD FHD+',battery:"5000mAh",slug:"oppo-a79-5g",brand:"Oppo",seller:"Mkopa",storage:"256GB",reviews:{averageRating:4.4,reviewCount:24}},
-  {id:21,name:"Tecno Camon 30 Pro",fullname:"Tecno Camon 30 Pro 6.77\", 512GB+12GB",status:"New",image:"",from:"KSh 9,000",deposit:"KSh 11,500",daily:"KSh 230",totalPrice:"KSh 64,999",discount:"-3%",display:'6.77" LTPO AMOLED',battery:"5000mAh",slug:"tecno-camon-30-pro",brand:"Tecno",seller:"Mkopa",storage:"512GB",reviews:{averageRating:4.7,reviewCount:15}},
-  {id:22,name:"Infinix Hot 40i",fullname:"Infinix Hot 40i 6.56\", 128GB+4GB",status:"New",image:"",from:"KSh 2,000",deposit:"KSh 2,700",daily:"KSh 68",totalPrice:"KSh 11,499",discount:"-16%",display:'6.56" IPS',battery:"5000mAh",slug:"infinix-hot-40i",brand:"Infinix",seller:"Watu",storage:"128GB",reviews:{averageRating:4.0,reviewCount:73}},
-  {id:23,name:"Samsung Galaxy A06",fullname:"Samsung Galaxy A06 6.7\", 64GB+4GB",status:"New",image:"",from:"KSh 2,100",deposit:"KSh 2,800",daily:"KSh 70",totalPrice:"KSh 12,499",discount:"-12%",display:'6.7" LCD',battery:"5000mAh",slug:"samsung-a06",brand:"Samsung",seller:"Watu",storage:"64GB",reviews:{averageRating:4.1,reviewCount:48}},
-  {id:24,name:"Oppo A60",fullname:"Oppo A60 6.67\", 256GB+8GB RAM",status:"New",image:"",from:"KSh 4,800",deposit:"KSh 6,200",daily:"KSh 125",totalPrice:"KSh 27,999",discount:"-7%",display:'6.67" LCD FHD+',battery:"5000mAh",slug:"oppo-a60",brand:"Oppo",seller:"Watu",storage:"256GB",reviews:{averageRating:4.3,reviewCount:21}},
-];
+<!-- Inline product data for JS -->
+<script define:vars={{ products, allStorages, depositRanges }}>
+  // ========== STATE ==========
+  const PER_PAGE = 20;
+  let state = {
+    storages: [],
+    deposits: [],
+    sort: 'default',
+    page: 1,
+  };
 
-/* SVG placeholder per brand */
-const BC={Oppo:"#1A7A52",Samsung:"#1428A0",Tecno:"#C0392B",Infinix:"#7D3C98",Itel:"#D35400"};
-function svgPh(p){
-  const c=encodeURIComponent(BC[p.brand]||"#444");
-  const i=(p.name||'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  return`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='260' viewBox='0 0 240 260'%3E%3Crect width='240' height='260' fill='%23f8f8fa'/%3E%3Crect x='80' y='24' width='80' height='148' rx='12' fill='${c}'/%3E%3Crect x='90' y='36' width='60' height='110' rx='4' fill='%23ffffff' opacity='.25'/%3E%3Ccircle cx='120' cy='158' r='7' fill='%23ffffff' opacity='.5'/%3E%3Ctext x='120' y='214' text-anchor='middle' fill='${c}' font-size='15' font-family='Open Sans,sans-serif' font-weight='700'%3E${i}%3C/text%3E%3C/svg%3E`;
-}
-
-/* ── STATE ── */
-let S={filters:{},sort:'latest',page:1,view:'grid',pp:20,search:''};
-
-/* ── URL ── */
-function readURL(){
-  const p=new URLSearchParams(location.search);
-  S.filters={};
-  ['brand','storage','seller','deposit'].forEach(k=>{if(p.get(k))S.filters[k]=p.get(k).split(',');});
-  if(p.get('sort'))S.sort=p.get('sort');
-  if(p.get('page'))S.page=+p.get('page')||1;
-  if(p.get('view'))S.view=p.get('view');
-  if(p.get('q'))S.search=p.get('q');
-}
-function pushURL(){
-  const p=new URLSearchParams();
-  ['brand','storage','seller','deposit'].forEach(k=>{if(S.filters[k]?.length)p.set(k,S.filters[k].join(','));});
-  if(S.sort!=='latest')p.set('sort',S.sort);
-  if(S.page>1)p.set('page',S.page);
-  if(S.view!=='grid')p.set('view',S.view);
-  if(S.search)p.set('q',S.search);
-  history.pushState({},'',p.toString()?`${location.pathname}?${p}`:location.pathname);
-}
-
-/* ── FILTER / SORT ── */
-const DD={under20k:{l:'Under KSh 20k',f:d=>d<20000},under30k:{l:'Under KSh 30k',f:d=>d<30000},under40k:{l:'Under KSh 40k',f:d=>d<40000},ksh2k_4k:{l:'Deposit KSh 2k–4k',f:d=>d>=2000&&d<=4000}};
-function dp(s){return parseFloat(s.replace(/[^\d.]/g,''))||0;}
-function filtered(){
-  let r=[...products];
-  if(S.search){const q=S.search.toLowerCase();r=r.filter(p=>p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.storage.toLowerCase().includes(q));}
-  if(S.filters.brand?.length)r=r.filter(p=>S.filters.brand.includes(p.brand));
-  if(S.filters.storage?.length)r=r.filter(p=>S.filters.storage.includes(p.storage));
-  if(S.filters.seller?.length)r=r.filter(p=>S.filters.seller.includes(p.seller));
-  if(S.filters.deposit?.length)r=r.filter(p=>{const d=dp(p.deposit);return S.filters.deposit.some(k=>DD[k]?.f(d));});
-  if(S.sort==='price_asc')r.sort((a,b)=>dp(a.totalPrice)-dp(b.totalPrice));
-  else if(S.sort==='price_desc')r.sort((a,b)=>dp(b.totalPrice)-dp(a.totalPrice));
-  else if(S.sort==='rating')r.sort((a,b)=>(b.reviews?.averageRating||0)-(a.reviews?.averageRating||0));
-  else if(S.sort==='popularity')r.sort((a,b)=>(b.reviews?.reviewCount||0)-(a.reviews?.reviewCount||0));
-  return r;
-}
-function computeOpts(){
-  const B={},St={},Se={},Dp={under20k:0,under30k:0,under40k:0,ksh2k_4k:0};
-  products.forEach(p=>{
-    B[p.brand]=(B[p.brand]||0)+1;St[p.storage]=(St[p.storage]||0)+1;Se[p.seller]=(Se[p.seller]||0)+1;
-    const d=dp(p.deposit);
-    if(d<20000)Dp.under20k++;if(d<30000)Dp.under30k++;if(d<40000)Dp.under40k++;if(d>=2000&&d<=4000)Dp.ksh2k_4k++;
-  });
-  return{B,St,Se,Dp};
-}
-
-/* ── SIDEBAR HTML ── */
-function sbHTML(){
-  const {B,St,Se,Dp}=computeOpts();
-  const ac=Object.values(S.filters).flat().length;
-  const sec=(title,key,items)=>`
-    <div class="fsec">
-      <div class="fsec-hd" onclick="toggleSec(this)">
-        Filter By ${title}
-        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-      <div class="fopts">
-        ${items.map(([v,lbl,c])=>`
-          <div class="fopt">
-            <label><input type="checkbox" data-key="${key}" data-val="${v}" ${(S.filters[key]||[]).includes(v)?'checked':''}> ${lbl}</label>
-            <span class="fcnt">${c}</span>
-          </div>`).join('')}
-      </div>
-    </div>`;
-  return`
-    <div class="sb-box">
-      <div class="sb-hd">
-        <span class="page-title">Phones</span>
-        ${ac?`<button class="clear-btn" onclick="clearAll()">Clear all</button>`:''}
-      </div>
-      ${sec('Storage','storage',Object.entries(St).sort((a,b)=>b[1]-a[1]).map(([v,c])=>[v,v,c]))}
-      ${sec('Deposit','deposit',Object.entries(DD).map(([k,d])=>[k,d.l,Dp[k]]))}
-      ${sec('Brand','brand',Object.entries(B).sort((a,b)=>a[0].localeCompare(b[0])).map(([v,c])=>[v,v,c]))}
-      ${sec('Series','seller',Object.entries(Se).sort().map(([v,c])=>[v,v,c]))}
-    </div>`;
-}
-function bindCB(){
-  document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb=>{
-    cb.addEventListener('change',e=>{
-      const k=e.target.dataset.key,v=e.target.dataset.val;
-      if(!S.filters[k])S.filters[k]=[];
-      if(e.target.checked){if(!S.filters[k].includes(v))S.filters[k].push(v);}
-      else{S.filters[k]=S.filters[k].filter(x=>x!==v);if(!S.filters[k].length)delete S.filters[k];}
-      S.page=1;pushURL();render();
-    });
-  });
-}
-
-/* ── CARD HTML ── */
-function stars(r){return'★'.repeat(Math.floor(r))+(r%1>=.5?'☆':'');}
-function cardHTML(p,i){
-  const img=p.image||svgPh(p);
-  return`
-  <article class="card" role="listitem" style="animation-delay:${Math.min(i*25,200)}ms">
-    <a class="card-link" href="/${p.slug}">
-      <div class="cimg">
-        <img src="${img}" alt="${p.name} - lipa mdogo mdogo Kenya" loading="lazy" width="240" height="260"
-          onerror="this.onerror=null;this.src='${svgPh(p)}'"/>
-        ${p.status?`<span class="b-new">${p.status}</span>`:''}
-        ${p.discount?`<span class="b-disc">${p.discount}</span>`:''}
-        <button class="wishbtn" onclick="wish(event,${p.id})" aria-label="Save ${p.name}">
-          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="cbody">
-        <h3 class="cname">${p.name}</h3>
-        <div class="cspecs">
-          <span class="cspec">${p.storage}</span>
-          <span class="cspec">${p.display}</span>
-          <span class="cspec">${p.battery}</span>
-        </div>
-        <div class="cprices">
-          <div class="cprice-was">Was ${p.totalPrice}</div>
-          <div class="cprice-main">${p.from} <span class="cprice-sub">deposit</span></div>
-          <div class="cplans">
-            <div class="cplan"><div class="cplan-lbl">Deposit</div><div class="cplan-val">${p.deposit}</div></div>
-            <div class="cplan"><div class="cplan-lbl">Daily</div><div class="cplan-val">${p.daily}</div></div>
-          </div>
-        </div>
-        <div class="cfoot">
-          <span class="cseller"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.seller}</span>
-          ${p.reviews?`<div class="cstars"><span class="cstars-s">${stars(p.reviews.averageRating)}</span><span class="cstars-n">(${p.reviews.reviewCount})</span></div>`:''}
-        </div>
-      </div>
-    </a>
-  </article>`;
-}
-
-/* ── RENDER ── */
-function render(){
-  const all=filtered();
-  const total=all.length;
-  const pages=Math.max(1,Math.ceil(total/S.pp));
-  if(S.page>pages)S.page=pages;
-  const slice=all.slice((S.page-1)*S.pp,S.page*S.pp);
-
-  document.getElementById('resCt').textContent=`${total} product${total!==1?'s':''}`;
-
-  const grid=document.getElementById('pgrid');
-  grid.className='pgrid'+(S.view==='list'?' lv':'');
-  grid.innerHTML=slice.length
-    ?slice.map((p,i)=>cardHTML(p,i)).join('')
-    :`<div class="empty">
-        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <h3>No phones found</h3><p>Try adjusting your filters</p>
-        <button onclick="clearAll()">Clear All Filters</button>
-      </div>`;
-
-  /* pagination */
-  const pagi=document.getElementById('pagi');
-  if(pages<=1){pagi.innerHTML='';}else{
-    const p=S.page;let h='';
-    h+=`<a class="ppage${p===1?' dis':''}" href="#" onclick="pg(event,${p-1})">‹</a>`;
-    for(let i=1;i<=pages;i++){
-      if(i===1||i===pages||Math.abs(i-p)<=1)h+=`<a class="ppage${i===p?' on':''}" href="#" onclick="pg(event,${i})">${i}</a>`;
-      else if(Math.abs(i-p)===2)h+=`<span style="color:var(--tx3);padding:0 2px">…</span>`;
-    }
-    h+=`<a class="ppage${p===pages?' dis':''}" href="#" onclick="pg(event,${p+1})">›</a>`;
-    pagi.innerHTML=h;
+  // ========== INIT ==========
+  function init() {
+    readURLParams();
+    renderFilters();
+    renderProducts();
+    syncURLFilterBar();
   }
 
-  /* active filter tags */
-  const DL={under20k:'Under 20k',under30k:'Under 30k',under40k:'Under 40k',ksh2k_4k:'2k–4k deposit'};
-  const tags=[];
-  Object.entries(S.filters).forEach(([k,vs])=>(vs||[]).forEach(v=>{
-    const lbl=k==='deposit'?DL[v]||v:v;
-    tags.push(`<span class="atag">${k}: ${lbl}<button onclick="rmF('${k}','${v}')" aria-label="Remove">×</button></span>`);
-  }));
-  document.getElementById('aTags').innerHTML=tags.join('');
+  // ========== URL PARAMS ==========
+  function readURLParams() {
+    const params = new URLSearchParams(window.location.search);
+    state.storages = params.getAll('storage');
+    state.deposits = params.getAll('deposit');
+    state.sort = params.get('sort') || 'default';
+    state.page = parseInt(params.get('page') || '1', 10);
+    document.getElementById('sortSelect').value = state.sort;
+  }
 
-  /* filter badge */
-  const fc=Object.values(S.filters).flat().length;
-  const fb=document.getElementById('fcbadge');
-  fb.textContent=fc;fb.style.display=fc?'flex':'none';
+  function pushURL() {
+    const params = new URLSearchParams();
+    state.storages.forEach(s => params.append('storage', s));
+    state.deposits.forEach(d => params.append('deposit', d));
+    if (state.sort !== 'default') params.set('sort', state.sort);
+    if (state.page > 1) params.set('page', state.page);
+    const newURL = params.toString() ? `${window.location.pathname}?${params}` : window.location.pathname;
+    history.pushState({}, '', newURL);
+    syncURLFilterBar();
+  }
 
-  /* sidebars */
-  const sh=sbHTML();
-  document.getElementById('deskSb').innerHTML=sh;
-  document.getElementById('drwBody').innerHTML=sh;
-  bindCB();
+  function syncURLFilterBar() {
+    const bar = document.getElementById('urlFilterBar');
+    const txt = document.getElementById('urlFilterText');
+    const parts = [];
+    if (state.storages.length) parts.push(`Storage: ${state.storages.join(', ')}`);
+    if (state.deposits.length) {
+      const labels = state.deposits.map(v => depositRanges.find(r=>r.value===v)?.label || v);
+      parts.push(`Deposit: ${labels.join(', ')}`);
+    }
+    if (parts.length) {
+      bar.classList.add('show');
+      txt.textContent = 'Filtering by: ' + parts.join(' · ');
+    } else {
+      bar.classList.remove('show');
+    }
+  }
 
-  document.getElementById('sortSel').value=S.sort;
-  document.getElementById('vgrid').className='vbtn'+(S.view==='grid'?' on':'');
-  document.getElementById('vlist').className='vbtn'+(S.view==='list'?' on':'');
-}
+  // ========== FILTER LOGIC ==========
+  function getFilteredProducts() {
+    let list = [...products];
 
-/* ── ACTIONS ── */
-function pg(e,n){
-  e.preventDefault();
-  const t=Math.ceil(filtered().length/S.pp);
-  if(n<1||n>t)return;
-  S.page=n;pushURL();render();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function rmF(k,v){
-  S.filters[k]=(S.filters[k]||[]).filter(x=>x!==v);
-  if(!S.filters[k].length)delete S.filters[k];
-  S.page=1;pushURL();render();
-}
-function clearAll(){
-  S.filters={};S.search='';S.page=1;
-  const si=document.getElementById('searchInput');
-  if(si)si.value='';
-  pushURL();render();
-}
-function setView(v){S.view=v;pushURL();render();}
-function setPP(btn,n){
-  document.querySelectorAll('.snum').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');S.pp=n;S.page=1;pushURL();render();
-}
-function toggleSec(h){h.classList.toggle('col');h.nextElementSibling.classList.toggle('hide');}
-function openSidebar(){
-  document.getElementById('ovl').classList.add('on');
-  document.getElementById('drw').classList.add('on');
-  document.body.style.overflow='hidden';
-}
-function closeSidebar(){
-  document.getElementById('ovl').classList.remove('on');
-  document.getElementById('drw').classList.remove('on');
-  document.body.style.overflow='';
-}
-function doSearch(){S.search=document.getElementById('searchInput').value;S.page=1;pushURL();render();}
-function wish(e,id){
-  e.preventDefault();e.stopPropagation();
-  const s=e.currentTarget.querySelector('svg');
-  s.style.fill='#D0021B';s.style.stroke='#D0021B';
-}
+    if (state.storages.length) {
+      list = list.filter(p => state.storages.includes(p.storage));
+    }
 
-/* ── INIT ── */
-document.addEventListener('DOMContentLoaded',()=>{
-  readURL();
-  const si=document.getElementById('searchInput');
-  si.value=S.search;
-  let t;
-  si.addEventListener('input',e=>{clearTimeout(t);t=setTimeout(()=>{S.search=e.target.value;S.page=1;pushURL();render();},320);});
-  si.addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
-  document.getElementById('sortSel').addEventListener('change',e=>{S.sort=e.target.value;S.page=1;pushURL();render();});
-  window.addEventListener('popstate',()=>{readURL();si.value=S.search;render();});
-  render();
-});
+    if (state.deposits.length) {
+      list = list.filter(p => {
+        const dep = parseFloat((p.deposit || '').replace(/[^\d.]/g, '')) || 0;
+        return state.deposits.some(v => {
+          const range = depositRanges.find(r => r.value === v);
+          return range && dep < range.max;
+        });
+      });
+    }
+
+    // Sort
+    if (state.sort === 'rating') {
+      list.sort((a,b) => (b.reviews?.averageRating||0) - (a.reviews?.averageRating||0));
+    } else if (state.sort === 'deposit-low') {
+      list.sort((a,b) => parseFloat((a.deposit||'').replace(/[^\d.]/g,'')) - parseFloat((b.deposit||'').replace(/[^\d.]/g,'')));
+    } else if (state.sort === 'deposit-high') {
+      list.sort((a,b) => parseFloat((b.deposit||'').replace(/[^\d.]/g,'')) - parseFloat((a.deposit||'').replace(/[^\d.]/g,'')));
+    } else if (state.sort === 'price-low') {
+      list.sort((a,b) => parseFloat((a.totalPrice||'').replace(/[^\d.]/g,'')) - parseFloat((b.totalPrice||'').replace(/[^\d.]/g,'')));
+    } else if (state.sort === 'price-high') {
+      list.sort((a,b) => parseFloat((b.totalPrice||'').replace(/[^\d.]/g,'')) - parseFloat((a.totalPrice||'').replace(/[^\d.]/g,'')));
+    }
+
+    return list;
+  }
+
+  // ========== RENDER FILTERS ==========
+  function renderFilters() {
+    const filtered = getFilteredProducts();
+
+    // Count per storage
+    const storageCounts = {};
+    allStorages.forEach(s => {
+      storageCounts[s] = products.filter(p => p.storage === s).length;
+    });
+
+    // Count per deposit range
+    const depositCounts = {};
+    depositRanges.forEach(r => {
+      depositCounts[r.value] = products.filter(p => {
+        const dep = parseFloat((p.deposit||'').replace(/[^\d.]/g,'')) || 0;
+        return dep < r.max;
+      }).length;
+    });
+
+    const html = `
+      <div class="filter-section">
+        <div class="filter-section-title">Storage</div>
+        ${allStorages.map(s => `
+          <div class="filter-option">
+            <input type="checkbox" id="desk-st-${s}" value="${s}" ${state.storages.includes(s)?'checked':''} onchange="toggleFilter('storage','${s}',this.checked)">
+            <label for="desk-st-${s}">${s} <span class="filter-count">${storageCounts[s]||0}</span></label>
+          </div>
+        `).join('')}
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Deposit Range</div>
+        ${depositRanges.map(r => `
+          <div class="filter-option">
+            <input type="checkbox" id="desk-dep-${r.value}" value="${r.value}" ${state.deposits.includes(r.value)?'checked':''} onchange="toggleFilter('deposit','${r.value}',this.checked)">
+            <label for="desk-dep-${r.value}">${r.label} <span class="filter-count">${depositCounts[r.value]||0}</span></label>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    document.getElementById('desktopFilters').innerHTML = html;
+    renderMobileFilters(storageCounts, depositCounts);
+  }
+
+  function renderMobileFilters(storageCounts, depositCounts) {
+    const html = `
+      <div class="filter-section">
+        <div class="filter-section-title">Filter By Storage</div>
+        ${allStorages.map(s => `
+          <div class="filter-option">
+            <input type="checkbox" id="mob-st-${s}" value="${s}" ${state.storages.includes(s)?'checked':''} onchange="toggleFilter('storage','${s}',this.checked)">
+            <label for="mob-st-${s}">${s} <span class="filter-count">${storageCounts[s]||0}</span></label>
+          </div>
+        `).join('')}
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Filter By Deposit</div>
+        ${depositRanges.map(r => `
+          <div class="filter-option">
+            <input type="checkbox" id="mob-dep-${r.value}" value="${r.value}" ${state.deposits.includes(r.value)?'checked':''} onchange="toggleFilter('deposit','${r.value}',this.checked)">
+            <label for="mob-dep-${r.value}">${r.label} <span class="filter-count">${depositCounts[r.value]||0}</span></label>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    document.getElementById('mobileFilters').innerHTML = html;
+  }
+
+  // ========== TOGGLE FILTER ==========
+  function toggleFilter(type, value, checked) {
+    if (type === 'storage') {
+      if (checked) { if (!state.storages.includes(value)) state.storages.push(value); }
+      else { state.storages = state.storages.filter(v => v !== value); }
+    } else if (type === 'deposit') {
+      if (checked) { if (!state.deposits.includes(value)) state.deposits.push(value); }
+      else { state.deposits = state.deposits.filter(v => v !== value); }
+    }
+    state.page = 1;
+    syncFilterCheckboxes();
+    renderProducts();
+    renderActiveFilters();
+    updateFilterBadge();
+    pushURL();
+  }
+
+  function syncFilterCheckboxes() {
+    allStorages.forEach(s => {
+      const d = document.getElementById('desk-st-'+s);
+      const m = document.getElementById('mob-st-'+s);
+      if (d) d.checked = state.storages.includes(s);
+      if (m) m.checked = state.storages.includes(s);
+    });
+    depositRanges.forEach(r => {
+      const d = document.getElementById('desk-dep-'+r.value);
+      const m = document.getElementById('mob-dep-'+r.value);
+      if (d) d.checked = state.deposits.includes(r.value);
+      if (m) m.checked = state.deposits.includes(r.value);
+    });
+  }
+
+  function clearAllFilters() {
+    state.storages = [];
+    state.deposits = [];
+    state.page = 1;
+    syncFilterCheckboxes();
+    renderProducts();
+    renderActiveFilters();
+    updateFilterBadge();
+    pushURL();
+  }
+
+  // ========== ACTIVE FILTER TAGS ==========
+  function renderActiveFilters() {
+    const cont = document.getElementById('activeFilters');
+    let tags = [];
+    state.storages.forEach(s => {
+      tags.push(`<span class="filter-tag" onclick="toggleFilter('storage','${s}',false)">${s} <span class="remove">×</span></span>`);
+    });
+    state.deposits.forEach(v => {
+      const label = depositRanges.find(r=>r.value===v)?.label || v;
+      tags.push(`<span class="filter-tag" onclick="toggleFilter('deposit','${v}',false)">${label} <span class="remove">×</span></span>`);
+    });
+    if (tags.length) tags.push(`<span class="clear-all" onclick="clearAllFilters()">Clear all</span>`);
+    cont.innerHTML = tags.join('');
+  }
+
+  function updateFilterBadge() {
+    const count = state.storages.length + state.deposits.length;
+    const badge = document.getElementById('filterCountBadge');
+    if (count > 0) { badge.style.display = 'flex'; badge.textContent = count; }
+    else { badge.style.display = 'none'; }
+  }
+
+  // ========== RENDER PRODUCTS ==========
+  function renderProducts() {
+    const filtered = getFilteredProducts();
+    const total = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+    state.page = Math.min(state.page, totalPages);
+    const start = (state.page - 1) * PER_PAGE;
+    const pageItems = filtered.slice(start, start + PER_PAGE);
+
+    document.getElementById('resultCount').textContent = `(${total})`;
+
+    const grid = document.getElementById('productsGrid');
+
+    if (pageItems.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <h3>No phones found</h3>
+          <p>Try adjusting your filters to see more results.</p>
+        </div>`;
+      document.getElementById('pagination').innerHTML = '';
+      return;
+    }
+
+    grid.innerHTML = pageItems.map(p => {
+      const stars = renderStars(p.reviews?.averageRating || 0);
+      return `
+        <article class="product-card" role="listitem" itemscope itemtype="https://schema.org/Product">
+          ${p.status === 'New' ? '<span class="badge-new" aria-label="New product">NEW</span>' : ''}
+          ${p.discount ? `<span class="badge-discount" aria-label="Discount">${p.discount}</span>` : ''}
+          <a href="/${p.slug}" title="${p.fullname || p.name} - Lipa Mdogo Mdogo">
+            <div class="card-image-wrap">
+              <img
+                src="${p.image}"
+                alt="${p.name} lipa mdogo mdogo phone nairobi"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="375"
+                itemprop="image"
+                onerror="this.style.opacity='0.3'"
+              />
+            </div>
+            <div class="card-body">
+              <div class="card-name" itemprop="name">${p.name}</div>
+              ${p.storage ? `<span class="card-storage">${p.storage}</span>` : ''}
+              ${p.reviews?.reviewCount > 0 ? `
+                <div class="stars" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                  <span class="stars-icons" aria-label="${p.reviews.averageRating} stars">${stars}</span>
+                  <span class="stars-count" itemprop="reviewCount">(${p.reviews.reviewCount})</span>
+                  <meta itemprop="ratingValue" content="${p.reviews.averageRating}" />
+                </div>
+              ` : ''}
+              <div class="card-pricing">
+                <div class="price-from">Deposit from</div>
+                <div class="price-deposit" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                  <meta itemprop="priceCurrency" content="KES" />
+                  <meta itemprop="price" content="${(p.deposit||'').replace(/[^\d.]/g,'')}" />
+                  ${p.deposit}
+                </div>
+                <div class="price-daily">+ ${p.daily}/day</div>
+                <div class="price-total">Total: ${p.totalPrice}</div>
+              </div>
+              <span class="card-cta" role="button">Buy on Credit →</span>
+            </div>
+          </a>
+        </article>
+      `;
+    }).join('');
+
+    renderPagination(totalPages);
+    renderActiveFilters();
+    updateFilterBadge();
+  }
+
+  function renderStars(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      html += i <= Math.round(rating) ? '★' : '☆';
+    }
+    return html;
+  }
+
+  // ========== PAGINATION ==========
+  function renderPagination(totalPages) {
+    if (totalPages <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
+
+    let html = `<button class="page-btn" onclick="goToPage(${state.page-1})" ${state.page===1?'disabled':''} aria-label="Previous page">‹</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (totalPages > 7) {
+        if (i === 1 || i === totalPages || (i >= state.page - 1 && i <= state.page + 1)) {
+          html += `<button class="page-btn ${i===state.page?'active':''}" onclick="goToPage(${i})" aria-label="Page ${i}" aria-current="${i===state.page?'page':''}">${i}</button>`;
+        } else if (i === state.page - 2 || i === state.page + 2) {
+          html += `<span class="page-info">…</span>`;
+        }
+      } else {
+        html += `<button class="page-btn ${i===state.page?'active':''}" onclick="goToPage(${i})" aria-label="Page ${i}" aria-current="${i===state.page?'page':''}">${i}</button>`;
+      }
+    }
+
+    html += `<button class="page-btn" onclick="goToPage(${state.page+1})" ${state.page===totalPages?'disabled':''} aria-label="Next page">›</button>`;
+    document.getElementById('pagination').innerHTML = html;
+  }
+
+  function goToPage(p) {
+    const filtered = getFilteredProducts();
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+    if (p < 1 || p > totalPages) return;
+    state.page = p;
+    pushURL();
+    renderProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ========== SORT ==========
+  document.getElementById('sortSelect').addEventListener('change', function() {
+    state.sort = this.value;
+    state.page = 1;
+    pushURL();
+    renderProducts();
+  });
+
+  // ========== MOBILE SHEET ==========
+  function openFilterSheet() {
+    document.getElementById('sheetOverlay').classList.add('open');
+    document.getElementById('filterSheet').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFilterSheet() {
+    document.getElementById('sheetOverlay').classList.remove('open');
+    document.getElementById('filterSheet').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function applyMobileFilters() {
+    closeFilterSheet();
+  }
+
+  // ========== POPSTATE (back/forward) ==========
+  window.addEventListener('popstate', () => {
+    readURLParams();
+    syncFilterCheckboxes();
+    renderProducts();
+    syncURLFilterBar();
+  });
+
+  // ========== RUN ==========
+  init();
 </script>
+
 </body>
 </html>
