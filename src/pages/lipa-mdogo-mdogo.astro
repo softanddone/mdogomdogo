@@ -1,1225 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Phones | Lipa Mdogo Mdogo Nairobi — Buy Smartphones on Credit Kenya</title>
-<meta name="description" content="Buy smartphones on installments in Nairobi. Lipa mdogo mdogo — small deposit, daily M-Pesa payments. Oppo, Samsung, Tecno, Infinix. Free delivery Nairobi."/>
-<link rel="canonical" href="https://mdogomdogodeals.co.ke/phones"/>
-<meta property="og:title" content="Lipa Mdogo Mdogo Phones Nairobi"/>
-<meta property="og:url" content="https://mdogomdogodeals.co.ke/phones"/>
-<meta name="geo.region" content="KE-30"/>
-<meta name="geo.placename" content="Nairobi"/>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ItemList","name":"Lipa Mdogo Mdogo Phones Nairobi","url":"https://mdogomdogodeals.co.ke/phones","description":"Smartphones on installments in Nairobi Kenya"}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-/* ─── RESET ─── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phones — MobiShop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f4f2ee; --surface: #fff; --accent: #e8380d; --accent2: #1a1a2e;
+      --text: #1a1a2e; --muted: #8a8a9a; --border: #e0ddd8;
+      --sidebar-w: 240px; --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+      --radius: 14px; --tr: .2s ease;
+    }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
 
-/* ─── TOKENS ─── */
-:root{
-  --or:#F68B1E;
-  --or-d:#d9720d;
-  --or-bg:#FFF4E6;
-  --or-bd:rgba(246,139,30,.25);
-  --blk:#1A1A1A;
-  --tx:#212121;
-  --tx2:#616161;
-  --tx3:#9E9E9E;
-  --bd:#E0E0E0;
-  --bd2:#EEEEEE;
-  --bg:#F5F5F5;
-  --wh:#FFFFFF;
-  --red:#D32F2F;
-  --grn:#388E3C;
-  --sw:234px;
-  --font:'Open Sans',sans-serif;
-  --r:3px;
-}
+    /* TOPBAR */
+    .topbar { background: var(--accent2); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; height: 58px; position: sticky; top: 0; z-index: 400; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+    .topbar-logo { font-family: var(--font-head); font-size: 1.45rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -.5px; }
+    .topbar-logo span { color: var(--accent); }
+    .topbar-nav { display: flex; gap: 30px; }
+    .topbar-nav a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color var(--tr); }
+    .topbar-nav a:hover, .topbar-nav a.active-nav { color: #fff; }
+    .btn-cart { background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-family: var(--font-body); font-size: .85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: opacity var(--tr); }
+    .btn-cart:hover { opacity: .88; }
+    .cart-count { background: #fff; color: var(--accent); border-radius: 50%; width: 19px; height: 19px; font-size: .68rem; font-weight: 700; display: grid; place-items: center; }
 
-body{font-family:var(--font);color:var(--tx);background:var(--bg);font-size:13px;line-height:1.5}
+    /* BREADCRUMB */
+    .breadcrumb { padding: 13px 28px; font-size: .8rem; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb .sep { color: var(--border); }
+    .breadcrumb strong { color: var(--text); font-weight: 500; }
 
-/* ─── PAGE WRAP ─── */
-.shop-wrap{
-  max-width:1320px;
-  margin:0 auto;
-  padding:14px 14px 90px;
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-}
+    /* PAGE LAYOUT */
+    .page-layout { display: flex; max-width: 1440px; margin: 0 auto; padding: 0 20px 80px; }
 
-/* ════════════════════════════════
-   SIDEBAR
-════════════════════════════════ */
-.sidebar{
-  width:var(--sw);
-  flex-shrink:0;
-  position:sticky;
-  top:12px;
-  max-height:calc(100vh - 24px);
-  overflow-y:auto;
-  overflow-x:hidden;
-  scrollbar-width:thin;
-  scrollbar-color:var(--bd) transparent;
-}
-.sidebar::-webkit-scrollbar{width:3px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+    /* SIDEBAR */
+    .sidebar { width: var(--sidebar-w); flex-shrink: 0; padding-right: 24px; padding-top: 4px; }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .sidebar-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; }
+    .btn-clear-all { font-size: .75rem; color: var(--accent); background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: 600; text-decoration: underline; display: none; }
+    .btn-clear-all.visible { display: block; }
 
-/* sidebar box */
-.sb{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+    .filter-group { margin-bottom: 24px; }
+    .filter-group-title { font-family: var(--font-head); font-size: .75rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1.5px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+    .filter-group-title svg { transition: transform .25s; flex-shrink: 0; }
+    .filter-group.collapsed .filter-group-title svg { transform: rotate(-90deg); }
+    .filter-group-body { overflow: hidden; transition: max-height .3s ease; }
+    .filter-group.collapsed .filter-group-body { max-height: 0 !important; }
 
-/* sidebar header */
-.sb-hd{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:11px 14px;
-  background:var(--wh);
-  border-bottom:1px solid var(--bd);
-  position:sticky;top:0;z-index:2;
-}
-.sb-hd-title{font-size:14px;font-weight:700;color:var(--tx)}
-.sb-clear{font-size:11px;font-weight:600;color:var(--or);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:var(--font);padding:0;display:none}
-.sb-clear.show{display:inline}
+    .filter-option { display: flex; align-items: center; justify-content: space-between; padding: 5px 4px; cursor: pointer; gap: 8px; border-radius: 6px; transition: background var(--tr); }
+    .filter-option:hover { background: rgba(232,56,13,.05); }
+    .filter-option label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: .84rem; flex: 1; }
+    .filter-option input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+    .filter-count { font-size: .72rem; color: var(--muted); background: var(--border); border-radius: 20px; padding: 1px 7px; white-space: nowrap; transition: background var(--tr), color var(--tr); }
+    .filter-option:has(input:checked) .filter-count { background: rgba(232,56,13,.12); color: var(--accent); font-weight: 600; }
 
-/* filter section */
-.fsec{border-bottom:1px solid var(--bd2)}
-.fsec:last-child{border-bottom:none}
+    /* ACTIVE CHIPS */
+    .active-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+    .chip { display: inline-flex; align-items: center; gap: 5px; background: rgba(232,56,13,.1); color: var(--accent); border: 1.5px solid rgba(232,56,13,.25); border-radius: 20px; padding: 3px 10px 3px 12px; font-size: .75rem; font-weight: 600; cursor: pointer; transition: background var(--tr); }
+    .chip:hover { background: rgba(232,56,13,.18); }
+    .chip svg { width: 11px; height: 11px; }
 
-.fsec-hd{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;
-  font-size:12px;font-weight:700;color:var(--tx);
-  cursor:pointer;user-select:none;
-  transition:color .12s;
-}
-.fsec-hd:hover{color:var(--or)}
-.fsec-hd .chev{
-  width:11px;height:11px;
-  border-right:2px solid var(--tx3);
-  border-bottom:2px solid var(--tx3);
-  transform:rotate(45deg);
-  transition:transform .2s;
-  flex-shrink:0;
-  margin-top:-3px;
-}
-.fsec-hd.closed .chev{transform:rotate(-45deg);margin-top:2px}
+    /* MAIN */
+    .main { flex: 1; min-width: 0; }
 
-.fsec-body{padding:4px 0 8px}
-.fsec-body.hidden{display:none}
+    /* TOOLBAR */
+    .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .toolbar-left { display: flex; align-items: baseline; gap: 10px; }
+    .toolbar-title { font-family: var(--font-head); font-size: 1.65rem; font-weight: 800; letter-spacing: -.5px; }
+    .results-count { font-size: .82rem; color: var(--muted); }
+    .toolbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .show-label { font-size: .8rem; color: var(--muted); white-space: nowrap; }
+    .show-options { display: flex; align-items: center; gap: 2px; }
+    .show-options button { font-size: .82rem; color: var(--muted); background: none; border: none; cursor: pointer; padding: 2px 5px; font-family: var(--font-body); transition: color var(--tr); }
+    .show-options button.active { color: var(--accent); font-weight: 700; }
+    .show-options .sep { color: var(--border); font-size: .82rem; }
+    .view-btns { display: flex; gap: 4px; }
+    .view-btn { background: none; border: 1.5px solid var(--border); border-radius: 6px; width: 30px; height: 30px; cursor: pointer; display: grid; place-items: center; color: var(--muted); transition: border-color var(--tr), color var(--tr); }
+    .view-btn:hover, .view-btn.active { border-color: var(--accent); color: var(--accent); }
+    .sort-select { border: 1.5px solid var(--border); border-radius: 9px; padding: 6px 12px; font-family: var(--font-body); font-size: .82rem; color: var(--text); background: var(--surface); cursor: pointer; outline: none; }
+    .sort-select:focus { border-color: var(--accent); }
 
-.fopt{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:5px 14px;
-  cursor:pointer;
-  transition:background .1s;
-}
-.fopt:hover{background:var(--bg)}
-.fopt label{
-  display:flex;align-items:center;gap:8px;
-  cursor:pointer;font-size:12px;color:var(--tx);flex:1;
-  line-height:1.3;
-}
-.fopt input[type=checkbox]{
-  accent-color:var(--or);
-  width:14px;height:14px;
-  cursor:pointer;flex-shrink:0;
-  border-radius:2px;
-}
-.fcnt{font-size:11px;color:var(--tx3)}
+    /* PRODUCT GRID */
+    .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .product-grid.view-3 { grid-template-columns: repeat(3, 1fr); }
+    .product-grid.view-list { grid-template-columns: 1fr; gap: 10px; }
 
-/* ════════════════════════════════
-   MOBILE DRAWER
-════════════════════════════════ */
-.drw-ovl{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.52);z-index:500;
-}
-.drw-ovl.on{display:block}
+    /* CARD */
+    .product-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; position: relative; transition: box-shadow .28s, transform .28s; border: 1.5px solid transparent; }
+    .product-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.10); transform: translateY(-3px); border-color: rgba(232,56,13,.18); }
 
-.drw{
-  position:fixed;left:0;top:0;bottom:0;
-  width:290px;background:var(--wh);
-  z-index:501;
-  transform:translateX(-100%);
-  transition:transform .28s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;
-}
-.drw.on{transform:translateX(0)}
+    /* LIST VIEW */
+    .product-grid.view-list .product-card { display: flex; transform: none !important; }
+    .product-grid.view-list .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .product-grid.view-list .card-img-wrap { width: 130px; flex-shrink: 0; border-radius: 12px 0 0 12px; aspect-ratio: 1; }
+    .product-grid.view-list .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 16px 20px; }
+    .product-grid.view-list .card-name { -webkit-line-clamp: unset; font-size: .92rem; }
+    .product-grid.view-list .btn-add-cart-list { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; background: var(--accent2); color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: .8rem; font-family: var(--font-body); font-weight: 600; cursor: pointer; transition: background var(--tr); width: fit-content; }
+    .product-grid.view-list .btn-add-cart-list:hover { background: var(--accent); }
 
-.drw-top{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:13px 16px;border-bottom:1px solid var(--bd);
-  flex-shrink:0;background:var(--wh);
-}
-.drw-top h3{font-size:14px;font-weight:700}
-.drw-x{
-  background:none;border:none;cursor:pointer;
-  color:var(--tx2);padding:4px;display:flex;
-  border-radius:var(--r);
-}
-.drw-x:hover{background:var(--bg)}
-.drw-body{flex:1;overflow-y:auto}
-.drw-foot{
-  padding:12px 16px;border-top:1px solid var(--bd);
-  flex-shrink:0;background:var(--wh);
-}
-.drw-apply{
-  width:100%;padding:11px;
-  background:var(--or);color:#fff;border:none;
-  border-radius:var(--r);font-family:var(--font);
-  font-size:13px;font-weight:700;cursor:pointer;
-  transition:background .15s;
-}
-.drw-apply:hover{background:var(--or-d)}
+    .card-img-wrap { position: relative; aspect-ratio: 1; background: #f8f7f5; overflow: hidden; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 14px; transition: transform .32s ease; }
+    .product-card:hover .card-img-wrap img { transform: scale(1.06); }
+    .badge-new { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font-family: var(--font-head); font-size: .62rem; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; border-radius: 5px; z-index: 1; }
+    .btn-add-cart { position: absolute; bottom: 10px; right: 10px; background: var(--accent2); color: #fff; border: none; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; display: grid; place-items: center; opacity: 0; transform: scale(.75); transition: opacity .22s, transform .22s, background .15s; }
+    .btn-add-cart:hover { background: var(--accent); }
+    .product-card:hover .btn-add-cart { opacity: 1; transform: scale(1); }
+    .card-body { padding: 11px 13px 14px; }
+    .card-name { font-size: .82rem; font-weight: 500; margin-bottom: 7px; line-height: 1.38; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-price-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+    .card-old-price { font-size: .74rem; color: var(--muted); text-decoration: line-through; }
+    .card-price { font-family: var(--font-head); font-size: .95rem; font-weight: 700; color: var(--accent); }
+    .card-storage { font-size: .72rem; color: var(--muted); margin-top: 4px; }
 
-/* ════════════════════════════════
-   MAIN CONTENT
-════════════════════════════════ */
-.main{flex:1;min-width:0}
+    /* EMPTY STATE */
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 70px 20px; }
+    .empty-state svg { width: 56px; height: 56px; color: var(--border); margin-bottom: 16px; }
+    .empty-state h3 { font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 8px; }
+    .empty-state p { font-size: .85rem; color: var(--muted); }
+    .btn-reset { margin-top: 18px; background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 10px 22px; font-family: var(--font-body); font-weight: 600; cursor: pointer; font-size: .85rem; }
 
-/* ── TOOLBAR ── */
-.toolbar{
-  background:var(--wh);
-  border:1px solid var(--bd);
-  border-radius:var(--r);
-  padding:9px 12px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:8px;margin-bottom:10px;flex-wrap:wrap;
-}
-.tb-l{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.tb-r{display:flex;align-items:center;gap:6px}
+    /* OVERLAY */
+    .filter-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 500; opacity: 0; transition: opacity .3s; }
+    .filter-overlay.open { opacity: 1; }
 
-/* mobile filter toggle */
-.mob-sb-btn{
-  display:none;
-  align-items:center;gap:6px;
-  padding:6px 11px;
-  border:1px solid var(--bd);border-radius:var(--r);
-  font-family:var(--font);font-size:12px;font-weight:700;
-  background:var(--wh);color:var(--tx);cursor:pointer;
-  transition:border-color .12s,color .12s;
-}
-.mob-sb-btn:hover{border-color:var(--or);color:var(--or)}
-.mob-sb-btn svg{width:13px;height:13px;flex-shrink:0}
-.fc-badge{
-  background:var(--or);color:#fff;
-  border-radius:50%;width:16px;height:16px;
-  font-size:10px;font-weight:700;
-  display:none;align-items:center;justify-content:center;
-  line-height:1;
-}
-.fc-badge.show{display:flex}
+    /* FILTER DRAWER */
+    .filter-drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); z-index: 501; border-radius: 22px 22px 0 0; padding: 0 20px 96px; max-height: 85vh; overflow-y: auto; transform: translateY(100%); transition: transform .36s cubic-bezier(.4,0,.2,1); }
+    .filter-drawer.open { transform: translateY(0); }
+    .drawer-handle { width: 40px; height: 4px; background: var(--border); border-radius: 4px; margin: 14px auto 18px; }
+    .drawer-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1.5px solid var(--border); margin-bottom: 4px; }
+    .drawer-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; }
+    .drawer-close { background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: .88rem; }
+    .drawer-footer { position: sticky; bottom: 0; background: var(--surface); padding: 14px 0 4px; display: flex; gap: 10px; }
+    .btn-apply { flex: 1; background: var(--accent); color: #fff; border: none; border-radius: 11px; padding: 13px; font-family: var(--font-head); font-weight: 700; font-size: .95rem; cursor: pointer; }
+    .btn-drawer-clear { background: #eee; color: var(--text); border: none; border-radius: 11px; padding: 13px 18px; font-family: var(--font-body); font-weight: 600; font-size: .88rem; cursor: pointer; }
 
-.tb-title{font-size:14px;font-weight:700;color:var(--tx)}
-.tb-count{font-size:12px;color:var(--tx3)}
+    /* SORT SHEET */
+    .sort-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); z-index: 501; border-radius: 22px 22px 0 0; padding: 0 20px 90px; transform: translateY(100%); transition: transform .36s cubic-bezier(.4,0,.2,1); }
+    .sort-sheet.open { transform: translateY(0); }
+    .sort-sheet-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; padding: 20px 0 14px; border-bottom: 1.5px solid var(--border); margin-bottom: 4px; }
+    .sort-option { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); cursor: pointer; font-size: .9rem; }
+    .sort-option:last-child { border-bottom: none; }
+    .sort-option.selected { color: var(--accent); font-weight: 600; }
+    .sort-check { color: var(--accent); display: none; }
+    .sort-option.selected .sort-check { display: block; }
 
-/* show per page */
-.pp-wrap{display:flex;align-items:center;gap:5px}
-.pp-lbl{font-size:12px;color:var(--tx2);white-space:nowrap}
-.pp-btns{display:flex}
-.pp-btn{
-  padding:4px 8px;font-size:12px;font-weight:600;
-  color:var(--tx2);
-  border:1px solid var(--bd);border-right:none;
-  background:var(--wh);cursor:pointer;
-  font-family:var(--font);transition:all .12s;
-  white-space:nowrap;
-}
-.pp-btn:first-child{border-radius:var(--r) 0 0 var(--r)}
-.pp-btn:last-child{border-right:1px solid var(--bd);border-radius:0 var(--r) var(--r) 0}
-.pp-btn.on,.pp-btn:hover{background:var(--or);color:#fff;border-color:var(--or);z-index:1}
+    /* MOBILE BOTTOM BAR */
+    .mobile-bottombar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1.5px solid var(--border); z-index: 300; padding-bottom: env(safe-area-inset-bottom); }
+    .mobile-bottombar-inner { display: flex; }
+    .mob-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 9px 0 8px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: .67rem; color: var(--muted); font-weight: 500; position: relative; }
+    .mob-btn.active { color: var(--accent); }
+    .mob-btn svg { width: 21px; height: 21px; }
+    .mob-badge { position: absolute; top: 6px; right: calc(50% - 18px); background: var(--accent); color: #fff; border-radius: 50%; width: 16px; height: 16px; font-size: .6rem; font-weight: 700; display: grid; place-items: center; }
 
-/* view btns */
-.vw-btns{display:flex;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
-.vw-btn{
-  padding:5px 9px;background:var(--wh);border:none;
-  cursor:pointer;color:var(--tx3);display:flex;align-items:center;
-  transition:all .12s;
-}
-.vw-btn+.vw-btn{border-left:1px solid var(--bd)}
-.vw-btn:hover,.vw-btn.on{background:var(--or-bg);color:var(--or)}
-.vw-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+    /* MOBILE TOP CONTROLS */
+    .mobile-top-controls { display: none; align-items: center; margin-bottom: 14px; gap: 8px; }
+    .btn-filter-mob, .btn-sort-mob { background: var(--surface); border: 1.5px solid var(--border); border-radius: 9px; padding: 9px 14px; font-family: var(--font-body); font-size: .82rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--text); transition: border-color var(--tr); flex: 1; justify-content: center; }
+    .btn-filter-mob:hover, .btn-sort-mob:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-badge { background: var(--accent); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: .66rem; font-weight: 700; display: inline-grid; place-items: center; }
 
-/* sort */
-.sort-sel{
-  padding:5px 26px 5px 9px;
-  border:1px solid var(--bd);border-radius:var(--r);
-  font-family:var(--font);font-size:12px;color:var(--tx);
-  background:var(--wh) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
-  appearance:none;outline:none;cursor:pointer;
-}
-.sort-sel:focus{border-color:var(--or)}
-
-/* ── ACTIVE FILTER TAGS ── */
-.atags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
-.atag{
-  display:inline-flex;align-items:center;gap:4px;
-  padding:4px 8px 4px 10px;
-  background:var(--or-bg);border:1px solid var(--or-bd);
-  color:var(--or-d);border-radius:50px;
-  font-size:11px;font-weight:600;
-}
-.atag-x{
-  background:none;border:none;cursor:pointer;
-  color:var(--or);font-size:16px;line-height:1;
-  padding:0;display:flex;align-items:center;
-  transition:color .1s;
-}
-.atag-x:hover{color:var(--red)}
-
-/* ════════════════════════════════
-   PRODUCT GRID
-════════════════════════════════ */
-.pgrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:var(--bd);
-  border:1px solid var(--bd);
-  border-radius:var(--r);
-  overflow:hidden;
-}
-.pgrid.lv{grid-template-columns:1fr}
-
-/* ── PRODUCT CARD ── */
-.card{
-  background:var(--wh);
-  display:flex;flex-direction:column;
-  position:relative;
-  cursor:pointer;
-  transition:box-shadow .18s;
-}
-.card:hover{
-  box-shadow:inset 0 0 0 2px var(--or);
-  z-index:2;
-}
-.card-a{
-  display:flex;flex-direction:column;
-  flex:1;text-decoration:none;color:inherit;
-}
-
-/* ── IMAGE ZONE ──
-   Critical: phones must be large & clearly visible.
-   We use a tall aspect ratio + generous white space,
-   image fills ~85% of the zone for maximum impact.
-*/
-.cimg{
-  position:relative;
-  background:#FAFAFA;
-  aspect-ratio:4/5;       /* tall portrait — ideal for phones */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  padding:5%;             /* small even padding, max image area */
-}
-.cimg img{
-  width:90%;              /* large: fills most of the zone */
-  height:90%;
-  object-fit:contain;
-  display:block;
-  transition:transform .35s ease;
-  /* drop shadow adds depth & pops against white */
-  filter:drop-shadow(0 6px 16px rgba(0,0,0,.13));
-}
-.card:hover .cimg img{
-  transform:scale(1.06);
-}
-
-/* badges */
-.b-new{
-  position:absolute;top:9px;left:9px;
-  background:var(--or);color:#fff;
-  font-size:10px;font-weight:700;
-  padding:2px 8px;border-radius:2px;
-  text-transform:uppercase;letter-spacing:.04em;
-  line-height:1.5;z-index:1;
-}
-.b-disc{
-  position:absolute;top:9px;right:9px;
-  background:var(--red);color:#fff;
-  font-size:10px;font-weight:700;
-  padding:2px 8px;border-radius:2px;
-  line-height:1.5;z-index:1;
-}
-
-/* wishlist heart — shows on hover */
-.wish-btn{
-  position:absolute;bottom:10px;right:10px;
-  background:rgba(255,255,255,.94);
-  border:1px solid var(--bd);
-  border-radius:50%;
-  width:32px;height:32px;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-  opacity:0;
-  transform:scale(.8);
-  transition:opacity .18s,transform .18s,border-color .12s,color .12s;
-  color:var(--tx3);
-}
-.card:hover .wish-btn{opacity:1;transform:scale(1)}
-.wish-btn:hover{border-color:var(--red);color:var(--red)}
-.wish-btn.wished{opacity:1;transform:scale(1);color:var(--red);border-color:var(--red)}
-.wish-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
-
-/* ── CARD BODY ── */
-.cbody{
-  padding:10px 13px 13px;
-  border-top:1px solid var(--bd2);
-  flex:1;display:flex;flex-direction:column;
-  gap:0;
-}
-
-.cname{
-  font-size:12.5px;font-weight:600;color:var(--tx);
-  line-height:1.4;margin-bottom:5px;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-.cspecs{
-  display:flex;flex-wrap:wrap;gap:3px;
-  margin-bottom:10px;
-}
-.cspec{
-  font-size:10px;padding:2px 6px;
-  background:var(--bg);color:var(--tx3);
-  border-radius:2px;border:1px solid var(--bd2);
-  white-space:nowrap;
-}
-
-/* pricing */
-.cprices{margin-top:auto}
-.cprice-was{
-  font-size:10.5px;color:var(--tx3);
-  text-decoration:line-through;margin-bottom:1px;
-}
-.cprice-from{
-  font-size:16px;font-weight:800;
-  color:var(--or);line-height:1.15;
-  margin-bottom:7px;
-}
-.cprice-from small{font-size:10px;font-weight:400;color:var(--tx3)}
-
-.cplans{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.cplan{
-  background:var(--bg);border:1px solid var(--bd2);
-  border-radius:2px;padding:5px 7px;
-}
-.cplan-lbl{
-  font-size:9px;text-transform:uppercase;
-  letter-spacing:.06em;color:var(--tx3);
-  font-weight:700;margin-bottom:1px;
-}
-.cplan-val{font-size:12px;font-weight:700;color:var(--blk)}
-
-/* card footer */
-.cfoot{
-  margin-top:9px;padding-top:8px;
-  border-top:1px solid var(--bd2);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.cseller{
-  font-size:10px;color:var(--tx3);
-  display:flex;align-items:center;gap:3px;
-}
-.cseller svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
-.cstars{display:flex;align-items:center;gap:2px}
-.cstars-s{color:var(--or);font-size:11px;letter-spacing:.5px}
-.cstars-n{font-size:10px;color:var(--tx3)}
-
-/* ── LIST VIEW OVERRIDES ── */
-.pgrid.lv .card{flex-direction:row}
-.pgrid.lv .card-a{flex-direction:row}
-.pgrid.lv .cimg{
-  width:200px;flex-shrink:0;
-  aspect-ratio:unset;min-height:200px;
-  padding:4%;
-}
-.pgrid.lv .cimg img{width:88%;height:88%}
-.pgrid.lv .cbody{border-top:none;border-left:1px solid var(--bd2);padding:16px 20px}
-.pgrid.lv .cname{font-size:13.5px;-webkit-line-clamp:3}
-.pgrid.lv .cplans{max-width:280px}
-
-/* ── EMPTY STATE ── */
-.empty{
-  grid-column:1/-1;
-  text-align:center;padding:70px 20px;
-  color:var(--tx3);
-}
-.empty-icon{
-  width:56px;height:56px;
-  border:2px solid var(--bd);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 16px;opacity:.4;
-}
-.empty-icon svg{width:26px;height:26px;fill:none;stroke:var(--tx3);stroke-width:1.5}
-.empty h3{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px}
-.empty p{font-size:12px;margin-bottom:16px}
-.empty-btn{
-  padding:9px 22px;
-  background:var(--or);color:#fff;
-  border:none;border-radius:var(--r);
-  font-family:var(--font);font-weight:700;
-  cursor:pointer;font-size:12px;
-  transition:background .15s;
-}
-.empty-btn:hover{background:var(--or-d)}
-
-/* ════════════════════════════════
-   PAGINATION
-════════════════════════════════ */
-.pagi{
-  display:flex;align-items:center;justify-content:center;
-  gap:4px;margin-top:16px;flex-wrap:wrap;
-}
-.ppage{
-  min-width:36px;height:36px;padding:0 7px;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--bd);border-radius:var(--r);
-  font-family:var(--font);font-size:12px;font-weight:600;
-  background:var(--wh);color:var(--tx);
-  cursor:pointer;text-decoration:none;
-  transition:all .12s;
-}
-.ppage:hover{border-color:var(--or);color:var(--or)}
-.ppage.on{background:var(--or);border-color:var(--or);color:#fff;font-weight:700}
-.ppage.dis{opacity:.3;cursor:default;pointer-events:none}
-.ppage.dots{border:none;background:none;cursor:default;color:var(--tx3)}
-
-/* ════════════════════════════════
-   SEO SECTION
-════════════════════════════════ */
-.seo{
-  background:var(--wh);border:1px solid var(--bd);
-  border-radius:var(--r);padding:20px 22px;margin-top:12px;
-}
-.seo h2{font-size:13px;font-weight:700;margin-bottom:8px}
-.seo p{font-size:12px;color:var(--tx2);line-height:1.75;margin-bottom:6px}
-.seo h3{font-size:11.5px;font-weight:700;margin:12px 0 6px;color:var(--tx);text-transform:uppercase;letter-spacing:.04em}
-.seo-tags{display:flex;flex-wrap:wrap;gap:4px}
-.seo-tag{
-  padding:4px 10px;background:var(--bg);
-  border-radius:50px;font-size:11px;color:var(--tx2);
-  border:1px solid var(--bd);text-decoration:none;
-  transition:border-color .12s,color .12s;
-}
-.seo-tag:hover{border-color:var(--or);color:var(--or)}
-
-/* ════════════════════════════════
-   MOBILE BOTTOM NAV
-════════════════════════════════ */
-.mbar{
-  display:none;position:fixed;bottom:0;left:0;right:0;
-  background:var(--wh);
-  border-top:1px solid var(--bd);
-  z-index:100;
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-.mbar-in{display:flex}
-.mbar-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
-  background:none;border:none;cursor:pointer;
-  color:var(--tx3);font-family:var(--font);font-size:10px;font-weight:700;
-  padding:9px 0;text-decoration:none;
-  transition:color .12s;
-  border-right:1px solid var(--bd2);
-}
-.mbar-btn:last-child{border-right:none}
-.mbar-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
-.mbar-btn:hover,.mbar-btn.act{color:var(--or)}
-
-/* ════════════════════════════════
-   ANIMATION
-════════════════════════════════ */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.card{animation:fadeUp .22s ease both}
-
-/* ════════════════════════════════
-   RESPONSIVE
-════════════════════════════════ */
-/* 3 col when sidebar takes space */
-@media(max-width:1120px){
-  .pgrid:not(.lv){grid-template-columns:repeat(3,1fr)}
-}
-
-/* hide sidebar → show mobile button */
-@media(max-width:860px){
-  .sidebar{display:none}
-  .pgrid:not(.lv){grid-template-columns:repeat(2,1fr)}
-  .mob-sb-btn{display:flex}
-  .mbar{display:block}
-  .shop-wrap{padding:8px 8px 76px}
-  .pp-wrap,.vw-btns{display:none}
-}
-
-/* tight mobile */
-@media(max-width:520px){
-  .pgrid:not(.lv){grid-template-columns:repeat(2,1fr)}
-  .cimg{padding:3%}
-  .cimg img{width:92%;height:92%}
-  .cbody{padding:8px 9px 11px}
-  .cname{font-size:11.5px}
-  .cprice-from{font-size:14px}
-  .cplans{grid-template-columns:1fr 1fr}
-  /* list on mobile: collapse to column */
-  .pgrid.lv .card,.pgrid.lv .card-a{flex-direction:column}
-  .pgrid.lv .cimg{width:100%;min-height:unset;aspect-ratio:4/4}
-  .pgrid.lv .cbody{border-left:none;border-top:1px solid var(--bd2)}
-  .sort-sel{font-size:11px;padding:5px 20px 5px 7px}
-}
-</style>
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .product-grid:not(.view-list):not(.view-3) { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 960px) {
+      :root { --sidebar-w: 210px; }
+      .product-grid:not(.view-list):not(.view-3) { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 800px) {
+      .sidebar { display: none; }
+      .mobile-top-controls { display: flex; }
+      .filter-overlay { display: block; }
+      .mobile-bottombar { display: block; }
+      .page-layout { padding-bottom: 92px; padding-left: 12px; padding-right: 12px; }
+      .product-grid:not(.view-list) { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+      .topbar-nav { display: none; }
+      .toolbar-right { display: none; }
+      .toolbar { margin-bottom: 4px; }
+      .toolbar-title { font-size: 1.25rem; }
+      .breadcrumb { padding: 10px 16px; }
+      .topbar { padding: 0 16px; }
+    }
+    @media (max-width: 480px) {
+      .product-grid:not(.view-list) { gap: 8px !important; }
+      .card-body { padding: 9px 10px 12px; }
+      .card-name { font-size: .79rem; }
+      .product-grid.view-list .card-img-wrap { width: 90px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     MOBILE OVERLAY + SIDEBAR DRAWER
-══════════════════════════════════════ -->
-<div class="drw-ovl" id="drwOvl" onclick="closeSb()"></div>
-<div class="drw" id="drw" role="dialog" aria-modal="true" aria-label="Filter phones">
-  <div class="drw-top">
-    <h3>Filter Phones</h3>
-    <button class="drw-x" onclick="closeSb()" aria-label="Close filters">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="#" class="topbar-logo">Mobi<span>Shop</span></a>
+  <nav class="topbar-nav">
+    <a href="#" class="active-nav">Phones</a>
+    <a href="#">Tablets</a>
+    <a href="#">Accessories</a>
+    <a href="#">Deals</a>
+  </nav>
+  <div>
+    <button class="btn-cart">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Cart <span class="cart-count" id="cartCount">0</span>
     </button>
   </div>
-  <div class="drw-body" id="drwBody"></div>
-  <div class="drw-foot">
-    <button class="drw-apply" onclick="closeSb()">Show Results</button>
-  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Home</a><span class="sep">›</span><strong>Phones</strong>
 </div>
 
-<!-- ══════════════════════════════════════
-     SHOP LAYOUT
-══════════════════════════════════════ -->
-<div class="shop-wrap">
+<!-- PAGE -->
+<div class="page-layout">
 
   <!-- DESKTOP SIDEBAR -->
-  <aside class="sidebar" id="deskSb" aria-label="Product filters"></aside>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Filters</span>
+      <button class="btn-clear-all" id="clearAllBtn">Clear all</button>
+    </div>
+    <div id="desktopFilters"></div>
+  </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="main">
-
-    <!-- TOOLBAR -->
     <div class="toolbar">
-      <div class="tb-l">
-        <!-- mobile filter toggle -->
-        <button class="mob-sb-btn" id="mobSbBtn" onclick="openSb()" aria-label="Open filters" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-          Show sidebar
-          <span class="fc-badge" id="fcBadge" aria-label="active filters count">0</span>
-        </button>
-        <span class="tb-title">Phones</span>
-        <span class="tb-count" id="tbCount" aria-live="polite"></span>
+      <div class="toolbar-left">
+        <h1 class="toolbar-title">Phones</h1>
+        <span class="results-count" id="resultsCount"></span>
       </div>
-      <div class="tb-r">
-        <!-- per page -->
-        <div class="pp-wrap">
-          <span class="pp-lbl">Show:</span>
-          <div class="pp-btns" role="group" aria-label="Products per page">
-            <button class="pp-btn" data-pp="9"  onclick="setPP(this,9)" >9</button>
-            <button class="pp-btn on" data-pp="20" onclick="setPP(this,20)">20</button>
-            <button class="pp-btn" data-pp="40" onclick="setPP(this,40)">40</button>
-            <button class="pp-btn" data-pp="60" onclick="setPP(this,60)">60</button>
-          </div>
+      <div class="toolbar-right">
+        <span class="show-label">Show:</span>
+        <div class="show-options" id="showOptions">
+          <button class="active" data-per="9">9</button><span class="sep">/</span>
+          <button data-per="12">12</button><span class="sep">/</span>
+          <button data-per="18">18</button><span class="sep">/</span>
+          <button data-per="24">24</button>
         </div>
-        <!-- view toggle -->
-        <div class="vw-btns" role="group" aria-label="View mode">
-          <button class="vw-btn on" id="vGrid" onclick="setView('grid')" title="Grid view" aria-pressed="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <div class="view-btns">
+          <button class="view-btn" id="viewList" title="List view">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
-          <button class="vw-btn" id="vList" onclick="setView('list')" title="List view" aria-pressed="false">
-            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r="1.2" fill="currentColor" stroke="none"/><circle cx="3" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="3" cy="18" r="1.2" fill="currentColor" stroke="none"/></svg>
+          <button class="view-btn" id="view3" title="3-column">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="6" height="9"/><rect x="9" y="2" width="6" height="9"/><rect x="16" y="2" width="6" height="9"/><rect x="2" y="13" width="6" height="9"/><rect x="9" y="13" width="6" height="9"/><rect x="16" y="13" width="6" height="9"/></svg>
+          </button>
+          <button class="view-btn active" id="view4" title="4-column">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
           </button>
         </div>
-        <!-- sort -->
-        <select class="sort-sel" id="sortSel" aria-label="Sort products">
-          <option value="default">Sort by latest</option>
-          <option value="popularity">Sort by popularity</option>
-          <option value="rating">Sort by rating</option>
-          <option value="price_asc">Price: low → high</option>
-          <option value="price_desc">Price: high → low</option>
+        <select class="sort-select" id="sortSelect">
+          <option value="latest">Sort by latest</option>
+          <option value="popular">Sort by popularity</option>
+          <option value="rating">Sort by average rating</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
         </select>
       </div>
     </div>
 
-    <!-- ACTIVE FILTER CHIPS -->
-    <div class="atags" id="aTags" aria-label="Active filters" aria-live="polite"></div>
+    <!-- Mobile controls -->
+    <div class="mobile-top-controls">
+      <button class="btn-filter-mob" id="openFilterBtn">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filters <span class="filter-badge" id="filterBadge" style="display:none"></span>
+      </button>
+      <button class="btn-sort-mob" id="openSortBtn">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+        <span id="sortLabel">Sort by latest</span>
+      </button>
+    </div>
 
-    <!-- PRODUCT GRID -->
-    <div class="pgrid" id="pgrid" role="list" aria-label="Phone products"></div>
-
-    <!-- PAGINATION -->
-    <nav class="pagi" id="pagi" aria-label="Pages"></nav>
-
-    <!-- SEO CONTENT -->
-    <article class="seo">
-      <h2>Buy Smartphones on Lipa Mdogo Mdogo in Nairobi, Kenya</h2>
-      <p>Looking for the best phones on installments in Nairobi? MdogoMdogo Deals offers flexible <strong>lipa mdogo mdogo</strong> plans — pay a small deposit and spread the balance in easy daily M-Pesa payments. Powered by trusted partners like MKopa and Watu Simu. Free same-day delivery across Nairobi.</p>
-      <h3>Browse by category</h3>
-      <div class="seo-tags">
-        <a href="?brand=Samsung" class="seo-tag">Samsung on credit</a>
-        <a href="?brand=Oppo" class="seo-tag">Oppo lipa mdogo mdogo</a>
-        <a href="?brand=Tecno" class="seo-tag">Tecno installments Nairobi</a>
-        <a href="?brand=Infinix" class="seo-tag">Infinix phone loan Kenya</a>
-        <a href="?brand=Itel" class="seo-tag">Itel affordable phones</a>
-        <a href="?storage=128GB" class="seo-tag">128GB phones Kenya</a>
-        <a href="?storage=256GB" class="seo-tag">256GB smartphones</a>
-        <a href="?seller=Mkopa" class="seo-tag">MKopa phones</a>
-        <a href="?seller=Watu" class="seo-tag">Watu Simu Kenya</a>
-        <a href="?deposit=ksh2k_4k" class="seo-tag">Deposit under KSh 4k</a>
-      </div>
-    </article>
-
+    <div class="active-chips" id="activeChips"></div>
+    <div class="product-grid" id="productGrid"></div>
   </main>
 </div>
 
-<!-- MOBILE BOTTOM NAV -->
-<nav class="mbar" aria-label="Mobile navigation">
-  <div class="mbar-in">
-    <button class="mbar-btn act" onclick="openSb()">
-      <svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+<!-- OVERLAYS -->
+<div class="filter-overlay" id="filterOverlay"></div>
+
+<!-- FILTER DRAWER -->
+<div class="filter-drawer" id="filterDrawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <span class="drawer-title">Filters</span>
+    <button class="drawer-close" id="closeFilterBtn">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Close
+    </button>
+  </div>
+  <div id="mobileFilters"></div>
+  <div class="drawer-footer">
+    <button class="btn-drawer-clear" id="clearMobileBtn">Clear</button>
+    <button class="btn-apply" id="applyFilterBtn">Show results</button>
+  </div>
+</div>
+
+<!-- SORT SHEET -->
+<div class="sort-sheet" id="sortSheet">
+  <div class="drawer-handle"></div>
+  <div class="sort-sheet-title">Sort by</div>
+  <div id="sortOptions"></div>
+</div>
+
+<!-- MOBILE BOTTOM BAR -->
+<nav class="mobile-bottombar">
+  <div class="mobile-bottombar-inner">
+    <button class="mob-btn active" id="mobFilterBtn">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
       Filters
     </button>
-    <a href="/cart" class="mbar-btn">
-      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <button class="mob-btn">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="mob-badge" id="mobCartBadge" style="display:none">0</span>
       Cart
-    </a>
-    <a href="/" class="mbar-btn">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </button>
+    <button class="mob-btn">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Home
-    </a>
-    <a href="/phones" class="mbar-btn">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </button>
+    <button class="mob-btn">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       Shop
-    </a>
+    </button>
   </div>
 </nav>
 
 <script>
-/* ═══════════════════════════════════════════════
-   PRODUCTS
-═══════════════════════════════════════════════ */
-const products = [
-  {id:1, name:"Oppo A3x",         status:"New", image:"", from:"KSh 2,900", deposit:"KSh 3,500", daily:"KSh 90",  totalPrice:"KSh 16,500", discount:"-15%", display:'6.67" HD+',   battery:"5100mAh", slug:"oppo-a3x",          brand:"Oppo",    seller:"Mkopa", storage:"128GB", reviews:{r:4.5,n:27}},
-  {id:2, name:"Oppo A3 Pro",      status:"New", image:"", from:"KSh 3,500", deposit:"KSh 3,900", daily:"KSh 90",  totalPrice:"KSh 19,999", discount:"-12%", display:'6.7" AMOLED', battery:"5000mAh", slug:"oppo-a3-pro",        brand:"Oppo",    seller:"Mkopa", storage:"256GB", reviews:{r:4.6,n:31}},
-  {id:3, name:"Samsung Galaxy A15",status:"New", image:"", from:"KSh 3,200", deposit:"KSh 4,000", daily:"KSh 95",  totalPrice:"KSh 18,500", discount:"-10%", display:'6.5" AMOLED', battery:"5000mAh", slug:"samsung-a15",        brand:"Samsung", seller:"Watu",  storage:"128GB", reviews:{r:4.4,n:45}},
-  {id:4, name:"Tecno Camon 30",   status:"New", image:"", from:"KSh 4,500", deposit:"KSh 5,000", daily:"KSh 110", totalPrice:"KSh 24,999", discount:"-8%",  display:'6.78" AMOLED',battery:"5000mAh", slug:"tecno-camon-30",     brand:"Tecno",   seller:"Mkopa", storage:"256GB", reviews:{r:4.3,n:38}},
-  {id:5, name:"Infinix Hot 40 Pro",status:"New", image:"", from:"KSh 2,500", deposit:"KSh 3,200", daily:"KSh 80",  totalPrice:"KSh 14,999", discount:"-18%", display:'6.78" FHD+',  battery:"5000mAh", slug:"infinix-hot-40-pro", brand:"Infinix", seller:"Watu",  storage:"128GB", reviews:{r:4.2,n:52}},
-  {id:6, name:"Samsung A25 5G",   status:"New", image:"", from:"KSh 5,000", deposit:"KSh 6,500", daily:"KSh 130", totalPrice:"KSh 29,999", discount:"-5%",  display:'6.5" AMOLED', battery:"5000mAh", slug:"samsung-a25-5g",     brand:"Samsung", seller:"Mkopa", storage:"256GB", reviews:{r:4.5,n:29}},
-  {id:7, name:"Tecno Spark 20 Pro",status:"New", image:"", from:"KSh 2,800", deposit:"KSh 3,600", daily:"KSh 85",  totalPrice:"KSh 15,999", discount:"-12%", display:'6.78" IPS',   battery:"5000mAh", slug:"tecno-spark-20-pro", brand:"Tecno",   seller:"Watu",  storage:"128GB", reviews:{r:4.1,n:41}},
-  {id:8, name:"Infinix Note 40",  status:"New", image:"", from:"KSh 4,200", deposit:"KSh 5,500", daily:"KSh 120", totalPrice:"KSh 26,999", discount:"-7%",  display:'6.78" AMOLED',battery:"5000mAh", slug:"infinix-note-40",    brand:"Infinix", seller:"Mkopa", storage:"256GB", reviews:{r:4.4,n:33}},
-  {id:9, name:"Oppo Reno 11F",    status:"New", image:"", from:"KSh 6,000", deposit:"KSh 8,000", daily:"KSh 160", totalPrice:"KSh 38,999", discount:"-6%",  display:'6.7" AMOLED', battery:"5000mAh", slug:"oppo-reno-11f",      brand:"Oppo",    seller:"Mkopa", storage:"256GB", reviews:{r:4.6,n:19}},
-  {id:10,name:"Itel P55 Plus",    status:"New", image:"", from:"KSh 1,800", deposit:"KSh 2,500", daily:"KSh 65",  totalPrice:"KSh 11,999", discount:"-20%", display:'6.6" HD+',    battery:"6000mAh", slug:"itel-p55-plus",      brand:"Itel",    seller:"Watu",  storage:"128GB", reviews:{r:4.0,n:67}},
-  {id:11,name:"Samsung Galaxy A05s",status:"New",image:"", from:"KSh 2,600", deposit:"KSh 3,300", daily:"KSh 82",  totalPrice:"KSh 15,499", discount:"-11%", display:'6.7" LCD',    battery:"5000mAh", slug:"samsung-a05s",       brand:"Samsung", seller:"Mkopa", storage:"128GB", reviews:{r:4.2,n:55}},
-  {id:12,name:"Tecno Camon 20 Pro",status:"New",image:"", from:"KSh 4,000", deposit:"KSh 5,200", daily:"KSh 105", totalPrice:"KSh 22,999", discount:"-9%",  display:'6.67" AMOLED',battery:"5000mAh", slug:"tecno-camon-20-pro", brand:"Tecno",   seller:"Watu",  storage:"256GB", reviews:{r:4.3,n:44}},
-  {id:13,name:"Infinix Smart 8",  status:"New", image:"", from:"KSh 1,500", deposit:"KSh 2,000", daily:"KSh 55",  totalPrice:"KSh 9,999",  discount:"-15%", display:'6.6" HD+',    battery:"5000mAh", slug:"infinix-smart-8",    brand:"Infinix", seller:"Watu",  storage:"64GB",  reviews:{r:3.9,n:80}},
-  {id:14,name:"Samsung Galaxy A35",status:"New",image:"", from:"KSh 6,500", deposit:"KSh 8,500", daily:"KSh 170", totalPrice:"KSh 42,999", discount:"-4%",  display:'6.6" AMOLED', battery:"5000mAh", slug:"samsung-a35",        brand:"Samsung", seller:"Mkopa", storage:"128GB", reviews:{r:4.6,n:22}},
-  {id:15,name:"Oppo A18",         status:"New", image:"", from:"KSh 2,200", deposit:"KSh 2,900", daily:"KSh 72",  totalPrice:"KSh 12,999", discount:"-13%", display:'6.56" HD+',   battery:"5000mAh", slug:"oppo-a18",           brand:"Oppo",    seller:"Watu",  storage:"128GB", reviews:{r:4.1,n:36}},
-  {id:16,name:"Tecno Pova 6 Pro", status:"New", image:"", from:"KSh 5,500", deposit:"KSh 7,000", daily:"KSh 145", totalPrice:"KSh 34,999", discount:"-6%",  display:'6.78" AMOLED',battery:"6000mAh", slug:"tecno-pova-6-pro",   brand:"Tecno",   seller:"Mkopa", storage:"256GB", reviews:{r:4.4,n:28}},
-  {id:17,name:"Itel A70",         status:"New", image:"", from:"KSh 1,600", deposit:"KSh 2,200", daily:"KSh 58",  totalPrice:"KSh 10,499", discount:"-17%", display:'6.6" HD+',    battery:"5000mAh", slug:"itel-a70",           brand:"Itel",    seller:"Watu",  storage:"128GB", reviews:{r:4.0,n:61}},
-  {id:18,name:"Infinix Zero 30 5G",status:"New",image:"", from:"KSh 7,000", deposit:"KSh 9,000", daily:"KSh 180", totalPrice:"KSh 49,999", discount:"-5%",  display:'6.78" AMOLED',battery:"5000mAh", slug:"infinix-zero-30-5g", brand:"Infinix", seller:"Mkopa", storage:"256GB", reviews:{r:4.5,n:17}},
-  {id:19,name:"Samsung Galaxy M15",status:"New",image:"", from:"KSh 3,800", deposit:"KSh 4,800", daily:"KSh 100", totalPrice:"KSh 20,999", discount:"-9%",  display:'6.5" AMOLED', battery:"6000mAh", slug:"samsung-m15",        brand:"Samsung", seller:"Watu",  storage:"128GB", reviews:{r:4.3,n:39}},
-  {id:20,name:"Oppo A79 5G",      status:"New", image:"", from:"KSh 5,800", deposit:"KSh 7,500", daily:"KSh 155", totalPrice:"KSh 37,999", discount:"-5%",  display:'6.72" FHD+',  battery:"5000mAh", slug:"oppo-a79-5g",        brand:"Oppo",    seller:"Mkopa", storage:"256GB", reviews:{r:4.4,n:24}},
-  {id:21,name:"Tecno Camon 30 Pro",status:"New",image:"", from:"KSh 9,000", deposit:"KSh 11,500",daily:"KSh 230", totalPrice:"KSh 64,999", discount:"-3%",  display:'6.77" LTPO',  battery:"5000mAh", slug:"tecno-camon-30-pro", brand:"Tecno",   seller:"Mkopa", storage:"512GB", reviews:{r:4.7,n:15}},
-  {id:22,name:"Infinix Hot 40i",  status:"New", image:"", from:"KSh 2,000", deposit:"KSh 2,700", daily:"KSh 68",  totalPrice:"KSh 11,499", discount:"-16%", display:'6.56" IPS',   battery:"5000mAh", slug:"infinix-hot-40i",    brand:"Infinix", seller:"Watu",  storage:"128GB", reviews:{r:4.0,n:73}},
-  {id:23,name:"Samsung Galaxy A06",status:"New",image:"", from:"KSh 2,100", deposit:"KSh 2,800", daily:"KSh 70",  totalPrice:"KSh 12,499", discount:"-12%", display:'6.7" LCD',    battery:"5000mAh", slug:"samsung-a06",        brand:"Samsung", seller:"Watu",  storage:"64GB",  reviews:{r:4.1,n:48}},
-  {id:24,name:"Oppo A60",         status:"New", image:"", from:"KSh 4,800", deposit:"KSh 6,200", daily:"KSh 125", totalPrice:"KSh 27,999", discount:"-7%",  display:'6.67" FHD+',  battery:"5000mAh", slug:"oppo-a60",           brand:"Oppo",    seller:"Watu",  storage:"256GB", reviews:{r:4.3,n:21}},
+/* ── DATA ── */
+const ALL_PHONES = [
+  { id:1,  name:"Motorola Moto G Stylus 5G",  price:5200,  old:5500,  storage:"128GB", series:"Moto G Series",       deposit:1200, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/motorola-moto-g-stylus-5g-2024.jpg" },
+  { id:2,  name:"Oppo Reno 15F 5G",            price:12200, old:13000, storage:"512GB", series:"Oppo Reno Series",    deposit:3000, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno12-f-5g.jpg" },
+  { id:3,  name:"Tecno Camon 50 Pro",           price:6300,  old:7000,  storage:"256GB", series:"Camon Series",       deposit:1500, rating:4.1, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30-pro-5g.jpg" },
+  { id:4,  name:"Tecno Camon 50",               price:5700,  old:4800,  storage:"128GB", series:"Camon Series",       deposit:1000, rating:4.0, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30.jpg" },
+  { id:5,  name:"Samsung Galaxy S24",           price:15500, old:18000, storage:"256GB", series:"Galaxy S Series",    deposit:4000, rating:4.8, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24.jpg" },
+  { id:6,  name:"Infinix Hot 40 Pro",           price:3200,  old:4000,  storage:"128GB", series:"Infinix Hot Series", deposit:800,  rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40-pro.jpg" },
+  { id:7,  name:"Samsung Galaxy Tab S9",        price:22000, old:25000, storage:"512GB", series:"Galaxy Tab",         deposit:6000, rating:4.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s9.jpg" },
+  { id:8,  name:"Infinix Note 30 5G",           price:5800,  old:6500,  storage:"256GB", series:"Infinix Note Series",deposit:1300, rating:4.2, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-note-30-5g.jpg" },
+  { id:9,  name:"Oppo A78 5G",                  price:7200,  old:8500,  storage:"128GB", series:"Oppo A Series",      deposit:1800, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-a78-5g.jpg" },
+  { id:10, name:"Samsung Galaxy A55",           price:8900,  old:10000, storage:"256GB", series:"Galaxy S Series",    deposit:2200, rating:4.4, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a55.jpg" },
+  { id:11, name:"Infinix GT 20 Pro",            price:9500,  old:11000, storage:"256GB", series:"Infinix GT Series",  deposit:2500, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-gt-20-pro.jpg" },
+  { id:12, name:"Tecno Spark 20 Pro",           price:4200,  old:5000,  storage:"128GB", series:"Camon Series",       deposit:900,  rating:3.8, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-spark-20-pro.jpg" },
+  { id:13, name:"Samsung Galaxy S23 FE",        price:11500, old:13500, storage:"256GB", series:"Galaxy S Series",    deposit:3000, rating:4.5, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-fe.jpg" },
+  { id:14, name:"Infinix Hot 40i",              price:2800,  old:3500,  storage:"64GB",  series:"Infinix Hot Series", deposit:600,  rating:3.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40i.jpg" },
+  { id:15, name:"Oppo Reno 11F",                price:10200, old:12000, storage:"256GB", series:"Oppo Reno Series",   deposit:2600, rating:4.2, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno11-f.jpg" },
+  { id:16, name:"Samsung Galaxy A15",           price:4800,  old:5800,  storage:"128GB", series:"Galaxy S Series",    deposit:1100, rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a15.jpg" },
+  { id:17, name:"Tecno Pova 6 Pro",             price:6800,  old:8000,  storage:"256GB", series:"Camon Series",       deposit:1700, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-pova-6-pro.jpg" },
+  { id:18, name:"Infinix Zero 40",              price:14500, old:16000, storage:"512GB", series:"Infinix GT Series",  deposit:3700, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-zero-40-5g.jpg" },
 ];
 
-/* ═══════════════════════════════════════════════
-   SVG PHONE PLACEHOLDER (large, bold, brand-coloured)
-═══════════════════════════════════════════════ */
-const BRAND_COLORS = {
-  Oppo:"#1A7A52", Samsung:"#1428A0", Tecno:"#C62828",
-  Infinix:"#6A1B9A", Itel:"#E65100"
-};
-function makeSVG(p){
-  const c = encodeURIComponent(BRAND_COLORS[p.brand] || "#424242");
-  const lc = encodeURIComponent(BRAND_COLORS[p.brand] || "#424242");
-  const ini = p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  // Realistic-looking phone silhouette SVG
-  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 340' width='200' height='340'%3E`+
-    `%3Crect width='200' height='340' fill='%23F8F8FA'/%3E`+
-    // phone body
-    `%3Crect x='52' y='28' width='96' height='186' rx='16' ry='16' fill='${c}'/%3E`+
-    // screen
-    `%3Crect x='62' y='42' width='76' height='140' rx='5' ry='5' fill='%23fff' opacity='.18'/%3E`+
-    // notch/camera pill
-    `%3Crect x='82' y='32' width='36' height='7' rx='3.5' fill='%23000' opacity='.25'/%3E`+
-    // home bar
-    `%3Crect x='82' y='203' width='36' height='4' rx='2' fill='%23fff' opacity='.35'/%3E`+
-    // brand initial
-    `%3Ctext x='100' y='140' text-anchor='middle' dominant-baseline='middle' fill='%23fff' opacity='.55' font-size='38' font-family='Open Sans,sans-serif' font-weight='800'%3E${ini}%3C/text%3E`+
-    // brand label below phone
-    `%3Ctext x='100' y='268' text-anchor='middle' fill='${lc}' font-size='13' font-family='Open Sans,sans-serif' font-weight='700' opacity='.7'%3E${p.brand}%3C/text%3E`+
-    `%3C/svg%3E`;
+/* ── FILTER DEFINITIONS ── */
+const FILTER_GROUPS = [
+  { group: "Filter By Storage", filters: [
+    { label:"1TB",    test: p => p.storage === "1TB"   },
+    { label:"512GB",  test: p => p.storage === "512GB" },
+    { label:"256GB",  test: p => p.storage === "256GB" },
+    { label:"128GB",  test: p => p.storage === "128GB" },
+    { label:"64GB",   test: p => p.storage === "64GB"  },
+  ]},
+  { group: "Filter By Deposit", filters: [
+    { label:"Under Ksh 2k",  test: p => p.deposit < 2000 },
+    { label:"Ksh 2k – 4k",   test: p => p.deposit >= 2000 && p.deposit <= 4000 },
+    { label:"Under 20k",     test: p => p.price < 20000 },
+    { label:"Under 30k",     test: p => p.price < 30000 },
+    { label:"Under 40k",     test: p => p.price < 40000 },
+  ]},
+  { group: "Filter By Series", filters:
+    [...new Set(ALL_PHONES.map(p => p.series))].sort()
+      .map(s => ({ label: s, test: p => p.series === s }))
+  },
+];
+
+const SORT_OPTIONS = [
+  { value:"latest",     label:"Sort by latest" },
+  { value:"popular",    label:"Sort by popularity" },
+  { value:"rating",     label:"Sort by average rating" },
+  { value:"price-asc",  label:"Price: low to high" },
+  { value:"price-desc", label:"Price: high to low" },
+];
+
+/* ── STATE ── */
+const state = { active: new Set(), sort:"latest", perPage:9, view:"grid4", cartCount:0 };
+
+/* ── FILTER LOGIC ── */
+function applyFilters(phones) {
+  if (!state.active.size) return phones;
+  // per group: OR; between groups: AND
+  const byGroup = FILTER_GROUPS.map(g => g.filters.filter(f => state.active.has(f.label))).filter(a => a.length);
+  return phones.filter(p => byGroup.every(group => group.some(f => f.test(p))));
 }
 
-/* ═══════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════ */
-const S = { filters:{}, sort:'default', page:1, view:'grid', pp:20 };
-
-/* ═══════════════════════════════════════════════
-   URL SYNC
-═══════════════════════════════════════════════ */
-function readURL(){
-  const p = new URLSearchParams(location.search);
-  S.filters = {};
-  ['brand','storage','seller','deposit'].forEach(k => {
-    if(p.get(k)) S.filters[k] = p.get(k).split(',');
-  });
-  if(p.get('sort'))   S.sort = p.get('sort');
-  if(p.get('page'))   S.page = parseInt(p.get('page')) || 1;
-  if(p.get('view'))   S.view = p.get('view');
-  if(p.get('pp'))     S.pp   = parseInt(p.get('pp')) || 20;
-}
-function pushURL(){
-  const p = new URLSearchParams();
-  ['brand','storage','seller','deposit'].forEach(k => {
-    if(S.filters[k]?.length) p.set(k, S.filters[k].join(','));
-  });
-  if(S.sort !== 'default') p.set('sort', S.sort);
-  if(S.page > 1)           p.set('page', S.page);
-  if(S.view !== 'grid')    p.set('view', S.view);
-  if(S.pp !== 20)          p.set('pp', S.pp);
-  history.pushState({}, '', p.toString()
-    ? `${location.pathname}?${p}`
-    : location.pathname);
+function applySort(phones) {
+  const a = [...phones];
+  if (state.sort === "price-asc")  return a.sort((a,b) => a.price - b.price);
+  if (state.sort === "price-desc") return a.sort((a,b) => b.price - a.price);
+  if (state.sort === "rating")     return a.sort((a,b) => b.rating - a.rating);
+  if (state.sort === "popular")    return a.sort((a,b) => b.id % 5 - a.id % 5);
+  return a;
 }
 
-/* ═══════════════════════════════════════════════
-   FILTER DEFINITIONS
-═══════════════════════════════════════════════ */
-const DEPOSIT_DEFS = {
-  under20k: { label:'Under KSh 20,000', fn: d => d < 20000 },
-  under30k: { label:'Under KSh 30,000', fn: d => d < 30000 },
-  under40k: { label:'Under KSh 40,000', fn: d => d < 40000 },
-  ksh2k_4k: { label:'KSh 2,000 – 4,000', fn: d => d >= 2000 && d <= 4000 },
-};
-const toNum = s => parseFloat((s || '').replace(/[^\d.]/g,'')) || 0;
+function getResults() { return applySort(applyFilters(ALL_PHONES)); }
 
-function applyFilters(){
-  let r = [...products];
-  if(S.filters.brand?.length)
-    r = r.filter(p => S.filters.brand.includes(p.brand));
-  if(S.filters.storage?.length)
-    r = r.filter(p => S.filters.storage.includes(p.storage));
-  if(S.filters.seller?.length)
-    r = r.filter(p => S.filters.seller.includes(p.seller));
-  if(S.filters.deposit?.length)
-    r = r.filter(p => {
-      const d = toNum(p.deposit);
-      return S.filters.deposit.some(k => DEPOSIT_DEFS[k]?.fn(d));
-    });
-  // sort
-  if(S.sort === 'price_asc')  r.sort((a,b)=>toNum(a.totalPrice)-toNum(b.totalPrice));
-  if(S.sort === 'price_desc') r.sort((a,b)=>toNum(b.totalPrice)-toNum(a.totalPrice));
-  if(S.sort === 'rating')     r.sort((a,b)=>(b.reviews?.r||0)-(a.reviews?.r||0));
-  if(S.sort === 'popularity') r.sort((a,b)=>(b.reviews?.n||0)-(a.reviews?.n||0));
-  return r;
+function countForFilter(label) {
+  // count how many phones pass this filter + all other active group filters
+  const testFn = FILTER_GROUPS.flatMap(g => g.filters).find(f => f.label === label)?.test;
+  if (!testFn) return 0;
+  const otherByGroup = FILTER_GROUPS.map(g =>
+    g.filters.filter(f => state.active.has(f.label) && f.label !== label)
+  ).filter(a => a.length);
+  return ALL_PHONES.filter(p =>
+    otherByGroup.every(g => g.some(f => f.test(p))) && testFn(p)
+  ).length;
 }
 
-/* ═══════════════════════════════════════════════
-   SIDEBAR HTML
-═══════════════════════════════════════════════ */
-function computeCounts(){
-  // count UNFILTERED products per option
-  const B={}, St={}, Se={}, Dp={under20k:0,under30k:0,under40k:0,ksh2k_4k:0};
-  products.forEach(p => {
-    B[p.brand]   = (B[p.brand]   || 0) + 1;
-    St[p.storage] = (St[p.storage] || 0) + 1;
-    Se[p.seller]  = (Se[p.seller]  || 0) + 1;
-    const d = toNum(p.deposit);
-    if(d < 20000) Dp.under20k++;
-    if(d < 30000) Dp.under30k++;
-    if(d < 40000) Dp.under40k++;
-    if(d >= 2000 && d <= 4000) Dp.ksh2k_4k++;
-  });
-  return { B, St, Se, Dp };
-}
-
-function makeSidebarHTML(){
-  const { B, St, Se, Dp } = computeCounts();
-  const totalActive = Object.values(S.filters).flat().length;
-
-  function section(title, key, items){
-    return `
-    <div class="fsec">
-      <div class="fsec-hd" onclick="toggleSec(this)" role="button" aria-expanded="true">
-        Filter By ${title}
-        <span class="chev"></span>
+/* ── BUILD FILTER HTML ── */
+function buildFilters(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = FILTER_GROUPS.map(({ group, filters }) => `
+    <div class="filter-group" data-grp="${group}">
+      <div class="filter-group-title" onclick="toggleGrp(this)">
+        ${group}
+        <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="fsec-body">
-        ${items.map(([val, label, cnt]) => {
-          const checked = (S.filters[key]||[]).includes(val) ? 'checked' : '';
+      <div class="filter-group-body" style="max-height:${filters.length * 34}px">
+        ${filters.map(f => {
+          const cnt = countForFilter(f.label);
+          const chk = state.active.has(f.label) ? 'checked' : '';
           return `
-          <div class="fopt">
+          <div class="filter-option">
             <label>
-              <input type="checkbox" data-key="${key}" data-val="${val}" ${checked}/>
-              ${label}
+              <input type="checkbox" ${chk} data-filter="${escQ(f.label)}"
+                onchange="toggleFilter('${escQ(f.label)}', '${containerId}')">
+              ${f.label}
             </label>
-            <span class="fcnt">${cnt}</span>
+            <span class="filter-count">${cnt}</span>
           </div>`;
         }).join('')}
       </div>
-    </div>`;
-  }
-
-  const storageOrder = ['64GB','128GB','256GB','512GB','1TB'];
-  const sortedStorage = Object.entries(St)
-    .sort((a,b)=> (storageOrder.indexOf(a[0])+1||99) - (storageOrder.indexOf(b[0])+1||99));
-
-  return `
-  <div class="sb">
-    <div class="sb-hd">
-      <span class="sb-hd-title">Phones</span>
-      <button class="sb-clear ${totalActive ? 'show' : ''}" onclick="clearAll()">
-        Clear all${totalActive ? ` (${totalActive})` : ''}
-      </button>
-    </div>
-    ${section('Storage', 'storage', sortedStorage.map(([v,c])=>[v,v,c]))}
-    ${section('Deposit', 'deposit', Object.entries(DEPOSIT_DEFS).map(([k,d])=>[k,d.label,Dp[k]]))}
-    ${section('Brand',   'brand',   Object.entries(B).sort((a,b)=>a[0].localeCompare(b[0])).map(([v,c])=>[v,v,c]))}
-    ${section('Seller',  'seller',  Object.entries(Se).sort().map(([v,c])=>[v,v,c]))}
-  </div>`;
+    </div>`).join('');
 }
 
-function bindCheckboxes(){
-  document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
-    cb.addEventListener('change', e => {
-      const k = e.target.dataset.key;
-      const v = e.target.dataset.val;
-      if(!S.filters[k]) S.filters[k] = [];
-      if(e.target.checked){
-        if(!S.filters[k].includes(v)) S.filters[k].push(v);
-      } else {
-        S.filters[k] = S.filters[k].filter(x => x !== v);
-        if(!S.filters[k].length) delete S.filters[k];
-      }
-      S.page = 1;
-      pushURL();
-      render();
-    });
-  });
-}
+function escQ(s) { return s.replace(/'/g, "\\'"); }
+window.toggleGrp = t => t.closest('.filter-group').classList.toggle('collapsed');
 
-/* ═══════════════════════════════════════════════
-   CARD HTML
-═══════════════════════════════════════════════ */
-function renderStars(r){
-  const full = Math.floor(r);
-  const half = r % 1 >= 0.5 ? 1 : 0;
-  return '★'.repeat(full) + (half ? '½' : '');
-}
-
-function cardHTML(p, idx){
-  const src = p.image || makeSVG(p);
-  const delay = Math.min(idx * 28, 280);
-  return `
-  <article class="card" role="listitem" style="animation-delay:${delay}ms"
-    itemscope itemtype="https://schema.org/Product">
-    <a class="card-a" href="/${p.slug}" aria-label="View ${p.name}">
-
-      <div class="cimg">
-        <img
-          src="${src}"
-          alt="${p.name} – lipa mdogo mdogo Nairobi Kenya"
-          loading="lazy"
-          width="400"
-          height="500"
-          onerror="this.onerror=null;this.src='${makeSVG(p)}'"
-          itemprop="image"
-        />
-        ${p.status  ? `<span class="b-new">${p.status}</span>`   : ''}
-        ${p.discount ? `<span class="b-disc">${p.discount}</span>` : ''}
-        <button class="wish-btn" id="wish-${p.id}"
-          onclick="toggleWish(event,${p.id})"
-          aria-label="Save ${p.name} to wishlist">
-          <svg viewBox="0 0 24 24">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06
-              a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
-              1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="cbody">
-        <h3 class="cname" itemprop="name">${p.name}</h3>
-
-        <div class="cspecs">
-          <span class="cspec">${p.storage}</span>
-          <span class="cspec">${p.display}</span>
-          <span class="cspec">${p.battery}</span>
-        </div>
-
-        <div class="cprices"
-          itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-          <meta itemprop="priceCurrency" content="KES"/>
-          <meta itemprop="price"         content="${toNum(p.totalPrice)}"/>
-          <meta itemprop="availability"  content="https://schema.org/InStock"/>
-          <div class="cprice-was">Was ${p.totalPrice}</div>
-          <div class="cprice-from">
-            ${p.from} <small>/ min deposit</small>
-          </div>
-          <div class="cplans">
-            <div class="cplan">
-              <div class="cplan-lbl">Deposit</div>
-              <div class="cplan-val">${p.deposit}</div>
-            </div>
-            <div class="cplan">
-              <div class="cplan-lbl">Daily</div>
-              <div class="cplan-val">${p.daily}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cfoot">
-          <span class="cseller">
-            <svg viewBox="0 0 24 24">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            </svg>
-            ${p.seller}
-          </span>
-          ${p.reviews ? `
-          <div class="cstars">
-            <span class="cstars-s">${renderStars(p.reviews.r)}</span>
-            <span class="cstars-n">(${p.reviews.n})</span>
-          </div>` : ''}
-        </div>
-      </div>
-
-    </a>
-  </article>`;
-}
-
-/* ═══════════════════════════════════════════════
-   ACTIVE FILTER CHIPS
-═══════════════════════════════════════════════ */
-const DEP_LABELS = {
-  under20k:'Under KSh 20k', under30k:'Under KSh 30k',
-  under40k:'Under KSh 40k', ksh2k_4k:'KSh 2k–4k deposit'
+window.toggleFilter = (label, src) => {
+  state.active.has(label) ? state.active.delete(label) : state.active.add(label);
+  renderAll();
 };
-function renderTags(){
-  const chips = [];
-  Object.entries(S.filters).forEach(([key, vals]) => {
-    (vals||[]).forEach(v => {
-      const label = key === 'deposit' ? (DEP_LABELS[v]||v) : v;
-      chips.push(`
-        <span class="atag">
-          ${key}: <strong>${label}</strong>
-          <button class="atag-x"
-            onclick="removeFilter('${key}','${v}')"
-            aria-label="Remove ${label} filter">×</button>
-        </span>`);
-    });
-  });
-  document.getElementById('aTags').innerHTML = chips.join('');
+
+/* ── CHIPS ── */
+function renderChips() {
+  const xSvg = `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+  document.getElementById('activeChips').innerHTML =
+    [...state.active].map(l =>
+      `<span class="chip" onclick="rmFilter('${escQ(l)}')">${l} ${xSvg}</span>`
+    ).join('');
+
+  const cab = document.getElementById('clearAllBtn');
+  if (cab) cab.classList.toggle('visible', state.active.size > 0);
+
+  const fb = document.getElementById('filterBadge');
+  if (fb) { fb.style.display = state.active.size ? 'inline-grid' : 'none'; fb.textContent = state.active.size; }
 }
+window.rmFilter = l => { state.active.delete(l); renderAll(); };
 
-/* ═══════════════════════════════════════════════
-   PAGINATION
-═══════════════════════════════════════════════ */
-function renderPagination(total){
-  const pages = Math.max(1, Math.ceil(total / S.pp));
-  const el = document.getElementById('pagi');
-  if(pages <= 1){ el.innerHTML = ''; return; }
+/* ── GRID ── */
+const fallback = "https://placehold.co/300x300/f4f2ee/8a8a9a?text=Phone";
+const cartSvg  = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`;
 
-  const p = S.page;
-  let html = '';
-  // prev
-  html += `<a class="ppage${p===1?' dis':''}" href="#"
-    onclick="goPage(event,${p-1})" aria-label="Previous page">‹</a>`;
-  // pages
-  for(let i=1; i<=pages; i++){
-    if(i===1 || i===pages || Math.abs(i-p)<=1){
-      html += `<a class="ppage${i===p?' on':''}" href="#"
-        onclick="goPage(event,${i})" aria-label="Page ${i}"
-        ${i===p?'aria-current="page"':''}>${i}</a>`;
-    } else if(Math.abs(i-p)===2){
-      html += `<span class="ppage dots">…</span>`;
-    }
+function renderGrid() {
+  const grid = document.getElementById('productGrid');
+  const results = getResults();
+  const shown = results.slice(0, state.perPage);
+
+  grid.className = 'product-grid';
+  if (state.view === 'list')  grid.classList.add('view-list');
+  if (state.view === 'grid3') grid.classList.add('view-3');
+
+  document.getElementById('resultsCount').textContent =
+    `${results.length} product${results.length !== 1 ? 's' : ''}`;
+
+  if (!shown.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3>No phones match your filters</h3>
+        <p>Try adjusting or clearing the active filters.</p>
+        <button class="btn-reset" onclick="clearAll()">Clear all filters</button>
+      </div>`;
+    return;
   }
-  // next
-  html += `<a class="ppage${p===pages?' dis':''}" href="#"
-    onclick="goPage(event,${p+1})" aria-label="Next page">›</a>`;
-  el.innerHTML = html;
-}
 
-/* ═══════════════════════════════════════════════
-   MAIN RENDER
-═══════════════════════════════════════════════ */
-function render(){
-  // 1. filter + sort
-  const all   = applyFilters();
-  const total = all.length;
-  const pages = Math.max(1, Math.ceil(total / S.pp));
-  if(S.page > pages) S.page = pages;
-  const slice = all.slice((S.page-1)*S.pp, S.page*S.pp);
-
-  // 2. result count
-  document.getElementById('tbCount').textContent =
-    `${total} product${total!==1?'s':''}`;
-
-  // 3. grid
-  const grid = document.getElementById('pgrid');
-  grid.className = 'pgrid' + (S.view==='list' ? ' lv' : '');
-  grid.innerHTML = slice.length
-    ? slice.map((p,i) => cardHTML(p,i)).join('')
-    : `<div class="empty">
-        <div class="empty-icon">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  grid.innerHTML = shown.map(p => {
+    const badge = p.badge ? `<span class="badge-new">${p.badge}</span>` : '';
+    if (state.view === 'list') return `
+      <div class="product-card">
+        <div class="card-img-wrap">
+          ${badge}
+          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${fallback}'">
         </div>
-        <h3>No phones found</h3>
-        <p>Try removing some filters to see more results.</p>
-        <button class="empty-btn" onclick="clearAll()">Clear All Filters</button>
-       </div>`;
-
-  // 4. pagination
-  renderPagination(total);
-
-  // 5. active tags
-  renderTags();
-
-  // 6. filter badge
-  const fc = Object.values(S.filters).flat().length;
-  const badge = document.getElementById('fcBadge');
-  badge.textContent = fc;
-  badge.classList.toggle('show', fc > 0);
-
-  // 7. sidebars (both desktop + drawer share same HTML)
-  const sbHtml = makeSidebarHTML();
-  document.getElementById('deskSb').innerHTML = sbHtml;
-  document.getElementById('drwBody').innerHTML = sbHtml;
-  bindCheckboxes();
-
-  // 8. sync toolbar controls
-  document.getElementById('sortSel').value = S.sort;
-  document.getElementById('vGrid').className = 'vw-btn' + (S.view==='grid'?' on':'');
-  document.getElementById('vGrid').setAttribute('aria-pressed', S.view==='grid');
-  document.getElementById('vList').className = 'vw-btn' + (S.view==='list'?' on':'');
-  document.getElementById('vList').setAttribute('aria-pressed', S.view==='list');
-
-  // 9. sync pp buttons
-  document.querySelectorAll('.pp-btn').forEach(b => {
-    b.classList.toggle('on', parseInt(b.dataset.pp) === S.pp);
-  });
-
-  // 10. re-apply wishlist state
-  Object.keys(wishSet).forEach(id => {
-    const btn = document.getElementById(`wish-${id}`);
-    if(btn) btn.classList.add('wished');
-  });
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-price-row">
+            <span class="card-old-price">KSh ${p.old.toLocaleString()}</span>
+            <span class="card-price">KSh ${p.price.toLocaleString()}</span>
+          </div>
+          <div class="card-storage">${p.storage} · ${p.series}</div>
+          <button class="btn-add-cart-list" onclick="addToCart(event)">${cartSvg} Add to cart</button>
+        </div>
+      </div>`;
+    return `
+      <div class="product-card">
+        <div class="card-img-wrap">
+          ${badge}
+          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${fallback}'">
+          <button class="btn-add-cart" title="Add to cart" onclick="addToCart(event)">${cartSvg}</button>
+        </div>
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-price-row">
+            <span class="card-old-price">KSh ${p.old.toLocaleString()}</span>
+            <span class="card-price">KSh ${p.price.toLocaleString()}</span>
+          </div>
+          <div class="card-storage">${p.storage}</div>
+        </div>
+      </div>`;
+  }).join('');
 }
 
-/* ═══════════════════════════════════════════════
-   WISHLIST (in-memory)
-═══════════════════════════════════════════════ */
-const wishSet = {};
-function toggleWish(e, id){
-  e.preventDefault();
+/* ── RENDER ALL ── */
+function renderAll() {
+  buildFilters('desktopFilters');
+  buildFilters('mobileFilters');
+  renderChips();
+  renderGrid();
+  updateApplyBtn();
+}
+
+function updateApplyBtn() {
+  const btn = document.getElementById('applyFilterBtn');
+  if (!btn) return;
+  const n = getResults().length;
+  btn.textContent = `Show ${n} result${n !== 1 ? 's' : ''}`;
+}
+
+/* ── CLEAR ── */
+window.clearAll = () => { state.active.clear(); renderAll(); };
+
+/* ── CART ── */
+window.addToCart = e => {
   e.stopPropagation();
-  const btn = document.getElementById(`wish-${id}`);
-  if(!btn) return;
-  if(wishSet[id]){
-    delete wishSet[id];
-    btn.classList.remove('wished');
-  } else {
-    wishSet[id] = true;
-    btn.classList.add('wished');
-    const svg = btn.querySelector('svg path');
-    if(svg){ svg.style.fill='#D32F2F'; svg.style.stroke='#D32F2F'; }
-  }
+  state.cartCount++;
+  document.getElementById('cartCount').textContent = state.cartCount;
+  const mb = document.getElementById('mobCartBadge');
+  mb.style.display = 'grid'; mb.textContent = state.cartCount;
+  const b = e.currentTarget;
+  b.style.transform = 'scale(1.35)';
+  setTimeout(() => b.style.transform = '', 180);
+};
+
+/* ── FILTER DRAWER ── */
+const overlay = document.getElementById('filterOverlay');
+const drawer  = document.getElementById('filterDrawer');
+const sortSheet = document.getElementById('sortSheet');
+
+function openDrawer(el) {
+  overlay.style.display = 'block';
+  requestAnimationFrame(() => { overlay.classList.add('open'); el.classList.add('open'); });
+}
+function closeDrawer(el) {
+  overlay.classList.remove('open'); el.classList.remove('open');
+  setTimeout(() => { overlay.style.display = 'none'; }, 360);
 }
 
-/* ═══════════════════════════════════════════════
-   ACTIONS
-═══════════════════════════════════════════════ */
-function goPage(e, n){
-  e.preventDefault();
-  const tot = Math.ceil(applyFilters().length / S.pp);
-  if(n < 1 || n > tot) return;
-  S.page = n;
-  pushURL();
-  render();
-  window.scrollTo({ top: 0, behavior:'smooth' });
+['openFilterBtn','mobFilterBtn'].forEach(id =>
+  document.getElementById(id)?.addEventListener('click', () => { buildFilters('mobileFilters'); updateApplyBtn(); openDrawer(drawer); })
+);
+['closeFilterBtn','applyFilterBtn'].forEach(id =>
+  document.getElementById(id)?.addEventListener('click', () => closeDrawer(drawer))
+);
+overlay.addEventListener('click', () => { closeDrawer(drawer); closeDrawer(sortSheet); });
+
+document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+document.getElementById('clearMobileBtn').addEventListener('click', () => { state.active.clear(); renderAll(); });
+
+/* ── SORT ── */
+function renderSortSheet() {
+  const chk = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+  document.getElementById('sortOptions').innerHTML = SORT_OPTIONS.map(o => `
+    <div class="sort-option ${o.value === state.sort ? 'selected' : ''}" onclick="selectSort('${o.value}')">
+      ${o.label} <span class="sort-check">${chk}</span>
+    </div>`).join('');
 }
 
-function removeFilter(key, val){
-  S.filters[key] = (S.filters[key]||[]).filter(v => v !== val);
-  if(!S.filters[key].length) delete S.filters[key];
-  S.page = 1;
-  pushURL();
-  render();
-}
+window.selectSort = val => {
+  state.sort = val;
+  document.getElementById('sortSelect').value = val;
+  document.getElementById('sortLabel').textContent = SORT_OPTIONS.find(o => o.value === val)?.label || '';
+  renderGrid(); renderSortSheet(); closeDrawer(sortSheet);
+};
 
-function clearAll(){
-  S.filters = {};
-  S.page = 1;
-  pushURL();
-  render();
-}
-
-function setView(v){
-  S.view = v;
-  pushURL();
-  render();
-}
-
-function setPP(btn, n){
-  S.pp = n;
-  S.page = 1;
-  pushURL();
-  render();
-}
-
-function toggleSec(hd){
-  hd.classList.toggle('closed');
-  hd.nextElementSibling.classList.toggle('hidden');
-}
-
-function openSb(){
-  document.getElementById('drwOvl').classList.add('on');
-  document.getElementById('drw').classList.add('on');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('mobSbBtn').setAttribute('aria-expanded','true');
-}
-function closeSb(){
-  document.getElementById('drwOvl').classList.remove('on');
-  document.getElementById('drw').classList.remove('on');
-  document.body.style.overflow = '';
-  document.getElementById('mobSbBtn').setAttribute('aria-expanded','false');
-}
-
-/* ═══════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
-  readURL();
-
-  document.getElementById('sortSel').addEventListener('change', e => {
-    S.sort = e.target.value;
-    S.page = 1;
-    pushURL();
-    render();
-  });
-
-  window.addEventListener('popstate', () => {
-    readURL();
-    render();
-  });
-
-  render();
+document.getElementById('openSortBtn').addEventListener('click', () => { renderSortSheet(); openDrawer(sortSheet); });
+document.getElementById('sortSelect').addEventListener('change', e => {
+  state.sort = e.target.value;
+  document.getElementById('sortLabel').textContent = SORT_OPTIONS.find(o => o.value === state.sort)?.label || '';
+  renderGrid(); renderSortSheet();
 });
+
+/* ── VIEW ── */
+function setView(v) {
+  state.view = v;
+  ['viewList','view3','view4'].forEach(id => document.getElementById(id).classList.remove('active'));
+  document.getElementById(v === 'list' ? 'viewList' : v === 'grid3' ? 'view3' : 'view4').classList.add('active');
+  renderGrid();
+}
+document.getElementById('viewList').addEventListener('click', () => setView('list'));
+document.getElementById('view3').addEventListener('click', () => setView('grid3'));
+document.getElementById('view4').addEventListener('click', () => setView('grid4'));
+
+/* ── PER PAGE ── */
+document.getElementById('showOptions').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-per]');
+  if (!btn) return;
+  state.perPage = +btn.dataset.per;
+  document.querySelectorAll('#showOptions button').forEach(b => b.classList.toggle('active', b === btn));
+  renderGrid();
+});
+
+/* ── INIT ── */
+renderAll();
 </script>
 </body>
 </html>
