@@ -1,331 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phones — MobiShop</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #f4f2ee; --surface: #fff; --accent: #e8380d; --accent2: #1a1a2e;
-      --text: #1a1a2e; --muted: #8a8a9a; --border: #e0ddd8;
-      --sidebar-w: 240px; --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
-      --radius: 14px; --tr: .2s ease;
-    }
-    body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Phones — MobiShop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET & BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow-x:hidden}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#f4f2ee;
+  color:#1a1a2e;
+  /* full viewport layout */
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+:root{
+  --nav-h:56px;
+  --accent:#e8380d;
+  --dark:#1a1a2e;
+  --bg:#f4f2ee;
+  --surface:#fff;
+  --muted:#8a8a9a;
+  --border:#e2dfd9;
+  --radius:12px;
+}
 
-    /* TOPBAR */
-    .topbar { background: var(--accent2); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; height: 58px; position: sticky; top: 0; z-index: 400; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
-    .topbar-logo { font-family: var(--font-head); font-size: 1.45rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -.5px; }
-    .topbar-logo span { color: var(--accent); }
-    .topbar-nav { display: flex; gap: 30px; }
-    .topbar-nav a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .85rem; font-weight: 500; transition: color var(--tr); }
-    .topbar-nav a:hover, .topbar-nav a.active-nav { color: #fff; }
-    .btn-cart { background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-family: var(--font-body); font-size: .85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: opacity var(--tr); }
-    .btn-cart:hover { opacity: .88; }
-    .cart-count { background: #fff; color: var(--accent); border-radius: 50%; width: 19px; height: 19px; font-size: .68rem; font-weight: 700; display: grid; place-items: center; }
+/* ─── TOPNAV ─── */
+.topnav{
+  height:var(--nav-h);
+  background:var(--dark);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  flex-shrink:0;
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;text-decoration:none}
+.logo b{color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.84rem;font-weight:500}
+.nav-links a.on{color:#fff}
+.cart-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:7px 16px;font-family:'DM Sans',sans-serif;font-size:.84rem;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap
+}
+.cart-pill{
+  background:#fff;color:var(--accent);border-radius:20px;
+  padding:1px 7px;font-size:.7rem;font-weight:700;min-width:20px;text-align:center
+}
 
-    /* BREADCRUMB */
-    .breadcrumb { padding: 13px 28px; font-size: .8rem; color: var(--muted); display: flex; gap: 6px; align-items: center; }
-    .breadcrumb a { color: var(--muted); text-decoration: none; }
-    .breadcrumb a:hover { color: var(--accent); }
-    .breadcrumb .sep { color: var(--border); }
-    .breadcrumb strong { color: var(--text); font-weight: 500; }
+/* ─── PAGE SHELL ─── */
+/* fills remaining height, no overflow on body */
+.shell{
+  display:flex;
+  flex:1;
+  overflow:hidden; /* children scroll independently */
+  max-width:1440px;
+  width:100%;
+  margin:0 auto;
+}
 
-    /* PAGE LAYOUT */
-    .page-layout { display: flex; max-width: 1440px; margin: 0 auto; padding: 0 20px 80px; }
+/* ─── SIDEBAR ─── */
+.sidebar{
+  width:220px;
+  flex-shrink:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:16px 16px 40px;
+  border-right:1.5px solid var(--border);
+  background:var(--surface);
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 
-    /* SIDEBAR */
-    .sidebar { width: var(--sidebar-w); flex-shrink: 0; padding-right: 24px; padding-top: 4px; }
-    .sidebar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .sidebar-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; }
-    .btn-clear-all { font-size: .75rem; color: var(--accent); background: none; border: none; cursor: pointer; font-family: var(--font-body); font-weight: 600; text-decoration: underline; display: none; }
-    .btn-clear-all.visible { display: block; }
+.sb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sb-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700}
+.btn-clr{
+  font-size:.72rem;color:var(--accent);background:none;border:none;
+  cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;
+  opacity:0;pointer-events:none;transition:opacity .15s
+}
+.btn-clr.show{opacity:1;pointer-events:auto}
 
-    .filter-group { margin-bottom: 24px; }
-    .filter-group-title { font-family: var(--font-head); font-size: .75rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1.5px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
-    .filter-group-title svg { transition: transform .25s; flex-shrink: 0; }
-    .filter-group.collapsed .filter-group-title svg { transform: rotate(-90deg); }
-    .filter-group-body { overflow: hidden; transition: max-height .3s ease; }
-    .filter-group.collapsed .filter-group-body { max-height: 0 !important; }
+.fg{margin-bottom:20px}
+.fg-title{
+  font-size:.7rem;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);
+  padding:6px 0;border-bottom:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;user-select:none;margin-bottom:4px
+}
+.fg-title svg{transition:transform .2s;flex-shrink:0}
+.fg.closed .fg-title svg{transform:rotate(-90deg)}
+.fg-body{overflow:hidden;transition:max-height .25s ease}
+.fg.closed .fg-body{max-height:0!important}
 
-    .filter-option { display: flex; align-items: center; justify-content: space-between; padding: 5px 4px; cursor: pointer; gap: 8px; border-radius: 6px; transition: background var(--tr); }
-    .filter-option:hover { background: rgba(232,56,13,.05); }
-    .filter-option label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: .84rem; flex: 1; }
-    .filter-option input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
-    .filter-count { font-size: .72rem; color: var(--muted); background: var(--border); border-radius: 20px; padding: 1px 7px; white-space: nowrap; transition: background var(--tr), color var(--tr); }
-    .filter-option:has(input:checked) .filter-count { background: rgba(232,56,13,.12); color: var(--accent); font-weight: 600; }
+.fo{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:5px 4px;border-radius:6px;cursor:pointer;gap:6px;
+  transition:background .12s
+}
+.fo:hover{background:rgba(232,56,13,.06)}
+.fo label{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.82rem;flex:1;line-height:1.3}
+.fo input{accent-color:var(--accent);width:14px;height:14px;flex-shrink:0;cursor:pointer}
+.fo-cnt{
+  font-size:.7rem;color:var(--muted);background:var(--border);
+  border-radius:20px;padding:1px 7px;white-space:nowrap;flex-shrink:0;
+  transition:background .12s,color .12s
+}
+.fo:has(input:checked) .fo-cnt{background:rgba(232,56,13,.15);color:var(--accent);font-weight:600}
 
-    /* ACTIVE CHIPS */
-    .active-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
-    .chip { display: inline-flex; align-items: center; gap: 5px; background: rgba(232,56,13,.1); color: var(--accent); border: 1.5px solid rgba(232,56,13,.25); border-radius: 20px; padding: 3px 10px 3px 12px; font-size: .75rem; font-weight: 600; cursor: pointer; transition: background var(--tr); }
-    .chip:hover { background: rgba(232,56,13,.18); }
-    .chip svg { width: 11px; height: 11px; }
+/* ─── MAIN CONTENT ─── */
+.content{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.content::-webkit-scrollbar{width:4px}
+.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 
-    /* MAIN */
-    .main { flex: 1; min-width: 0; }
+/* ─── TOOLBAR ─── */
+.toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+  padding:14px 20px 0;
+  background:var(--bg);
+  flex-shrink:0;
+}
+.t-left{display:flex;align-items:baseline;gap:8px}
+.t-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
+.t-count{font-size:.8rem;color:var(--muted)}
+.t-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.show-row{display:flex;align-items:center;gap:4px;font-size:.8rem;color:var(--muted)}
+.show-row button{
+  background:none;border:none;font-size:.8rem;font-family:'DM Sans',sans-serif;
+  color:var(--muted);cursor:pointer;padding:1px 4px
+}
+.show-row button.on{color:var(--accent);font-weight:700}
+.show-row span{color:var(--border)}
+.view-row{display:flex;gap:3px}
+.vb{
+  background:none;border:1.5px solid var(--border);border-radius:6px;
+  width:28px;height:28px;cursor:pointer;display:grid;place-items:center;
+  color:var(--muted);transition:border-color .12s,color .12s
+}
+.vb.on,.vb:hover{border-color:var(--accent);color:var(--accent)}
+.sort-sel{
+  border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;
+  font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--dark);
+  background:var(--surface);cursor:pointer;outline:none;max-width:170px
+}
+.sort-sel:focus{border-color:var(--accent)}
 
-    /* TOOLBAR */
-    .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-    .toolbar-left { display: flex; align-items: baseline; gap: 10px; }
-    .toolbar-title { font-family: var(--font-head); font-size: 1.65rem; font-weight: 800; letter-spacing: -.5px; }
-    .results-count { font-size: .82rem; color: var(--muted); }
-    .toolbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .show-label { font-size: .8rem; color: var(--muted); white-space: nowrap; }
-    .show-options { display: flex; align-items: center; gap: 2px; }
-    .show-options button { font-size: .82rem; color: var(--muted); background: none; border: none; cursor: pointer; padding: 2px 5px; font-family: var(--font-body); transition: color var(--tr); }
-    .show-options button.active { color: var(--accent); font-weight: 700; }
-    .show-options .sep { color: var(--border); font-size: .82rem; }
-    .view-btns { display: flex; gap: 4px; }
-    .view-btn { background: none; border: 1.5px solid var(--border); border-radius: 6px; width: 30px; height: 30px; cursor: pointer; display: grid; place-items: center; color: var(--muted); transition: border-color var(--tr), color var(--tr); }
-    .view-btn:hover, .view-btn.active { border-color: var(--accent); color: var(--accent); }
-    .sort-select { border: 1.5px solid var(--border); border-radius: 9px; padding: 6px 12px; font-family: var(--font-body); font-size: .82rem; color: var(--text); background: var(--surface); cursor: pointer; outline: none; }
-    .sort-select:focus { border-color: var(--accent); }
+/* ─── CHIPS ─── */
+.chips{
+  display:flex;flex-wrap:wrap;gap:6px;
+  padding:10px 20px 0;
+  flex-shrink:0;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(232,56,13,.1);color:var(--accent);
+  border:1.5px solid rgba(232,56,13,.2);border-radius:20px;
+  padding:3px 9px 3px 11px;font-size:.73rem;font-weight:600;
+  cursor:pointer;transition:background .12s;white-space:nowrap
+}
+.chip:hover{background:rgba(232,56,13,.2)}
+.chip svg{width:10px;height:10px}
 
-    /* PRODUCT GRID */
-    .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .product-grid.view-3 { grid-template-columns: repeat(3, 1fr); }
-    .product-grid.view-list { grid-template-columns: 1fr; gap: 10px; }
+/* ─── GRID AREA ─── */
+.grid-wrap{
+  padding:14px 20px 40px;
+  flex:1;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  width:100%;
+}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.grid.glist{grid-template-columns:1fr;gap:10px}
 
-    /* CARD */
-    .product-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; position: relative; transition: box-shadow .28s, transform .28s; border: 1.5px solid transparent; }
-    .product-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.10); transform: translateY(-3px); border-color: rgba(232,56,13,.18); }
+/* ─── CARD ─── */
+.card{
+  background:var(--surface);border-radius:var(--radius);
+  overflow:hidden;border:1.5px solid transparent;
+  transition:box-shadow .22s,transform .22s,border-color .22s;
+  cursor:pointer;
+}
+.card:hover{box-shadow:0 8px 32px rgba(0,0,0,.09);transform:translateY(-2px);border-color:rgba(232,56,13,.15)}
+.card-img{position:relative;aspect-ratio:1;background:#f8f7f5;overflow:hidden}
+.card-img img{
+  width:100%;height:100%;object-fit:contain;padding:12px;
+  transition:transform .3s ease;
+}
+.card:hover .card-img img{transform:scale(1.05)}
+.badge{
+  position:absolute;top:8px;left:8px;
+  background:var(--accent);color:#fff;
+  font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;
+  letter-spacing:.08em;padding:2px 7px;border-radius:5px
+}
+.add-btn{
+  position:absolute;bottom:8px;right:8px;
+  background:var(--dark);color:#fff;border:none;
+  border-radius:50%;width:32px;height:32px;
+  cursor:pointer;display:grid;place-items:center;
+  opacity:0;transform:scale(.7);
+  transition:opacity .18s,transform .18s,background .12s
+}
+.add-btn:hover{background:var(--accent)}
+.card:hover .add-btn{opacity:1;transform:scale(1)}
+.card-body{padding:10px 12px 13px}
+.card-name{font-size:.8rem;font-weight:500;line-height:1.38;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-prices{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.card-old{font-size:.72rem;color:var(--muted);text-decoration:line-through}
+.card-new{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--accent)}
+.card-sub{font-size:.7rem;color:var(--muted);margin-top:3px}
 
-    /* LIST VIEW */
-    .product-grid.view-list .product-card { display: flex; transform: none !important; }
-    .product-grid.view-list .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
-    .product-grid.view-list .card-img-wrap { width: 130px; flex-shrink: 0; border-radius: 12px 0 0 12px; aspect-ratio: 1; }
-    .product-grid.view-list .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 16px 20px; }
-    .product-grid.view-list .card-name { -webkit-line-clamp: unset; font-size: .92rem; }
-    .product-grid.view-list .btn-add-cart-list { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; background: var(--accent2); color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: .8rem; font-family: var(--font-body); font-weight: 600; cursor: pointer; transition: background var(--tr); width: fit-content; }
-    .product-grid.view-list .btn-add-cart-list:hover { background: var(--accent); }
+/* LIST CARD */
+.grid.glist .card{display:flex;transform:none!important}
+.grid.glist .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.grid.glist .card-img{width:110px;flex-shrink:0;aspect-ratio:1;border-radius:11px 0 0 11px}
+.grid.glist .card-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:14px 18px}
+.grid.glist .card-name{-webkit-line-clamp:3;font-size:.88rem}
+.grid.glist .add-btn-list{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:10px;background:var(--dark);color:#fff;border:none;
+  border-radius:7px;padding:7px 14px;font-size:.78rem;font-family:'DM Sans',sans-serif;
+  font-weight:600;cursor:pointer;width:fit-content;transition:background .12s
+}
+.grid.glist .add-btn-list:hover{background:var(--accent)}
 
-    .card-img-wrap { position: relative; aspect-ratio: 1; background: #f8f7f5; overflow: hidden; }
-    .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 14px; transition: transform .32s ease; }
-    .product-card:hover .card-img-wrap img { transform: scale(1.06); }
-    .badge-new { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font-family: var(--font-head); font-size: .62rem; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; border-radius: 5px; z-index: 1; }
-    .btn-add-cart { position: absolute; bottom: 10px; right: 10px; background: var(--accent2); color: #fff; border: none; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; display: grid; place-items: center; opacity: 0; transform: scale(.75); transition: opacity .22s, transform .22s, background .15s; }
-    .btn-add-cart:hover { background: var(--accent); }
-    .product-card:hover .btn-add-cart { opacity: 1; transform: scale(1); }
-    .card-body { padding: 11px 13px 14px; }
-    .card-name { font-size: .82rem; font-weight: 500; margin-bottom: 7px; line-height: 1.38; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-price-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
-    .card-old-price { font-size: .74rem; color: var(--muted); text-decoration: line-through; }
-    .card-price { font-family: var(--font-head); font-size: .95rem; font-weight: 700; color: var(--accent); }
-    .card-storage { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+/* ─── EMPTY STATE ─── */
+.empty{
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+}
+.empty svg{width:52px;height:52px;color:var(--border);display:block;margin:0 auto 14px}
+.empty h3{font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:6px}
+.empty p{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+.btn-reset{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:9px 20px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer
+}
 
-    /* EMPTY STATE */
-    .empty-state { grid-column: 1/-1; text-align: center; padding: 70px 20px; }
-    .empty-state svg { width: 56px; height: 56px; color: var(--border); margin-bottom: 16px; }
-    .empty-state h3 { font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 8px; }
-    .empty-state p { font-size: .85rem; color: var(--muted); }
-    .btn-reset { margin-top: 18px; background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 10px 22px; font-family: var(--font-body); font-weight: 600; cursor: pointer; font-size: .85rem; }
+/* ─── MOBILE TOPBAR controls ─── */
+.mob-controls{
+  display:none;
+  align-items:center;gap:8px;
+  padding:10px 12px;
+  background:var(--bg);
+  border-bottom:1.5px solid var(--border);
+  flex-shrink:0;
+}
+.mob-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--surface);border:1.5px solid var(--border);border-radius:8px;
+  padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;
+  cursor:pointer;color:var(--dark);white-space:nowrap
+}
+.mob-btn:active{background:var(--border)}
+.f-badge{
+  background:var(--accent);color:#fff;border-radius:20px;
+  padding:0 6px;font-size:.68rem;font-weight:700;min-width:18px;text-align:center;
+  display:none
+}
 
-    /* OVERLAY */
-    .filter-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 500; opacity: 0; transition: opacity .3s; }
-    .filter-overlay.open { opacity: 1; }
+/* ─── MOBILE BOTTOM NAV ─── */
+.bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--surface);border-top:1.5px solid var(--border);
+  z-index:300;padding-bottom:env(safe-area-inset-bottom,0px)
+}
+.bn-inner{display:flex}
+.bn-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 0 7px;background:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.64rem;font-weight:500;color:var(--muted);
+  position:relative
+}
+.bn-btn.on{color:var(--accent)}
+.bn-btn svg{width:20px;height:20px}
+.bn-badge{
+  position:absolute;top:5px;right:calc(50% - 20px);
+  background:var(--accent);color:#fff;border-radius:50%;
+  width:15px;height:15px;font-size:.58rem;font-weight:700;
+  display:none;place-items:center
+}
 
-    /* FILTER DRAWER */
-    .filter-drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); z-index: 501; border-radius: 22px 22px 0 0; padding: 0 20px 96px; max-height: 85vh; overflow-y: auto; transform: translateY(100%); transition: transform .36s cubic-bezier(.4,0,.2,1); }
-    .filter-drawer.open { transform: translateY(0); }
-    .drawer-handle { width: 40px; height: 4px; background: var(--border); border-radius: 4px; margin: 14px auto 18px; }
-    .drawer-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1.5px solid var(--border); margin-bottom: 4px; }
-    .drawer-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; }
-    .drawer-close { background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: .88rem; }
-    .drawer-footer { position: sticky; bottom: 0; background: var(--surface); padding: 14px 0 4px; display: flex; gap: 10px; }
-    .btn-apply { flex: 1; background: var(--accent); color: #fff; border: none; border-radius: 11px; padding: 13px; font-family: var(--font-head); font-weight: 700; font-size: .95rem; cursor: pointer; }
-    .btn-drawer-clear { background: #eee; color: var(--text); border: none; border-radius: 11px; padding: 13px 18px; font-family: var(--font-body); font-weight: 600; font-size: .88rem; cursor: pointer; }
+/* ─── OVERLAY ─── */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.45);z-index:400;
+  opacity:0;transition:opacity .25s
+}
+.overlay.on{opacity:1}
 
-    /* SORT SHEET */
-    .sort-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); z-index: 501; border-radius: 22px 22px 0 0; padding: 0 20px 90px; transform: translateY(100%); transition: transform .36s cubic-bezier(.4,0,.2,1); }
-    .sort-sheet.open { transform: translateY(0); }
-    .sort-sheet-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; padding: 20px 0 14px; border-bottom: 1.5px solid var(--border); margin-bottom: 4px; }
-    .sort-option { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); cursor: pointer; font-size: .9rem; }
-    .sort-option:last-child { border-bottom: none; }
-    .sort-option.selected { color: var(--accent); font-weight: 600; }
-    .sort-check { color: var(--accent); display: none; }
-    .sort-option.selected .sort-check { display: block; }
+/* ─── FILTER PANEL (mobile) ─── */
+/* anchored to viewport, always visible when open */
+.filter-panel{
+  position:fixed;
+  /* sit just above bottom nav */
+  bottom:0;left:0;right:0;
+  /* max height = full viewport minus topnav */
+  max-height:calc(100dvh - var(--nav-h));
+  background:var(--surface);
+  border-radius:18px 18px 0 0;
+  z-index:500;
+  display:flex;
+  flex-direction:column;
+  transform:translateY(100%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.filter-panel.on{transform:translateY(0)}
 
-    /* MOBILE BOTTOM BAR */
-    .mobile-bottombar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1.5px solid var(--border); z-index: 300; padding-bottom: env(safe-area-inset-bottom); }
-    .mobile-bottombar-inner { display: flex; }
-    .mob-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 9px 0 8px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: .67rem; color: var(--muted); font-weight: 500; position: relative; }
-    .mob-btn.active { color: var(--accent); }
-    .mob-btn svg { width: 21px; height: 21px; }
-    .mob-badge { position: absolute; top: 6px; right: calc(50% - 18px); background: var(--accent); color: #fff; border-radius: 50%; width: 16px; height: 16px; font-size: .6rem; font-weight: 700; display: grid; place-items: center; }
+.fp-grip{width:36px;height:4px;background:var(--border);border-radius:4px;margin:12px auto 0;flex-shrink:0}
+.fp-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px 12px;border-bottom:1.5px solid var(--border);
+  flex-shrink:0
+}
+.fp-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700}
+.fp-close{background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:4px;font-family:'DM Sans',sans-serif;font-size:.85rem}
+.fp-body{flex:1;overflow-y:auto;padding:4px 18px 0;overscroll-behavior:contain}
+.fp-body::-webkit-scrollbar{width:3px}
+.fp-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.fp-foot{
+  display:flex;gap:8px;padding:12px 18px;
+  border-top:1.5px solid var(--border);flex-shrink:0;
+  background:var(--surface);
+  padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))
+}
+.fp-apply{
+  flex:1;background:var(--accent);color:#fff;border:none;border-radius:10px;
+  padding:13px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer
+}
+.fp-clr{
+  background:#eee;color:var(--dark);border:none;border-radius:10px;
+  padding:13px 16px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer
+}
 
-    /* MOBILE TOP CONTROLS */
-    .mobile-top-controls { display: none; align-items: center; margin-bottom: 14px; gap: 8px; }
-    .btn-filter-mob, .btn-sort-mob { background: var(--surface); border: 1.5px solid var(--border); border-radius: 9px; padding: 9px 14px; font-family: var(--font-body); font-size: .82rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--text); transition: border-color var(--tr); flex: 1; justify-content: center; }
-    .btn-filter-mob:hover, .btn-sort-mob:hover { border-color: var(--accent); color: var(--accent); }
-    .filter-badge { background: var(--accent); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: .66rem; font-weight: 700; display: inline-grid; place-items: center; }
+/* ─── SORT PANEL (mobile) ─── */
+.sort-panel{
+  position:fixed;bottom:0;left:0;right:0;
+  max-height:70dvh;
+  background:var(--surface);border-radius:18px 18px 0 0;
+  z-index:500;
+  display:flex;flex-direction:column;
+  transform:translateY(100%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.sort-panel.on{transform:translateY(0)}
+.sp-grip{width:36px;height:4px;background:var(--border);border-radius:4px;margin:12px auto 4px;flex-shrink:0}
+.sp-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;padding:8px 18px 12px;border-bottom:1.5px solid var(--border);flex-shrink:0}
+.sp-body{overflow-y:auto;flex:1;padding-bottom:env(safe-area-inset-bottom,0px)}
+.so{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  cursor:pointer;font-size:.88rem
+}
+.so:last-child{border-bottom:none}
+.so.on{color:var(--accent);font-weight:600}
+.so-chk{color:var(--accent);display:none}
+.so.on .so-chk{display:block}
 
-    /* RESPONSIVE */
-    @media (max-width: 1200px) {
-      .product-grid:not(.view-list):not(.view-3) { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 960px) {
-      :root { --sidebar-w: 210px; }
-      .product-grid:not(.view-list):not(.view-3) { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 800px) {
-      .sidebar { display: none; }
-      .mobile-top-controls { display: flex; }
-      .filter-overlay { display: block; }
-      .mobile-bottombar { display: block; }
-      .page-layout { padding-bottom: 92px; padding-left: 12px; padding-right: 12px; }
-      .product-grid:not(.view-list) { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
-      .topbar-nav { display: none; }
-      .toolbar-right { display: none; }
-      .toolbar { margin-bottom: 4px; }
-      .toolbar-title { font-size: 1.25rem; }
-      .breadcrumb { padding: 10px 16px; }
-      .topbar { padding: 0 16px; }
-    }
-    @media (max-width: 480px) {
-      .product-grid:not(.view-list) { gap: 8px !important; }
-      .card-body { padding: 9px 10px 12px; }
-      .card-name { font-size: .79rem; }
-      .product-grid.view-list .card-img-wrap { width: 90px; }
-    }
-  </style>
+/* ─── RESPONSIVE ─── */
+@media(max-width:1200px){
+  .grid:not(.glist):not(.g3){grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .grid:not(.glist):not(.g3){grid-template-columns:repeat(2,1fr)}
+  .sidebar{width:200px}
+}
+@media(max-width:720px){
+  .sidebar{display:none}
+  .mob-controls{display:flex}
+  .bottom-nav{display:block}
+  .shell{overflow:visible} /* let body scroll on mobile */
+  .content{overflow:visible}
+  body{overflow-x:hidden;overflow-y:auto}
+  .t-right{display:none}
+  .t-title{font-size:1.15rem}
+  .toolbar{padding:10px 12px 0}
+  .chips{padding:8px 12px 0}
+  .grid-wrap{padding:10px 12px 100px}
+  .grid:not(.glist){grid-template-columns:repeat(2,1fr)!important;gap:10px}
+  .grid.glist .card-img{width:95px}
+  .topbar .nav-links{display:none}
+  .topnav{padding:0 14px}
+}
+@media(max-width:420px){
+  .grid:not(.glist){gap:8px!important}
+  .card-body{padding:8px 10px 11px}
+  .card-name{font-size:.77rem}
+  .grid.glist .card-img{width:80px}
+}
+</style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<header class="topbar">
-  <a href="#" class="topbar-logo">Mobi<span>Shop</span></a>
-  <nav class="topbar-nav">
-    <a href="#" class="active-nav">Phones</a>
+<!-- NAV -->
+<nav class="topnav">
+  <a href="#" class="logo">Mobi<b>Shop</b></a>
+  <div class="nav-links">
+    <a href="#" class="on">Phones</a>
     <a href="#">Tablets</a>
     <a href="#">Accessories</a>
     <a href="#">Deals</a>
-  </nav>
-  <div>
-    <button class="btn-cart">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      Cart <span class="cart-count" id="cartCount">0</span>
-    </button>
   </div>
-</header>
+  <button class="cart-btn" id="cartBtn">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Cart <span class="cart-pill" id="cartPill">0</span>
+  </button>
+</nav>
 
-<!-- BREADCRUMB -->
-<div class="breadcrumb">
-  <a href="#">Home</a><span class="sep">›</span><strong>Phones</strong>
-</div>
-
-<!-- PAGE -->
-<div class="page-layout">
+<!-- PAGE SHELL -->
+<div class="shell">
 
   <!-- DESKTOP SIDEBAR -->
   <aside class="sidebar">
-    <div class="sidebar-header">
-      <span class="sidebar-title">Filters</span>
-      <button class="btn-clear-all" id="clearAllBtn">Clear all</button>
+    <div class="sb-head">
+      <span class="sb-title">Filters</span>
+      <button class="btn-clr" id="deskClear">Clear all</button>
     </div>
-    <div id="desktopFilters"></div>
+    <div id="deskFilters"></div>
   </aside>
 
-  <!-- MAIN -->
-  <main class="main">
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- TOOLBAR -->
     <div class="toolbar">
-      <div class="toolbar-left">
-        <h1 class="toolbar-title">Phones</h1>
-        <span class="results-count" id="resultsCount"></span>
+      <div class="t-left">
+        <span class="t-title">Phones</span>
+        <span class="t-count" id="tCount"></span>
       </div>
-      <div class="toolbar-right">
-        <span class="show-label">Show:</span>
-        <div class="show-options" id="showOptions">
-          <button class="active" data-per="9">9</button><span class="sep">/</span>
-          <button data-per="12">12</button><span class="sep">/</span>
-          <button data-per="18">18</button><span class="sep">/</span>
-          <button data-per="24">24</button>
+      <div class="t-right">
+        <div class="show-row">
+          Show:
+          <div id="perPageBtns">
+            <button class="on" data-n="9">9</button><span>/</span>
+            <button data-n="12">12</button><span>/</span>
+            <button data-n="18">18</button><span>/</span>
+            <button data-n="24">24</button>
+          </div>
         </div>
-        <div class="view-btns">
-          <button class="view-btn" id="viewList" title="List view">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <div class="view-row">
+          <button class="vb" id="vList" title="List">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
-          <button class="view-btn" id="view3" title="3-column">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="6" height="9"/><rect x="9" y="2" width="6" height="9"/><rect x="16" y="2" width="6" height="9"/><rect x="2" y="13" width="6" height="9"/><rect x="9" y="13" width="6" height="9"/><rect x="16" y="13" width="6" height="9"/></svg>
+          <button class="vb" id="v3" title="3-col">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="2" y="2" width="6" height="8"/><rect x="9" y="2" width="6" height="8"/><rect x="16" y="2" width="6" height="8"/><rect x="2" y="13" width="6" height="8"/><rect x="9" y="13" width="6" height="8"/><rect x="16" y="13" width="6" height="8"/></svg>
           </button>
-          <button class="view-btn active" id="view4" title="4-column">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
+          <button class="vb on" id="v4" title="4-col">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
           </button>
         </div>
-        <select class="sort-select" id="sortSelect">
+        <select class="sort-sel" id="sortSel">
           <option value="latest">Sort by latest</option>
           <option value="popular">Sort by popularity</option>
-          <option value="rating">Sort by average rating</option>
-          <option value="price-asc">Price: low to high</option>
-          <option value="price-desc">Price: high to low</option>
+          <option value="rating">Sort by rating</option>
+          <option value="price-asc">Price: low → high</option>
+          <option value="price-desc">Price: high → low</option>
         </select>
       </div>
     </div>
 
-    <!-- Mobile controls -->
-    <div class="mobile-top-controls">
-      <button class="btn-filter-mob" id="openFilterBtn">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
-        Filters <span class="filter-badge" id="filterBadge" style="display:none"></span>
+    <!-- MOBILE CONTROLS -->
+    <div class="mob-controls">
+      <button class="mob-btn" id="mobFilterBtn">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filters <span class="f-badge" id="fBadge"></span>
       </button>
-      <button class="btn-sort-mob" id="openSortBtn">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
-        <span id="sortLabel">Sort by latest</span>
+      <button class="mob-btn" id="mobSortBtn">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+        <span id="sortLabel">Latest</span>
       </button>
     </div>
 
-    <div class="active-chips" id="activeChips"></div>
-    <div class="product-grid" id="productGrid"></div>
-  </main>
-</div>
+    <!-- CHIPS -->
+    <div class="chips" id="chips"></div>
 
-<!-- OVERLAYS -->
-<div class="filter-overlay" id="filterOverlay"></div>
+    <!-- GRID -->
+    <div class="grid-wrap">
+      <div class="grid" id="grid"></div>
+    </div>
 
-<!-- FILTER DRAWER -->
-<div class="filter-drawer" id="filterDrawer">
-  <div class="drawer-handle"></div>
-  <div class="drawer-header">
-    <span class="drawer-title">Filters</span>
-    <button class="drawer-close" id="closeFilterBtn">
+  </div><!-- /content -->
+</div><!-- /shell -->
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- FILTER PANEL (mobile) -->
+<div class="filter-panel" id="filterPanel">
+  <div class="fp-grip"></div>
+  <div class="fp-head">
+    <span class="fp-title">Filters</span>
+    <button class="fp-close" id="fpClose">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       Close
     </button>
   </div>
-  <div id="mobileFilters"></div>
-  <div class="drawer-footer">
-    <button class="btn-drawer-clear" id="clearMobileBtn">Clear</button>
-    <button class="btn-apply" id="applyFilterBtn">Show results</button>
+  <div class="fp-body" id="mobFilters"></div>
+  <div class="fp-foot">
+    <button class="fp-clr" id="fpClear">Clear</button>
+    <button class="fp-apply" id="fpApply">Show results</button>
   </div>
 </div>
 
-<!-- SORT SHEET -->
-<div class="sort-sheet" id="sortSheet">
-  <div class="drawer-handle"></div>
-  <div class="sort-sheet-title">Sort by</div>
-  <div id="sortOptions"></div>
+<!-- SORT PANEL (mobile) -->
+<div class="sort-panel" id="sortPanel">
+  <div class="sp-grip"></div>
+  <div class="sp-title">Sort by</div>
+  <div class="sp-body" id="sortOpts"></div>
 </div>
 
-<!-- MOBILE BOTTOM BAR -->
-<nav class="mobile-bottombar">
-  <div class="mobile-bottombar-inner">
-    <button class="mob-btn active" id="mobFilterBtn">
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bn-inner">
+    <button class="bn-btn on" id="bnFilter">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
       Filters
     </button>
-    <button class="mob-btn">
+    <button class="bn-btn" id="bnCart">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      <span class="mob-badge" id="mobCartBadge" style="display:none">0</span>
+      <span class="bn-badge" id="bnBadge"></span>
       Cart
     </button>
-    <button class="mob-btn">
+    <button class="bn-btn">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Home
     </button>
-    <button class="mob-btn">
+    <button class="bn-btn">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       Shop
     </button>
@@ -333,308 +555,332 @@
 </nav>
 
 <script>
-/* ── DATA ── */
-const ALL_PHONES = [
-  { id:1,  name:"Motorola Moto G Stylus 5G",  price:5200,  old:5500,  storage:"128GB", series:"Moto G Series",       deposit:1200, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/motorola-moto-g-stylus-5g-2024.jpg" },
-  { id:2,  name:"Oppo Reno 15F 5G",            price:12200, old:13000, storage:"512GB", series:"Oppo Reno Series",    deposit:3000, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno12-f-5g.jpg" },
-  { id:3,  name:"Tecno Camon 50 Pro",           price:6300,  old:7000,  storage:"256GB", series:"Camon Series",       deposit:1500, rating:4.1, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30-pro-5g.jpg" },
-  { id:4,  name:"Tecno Camon 50",               price:5700,  old:4800,  storage:"128GB", series:"Camon Series",       deposit:1000, rating:4.0, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30.jpg" },
-  { id:5,  name:"Samsung Galaxy S24",           price:15500, old:18000, storage:"256GB", series:"Galaxy S Series",    deposit:4000, rating:4.8, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24.jpg" },
-  { id:6,  name:"Infinix Hot 40 Pro",           price:3200,  old:4000,  storage:"128GB", series:"Infinix Hot Series", deposit:800,  rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40-pro.jpg" },
-  { id:7,  name:"Samsung Galaxy Tab S9",        price:22000, old:25000, storage:"512GB", series:"Galaxy Tab",         deposit:6000, rating:4.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s9.jpg" },
-  { id:8,  name:"Infinix Note 30 5G",           price:5800,  old:6500,  storage:"256GB", series:"Infinix Note Series",deposit:1300, rating:4.2, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-note-30-5g.jpg" },
-  { id:9,  name:"Oppo A78 5G",                  price:7200,  old:8500,  storage:"128GB", series:"Oppo A Series",      deposit:1800, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-a78-5g.jpg" },
-  { id:10, name:"Samsung Galaxy A55",           price:8900,  old:10000, storage:"256GB", series:"Galaxy S Series",    deposit:2200, rating:4.4, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a55.jpg" },
-  { id:11, name:"Infinix GT 20 Pro",            price:9500,  old:11000, storage:"256GB", series:"Infinix GT Series",  deposit:2500, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-gt-20-pro.jpg" },
-  { id:12, name:"Tecno Spark 20 Pro",           price:4200,  old:5000,  storage:"128GB", series:"Camon Series",       deposit:900,  rating:3.8, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-spark-20-pro.jpg" },
-  { id:13, name:"Samsung Galaxy S23 FE",        price:11500, old:13500, storage:"256GB", series:"Galaxy S Series",    deposit:3000, rating:4.5, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-fe.jpg" },
-  { id:14, name:"Infinix Hot 40i",              price:2800,  old:3500,  storage:"64GB",  series:"Infinix Hot Series", deposit:600,  rating:3.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40i.jpg" },
-  { id:15, name:"Oppo Reno 11F",                price:10200, old:12000, storage:"256GB", series:"Oppo Reno Series",   deposit:2600, rating:4.2, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno11-f.jpg" },
-  { id:16, name:"Samsung Galaxy A15",           price:4800,  old:5800,  storage:"128GB", series:"Galaxy S Series",    deposit:1100, rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a15.jpg" },
-  { id:17, name:"Tecno Pova 6 Pro",             price:6800,  old:8000,  storage:"256GB", series:"Camon Series",       deposit:1700, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-pova-6-pro.jpg" },
-  { id:18, name:"Infinix Zero 40",              price:14500, old:16000, storage:"512GB", series:"Infinix GT Series",  deposit:3700, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-zero-40-5g.jpg" },
+/* ═══ DATA ═══ */
+const PHONES = [
+  {id:1, name:"Motorola Moto G Stylus 5G",  price:5200,  old:5500,  storage:"128GB", series:"Moto G Series",        deposit:1200, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/motorola-moto-g-stylus-5g-2024.jpg"},
+  {id:2, name:"Oppo Reno 15F 5G",            price:12200, old:13000, storage:"512GB", series:"Oppo Reno Series",     deposit:3000, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno12-f-5g.jpg"},
+  {id:3, name:"Tecno Camon 50 Pro",           price:6300,  old:7000,  storage:"256GB", series:"Camon Series",        deposit:1500, rating:4.1, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30-pro-5g.jpg"},
+  {id:4, name:"Tecno Camon 50",               price:5700,  old:4800,  storage:"128GB", series:"Camon Series",        deposit:1000, rating:4.0, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30.jpg"},
+  {id:5, name:"Samsung Galaxy S24",           price:15500, old:18000, storage:"256GB", series:"Galaxy S Series",     deposit:4000, rating:4.8, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24.jpg"},
+  {id:6, name:"Infinix Hot 40 Pro",           price:3200,  old:4000,  storage:"128GB", series:"Infinix Hot Series",  deposit:800,  rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40-pro.jpg"},
+  {id:7, name:"Samsung Galaxy Tab S9",        price:22000, old:25000, storage:"512GB", series:"Galaxy Tab",          deposit:6000, rating:4.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s9.jpg"},
+  {id:8, name:"Infinix Note 30 5G",           price:5800,  old:6500,  storage:"256GB", series:"Infinix Note Series", deposit:1300, rating:4.2, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-note-30-5g.jpg"},
+  {id:9, name:"Oppo A78 5G",                  price:7200,  old:8500,  storage:"128GB", series:"Oppo A Series",       deposit:1800, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-a78-5g.jpg"},
+  {id:10,name:"Samsung Galaxy A55",           price:8900,  old:10000, storage:"256GB", series:"Galaxy S Series",     deposit:2200, rating:4.4, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a55.jpg"},
+  {id:11,name:"Infinix GT 20 Pro",            price:9500,  old:11000, storage:"256GB", series:"Infinix GT Series",   deposit:2500, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-gt-20-pro.jpg"},
+  {id:12,name:"Tecno Spark 20 Pro",           price:4200,  old:5000,  storage:"128GB", series:"Camon Series",        deposit:900,  rating:3.8, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-spark-20-pro.jpg"},
+  {id:13,name:"Samsung Galaxy S23 FE",        price:11500, old:13500, storage:"256GB", series:"Galaxy S Series",     deposit:3000, rating:4.5, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-fe.jpg"},
+  {id:14,name:"Infinix Hot 40i",              price:2800,  old:3500,  storage:"64GB",  series:"Infinix Hot Series",  deposit:600,  rating:3.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40i.jpg"},
+  {id:15,name:"Oppo Reno 11F",                price:10200, old:12000, storage:"256GB", series:"Oppo Reno Series",    deposit:2600, rating:4.2, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno11-f.jpg"},
+  {id:16,name:"Samsung Galaxy A15",           price:4800,  old:5800,  storage:"128GB", series:"Galaxy S Series",     deposit:1100, rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a15.jpg"},
+  {id:17,name:"Tecno Pova 6 Pro",             price:6800,  old:8000,  storage:"256GB", series:"Camon Series",        deposit:1700, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-pova-6-pro.jpg"},
+  {id:18,name:"Infinix Zero 40",              price:14500, old:16000, storage:"512GB", series:"Infinix GT Series",   deposit:3700, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-zero-40-5g.jpg"},
+  {id:19,name:"Samsung Galaxy A35",           price:7800,  old:9200,  storage:"128GB", series:"Galaxy S Series",     deposit:2000, rating:4.2, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a35.jpg"},
+  {id:20,name:"Tecno Camon 20 Pro",           price:5100,  old:6000,  storage:"256GB", series:"Camon Series",        deposit:1200, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-20-pro-5g.jpg"},
 ];
 
-/* ── FILTER DEFINITIONS ── */
 const FILTER_GROUPS = [
-  { group: "Filter By Storage", filters: [
-    { label:"1TB",    test: p => p.storage === "1TB"   },
-    { label:"512GB",  test: p => p.storage === "512GB" },
-    { label:"256GB",  test: p => p.storage === "256GB" },
-    { label:"128GB",  test: p => p.storage === "128GB" },
-    { label:"64GB",   test: p => p.storage === "64GB"  },
+  {group:"Filter By Storage", filters:[
+    {label:"512GB", test:p=>p.storage==="512GB"},
+    {label:"256GB", test:p=>p.storage==="256GB"},
+    {label:"128GB", test:p=>p.storage==="128GB"},
+    {label:"64GB",  test:p=>p.storage==="64GB"},
   ]},
-  { group: "Filter By Deposit", filters: [
-    { label:"Under Ksh 2k",  test: p => p.deposit < 2000 },
-    { label:"Ksh 2k – 4k",   test: p => p.deposit >= 2000 && p.deposit <= 4000 },
-    { label:"Under 20k",     test: p => p.price < 20000 },
-    { label:"Under 30k",     test: p => p.price < 30000 },
-    { label:"Under 40k",     test: p => p.price < 40000 },
+  {group:"Filter By Deposit", filters:[
+    {label:"Under Ksh 2k",  test:p=>p.deposit<2000},
+    {label:"Ksh 2k – 4k",   test:p=>p.deposit>=2000&&p.deposit<=4000},
+    {label:"Ksh 4k – 8k",   test:p=>p.deposit>4000&&p.deposit<=8000},
+    {label:"Over Ksh 8k",   test:p=>p.deposit>8000},
   ]},
-  { group: "Filter By Series", filters:
-    [...new Set(ALL_PHONES.map(p => p.series))].sort()
-      .map(s => ({ label: s, test: p => p.series === s }))
+  {group:"Filter By Series", filters:
+    [...new Set(PHONES.map(p=>p.series))].sort()
+      .map(s=>({label:s, test:p=>p.series===s}))
   },
 ];
 
-const SORT_OPTIONS = [
-  { value:"latest",     label:"Sort by latest" },
-  { value:"popular",    label:"Sort by popularity" },
-  { value:"rating",     label:"Sort by average rating" },
-  { value:"price-asc",  label:"Price: low to high" },
-  { value:"price-desc", label:"Price: high to low" },
+const SORTS = [
+  {v:"latest",   l:"Latest"},
+  {v:"popular",  l:"Popular"},
+  {v:"rating",   l:"Top rated"},
+  {v:"price-asc",l:"Price: low → high"},
+  {v:"price-desc",l:"Price: high → low"},
 ];
 
-/* ── STATE ── */
-const state = { active: new Set(), sort:"latest", perPage:9, view:"grid4", cartCount:0 };
+/* ═══ STATE ═══ */
+const S = {active:new Set(), sort:"latest", perPage:9, view:"g4", cart:0};
 
-/* ── FILTER LOGIC ── */
-function applyFilters(phones) {
-  if (!state.active.size) return phones;
-  // per group: OR; between groups: AND
-  const byGroup = FILTER_GROUPS.map(g => g.filters.filter(f => state.active.has(f.label))).filter(a => a.length);
-  return phones.filter(p => byGroup.every(group => group.some(f => f.test(p))));
+/* ═══ FILTER LOGIC ═══ */
+function filtered(){
+  if(!S.active.size) return PHONES;
+  const byGroup = FILTER_GROUPS
+    .map(g=>g.filters.filter(f=>S.active.has(f.label)))
+    .filter(a=>a.length);
+  return PHONES.filter(p=>byGroup.every(g=>g.some(f=>f.test(p))));
 }
 
-function applySort(phones) {
-  const a = [...phones];
-  if (state.sort === "price-asc")  return a.sort((a,b) => a.price - b.price);
-  if (state.sort === "price-desc") return a.sort((a,b) => b.price - a.price);
-  if (state.sort === "rating")     return a.sort((a,b) => b.rating - a.rating);
-  if (state.sort === "popular")    return a.sort((a,b) => b.id % 5 - a.id % 5);
+function sorted(arr){
+  const a=[...arr];
+  if(S.sort==="price-asc")  return a.sort((a,b)=>a.price-b.price);
+  if(S.sort==="price-desc") return a.sort((a,b)=>b.price-a.price);
+  if(S.sort==="rating")     return a.sort((a,b)=>b.rating-a.rating);
+  if(S.sort==="popular")    return a.sort((a,b)=>b.id%7-a.id%7);
   return a;
 }
 
-function getResults() { return applySort(applyFilters(ALL_PHONES)); }
+function results(){return sorted(filtered())}
 
-function countForFilter(label) {
-  // count how many phones pass this filter + all other active group filters
-  const testFn = FILTER_GROUPS.flatMap(g => g.filters).find(f => f.label === label)?.test;
-  if (!testFn) return 0;
-  const otherByGroup = FILTER_GROUPS.map(g =>
-    g.filters.filter(f => state.active.has(f.label) && f.label !== label)
-  ).filter(a => a.length);
-  return ALL_PHONES.filter(p =>
-    otherByGroup.every(g => g.some(f => f.test(p))) && testFn(p)
-  ).length;
+function cntFor(label){
+  const testFn = FILTER_GROUPS.flatMap(g=>g.filters).find(f=>f.label===label)?.test;
+  if(!testFn) return 0;
+  // count phones matching this filter + all currently active filters from OTHER groups
+  const otherByGroup = FILTER_GROUPS.map(g=>
+    g.filters.filter(f=>S.active.has(f.label)&&f.label!==label)
+  ).filter(a=>a.length);
+  return PHONES.filter(p=>otherByGroup.every(g=>g.some(f=>f.test(p)))&&testFn(p)).length;
 }
 
-/* ── BUILD FILTER HTML ── */
-function buildFilters(containerId) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.innerHTML = FILTER_GROUPS.map(({ group, filters }) => `
-    <div class="filter-group" data-grp="${group}">
-      <div class="filter-group-title" onclick="toggleGrp(this)">
-        ${group}
-        <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+/* ═══ BUILD FILTER HTML ═══ */
+function fHTML(containerId){
+  const el=document.getElementById(containerId);
+  if(!el) return;
+  const chevron=`<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+  el.innerHTML=FILTER_GROUPS.map(({group,filters})=>`
+    <div class="fg" data-g="${esc(group)}">
+      <div class="fg-title" onclick="toggleFG(this)">
+        ${group} ${chevron}
       </div>
-      <div class="filter-group-body" style="max-height:${filters.length * 34}px">
-        ${filters.map(f => {
-          const cnt = countForFilter(f.label);
-          const chk = state.active.has(f.label) ? 'checked' : '';
-          return `
-          <div class="filter-option">
+      <div class="fg-body" style="max-height:${filters.length*36}px">
+        ${filters.map(f=>{
+          const cnt=cntFor(f.label);
+          const chk=S.active.has(f.label)?'checked':'';
+          return `<div class="fo">
             <label>
-              <input type="checkbox" ${chk} data-filter="${escQ(f.label)}"
-                onchange="toggleFilter('${escQ(f.label)}', '${containerId}')">
+              <input type="checkbox" ${chk} onchange="toggleF('${esc(f.label)}')">
               ${f.label}
             </label>
-            <span class="filter-count">${cnt}</span>
+            <span class="fo-cnt">${cnt}</span>
           </div>`;
         }).join('')}
       </div>
     </div>`).join('');
 }
 
-function escQ(s) { return s.replace(/'/g, "\\'"); }
-window.toggleGrp = t => t.closest('.filter-group').classList.toggle('collapsed');
+function esc(s){return s.replace(/'/g,"\\'")}
+window.toggleFG=t=>t.closest('.fg').classList.toggle('closed');
 
-window.toggleFilter = (label, src) => {
-  state.active.has(label) ? state.active.delete(label) : state.active.add(label);
+window.toggleF=label=>{
+  S.active.has(label)?S.active.delete(label):S.active.add(label);
   renderAll();
 };
 
-/* ── CHIPS ── */
-function renderChips() {
-  const xSvg = `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-  document.getElementById('activeChips').innerHTML =
-    [...state.active].map(l =>
-      `<span class="chip" onclick="rmFilter('${escQ(l)}')">${l} ${xSvg}</span>`
-    ).join('');
+/* ═══ CHIPS ═══ */
+function renderChips(){
+  const xSvg=`<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+  document.getElementById('chips').innerHTML=
+    [...S.active].map(l=>`<span class="chip" onclick="rmF('${esc(l)}')">${l}${xSvg}</span>`).join('');
 
-  const cab = document.getElementById('clearAllBtn');
-  if (cab) cab.classList.toggle('visible', state.active.size > 0);
+  // clear btn visibility
+  document.querySelectorAll('.btn-clr').forEach(b=>b.classList.toggle('show',S.active.size>0));
 
-  const fb = document.getElementById('filterBadge');
-  if (fb) { fb.style.display = state.active.size ? 'inline-grid' : 'none'; fb.textContent = state.active.size; }
+  // mobile badge
+  const fb=document.getElementById('fBadge');
+  fb.style.display=S.active.size?'inline':'none';
+  fb.textContent=S.active.size;
 }
-window.rmFilter = l => { state.active.delete(l); renderAll(); };
+window.rmF=l=>{S.active.delete(l);renderAll()};
+window.clearAll=()=>{S.active.clear();renderAll()};
 
-/* ── GRID ── */
-const fallback = "https://placehold.co/300x300/f4f2ee/8a8a9a?text=Phone";
-const cartSvg  = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`;
+/* ═══ GRID ═══ */
+const FALLBACK="https://placehold.co/300x300/f4f2ee/8a8a9a?text=Phone";
+const CART_SVG=`<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`;
 
-function renderGrid() {
-  const grid = document.getElementById('productGrid');
-  const results = getResults();
-  const shown = results.slice(0, state.perPage);
+function renderGrid(){
+  const grid=document.getElementById('grid');
+  const res=results();
+  const shown=res.slice(0,S.perPage);
 
-  grid.className = 'product-grid';
-  if (state.view === 'list')  grid.classList.add('view-list');
-  if (state.view === 'grid3') grid.classList.add('view-3');
+  // view class
+  grid.className='grid';
+  if(S.view==='glist') grid.classList.add('glist');
+  else if(S.view==='g3') grid.classList.add('g3');
 
-  document.getElementById('resultsCount').textContent =
-    `${results.length} product${results.length !== 1 ? 's' : ''}`;
+  document.getElementById('tCount').textContent=`${res.length} products`;
 
-  if (!shown.length) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <h3>No phones match your filters</h3>
-        <p>Try adjusting or clearing the active filters.</p>
-        <button class="btn-reset" onclick="clearAll()">Clear all filters</button>
-      </div>`;
+  if(!shown.length){
+    grid.innerHTML=`<div class="empty">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <h3>No phones match your filters</h3>
+      <p>Try clearing some filters to see more phones.</p>
+      <button class="btn-reset" onclick="clearAll()">Clear all filters</button>
+    </div>`;
     return;
   }
 
-  grid.innerHTML = shown.map(p => {
-    const badge = p.badge ? `<span class="badge-new">${p.badge}</span>` : '';
-    if (state.view === 'list') return `
-      <div class="product-card">
-        <div class="card-img-wrap">
+  const isList=S.view==='glist';
+  grid.innerHTML=shown.map(p=>{
+    const badge=p.badge?`<span class="badge">${p.badge}</span>`:'';
+    if(isList) return `
+      <div class="card">
+        <div class="card-img" style="border-radius:11px 0 0 11px">
           ${badge}
-          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${fallback}'">
+          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${FALLBACK}'">
         </div>
         <div class="card-body">
           <div class="card-name">${p.name}</div>
-          <div class="card-price-row">
-            <span class="card-old-price">KSh ${p.old.toLocaleString()}</span>
-            <span class="card-price">KSh ${p.price.toLocaleString()}</span>
+          <div class="card-prices">
+            <span class="card-old">KSh ${p.old.toLocaleString()}</span>
+            <span class="card-new">KSh ${p.price.toLocaleString()}</span>
           </div>
-          <div class="card-storage">${p.storage} · ${p.series}</div>
-          <button class="btn-add-cart-list" onclick="addToCart(event)">${cartSvg} Add to cart</button>
+          <div class="card-sub">${p.storage} · ${p.series}</div>
+          <button class="add-btn-list" onclick="addCart(event)">${CART_SVG} Add to cart</button>
         </div>
       </div>`;
     return `
-      <div class="product-card">
-        <div class="card-img-wrap">
+      <div class="card">
+        <div class="card-img">
           ${badge}
-          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${fallback}'">
-          <button class="btn-add-cart" title="Add to cart" onclick="addToCart(event)">${cartSvg}</button>
+          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${FALLBACK}'">
+          <button class="add-btn" onclick="addCart(event)" title="Add to cart">${CART_SVG}</button>
         </div>
         <div class="card-body">
           <div class="card-name">${p.name}</div>
-          <div class="card-price-row">
-            <span class="card-old-price">KSh ${p.old.toLocaleString()}</span>
-            <span class="card-price">KSh ${p.price.toLocaleString()}</span>
+          <div class="card-prices">
+            <span class="card-old">KSh ${p.old.toLocaleString()}</span>
+            <span class="card-new">KSh ${p.price.toLocaleString()}</span>
           </div>
-          <div class="card-storage">${p.storage}</div>
+          <div class="card-sub">${p.storage}</div>
         </div>
       </div>`;
   }).join('');
 }
 
-/* ── RENDER ALL ── */
-function renderAll() {
-  buildFilters('desktopFilters');
-  buildFilters('mobileFilters');
+/* ═══ RENDER ALL ═══ */
+function renderAll(){
+  fHTML('deskFilters');
+  fHTML('mobFilters');
   renderChips();
   renderGrid();
   updateApplyBtn();
 }
 
-function updateApplyBtn() {
-  const btn = document.getElementById('applyFilterBtn');
-  if (!btn) return;
-  const n = getResults().length;
-  btn.textContent = `Show ${n} result${n !== 1 ? 's' : ''}`;
+function updateApplyBtn(){
+  const n=results().length;
+  const btn=document.getElementById('fpApply');
+  if(btn) btn.textContent=`Show ${n} result${n!==1?'s':''}`;
 }
 
-/* ── CLEAR ── */
-window.clearAll = () => { state.active.clear(); renderAll(); };
-
-/* ── CART ── */
-window.addToCart = e => {
+/* ═══ CART ═══ */
+window.addCart=e=>{
   e.stopPropagation();
-  state.cartCount++;
-  document.getElementById('cartCount').textContent = state.cartCount;
-  const mb = document.getElementById('mobCartBadge');
-  mb.style.display = 'grid'; mb.textContent = state.cartCount;
-  const b = e.currentTarget;
-  b.style.transform = 'scale(1.35)';
-  setTimeout(() => b.style.transform = '', 180);
+  S.cart++;
+  document.getElementById('cartPill').textContent=S.cart;
+  const bb=document.getElementById('bnBadge');
+  bb.style.display='grid'; bb.textContent=S.cart;
+  const b=e.currentTarget;
+  const origBg=b.style.background;
+  b.style.transform='scale(1.3)';
+  setTimeout(()=>{b.style.transform=''},150);
 };
 
-/* ── FILTER DRAWER ── */
-const overlay = document.getElementById('filterOverlay');
-const drawer  = document.getElementById('filterDrawer');
-const sortSheet = document.getElementById('sortSheet');
+/* ═══ OVERLAY HELPERS ═══ */
+const overlay=document.getElementById('overlay');
+const filterPanel=document.getElementById('filterPanel');
+const sortPanel=document.getElementById('sortPanel');
 
-function openDrawer(el) {
-  overlay.style.display = 'block';
-  requestAnimationFrame(() => { overlay.classList.add('open'); el.classList.add('open'); });
+let activePanel=null;
+
+function openPanel(panel){
+  if(activePanel&&activePanel!==panel) closePanel(activePanel);
+  activePanel=panel;
+  overlay.style.display='block';
+  requestAnimationFrame(()=>{overlay.classList.add('on');panel.classList.add('on')});
 }
-function closeDrawer(el) {
-  overlay.classList.remove('open'); el.classList.remove('open');
-  setTimeout(() => { overlay.style.display = 'none'; }, 360);
+function closePanel(panel){
+  overlay.classList.remove('on');
+  panel.classList.remove('on');
+  setTimeout(()=>{
+    overlay.style.display='none';
+    activePanel=null;
+  },300);
 }
 
-['openFilterBtn','mobFilterBtn'].forEach(id =>
-  document.getElementById(id)?.addEventListener('click', () => { buildFilters('mobileFilters'); updateApplyBtn(); openDrawer(drawer); })
-);
-['closeFilterBtn','applyFilterBtn'].forEach(id =>
-  document.getElementById(id)?.addEventListener('click', () => closeDrawer(drawer))
-);
-overlay.addEventListener('click', () => { closeDrawer(drawer); closeDrawer(sortSheet); });
+overlay.addEventListener('click',()=>{if(activePanel) closePanel(activePanel)});
 
-document.getElementById('clearAllBtn').addEventListener('click', clearAll);
-document.getElementById('clearMobileBtn').addEventListener('click', () => { state.active.clear(); renderAll(); });
+/* ═══ FILTER PANEL ═══ */
+function openFilter(){
+  fHTML('mobFilters');
+  updateApplyBtn();
+  openPanel(filterPanel);
+}
+function closeFilter(){closePanel(filterPanel)}
 
-/* ── SORT ── */
-function renderSortSheet() {
-  const chk = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
-  document.getElementById('sortOptions').innerHTML = SORT_OPTIONS.map(o => `
-    <div class="sort-option ${o.value === state.sort ? 'selected' : ''}" onclick="selectSort('${o.value}')">
-      ${o.label} <span class="sort-check">${chk}</span>
+['mobFilterBtn','bnFilter'].forEach(id=>
+  document.getElementById(id)?.addEventListener('click',openFilter)
+);
+document.getElementById('fpClose').addEventListener('click',closeFilter);
+document.getElementById('fpApply').addEventListener('click',closeFilter);
+document.getElementById('fpClear').addEventListener('click',()=>{S.active.clear();renderAll()});
+document.getElementById('deskClear').addEventListener('click',()=>{S.active.clear();renderAll()});
+
+/* ═══ SORT PANEL ═══ */
+function buildSortOpts(){
+  const chk=`<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+  document.getElementById('sortOpts').innerHTML=SORTS.map(o=>`
+    <div class="so ${o.v===S.sort?'on':''}" onclick="pickSort('${o.v}')">
+      ${o.l} <span class="so-chk">${chk}</span>
     </div>`).join('');
 }
 
-window.selectSort = val => {
-  state.sort = val;
-  document.getElementById('sortSelect').value = val;
-  document.getElementById('sortLabel').textContent = SORT_OPTIONS.find(o => o.value === val)?.label || '';
-  renderGrid(); renderSortSheet(); closeDrawer(sortSheet);
+window.pickSort=v=>{
+  S.sort=v;
+  document.getElementById('sortSel').value=v;
+  document.getElementById('sortLabel').textContent=SORTS.find(o=>o.v===v)?.l||'';
+  renderGrid();
+  buildSortOpts();
+  closePanel(sortPanel);
 };
 
-document.getElementById('openSortBtn').addEventListener('click', () => { renderSortSheet(); openDrawer(sortSheet); });
-document.getElementById('sortSelect').addEventListener('change', e => {
-  state.sort = e.target.value;
-  document.getElementById('sortLabel').textContent = SORT_OPTIONS.find(o => o.value === state.sort)?.label || '';
-  renderGrid(); renderSortSheet();
+document.getElementById('mobSortBtn').addEventListener('click',()=>{buildSortOpts();openPanel(sortPanel)});
+document.getElementById('sortSel').addEventListener('change',e=>{
+  S.sort=e.target.value;
+  document.getElementById('sortLabel').textContent=SORTS.find(o=>o.v===S.sort)?.l||'';
+  renderGrid();
 });
 
-/* ── VIEW ── */
-function setView(v) {
-  state.view = v;
-  ['viewList','view3','view4'].forEach(id => document.getElementById(id).classList.remove('active'));
-  document.getElementById(v === 'list' ? 'viewList' : v === 'grid3' ? 'view3' : 'view4').classList.add('active');
+/* ═══ VIEW TOGGLE ═══ */
+function setView(v){
+  S.view=v;
+  ['vList','v3','v4'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById(v==='glist'?'vList':v==='g3'?'v3':'v4').classList.add('on');
   renderGrid();
 }
-document.getElementById('viewList').addEventListener('click', () => setView('list'));
-document.getElementById('view3').addEventListener('click', () => setView('grid3'));
-document.getElementById('view4').addEventListener('click', () => setView('grid4'));
+document.getElementById('vList').addEventListener('click',()=>setView('glist'));
+document.getElementById('v3').addEventListener('click',()=>setView('g3'));
+document.getElementById('v4').addEventListener('click',()=>setView('g4'));
 
-/* ── PER PAGE ── */
-document.getElementById('showOptions').addEventListener('click', e => {
-  const btn = e.target.closest('button[data-per]');
-  if (!btn) return;
-  state.perPage = +btn.dataset.per;
-  document.querySelectorAll('#showOptions button').forEach(b => b.classList.toggle('active', b === btn));
+/* ═══ PER PAGE ═══ */
+document.getElementById('perPageBtns').addEventListener('click',e=>{
+  const btn=e.target.closest('button[data-n]');
+  if(!btn) return;
+  S.perPage=+btn.dataset.n;
+  document.querySelectorAll('#perPageBtns button').forEach(b=>b.classList.toggle('on',b===btn));
   renderGrid();
 });
 
-/* ── INIT ── */
+/* ═══ SHELL HEIGHT ═══ */
+/* Make shell fill exactly the remaining viewport height on desktop */
+function setSizes(){
+  const navH=document.querySelector('.topnav').offsetHeight;
+  if(window.innerWidth>720){
+    document.querySelector('.shell').style.height=`calc(100dvh - ${navH}px)`;
+  } else {
+    document.querySelector('.shell').style.height='auto';
+  }
+}
+window.addEventListener('resize',setSizes);
+setSizes();
+
+/* ═══ INIT ═══ */
 renderAll();
 </script>
 </body>
