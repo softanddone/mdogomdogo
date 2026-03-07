@@ -1,887 +1,1084 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Phones — MobiShop</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<style>
-/* ─── RESET & BASE ─── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow-x:hidden}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:#f4f2ee;
-  color:#1a1a2e;
-  /* full viewport layout */
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-}
-:root{
-  --nav-h:56px;
-  --accent:#e8380d;
-  --dark:#1a1a2e;
-  --bg:#f4f2ee;
-  --surface:#fff;
-  --muted:#8a8a9a;
-  --border:#e2dfd9;
-  --radius:12px;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhoneHub Kenya — Lipa Kidogo Kidogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─── TOPNAV ─── */
-.topnav{
-  height:var(--nav-h);
-  background:var(--dark);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  flex-shrink:0;
-  position:sticky;
-  top:0;
-  z-index:200;
-}
-.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;text-decoration:none}
-.logo b{color:var(--accent)}
-.nav-links{display:flex;gap:24px}
-.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.84rem;font-weight:500}
-.nav-links a.on{color:#fff}
-.cart-btn{
-  background:var(--accent);color:#fff;border:none;border-radius:8px;
-  padding:7px 16px;font-family:'DM Sans',sans-serif;font-size:.84rem;font-weight:600;
-  cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap
-}
-.cart-pill{
-  background:#fff;color:var(--accent);border-radius:20px;
-  padding:1px 7px;font-size:.7rem;font-weight:700;min-width:20px;text-align:center
-}
+    :root {
+      --orange: #ff6000;
+      --orange-light: #ff8533;
+      --orange-pale: #fff4ed;
+      --red: #e62e2e;
+      --gold: #f5a623;
+      --navy: #0d1b2a;
+      --dark: #1a1a2e;
+      --white: #ffffff;
+      --gray-1: #f7f8fa;
+      --gray-2: #ebebeb;
+      --gray-3: #b0b0b0;
+      --text: #222;
+      --text-light: #666;
+      --badge-new: #00b96b;
+      --badge-hot: #e62e2e;
+      --badge-sale: #ff6000;
+    }
 
-/* ─── PAGE SHELL ─── */
-/* fills remaining height, no overflow on body */
-.shell{
-  display:flex;
-  flex:1;
-  overflow:hidden; /* children scroll independently */
-  max-width:1440px;
-  width:100%;
-  margin:0 auto;
-}
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--gray-1);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-/* ─── SIDEBAR ─── */
-.sidebar{
-  width:220px;
-  flex-shrink:0;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:16px 16px 40px;
-  border-right:1.5px solid var(--border);
-  background:var(--surface);
-}
-.sidebar::-webkit-scrollbar{width:4px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+    /* ─── TOP BANNER ─── */
+    .top-banner {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .top-banner span { color: var(--gold); font-weight: 700; }
 
-.sb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.sb-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700}
-.btn-clr{
-  font-size:.72rem;color:var(--accent);background:none;border:none;
-  cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;
-  opacity:0;pointer-events:none;transition:opacity .15s
-}
-.btn-clr.show{opacity:1;pointer-events:auto}
+    /* ─── SITE HEADER ─── */
+    .site-header {
+      background: var(--orange);
+      padding: 14px 24px 0;
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+    }
+    .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      padding-bottom: 12px;
+      flex-shrink: 0;
+    }
+    .logo span { color: var(--gold); }
+    .logo sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.75);
+      margin-top: 2px;
+    }
+    .header-cats {
+      display: flex;
+      gap: 2px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .header-cats a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      padding: 8px 14px 12px;
+      border-radius: 6px 6px 0 0;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .header-cats a:hover, .header-cats a.active {
+      background: var(--gray-1);
+      color: var(--orange);
+    }
 
-.fg{margin-bottom:20px}
-.fg-title{
-  font-size:.7rem;font-weight:700;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--muted);
-  padding:6px 0;border-bottom:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  cursor:pointer;user-select:none;margin-bottom:4px
-}
-.fg-title svg{transition:transform .2s;flex-shrink:0}
-.fg.closed .fg-title svg{transform:rotate(-90deg)}
-.fg-body{overflow:hidden;transition:max-height .25s ease}
-.fg.closed .fg-body{max-height:0!important}
+    /* ─── FILTER STRIP ─── */
+    .filter-strip {
+      background: #fff;
+      border-bottom: 1px solid var(--gray-2);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-right: 4px;
+    }
+    .filter-chip {
+      border: 1.5px solid var(--gray-2);
+      background: var(--gray-1);
+      color: var(--text);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-chip:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-pale); }
+    .filter-chip.active { border-color: var(--orange); background: var(--orange); color: #fff; }
+    .sort-select {
+      margin-left: auto;
+      border: 1.5px solid var(--gray-2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--gray-1);
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
 
-.fo{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:5px 4px;border-radius:6px;cursor:pointer;gap:6px;
-  transition:background .12s
-}
-.fo:hover{background:rgba(232,56,13,.06)}
-.fo label{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.82rem;flex:1;line-height:1.3}
-.fo input{accent-color:var(--accent);width:14px;height:14px;flex-shrink:0;cursor:pointer}
-.fo-cnt{
-  font-size:.7rem;color:var(--muted);background:var(--border);
-  border-radius:20px;padding:1px 7px;white-space:nowrap;flex-shrink:0;
-  transition:background .12s,color .12s
-}
-.fo:has(input:checked) .fo-cnt{background:rgba(232,56,13,.15);color:var(--accent);font-weight:600}
+    /* ─── MAIN LAYOUT ─── */
+    .page-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
 
-/* ─── MAIN CONTENT ─── */
-.content{
-  flex:1;
-  overflow-y:auto;
-  overflow-x:hidden;
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-}
-.content::-webkit-scrollbar{width:4px}
-.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+    /* ─── PROMO STRIP ─── */
+    .promo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .promo-tile {
+      background: linear-gradient(135deg, var(--orange) 0%, #ff3c00 100%);
+      color: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 10px rgba(255,96,0,0.25);
+    }
+    .promo-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,96,0,0.35); }
+    .promo-tile.navy { background: linear-gradient(135deg, var(--navy) 0%, #162640 100%); box-shadow: 0 2px 10px rgba(13,27,42,0.25); }
+    .promo-tile.navy:hover { box-shadow: 0 6px 20px rgba(13,27,42,0.35); }
+    .promo-tile.gold { background: linear-gradient(135deg, #c47d00 0%, var(--gold) 100%); box-shadow: 0 2px 10px rgba(245,166,35,0.3); }
+    .promo-tile.gold:hover { box-shadow: 0 6px 20px rgba(245,166,35,0.4); }
+    .promo-tile.green { background: linear-gradient(135deg, #007a46 0%, #00b96b 100%); box-shadow: 0 2px 10px rgba(0,185,107,0.25); }
+    .promo-tile.green:hover { box-shadow: 0 6px 20px rgba(0,185,107,0.35); }
+    .promo-icon { font-size: 28px; }
+    .promo-info { line-height: 1.3; }
+    .promo-info strong { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 900; letter-spacing: 0.03em; }
+    .promo-info span { font-size: 11.5px; opacity: 0.85; }
 
-/* ─── TOOLBAR ─── */
-.toolbar{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:10px;
-  padding:14px 20px 0;
-  background:var(--bg);
-  flex-shrink:0;
-}
-.t-left{display:flex;align-items:baseline;gap:8px}
-.t-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
-.t-count{font-size:.8rem;color:var(--muted)}
-.t-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.show-row{display:flex;align-items:center;gap:4px;font-size:.8rem;color:var(--muted)}
-.show-row button{
-  background:none;border:none;font-size:.8rem;font-family:'DM Sans',sans-serif;
-  color:var(--muted);cursor:pointer;padding:1px 4px
-}
-.show-row button.on{color:var(--accent);font-weight:700}
-.show-row span{color:var(--border)}
-.view-row{display:flex;gap:3px}
-.vb{
-  background:none;border:1.5px solid var(--border);border-radius:6px;
-  width:28px;height:28px;cursor:pointer;display:grid;place-items:center;
-  color:var(--muted);transition:border-color .12s,color .12s
-}
-.vb.on,.vb:hover{border-color:var(--accent);color:var(--accent)}
-.sort-sel{
-  border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;
-  font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--dark);
-  background:var(--surface);cursor:pointer;outline:none;max-width:170px
-}
-.sort-sel:focus{border-color:var(--accent)}
+    /* ─── SECTION TITLE ─── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-head h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      color: var(--navy);
+    }
+    .section-head .line {
+      flex: 1;
+      height: 2px;
+      background: var(--gray-2);
+      border-radius: 2px;
+    }
+    .section-head .line::before {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+    .section-head .see-all {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .section-head .see-all:hover { text-decoration: underline; }
 
-/* ─── CHIPS ─── */
-.chips{
-  display:flex;flex-wrap:wrap;gap:6px;
-  padding:10px 20px 0;
-  flex-shrink:0;
-}
-.chip{
-  display:inline-flex;align-items:center;gap:4px;
-  background:rgba(232,56,13,.1);color:var(--accent);
-  border:1.5px solid rgba(232,56,13,.2);border-radius:20px;
-  padding:3px 9px 3px 11px;font-size:.73rem;font-weight:600;
-  cursor:pointer;transition:background .12s;white-space:nowrap
-}
-.chip:hover{background:rgba(232,56,13,.2)}
-.chip svg{width:10px;height:10px}
+    /* ─── PRODUCT GRID ─── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 36px;
+    }
 
-/* ─── GRID AREA ─── */
-.grid-wrap{
-  padding:14px 20px 40px;
-  flex:1;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  width:100%;
-}
-.grid.g3{grid-template-columns:repeat(3,1fr)}
-.grid.glist{grid-template-columns:1fr;gap:10px}
+    /* ─── PRODUCT CARD ─── */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid var(--gray-2);
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      animation: fadeUp 0.4s ease both;
+    }
+    .card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 8px 28px rgba(255,96,0,0.12);
+      transform: translateY(-3px);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card:nth-child(1)  { animation-delay: 0.05s; }
+    .card:nth-child(2)  { animation-delay: 0.10s; }
+    .card:nth-child(3)  { animation-delay: 0.15s; }
+    .card:nth-child(4)  { animation-delay: 0.20s; }
+    .card:nth-child(5)  { animation-delay: 0.25s; }
+    .card:nth-child(6)  { animation-delay: 0.08s; }
+    .card:nth-child(7)  { animation-delay: 0.13s; }
+    .card:nth-child(8)  { animation-delay: 0.18s; }
+    .card:nth-child(9)  { animation-delay: 0.23s; }
+    .card:nth-child(10) { animation-delay: 0.28s; }
 
-/* ─── CARD ─── */
-.card{
-  background:var(--surface);border-radius:var(--radius);
-  overflow:hidden;border:1.5px solid transparent;
-  transition:box-shadow .22s,transform .22s,border-color .22s;
-  cursor:pointer;
-}
-.card:hover{box-shadow:0 8px 32px rgba(0,0,0,.09);transform:translateY(-2px);border-color:rgba(232,56,13,.15)}
-.card-img{position:relative;aspect-ratio:1;background:#f8f7f5;overflow:hidden}
-.card-img img{
-  width:100%;height:100%;object-fit:contain;padding:12px;
-  transition:transform .3s ease;
-}
-.card:hover .card-img img{transform:scale(1.05)}
-.badge{
-  position:absolute;top:8px;left:8px;
-  background:var(--accent);color:#fff;
-  font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;
-  letter-spacing:.08em;padding:2px 7px;border-radius:5px
-}
-.add-btn{
-  position:absolute;bottom:8px;right:8px;
-  background:var(--dark);color:#fff;border:none;
-  border-radius:50%;width:32px;height:32px;
-  cursor:pointer;display:grid;place-items:center;
-  opacity:0;transform:scale(.7);
-  transition:opacity .18s,transform .18s,background .12s
-}
-.add-btn:hover{background:var(--accent)}
-.card:hover .add-btn{opacity:1;transform:scale(1)}
-.card-body{padding:10px 12px 13px}
-.card-name{font-size:.8rem;font-weight:500;line-height:1.38;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-prices{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
-.card-old{font-size:.72rem;color:var(--muted);text-decoration:line-through}
-.card-new{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--accent)}
-.card-sub{font-size:.7rem;color:var(--muted);margin-top:3px}
+    /* badge */
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .badge-new  { background: var(--badge-new); }
+    .badge-hot  { background: var(--badge-hot); }
+    .badge-sale { background: var(--badge-sale); }
+    .badge-installment { background: var(--navy); }
 
-/* LIST CARD */
-.grid.glist .card{display:flex;transform:none!important}
-.grid.glist .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
-.grid.glist .card-img{width:110px;flex-shrink:0;aspect-ratio:1;border-radius:11px 0 0 11px}
-.grid.glist .card-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:14px 18px}
-.grid.glist .card-name{-webkit-line-clamp:3;font-size:.88rem}
-.grid.glist .add-btn-list{
-  display:inline-flex;align-items:center;gap:5px;
-  margin-top:10px;background:var(--dark);color:#fff;border:none;
-  border-radius:7px;padding:7px 14px;font-size:.78rem;font-family:'DM Sans',sans-serif;
-  font-weight:600;cursor:pointer;width:fit-content;transition:background .12s
-}
-.grid.glist .add-btn-list:hover{background:var(--accent)}
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .wishlist-btn:hover { background: #fff; transform: scale(1.12); }
 
-/* ─── EMPTY STATE ─── */
-.empty{
-  grid-column:1/-1;text-align:center;padding:60px 20px;
-}
-.empty svg{width:52px;height:52px;color:var(--border);display:block;margin:0 auto 14px}
-.empty h3{font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:6px}
-.empty p{font-size:.82rem;color:var(--muted);margin-bottom:16px}
-.btn-reset{
-  background:var(--accent);color:#fff;border:none;border-radius:8px;
-  padding:9px 20px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer
-}
+    /* image */
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      padding: 20px;
+      background: var(--gray-1);
+      transition: transform 0.3s;
+    }
+    .card:hover .card-img { transform: scale(1.05); }
 
-/* ─── MOBILE TOPBAR controls ─── */
-.mob-controls{
-  display:none;
-  align-items:center;gap:8px;
-  padding:10px 12px;
-  background:var(--bg);
-  border-bottom:1.5px solid var(--border);
-  flex-shrink:0;
-}
-.mob-btn{
-  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
-  background:var(--surface);border:1.5px solid var(--border);border-radius:8px;
-  padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;
-  cursor:pointer;color:var(--dark);white-space:nowrap
-}
-.mob-btn:active{background:var(--border)}
-.f-badge{
-  background:var(--accent);color:#fff;border-radius:20px;
-  padding:0 6px;font-size:.68rem;font-weight:700;min-width:18px;text-align:center;
-  display:none
-}
+    /* body */
+    .card-body {
+      padding: 12px 12px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-brand {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+    .card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 6px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-specs {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .spec-tag {
+      background: var(--gray-1);
+      border: 1px solid var(--gray-2);
+      color: var(--text-light);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 500;
+    }
 
-/* ─── MOBILE BOTTOM NAV ─── */
-.bottom-nav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--surface);border-top:1.5px solid var(--border);
-  z-index:300;padding-bottom:env(safe-area-inset-bottom,0px)
-}
-.bn-inner{display:flex}
-.bn-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:8px 0 7px;background:none;border:none;cursor:pointer;
-  font-family:'DM Sans',sans-serif;font-size:.64rem;font-weight:500;color:var(--muted);
-  position:relative
-}
-.bn-btn.on{color:var(--accent)}
-.bn-btn svg{width:20px;height:20px}
-.bn-badge{
-  position:absolute;top:5px;right:calc(50% - 20px);
-  background:var(--accent);color:#fff;border-radius:50%;
-  width:15px;height:15px;font-size:.58rem;font-weight:700;
-  display:none;place-items:center
-}
+    /* rating */
+    .card-rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 9px;
+    }
+    .stars { color: var(--gold); font-size: 13px; letter-spacing: -1px; }
+    .rating-count { font-size: 11.5px; color: var(--text-light); }
 
-/* ─── OVERLAY ─── */
-.overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.45);z-index:400;
-  opacity:0;transition:opacity .25s
-}
-.overlay.on{opacity:1}
+    /* price */
+    .card-price {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .price-current {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: -0.5px;
+    }
+    .price-original {
+      font-size: 13px;
+      color: var(--gray-3);
+      text-decoration: line-through;
+    }
+    .price-save {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--badge-new);
+    }
+    .installment-note {
+      font-size: 11.5px;
+      color: var(--navy);
+      font-weight: 600;
+      background: #e8f0fe;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
 
-/* ─── FILTER PANEL (mobile) ─── */
-/* anchored to viewport, always visible when open */
-.filter-panel{
-  position:fixed;
-  /* sit just above bottom nav */
-  bottom:0;left:0;right:0;
-  /* max height = full viewport minus topnav */
-  max-height:calc(100dvh - var(--nav-h));
-  background:var(--surface);
-  border-radius:18px 18px 0 0;
-  z-index:500;
-  display:flex;
-  flex-direction:column;
-  transform:translateY(100%);
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
-.filter-panel.on{transform:translateY(0)}
+    /* CTA */
+    .card-cta {
+      display: flex;
+      gap: 7px;
+      margin-top: auto;
+    }
+    .btn-cart {
+      flex: 1;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .btn-cart:hover { background: var(--orange-light); transform: scale(1.02); }
+    .btn-buy {
+      flex: 1;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .btn-buy:hover { background: #162640; transform: scale(1.02); }
 
-.fp-grip{width:36px;height:4px;background:var(--border);border-radius:4px;margin:12px auto 0;flex-shrink:0}
-.fp-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px 12px;border-bottom:1.5px solid var(--border);
-  flex-shrink:0
-}
-.fp-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700}
-.fp-close{background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:4px;font-family:'DM Sans',sans-serif;font-size:.85rem}
-.fp-body{flex:1;overflow-y:auto;padding:4px 18px 0;overscroll-behavior:contain}
-.fp-body::-webkit-scrollbar{width:3px}
-.fp-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-.fp-foot{
-  display:flex;gap:8px;padding:12px 18px;
-  border-top:1.5px solid var(--border);flex-shrink:0;
-  background:var(--surface);
-  padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))
-}
-.fp-apply{
-  flex:1;background:var(--accent);color:#fff;border:none;border-radius:10px;
-  padding:13px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer
-}
-.fp-clr{
-  background:#eee;color:var(--dark);border:none;border-radius:10px;
-  padding:13px 16px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer
-}
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+      margin-bottom: 36px;
+    }
+    .trust-item {
+      background: #fff;
+      border: 1.5px solid var(--gray-2);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .trust-icon { font-size: 26px; }
+    .trust-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); }
+    .trust-text span { font-size: 12px; color: var(--text-light); }
 
-/* ─── SORT PANEL (mobile) ─── */
-.sort-panel{
-  position:fixed;bottom:0;left:0;right:0;
-  max-height:70dvh;
-  background:var(--surface);border-radius:18px 18px 0 0;
-  z-index:500;
-  display:flex;flex-direction:column;
-  transform:translateY(100%);
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
-.sort-panel.on{transform:translateY(0)}
-.sp-grip{width:36px;height:4px;background:var(--border);border-radius:4px;margin:12px auto 4px;flex-shrink:0}
-.sp-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;padding:8px 18px 12px;border-bottom:1.5px solid var(--border);flex-shrink:0}
-.sp-body{overflow-y:auto;flex:1;padding-bottom:env(safe-area-inset-bottom,0px)}
-.so{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px;border-bottom:1px solid var(--border);
-  cursor:pointer;font-size:.88rem
-}
-.so:last-child{border-bottom:none}
-.so.on{color:var(--accent);font-weight:600}
-.so-chk{color:var(--accent);display:none}
-.so.on .so-chk{display:block}
+    /* ─── FEATURED DEAL CARD ─── */
+    .deal-card {
+      grid-column: span 2;
+      background: linear-gradient(135deg, var(--navy) 0%, #162640 100%);
+      color: #fff;
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      overflow: hidden;
+      position: relative;
+      border: none;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .deal-card:hover { box-shadow: 0 10px 36px rgba(13,27,42,0.3); transform: translateY(-3px); }
+    .deal-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,96,0,0.18);
+    }
+    .deal-card .card-img { background: transparent; padding: 0; flex-shrink: 0; width: 130px; height: 130px; }
+    .deal-info { position: relative; }
+    .deal-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    .deal-info h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+    .deal-info .deal-price { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; color: var(--gold); }
+    .deal-info .deal-orig { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: line-through; margin-left: 8px; }
+    .deal-info .deal-install { font-size: 12.5px; color: rgba(255,255,255,0.8); margin-top: 4px; }
+    .deal-cta { margin-top: 14px; background: var(--orange); color: #fff; border: none; border-radius: 6px; padding: 9px 20px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; transition: background 0.15s; }
+    .deal-cta:hover { background: var(--orange-light); }
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:1200px){
-  .grid:not(.glist):not(.g3){grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:900px){
-  .grid:not(.glist):not(.g3){grid-template-columns:repeat(2,1fr)}
-  .sidebar{width:200px}
-}
-@media(max-width:720px){
-  .sidebar{display:none}
-  .mob-controls{display:flex}
-  .bottom-nav{display:block}
-  .shell{overflow:visible} /* let body scroll on mobile */
-  .content{overflow:visible}
-  body{overflow-x:hidden;overflow-y:auto}
-  .t-right{display:none}
-  .t-title{font-size:1.15rem}
-  .toolbar{padding:10px 12px 0}
-  .chips{padding:8px 12px 0}
-  .grid-wrap{padding:10px 12px 100px}
-  .grid:not(.glist){grid-template-columns:repeat(2,1fr)!important;gap:10px}
-  .grid.glist .card-img{width:95px}
-  .topbar .nav-links{display:none}
-  .topnav{padding:0 14px}
-}
-@media(max-width:420px){
-  .grid:not(.glist){gap:8px!important}
-  .card-body{padding:8px 10px 11px}
-  .card-name{font-size:.77rem}
-  .grid.glist .card-img{width:80px}
-}
-</style>
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(4, 1fr); }
+      .promo-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 800px) {
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .trust-bar { grid-template-columns: repeat(2, 1fr); }
+      .site-header { padding: 12px 16px 0; }
+      .header-cats { display: none; }
+      .deal-card { grid-column: span 3; }
+    }
+    @media (max-width: 560px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .promo-strip { grid-template-columns: 1fr 1fr; }
+      .trust-bar { grid-template-columns: 1fr 1fr; }
+      .deal-card { grid-column: span 2; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="topnav">
-  <a href="#" class="logo">Mobi<b>Shop</b></a>
-  <div class="nav-links">
-    <a href="#" class="on">Phones</a>
-    <a href="#">Tablets</a>
+<!-- TOP BANNER -->
+<div class="top-banner">
+  🚀 Free Delivery in Nairobi CBD &nbsp;|&nbsp; <span>Lipa Mdogo Mdogo</span> — Pay from KSh 500/week &nbsp;|&nbsp; ☎ 0700 123 456
+</div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="logo">
+    Phone<span>Hub</span>
+    <sub>KENYA · NAIROBI</sub>
+  </div>
+  <nav class="header-cats">
+    <a href="#" class="active">All Phones</a>
+    <a href="#">Samsung</a>
+    <a href="#">iPhone</a>
+    <a href="#">Tecno</a>
+    <a href="#">Infinix</a>
+    <a href="#">Xiaomi</a>
+    <a href="#">Nokia</a>
     <a href="#">Accessories</a>
-    <a href="#">Deals</a>
-  </div>
-  <button class="cart-btn" id="cartBtn">
-    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-    Cart <span class="cart-pill" id="cartPill">0</span>
-  </button>
-</nav>
+  </nav>
+</header>
 
-<!-- PAGE SHELL -->
-<div class="shell">
-
-  <!-- DESKTOP SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sb-head">
-      <span class="sb-title">Filters</span>
-      <button class="btn-clr" id="deskClear">Clear all</button>
-    </div>
-    <div id="deskFilters"></div>
-  </aside>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <!-- TOOLBAR -->
-    <div class="toolbar">
-      <div class="t-left">
-        <span class="t-title">Phones</span>
-        <span class="t-count" id="tCount"></span>
-      </div>
-      <div class="t-right">
-        <div class="show-row">
-          Show:
-          <div id="perPageBtns">
-            <button class="on" data-n="9">9</button><span>/</span>
-            <button data-n="12">12</button><span>/</span>
-            <button data-n="18">18</button><span>/</span>
-            <button data-n="24">24</button>
-          </div>
-        </div>
-        <div class="view-row">
-          <button class="vb" id="vList" title="List">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-          </button>
-          <button class="vb" id="v3" title="3-col">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="2" y="2" width="6" height="8"/><rect x="9" y="2" width="6" height="8"/><rect x="16" y="2" width="6" height="8"/><rect x="2" y="13" width="6" height="8"/><rect x="9" y="13" width="6" height="8"/><rect x="16" y="13" width="6" height="8"/></svg>
-          </button>
-          <button class="vb on" id="v4" title="4-col">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
-          </button>
-        </div>
-        <select class="sort-sel" id="sortSel">
-          <option value="latest">Sort by latest</option>
-          <option value="popular">Sort by popularity</option>
-          <option value="rating">Sort by rating</option>
-          <option value="price-asc">Price: low → high</option>
-          <option value="price-desc">Price: high → low</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- MOBILE CONTROLS -->
-    <div class="mob-controls">
-      <button class="mob-btn" id="mobFilterBtn">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
-        Filters <span class="f-badge" id="fBadge"></span>
-      </button>
-      <button class="mob-btn" id="mobSortBtn">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
-        <span id="sortLabel">Latest</span>
-      </button>
-    </div>
-
-    <!-- CHIPS -->
-    <div class="chips" id="chips"></div>
-
-    <!-- GRID -->
-    <div class="grid-wrap">
-      <div class="grid" id="grid"></div>
-    </div>
-
-  </div><!-- /content -->
-</div><!-- /shell -->
-
-<!-- OVERLAY -->
-<div class="overlay" id="overlay"></div>
-
-<!-- FILTER PANEL (mobile) -->
-<div class="filter-panel" id="filterPanel">
-  <div class="fp-grip"></div>
-  <div class="fp-head">
-    <span class="fp-title">Filters</span>
-    <button class="fp-close" id="fpClose">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      Close
-    </button>
-  </div>
-  <div class="fp-body" id="mobFilters"></div>
-  <div class="fp-foot">
-    <button class="fp-clr" id="fpClear">Clear</button>
-    <button class="fp-apply" id="fpApply">Show results</button>
-  </div>
+<!-- FILTER STRIP -->
+<div class="filter-strip">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-chip active">All</button>
+  <button class="filter-chip">Under KSh 10K</button>
+  <button class="filter-chip">10K – 30K</button>
+  <button class="filter-chip">30K – 60K</button>
+  <button class="filter-chip">60K+</button>
+  <button class="filter-chip">Installments Only</button>
+  <button class="filter-chip">5G Phones</button>
+  <button class="filter-chip">New Arrivals</button>
+  <select class="sort-select">
+    <option>Sort: Featured</option>
+    <option>Price: Low to High</option>
+    <option>Price: High to Low</option>
+    <option>Best Rated</option>
+    <option>Most Popular</option>
+  </select>
 </div>
 
-<!-- SORT PANEL (mobile) -->
-<div class="sort-panel" id="sortPanel">
-  <div class="sp-grip"></div>
-  <div class="sp-title">Sort by</div>
-  <div class="sp-body" id="sortOpts"></div>
-</div>
+<!-- PAGE BODY -->
+<main class="page-body">
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <div class="bn-inner">
-    <button class="bn-btn on" id="bnFilter">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
-      Filters
-    </button>
-    <button class="bn-btn" id="bnCart">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      <span class="bn-badge" id="bnBadge"></span>
-      Cart
-    </button>
-    <button class="bn-btn">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Home
-    </button>
-    <button class="bn-btn">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      Shop
-    </button>
+  <!-- PROMO STRIP -->
+  <div class="promo-strip">
+    <div class="promo-tile">
+      <div class="promo-icon">📦</div>
+      <div class="promo-info">
+        <strong>Free CBD Delivery</strong>
+        <span>Same-day within Nairobi</span>
+      </div>
+    </div>
+    <div class="promo-tile navy">
+      <div class="promo-icon">💳</div>
+      <div class="promo-info">
+        <strong>Lipa Mdogo Mdogo</strong>
+        <span>From KSh 500/week via M-Pesa</span>
+      </div>
+    </div>
+    <div class="promo-tile gold">
+      <div class="promo-icon">🔒</div>
+      <div class="promo-info">
+        <strong>12-Month Warranty</strong>
+        <span>Genuine manufacturer warranty</span>
+      </div>
+    </div>
+    <div class="promo-tile green">
+      <div class="promo-icon">🔄</div>
+      <div class="promo-info">
+        <strong>7-Day Returns</strong>
+        <span>No questions asked</span>
+      </div>
+    </div>
   </div>
-</nav>
+
+  <!-- FEATURED DEALS -->
+  <div class="section-head">
+    <h2>🔥 Flash Deals</h2>
+    <div class="line"></div>
+    <a href="#" class="see-all">See All Deals →</a>
+  </div>
+  <div class="product-grid" style="margin-bottom:36px;">
+
+    <!-- DEAL CARD (spans 2 cols) -->
+    <div class="deal-card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=300&q=80" alt="iPhone 15 Pro" />
+      <div class="deal-info">
+        <span class="deal-tag">⚡ Deal of the Day</span>
+        <h3>Apple iPhone 15 Pro<br>256GB · Titanium</h3>
+        <div>
+          <span class="deal-price">KSh 142,500</span>
+          <span class="deal-orig">KSh 178,000</span>
+        </div>
+        <div class="deal-install">Or KSh 3,200/week on installment</div>
+        <button class="deal-cta">Buy Now on M-Pesa</button>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <span class="badge badge-hot">HOT</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=300&q=80" alt="Samsung S24" />
+      <div class="card-body">
+        <div class="card-brand">Samsung</div>
+        <div class="card-name">Galaxy S24 Ultra 5G 256GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">200MP</span>
+          <span class="spec-tag">12GB RAM</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">(284)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 159,000</span>
+          <span class="price-original">185,000</span>
+        </div>
+        <div class="installment-note">💳 From KSh 3,600/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <span class="badge badge-new">NEW</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=300&q=80" alt="Tecno Spark" />
+      <div class="card-body">
+        <div class="card-brand">Tecno</div>
+        <div class="card-name">Spark 20 Pro+ 8GB/256GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">5000mAh</span>
+          <span class="spec-tag">108MP</span>
+          <span class="spec-tag">4G</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(91)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 18,500</span>
+          <span class="price-original">22,000</span>
+          <span class="price-save">-16%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 500/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <span class="badge badge-sale">SALE</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=300&q=80" alt="Infinix Zero" />
+      <div class="card-body">
+        <div class="card-brand">Infinix</div>
+        <div class="card-name">Zero 30 5G 12GB/256GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">144Hz</span>
+          <span class="spec-tag">68W Fast</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(143)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 29,999</span>
+          <span class="price-original">36,000</span>
+          <span class="price-save">-17%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 750/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ALL PHONES SECTION -->
+  <div class="section-head">
+    <h2>📱 All Phones</h2>
+    <div class="line"></div>
+    <a href="#" class="see-all">View All →</a>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <span class="badge badge-new">NEW</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=300&q=80" alt="Samsung A55" />
+      <div class="card-body">
+        <div class="card-brand">Samsung</div>
+        <div class="card-name">Galaxy A55 5G 8/256GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">50MP</span>
+          <span class="spec-tag">5000mAh</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">(207)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 49,500</span>
+          <span class="price-original">58,000</span>
+        </div>
+        <div class="installment-note">💳 From KSh 1,200/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=300&q=80" alt="Xiaomi Redmi" />
+      <div class="card-body">
+        <div class="card-brand">Xiaomi</div>
+        <div class="card-name">Redmi Note 13 Pro+ 5G</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">200MP</span>
+          <span class="spec-tag">120Hz</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(155)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 42,000</span>
+          <span class="price-original">50,500</span>
+          <span class="price-save">-17%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 1,000/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <span class="badge badge-hot">HOT</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=300&q=80" alt="iPhone 14" />
+      <div class="card-body">
+        <div class="card-brand">Apple</div>
+        <div class="card-name">iPhone 14 128GB Midnight</div>
+        <div class="card-specs">
+          <span class="spec-tag">A15</span>
+          <span class="spec-tag">4K Video</span>
+          <span class="spec-tag">5G</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">(512)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 98,000</span>
+          <span class="price-original">115,000</span>
+        </div>
+        <div class="installment-note">💳 From KSh 2,200/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <span class="badge badge-sale">SALE</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1607936854279-55e8a4c64888?w=300&q=80" alt="Tecno Camon" />
+      <div class="card-body">
+        <div class="card-brand">Tecno</div>
+        <div class="card-name">Camon 20 Premier 5G 8GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">50MP</span>
+          <span class="spec-tag">4G</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(88)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 26,500</span>
+          <span class="price-original">31,000</span>
+          <span class="price-save">-15%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 650/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=300&q=80" alt="Nokia G60" />
+      <div class="card-body">
+        <div class="card-brand">Nokia</div>
+        <div class="card-name">G60 5G 6GB/128GB Pure Black</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">50MP</span>
+          <span class="spec-tag">4500mAh</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(62)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 24,000</span>
+        </div>
+        <div class="installment-note">💳 From KSh 600/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <span class="badge badge-new">NEW</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=300&q=80" alt="Oppo Reno" />
+      <div class="card-body">
+        <div class="card-brand">OPPO</div>
+        <div class="card-name">Reno 11 Pro 5G 12/256GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">80W</span>
+          <span class="spec-tag">120Hz</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">(43)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 55,000</span>
+          <span class="price-original">64,000</span>
+          <span class="price-save">-14%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 1,300/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <span class="badge badge-hot">HOT</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&q=80" alt="Infinix Hot" />
+      <div class="card-body">
+        <div class="card-brand">Infinix</div>
+        <div class="card-name">Hot 40 Pro 8GB/128GB</div>
+        <div class="card-specs">
+          <span class="spec-tag">6.78"</span>
+          <span class="spec-tag">108MP</span>
+          <span class="spec-tag">4G</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(176)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 14,500</span>
+          <span class="price-original">17,000</span>
+          <span class="price-save">-15%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 500/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1570101945621-945409a6370f?w=300&q=80" alt="Samsung A14" />
+      <div class="card-body">
+        <div class="card-brand">Samsung</div>
+        <div class="card-name">Galaxy A14 4GB/64GB Black</div>
+        <div class="card-specs">
+          <span class="spec-tag">50MP</span>
+          <span class="spec-tag">5000mAh</span>
+          <span class="spec-tag">4G</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(321)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 11,999</span>
+          <span class="price-original">14,500</span>
+          <span class="price-save">-17%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 500/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <span class="badge badge-new">NEW</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&q=80" alt="Google Pixel" />
+      <div class="card-body">
+        <div class="card-brand">Google</div>
+        <div class="card-name">Pixel 8a 128GB Obsidian</div>
+        <div class="card-specs">
+          <span class="spec-tag">5G</span>
+          <span class="spec-tag">64MP</span>
+          <span class="spec-tag">AI</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">(59)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 69,500</span>
+          <span class="price-original">78,000</span>
+        </div>
+        <div class="installment-note">💳 From KSh 1,600/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <span class="badge badge-sale">SALE</span>
+      <button class="wishlist-btn">🤍</button>
+      <img class="card-img" src="https://images.unsplash.com/photo-1551355738-a0b2be37e87e?w=300&q=80" alt="Huawei Nova" />
+      <div class="card-body">
+        <div class="card-brand">Huawei</div>
+        <div class="card-name">Nova 12i 8GB/128GB Black</div>
+        <div class="card-specs">
+          <span class="spec-tag">108MP</span>
+          <span class="spec-tag">6.7"</span>
+          <span class="spec-tag">4G</span>
+        </div>
+        <div class="card-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-count">(77)</span>
+        </div>
+        <div class="card-price">
+          <span class="price-current">KSh 22,000</span>
+          <span class="price-original">27,500</span>
+          <span class="price-save">-20%</span>
+        </div>
+        <div class="installment-note">💳 From KSh 550/wk</div>
+        <div class="card-cta">
+          <button class="btn-cart">🛒 Cart</button>
+          <button class="btn-buy">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <span class="trust-icon">🏪</span>
+      <div class="trust-text">
+        <strong>Verified Nairobi Store</strong>
+        <span>Tom Mboya St, Moi Ave & Online</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">📲</span>
+      <div class="trust-text">
+        <strong>M-Pesa Installments</strong>
+        <span>Pay weekly, no credit check</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🛡️</span>
+      <div class="trust-text">
+        <strong>100% Genuine Phones</strong>
+        <span>All phones brand new & sealed</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">☎️</span>
+      <div class="trust-text">
+        <strong>Support via WhatsApp</strong>
+        <span>0700 123 456 · Mon–Sat 8am–8pm</span>
+      </div>
+    </div>
+  </div>
+
+</main>
 
 <script>
-/* ═══ DATA ═══ */
-const PHONES = [
-  {id:1, name:"Motorola Moto G Stylus 5G",  price:5200,  old:5500,  storage:"128GB", series:"Moto G Series",        deposit:1200, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/motorola-moto-g-stylus-5g-2024.jpg"},
-  {id:2, name:"Oppo Reno 15F 5G",            price:12200, old:13000, storage:"512GB", series:"Oppo Reno Series",     deposit:3000, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno12-f-5g.jpg"},
-  {id:3, name:"Tecno Camon 50 Pro",           price:6300,  old:7000,  storage:"256GB", series:"Camon Series",        deposit:1500, rating:4.1, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30-pro-5g.jpg"},
-  {id:4, name:"Tecno Camon 50",               price:5700,  old:4800,  storage:"128GB", series:"Camon Series",        deposit:1000, rating:4.0, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30.jpg"},
-  {id:5, name:"Samsung Galaxy S24",           price:15500, old:18000, storage:"256GB", series:"Galaxy S Series",     deposit:4000, rating:4.8, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24.jpg"},
-  {id:6, name:"Infinix Hot 40 Pro",           price:3200,  old:4000,  storage:"128GB", series:"Infinix Hot Series",  deposit:800,  rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40-pro.jpg"},
-  {id:7, name:"Samsung Galaxy Tab S9",        price:22000, old:25000, storage:"512GB", series:"Galaxy Tab",          deposit:6000, rating:4.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-tab-s9.jpg"},
-  {id:8, name:"Infinix Note 30 5G",           price:5800,  old:6500,  storage:"256GB", series:"Infinix Note Series", deposit:1300, rating:4.2, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-note-30-5g.jpg"},
-  {id:9, name:"Oppo A78 5G",                  price:7200,  old:8500,  storage:"128GB", series:"Oppo A Series",       deposit:1800, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-a78-5g.jpg"},
-  {id:10,name:"Samsung Galaxy A55",           price:8900,  old:10000, storage:"256GB", series:"Galaxy S Series",     deposit:2200, rating:4.4, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a55.jpg"},
-  {id:11,name:"Infinix GT 20 Pro",            price:9500,  old:11000, storage:"256GB", series:"Infinix GT Series",   deposit:2500, rating:4.3, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-gt-20-pro.jpg"},
-  {id:12,name:"Tecno Spark 20 Pro",           price:4200,  old:5000,  storage:"128GB", series:"Camon Series",        deposit:900,  rating:3.8, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-spark-20-pro.jpg"},
-  {id:13,name:"Samsung Galaxy S23 FE",        price:11500, old:13500, storage:"256GB", series:"Galaxy S Series",     deposit:3000, rating:4.5, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-fe.jpg"},
-  {id:14,name:"Infinix Hot 40i",              price:2800,  old:3500,  storage:"64GB",  series:"Infinix Hot Series",  deposit:600,  rating:3.7, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-hot-40i.jpg"},
-  {id:15,name:"Oppo Reno 11F",                price:10200, old:12000, storage:"256GB", series:"Oppo Reno Series",    deposit:2600, rating:4.2, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno11-f.jpg"},
-  {id:16,name:"Samsung Galaxy A15",           price:4800,  old:5800,  storage:"128GB", series:"Galaxy S Series",     deposit:1100, rating:3.9, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a15.jpg"},
-  {id:17,name:"Tecno Pova 6 Pro",             price:6800,  old:8000,  storage:"256GB", series:"Camon Series",        deposit:1700, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-pova-6-pro.jpg"},
-  {id:18,name:"Infinix Zero 40",              price:14500, old:16000, storage:"512GB", series:"Infinix GT Series",   deposit:3700, rating:4.5, badge:"NEW", img:"https://fdn2.gsmarena.com/vv/bigpic/infinix-zero-40-5g.jpg"},
-  {id:19,name:"Samsung Galaxy A35",           price:7800,  old:9200,  storage:"128GB", series:"Galaxy S Series",     deposit:2000, rating:4.2, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a35.jpg"},
-  {id:20,name:"Tecno Camon 20 Pro",           price:5100,  old:6000,  storage:"256GB", series:"Camon Series",        deposit:1200, rating:4.0, badge:"",    img:"https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-20-pro-5g.jpg"},
-];
+  // Filter chips toggle
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
 
-const FILTER_GROUPS = [
-  {group:"Filter By Storage", filters:[
-    {label:"512GB", test:p=>p.storage==="512GB"},
-    {label:"256GB", test:p=>p.storage==="256GB"},
-    {label:"128GB", test:p=>p.storage==="128GB"},
-    {label:"64GB",  test:p=>p.storage==="64GB"},
-  ]},
-  {group:"Filter By Deposit", filters:[
-    {label:"Under Ksh 2k",  test:p=>p.deposit<2000},
-    {label:"Ksh 2k – 4k",   test:p=>p.deposit>=2000&&p.deposit<=4000},
-    {label:"Ksh 4k – 8k",   test:p=>p.deposit>4000&&p.deposit<=8000},
-    {label:"Over Ksh 8k",   test:p=>p.deposit>8000},
-  ]},
-  {group:"Filter By Series", filters:
-    [...new Set(PHONES.map(p=>p.series))].sort()
-      .map(s=>({label:s, test:p=>p.series===s}))
-  },
-];
+  // Wishlist toggle
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+    });
+  });
 
-const SORTS = [
-  {v:"latest",   l:"Latest"},
-  {v:"popular",  l:"Popular"},
-  {v:"rating",   l:"Top rated"},
-  {v:"price-asc",l:"Price: low → high"},
-  {v:"price-desc",l:"Price: high → low"},
-];
-
-/* ═══ STATE ═══ */
-const S = {active:new Set(), sort:"latest", perPage:9, view:"g4", cart:0};
-
-/* ═══ FILTER LOGIC ═══ */
-function filtered(){
-  if(!S.active.size) return PHONES;
-  const byGroup = FILTER_GROUPS
-    .map(g=>g.filters.filter(f=>S.active.has(f.label)))
-    .filter(a=>a.length);
-  return PHONES.filter(p=>byGroup.every(g=>g.some(f=>f.test(p))));
-}
-
-function sorted(arr){
-  const a=[...arr];
-  if(S.sort==="price-asc")  return a.sort((a,b)=>a.price-b.price);
-  if(S.sort==="price-desc") return a.sort((a,b)=>b.price-a.price);
-  if(S.sort==="rating")     return a.sort((a,b)=>b.rating-a.rating);
-  if(S.sort==="popular")    return a.sort((a,b)=>b.id%7-a.id%7);
-  return a;
-}
-
-function results(){return sorted(filtered())}
-
-function cntFor(label){
-  const testFn = FILTER_GROUPS.flatMap(g=>g.filters).find(f=>f.label===label)?.test;
-  if(!testFn) return 0;
-  // count phones matching this filter + all currently active filters from OTHER groups
-  const otherByGroup = FILTER_GROUPS.map(g=>
-    g.filters.filter(f=>S.active.has(f.label)&&f.label!==label)
-  ).filter(a=>a.length);
-  return PHONES.filter(p=>otherByGroup.every(g=>g.some(f=>f.test(p)))&&testFn(p)).length;
-}
-
-/* ═══ BUILD FILTER HTML ═══ */
-function fHTML(containerId){
-  const el=document.getElementById(containerId);
-  if(!el) return;
-  const chevron=`<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
-  el.innerHTML=FILTER_GROUPS.map(({group,filters})=>`
-    <div class="fg" data-g="${esc(group)}">
-      <div class="fg-title" onclick="toggleFG(this)">
-        ${group} ${chevron}
-      </div>
-      <div class="fg-body" style="max-height:${filters.length*36}px">
-        ${filters.map(f=>{
-          const cnt=cntFor(f.label);
-          const chk=S.active.has(f.label)?'checked':'';
-          return `<div class="fo">
-            <label>
-              <input type="checkbox" ${chk} onchange="toggleF('${esc(f.label)}')">
-              ${f.label}
-            </label>
-            <span class="fo-cnt">${cnt}</span>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`).join('');
-}
-
-function esc(s){return s.replace(/'/g,"\\'")}
-window.toggleFG=t=>t.closest('.fg').classList.toggle('closed');
-
-window.toggleF=label=>{
-  S.active.has(label)?S.active.delete(label):S.active.add(label);
-  renderAll();
-};
-
-/* ═══ CHIPS ═══ */
-function renderChips(){
-  const xSvg=`<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-  document.getElementById('chips').innerHTML=
-    [...S.active].map(l=>`<span class="chip" onclick="rmF('${esc(l)}')">${l}${xSvg}</span>`).join('');
-
-  // clear btn visibility
-  document.querySelectorAll('.btn-clr').forEach(b=>b.classList.toggle('show',S.active.size>0));
-
-  // mobile badge
-  const fb=document.getElementById('fBadge');
-  fb.style.display=S.active.size?'inline':'none';
-  fb.textContent=S.active.size;
-}
-window.rmF=l=>{S.active.delete(l);renderAll()};
-window.clearAll=()=>{S.active.clear();renderAll()};
-
-/* ═══ GRID ═══ */
-const FALLBACK="https://placehold.co/300x300/f4f2ee/8a8a9a?text=Phone";
-const CART_SVG=`<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`;
-
-function renderGrid(){
-  const grid=document.getElementById('grid');
-  const res=results();
-  const shown=res.slice(0,S.perPage);
-
-  // view class
-  grid.className='grid';
-  if(S.view==='glist') grid.classList.add('glist');
-  else if(S.view==='g3') grid.classList.add('g3');
-
-  document.getElementById('tCount').textContent=`${res.length} products`;
-
-  if(!shown.length){
-    grid.innerHTML=`<div class="empty">
-      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <h3>No phones match your filters</h3>
-      <p>Try clearing some filters to see more phones.</p>
-      <button class="btn-reset" onclick="clearAll()">Clear all filters</button>
-    </div>`;
-    return;
-  }
-
-  const isList=S.view==='glist';
-  grid.innerHTML=shown.map(p=>{
-    const badge=p.badge?`<span class="badge">${p.badge}</span>`:'';
-    if(isList) return `
-      <div class="card">
-        <div class="card-img" style="border-radius:11px 0 0 11px">
-          ${badge}
-          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${FALLBACK}'">
-        </div>
-        <div class="card-body">
-          <div class="card-name">${p.name}</div>
-          <div class="card-prices">
-            <span class="card-old">KSh ${p.old.toLocaleString()}</span>
-            <span class="card-new">KSh ${p.price.toLocaleString()}</span>
-          </div>
-          <div class="card-sub">${p.storage} · ${p.series}</div>
-          <button class="add-btn-list" onclick="addCart(event)">${CART_SVG} Add to cart</button>
-        </div>
-      </div>`;
-    return `
-      <div class="card">
-        <div class="card-img">
-          ${badge}
-          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='${FALLBACK}'">
-          <button class="add-btn" onclick="addCart(event)" title="Add to cart">${CART_SVG}</button>
-        </div>
-        <div class="card-body">
-          <div class="card-name">${p.name}</div>
-          <div class="card-prices">
-            <span class="card-old">KSh ${p.old.toLocaleString()}</span>
-            <span class="card-new">KSh ${p.price.toLocaleString()}</span>
-          </div>
-          <div class="card-sub">${p.storage}</div>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-/* ═══ RENDER ALL ═══ */
-function renderAll(){
-  fHTML('deskFilters');
-  fHTML('mobFilters');
-  renderChips();
-  renderGrid();
-  updateApplyBtn();
-}
-
-function updateApplyBtn(){
-  const n=results().length;
-  const btn=document.getElementById('fpApply');
-  if(btn) btn.textContent=`Show ${n} result${n!==1?'s':''}`;
-}
-
-/* ═══ CART ═══ */
-window.addCart=e=>{
-  e.stopPropagation();
-  S.cart++;
-  document.getElementById('cartPill').textContent=S.cart;
-  const bb=document.getElementById('bnBadge');
-  bb.style.display='grid'; bb.textContent=S.cart;
-  const b=e.currentTarget;
-  const origBg=b.style.background;
-  b.style.transform='scale(1.3)';
-  setTimeout(()=>{b.style.transform=''},150);
-};
-
-/* ═══ OVERLAY HELPERS ═══ */
-const overlay=document.getElementById('overlay');
-const filterPanel=document.getElementById('filterPanel');
-const sortPanel=document.getElementById('sortPanel');
-
-let activePanel=null;
-
-function openPanel(panel){
-  if(activePanel&&activePanel!==panel) closePanel(activePanel);
-  activePanel=panel;
-  overlay.style.display='block';
-  requestAnimationFrame(()=>{overlay.classList.add('on');panel.classList.add('on')});
-}
-function closePanel(panel){
-  overlay.classList.remove('on');
-  panel.classList.remove('on');
-  setTimeout(()=>{
-    overlay.style.display='none';
-    activePanel=null;
-  },300);
-}
-
-overlay.addEventListener('click',()=>{if(activePanel) closePanel(activePanel)});
-
-/* ═══ FILTER PANEL ═══ */
-function openFilter(){
-  fHTML('mobFilters');
-  updateApplyBtn();
-  openPanel(filterPanel);
-}
-function closeFilter(){closePanel(filterPanel)}
-
-['mobFilterBtn','bnFilter'].forEach(id=>
-  document.getElementById(id)?.addEventListener('click',openFilter)
-);
-document.getElementById('fpClose').addEventListener('click',closeFilter);
-document.getElementById('fpApply').addEventListener('click',closeFilter);
-document.getElementById('fpClear').addEventListener('click',()=>{S.active.clear();renderAll()});
-document.getElementById('deskClear').addEventListener('click',()=>{S.active.clear();renderAll()});
-
-/* ═══ SORT PANEL ═══ */
-function buildSortOpts(){
-  const chk=`<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
-  document.getElementById('sortOpts').innerHTML=SORTS.map(o=>`
-    <div class="so ${o.v===S.sort?'on':''}" onclick="pickSort('${o.v}')">
-      ${o.l} <span class="so-chk">${chk}</span>
-    </div>`).join('');
-}
-
-window.pickSort=v=>{
-  S.sort=v;
-  document.getElementById('sortSel').value=v;
-  document.getElementById('sortLabel').textContent=SORTS.find(o=>o.v===v)?.l||'';
-  renderGrid();
-  buildSortOpts();
-  closePanel(sortPanel);
-};
-
-document.getElementById('mobSortBtn').addEventListener('click',()=>{buildSortOpts();openPanel(sortPanel)});
-document.getElementById('sortSel').addEventListener('change',e=>{
-  S.sort=e.target.value;
-  document.getElementById('sortLabel').textContent=SORTS.find(o=>o.v===S.sort)?.l||'';
-  renderGrid();
-});
-
-/* ═══ VIEW TOGGLE ═══ */
-function setView(v){
-  S.view=v;
-  ['vList','v3','v4'].forEach(id=>document.getElementById(id).classList.remove('on'));
-  document.getElementById(v==='glist'?'vList':v==='g3'?'v3':'v4').classList.add('on');
-  renderGrid();
-}
-document.getElementById('vList').addEventListener('click',()=>setView('glist'));
-document.getElementById('v3').addEventListener('click',()=>setView('g3'));
-document.getElementById('v4').addEventListener('click',()=>setView('g4'));
-
-/* ═══ PER PAGE ═══ */
-document.getElementById('perPageBtns').addEventListener('click',e=>{
-  const btn=e.target.closest('button[data-n]');
-  if(!btn) return;
-  S.perPage=+btn.dataset.n;
-  document.querySelectorAll('#perPageBtns button').forEach(b=>b.classList.toggle('on',b===btn));
-  renderGrid();
-});
-
-/* ═══ SHELL HEIGHT ═══ */
-/* Make shell fill exactly the remaining viewport height on desktop */
-function setSizes(){
-  const navH=document.querySelector('.topnav').offsetHeight;
-  if(window.innerWidth>720){
-    document.querySelector('.shell').style.height=`calc(100dvh - ${navH}px)`;
-  } else {
-    document.querySelector('.shell').style.height='auto';
-  }
-}
-window.addEventListener('resize',setSizes);
-setSizes();
-
-/* ═══ INIT ═══ */
-renderAll();
+  // Cart button feedback
+  document.querySelectorAll('.btn-cart').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const original = btn.textContent;
+      btn.textContent = '✓ Added!';
+      btn.style.background = '#00b96b';
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = '';
+      }, 1400);
+    });
+  });
 </script>
 </body>
 </html>
