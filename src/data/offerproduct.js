@@ -143,13 +143,12 @@ export const products = [
   ],
 },
 
-
   {
     id: "3",
     name: "Infinix Smart 10",
     slug:"infinixsmart10offer",
     storage: "64GB",
-    images: ["/phones/smart1.png", "/phones/smart2.png", "/phones/smart3.png"],
+    images: ["/phones/smart1.jpg", "/phones/smart2.jpg", "/phones/smart3.jpg"],
     deposit: 3100,
     dailyPayment: 95,
     paymentDays: 90,
@@ -177,7 +176,13 @@ export const products = [
   storage: "256GB",
   images: [
     "/phones/camon501.webp",
-    "/phones/camon502.jpg",
+    // "/phones/camon502.jpg",
+    "/phones/tt.jpg",
+
+    
+    "/phones/ttt2.webp",
+
+
     
   ],
   deposit: 8500,
@@ -231,8 +236,11 @@ export const products = [
     images: [
       // "/phones/infinix1.jpeg",
       "/phones/infinix4.jpg",
-      "/phones/infinix3.jpg",
-      "/phones/infinix2.jpg",
+      // "/phones/infinix3.jpg",
+      // "/phones/infinix2.jpg",
+
+      "/phones/infi.webp",
+
 
 
     ],
@@ -259,11 +267,17 @@ export const products = [
     slug:"tecnospark40prooffer",
     storage: "256GB",
     images: [
-      "/phones/plus1.jpeg",
-      "/phones/plus2.jpeg",
-      "/phones/plus3.jpeg",
-      "/phones/plus4.jpeg",
-      "/phones/plus5.jpeg",
+      // "/phones/plus1.jpeg",
+      // "/phones/plus2.jpeg",
+      // "/phones/plus3.jpeg",
+      // "/phones/plus4.jpeg",
+      // "/phones/plus5.jpeg",
+
+
+      "/phones/to1.webp",
+      "/phones/to2.webp",
+      "/phones/to3.webp",
+      "/phones/to4.webp",
     ],
     deposit: 5400,
     dailyPayment: 160,
@@ -289,8 +303,8 @@ export const products = [
     storage: "256GB",
     images: [
       "/phones/note1.jpeg",
-      "/phones/note2.jpeg",
-      "/phones/note3.jpeg",
+      // "/phones/note2.jpeg",
+      // "/phones/note3.jpeg",
       "/phones/note4.jpeg",
     ],
     deposit: 7000,
@@ -412,6 +426,36 @@ export const products = [
 },
 
 
+
+
+{
+  id: "10",
+  name: "Samsung Galaxy A42",
+  slug: "samsungA42offer",
+  storage: "128GB",
+  images: [
+
+    "/phones/a42.png",
+    "/phones/a422.jpg",
+
+  ],
+  deposit: 4700,
+  dailyPayment: 120,
+  paymentDays: 90,
+  whatsappNumber: "+254100028823",
+  description:
+    "Brand new — sealed box with charger, cable, and all original accessories",
+  features: [
+    "Samsung Galaxy A42 modern premium design",
+    "Storage: 128GB ROM / 4GB RAM",
+    "Camera: 48MP quad rear camera system",
+    "Large 5000mAh battery for long daily use",
+    "6.6-inch Super AMOLED display",
+    "Smooth performance for apps, social media & gaming",
+    "Brand new (not refurb/used)",
+    "Original Samsung accessories included",
+  ],
+},
 
 
   

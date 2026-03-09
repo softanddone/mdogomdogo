@@ -1,3 +1,15 @@
+---
+import { products } from '../data/product2.js';
+
+// Helper: render star rating
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+  return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+}
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -522,7 +534,7 @@
 
 <!-- TOP BANNER -->
 <div class="top-banner">
-  🚀 Free Delivery in Nairobi CBD &nbsp;|&nbsp; <span>Lipa Mdogo Mdogo</span> — Pay from KSh 500/week &nbsp;|&nbsp; ☎ 0700 123 456
+  🚀 Free Delivery in Nairobi CBD &nbsp;|&nbsp; <span>Lipa Mdogo Mdogo</span> — Pay from KSh 500/week &nbsp;|&nbsp; ☎ 0720202167
 </div>
 
 <!-- SITE HEADER -->
@@ -598,121 +610,83 @@
     </div>
   </div>
 
-  <!-- FEATURED DEALS -->
+  <!-- FEATURED DEALS — uses first product as the Deal of the Day -->
   <div class="section-head">
     <h2>🔥 Flash Deals</h2>
     <div class="line"></div>
     <a href="#" class="see-all">See All Deals →</a>
   </div>
+
   <div class="product-grid" style="margin-bottom:36px;">
 
-    <!-- DEAL CARD (spans 2 cols) -->
-    <div class="deal-card">
-      <img class="card-img" src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=300&q=80" alt="iPhone 15 Pro" />
-      <div class="deal-info">
-        <span class="deal-tag">⚡ Deal of the Day</span>
-        <h3>Apple iPhone 15 Pro<br>256GB · Titanium</h3>
-        <div>
-          <span class="deal-price">KSh 142,500</span>
-          <span class="deal-orig">KSh 178,000</span>
+    <!-- DEAL CARD: first product -->
+    {products.slice(0, 1).map((p) => (
+      <a href={`/phones/${p.slug}`} class="deal-card" style="text-decoration:none;">
+        <img class="card-img" src={p.source} alt={p.name} />
+        <div class="deal-info">
+          <span class="deal-tag">⚡ Deal of the Day</span>
+          <h3>{p.fullname}</h3>
+          <div>
+            <span class="deal-price">{p.totalPrice}</span>
+            {p.discount && <span class="deal-orig">{p.discount} off</span>}
+          </div>
+          <div class="deal-install">Or {p.daily}/day on installment · Deposit {p.deposit}</div>
+          <button class="deal-cta">Buy Now on M-Pesa</button>
         </div>
-        <div class="deal-install">Or KSh 3,200/week on installment</div>
-        <button class="deal-cta">Buy Now on M-Pesa</button>
-      </div>
-    </div>
+      </a>
+    ))}
 
-    <!-- CARD -->
-    <div class="card">
-      <span class="badge badge-hot">HOT</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=300&q=80" alt="Samsung S24" />
-      <div class="card-body">
-        <div class="card-brand">Samsung</div>
-        <div class="card-name">Galaxy S24 Ultra 5G 256GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">200MP</span>
-          <span class="spec-tag">12GB RAM</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★★</span>
-          <span class="rating-count">(284)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 159,000</span>
-          <span class="price-original">185,000</span>
-        </div>
-        <div class="installment-note">💳 From KSh 3,600/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
+    <!-- Remaining flash deal cards: products 2–4 -->
+    {products.slice(1, 4).map((p, i) => {
+      const badgeClass = i === 0 ? 'badge-hot' : i === 1 ? 'badge-new' : 'badge-sale';
+      const badgeLabel = i === 0 ? 'HOT' : i === 1 ? 'NEW' : 'SALE';
 
-    <!-- CARD -->
-    <div class="card">
-      <span class="badge badge-new">NEW</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=300&q=80" alt="Tecno Spark" />
-      <div class="card-body">
-        <div class="card-brand">Tecno</div>
-        <div class="card-name">Spark 20 Pro+ 8GB/256GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">5000mAh</span>
-          <span class="spec-tag">108MP</span>
-          <span class="spec-tag">4G</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(91)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 18,500</span>
-          <span class="price-original">22,000</span>
-          <span class="price-save">-16%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 500/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
+      // Build spec tags from available fields
+      const specs = [
+        p.processor?.split(' ').slice(-2).join(' '),
+        p.camera?.split(',')[0],
+        p.battery?.split(',')[0],
+      ].filter(Boolean).slice(0, 3);
 
-    <!-- CARD -->
-    <div class="card">
-      <span class="badge badge-sale">SALE</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=300&q=80" alt="Infinix Zero" />
-      <div class="card-body">
-        <div class="card-brand">Infinix</div>
-        <div class="card-name">Zero 30 5G 12GB/256GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">144Hz</span>
-          <span class="spec-tag">68W Fast</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(143)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 29,999</span>
-          <span class="price-original">36,000</span>
-          <span class="price-save">-17%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 750/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
+      const rating = p.reviews?.averageRating ?? 4.5;
+      const reviewCount = p.reviews?.reviewCount ?? 0;
+      const fullStars = Math.floor(rating);
+      const emptyStars = 5 - fullStars;
+
+      return (
+        <a href={`/phones/${p.slug}`} class="card" style="text-decoration:none; color:inherit;">
+          <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
+          <button class="wishlist-btn" data-id={p.id}>🤍</button>
+          <img class="card-img" src={p.source} alt={p.name} />
+          <div class="card-body">
+            <div class="card-brand">{p.brand}</div>
+            <div class="card-name">{p.fullname}</div>
+            <div class="card-specs">
+              {specs.map(s => <span class="spec-tag">{s}</span>)}
+            </div>
+            <div class="card-rating">
+              <span class="stars">
+                {'★'.repeat(fullStars)}{'☆'.repeat(emptyStars)}
+              </span>
+              <span class="rating-count">({reviewCount})</span>
+            </div>
+            <div class="card-price">
+              <span class="price-current">{p.totalPrice}</span>
+              {p.discount && <span class="price-save">{p.discount}</span>}
+            </div>
+            <div class="installment-note">💳 From {p.from}/wk · Deposit {p.deposit}</div>
+            <div class="card-cta">
+              <button class="btn-cart">🛒 Cart</button>
+              <button class="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </a>
+      );
+    })}
 
   </div>
 
-  <!-- ALL PHONES SECTION -->
+  <!-- ALL PHONES SECTION — all products from data file -->
   <div class="section-head">
     <h2>📱 All Phones</h2>
     <div class="line"></div>
@@ -720,299 +694,53 @@
   </div>
 
   <div class="product-grid">
+    {products.map((p, i) => {
+      const statusLower = p.status?.toLowerCase();
+      const badgeClass = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+      const badgeLabel = p.status ?? 'NEW';
 
-    <!-- 1 -->
-    <div class="card">
-      <span class="badge badge-new">NEW</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=300&q=80" alt="Samsung A55" />
-      <div class="card-body">
-        <div class="card-brand">Samsung</div>
-        <div class="card-name">Galaxy A55 5G 8/256GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">50MP</span>
-          <span class="spec-tag">5000mAh</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★★</span>
-          <span class="rating-count">(207)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 49,500</span>
-          <span class="price-original">58,000</span>
-        </div>
-        <div class="installment-note">💳 From KSh 1,200/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
+      // Parse spec tags: display, processor short form, battery
+      const specs = [
+        p.phonedisplay,
+        p.processor?.split(' ').slice(-2).join(' '),
+        p.battery?.split(',')[0],
+      ].filter(Boolean).slice(0, 3);
 
-    <!-- 2 -->
-    <div class="card">
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=300&q=80" alt="Xiaomi Redmi" />
-      <div class="card-body">
-        <div class="card-brand">Xiaomi</div>
-        <div class="card-name">Redmi Note 13 Pro+ 5G</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">200MP</span>
-          <span class="spec-tag">120Hz</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(155)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 42,000</span>
-          <span class="price-original">50,500</span>
-          <span class="price-save">-17%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 1,000/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
+      const rating = p.reviews?.averageRating ?? 4.5;
+      const reviewCount = p.reviews?.reviewCount ?? 0;
+      const fullStars = Math.floor(rating);
+      const emptyStars = 5 - fullStars;
 
-    <!-- 3 -->
-    <div class="card">
-      <span class="badge badge-hot">HOT</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=300&q=80" alt="iPhone 14" />
-      <div class="card-body">
-        <div class="card-brand">Apple</div>
-        <div class="card-name">iPhone 14 128GB Midnight</div>
-        <div class="card-specs">
-          <span class="spec-tag">A15</span>
-          <span class="spec-tag">4K Video</span>
-          <span class="spec-tag">5G</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★★</span>
-          <span class="rating-count">(512)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 98,000</span>
-          <span class="price-original">115,000</span>
-        </div>
-        <div class="installment-note">💳 From KSh 2,200/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4 -->
-    <div class="card">
-      <span class="badge badge-sale">SALE</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1607936854279-55e8a4c64888?w=300&q=80" alt="Tecno Camon" />
-      <div class="card-body">
-        <div class="card-brand">Tecno</div>
-        <div class="card-name">Camon 20 Premier 5G 8GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">50MP</span>
-          <span class="spec-tag">4G</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(88)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 26,500</span>
-          <span class="price-original">31,000</span>
-          <span class="price-save">-15%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 650/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5 -->
-    <div class="card">
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=300&q=80" alt="Nokia G60" />
-      <div class="card-body">
-        <div class="card-brand">Nokia</div>
-        <div class="card-name">G60 5G 6GB/128GB Pure Black</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">50MP</span>
-          <span class="spec-tag">4500mAh</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(62)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 24,000</span>
-        </div>
-        <div class="installment-note">💳 From KSh 600/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6 -->
-    <div class="card">
-      <span class="badge badge-new">NEW</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=300&q=80" alt="Oppo Reno" />
-      <div class="card-body">
-        <div class="card-brand">OPPO</div>
-        <div class="card-name">Reno 11 Pro 5G 12/256GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">80W</span>
-          <span class="spec-tag">120Hz</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★★</span>
-          <span class="rating-count">(43)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 55,000</span>
-          <span class="price-original">64,000</span>
-          <span class="price-save">-14%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 1,300/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7 -->
-    <div class="card">
-      <span class="badge badge-hot">HOT</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&q=80" alt="Infinix Hot" />
-      <div class="card-body">
-        <div class="card-brand">Infinix</div>
-        <div class="card-name">Hot 40 Pro 8GB/128GB</div>
-        <div class="card-specs">
-          <span class="spec-tag">6.78"</span>
-          <span class="spec-tag">108MP</span>
-          <span class="spec-tag">4G</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(176)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 14,500</span>
-          <span class="price-original">17,000</span>
-          <span class="price-save">-15%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 500/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 8 -->
-    <div class="card">
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1570101945621-945409a6370f?w=300&q=80" alt="Samsung A14" />
-      <div class="card-body">
-        <div class="card-brand">Samsung</div>
-        <div class="card-name">Galaxy A14 4GB/64GB Black</div>
-        <div class="card-specs">
-          <span class="spec-tag">50MP</span>
-          <span class="spec-tag">5000mAh</span>
-          <span class="spec-tag">4G</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(321)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 11,999</span>
-          <span class="price-original">14,500</span>
-          <span class="price-save">-17%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 500/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 9 -->
-    <div class="card">
-      <span class="badge badge-new">NEW</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&q=80" alt="Google Pixel" />
-      <div class="card-body">
-        <div class="card-brand">Google</div>
-        <div class="card-name">Pixel 8a 128GB Obsidian</div>
-        <div class="card-specs">
-          <span class="spec-tag">5G</span>
-          <span class="spec-tag">64MP</span>
-          <span class="spec-tag">AI</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★★</span>
-          <span class="rating-count">(59)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 69,500</span>
-          <span class="price-original">78,000</span>
-        </div>
-        <div class="installment-note">💳 From KSh 1,600/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 10 -->
-    <div class="card">
-      <span class="badge badge-sale">SALE</span>
-      <button class="wishlist-btn">🤍</button>
-      <img class="card-img" src="https://images.unsplash.com/photo-1551355738-a0b2be37e87e?w=300&q=80" alt="Huawei Nova" />
-      <div class="card-body">
-        <div class="card-brand">Huawei</div>
-        <div class="card-name">Nova 12i 8GB/128GB Black</div>
-        <div class="card-specs">
-          <span class="spec-tag">108MP</span>
-          <span class="spec-tag">6.7"</span>
-          <span class="spec-tag">4G</span>
-        </div>
-        <div class="card-rating">
-          <span class="stars">★★★★☆</span>
-          <span class="rating-count">(77)</span>
-        </div>
-        <div class="card-price">
-          <span class="price-current">KSh 22,000</span>
-          <span class="price-original">27,500</span>
-          <span class="price-save">-20%</span>
-        </div>
-        <div class="installment-note">💳 From KSh 550/wk</div>
-        <div class="card-cta">
-          <button class="btn-cart">🛒 Cart</button>
-          <button class="btn-buy">Buy Now</button>
-        </div>
-      </div>
-    </div>
-
+      return (
+        <a href={`/phones/${p.slug}`} class="card" style="text-decoration:none; color:inherit;">
+          <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
+          <button class="wishlist-btn" data-id={p.id}>🤍</button>
+          <img class="card-img" src={p.source} alt={p.name} />
+          <div class="card-body">
+            <div class="card-brand">{p.brand}</div>
+            <div class="card-name">{p.fullname}</div>
+            <div class="card-specs">
+              {specs.map(s => <span class="spec-tag">{s}</span>)}
+            </div>
+            <div class="card-rating">
+              <span class="stars">
+                {'★'.repeat(fullStars)}{'☆'.repeat(emptyStars)}
+              </span>
+              <span class="rating-count">({reviewCount})</span>
+            </div>
+            <div class="card-price">
+              <span class="price-current">{p.totalPrice}</span>
+              {p.discount && <span class="price-save">{p.discount}</span>}
+            </div>
+            <div class="installment-note">💳 From {p.from}/wk · Deposit {p.deposit}</div>
+            <div class="card-cta">
+              <button class="btn-cart">🛒 Cart</button>
+              <button class="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </a>
+      );
+    })}
   </div>
 
   <!-- TRUST BAR -->
@@ -1058,17 +786,19 @@
     });
   });
 
-  // Wishlist toggle
+  // Wishlist toggle — stop propagation so the <a> link doesn't fire
   document.querySelectorAll('.wishlist-btn').forEach(btn => {
     btn.addEventListener('click', e => {
+      e.preventDefault();
       e.stopPropagation();
       btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
     });
   });
 
-  // Cart button feedback
+  // Cart button feedback — stop propagation so the <a> link doesn't fire
   document.querySelectorAll('.btn-cart').forEach(btn => {
     btn.addEventListener('click', e => {
+      e.preventDefault();
       e.stopPropagation();
       const original = btn.textContent;
       btn.textContent = '✓ Added!';
@@ -1077,6 +807,13 @@
         btn.textContent = original;
         btn.style.background = '';
       }, 1400);
+    });
+  });
+
+  // Buy Now — stop propagation so the <a> link doesn't fire
+  document.querySelectorAll('.btn-buy').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
     });
   });
 </script>
