@@ -795,7 +795,7 @@ function parsePrice(str) {
 
 <!-- ─── BOTTOM TAB BAR ─── -->
 <nav class="bottom-tab-bar">
-  <button class="tab-btn" id="tab-filters" onclick="openFilterDrawer()">
+  <button class="tab-btn" id="tab-filters">
     <span class="tab-icon">⚙️</span>
     <span>Filters</span>
   </button>
@@ -804,25 +804,25 @@ function parsePrice(str) {
     <span class="tab-badge" id="cart-badge">0</span>
     <span>Cart</span>
   </button>
-  <button class="tab-btn active" id="tab-home" onclick="scrollToTop()">
+  <button class="tab-btn active" id="tab-home">
     <span class="tab-icon">🏠</span>
     <span>Home</span>
   </button>
-  <button class="tab-btn" id="tab-shop" onclick="scrollToPhones()">
+  <button class="tab-btn" id="tab-shop">
     <span class="tab-icon">📱</span>
     <span>Shop</span>
   </button>
 </nav>
 
 <!-- ─── FILTER OVERLAY ─── -->
-<div class="filter-overlay" id="filter-overlay" onclick="closeFilterDrawer()"></div>
+<div class="filter-overlay" id="filter-overlay"></div>
 
 <!-- ─── FILTER DRAWER ─── -->
 <div class="filter-drawer" id="filter-drawer">
   <div class="drawer-handle"></div>
   <div class="drawer-header">
     <h3>Filters</h3>
-    <button class="drawer-close" onclick="closeFilterDrawer()">✕</button>
+    <button class="drawer-close" id="drawer-close-btn">✕</button>
   </div>
   <div class="drawer-body" id="drawer-body">
 
@@ -892,8 +892,8 @@ function parsePrice(str) {
 
   </div>
   <div class="drawer-footer">
-    <button class="btn-clear" onclick="clearDrawerFilters()">Clear All</button>
-    <button class="btn-apply" onclick="applyDrawerFilters()">Apply Filters</button>
+    <button class="btn-clear" id="drawer-clear-btn">Clear All</button>
+    <button class="btn-apply" id="drawer-apply-btn">Apply Filters</button>
   </div>
 </div>
 
@@ -1127,8 +1127,13 @@ function parsePrice(str) {
   document.querySelectorAll('.btn-buy').forEach(btn => btn.addEventListener('click', e => e.stopPropagation()));
 
   // ─── BOTTOM TAB HELPERS ───────────────────────────────────────────────────
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  function scrollToPhones() { allPhonesSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  document.getElementById('tab-home').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  document.getElementById('tab-shop').addEventListener('click', () => {
+    allPhonesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  document.getElementById('tab-filters').addEventListener('click', openFilterDrawer);
 
   // ─── FILTER DRAWER ────────────────────────────────────────────────────────
   const drawerEl  = document.getElementById('filter-drawer');
@@ -1152,15 +1157,12 @@ function parsePrice(str) {
     document.querySelectorAll('#drawer-body input[type="checkbox"]').forEach(cb => cb.checked = false);
   }
   function applyDrawerFilters() {
-    // Read checked deposit
     drawerDepositFilters.clear();
     document.querySelectorAll('#deposit-options input:checked').forEach(cb => drawerDepositFilters.add(cb.value));
-    // Read checked storage
     drawerStorageFilters.clear();
     document.querySelectorAll('#storage-options input:checked').forEach(cb => drawerStorageFilters.add(cb.value));
 
     closeFilterDrawer();
-    // Reset chip bar to neutral if drawer filters active
     if (drawerDepositFilters.size > 0 || drawerStorageFilters.size > 0) {
       document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       applyDrawerFilterSet(1, true);
@@ -1169,6 +1171,11 @@ function parsePrice(str) {
       applyFilterAndPage('all', 1, true);
     }
   }
+
+  document.getElementById('drawer-close-btn').addEventListener('click', closeFilterDrawer);
+  document.getElementById('drawer-clear-btn').addEventListener('click', clearDrawerFilters);
+  document.getElementById('drawer-apply-btn').addEventListener('click', applyDrawerFilters);
+  document.getElementById('filter-overlay').addEventListener('click', closeFilterDrawer);
 
   // Build storage checkboxes dynamically from product data
   function buildStorageOptions() {
