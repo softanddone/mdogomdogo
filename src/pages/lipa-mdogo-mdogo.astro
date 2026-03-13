@@ -599,8 +599,122 @@ function parsePrice(str) {
       .deal-card { grid-column: span 2; }
     }
   </style>
+
+  <!-- ─── COOKIE CONSENT BANNER STYLES ─── -->
+  <style>
+    .cookie-banner {
+      position: fixed;
+      bottom: calc(var(--tab-h) + 10px);
+      left: 12px; right: 12px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 14px;
+      padding: 16px 18px;
+      z-index: 999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      display: flex; flex-direction: column; gap: 12px;
+      transform: translateY(20px); opacity: 0; pointer-events: none;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      max-width: 480px;
+    }
+    .cookie-banner.visible { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .cookie-banner-text { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.88); }
+    .cookie-banner-text a { color: var(--gold); text-decoration: underline; }
+    .cookie-banner-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+    .cookie-banner-actions { display: flex; gap: 8px; }
+    .btn-cookie-accept { flex: 2; background: var(--primary); color: #fff; border: none; border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; transition: background 0.15s; }
+    .btn-cookie-accept:hover { background: var(--primary-dark); }
+    .btn-cookie-reject, .btn-cookie-settings { flex: 1; background: transparent; color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Barlow', sans-serif; transition: all 0.15s; }
+    .btn-cookie-reject:hover, .btn-cookie-settings:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+    .cookie-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 1100; display: none; align-items: flex-end; justify-content: center; }
+    .cookie-modal-overlay.open { display: flex; }
+    .cookie-modal { background: #fff; border-radius: 20px 20px 0 0; width: 100%; max-width: 560px; max-height: 85vh; overflow-y: auto; padding: 24px 20px 32px; }
+    .cookie-modal h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .cookie-modal p { font-size: 13px; color: var(--text-light); line-height: 1.5; margin-bottom: 20px; }
+    .cookie-toggle-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--gray-2); gap: 16px; }
+    .cookie-toggle-row:last-of-type { border-bottom: none; }
+    .cookie-toggle-info strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .cookie-toggle-info span { font-size: 12px; color: var(--text-light); line-height: 1.4; }
+    .toggle-switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: var(--gray-2); border-radius: 24px; cursor: pointer; transition: background 0.2s; }
+    .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .toggle-switch input:checked + .toggle-slider { background: var(--primary); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .toggle-switch input:disabled + .toggle-slider { opacity: 0.6; cursor: not-allowed; }
+    .cookie-modal-footer { margin-top: 20px; }
+    .btn-save-prefs { width: 100%; background: var(--primary); color: #fff; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; transition: background 0.15s; }
+    .btn-save-prefs:hover { background: var(--primary-dark); }
+    @media (min-width: 900px) { .cookie-banner { bottom: 20px; left: auto; right: 24px; } }
+  </style>
+
+  <!-- ─── GOOGLE TAG MANAGER ─── Replace GTM-XXXXXXX with your container ID ─── -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+
+  <!-- ─── GOOGLE ANALYTICS 4 ─── Replace G-XXXXXXXXXX with your Measurement ID ─── -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('consent', 'default', {
+      analytics_storage: 'denied', ad_storage: 'denied',
+      ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500
+    });
+    gtag('config', 'G-XXXXXXXXXX', { send_page_view: false });
+  </script>
+
+  <!-- ─── META PIXEL ─── Replace YOUR_PIXEL_ID with your Pixel ID ─── -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window._fbPixelId = 'YOUR_PIXEL_ID';
+  </script>
+
+  <!-- ─── TIKTOK PIXEL ─── Replace TIKTOK_PIXEL_ID with your Pixel ID ─── -->
+  <script>
+    !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=i;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._o=ttq._o||{};ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript";o.async=!0;o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};window._ttPixelId='TIKTOK_PIXEL_ID';}(window,document,'ttq');
+  </script>
 </head>
 <body>
+
+<!-- GTM noscript fallback -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ─── COOKIE CONSENT BANNER ─── -->
+<div class="cookie-banner" id="cookie-banner">
+  <div>
+    <div class="cookie-banner-title">🍪 We use cookies</div>
+    <div class="cookie-banner-text">We use cookies and tracking technologies to improve your experience, show personalised ads, and analyse traffic. <a href="/privacy-policy">Privacy Policy</a></div>
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="btn-cookie-reject" id="cookie-reject">Reject</button>
+    <button class="btn-cookie-settings" id="cookie-settings-btn">Settings</button>
+    <button class="btn-cookie-accept" id="cookie-accept">Accept All</button>
+  </div>
+</div>
+
+<!-- ─── COOKIE SETTINGS MODAL ─── -->
+<div class="cookie-modal-overlay" id="cookie-modal-overlay">
+  <div class="cookie-modal">
+    <h3>Cookie Preferences</h3>
+    <p>Choose which cookies you allow. Your choice is saved for 365 days and can be changed at any time.</p>
+    <div class="cookie-toggle-row">
+      <div class="cookie-toggle-info"><strong>Strictly Necessary</strong><span>Required for the site to work. Cannot be disabled.</span></div>
+      <label class="toggle-switch"><input type="checkbox" checked disabled /><span class="toggle-slider"></span></label>
+    </div>
+    <div class="cookie-toggle-row">
+      <div class="cookie-toggle-info"><strong>Analytics (Google Analytics 4)</strong><span>Helps us understand how visitors use the site so we can improve it.</span></div>
+      <label class="toggle-switch"><input type="checkbox" id="pref-analytics" /><span class="toggle-slider"></span></label>
+    </div>
+    <div class="cookie-toggle-row">
+      <div class="cookie-toggle-info"><strong>Marketing (Meta &amp; TikTok Pixel)</strong><span>Used to show you relevant ads on Facebook, Instagram and TikTok.</span></div>
+      <label class="toggle-switch"><input type="checkbox" id="pref-marketing" /><span class="toggle-slider"></span></label>
+    </div>
+    <div class="cookie-modal-footer">
+      <button class="btn-save-prefs" id="cookie-save-prefs">Save Preferences</button>
+    </div>
+  </div>
+</div>
 
 <!-- TOP BANNER -->
 <div class="top-banner">
@@ -1236,6 +1350,103 @@ function parsePrice(str) {
 
   // ─── INIT ────────────────────────────────────────────────────────────────
   applyFilterAndPage('all', 1, false);
+
+  // ─── COOKIE CONSENT LOGIC ─────────────────────────────────────────────────
+  const COOKIE_KEY = 'mdogo_cookie_consent';
+
+  function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))}; expires=${expires}; path=/; SameSite=Lax`;
+  }
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    try { return match ? JSON.parse(decodeURIComponent(match[1])) : null; } catch { return null; }
+  }
+
+  function fireAnalytics() {
+    // Update GA4 consent
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      gtag('event', 'page_view');
+    }
+  }
+  function fireMarketing() {
+    // Fire Meta Pixel
+    if (typeof fbq === 'undefined' && window._fbPixelId) {
+      fbq('init', window._fbPixelId);
+      fbq('track', 'PageView');
+    }
+    // Fire TikTok Pixel
+    if (typeof ttq !== 'undefined' && window._ttPixelId) {
+      ttq.load(window._ttPixelId);
+      ttq.page();
+    }
+    // Update GA4 ad consent
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' });
+    }
+  }
+
+  function applyConsent(prefs) {
+    if (prefs.analytics) fireAnalytics();
+    if (prefs.marketing) fireMarketing();
+  }
+
+  function grantAll() {
+    const prefs = { analytics: true, marketing: true };
+    setCookie(COOKIE_KEY, prefs, 365);
+    applyConsent(prefs);
+    hideBanner();
+  }
+  function rejectAll() {
+    setCookie(COOKIE_KEY, { analytics: false, marketing: false }, 365);
+    hideBanner();
+  }
+  function savePrefs() {
+    const prefs = {
+      analytics: document.getElementById('pref-analytics').checked,
+      marketing: document.getElementById('pref-marketing').checked,
+    };
+    setCookie(COOKIE_KEY, prefs, 365);
+    applyConsent(prefs);
+    closeModal();
+    hideBanner();
+  }
+
+  function hideBanner() {
+    const b = document.getElementById('cookie-banner');
+    b.classList.remove('visible');
+    setTimeout(() => b.style.display = 'none', 400);
+  }
+  function openModal() {
+    document.getElementById('cookie-modal-overlay').classList.add('open');
+    // Pre-fill toggles from saved prefs
+    const saved = getCookie(COOKIE_KEY);
+    if (saved) {
+      document.getElementById('pref-analytics').checked = !!saved.analytics;
+      document.getElementById('pref-marketing').checked = !!saved.marketing;
+    }
+  }
+  function closeModal() {
+    document.getElementById('cookie-modal-overlay').classList.remove('open');
+  }
+
+  // Wire up buttons
+  document.getElementById('cookie-accept').addEventListener('click', grantAll);
+  document.getElementById('cookie-reject').addEventListener('click', rejectAll);
+  document.getElementById('cookie-settings-btn').addEventListener('click', openModal);
+  document.getElementById('cookie-save-prefs').addEventListener('click', savePrefs);
+  document.getElementById('cookie-modal-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Show banner only if no consent saved yet; otherwise re-apply saved prefs silently
+  const savedPrefs = getCookie(COOKIE_KEY);
+  if (savedPrefs) {
+    applyConsent(savedPrefs);
+  } else {
+    setTimeout(() => document.getElementById('cookie-banner').classList.add('visible'), 800);
+  }
 </script>
 </body>
 </html>
