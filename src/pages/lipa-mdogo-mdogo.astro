@@ -729,13 +729,13 @@ function parsePrice(str) {
   </div>
   <nav class="header-cats">
     <a href="#" class="active">All Phones</a>
-    <a href="#">Samsung</a>
-    <a href="#">iPhone</a>
-    <a href="#">Tecno</a>
-    <a href="#">Infinix</a>
-    <a href="#">Vivo</a>
-    <a href="#">Nokia</a>
-    <a href="#">Accessories</a>
+    <a href="/samsung">Samsung</a>
+    <a href="/iphone">iPhone</a>
+    <a href="/tecno">Tecno</a>
+    <a href="/infinix">Infinix</a>
+    <a href="/vivo">Vivo</a>
+    <a href="/hmd">Nokia</a>
+    <a href="/tv/televisions">Smart Tvs</a>
   </nav>
 </header>
 
@@ -793,13 +793,13 @@ function parsePrice(str) {
 
   <div class="product-grid" style="margin-bottom:36px;">
     {products.slice(0, 1).map((p) => (
-      <a href={`/phones/${p.slug}`} class="deal-card" style="text-decoration:none;">
-        <img class="card-img" src={p.source} alt={p.name} />
+      <a href={`/${p.slug}`} class="deal-card" style="text-decoration:none;">
+        <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} Buy on Lipa Mdogo Mdogo Nairobi Kenya`} width="130" height="130" />
         <div class="deal-info">
           <span class="deal-tag">⚡ Deal of the Day</span>
           <h3>{p.fullname}</h3>
           <div>
-            <span class="deal-price">{p.totalPrice}</span>
+            <span class="deal-price">{p.deposit}</span>
             {p.discount && <span class="deal-orig">{p.discount} off</span>}
           </div>
           <div class="deal-install">Or {p.daily}/day on installment · Deposit {p.deposit}</div>
@@ -818,10 +818,10 @@ function parsePrice(str) {
       const emptyStars = 5 - fullStars;
       const depositNum = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
       return (
-        <a href={`/phones/${p.slug}`} class="card" data-deposit={depositNum} style="text-decoration:none; color:inherit;">
+        <a href={`/${p.slug}`} class="card" data-deposit={depositNum} style="text-decoration:none; color:inherit;">
           <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
           <button class="wishlist-btn" data-id={p.id}>🤍</button>
-          <img class="card-img" src={p.source} alt={p.name} />
+          <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} ${p.brand ?? ''} Lipa Mdogo Mdogo Nairobi`} loading="lazy" width="300" height="300" />
           <div class="card-body">
             <div class="card-brand">{p.brand}</div>
             <div class="card-name">{p.fullname}</div>
@@ -866,10 +866,10 @@ function parsePrice(str) {
       const storageMatch = (p.storage ?? p.ram ?? '').match(/\d+\s*(GB|TB)/i);
       const storageVal = storageMatch ? storageMatch[0].replace(/\s+/g, '').toUpperCase() : '';
       return (
-        <a href={`/phones/${p.slug}`} class="card" data-deposit={depositNum} data-storage={storageVal} style="text-decoration:none; color:inherit;">
+        <a href={`/${p.slug}`} class="card" data-deposit={depositNum} data-storage={storageVal} style="text-decoration:none; color:inherit;">
           <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
           <button class="wishlist-btn" data-id={p.id}>🤍</button>
-          <img class="card-img" src={p.source} alt={p.name} />
+          <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} ${p.brand ?? ''} Buy on Lipa Mdogo Mdogo Installments Nairobi Kenya`} loading="lazy" width="300" height="300" />
           <div class="card-body">
             <div class="card-brand">{p.brand}</div>
             <div class="card-name">{p.fullname}</div>
@@ -879,7 +879,7 @@ function parsePrice(str) {
               <span class="rating-count">({reviewCount})</span>
             </div>
             <div class="card-price">
-              <span class="price-current">{p.totalPrice}</span>
+              <span class="price-current">{p.deposit}</span>
               {p.discount && <span class="price-save">{p.discount}</span>}
             </div>
             <div class="installment-note">💳 From {p.from}/wk · Deposit {p.deposit}</div>

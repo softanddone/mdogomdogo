@@ -250,9 +250,6 @@ export const products = [
   
 
 
-
-
-
 {
   id: 3,
   name: "Oppo A60",

@@ -1,0 +1,386 @@
+---
+/**
+ * Dynamic Filter Pages — /filter/[...filterSlug]
+ *
+ * Place this file at:  src/pages/filter/[...filterSlug].astro
+ * Place filter-config.js at: src/data/filter-config.js
+ *
+ * Generated routes (examples):
+ *   /phones/filter/all
+ *   /phones/filter/under-3k
+ *   /phones/filter/samsung
+ *   /phones/filter/samsung-under-3k
+ *   … every brand × deposit combination
+ */
+
+import { products } from '../../data/product2.js';
+import {
+  DEPOSIT_FILTERS,
+  ALL_BRANDS,
+  brandSlug,
+  parseDeposit,
+} from '../../data/filter-config.js';
+
+// ─── getStaticPaths ───────────────────────────────────────────────────────────
+
+export async function getStaticPaths() {
+  // Import inside getStaticPaths as well — Astro requires this for static path generation
+  const { products } = await import('../../data/product2.js');
+  const { DEPOSIT_FILTERS, ALL_BRANDS, brandSlug } = await import('../../data/filter-config.js');
+
+  const paths = [];
+
+  // 1. "All" — no filters
+  paths.push({
+    params: { filterSlug: 'all' },
+    props: { depositFilter: null, brandFilter: null, label: 'All Phones' },
+  });
+
+  // 2. Deposit-only pages
+  for (const dep of DEPOSIT_FILTERS) {
+    paths.push({
+      params: { filterSlug: dep.key },
+      props: { depositFilter: dep, brandFilter: null, label: `Phones ${dep.label}` },
+    });
+  }
+
+  // 3. Brand-only pages
+  for (const brand of ALL_BRANDS) {
+    paths.push({
+      params: { filterSlug: brandSlug(brand) },
+      props: { depositFilter: null, brandFilter: brand, label: `${brand} Phones` },
+    });
+  }
+
+  // 4. Brand × Deposit combination pages
+  for (const brand of ALL_BRANDS) {
+    for (const dep of DEPOSIT_FILTERS) {
+      paths.push({
+        params: { filterSlug: `${brandSlug(brand)}-${dep.key}` },
+        props: {
+          depositFilter: dep,
+          brandFilter: brand,
+          label: `${brand} Phones ${dep.label}`,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+// ─── PAGE DATA ────────────────────────────────────────────────────────────────
+
+const { filterSlug } = Astro.params;
+const { depositFilter, brandFilter, label } = Astro.props;
+
+const filteredProducts = products.filter(p => {
+  const deposit = parseDeposit(p.deposit);
+  const matchesDeposit = !depositFilter || (deposit >= depositFilter.min && deposit <= depositFilter.max);
+  const matchesBrand   = !brandFilter  || (p.brand?.toLowerCase() === brandFilter.toLowerCase());
+  return matchesDeposit && matchesBrand;
+});
+
+const pageTitle    = `${label} — Lipa Mdogo Mdogo | MdogomdogoDeals Nairobi`;
+const metaDesc     = `Shop ${label} on installments in Nairobi. ${depositFilter ? `Deposit ${depositFilter.label}.` : ''} Pay via M-Pesa weekly. Free delivery CBD. ${filteredProducts.length} phones available.`;
+const canonicalUrl = `https://mdogomdeals.co.ke/filter/${filterSlug}`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'All Phones', href: '/filter/all' },
+  ...(brandFilter   ? [{ label: brandFilter,            href: `/filter/${brandSlug(brandFilter)}`   }] : []),
+  ...(depositFilter ? [{ label: depositFilter.label,    href: `/filter/${depositFilter.key}`         }] : []),
+];
+
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  return '★'.repeat(full) + '☆'.repeat(5 - full);
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={metaDesc} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={pageTitle} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:url"         content={canonicalUrl} />
+  <meta property="og:site_name"   content="MdogomdogoDeals" />
+
+  <!-- Structured Data: ItemList for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": label,
+    "description": metaDesc,
+    "numberOfItems": filteredProducts.length,
+    "itemListElement": filteredProducts.slice(0, 20).map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.fullname ?? p.name,
+        "brand": { "@type": "Brand", "name": p.brand },
+        "image": p.source,
+        "url": `https://mdogomdeals.co.ke/${p.slug}`,
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "KES",
+          "price": p.deposit?.replace(/[^0-9]/g, '') ?? "0",
+          "availability": "https://schema.org/InStock",
+          "seller": { "@type": "Organization", "name": "MdogomdogoDeals" }
+        }
+      }
+    }))
+  })} />
+
+  <!-- BreadcrumbList structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": b.label,
+      "item": `https://mdogomdeals.co.ke${b.href}`
+    }))
+  })} />
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1a73e8; --primary-dark: #1557b0; --primary-light: #e8f0fe;
+      --gold: #f5a623; --navy: #0d1b2a; --green: #00b96b; --red: #e53935;
+      --gray-1: #f5f7fa; --gray-2: #e8eaed; --gray-3: #9aa0a6;
+      --text: #202124; --text-light: #5f6368;
+      --badge-new: #00b96b; --badge-hot: #e53935; --badge-sale: #1a73e8;
+    }
+    body { font-family: 'Barlow', sans-serif; background: var(--gray-1); color: var(--text); }
+
+    .top-banner { background: var(--navy); color: #fff; text-align: center; padding: 9px 16px; font-size: 13px; font-weight: 500; }
+    .top-banner span { color: var(--gold); font-weight: 700; }
+
+    .site-header { background: var(--primary); padding: 14px 24px 12px; display: flex; align-items: center; gap: 16px; }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; color: #fff; text-decoration: none; }
+    .logo span { color: var(--gold); }
+
+    /* Breadcrumbs */
+    .breadcrumb-bar { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 20px; }
+    .breadcrumb-list { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; list-style: none; }
+    .breadcrumb-list li { font-size: 13px; color: var(--text-light); }
+    .breadcrumb-list li a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .breadcrumb-list li a:hover { text-decoration: underline; }
+    .breadcrumb-list li.sep { color: var(--gray-3); }
+
+    /* Filter navigation */
+    .filter-nav { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 12px 20px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .filter-nav-label { font-size: 12px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
+    .filter-nav-link { display: inline-block; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+    .filter-nav-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .filter-nav-link.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+    /* Page header */
+    .page-header { max-width: 1280px; margin: 0 auto; padding: 24px 20px 0; }
+    .page-header h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .page-header p { font-size: 14px; color: var(--text-light); margin-bottom: 20px; }
+    .result-count { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 6px; padding: 3px 10px; font-size: 13px; font-weight: 700; margin-left: 10px; }
+
+    /* Product grid */
+    .page-body { max-width: 1280px; margin: 0 auto; padding: 20px 20px 60px; }
+    .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .card { background: #fff; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--gray-2); transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; cursor: pointer; position: relative; display: flex; flex-direction: column; }
+    .card:hover { border-color: var(--primary); box-shadow: 0 8px 28px rgba(26,115,232,0.12); transform: translateY(-3px); }
+    .badge { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 3px 9px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
+    .badge-new { background: var(--badge-new); } .badge-hot { background: var(--badge-hot); } .badge-sale { background: var(--badge-sale); }
+    .card-img { width: 100%; aspect-ratio: 1/1; object-fit: contain; padding: 20px; background: var(--gray-1); transition: transform 0.3s; }
+    .card:hover .card-img { transform: scale(1.05); }
+    .card-body { padding: 12px 12px 10px; flex: 1; display: flex; flex-direction: column; }
+    .card-brand { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; margin-bottom: 6px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-specs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .spec-tag { background: var(--gray-1); border: 1px solid var(--gray-2); color: var(--text-light); border-radius: 4px; padding: 2px 7px; font-size: 11px; }
+    .stars { color: var(--gold); font-size: 13px; } .rating-count { font-size: 11.5px; color: var(--text-light); }
+    .card-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 9px; }
+    .price-current { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--primary); }
+    .price-save { font-size: 11.5px; font-weight: 700; color: var(--green); }
+    .card-price { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; margin-bottom: 6px; }
+    .installment-note { font-size: 11.5px; color: var(--primary-dark); font-weight: 600; background: var(--primary-light); padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+    .card-cta { display: flex; gap: 7px; margin-top: auto; }
+    .btn-cart { flex: 1; background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-cart:hover { background: var(--primary-dark); }
+    .btn-buy { flex: 1; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-buy:hover { background: #162640; }
+
+    /* Empty state */
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; }
+    .empty-state h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 8px; }
+    .empty-state a { color: var(--primary); font-weight: 600; }
+
+    /* Related filter suggestions */
+    .related-filters { max-width: 1280px; margin: 0 auto; padding: 0 20px 40px; }
+    .related-filters h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+    .related-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .related-link { display: inline-block; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
+    .related-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .related-link .count { font-size: 11px; color: var(--text-light); margin-left: 4px; }
+
+    @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 800px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+
+<div class="top-banner">
+  🚀 Free Delivery Nairobi CBD &nbsp;|&nbsp; <span>Lipa Mdogo Mdogo</span> — Deposit from KSh 2,000 &nbsp;|&nbsp; ☎ 0100028823
+</div>
+
+<header class="site-header">
+  <a href="/" class="logo">Mdogomdogo<span>Deals</span></a>
+</header>
+
+<!-- BREADCRUMBS -->
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+    {breadcrumbs.map((b, i) => (
+      <>
+        {i > 0 && <li class="sep">›</li>}
+        <li>{i < breadcrumbs.length - 1 ? <a href={b.href}>{b.label}</a> : b.label}</li>
+      </>
+    ))}
+  </ol>
+</nav>
+
+<!-- FILTER NAVIGATION -->
+<nav class="filter-nav" aria-label="Filter by deposit">
+  <span class="filter-nav-label">Deposit:</span>
+  <a href="/filter/all" class={`filter-nav-link${!depositFilter && !brandFilter ? ' active' : ''}`}>All</a>
+  {DEPOSIT_FILTERS.map(dep => {
+    const href = brandFilter ? `/filter/${brandSlug(brandFilter)}-${dep.key}` : `/filter/${dep.key}`;
+    const isActive = depositFilter?.key === dep.key;
+    return <a href={href} class={`filter-nav-link${isActive ? ' active' : ''}`}>{dep.label}</a>;
+  })}
+</nav>
+
+<!-- BRAND NAVIGATION -->
+<nav class="filter-nav" style="padding-top:8px;padding-bottom:12px;" aria-label="Filter by brand">
+  <span class="filter-nav-label">Brand:</span>
+  <a href={depositFilter ? `/filter/${depositFilter.key}` : '/filter/all'} class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>All Brands</a>
+  {ALL_BRANDS.map(brand => {
+    const href = depositFilter ? `/filter/${brandSlug(brand)}-${depositFilter.key}` : `/filter/${brandSlug(brand)}`;
+    const isActive = brandFilter?.toLowerCase() === brand.toLowerCase();
+    return <a href={href} class={`filter-nav-link${isActive ? ' active' : ''}`}>{brand}</a>;
+  })}
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>
+    {label}
+    <span class="result-count">{filteredProducts.length} phones</span>
+  </h1>
+  <p>
+    {brandFilter && `${brandFilter} phones `}
+    {depositFilter && `with deposit ${depositFilter.label} `}
+    available on Lipa Mdogo Mdogo installments in Nairobi. Pay via M-Pesa weekly — no credit check required.
+  </p>
+</div>
+
+<!-- PRODUCT GRID -->
+<main class="page-body">
+  <div class="product-grid">
+    {filteredProducts.length === 0 ? (
+      <div class="empty-state">
+        <h2>😕 No phones found for this filter</h2>
+        <p><a href="/filter/all">View all phones</a> or try a different filter above.</p>
+      </div>
+    ) : filteredProducts.map((p) => {
+      const statusLower = p.status?.toLowerCase();
+      const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+      const badgeLabel  = p.status ?? 'NEW';
+      const specs = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
+      const rating      = p.reviews?.averageRating ?? 4.5;
+      const reviewCount = p.reviews?.reviewCount ?? 0;
+
+      // Rich SEO alt text: brand + name + deposit context + location
+      const altText = [
+        p.fullname ?? p.name,
+        p.brand,
+        depositFilter ? `Deposit ${depositFilter.label}` : 'Lipa Mdogo Mdogo',
+        'Buy Nairobi Kenya Installments'
+      ].filter(Boolean).join(' ');
+
+      return (
+        <a href={`/${p.slug}`} class="card" style="text-decoration:none; color:inherit;">
+          <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
+          <img
+            class="card-img"
+            src={p.source}
+            alt={altText}
+            loading="lazy"
+            width="300"
+            height="300"
+            decoding="async"
+          />
+          <div class="card-body">
+            <div class="card-brand">{p.brand}</div>
+            <div class="card-name">{p.fullname}</div>
+            <div class="card-specs">{specs.map(s => <span class="spec-tag">{s}</span>)}</div>
+            <div class="card-rating">
+              <span class="stars">{renderStars(rating)}</span>
+              <span class="rating-count">({reviewCount})</span>
+            </div>
+            <div class="card-price">
+              <span class="price-current">{p.totalPrice}</span>
+              {p.discount && <span class="price-save">{p.discount}</span>}
+            </div>
+            <div class="installment-note">💳 From {p.from}/wk · Deposit {p.deposit}</div>
+            <div class="card-cta">
+              <button class="btn-cart">🛒 Cart</button>
+              <button class="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+</main>
+
+<!-- RELATED FILTER SUGGESTIONS -->
+{filteredProducts.length > 0 && (
+  <section class="related-filters">
+    <h2>Browse More Filters</h2>
+    <div class="related-grid">
+      {ALL_BRANDS.map(brand => {
+        const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
+        return (
+          <a href={`/filter/${brandSlug(brand)}`} class="related-link">
+            {brand} Phones <span class="count">({count})</span>
+          </a>
+        );
+      })}
+      {DEPOSIT_FILTERS.map(dep => {
+        const count = products.filter(p => {
+          const d = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
+          return d >= dep.min && d <= dep.max;
+        }).length;
+        return (
+          <a href={`/filter/${dep.key}`} class="related-link">
+            {dep.label} <span class="count">({count})</span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+)}
+
+</body>
+</html>
