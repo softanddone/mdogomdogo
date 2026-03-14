@@ -207,7 +207,8 @@ function renderStars(rating) {
     .card:hover { border-color: var(--primary); box-shadow: 0 8px 28px rgba(26,115,232,0.12); transform: translateY(-3px); }
     .badge { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 3px 9px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
     .badge-new { background: var(--badge-new); } .badge-hot { background: var(--badge-hot); } .badge-sale { background: var(--badge-sale); }
-    .card-img { width: 100%; aspect-ratio: 1/1; object-fit: contain; padding: 20px; background: var(--gray-1); transition: transform 0.3s; }
+    .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--gray-1); display: flex; align-items: center; justify-content: center; }
+    .card-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; transition: transform 0.3s; }
     .card:hover .card-img { transform: scale(1.05); }
     .card-body { padding: 12px 12px 10px; flex: 1; display: flex; flex-direction: column; }
     .card-brand { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
@@ -371,15 +372,17 @@ function renderStars(rating) {
       return (
         <a href={`/${p.slug}`} class="card" style="text-decoration:none; color:inherit;">
           <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
-          <img
-            class="card-img"
-            src={p.source}
-            alt={altText}
-            loading="lazy"
-            width="300"
-            height="300"
-            decoding="async"
-          />
+          <div class="card-img-wrap">
+            <img
+              class="card-img"
+              src={p.source}
+              alt={altText}
+              loading="lazy"
+              width="300"
+              height="225"
+              decoding="async"
+            />
+          </div>
           <div class="card-body">
             <div class="card-brand">{p.brand}</div>
             <div class="card-name">{p.fullname}</div>
