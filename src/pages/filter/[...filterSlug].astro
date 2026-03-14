@@ -170,9 +170,11 @@ function renderStars(rating) {
     .breadcrumb-list li.sep { color: var(--gray-3); }
 
     /* Filter navigation */
-    .filter-nav { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 12px 20px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .filter-nav-label { font-size: 12px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
-    .filter-nav-link { display: inline-block; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+    .filter-nav { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 8px 0 0; }
+    .filter-nav-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; padding: 0 16px; margin-bottom: 6px; }
+    .filter-nav-scroll { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding: 2px 16px 10px; scrollbar-width: none; -ms-overflow-style: none; }
+    .filter-nav-scroll::-webkit-scrollbar { display: none; }
+    .filter-nav-link { display: inline-flex; align-items: center; flex-shrink: 0; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
     .filter-nav-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
     .filter-nav-link.active { border-color: var(--primary); background: var(--primary); color: #fff; }
 
@@ -287,24 +289,28 @@ function renderStars(rating) {
 
 <!-- DEPOSIT FILTER NAVIGATION -->
 <nav class="filter-nav" aria-label="Filter by deposit">
-  <span class="filter-nav-label">Deposit:</span>
-  <a href="/filter/all" class={`filter-nav-link${!depositFilter && !brandFilter ? ' active' : ''}`}>All</a>
-  {DEPOSIT_FILTERS.map(dep => {
-    const href = brandFilter ? `/filter/${brandSlug(brandFilter)}-${dep.key}` : `/filter/${dep.key}`;
-    const isActive = depositFilter?.key === dep.key;
-    return <a href={href} class={`filter-nav-link${isActive ? ' active' : ''}`}>{dep.label}</a>;
-  })}
+  <span class="filter-nav-label">Deposit</span>
+  <div class="filter-nav-scroll">
+    <a href="/filter/all" class={`filter-nav-link${!depositFilter && !brandFilter ? ' active' : ''}`}>All</a>
+    {DEPOSIT_FILTERS.map(dep => {
+      const href = brandFilter ? `/filter/${brandSlug(brandFilter)}-${dep.key}` : `/filter/${dep.key}`;
+      const isActive = depositFilter?.key === dep.key;
+      return <a href={href} class={`filter-nav-link${isActive ? ' active' : ''}`}>{dep.label}</a>;
+    })}
+  </div>
 </nav>
 
 <!-- BRAND FILTER NAVIGATION -->
-<nav class="filter-nav" style="padding-top:8px;padding-bottom:12px;" aria-label="Filter by brand">
-  <span class="filter-nav-label">Brand:</span>
-  <a href={depositFilter ? `/filter/${depositFilter.key}` : '/filter/all'} class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>All Brands</a>
-  {ALL_BRANDS.map(brand => {
-    const href = depositFilter ? `/filter/${brandSlug(brand)}-${depositFilter.key}` : `/filter/${brandSlug(brand)}`;
-    const isActive = brandFilter?.toLowerCase() === brand.toLowerCase();
-    return <a href={href} class={`filter-nav-link${isActive ? ' active' : ''}`}>{brand}</a>;
-  })}
+<nav class="filter-nav" aria-label="Filter by brand">
+  <span class="filter-nav-label">Brand</span>
+  <div class="filter-nav-scroll">
+    <a href={depositFilter ? `/filter/${depositFilter.key}` : '/filter/all'} class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>All</a>
+    {ALL_BRANDS.map(brand => {
+      const href = depositFilter ? `/filter/${brandSlug(brand)}-${depositFilter.key}` : `/filter/${brandSlug(brand)}`;
+      const isActive = brandFilter?.toLowerCase() === brand.toLowerCase();
+      return <a href={href} class={`filter-nav-link${isActive ? ' active' : ''}`}>{brand}</a>;
+    })}
+  </div>
 </nav>
 
 <!-- PAGE HEADER -->
