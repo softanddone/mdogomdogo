@@ -236,7 +236,7 @@ function renderStars(r: number) {
         </div>
 
         <h1 class="product-title">
-          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name}
+         {currentProduct.fullname ?? currentProduct.name }- Lipa Mdogo Mdogo
         </h1>
 
         {reviewCount > 0 && (
@@ -269,7 +269,11 @@ function renderStars(r: number) {
             </div>
           </div>
           <div class="installment-note">
-            Or from <strong>{currentProduct.from}/week</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
+            Or weekly <strong>  KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week
+</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
+          
+          
+
           </div>
           <ul class="pricing-bullets">
             <li>No payment before delivery</li>
