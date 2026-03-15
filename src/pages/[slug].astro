@@ -62,7 +62,7 @@ const faqs = [
   },
   {
     question: "What if I miss a daily payment?",
-    answer: "Just contact us. We offer flexible grace periods and can adjust your payment schedule. No penalties for genuine cases.",
+    answer: "No cash penalties for missing to pay in time. Your phone will be unlocked the following time you pay.",
   },
 ];
 
@@ -505,7 +505,7 @@ function renderStars(r: number) {
           <li>
             <div class="step-circle">3</div>
             <div>
-              <strong>Inspect</strong> — check the phone. Power it on, test it, make sure you are fully satisfied.
+              <strong>Inspect</strong> — check the phone.Make sure you are fully satisfied.
               You pay nothing until you approve.
             </div>
           </li>
@@ -513,14 +513,16 @@ function renderStars(r: number) {
             <div class="step-circle">4</div>
             <div>
               <strong>Pay deposit</strong> — once happy, pay the deposit of <strong>KES {currentProduct.deposit}</strong>
-              via M-Pesa or cash on the spot. The phone is yours to take home.
+              via M-Pesa on the spot. The phone is yours to take home.
             </div>
           </li>
           <li>
             <div class="step-circle">5</div>
             <div>
               <strong>Start instalments</strong> — after a free grace period, pay
-              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {currentProduct.from}/week</strong>
+              <strong> KES {currentProduct.daily}/day</strong> or <strong>
+  KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week
+</strong>
               at your own pace until the balance is cleared.
             </div>
           </li>
