@@ -280,6 +280,8 @@ function renderStars(r: number) {
 
         <!-- ── ORDER METHODS ── -->
         <div class="order-block">
+          <p class="order-heading">How would you like to order?</p>
+
           <a
             href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name}`}
             class="btn-order-wa"
@@ -287,13 +289,14 @@ function renderStars(r: number) {
           >
             Order via WhatsApp
           </a>
+
           <a href="tel:+254100028823" class="btn-order-call">
-            Call 0100028823
+            Call Us — 0100028823
           </a>
-          <p class="form-toggle-line">
-            Prefer to fill a form?
-            <button class="form-toggle-link" id="toggle-form-btn" type="button">Click here to place your order</button>
-          </p>
+
+          <button class="btn-order-form" id="toggle-form-btn" type="button">
+            Fill in an Order Form
+          </button>
         </div>
 
         <!-- Inline order form (hidden by default) -->
@@ -743,12 +746,13 @@ function renderStars(r: number) {
   .main-img-wrap {
     position: relative; background: var(--gray-1);
     border: 1.5px solid var(--gray-2); border-radius: var(--radius);
-    padding: 28px; display: flex; align-items: center; justify-content: center;
+    padding: 0; display: flex; align-items: center; justify-content: center;
     min-height: 320px; overflow: hidden;
   }
   .main-product-img {
-    width: 100%; max-width: 380px; height: auto;
-    object-fit: contain; display: block; transition: transform 0.35s;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block; transition: transform 0.35s;
   }
   .main-img-wrap:hover .main-product-img { transform: scale(1.04); }
 
@@ -839,6 +843,14 @@ function renderStars(r: number) {
     width: 1px; background: var(--primary); opacity: .2;
     height: 44px; margin: 0 18px; flex-shrink: 0;
   }
+
+  /* On small screens: stack price blocks vertically, reduce font sizes */
+  @media (max-width: 480px) {
+    .pricing-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .divider-v { display: none; }
+    .price-big { font-size: 22px; }
+    .price-label { font-size: 10px; }
+  }
   .installment-note {
     background: #fff; border: 1px solid var(--primary);
     border-radius: 6px; padding: 8px 12px;
@@ -862,6 +874,12 @@ function renderStars(r: number) {
   /* Order methods */
   .order-block { display: flex; flex-direction: column; gap: 10px; }
 
+  .order-heading {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--text-light); margin-bottom: 2px;
+  }
+
+  /* WhatsApp — primary, most prominent */
   .btn-order-wa {
     display: flex; align-items: center; justify-content: center;
     width: 100%; padding: 15px 20px;
@@ -869,11 +887,11 @@ function renderStars(r: number) {
     border-radius: 8px; border: none;
     font-family: 'Barlow', sans-serif; font-size: 17px; font-weight: 800;
     text-decoration: none; text-align: center; letter-spacing: 0.01em;
-    transition: background .15s, transform .15s, box-shadow .15s;
-    cursor: pointer;
+    transition: background .15s, transform .15s, box-shadow .15s; cursor: pointer;
   }
   .btn-order-wa:hover { background: #1fb356; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.35); }
 
+  /* Call — secondary, clearly labelled */
   .btn-order-call {
     display: flex; align-items: center; justify-content: center;
     width: 100%; padding: 13px 20px;
@@ -881,20 +899,21 @@ function renderStars(r: number) {
     border: 2px solid var(--primary); border-radius: 8px;
     font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 700;
     text-decoration: none; text-align: center;
-    transition: background .15s, transform .15s;
-    cursor: pointer;
+    transition: background .15s, transform .15s; cursor: pointer;
   }
   .btn-order-call:hover { background: var(--primary-light); transform: translateY(-1px); }
 
-  .form-toggle-line {
-    text-align: center; font-size: 13px; color: var(--text-light);
+  /* Order form — tertiary, plain outlined */
+  .btn-order-form {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 11px 20px;
+    background: #fff; color: var(--text-light);
+    border: 1.5px solid var(--gray-2); border-radius: 8px;
+    font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 600;
+    text-align: center; cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
   }
-  .form-toggle-link {
-    background: none; border: none; padding: 0;
-    color: var(--primary); font-size: 13px; font-weight: 600;
-    text-decoration: underline; cursor: pointer; font-family: 'Barlow', sans-serif;
-  }
-  .form-toggle-link:hover { color: var(--primary-dark); }
+  .btn-order-form:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
 
   /* Order form */
   .order-form-wrap {
