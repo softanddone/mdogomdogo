@@ -3,7 +3,6 @@ import { products } from '../../data/product2.js';
 import {
   DEPOSIT_FILTERS,
   STORAGE_FILTERS,
-  PAYMENT_FILTERS,
   ALL_BRANDS,
   brandSlug,
   parseDeposit,
@@ -15,7 +14,7 @@ import {
 export async function getStaticPaths() {
   const { products } = await import('../../data/product2.js');
   const {
-    DEPOSIT_FILTERS, STORAGE_FILTERS, PAYMENT_FILTERS,
+    DEPOSIT_FILTERS, STORAGE_FILTERS,
     ALL_BRANDS, brandSlug,
   } = await import('../../data/filter-config.js');
 
@@ -24,14 +23,14 @@ export async function getStaticPaths() {
   // 1. All
   paths.push({
     params: { filterSlug: 'all' },
-    props: { depositFilter: null, brandFilter: null, storageFilter: null, paymentFilter: null, label: 'All Phones' },
+    props: { depositFilter: null, brandFilter: null, storageFilter: null, label: 'All Phones' },
   });
 
   // 2. Deposit-only
   for (const dep of DEPOSIT_FILTERS) {
     paths.push({
       params: { filterSlug: dep.key },
-      props: { depositFilter: dep, brandFilter: null, storageFilter: null, paymentFilter: null, label: `Phones ${dep.label}` },
+      props: { depositFilter: dep, brandFilter: null, storageFilter: null, label: `Phones ${dep.label}` },
     });
   }
 
@@ -39,7 +38,7 @@ export async function getStaticPaths() {
   for (const brand of ALL_BRANDS) {
     paths.push({
       params: { filterSlug: brandSlug(brand) },
-      props: { depositFilter: null, brandFilter: brand, storageFilter: null, paymentFilter: null, label: `${brand} Phones` },
+      props: { depositFilter: null, brandFilter: brand, storageFilter: null, label: `${brand} Phones` },
     });
   }
 
@@ -48,7 +47,7 @@ export async function getStaticPaths() {
     for (const dep of DEPOSIT_FILTERS) {
       paths.push({
         params: { filterSlug: `${brandSlug(brand)}-${dep.key}` },
-        props: { depositFilter: dep, brandFilter: brand, storageFilter: null, paymentFilter: null, label: `${brand} Phones ${dep.label}` },
+        props: { depositFilter: dep, brandFilter: brand, storageFilter: null, label: `${brand} Phones ${dep.label}` },
       });
     }
   }
@@ -57,7 +56,7 @@ export async function getStaticPaths() {
   for (const stor of STORAGE_FILTERS) {
     paths.push({
       params: { filterSlug: stor.key },
-      props: { depositFilter: null, brandFilter: null, storageFilter: stor, paymentFilter: null, label: `${stor.label} Phones` },
+      props: { depositFilter: null, brandFilter: null, storageFilter: stor, label: `${stor.label} Phones` },
     });
   }
 
@@ -66,18 +65,12 @@ export async function getStaticPaths() {
     for (const stor of STORAGE_FILTERS) {
       paths.push({
         params: { filterSlug: `${brandSlug(brand)}-${stor.key}` },
-        props: { depositFilter: null, brandFilter: brand, storageFilter: stor, paymentFilter: null, label: `${brand} ${stor.label} Phones` },
+        props: { depositFilter: null, brandFilter: brand, storageFilter: stor, label: `${brand} ${stor.label} Phones` },
       });
     }
   }
 
-  // 7. Payment-only
-  for (const pay of PAYMENT_FILTERS) {
-    paths.push({
-      params: { filterSlug: pay.key },
-      props: { depositFilter: null, brandFilter: null, storageFilter: null, paymentFilter: pay, label: `Phones — ${pay.label}` },
-    });
-  }
+
 
   return paths;
 }
@@ -85,7 +78,7 @@ export async function getStaticPaths() {
 // ─── PAGE DATA ────────────────────────────────────────────────────────────────
 
 const { filterSlug } = Astro.params;
-const { depositFilter, brandFilter, storageFilter, paymentFilter, label } = Astro.props;
+const { depositFilter, brandFilter, storageFilter, label } = Astro.props;
 
 const CARDS_PER_PAGE = 20;
 
@@ -94,7 +87,6 @@ const filteredProducts = products.filter(p => {
   const matchesDeposit  = !depositFilter  || (deposit >= depositFilter.min && deposit <= depositFilter.max);
   const matchesBrand    = !brandFilter    || (p.brand?.toLowerCase() === brandFilter.toLowerCase());
   const matchesStorage  = !storageFilter  || (parseStorageSlug(p.storage) === storageFilter.key);
-  // paymentFilter is SEO/label-only — not filtering products (all products support all payment cadences)
   return matchesDeposit && matchesBrand && matchesStorage;
 });
 
@@ -110,7 +102,6 @@ const breadcrumbs = [
   ...(brandFilter    ? [{ label: brandFilter,            href: `/filter/${brandSlug(brandFilter)}`  }] : []),
   ...(depositFilter  ? [{ label: depositFilter.label,    href: `/filter/${depositFilter.key}`        }] : []),
   ...(storageFilter  ? [{ label: storageFilter.label,    href: `/filter/${storageFilter.key}`        }] : []),
-  ...(paymentFilter  ? [{ label: paymentFilter.label,    href: `/filter/${paymentFilter.key}`        }] : []),
 ];
 
 function renderStars(rating) {
@@ -358,17 +349,6 @@ const baseDepositHref  = (b, d, s) => {
   </div>
 </nav>
 
-<!-- PAYMENT STYLE FILTER -->
-<nav class="filter-nav" style="border-bottom:2px solid var(--gray-2);" aria-label="Filter by payment style">
-  <span class="filter-nav-label">Pay By</span>
-  <div class="filter-nav-scroll">
-    <a href="/filter/all" class={`filter-nav-link${!paymentFilter ? ' active' : ''}`}>All</a>
-    {PAYMENT_FILTERS.map(pay => (
-      <a href={`/filter/${pay.key}`} class={`filter-nav-link${paymentFilter?.key === pay.key ? ' active' : ''}`}>{pay.label}</a>
-    ))}
-  </div>
-</nav>
-
 <!-- PAGE HEADER -->
 <div class="page-header">
   <h1>
@@ -384,7 +364,7 @@ const baseDepositHref  = (b, d, s) => {
 </div>
 
 <!-- ACTIVE FILTER CHIPS -->
-{(brandFilter || depositFilter || storageFilter || paymentFilter) && (
+{(brandFilter || depositFilter || storageFilter) && (
   <div class="active-filters">
     <span class="active-filters-label">Active filters</span>
     <div class="active-filter-chips">
@@ -407,12 +387,6 @@ const baseDepositHref  = (b, d, s) => {
         <a href={brandFilter ? `/filter/${brandSlug(brandFilter)}` : '/filter/all'}
            class="filter-chip" title={`Remove ${storageFilter.label} filter`}>
           {storageFilter.label}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </a>
-      )}
-      {paymentFilter && (
-        <a href="/filter/all" class="filter-chip" title={`Remove ${paymentFilter.label} filter`}>
-          {paymentFilter.label}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </a>
       )}
@@ -518,9 +492,9 @@ const baseDepositHref  = (b, d, s) => {
       <div class="seo-tags">
         <a href="/filter/all" class="seo-tag">buy phone pay later Kenya</a>
         <a href="/filter/under-3k" class="seo-tag">phones under 3000 deposit</a>
-        <a href="/filter/pay-daily" class="seo-tag">pay daily installment phone</a>
-        <a href="/filter/pay-weekly" class="seo-tag">pay weekly M-Pesa phone</a>
-        <a href="/filter/pay-monthly" class="seo-tag">monthly installment smartphone</a>
+        <a href="/filter/all" class="seo-tag">pay daily installment phone</a>
+        <a href="/filter/all" class="seo-tag">pay weekly M-Pesa phone</a>
+        <a href="/filter/all" class="seo-tag">monthly installment smartphone</a>
         <a href="/filter/all" class="seo-tag">lipa pole pole phones Nairobi</a>
         <a href="/filter/all" class="seo-tag">cheapest lipa mdogo mdogo phone</a>
         <a href="/filter/under-3k" class="seo-tag">budget phone small deposit</a>
@@ -552,8 +526,7 @@ const baseDepositHref  = (b, d, s) => {
       <h3>Delivery &amp; How It Works</h3>
       <p>
         Order online and get same-day delivery in Nairobi CBD.
-        Pay a deposit via M-Pesa, then choose <a href="/filter/pay-daily">daily</a>,
-        <a href="/filter/pay-weekly">weekly</a>, or <a href="/filter/pay-monthly">monthly</a> installments — whichever fits your budget.
+        Pay a deposit via M-Pesa, then choose <a href="/filter/all">daily, weekly, or monthly</a> installments — whichever fits your budget.
         Available near you across Nairobi. No hidden charges.
       </p>
       <div class="seo-tags">
