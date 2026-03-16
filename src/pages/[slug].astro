@@ -174,9 +174,9 @@ function renderStars(r: number) {
       <ol class="breadcrumb-list">
         <li><a href="/">Home</a></li>
         <li class="sep">›</li>
-        <li><a href="/filter/all">All Phones</a></li>
+        <li><a href="/nairobi/all">All Phones</a></li>
         <li class="sep">›</li>
-        <li><a href={`/filter/${brandSlug}`}>{currentProduct.brand}</a></li>
+        <li><a href={`/nairobi/${brandSlug}`}>{currentProduct.brand}</a></li>
         <li class="sep">›</li>
         <li>{currentProduct.brand} {currentProduct.name}</li>
       </ol>
@@ -186,7 +186,7 @@ function renderStars(r: number) {
     <div class="seo-intro">
       <p>
         Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
-        You are in the right place. The <a href={`/filter/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
+        You are in the right place. The <a href={`/nairobi/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
         <strong>Lipa Mdogo Mdogo</strong> — pay a small deposit after delivery and spread the rest in
         affordable daily or weekly instalments. No credit check, no guarantor, no upfront payment.
         Same-day delivery across <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
@@ -485,7 +485,7 @@ function renderStars(r: number) {
             If you are comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> against similar devices,
             keep in mind that with Lipa Mdogo Mdogo you are not paying the full price upfront —
             just a small deposit on delivery, making it accessible regardless of which phone you choose.
-            <a href="/filter/all">Browse all phones on instalments</a> to compare options side by side.
+            <a href="/nairobi/all">Browse all phones on instalments</a> to compare options side by side.
           </p>
         </div>
       </div>
@@ -538,7 +538,7 @@ function renderStars(r: number) {
             </a>
           ))}
         </div>
-        <p class="pac-browse"><a href={`/filter/${brandSlug}`}>View all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/filter/all">Browse all phones &rarr;</a></p>
+        <p class="pac-browse"><a href={`/nairobi/${brandSlug}`}>View all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/nairobi/all">Browse all phones &rarr;</a></p>
       </div>
 
       <div class="section-card" id="section-ideal">
