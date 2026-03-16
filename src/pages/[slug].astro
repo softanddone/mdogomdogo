@@ -20,16 +20,86 @@ if (!currentProduct) {
   return Astro.redirect("/404");
 }
 
-const relatedProducts = products
-  .filter(
-    (p) =>
-      p.id !== currentProduct.id &&
-      (p.brand === currentProduct.brand ||
-        p.categoryPath.some((cat) =>
-          currentProduct.categoryPath.includes(cat),
-        )),
-  )
-  .slice(0, 4);
+// ── Smart related products: unique per product page ──────────────────────────
+const currentDeposit = parseInt((currentProduct.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
+const PRICE_TIER_RANGE = 3000; // ±KES 3000 = same price tier
+
+// Seeded shuffle — unique per slug so every product page gets different results
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed >>> 0;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = Math.imul(s ^ (s >>> 16), 0x45d9f3b);
+    s = Math.imul(s ^ (s >>> 16), 0x45d9f3b);
+    s = s ^ (s >>> 16);
+    const j = Math.abs(s) % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Build a numeric seed from the full slug string — unique per product
+const slugSeed = currentProduct.slug.split('').reduce((n, c, i) => n + c.charCodeAt(0) * (i + 7), 0);
+
+const otherProducts = products.filter((p) => p.id !== currentProduct.id);
+
+// Tier 1 — same brand, close price (most relevant)
+const tier1 = seededShuffle(
+  otherProducts.filter((p) => {
+    const dep = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
+    return p.brand === currentProduct.brand && Math.abs(dep - currentDeposit) <= PRICE_TIER_RANGE;
+  }),
+  slugSeed
+);
+
+// Tier 2 — same brand, any price
+const tier1ids = new Set(tier1.map((p) => p.id));
+const tier2 = seededShuffle(
+  otherProducts.filter((p) => p.brand === currentProduct.brand && !tier1ids.has(p.id)),
+  slugSeed + 1
+);
+
+// Tier 3 — different brand, close price (cross-brand comparison)
+const tier12ids = new Set([...tier1, ...tier2].map((p) => p.id));
+const tier3 = seededShuffle(
+  otherProducts.filter((p) => {
+    const dep = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
+    return p.brand !== currentProduct.brand
+      && Math.abs(dep - currentDeposit) <= PRICE_TIER_RANGE
+      && !tier12ids.has(p.id);
+  }),
+  slugSeed + 2
+);
+
+// Tier 4 — same storage, different brand (spec-similar)
+const currentStorage = (currentProduct.storage ?? '').replace(/[^0-9]/g, '');
+const tier123ids = new Set([...tier1, ...tier2, ...tier3].map((p) => p.id));
+const tier4 = seededShuffle(
+  otherProducts.filter((p) => {
+    const s = (p.storage ?? '').replace(/[^0-9]/g, '');
+    return s === currentStorage && s !== '' && !tier123ids.has(p.id);
+  }),
+  slugSeed + 3
+);
+
+// Tier 5 — any remaining products (pure fallback, shuffled uniquely per slug)
+const tier1234ids = new Set([...tier1, ...tier2, ...tier3, ...tier4].map((p) => p.id));
+const tier5 = seededShuffle(
+  otherProducts.filter((p) => !tier1234ids.has(p.id)),
+  slugSeed + 4
+);
+
+// Fill pool up to 4 from tiers in priority order
+const pool: typeof products = [];
+for (const tier of [tier1, tier2, tier3, tier4, tier5]) {
+  for (const p of tier) {
+    if (pool.length >= 4) break;
+    if (!pool.find((x) => x.id === p.id)) pool.push(p);
+  }
+  if (pool.length >= 4) break;
+}
+
+const relatedProducts = pool.slice(0, 4);
 
 const faqs = [
   {
@@ -174,9 +244,9 @@ function renderStars(r: number) {
       <ol class="breadcrumb-list">
         <li><a href="/">Home</a></li>
         <li class="sep">›</li>
-        <li><a href="/nairobi/all">All Phones</a></li>
+        <li><a href="/filter/all">All Phones</a></li>
         <li class="sep">›</li>
-        <li><a href={`/nairobi/${brandSlug}`}>{currentProduct.brand}</a></li>
+        <li><a href={`/filter/${brandSlug}`}>{currentProduct.brand}</a></li>
         <li class="sep">›</li>
         <li>{currentProduct.brand} {currentProduct.name}</li>
       </ol>
@@ -186,7 +256,7 @@ function renderStars(r: number) {
     <div class="seo-intro">
       <p>
         Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
-        You are in the right place. The <a href={`/nairobi/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
+        You are in the right place. The <a href={`/filter/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
         <strong>Lipa Mdogo Mdogo</strong> — pay a small deposit after delivery and spread the rest in
         affordable daily or weekly instalments. No credit check, no guarantor, no upfront payment.
         Same-day delivery across <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
@@ -485,7 +555,7 @@ function renderStars(r: number) {
             If you are comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> against similar devices,
             keep in mind that with Lipa Mdogo Mdogo you are not paying the full price upfront —
             just a small deposit on delivery, making it accessible regardless of which phone you choose.
-            <a href="/nairobi/all">Browse all phones on instalments</a> to compare options side by side.
+            <a href="/filter/all">Browse all phones on instalments</a> to compare options side by side.
           </p>
         </div>
       </div>
@@ -538,7 +608,7 @@ function renderStars(r: number) {
             </a>
           ))}
         </div>
-        <p class="pac-browse"><a href={`/nairobi/${brandSlug}`}>View all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/nairobi/all">Browse all phones &rarr;</a></p>
+        <p class="pac-browse"><a href={`/filter/${brandSlug}`}>View all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/filter/all">Browse all phones &rarr;</a></p>
       </div>
 
       <div class="section-card" id="section-ideal">
@@ -577,55 +647,57 @@ function renderStars(r: number) {
 
         <div class="price-kenya-block">
           <div class="price-kenya-row">
-            <span class="pkr-label">Deposit (paid on delivery)</span>
+            <span class="pkr-label">Starting deposit — paid on delivery</span>
             <span class="pkr-value">{currentProduct.deposit}</span>
           </div>
           <div class="price-kenya-row">
-            <span class="pkr-label">Daily instalment from</span>
+            <span class="pkr-label">Then from</span>
             <span class="pkr-value accent">{currentProduct.daily}<span class="pkr-per">/day</span></span>
           </div>
           <div class="price-kenya-row">
-            <span class="pkr-label">Weekly instalment from</span>
+            <span class="pkr-label">Or from</span>
             <span class="pkr-value accent">{currentProduct.from}<span class="pkr-per">/week</span></span>
           </div>
         </div>
 
         <div class="prose" style="margin-top: 1.5rem;">
           <p>
-            The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> normally ranges between
-            <strong>KES {currentProduct.deposit} and KES {currentProduct.totalPrice}</strong> depending on the storage
-            option and where you buy. With our <strong>Lipa Mdogo Mdogo</strong> plan, you only pay a deposit of
-            <strong>KES {currentProduct.deposit}</strong> — after delivery and after you have inspected the phone —
-            and then small daily payments of <strong>KES {currentProduct.daily}</strong> until fully paid.
-            No interest, no hidden charges, no credit check required.
+            The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> on Lipa Mdogo Mdogo
+            starts at a deposit of <strong>{currentProduct.deposit}</strong>.
+            That deposit is only paid <em>after</em> we deliver the phone to your door and you have inspected it —
+            not before. Once you are happy, you pay the deposit and the phone is yours.
+            You then continue with small payments of <strong>{currentProduct.daily} per day</strong>
+            or <strong>{currentProduct.from} per week</strong> at your own pace.
+            No interest. No hidden charges. No credit check.
           </p>
           <p>
-            Many Kenyans search for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> expecting
-            to pay the full amount upfront. With MdogomdogoDeals, that is not how it works. You get the phone delivered
-            to your door first — anywhere in Nairobi, Kiambu, Machakos, or Kajiado — inspect it, and only then
-            start your payment. It is the most affordable way to own a genuine {currentProduct.brand} smartphone in Kenya today.
+            When people search for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>
+            they are usually worried about a large lump sum. With MdogomdogoDeals that never happens.
+            The only amount you commit to upfront is the <strong>{currentProduct.deposit} deposit</strong> —
+            and even that comes <em>after</em> the phone is in your hands.
+            It is the most accessible way to own a genuine {currentProduct.brand} smartphone in Kenya today.
           </p>
           {currentProduct.storage && (
             <p>
               The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the most popular
-              option among Kenyan buyers, offering the best balance between storage capacity and monthly cost.
-              If you need more space, ask us about available variants when you order.
+              choice among Kenyan buyers. If you need a different storage option, let us know when you order
+              and we will advise on availability.
             </p>
           )}
         </div>
 
         <div class="price-why-grid">
           <div class="price-why-item">
-            <strong>No upfront payment</strong>
-            <p>We deliver first. You pay the deposit only after you are satisfied with the phone.</p>
+            <strong>Deposit paid on delivery</strong>
+            <p>We deliver first. You inspect the phone. Only then you pay the {currentProduct.deposit} deposit.</p>
           </div>
           <div class="price-why-item">
             <strong>No interest added</strong>
-            <p>What you see is what you pay — no hidden fees on top of the instalment price.</p>
+            <p>What you see is what you pay — no extra charges on top of your instalments.</p>
           </div>
           <div class="price-why-item">
             <strong>Flexible schedule</strong>
-            <p>Pay daily, weekly, or monthly — whichever suits your income cycle.</p>
+            <p>Continue paying daily, weekly, or monthly — whichever suits your income cycle.</p>
           </div>
           <div class="price-why-item">
             <strong>Genuine product</strong>
