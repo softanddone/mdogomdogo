@@ -62,7 +62,7 @@ const faqs = [
   },
   {
     question: "What if I miss a daily payment?",
-    answer: "No cash penalties for missing to pay in time. Your phone will be unlocked the following time you pay.",
+    answer: "Just contact us. We offer flexible grace periods and can adjust your payment schedule. No penalties for genuine cases.",
   },
 ];
 
@@ -182,6 +182,21 @@ function renderStars(r: number) {
       </ol>
     </nav>
 
+    <!-- SEO INTRO -->
+    <div class="seo-intro">
+      <p>
+        Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
+        You are in the right place. The {currentProduct.brand} {currentProduct.name} is available in Kenya on
+        <strong>Lipa Mdogo Mdogo</strong> — pay a small deposit after delivery and spread the rest in
+        affordable daily or weekly instalments. No credit check, no guarantor, no upfront payment.
+        Same-day delivery across <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
+        {currentProduct.ram && ` Packed with ${currentProduct.ram} RAM`}
+        {currentProduct.storage && `, ${currentProduct.storage} storage`}
+        {currentProduct.battery && `, and a ${currentProduct.battery} battery`}
+        {` — the ${currentProduct.brand} ${currentProduct.name} is one of the best value smartphones available in Kenya today.`}
+      </p>
+    </div>
+
     <!-- ═══════════════════════════════════════════════════════
          HERO
          ═══════════════════════════════════════════════════════ -->
@@ -199,7 +214,7 @@ function renderStars(r: number) {
           <img
             id="main-product-img"
             src={currentProduct.source}
-            alt={`${currentProduct.brand} ${currentProduct.name} — Lipa Mdogo Mdogo Kenya`}
+            alt={`${currentProduct.brand} ${currentProduct.name} price in Kenya — buy on instalments Nairobi`}
             class="main-product-img"
             loading="eager"
             width="560" height="560"
@@ -208,16 +223,16 @@ function renderStars(r: number) {
 
         <div class="thumb-row">
           <button class="thumb active" data-src={currentProduct.source} aria-label="View image 1">
-            <img src={currentProduct.source} alt="" width="72" height="72" />
+            <img src={currentProduct.source} alt={`${currentProduct.brand} ${currentProduct.name} front view Kenya`} width="72" height="72" />
           </button>
           {currentProduct.source2 && (
             <button class="thumb" data-src={currentProduct.source2} aria-label="View image 2">
-              <img src={currentProduct.source2} alt="" width="72" height="72" loading="lazy" />
+              <img src={currentProduct.source2} alt={`${currentProduct.brand} ${currentProduct.name} side view — ${currentProduct.color}`} width="72" height="72" loading="lazy" />
             </button>
           )}
           {currentProduct.source3 && (
             <button class="thumb" data-src={currentProduct.source3} aria-label="View image 3">
-              <img src={currentProduct.source3} alt="" width="72" height="72" loading="lazy" />
+              <img src={currentProduct.source3} alt={`${currentProduct.brand} ${currentProduct.name} camera — buy Nairobi lipa mdogo mdogo`} width="72" height="72" loading="lazy" />
             </button>
           )}
         </div>
@@ -236,7 +251,7 @@ function renderStars(r: number) {
         </div>
 
         <h1 class="product-title">
-         {currentProduct.fullname ?? currentProduct.name }- Lipa Mdogo Mdogo
+          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name}
         </h1>
 
         {reviewCount > 0 && (
@@ -269,11 +284,7 @@ function renderStars(r: number) {
             </div>
           </div>
           <div class="installment-note">
-            Or weekly <strong>  KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week
-</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
-          
-          
-
+            Or from <strong>{currentProduct.from}/week</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
           </div>
           <ul class="pricing-bullets">
             <li>No payment before delivery</li>
@@ -337,7 +348,7 @@ function renderStars(r: number) {
         </div>
 
         <p class="seller-line">
-          Sold by <a href={`/nairobi/${brandSlug}`}>{currentProduct.seller}</a> &middot; Nairobi, Kenya
+          Sold by <a href={`/${brandSlug}-phones`}>{currentProduct.seller}</a> &middot; Nairobi, Kenya
         </p>
 
       </div>
@@ -348,6 +359,7 @@ function renderStars(r: number) {
          ═══════════════════════════════════════════════════════ -->
     <div class="tab-nav" id="tab-nav" role="tablist">
       <button class="tab-btn active" data-tab="overview" role="tab">Overview</button>
+      <button class="tab-btn"        data-tab="price"    role="tab">Price in Kenya</button>
       <button class="tab-btn"        data-tab="specs"    role="tab">Specifications</button>
       <button class="tab-btn"        data-tab="delivery" role="tab">Delivery &amp; Payment</button>
       <button class="tab-btn"        data-tab="faq"      role="tab">FAQ</button>
@@ -359,7 +371,7 @@ function renderStars(r: number) {
     <section class="tab-panel active" id="tab-overview" role="tabpanel">
 
       {keyFeatures.length > 0 && (
-        <div class="section-card">
+        <div class="section-card" id="section-features">
           <h2 class="section-title">Key Features</h2>
           <div class="features-grid">
             {keyFeatures.map(f => (
@@ -372,44 +384,124 @@ function renderStars(r: number) {
         </div>
       )}
 
-      <div class="section-card">
+      <!-- ABOUT — expanded -->
+      <div class="section-card" id="section-about">
         <h2 class="section-title">About the {currentProduct.brand} {currentProduct.name}</h2>
         <div class="prose">
           <p>
-            {currentProduct.description ||
-              `The ${currentProduct.brand} ${currentProduct.name} is one of the most popular smartphones available in Kenya right now. Sold on flexible Lipa Mdogo Mdogo instalments — delivered to your door first, deposit paid on arrival, then daily or weekly payments at your own pace.`}
+            The <strong>{currentProduct.brand} {currentProduct.name}</strong> is one of the most sought-after smartphones in Kenya right now —
+            and for good reason. Whether you are a student in Nairobi looking for a reliable phone for online classes,
+            a professional who needs a fast device for emails and video calls, or simply someone who wants a quality smartphone
+            without paying the full price upfront, the {currentProduct.brand} {currentProduct.name} delivers on all fronts.
+            Available on <strong>Lipa Mdogo Mdogo</strong> — Kenya's most flexible phone instalment plan — you can own this phone
+            today with just a small deposit paid after delivery.
           </p>
+
           {currentProduct.ram && (
-            <p><strong>Performance:</strong> With {currentProduct.ram} of RAM the {currentProduct.brand} {currentProduct.name} handles multitasking, browsing, and gaming without lag.</p>
+            <p>
+              <strong>Performance you can feel:</strong> Powered by {currentProduct.processor && `a ${currentProduct.processor} processor and `}{currentProduct.ram} of RAM,
+              the {currentProduct.brand} {currentProduct.name} handles everything you throw at it —
+              switching between apps, streaming YouTube, managing multiple WhatsApp groups, and playing games —
+              all without slowdown. Whether you are multitasking at work or scrolling through social media on your commute,
+              this phone keeps up effortlessly.
+            </p>
           )}
+
           {currentProduct.storage && (
-            <p><strong>Storage:</strong> {currentProduct.storage} of internal storage for photos, videos, apps, and documents.</p>
+            <p>
+              <strong>Never run out of space:</strong> With {currentProduct.storage} of built-in storage,
+              the {currentProduct.brand} {currentProduct.name} gives you plenty of room for your photos, videos, music,
+              documents, and apps. No more deleting old files just to make space — store your M-Pesa statements,
+              WhatsApp media, TikTok downloads, and everything else you need, all in one place.
+              {currentProduct.expandableStorage && ` You can also expand storage further with a microSD card.`}
+            </p>
+          )}
+
+          {currentProduct.camera && (
+            <p>
+              <strong>A camera built for everyday Kenya:</strong> The {currentProduct.camera} camera system on the {currentProduct.brand} {currentProduct.name}
+              is designed to capture real life in sharp, vivid detail — from busy Nairobi streets and family gatherings
+              to Kenya's stunning landscapes. Whether you are shooting portraits, street photography, or quick videos
+              for Instagram and TikTok, you will be impressed by the quality. The front camera handles selfies and
+              video calls equally well, making it a great choice for professionals and content creators.
+            </p>
+          )}
+
+          {currentProduct.battery && (
+            <p>
+              <strong>Battery that lasts the whole day:</strong> The {currentProduct.battery} battery in the {currentProduct.brand} {currentProduct.name}
+              is built to keep up with a full Kenyan workday — long commutes on matatus, extended work sessions,
+              evenings of entertainment, and everything in between. Fewer interruptions, less time hunting for a charger.
+              {currentProduct.charging && ` And with ${currentProduct.charging}, topping back up is quick when you do need it.`}
+            </p>
+          )}
+
+          {currentProduct.display && (
+            <p>
+              <strong>A display that stands out:</strong> The {currentProduct.display} screen brings content to life with
+              vibrant colours and crisp clarity — perfect for streaming, gaming, and video calls. Whether you are watching
+              a film on your commute, following a tutorial, or video-calling family upcountry, the display delivers
+              a premium viewing experience at an accessible price.
+            </p>
+          )}
+
+          <p>
+            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan networks —
+            <strong>Safaricom 4G/LTE, Airtel Kenya, and Telkom Kenya</strong> — so you get strong signal,
+            fast mobile data, and clear calls wherever you are in the country.
+            It comes with a <strong>2-year manufacturer warranty</strong> and is sourced directly from
+            authorised {currentProduct.brand} distributors in Kenya.
+          </p>
+        </div>
+      </div>
+
+      <!-- COMPARISON -->
+      <div class="section-card" id="section-comparison">
+        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} vs Similar Phones in Kenya</h2>
+        <div class="prose">
+          <p>
+            Compared to other smartphones in the same price range in Kenya, the <strong>{currentProduct.brand} {currentProduct.name}</strong> stands out
+            for its balance of performance, camera quality, and battery life. While many budget phones compromise on at least
+            one of these, the {currentProduct.name} holds its ground across all three — making it one of the strongest
+            all-round choices for Kenyan buyers in {currentProduct.releaseYear || '2024'}.
+          </p>
+          {currentProduct.ram && currentProduct.battery && (
+            <p>
+              Where some competing phones offer more RAM but a smaller battery, or a larger display but a weaker processor,
+              the {currentProduct.brand} {currentProduct.name} strikes a practical balance —
+              {currentProduct.ram} RAM ensures smooth everyday performance,
+              while the {currentProduct.battery} battery means you are unlikely to run out of charge before the end of the day.
+            </p>
           )}
           {currentProduct.camera && (
-            <p><strong>Camera:</strong> The {currentProduct.camera} camera lets you capture Kenya's landscapes and everyday moments in sharp detail.</p>
+            <p>
+              On camera, the {currentProduct.brand} {currentProduct.name}'s {currentProduct.camera} setup outperforms many phones
+              at a similar deposit range in Kenya. For social media content, WhatsApp photos, and casual video recording,
+              it delivers noticeably sharper results than older or lower-spec alternatives.
+            </p>
           )}
-          {currentProduct.battery && (
-            <p><strong>Battery:</strong> The {currentProduct.battery} keeps you going through long commutes and busy workdays without needing a recharge.</p>
-          )}
-          {currentProduct.display && (
-            <p><strong>Display:</strong> The {currentProduct.display} screen delivers vivid, sharp visuals — great for streaming, browsing, and gaming.</p>
-          )}
+          <p>
+            If you are comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> against similar devices,
+            keep in mind that with Lipa Mdogo Mdogo you are not paying the full price upfront —
+            just a small deposit on delivery, making it accessible regardless of which phone you choose.
+            <a href="/filter/all">Browse all phones on instalments</a> to compare options side by side.
+          </p>
         </div>
       </div>
 
-      <div class="section-card">
-        <h2 class="section-title">Ideal For</h2>
+      <div class="section-card" id="section-ideal">
+        <h2 class="section-title">Who Is the {currentProduct.brand} {currentProduct.name} Ideal For?</h2>
         <div class="use-cases-grid">
-          <div class="use-case"><strong>Students</strong><p>Online classes, research, and learning apps run smoothly.</p></div>
-          <div class="use-case"><strong>Professionals</strong><p>Email, video calls, and banking apps — fast and reliable.</p></div>
-          <div class="use-case"><strong>Content Creators</strong><p>Powerful camera and processor for social media content.</p></div>
-          <div class="use-case"><strong>Gamers</strong><p>Smooth performance on popular mobile games.</p></div>
-          <div class="use-case"><strong>Social Media</strong><p>Stay connected on WhatsApp, Instagram, TikTok, and more.</p></div>
-          <div class="use-case"><strong>Everyday Use</strong><p>Reliable battery and display for all-day use across Kenya.</p></div>
+          <div class="use-case"><strong>Students</strong><p>Online classes, research, and learning apps run smoothly without lag.</p></div>
+          <div class="use-case"><strong>Professionals</strong><p>Email, video calls, and banking apps — fast and reliable all day.</p></div>
+          <div class="use-case"><strong>Content Creators</strong><p>Powerful camera and processor for photos, reels, and social content.</p></div>
+          <div class="use-case"><strong>Gamers</strong><p>Smooth performance on popular mobile games without overheating.</p></div>
+          <div class="use-case"><strong>Social Media</strong><p>Stay connected on WhatsApp, Instagram, TikTok, Facebook, and X.</p></div>
+          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery and a great display for life in Kenya's busiest counties.</p></div>
         </div>
       </div>
 
-      <div class="section-card">
+      <div class="section-card" id="section-inbox">
         <h2 class="section-title">What's in the Box</h2>
         <ul class="box-list">
           <li>1 &times; {currentProduct.brand} {currentProduct.name} handset</li>
@@ -421,6 +513,89 @@ function renderStars(r: number) {
         </ul>
       </div>
 
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         TAB: PRICE IN KENYA
+         ═══════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-price" role="tabpanel">
+      <div class="section-card" id="section-price">
+
+        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} Price in Kenya</h2>
+
+        <div class="price-kenya-block">
+          <div class="price-kenya-row">
+            <span class="pkr-label">Deposit (paid on delivery)</span>
+            <span class="pkr-value">{currentProduct.deposit}</span>
+          </div>
+          <div class="price-kenya-row">
+            <span class="pkr-label">Daily instalment from</span>
+            <span class="pkr-value accent">{currentProduct.daily}<span class="pkr-per">/day</span></span>
+          </div>
+          <div class="price-kenya-row">
+            <span class="pkr-label">Weekly instalment from</span>
+            <span class="pkr-value accent">{currentProduct.from}<span class="pkr-per">/week</span></span>
+          </div>
+        </div>
+
+        <div class="prose" style="margin-top: 1.5rem;">
+          <p>
+            The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> normally ranges between
+            <strong>KES {currentProduct.deposit} and KES {currentProduct.totalPrice}</strong> depending on the storage
+            option and where you buy. With our <strong>Lipa Mdogo Mdogo</strong> plan, you only pay a deposit of
+            <strong>KES {currentProduct.deposit}</strong> — after delivery and after you have inspected the phone —
+            and then small daily payments of <strong>KES {currentProduct.daily}</strong> until fully paid.
+            No interest, no hidden charges, no credit check required.
+          </p>
+          <p>
+            Many Kenyans search for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> expecting
+            to pay the full amount upfront. With MdogomdogoDeals, that is not how it works. You get the phone delivered
+            to your door first — anywhere in Nairobi, Kiambu, Machakos, or Kajiado — inspect it, and only then
+            start your payment. It is the most affordable way to own a genuine {currentProduct.brand} smartphone in Kenya today.
+          </p>
+          {currentProduct.storage && (
+            <p>
+              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the most popular
+              option among Kenyan buyers, offering the best balance between storage capacity and monthly cost.
+              If you need more space, ask us about available variants when you order.
+            </p>
+          )}
+        </div>
+
+        <div class="price-why-grid">
+          <div class="price-why-item">
+            <strong>No upfront payment</strong>
+            <p>We deliver first. You pay the deposit only after you are satisfied with the phone.</p>
+          </div>
+          <div class="price-why-item">
+            <strong>No interest added</strong>
+            <p>What you see is what you pay — no hidden fees on top of the instalment price.</p>
+          </div>
+          <div class="price-why-item">
+            <strong>Flexible schedule</strong>
+            <p>Pay daily, weekly, or monthly — whichever suits your income cycle.</p>
+          </div>
+          <div class="price-why-item">
+            <strong>Genuine product</strong>
+            <p>Every phone comes from authorised {currentProduct.brand} distributors with a 2-year warranty.</p>
+          </div>
+        </div>
+
+        <div class="price-cta-row">
+          <a
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name}`}
+            class="btn-order-wa"
+            target="_blank" rel="noopener"
+            style="max-width: 340px;"
+          >
+            Order via WhatsApp
+          </a>
+          <a href="tel:+254100028823" class="btn-order-call" style="max-width: 340px;">
+            Call Us — 0100028823
+          </a>
+        </div>
+
+      </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
@@ -509,7 +684,7 @@ function renderStars(r: number) {
           <li>
             <div class="step-circle">3</div>
             <div>
-              <strong>Inspect</strong> — check the phone.Make sure you are fully satisfied.
+              <strong>Inspect</strong> — check the phone. Power it on, test it, make sure you are fully satisfied.
               You pay nothing until you approve.
             </div>
           </li>
@@ -517,16 +692,14 @@ function renderStars(r: number) {
             <div class="step-circle">4</div>
             <div>
               <strong>Pay deposit</strong> — once happy, pay the deposit of <strong>KES {currentProduct.deposit}</strong>
-              via M-Pesa on the spot. The phone is yours to take home.
+              via M-Pesa or cash on the spot. The phone is yours to take home.
             </div>
           </li>
           <li>
             <div class="step-circle">5</div>
             <div>
               <strong>Start instalments</strong> — after a free grace period, pay
-              <strong> KES {currentProduct.daily}/day</strong> or <strong>
-  KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week
-</strong>
+              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {currentProduct.from}/week</strong>
               at your own pace until the balance is cleared.
             </div>
           </li>
@@ -725,6 +898,17 @@ function renderStars(r: number) {
   .breadcrumb-bar {
     background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 20px;
   }
+
+  /* ── SEO intro paragraph ── */
+  .seo-intro {
+    background: #fff; border-bottom: 1px solid var(--gray-2);
+    padding: 14px 20px;
+  }
+  .seo-intro p {
+    max-width: 1280px; margin: 0 auto;
+    font-size: 14px; color: var(--text-light); line-height: 1.75;
+  }
+  .seo-intro strong { color: var(--text); }
   .breadcrumb-list {
     display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
     list-style: none; font-size: 13px; color: var(--text-light);
@@ -1162,4 +1346,51 @@ function renderStars(r: number) {
   .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,115,232,.3); }
   .btn-whatsapp { background: #25d366; color: #fff; }
   .btn-whatsapp:hover { background: #1fb356; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.3); }
+
+  /* ════════════════════════════════════════
+     PRICE IN KENYA SECTION
+     ════════════════════════════════════════ */
+  .price-kenya-block {
+    display: flex; flex-direction: column; gap: 0;
+    border: 2px solid var(--primary); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 4px;
+  }
+  .price-kenya-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; border-bottom: 1px solid var(--primary-light);
+    background: #fff;
+  }
+  .price-kenya-row:last-child { border-bottom: none; }
+  .price-kenya-row:first-child { background: var(--primary-light); }
+  .pkr-label {
+    font-size: 13px; font-weight: 600; color: var(--text-light);
+  }
+  .pkr-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px; font-weight: 900; color: var(--navy);
+    line-height: 1;
+  }
+  .pkr-value.accent { color: var(--primary); }
+  .pkr-per { font-size: 13px; font-weight: 400; }
+
+  .price-why-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    margin-top: 20px;
+  }
+  @media (max-width: 560px) { .price-why-grid { grid-template-columns: 1fr; } }
+  .price-why-item {
+    background: var(--gray-1); border: 1.5px solid var(--gray-2);
+    border-radius: 9px; padding: 14px;
+  }
+  .price-why-item strong { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
+  .price-why-item p { font-size: 13px; color: var(--text-light); margin: 0; line-height: 1.5; }
+
+  .price-cta-row {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 20px; align-items: stretch;
+  }
+
+  /* Prose links */
+  .prose a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  .prose a:hover { text-decoration: underline; }
 </style>
