@@ -186,7 +186,7 @@ function renderStars(r: number) {
     <div class="seo-intro">
       <p>
         Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
-        You are in the right place. The {currentProduct.brand} {currentProduct.name} is available in Kenya on
+        You are in the right place. The <a href={`/filter/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
         <strong>Lipa Mdogo Mdogo</strong> — pay a small deposit after delivery and spread the rest in
         affordable daily or weekly instalments. No credit check, no guarantor, no upfront payment.
         Same-day delivery across <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
@@ -194,6 +194,7 @@ function renderStars(r: number) {
         {currentProduct.storage && `, ${currentProduct.storage} storage`}
         {currentProduct.battery && `, and a ${currentProduct.battery} battery`}
         {` — the ${currentProduct.brand} ${currentProduct.name} is one of the best value smartphones available in Kenya today.`}
+        &nbsp;<a href="#price-kenya">See price &amp; instalments &darr;</a>
       </p>
     </div>
 
@@ -251,7 +252,7 @@ function renderStars(r: number) {
         </div>
 
         <h1 class="product-title">
-          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name}
+          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name} &mdash; Lipa Mdogo Mdogo Kenya
         </h1>
 
         {reviewCount > 0 && (
@@ -489,6 +490,57 @@ function renderStars(r: number) {
         </div>
       </div>
 
+      <!-- PROS & CONS -->
+      <div class="section-card" id="pros-cons">
+        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} — Pros &amp; Cons</h2>
+        <div class="pros-cons-grid">
+          <div class="pros-col">
+            <h3 class="pc-heading pc-pros">Pros</h3>
+            <ul class="pc-list">
+              {currentProduct.battery && <li>Long battery life — {currentProduct.battery} keeps you powered all day</li>}
+              {currentProduct.ram && <li>Smooth performance with {currentProduct.ram} RAM for multitasking</li>}
+              {currentProduct.storage && <li>Generous {currentProduct.storage} internal storage — no constant deleting</li>}
+              {currentProduct.camera && <li>Capable {currentProduct.camera} camera for photos and video</li>}
+              <li>Works on all Kenyan networks — Safaricom, Airtel, Telkom</li>
+              <li>Available on Lipa Mdogo Mdogo — deposit paid only after delivery</li>
+              <li>2-year manufacturer warranty included</li>
+              <li>Same-day delivery in Nairobi, Kiambu, Machakos &amp; Kajiado</li>
+            </ul>
+          </div>
+          <div class="cons-col">
+            <h3 class="pc-heading pc-cons">Cons</h3>
+            <ul class="pc-list">
+              {currentProduct.wirelessCharging === 'Not Available' && <li>No wireless charging support</li>}
+              {currentProduct.audioJack === 'No' && <li>No 3.5mm headphone jack</li>}
+              <li>Limited to delivery in 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
+              <li>Full balance must be cleared through daily/weekly instalments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PEOPLE ALSO COMPARE -->
+      <div class="section-card" id="people-also-compare">
+        <h2 class="section-title">People Also Compare</h2>
+        <p class="pac-intro">
+          Buyers looking at the <strong>{currentProduct.brand} {currentProduct.name}</strong> in Kenya often also consider these alternatives.
+          All are available on Lipa Mdogo Mdogo instalments with same-day delivery.
+        </p>
+        <div class="pac-grid">
+          {relatedProducts.slice(0, 4).map(p => (
+            <a href={`/${p.slug}`} class="pac-card">
+              <img src={p.source} alt={`${p.brand} ${p.name} price Kenya`} width="80" height="80" loading="lazy" />
+              <div class="pac-info">
+                <span class="pac-brand">{p.brand}</span>
+                <span class="pac-name">{p.fullname ?? p.name}</span>
+                <span class="pac-deposit">From {p.deposit} deposit</span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <p class="pac-browse"><a href={`/filter/${brandSlug}`}>View all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/filter/all">Browse all phones &rarr;</a></p>
+      </div>
+
       <div class="section-card" id="section-ideal">
         <h2 class="section-title">Who Is the {currentProduct.brand} {currentProduct.name} Ideal For?</h2>
         <div class="use-cases-grid">
@@ -519,7 +571,7 @@ function renderStars(r: number) {
          TAB: PRICE IN KENYA
          ═══════════════════════════════════════════════════════ -->
     <section class="tab-panel" id="tab-price" role="tabpanel">
-      <div class="section-card" id="section-price">
+      <div class="section-card" id="price-kenya">
 
         <h2 class="section-title">{currentProduct.brand} {currentProduct.name} Price in Kenya</h2>
 
@@ -602,7 +654,7 @@ function renderStars(r: number) {
          TAB: SPECIFICATIONS
          ═══════════════════════════════════════════════════════ -->
     <section class="tab-panel" id="tab-specs" role="tabpanel">
-      <div class="section-card">
+      <div class="section-card" id="specifications">
         <h2 class="section-title">{currentProduct.brand} {currentProduct.name} &mdash; Full Specifications</h2>
 
         {[
@@ -663,7 +715,7 @@ function renderStars(r: number) {
          TAB: DELIVERY & PAYMENT
          ═══════════════════════════════════════════════════════ -->
     <section class="tab-panel" id="tab-delivery" role="tabpanel">
-      <div class="section-card">
+      <div class="section-card" id="delivery">
 
         <h2 class="section-title">How It Works</h2>
         <ol class="payment-steps">
@@ -1393,4 +1445,93 @@ function renderStars(r: number) {
   /* Prose links */
   .prose a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .prose a:hover { text-decoration: underline; }
+
+  /* SEO intro links */
+  .seo-intro a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  .seo-intro a:hover { text-decoration: underline; }
+
+  /* ════════════════════════════════════════
+     PROS & CONS
+     ════════════════════════════════════════ */
+  .pros-cons-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  @media (max-width: 600px) { .pros-cons-grid { grid-template-columns: 1fr; } }
+
+  .pros-col, .cons-col {
+    border-radius: 9px; padding: 16px 18px;
+  }
+  .pros-col { background: #f0fdf6; border: 1.5px solid #a7f0ca; }
+  .cons-col { background: #fef6f6; border: 1.5px solid #fecaca; }
+
+  .pc-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 900; margin-bottom: 12px;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .pc-pros { color: #166534; }
+  .pc-cons { color: #991b1b; }
+
+  .pc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pc-list li {
+    font-size: 13.5px; color: var(--text); line-height: 1.5;
+    padding-left: 20px; position: relative;
+  }
+  .pros-col .pc-list li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--green); font-weight: 900;
+  }
+  .cons-col .pc-list li::before {
+    content: '✗'; position: absolute; left: 0;
+    color: var(--red); font-weight: 900;
+  }
+
+  /* ════════════════════════════════════════
+     PEOPLE ALSO COMPARE
+     ════════════════════════════════════════ */
+  .pac-intro {
+    font-size: 14px; color: var(--text-light); line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .pac-intro strong { color: var(--text); }
+
+  .pac-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 700px) { .pac-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .pac-card {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: var(--gray-1); border: 1.5px solid var(--gray-2);
+    border-radius: 9px; padding: 14px 10px;
+    text-decoration: none; color: inherit;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+  }
+  .pac-card:hover {
+    border-color: var(--primary); box-shadow: 0 4px 16px rgba(26,115,232,.12);
+    transform: translateY(-2px);
+  }
+  .pac-card img {
+    width: 72px; height: 72px; object-fit: contain;
+  }
+  .pac-info { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+  .pac-brand {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--text-light);
+  }
+  .pac-name {
+    font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.3;
+  }
+  .pac-deposit {
+    font-size: 12px; font-weight: 600; color: var(--primary);
+    background: var(--primary-light); border-radius: 4px;
+    padding: 2px 7px; margin-top: 2px;
+  }
+
+  .pac-browse {
+    font-size: 13px; color: var(--text-light);
+  }
+  .pac-browse a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  .pac-browse a:hover { text-decoration: underline; }
 </style>
