@@ -4,11 +4,41 @@
 import { products } from './product2.js';
 
 export const DEPOSIT_FILTERS = [
-  { key: 'under-3k',  label: 'Under KSh 3K',  min: 0,     max: 2999     },
-  { key: '3k-5k',     label: 'KSh 3K – 5K',   min: 3000,  max: 5000     },
-  { key: '5k-8k',     label: 'KSh 5K – 8K',   min: 5001,  max: 8000     },
-  { key: '8k-10k',    label: 'KSh 8K – 10K',  min: 8001,  max: 10000    },
-  { key: 'above-10k', label: 'KSh 10K+',       min: 10001, max: Infinity },
+  {
+    key:   'deposit-under-3000',
+    label: 'Deposit Under 3,000',
+    h1:    'Phones With Deposit Under KSh 3,000',
+    min:   0,
+    max:   2999,
+  },
+  {
+    key:   'deposit-under-5000',
+    label: 'Deposit Under 5,000',
+    h1:    'Phones With Deposit Under KSh 5,000',
+    min:   3000,
+    max:   5000,
+  },
+  {
+    key:   'deposit-under-8000',
+    label: 'Deposit Under 8,000',
+    h1:    'Phones With Deposit Under KSh 8,000',
+    min:   5001,
+    max:   8000,
+  },
+  {
+    key:   'deposit-under-10000',
+    label: 'Deposit Under 10,000',
+    h1:    'Phones With Deposit Under KSh 10,000',
+    min:   8001,
+    max:   10000,
+  },
+  {
+    key:   'deposit-above-10000',
+    label: 'Deposit Above 10,000',
+    h1:    'Phones With Deposit Above KSh 10,000',
+    min:   10001,
+    max:   Infinity,
+  },
 ];
 
 export const STORAGE_FILTERS = [
