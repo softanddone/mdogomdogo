@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
   // 1. All
   paths.push({
-    params: { filterSlug: 'all' },
+    params: { filterSlug: 'lipa-mdogo-mdogo-phones' },
     props: { depositFilter: null, brandFilter: null, storageFilter: null, label: 'All Phones' },
   });
 
@@ -94,14 +94,14 @@ const totalPages = Math.ceil(filteredProducts.length / CARDS_PER_PAGE);
 
 const pageTitle    = `${label} — Lipa Mdogo Mdogo | MdogomdogoDeals Nairobi`;
 const metaDesc     = `Shop ${label} on installments in Nairobi. ${depositFilter ? `Deposit ${depositFilter.label}.` : ''} ${storageFilter ? `${storageFilter.label} storage.` : ''} Pay via M-Pesa. Free delivery CBD. ${filteredProducts.length} phones available.`;
-const canonicalUrl = `https://mdogomdeals.co.ke/nairobi/${filterSlug}`;
+const canonicalUrl = `https://mdogomdogodeals.co.ke/phones/${filterSlug}`;
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
-  { label: 'All Phones', href: '/nairobi/all' },
-  ...(brandFilter    ? [{ label: brandFilter,            href: `/nairobi/${brandSlug(brandFilter)}`  }] : []),
-  ...(depositFilter  ? [{ label: depositFilter.label,    href: `/nairobi/${depositFilter.key}`        }] : []),
-  ...(storageFilter  ? [{ label: storageFilter.label,    href: `/nairobi/${storageFilter.key}`        }] : []),
+  { label: 'All Phones', href: '/phones/lipa-mdogo-mdogo-phones' },
+  ...(brandFilter    ? [{ label: brandFilter,            href: `/phones/${brandSlug(brandFilter)}`  }] : []),
+  ...(depositFilter  ? [{ label: depositFilter.label,    href: `/phones/${depositFilter.key}`        }] : []),
+  ...(storageFilter  ? [{ label: storageFilter.label,    href: `/phones/${storageFilter.key}`        }] : []),
 ];
 
 function renderStars(rating) {
@@ -112,7 +112,7 @@ function renderStars(rating) {
 // Build current-filter base slug for cross-filter links
 const baseDepositHref  = (b, d, s) => {
   const parts = [b ? brandSlug(b) : null, d ? d.key : null, s ? s.key : null].filter(Boolean);
-  return parts.length ? `/nairobi/${parts.join('-')}` : '/nairobi/all';
+  return parts.length ? `/phones/${parts.join('-')}` : '/phones/lipa-mdogo-mdogo-phones';
 };
 ---
 
@@ -314,10 +314,10 @@ const baseDepositHref  = (b, d, s) => {
 <nav class="filter-nav" aria-label="Filter by deposit">
   <span class="filter-nav-label">Deposit</span>
   <div class="filter-nav-scroll">
-    <a href={brandFilter ? `/nairobi/${brandSlug(brandFilter)}` : '/nairobi/all'}
+    <a href={brandFilter ? `/phones/${brandSlug(brandFilter)}` : '/phones/lipa-mdogo-mdogo-phones'}
        class={`filter-nav-link${!depositFilter ? ' active' : ''}`}>All</a>
     {DEPOSIT_FILTERS.map(dep => {
-      const href = brandFilter ? `/nairobi/${brandSlug(brandFilter)}-${dep.key}` : `/nairobi/${dep.key}`;
+      const href = brandFilter ? `/phones/${brandSlug(brandFilter)}-${dep.key}` : `/phones/${dep.key}`;
       return <a href={href} class={`filter-nav-link${depositFilter?.key === dep.key ? ' active' : ''}`}>{dep.label}</a>;
     })}
   </div>
@@ -327,10 +327,10 @@ const baseDepositHref  = (b, d, s) => {
 <nav class="filter-nav" aria-label="Filter by brand">
   <span class="filter-nav-label">Brand</span>
   <div class="filter-nav-scroll">
-    <a href={depositFilter ? `/nairobi/${depositFilter.key}` : '/nairobi/all'}
+    <a href={depositFilter ? `/phones/${depositFilter.key}` : '/phones/lipa-mdogo-mdogo-phones'}
        class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>All</a>
     {ALL_BRANDS.map(brand => {
-      const href = depositFilter ? `/nairobi/${brandSlug(brand)}-${depositFilter.key}` : `/nairobi/${brandSlug(brand)}`;
+      const href = depositFilter ? `/phones/${brandSlug(brand)}-${depositFilter.key}` : `/phones/${brandSlug(brand)}`;
       return <a href={href} class={`filter-nav-link${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' active' : ''}`}>{brand}</a>;
     })}
   </div>
@@ -340,10 +340,10 @@ const baseDepositHref  = (b, d, s) => {
 <nav class="filter-nav" aria-label="Filter by storage">
   <span class="filter-nav-label">Storage</span>
   <div class="filter-nav-scroll">
-    <a href={brandFilter ? `/nairobi/${brandSlug(brandFilter)}` : '/nairobi/all'}
+    <a href={brandFilter ? `/phones/${brandSlug(brandFilter)}` : '/phones/lipa-mdogo-mdogo-phones'}
        class={`filter-nav-link${!storageFilter ? ' active' : ''}`}>All</a>
     {STORAGE_FILTERS.map(stor => {
-      const href = brandFilter ? `/nairobi/${brandSlug(brandFilter)}-${stor.key}` : `/nairobi/${stor.key}`;
+      const href = brandFilter ? `/phones/${brandSlug(brandFilter)}-${stor.key}` : `/phones/${stor.key}`;
       return <a href={href} class={`filter-nav-link${storageFilter?.key === stor.key ? ' active' : ''}`}>{stor.label}</a>;
     })}
   </div>
@@ -370,28 +370,28 @@ const baseDepositHref  = (b, d, s) => {
     <div class="active-filter-chips">
 
       {brandFilter && (
-        <a href={depositFilter ? `/nairobi/${depositFilter.key}` : storageFilter ? `/nairobi/${storageFilter.key}` : '/nairobi/all'}
+        <a href={depositFilter ? `/phones/${depositFilter.key}` : storageFilter ? `/phones/${storageFilter.key}` : '/phones/lipa-mdogo-mdogo-phones'}
            class="filter-chip" title={`Remove ${brandFilter} filter`}>
           {brandFilter}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </a>
       )}
       {depositFilter && (
-        <a href={brandFilter ? `/nairobi/${brandSlug(brandFilter)}` : '/nairobi/all'}
+        <a href={brandFilter ? `/phones/${brandSlug(brandFilter)}` : '/phones/lipa-mdogo-mdogo-phones'}
            class="filter-chip" title={`Remove ${depositFilter.label} filter`}>
           {depositFilter.label}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </a>
       )}
       {storageFilter && (
-        <a href={brandFilter ? `/nairobi/${brandSlug(brandFilter)}` : '/nairobi/all'}
+        <a href={brandFilter ? `/phones/${brandSlug(brandFilter)}` : '/phones/lipa-mdogo-mdogo-phones'}
            class="filter-chip" title={`Remove ${storageFilter.label} filter`}>
           {storageFilter.label}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </a>
       )}
 
-      <a href="/nairobi/all" class="filter-chip-clear">Clear all</a>
+      <a href="/phones/lipa-mdogo-mdogo-phones" class="filter-chip-clear">Clear all</a>
     </div>
   </div>
 )}
@@ -402,7 +402,7 @@ const baseDepositHref  = (b, d, s) => {
     {filteredProducts.length === 0 ? (
       <div class="empty-state">
         <h2>😕 No phones found for this filter</h2>
-        <p><a href="/nairobi/all">View all phones</a> or try a different filter above.</p>
+        <p><a href="/phones/lipa-mdogo-mdogo-phones">View all phones</a> or try a different filter above.</p>
       </div>
     ) : filteredProducts.map((p, i) => {
       const statusLower = p.status?.toLowerCase();
@@ -457,14 +457,14 @@ const baseDepositHref  = (b, d, s) => {
     <div class="related-grid">
       {ALL_BRANDS.map(brand => {
         const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
-        return <a href={`/nairobi/${brandSlug(brand)}`} class="related-link">{brand}<span class="count">({count})</span></a>;
+        return <a href={`/phones/${brandSlug(brand)}`} class="related-link">{brand}<span class="count">({count})</span></a>;
       })}
       {DEPOSIT_FILTERS.map(dep => {
         const count = products.filter(p => { const d = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0; return d >= dep.min && d <= dep.max; }).length;
-        return <a href={`/nairobi/${dep.key}`} class="related-link">{dep.label}<span class="count">({count})</span></a>;
+        return <a href={`/phones/${dep.key}`} class="related-link">{dep.label}<span class="count">({count})</span></a>;
       })}
       {STORAGE_FILTERS.map(stor => (
-        <a href={`/nairobi/${stor.key}`} class="related-link">{stor.label} Storage</a>
+        <a href={`/phones/${stor.key}`} class="related-link">{stor.label} Storage</a>
       ))}
     </div>
   </section>
@@ -490,14 +490,14 @@ const baseDepositHref  = (b, d, s) => {
         }
       </p>
       <div class="seo-tags">
-        <a href="/nairobi/all" class="seo-tag">buy phone pay later Kenya</a>
-        <a href="/nairobi/under-3k" class="seo-tag">phones under 3000 deposit</a>
-        <a href="/nairobi/all" class="seo-tag">pay daily installment phone</a>
-        <a href="/nairobi/all" class="seo-tag">pay weekly M-Pesa phone</a>
-        <a href="/nairobi/all" class="seo-tag">monthly installment smartphone</a>
-        <a href="/nairobi/all" class="seo-tag">lipa pole pole phones Nairobi</a>
-        <a href="/nairobi/all" class="seo-tag">cheapest lipa mdogo mdogo phone</a>
-        <a href="/nairobi/under-3k" class="seo-tag">budget phone small deposit</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">buy phone pay later Kenya</a>
+        <a href="/phones/under-3k" class="seo-tag">phones under 3000 deposit</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">pay daily installment phone</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">pay weekly M-Pesa phone</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">monthly installment smartphone</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">lipa pole pole phones Nairobi</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">cheapest lipa mdogo mdogo phone</a>
+        <a href="/phones/under-3k" class="seo-tag">budget phone small deposit</a>
       </div>
     </div>
 
@@ -505,20 +505,20 @@ const baseDepositHref  = (b, d, s) => {
       <h3>Popular Phone Series</h3>
       <p>
         Looking for a specific series?
-        <a href="/nairobi/samsung">Samsung Galaxy A Series</a> and
-        <a href="/nairobi/tecno">Tecno Spark & Camon</a> are among the most popular lipa mdogo mdogo phones in Nairobi.
-        <a href="/nairobi/infinix">Infinix Hot Series</a> offers large screens and big batteries at budget deposits.
-        <a href="/nairobi/redmi">Redmi Series</a> brings 4G and 5G performance on easy weekly installments.
+        <a href="/phones/samsung">Samsung Galaxy A Series</a> and
+        <a href="/phones/tecno">Tecno Spark & Camon</a> are among the most popular lipa mdogo mdogo phones in Nairobi.
+        <a href="/phones/infinix">Infinix Hot Series</a> offers large screens and big batteries at budget deposits.
+        <a href="/phones/redmi">Redmi Series</a> brings 4G and 5G performance on easy weekly installments.
       </p>
       <div class="seo-tags">
-        <a href="/nairobi/samsung" class="seo-tag">Samsung lipa mdogo mdogo</a>
-        <a href="/nairobi/tecno" class="seo-tag">Tecno Camon installment</a>
-        <a href="/nairobi/tecno" class="seo-tag">Tecno Spark pay later</a>
-        <a href="/nairobi/infinix" class="seo-tag">Infinix Hot lipa mdogo mdogo</a>
-        <a href="/nairobi/redmi" class="seo-tag">Redmi 4G installment Kenya</a>
-        <a href="/nairobi/all" class="seo-tag">5G phones lipa mdogo mdogo</a>
-        <a href="/nairobi/all" class="seo-tag">gaming phones installment Nairobi</a>
-        <a href="/nairobi/all" class="seo-tag">good camera phone pay later</a>
+        <a href="/phones/samsung" class="seo-tag">Samsung lipa mdogo mdogo</a>
+        <a href="/phones/tecno" class="seo-tag">Tecno Camon installment</a>
+        <a href="/phones/tecno" class="seo-tag">Tecno Spark pay later</a>
+        <a href="/phones/infinix" class="seo-tag">Infinix Hot lipa mdogo mdogo</a>
+        <a href="/phones/redmi" class="seo-tag">Redmi 4G installment Kenya</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">5G phones lipa mdogo mdogo</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">gaming phones installment Nairobi</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">good camera phone pay later</a>
       </div>
     </div>
 
@@ -526,18 +526,18 @@ const baseDepositHref  = (b, d, s) => {
       <h3>Delivery &amp; How It Works</h3>
       <p>
         Order online and get same-day delivery in Nairobi CBD.
-        Pay a deposit via M-Pesa, then choose <a href="/nairobi/all">daily, weekly, or monthly</a> installments — whichever fits your budget.
+        Pay a deposit via M-Pesa, then choose <a href="/phones/lipa-mdogo-mdogo-phones">daily, weekly, or monthly</a> installments — whichever fits your budget.
         Available near you across Nairobi. No hidden charges.
       </p>
       <div class="seo-tags">
-        <a href="/nairobi/all" class="seo-tag">phone installment delivery Nairobi</a>
-        <a href="/nairobi/all" class="seo-tag">online order phone Kenya</a>
-        <a href="/nairobi/all" class="seo-tag">available near me Nairobi</a>
-        <a href="/nairobi/storage-128gb" class="seo-tag">128GB installment phone</a>
-        <a href="/nairobi/storage-256gb" class="seo-tag">256GB pay later Kenya</a>
-        <a href="/nairobi/all" class="seo-tag">large battery phone installment</a>
-        <a href="/nairobi/all" class="seo-tag">big screen lipa mdogo mdogo</a>
-        <a href="/nairobi/all" class="seo-tag">most affordable smartphone Kenya</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">phone installment delivery Nairobi</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">online order phone Kenya</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">available near me Nairobi</a>
+        <a href="/phones/storage-128gb" class="seo-tag">128GB installment phone</a>
+        <a href="/phones/storage-256gb" class="seo-tag">256GB pay later Kenya</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">large battery phone installment</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">big screen lipa mdogo mdogo</a>
+        <a href="/phones/lipa-mdogo-mdogo-phones" class="seo-tag">most affordable smartphone Kenya</a>
       </div>
     </div>
 
