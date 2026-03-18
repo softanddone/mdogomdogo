@@ -8,6 +8,8 @@ import {
   parseDeposit,
   parseStorageSlug,
 } from '../../data/filter-config.js';
+import Gift from '../../components/Gift.astro';
+import Nav from '../../components/Nav.astro';
 
 // ─── getStaticPaths ───────────────────────────────────────────────────────────
 
@@ -294,13 +296,9 @@ const baseDepositHref = (b, d, s) => {
 </head>
 <body>
 
-<div class="top-banner">
-  🚀 Free Delivery Nairobi CBD &nbsp;|&nbsp; <span>Lipa Mdogo Mdogo</span> — Deposit from KSh 2,000 &nbsp;|&nbsp; ☎ 0100028823
-</div>
 
-<header class="site-header">
-  <a href="/" class="logo">Mdogomdogo<span>Deals</span></a>
-</header>
+  <Gift/>
+  <Nav/>
 
 <!-- BREADCRUMBS -->
 <nav class="breadcrumb-bar" aria-label="Breadcrumb">
