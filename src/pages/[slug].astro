@@ -229,13 +229,7 @@ function renderStars(r: number) {
   <Gift />
   <Nav />
 
-  <div class="top-banner">
-    Same-day delivery &nbsp;|&nbsp; <span>Lipa Mdogo Mdogo</span> &mdash; Pay only after delivery &nbsp;|&nbsp; 0100028823
-  </div>
-
-  <header class="site-header">
-    <a href="/" class="logo">Mdogomdogo<span>Deals</span></a>
-  </header>
+  
 
   <main class="product-page">
 
@@ -355,7 +349,12 @@ function renderStars(r: number) {
             </div>
           </div>
           <div class="installment-note">
-            Or from <strong>{currentProduct.from}/week</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
+            Or from <strong>
+              
+
+              {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
+              
+              /week</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
           </div>
           <ul class="pricing-bullets">
             <li>No payment before delivery</li>
@@ -656,7 +655,14 @@ function renderStars(r: number) {
           </div>
           <div class="price-kenya-row">
             <span class="pkr-label">Or from</span>
-            <span class="pkr-value accent">{currentProduct.from}<span class="pkr-per">/week</span></span>
+            <span class="pkr-value accent">
+              
+              
+
+
+              {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
+              
+              <span class="pkr-per">/week</span></span>
           </div>
         </div>
 
@@ -667,7 +673,15 @@ function renderStars(r: number) {
             That deposit is only paid <em>after</em> we deliver the phone to your door and you have inspected it —
             not before. Once you are happy, you pay the deposit and the phone is yours.
             You then continue with small payments of <strong>{currentProduct.daily} per day</strong>
-            or <strong>{currentProduct.from} per week</strong> at your own pace.
+            or <strong>
+              
+              
+              
+
+              {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
+              
+              
+               per week</strong> at your own pace.
             No interest. No hidden charges. No credit check.
           </p>
           <p>
@@ -823,7 +837,12 @@ function renderStars(r: number) {
             <div class="step-circle">5</div>
             <div>
               <strong>Start instalments</strong> — after a free grace period, pay
-              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {currentProduct.from}/week</strong>
+              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES 
+                
+                
+                {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
+                
+                /week</strong>
               at your own pace until the balance is cleared.
             </div>
           </li>
