@@ -1,291 +1,568 @@
 ---
-import CategoryLayout from "../layouts/CategoryLayout.astro";
-import { products } from "../data/product2";
-import ProductCard from "../components/ProductCard.astro";
-import PopularBrands from "../components/PopularBrands.astro";
+import { products } from '../data/product2.js';
+import {
+  DEPOSIT_FILTERS,
+  STORAGE_FILTERS,
+  ALL_BRANDS,
+  brandSlug,
+  parseDeposit,
+  parseStorageSlug,
+} from '../data/filter-config.js';
+import Gift from '../components/Gift.astro';
+import Nav from '../components/Nav.astro';
+
+// ─── getStaticPaths ───────────────────────────────────────────────────────────
 
 export async function getStaticPaths() {
-  const allCategories = new Set<string>();
+  const { products } = await import('../data/product2.js');
+
+  const allCategories = new Set();
 
   products.forEach((product) => {
-    const categoryPath = product.categoryPath as string[];
+    const categoryPath = product.categoryPath;
     categoryPath.forEach((category) => {
       const slug = category
         .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/[^\w-]/g, "-")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "");
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
       allCategories.add(slug);
     });
   });
 
-  const categories = Array.from(allCategories);
-  const paths = categories.map((category) => ({
-    params: { category },
-  }));
-
-  return paths;
+  return Array.from(allCategories).map((slug) => ({ params: { category: slug } }));
 }
+
+// ─── PAGE DATA ────────────────────────────────────────────────────────────────
 
 const { category } = Astro.params;
 
-// Filter products
-const filteredProducts = products.filter((product) => {
-  const categoryPath = product.categoryPath as string[];
-  return categoryPath.some((cat) => {
-    const slug = cat
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]/g, "-")
-      .replace(/-+/g, "-")
-      .replace(/^-|-$/g, "");
-    return slug === category;
-  });
-});
+const toSlug = (str) =>
+  str.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+
+// Filter products by category
+const filteredProducts = products.filter((product) =>
+  (product.categoryPath).some((cat) => toSlug(cat) === category)
+);
 
 if (filteredProducts.length === 0) {
-  throw new Error(`No products found in the category: ${category}`);
+  throw new Error(`No products found in category: ${category}`);
 }
 
-// Get display name
+// Resolve display name
 let displayCategory = category;
 for (const product of filteredProducts) {
-  const categoryPath = product.categoryPath as string[];
-  const found = categoryPath.find((cat) => {
-    const slug = cat
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]/g, "-")
-      .replace(/-+/g, "-")
-      .replace(/^-|-$/g, "");
-    return slug === category;
-  });
-  if (found) {
-    displayCategory = found;
-    break;
-  }
+  const found = (product.categoryPath).find((cat) => toSlug(cat) === category);
+  if (found) { displayCategory = found; break; }
 }
 
-// Get price range
-const prices = filteredProducts.map((p) =>
-  parseInt(p.totalPrice.replace(/[^\d]/g, ""))
-);
-const minPrice = Math.min(...prices);
-const maxPrice = Math.max(...prices);
+// Price range
+const prices = filteredProducts.map((p) => parseInt((p.totalPrice ?? p.deposit ?? '0').replace(/[^\d]/g, ''), 10)).filter(Boolean);
+const minPrice = prices.length ? Math.min(...prices) : 0;
+const maxPrice = prices.length ? Math.max(...prices) : 0;
 
-// Props for CategoryLayout
-const layoutProps = {
-  category: category,
-  displayCategory: displayCategory,
-  products: filteredProducts,
-};
+const CARDS_PER_PAGE = 20;
+const totalPages = Math.ceil(filteredProducts.length / CARDS_PER_PAGE);
+
+// ─── SEO ──────────────────────────────────────────────────────────────────────
+
+const pageTitle = `${displayCategory} Phones on Lipa Mdogo Mdogo in Nairobi | MdogomdogoDeals`;
+const metaDesc = `Buy genuine ${displayCategory} smartphones in Kenya on Lipa Mdogo Mdogo installments. Pay a small deposit and spread the rest weekly via M-Pesa. No credit check. Free delivery Nairobi. ${filteredProducts.length} ${displayCategory} phones available.`;
+const canonicalUrl = `https://mdogomdogodeals.co.ke/categories/${category}`;
+
+const breadcrumbs = [
+  { label: 'Home',       href: '/' },
+  { label: 'All Categories', href: '/phones/lipa-mdogo-mdogo-nairobi' },
+  { label: displayCategory, href: `/categories/${category}` },
+];
+
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  return '★'.repeat(full) + '☆'.repeat(5 - full);
+}
 ---
 
-<CategoryLayout {...layoutProps}>
-  <link rel="stylesheet" href="/styles/category.css" slot="head" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={metaDesc} />
+  <link rel="canonical" href={canonicalUrl} />
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a>
-    <span class="separator">›</span>
-    <a href="/categories">Categories</a>
-    <span class="separator">›</span>
-    <span>{displayCategory}</span>
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={pageTitle} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:url"         content={canonicalUrl} />
+  <meta property="og:site_name"   content="MdogomdogoDeals" />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `${displayCategory} Phones`,
+    "description": metaDesc,
+    "numberOfItems": filteredProducts.length,
+    "itemListElement": filteredProducts.slice(0, 20).map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.fullname ?? p.name,
+        "brand": { "@type": "Brand", "name": p.brand },
+        "image": p.source,
+        "url": `https://mdogomdogodeals.co.ke/${p.slug}`,
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "KES",
+          "price": (p.totalPrice ?? p.deposit ?? '0').replace(/[^0-9]/g, ''),
+          "availability": "https://schema.org/InStock",
+          "seller": { "@type": "Organization", "name": "MdogomdogoDeals" }
+        }
+      }
+    }))
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": b.label,
+      "item": `https://mdogomdogodeals.co.ke${b.href}`
+    }))
+  })} />
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1a73e8; --primary-dark: #1557b0; --primary-light: #e8f0fe;
+      --gold: #f5a623; --navy: #0d1b2a; --green: #00b96b; --red: #e53935;
+      --gray-1: #f5f7fa; --gray-2: #e8eaed; --gray-3: #9aa0a6;
+      --text: #202124; --text-light: #5f6368;
+      --badge-new: #00b96b; --badge-hot: #e53935; --badge-sale: #1a73e8;
+    }
+    body { font-family: 'Barlow', sans-serif; background: var(--gray-1); color: var(--text); }
+
+    /* Breadcrumbs */
+    .breadcrumb-bar { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 16px; }
+    .breadcrumb-list { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; list-style: none; }
+    .breadcrumb-list li { font-size: 13px; color: var(--text-light); }
+    .breadcrumb-list li a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .breadcrumb-list li a:hover { text-decoration: underline; }
+    .breadcrumb-list li.sep { color: var(--gray-3); }
+
+    /* Filter navigation rows */
+    .filter-nav { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 8px 0 0; }
+    .filter-nav-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; padding: 0 16px; margin-bottom: 6px; }
+    .filter-nav-scroll { display: flex; align-items: center; gap: 7px; overflow-x: auto; padding: 2px 16px 10px; scrollbar-width: none; -ms-overflow-style: none; }
+    .filter-nav-scroll::-webkit-scrollbar { display: none; }
+    .filter-nav-link { display: inline-flex; align-items: center; flex-shrink: 0; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+    .filter-nav-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .filter-nav-link.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+    /* Page header */
+    .page-header { max-width: 1280px; margin: 0 auto; padding: 20px 20px 0; }
+    .page-header h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .page-header p { font-size: 14px; color: var(--text-light); margin-bottom: 16px; }
+    .result-count { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 6px; padding: 3px 10px; font-size: 13px; font-weight: 700; margin-left: 10px; }
+
+    /* Trust block */
+    .trust-block { max-width: 1280px; margin: 0 auto 4px; padding: 12px 20px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .trust-item { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 8px; padding: 10px 12px; }
+    .trust-item .icon { font-size: 20px; flex-shrink: 0; color: var(--primary); display: flex; align-items: center; }
+    .trust-item strong { display: block; font-size: 12px; color: var(--text); font-weight: 700; }
+    .trust-item p { margin: 0; font-size: 11px; color: var(--text-light); }
+    @media (max-width: 800px) { .trust-block { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .trust-block { grid-template-columns: 1fr 1fr; gap: 8px; } }
+
+    /* Active filter chips */
+    .active-filters { max-width: 1280px; margin: 0 auto; padding: 12px 20px 4px; }
+    .active-filters-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 7px; }
+    .active-filter-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+    .filter-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--primary-light); border: 1.5px solid var(--primary); color: var(--primary); border-radius: 20px; padding: 5px 12px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.15s; }
+    .filter-chip:hover { background: #d2e3fc; }
+    .filter-chip svg { flex-shrink: 0; opacity: 0.7; }
+    .filter-chip-clear { display: inline-flex; align-items: center; font-size: 13px; color: var(--red); font-weight: 600; text-decoration: none; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--red); background: #fdecea; transition: opacity 0.15s; }
+    .filter-chip-clear:hover { opacity: 0.75; }
+
+    /* Product grid */
+    .page-body { max-width: 1280px; margin: 0 auto; padding: 20px 20px 24px; }
+    .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .card { display: none; flex-direction: column; background: #fff; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--gray-2); transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; cursor: pointer; position: relative; text-decoration: none; color: inherit; }
+    .card.visible { display: flex; }
+    .card:hover { border-color: var(--primary); box-shadow: 0 8px 28px rgba(26,115,232,0.12); transform: translateY(-3px); }
+    .badge { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 3px 9px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
+    .badge-new { background: var(--badge-new); } .badge-hot { background: var(--badge-hot); } .badge-sale { background: var(--badge-sale); }
+    .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--gray-1); display: flex; align-items: center; justify-content: center; }
+    .card-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; transition: transform 0.3s; }
+    .card:hover .card-img { transform: scale(1.05); }
+    .card-body { padding: 12px 12px 10px; flex: 1; display: flex; flex-direction: column; }
+    .card-brand { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; margin-bottom: 6px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-specs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .spec-tag { background: var(--gray-1); border: 1px solid var(--gray-2); color: var(--text-light); border-radius: 4px; padding: 2px 7px; font-size: 11px; }
+    .stars { color: var(--gold); font-size: 13px; } .rating-count { font-size: 11.5px; color: var(--text-light); }
+    .card-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 9px; }
+    .price-current { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--primary); }
+    .price-save { font-size: 11.5px; font-weight: 700; color: var(--green); }
+    .card-price { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; margin-bottom: 6px; }
+    .installment-note { font-size: 11.5px; color: var(--primary-dark); font-weight: 600; background: var(--primary-light); padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+    .card-cta { display: flex; gap: 7px; margin-top: auto; }
+    .btn-cart { flex: 1; background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-cart:hover { background: var(--primary-dark); }
+    .btn-buy { flex: 1; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-buy:hover { background: #162640; }
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; }
+    .empty-state h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 8px; }
+    .empty-state a { color: var(--primary); font-weight: 600; }
+
+    /* Pagination */
+    .pagination-wrap { max-width: 1280px; margin: 0 auto; padding: 4px 20px 48px; }
+    .pagination-info { text-align: center; font-size: 13px; color: var(--text-light); margin-bottom: 14px; }
+    .pagination-bar { display: flex; align-items: center; justify-content: center; gap: 5px; flex-wrap: wrap; }
+    .page-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; padding: 0 12px; border: 1.5px solid var(--gray-2); background: #fff; color: var(--text); border-radius: 8px; font-size: 14px; font-weight: 600; font-family: 'Barlow', sans-serif; cursor: pointer; transition: all 0.15s; }
+    .page-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .page-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; cursor: default; pointer-events: none; }
+    .page-btn.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .page-ellipsis { display: inline-flex; align-items: flex-end; justify-content: center; width: 32px; height: 40px; color: var(--text-light); font-size: 16px; padding-bottom: 4px; user-select: none; }
+
+    /* Related filters */
+    .related-filters { max-width: 1280px; margin: 0 auto; padding: 0 20px 32px; }
+    .related-filters h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .related-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+    .related-link { display: inline-block; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
+    .related-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .related-link .count { font-size: 11px; color: var(--text-light); margin-left: 3px; }
+
+    /* SEO content block */
+    .seo-section { max-width: 1280px; margin: 0 auto; padding: 0 20px 56px; }
+    .seo-section hr { border: none; border-top: 1px solid var(--gray-2); margin-bottom: 28px; }
+    .seo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 40px; }
+    .seo-col h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+    .seo-col p { font-size: 13px; color: var(--text-light); line-height: 1.75; }
+    .seo-col p a { color: var(--text-light); text-decoration: underline; text-decoration-color: var(--gray-2); text-underline-offset: 2px; }
+    .seo-col p a:hover { color: var(--primary); text-decoration-color: var(--primary); }
+    .seo-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+    .seo-tag { display: inline-block; background: #fff; border: 1px solid var(--gray-2); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--text-light); text-decoration: none; transition: all 0.12s; }
+    .seo-tag:hover { border-color: var(--primary); color: var(--primary); }
+
+    @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 800px)  { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px)  { .seo-grid { grid-template-columns: 1fr; gap: 20px; } }
+  </style>
+</head>
+<body>
+
+  <Gift />
+  <Nav />
+
+  <!-- BREADCRUMBS -->
+  <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list">
+      {breadcrumbs.map((b, i) => (
+        <>
+          {i > 0 && <li class="sep">›</li>}
+          <li>{i < breadcrumbs.length - 1 ? <a href={b.href}>{b.label}</a> : b.label}</li>
+        </>
+      ))}
+    </ol>
   </nav>
 
-  <PopularBrands />
+  <!-- DEPOSIT FILTER -->
+  <nav class="filter-nav" aria-label="Filter by deposit">
+    <span class="filter-nav-label">Deposit</span>
+    <div class="filter-nav-scroll">
+      <a href={`/categories/${category}`} class="filter-nav-link active">All</a>
+      {DEPOSIT_FILTERS.map(dep => (
+        <a href={`/phones/${dep.key}`} class="filter-nav-link">{dep.label}</a>
+      ))}
+    </div>
+  </nav>
 
-  <div class="category-container">
-    <header class="category-header">
-      <h1>{displayCategory} Phones on Lipa Mdogo Mdogo in Kenya</h1>
-      <p class="category-intro">
-        Buy genuine <strong>{displayCategory}</strong> smartphones in Kenya with our
-        flexible
-        <strong>Lipa Mdogo Mdogo</strong> payment plan. Pay a small deposit and continue
-        with affordable daily installments from <strong>Ksh 80 per day</strong>.
-        We have
-        <strong>{filteredProducts.length} {displayCategory} models</strong> ranging
-        from Ksh {minPrice.toLocaleString()} to Ksh {maxPrice.toLocaleString()},
-        all with 100% original warranties and free same-day delivery in Nairobi,
-        Kiambu, and surrounding areas.
-      </p>
-    </header>
+  <!-- BRAND FILTER -->
+  <nav class="filter-nav" aria-label="Filter by brand">
+    <span class="filter-nav-label">Brand</span>
+    <div class="filter-nav-scroll">
+      <a href={`/categories/${category}`} class="filter-nav-link active">All</a>
+      {ALL_BRANDS.map(brand => (
+        <a href={`/phones/${brandSlug(brand)}`} class="filter-nav-link">{brand}</a>
+      ))}
+    </div>
+  </nav>
 
-    <aside class="trust-block">
-      <div class="trust-item">
-        <span class="icon">🚚</span>
-        <div>
-          <strong>Free Delivery</strong>
-          <p>Same-day in Nairobi</p>
-        </div>
-      </div>
-      <div class="trust-item">
-        <span class="icon">💳</span>
-        <div>
-          <strong>Daily Payments</strong>
-          <p>From Ksh 80/day</p>
-        </div>
-      </div>
-      <div class="trust-item">
-        <span class="icon">⚡</span>
-        <div>
-          <strong>Quick Approval</strong>
-          <p>Get approved in minutes</p>
-        </div>
-      </div>
-      <div class="trust-item">
-        <span class="icon">✅</span>
-        <div>
-          <strong>Genuine Products</strong>
-          <p>100% original with warranty</p>
-        </div>
-      </div>
-    </aside>
+  <!-- STORAGE FILTER -->
+  <nav class="filter-nav" aria-label="Filter by storage">
+    <span class="filter-nav-label">Storage</span>
+    <div class="filter-nav-scroll">
+      <a href={`/categories/${category}`} class="filter-nav-link active">All</a>
+      {STORAGE_FILTERS.map(stor => (
+        <a href={`/phones/${stor.key}`} class="filter-nav-link">{stor.label}</a>
+      ))}
+    </div>
+  </nav>
 
-    <section class="products-section">
-      <h2>Available {displayCategory} Phones</h2>
-      <div class="product-grid">
-        {filteredProducts.map((product) => <ProductCard {...product} />)}
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>
+      {displayCategory} Phones on Lipa Mdogo Mdogo
+      <span class="result-count">{filteredProducts.length} phones</span>
+    </h1>
+    <p>
+      Buy genuine <strong>{displayCategory}</strong> smartphones in Nairobi on flexible installments.
+      {minPrice > 0 && maxPrice > 0 && ` Prices from Ksh ${minPrice.toLocaleString()} to Ksh ${maxPrice.toLocaleString()}.`}
+      {' '}Pay on delivery via M-Pesa — no credit check required.
+    </p>
+  </div>
+
+  <!-- TRUST BLOCK -->
+  <div class="trust-block">
+    <div class="trust-item">
+      <span class="icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </span>
+      <div><strong>Free Delivery</strong><p>Same-day in Nairobi</p></div>
+    </div>
+    <div class="trust-item">
+      <span class="icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </span>
+      <div><strong>Daily Payments</strong><p>From Ksh 80/day</p></div>
+    </div>
+    <div class="trust-item">
+      <span class="icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </span>
+      <div><strong>Quick Approval</strong><p>Get approved in minutes</p></div>
+    </div>
+    <div class="trust-item">
+      <span class="icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </span>
+      <div><strong>Genuine Products</strong><p>100% original with warranty</p></div>
+    </div>
+  </div>
+
+  <!-- ACTIVE FILTER CHIPS — category chip always shown -->
+  <div class="active-filters">
+    <span class="active-filters-label">Active filters</span>
+    <div class="active-filter-chips">
+      <span class="filter-chip">
+        {displayCategory}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </span>
+      <a href="/categories" class="filter-chip-clear">Clear all</a>
+    </div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <main class="page-body">
+    <div class="product-grid" id="product-grid">
+      {filteredProducts.length === 0 ? (
+        <div class="empty-state">
+          <h2>😕 No phones found in this category</h2>
+          <p><a href="/categories">View all categories</a> or <a href="/phones/lipa-mdogo-mdogo-nairobi">browse all phones</a>.</p>
+        </div>
+      ) : filteredProducts.map((p, i) => {
+        const statusLower = p.status?.toLowerCase();
+        const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+        const badgeLabel  = p.status ?? 'NEW';
+        const specs       = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
+        const rating      = p.reviews?.averageRating ?? 4.5;
+        const reviewCount = p.reviews?.reviewCount ?? 0;
+        const altText     = [p.fullname ?? p.name, p.brand, displayCategory, 'Lipa Mdogo Mdogo Buy Nairobi Kenya'].filter(Boolean).join(' ');
+        return (
+          <a href={`/${p.slug}`} class="card" data-index={i} style="text-decoration:none; color:inherit;">
+            <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
+            <div class="card-img-wrap">
+              <img class="card-img" src={p.source} alt={altText} loading="lazy" width="300" height="225" decoding="async" />
+            </div>
+            <div class="card-body">
+              <div class="card-brand">{p.brand}</div>
+              <div class="card-name">{p.fullname}</div>
+              <div class="card-specs">{specs.map(s => <span class="spec-tag">{s}</span>)}</div>
+              <div class="card-rating">
+                <span class="stars">{renderStars(rating)}</span>
+                <span class="rating-count">({reviewCount})</span>
+              </div>
+              <div class="card-price">
+                <span class="price-current">{p.deposit}</span>
+                {p.discount && <span class="price-save">{p.discount}</span>}
+              </div>
+              <div class="installment-note">Small instalments · Deposit {p.deposit}</div>
+              <div class="card-cta">
+                <button class="btn-cart">Add to Cart</button>
+                <button class="btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </main>
+
+  <!-- PAGINATION -->
+  {filteredProducts.length > CARDS_PER_PAGE && (
+    <div class="pagination-wrap" id="pagination-wrap">
+      <p class="pagination-info" id="pagination-info"></p>
+      <div class="pagination-bar" id="pagination-bar"></div>
+    </div>
+  )}
+
+  <!-- RELATED FILTER SUGGESTIONS -->
+  {filteredProducts.length > 0 && (
+    <section class="related-filters">
+      <h2>Browse More</h2>
+      <div class="related-grid">
+        {ALL_BRANDS.map(brand => {
+          const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
+          return (
+            <a href={`/phones/${brandSlug(brand)}`} class="related-link">
+              {brand}<span class="count">({count})</span>
+            </a>
+          );
+        })}
+        {DEPOSIT_FILTERS.map(dep => {
+          const count = products.filter(p => {
+            const d = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
+            return d >= dep.min && d <= dep.max;
+          }).length;
+          return (
+            <a href={`/phones/${dep.key}`} class="related-link">
+              {dep.label}<span class="count">({count})</span>
+            </a>
+          );
+        })}
+        {STORAGE_FILTERS.map(stor => (
+          <a href={`/phones/${stor.key}`} class="related-link">{stor.label} Storage</a>
+        ))}
       </div>
     </section>
-  </div>
-</CategoryLayout>
+  )}
 
-<style>
-  .breadcrumb {
-    max-width: 1200px;
-    margin: 1rem auto;
-    padding: 0 1rem;
-    font-size: 0.9rem;
-    color: #666;
-  }
+  <!-- SEO CONTENT -->
+  <section class="seo-section" aria-label={`About ${displayCategory} phones in Nairobi`}>
+    <hr />
+    <div class="seo-grid">
 
-  .breadcrumb a {
-    color: #ff6b35;
-    text-decoration: none;
-  }
+      <div class="seo-col">
+        <h3>{displayCategory} on Lipa Mdogo Mdogo</h3>
+        <p>
+          Shop the latest <strong>{displayCategory}</strong> smartphones on <strong>lipa mdogo mdogo</strong> installments
+          in Nairobi — no credit check, no guarantor, no stress.
+          Pay a small deposit from KSh 2,000 and spread the rest weekly via M-Pesa.
+          We stock {filteredProducts.length} {displayCategory} models, all 100% genuine with warranty.
+        </p>
+        <div class="seo-tags">
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy phone pay later Kenya</a>
+          <a href="/phones/deposit-under-3000"        class="seo-tag">phones deposit under 3000</a>
+          <a href="/phones/deposit-under-5000"        class="seo-tag">phones deposit under 5000</a>
+          <a href="/phones/deposit-under-10000"       class="seo-tag">phones deposit under 10000</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">pay weekly M-Pesa phone</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa pole pole phones Nairobi</a>
+        </div>
+      </div>
 
-  .breadcrumb a:hover {
-    text-decoration: underline;
-  }
+      <div class="seo-col">
+        <h3>Popular Brands</h3>
+        <p>
+          Looking for a specific brand?
+          <a href="/phones/samsung">Samsung Galaxy</a>,
+          <a href="/phones/tecno">Tecno Spark &amp; Camon</a>,
+          <a href="/phones/infinix">Infinix Hot Series</a>, and
+          <a href="/phones/redmi">Redmi</a> are all available on easy weekly installments.
+          Compare models and find the best {displayCategory} phone for your budget.
+        </p>
+        <div class="seo-tags">
+          <a href="/phones/samsung"  class="seo-tag">Samsung lipa mdogo mdogo</a>
+          <a href="/phones/tecno"    class="seo-tag">Tecno installment Nairobi</a>
+          <a href="/phones/infinix"  class="seo-tag">Infinix lipa mdogo mdogo</a>
+          <a href="/phones/redmi"    class="seo-tag">Redmi 4G installment Kenya</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">5G phones lipa mdogo mdogo</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">good camera phone pay later</a>
+        </div>
+      </div>
 
-  .separator {
-    margin: 0 0.5rem;
-  }
+      <div class="seo-col">
+        <h3>Delivery &amp; How It Works</h3>
+        <p>
+          Order online and get same-day delivery in Nairobi CBD.
+          Pay a deposit via M-Pesa, then choose <a href="/phones/lipa-mdogo-mdogo-nairobi">daily, weekly, or monthly</a> installments — whichever fits your budget.
+          Available across Nairobi. No hidden charges.
+        </p>
+        <div class="seo-tags">
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phone installment delivery Nairobi</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">online order phone Kenya</a>
+          <a href="/phones/storage-128gb"             class="seo-tag">128GB installment phone</a>
+          <a href="/phones/storage-256gb"             class="seo-tag">256GB pay later Kenya</a>
+          <a href="/phones/deposit-under-3000"        class="seo-tag">most affordable smartphone Kenya</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">large battery phone installment</a>
+        </div>
+      </div>
 
-  .category-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
+    </div>
+  </section>
 
-  .category-header {
-    margin: 2rem 0 1.5rem;
-  }
+  <script define:vars={{ totalPages, CARDS_PER_PAGE, totalProducts: filteredProducts.length }}>
+  (function () {
+    const cards  = Array.from(document.querySelectorAll('#product-grid .card'));
+    const infoEl = document.getElementById('pagination-info');
+    const barEl  = document.getElementById('pagination-bar');
 
-  .category-header h1 {
-    font-size: 2rem;
-    margin: 0 0 1rem 0;
-    color: #333;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .category-intro {
-    line-height: 1.7;
-    color: #555;
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .category-intro strong {
-    color: #ff6b35;
-  }
-
-  .trust-block {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 8px;
-    border: 1px solid #e8e8e8;
-  }
-
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-
-  .trust-item strong {
-    display: block;
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 0.1rem;
-  }
-
-  .trust-item p {
-    margin: 0;
-    font-size: 0.8rem;
-    color: #666;
-  }
-
-  .products-section {
-    margin: 2rem 0;
-  }
-
-  .products-section h2 {
-    font-size: 1.5rem;
-    margin: 0 0 1.5rem 0;
-    color: #333;
-    font-weight: 600;
-  }
-
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  @media screen and (max-width: 599px) {
-    .category-header h1 {
-      font-size: 1.5rem;
+    if (!cards.length || totalPages <= 1) {
+      cards.forEach(c => c.classList.add('visible'));
+      return;
     }
 
-    .product-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+    let currentPage = 1;
+
+    function showPage(page) {
+      currentPage = page;
+      const start = (page - 1) * CARDS_PER_PAGE;
+      const end   = start + CARDS_PER_PAGE;
+      cards.forEach((c, i) => c.classList.toggle('visible', i >= start && i < end));
+      infoEl.textContent = `Showing ${start + 1}–${Math.min(end, totalProducts)} of ${totalProducts} phones`;
+      buildBar(page);
+      document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    .trust-block {
-      grid-template-columns: 1fr;
-      padding: 1rem;
+    function buildBar(active) {
+      barEl.innerHTML = '';
+      const make = (label, page, cls) => {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn' + (cls ? ' ' + cls : '');
+        btn.innerHTML = label;
+        if (page !== null) btn.addEventListener('click', () => showPage(page));
+        return btn;
+      };
+      const dot = () => {
+        const s = document.createElement('span');
+        s.className = 'page-ellipsis';
+        s.textContent = '…';
+        return s;
+      };
+      const prev = make('&#8592;', active - 1);
+      if (active === 1) prev.classList.add('disabled');
+      barEl.appendChild(prev);
+      const nums = [...new Set([1, totalPages, active, active - 1, active + 1].filter(p => p >= 1 && p <= totalPages))].sort((a, b) => a - b);
+      let last = 0;
+      nums.forEach(p => {
+        if (p - last > 1) barEl.appendChild(dot());
+        barEl.appendChild(make(p, p, p === active ? 'active' : ''));
+        last = p;
+      });
+      const next = make('&#8594;', active + 1);
+      if (active === totalPages) next.classList.add('disabled');
+      barEl.appendChild(next);
     }
-  }
 
-  @media screen and (min-width: 600px) and (max-width: 899px) {
-    .product-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
+    showPage(1);
+  })();
+  </script>
 
-  @media screen and (min-width: 900px) and (max-width: 1199px) {
-    .product-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media screen and (min-width: 1200px) {
-    .product-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-</style>
+</body>
+</html>

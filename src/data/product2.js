@@ -127,6 +127,123 @@ export const products = [
 
 
 
+  {
+    id: 1,
+    name: "Tecno Pop 10",
+    fullname:"Tecno Pop 10 6.6 Inches, 64GB ROM + 4GB RAM, Battery: 5000mAh (Dual SIM) 13MP",
+    status: "New",
+    image: "/product/phones/tecnopop10-64.webp",
+    from: "KSh 2,000",
+    deposit: "KSh 2,000",
+    daily: "Ksh 70",
+    totalPrice: "KSh 12,000",
+    source: "/phones/tecnopop10-64.webp",
+    discount: "-10%",
+    display: "block",
+    phonedisplay: "6.6\" HD+ (1612 × 720)",
+    processor: "Unisoc Quad-Core",
+    camera: "13MP (rear), 8MP (front)",
+    memory: "64GB / 4GB RAM, MicroSD up to 256GB",
+    battery: "5000mAh, 10W Charging",
+    version: "Android 13 (Go Edition), HiOS",
+    depositanddaily: "KSh 2,500 Daily KSh 70",
+    slug: "tecno-pop-10-64-4",
+    slugs: "tecno-pop-10-64-4",
+    description: "Buy Tecno Pop 10 64GB on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & affordable daily payments. Fast delivery available",
+    brand: "Tecno",
+    seller: "Mkopa",
+    model: "Tecno Pop 10",
+    storage: "64GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+    details: [
+      {
+        title: "Body and Design",
+        content: `The Tecno Pop 10 features a simple yet stylish design with a textured back that improves grip and reduces fingerprints. It is lightweight and easy to carry, making it ideal for everyday use. Available in multiple vibrant colors, it offers a modern look at an entry-level price.`,
+      },
+      {
+        title: "Display",
+        content: `Enjoy a 6.6-inch HD+ display with a resolution of 1612 × 720 pixels. The screen is large enough for watching videos, browsing, and social media. With decent brightness and color reproduction, it provides a comfortable viewing experience for daily tasks.`,
+      },
+      {
+        title: "Camera System",
+        content: `The Tecno Pop 10 comes with a 13MP rear camera capable of capturing clear photos in good lighting conditions. The 8MP front camera is suitable for selfies and video calls. AI enhancements help improve image quality, especially for portraits and beauty shots.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by a Unisoc quad-core processor, the device handles basic tasks such as calls, WhatsApp, browsing, and light apps smoothly. With 4GB RAM and 64GB storage, users get a decent performance for everyday usage and entry-level multitasking.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running on Android 13 Go Edition with HiOS, the Tecno Pop 10 is optimized for smooth performance on entry-level hardware. It offers a clean interface, essential apps, and improved efficiency for better usability.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `The phone comes with 64GB internal storage and 4GB RAM, expandable via MicroSD up to 256GB. This provides enough space for apps, photos, and videos while maintaining smooth performance.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `Equipped with a 5000mAh battery, the Tecno Pop 10 easily lasts a full day on normal usage. It supports 10W charging, ensuring steady and reliable power when needed.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Connectivity options include 4G LTE, Wi-Fi, Bluetooth, GPS, and a Micro-USB port. The device also includes basic sensors like an accelerometer and face unlock for convenient access.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Affordable entry-level smartphone",
+          "Large 6.6″ display",
+          "Good battery life (5000mAh)",
+          "Expandable storage",
+          "Lightweight and easy to use",
+        ],
+        cons: [
+          "Basic performance (not for heavy gaming)",
+          "Average camera in low light",
+          "Slow 10W charging",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Tecno Pop 10 is a budget-friendly smartphone ideal for beginners, students, and anyone looking for a reliable daily device. It offers solid battery life, a large display, and essential features at a very affordable price.`,
+      },
+    ],
+
+    color: "Black, Blue, Green",
+    weight: "190g",
+    dimensions: {
+      length: "164mm",
+      width: "75.5mm",
+      height: "8.9mm"
+    },
+    material: "Plastic",
+    pattern: "Matte",
+    productLine: "Tecno Pop",
+    reviews: {
+      averageRating: 4.3,
+      reviewCount: 18,
+      reviews: [
+        {
+          author: "Kevin O.",
+          rating: 4,
+          reviewBody: "Very affordable and works well for daily use.",
+          datePublished: "2025-02-10"
+        },
+        {
+          author: "Mary W.",
+          rating: 5,
+          reviewBody: "Battery life is impressive for this price.",
+          datePublished: "2025-03-01"
+        }
+      ]
+    }
+},
+
+
+
 
   {
   id: 2,
