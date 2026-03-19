@@ -1,53 +1,915 @@
 ---
-import Welcome from "../components/Welcome.astro";
-import Nav from "../components/Nav.astro";
-import HeadText from "../components/HeadText.astro";
-import HomeLayout from "../layouts/HomeLayout.astro";
-import Hero from "../components/Hero.astro";
-import PopularBrands from "../components/PopularBrands.astro";
-import Credit from "../components/Credit.astro";
-import Gift from "../components/Gift.astro";
-import Summary from "../components/Summary.astro";
-import Loop from "../components/Loop.astro";
-import Brands from "../components/Brands.astro";
-import THead from "../components/THead.astro";
-import WhatsappCall from "../components/WhatsappCall.astro";
-import HeaderOffers from "../components/HeaderOffers.astro";
-// import Offer from "./[offer].astro";
+import { products } from '../data/product2.js';
+import {
+  ALL_BRANDS,
+  DEPOSIT_FILTERS,
+  STORAGE_FILTERS,
+  brandSlug,
+  parseDeposit,
+} from '../data/filter-config.js';
+import Gift from '../components/Gift.astro';
+import Nav from '../components/Nav.astro';
 
-import Offer from "../components/Offer.astro";
+// ── Featured: first 5 products (or filter by status === 'New' / 'Hot')
+const featured   = products.slice(0, 5);
+const samsungList = products.filter(p => p.brand?.toLowerCase() === 'samsung').slice(0, 5);
+const tecnoList   = products.filter(p => p.brand?.toLowerCase() === 'tecno').slice(0, 5);
 
+function renderStars(rating) {
+  const full = Math.floor(rating ?? 4.5);
+  return '★'.repeat(full) + '☆'.repeat(5 - full);
+}
 
-
-
+const pageTitle = 'MdogomdogoDeals — Lipa Mdogo Mdogo Phones Nairobi | Pay Weekly via M-Pesa';
+const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small deposit from KSh 2,000 and spread the rest weekly via M-Pesa. Samsung, Tecno, Infinix — no credit check, free delivery Nairobi CBD.';
 ---
-<HomeLayout>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={metaDesc} />
+  <link rel="canonical" href="https://mdogomdogodeals.co.ke/" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={pageTitle} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:url"         content="https://mdogomdogodeals.co.ke/" />
+  <meta property="og:site_name"   content="MdogomdogoDeals" />
 
-<HeaderOffers/>
-    <WhatsappCall/>
-    <Offer />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MdogomdogoDeals",
+    "url": "https://mdogomdogodeals.co.ke",
+    "description": metaDesc,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://mdogomdogodeals.co.ke/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  })} />
 
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- <Gift />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1a73e8; --primary-dark: #1557b0; --primary-light: #e8f0fe;
+      --gold: #f5a623; --navy: #0d1b2a; --green: #00b96b; --red: #e53935;
+      --gray-1: #f5f7fa; --gray-2: #e8eaed; --gray-3: #9aa0a6;
+      --text: #202124; --text-light: #5f6368;
+    }
+    body { font-family: 'Barlow', sans-serif; background: #fff; color: var(--text); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
 
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--primary);
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 7px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 20px; }
+    .top-bar a { color: #fff; font-weight: 700; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: #fff;
+      border-bottom: 2px solid var(--gray-2);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; color: var(--navy); letter-spacing: -0.5px; }
+    .logo span { color: var(--primary); }
+
+    .header-search { flex: 1; max-width: 500px; display: flex; border: 1.5px solid var(--gray-2); border-radius: 8px; overflow: hidden; }
+    .header-search input { flex: 1; border: none; outline: none; padding: 9px 14px; font-size: 14px; font-family: 'Barlow', sans-serif; color: var(--text); background: #fff; }
+    .header-search button { background: var(--primary); border: none; color: #fff; padding: 0 16px; cursor: pointer; font-size: 14px; font-family: 'Barlow', sans-serif; font-weight: 700; white-space: nowrap; }
+
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .header-contact .label  { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; }
+    .header-contact .number { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; color: var(--navy); }
+    .header-wa {
+      background: #25d366;
+      color: #fff;
+      border-radius: 7px;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      border: none;
+    }
+
+    /* ── MAIN NAV ── */
+    .main-nav { background: #fff; border-bottom: 1px solid var(--gray-2); }
+    .main-nav ul {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .main-nav ul::-webkit-scrollbar { display: none; }
+    .main-nav li a {
+      display: block;
+      padding: 11px 13px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .main-nav li a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+    .main-nav li a.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 700; }
+
+    /* ── HERO ── */
+    .hero-banner { background: var(--primary-light); border-bottom: 1px solid #c5d9fa; padding: 24px 20px; }
+    .hero-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .hero-text h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 900; color: var(--navy); line-height: 1.1; margin-bottom: 8px; }
+    .hero-text h1 span { color: var(--primary); }
+    .hero-text p { font-size: 14px; color: var(--text-light); margin-bottom: 16px; max-width: 440px; line-height: 1.65; }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 7px;
+      padding: 10px 24px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      display: inline-block;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline {
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      border-radius: 7px;
+      padding: 9px 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      display: inline-block;
+      background: #fff;
+      transition: background 0.15s;
+    }
+    .btn-outline:hover { background: var(--primary-light); }
+
+    .deposit-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dep-chip {
+      background: #fff;
+      border: 1.5px solid #c5d9fa;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+      min-width: 120px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .dep-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .dep-chip small { display: block; font-family: 'Barlow', sans-serif; font-size: 11px; font-weight: 600; color: var(--text-light); margin-top: 2px; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 11px 20px; }
+    .trust-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    .trust-icon {
+      width: 20px;
+      height: 20px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 11px; height: 11px; }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+    .section-head { display: flex; align-items: center; justify-content: space-between; padding-top: 26px; margin-bottom: 14px; }
+    .section-head h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .tag { display: inline-block; background: var(--primary); color: #fff; font-size: 10.5px; font-family: 'Barlow', sans-serif; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .tag.hot { background: var(--red); }
+    .tag.new { background: var(--green); }
+    .see-all { font-size: 13px; font-weight: 700; color: var(--primary); }
+    .see-all:hover { text-decoration: underline; }
+    .section-rule { border: none; border-top: 1px solid var(--gray-2); margin: 4px 0 0; }
+
+    /* ── BRAND GRID ── */
+    .brand-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 24px; }
+    .brand-chip {
+      background: #fff;
+      border: 1.5px solid var(--gray-2);
+      border-radius: 10px;
+      padding: 16px 12px 12px;
+      text-align: center;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .brand-chip:hover { border-color: var(--primary); box-shadow: 0 2px 10px rgba(26,115,232,0.1); }
+    .brand-chip-label { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800; color: var(--navy); }
+    .brand-chip:hover .brand-chip-label { color: var(--primary); }
+    .brand-chip-sub { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+    /* ── PRODUCT CARD ── */
+    .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 28px; }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 10px;
+      border: 1.5px solid var(--gray-2);
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { border-color: var(--primary); box-shadow: 0 6px 24px rgba(26,115,232,0.11); transform: translateY(-2px); }
+
+    /* status badge */
+    .card-badge {
+      position: absolute;
+      top: 9px; left: 9px;
+      z-index: 3;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+    }
+    .badge-new  { background: var(--green); }
+    .badge-hot  { background: var(--red); }
+    .badge-sale { background: var(--primary); }
+
+    /* discount badge */
+    .card-discount {
+      position: absolute;
+      top: 9px; right: 9px;
+      z-index: 3;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      line-height: 1.4;
+    }
+
+    /* image */
+    .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--gray-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.3s;
+    }
+    .card:hover .card-img { transform: scale(1.05); }
+
+    /* body */
+    .card-body { padding: 12px 12px 10px; flex: 1; display: flex; flex-direction: column; }
+    .card-brand { font-size: 10.5px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 3px; }
+    .card-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 7px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* spec pills */
+    .card-specs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+    .spec-pill {
+      background: var(--gray-1);
+      border: 1px solid var(--gray-2);
+      color: var(--text-light);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 10.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* rating */
+    .card-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 9px; }
+    .stars { color: var(--gold); font-size: 12px; letter-spacing: 0.5px; }
+    .rating-count { font-size: 11px; color: var(--text-light); }
+
+    /* price */
+    .card-price { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; margin-bottom: 5px; }
+    .price-deposit { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--primary); line-height: 1; }
+    .price-label { font-size: 10.5px; color: var(--text-light); font-weight: 500; }
+
+    /* installment note */
+    .installment-note {
+      font-size: 11px;
+      color: var(--primary-dark);
+      font-weight: 600;
+      background: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      display: inline-block;
+      line-height: 1.5;
+    }
+
+    /* CTA buttons */
+    .card-cta { display: flex; gap: 6px; margin-top: auto; }
+    .btn-cart {
+      flex: 1;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Barlow', sans-serif;
+      transition: background 0.15s;
+    }
+    .btn-cart:hover { background: var(--primary-dark); }
+    .btn-buy {
+      flex: 1;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Barlow', sans-serif;
+      transition: background 0.15s;
+    }
+    .btn-buy:hover { background: #162640; }
+
+    /* ── PROMO STRIP ── */
+    .promo-strip {
+      background: var(--primary-light);
+      border: 1.5px solid #c5d9fa;
+      border-radius: 10px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .promo-strip h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 900; color: var(--navy); margin-bottom: 3px; }
+    .promo-strip p  { font-size: 13px; color: var(--text-light); }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--gray-1); border-top: 1px solid var(--gray-2); border-bottom: 1px solid var(--gray-2); padding: 28px 20px; }
+    .how-inner { max-width: 1280px; margin: 0 auto; }
+    .how-inner > h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 16px; }
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .how-card { background: #fff; border: 1.5px solid var(--gray-2); border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 12px; }
+    .how-num { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .how-card:nth-child(2) .how-num { background: var(--gold); color: var(--navy); }
+    .how-card:nth-child(3) .how-num { background: var(--green); }
+    .how-card:nth-child(4) .how-num { background: var(--red); }
+    .how-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .how-desc  { font-size: 12.5px; color: var(--text-light); line-height: 1.6; }
+
+    /* ── WHY ── */
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+    .why-card { background: #fff; border: 1.5px solid var(--gray-2); border-radius: 10px; padding: 16px 14px; }
+    .why-icon-wrap { width: 36px; height: 36px; background: var(--primary-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .why-icon-wrap svg { width: 18px; height: 18px; color: var(--primary); }
+    .why-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .why-desc  { font-size: 12px; color: var(--text-light); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .footer { background: #fff; border-top: 1px solid var(--gray-2); padding: 32px 20px 16px; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 22px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 900; color: var(--navy); margin-bottom: 8px; display: block; }
+    .footer-logo span { color: var(--primary); }
+    .footer-tagline { font-size: 12.5px; color: var(--text-light); line-height: 1.7; margin-bottom: 14px; }
+    .footer-contact a { display: block; font-size: 13px; color: var(--text-light); margin-bottom: 5px; }
+    .footer-contact a:hover { color: var(--primary); }
+    .footer-col-title { font-size: 11px; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 6px; }
+    .footer-links a { font-size: 13px; color: var(--text-light); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-bottom { border-top: 1px solid var(--gray-2); padding-top: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .footer-bottom p { font-size: 12px; color: var(--gray-3); }
+
+    /* ── SEO TAGS ── */
+    .seo-tags { border-top: 1px solid var(--gray-2); padding: 12px 20px; background: var(--gray-1); }
+    .seo-tags-inner { max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 6px; }
+    .seo-tag { font-size: 11.5px; color: var(--text-light); border: 1px solid var(--gray-2); border-radius: 5px; padding: 3px 9px; background: #fff; transition: color 0.12s; }
+    .seo-tag:hover { color: var(--primary); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(4, 1fr); } .brand-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 900px)  { .product-grid { grid-template-columns: repeat(3, 1fr); } .how-grid { grid-template-columns: repeat(2, 1fr); } .why-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } .deposit-chips { display: none; } }
+    @media (max-width: 700px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } .brand-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 500px)  { .header-search { display: none; } .brand-grid { grid-template-columns: repeat(2, 1fr); } .how-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <Gift />
   <Nav />
-  <THead />
 
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <span>Free delivery Nairobi CBD</span>
+    <span>Pay via M-Pesa</span>
+    <span>No credit check</span>
+  </div>
+  <div>Call/WhatsApp: <a href="tel:+254100028823">0100028823</a></div>
+</div>
 
-  <Hero />
+<!-- HEADER -->
+<header class="site-header">
+  <a href="/" class="logo">Mdogo<span>mdogo</span>Deals</a>
+  <div class="header-search">
+    <input type="text" placeholder="Search phones e.g. Samsung A16, Tecno Camon 50..." />
+    <button>Search</button>
+  </div>
+  <div class="header-right">
+    <div class="header-contact">
+      <div class="label">24/7 Support</div>
+      <div class="number">0100028823</div>
+    </div>
+    <a href="https://wa.me/2547100028823" class="header-wa">WhatsApp</a>
+  </div>
+</header>
 
-  <PopularBrands />
-  
+<!-- MAIN NAV -->
+<nav class="main-nav" aria-label="Main navigation">
+  <ul>
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones</a></li>
+    {ALL_BRANDS.map(brand => (
+      <li><a href={`/phones/${brandSlug(brand)}`}>{brand}</a></li>
+    ))}
+    {DEPOSIT_FILTERS.map(dep => (
+      <li><a href={`/phones/${dep.key}`}>{dep.label}</a></li>
+    ))}
+  </ul>
+</nav>
 
+<!-- HERO -->
+<div class="hero-banner">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Lipa Mdogo Mdogo<br><span>Phones Nairobi</span></h1>
+      <p>
+        Pay a small deposit from <strong>KSh 2,000</strong> then spread the rest weekly via M-Pesa.
+        No credit check. No guarantor. Free delivery Nairobi CBD.
+      </p>
+      <div class="hero-btns">
+        <a href="/phones/lipa-mdogo-mdogo-nairobi" class="btn-primary">Browse All Phones</a>
+        <a href="/phones/deposit-under-5000" class="btn-outline">Under KSh 5K Deposit</a>
+      </div>
+    </div>
+    <div class="deposit-chips">
+      {DEPOSIT_FILTERS.map(dep => (
+        <a href={`/phones/${dep.key}`} class="dep-chip">
+          {dep.label}
+          <small>Deposit</small>
+        </a>
+      ))}
+      <a href="/phones/storage-128gb" class="dep-chip">128GB<small>Storage</small></a>
+      <a href="/phones/storage-256gb" class="dep-chip">256GB<small>Storage</small></a>
+    </div>
+  </div>
+</div>
 
-  <Welcome />
-  <Summary /> -->
-  <!-- <Credit />  -->
-   
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      {products.length}+ Phones Available
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Deposit from KSh 2,000
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      No Credit Check
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Same-Day Delivery Nairobi CBD
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Pay Weekly via M-Pesa
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      100% Genuine Phones
+    </div>
+  </div>
+</div>
 
+<!-- PAGE BODY -->
+<div class="page-wrap">
 
-     
+  <!-- BRANDS -->
+  <div class="section-head">
+    <h2>Popular Brands</h2>
+    <a href="/phones/lipa-mdogo-mdogo-nairobi" class="see-all">All brands &rarr;</a>
+  </div>
+  <div class="brand-grid">
+    {ALL_BRANDS.map(brand => {
+      const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
+      return (
+        <a href={`/phones/${brandSlug(brand)}`} class="brand-chip">
+          <div class="brand-chip-label">{brand}</div>
+          <div class="brand-chip-sub">{count} phones</div>
+        </a>
+      );
+    })}
+  </div>
 
+  <hr class="section-rule" />
 
-</HomeLayout>
+  <!-- TRENDING OFFERS -->
+  <div class="section-head">
+    <h2>Trending Offers <span class="tag hot">Hot</span></h2>
+    <a href="/phones/lipa-mdogo-mdogo-nairobi" class="see-all">View all &rarr;</a>
+  </div>
+  <div class="product-grid">
+    {featured.map(p => {
+      const statusLower = p.status?.toLowerCase();
+      const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+      const rating      = p.reviews?.averageRating ?? 4.5;
+      const reviewCount = p.reviews?.reviewCount ?? 0;
+      const specs       = [
+        p.phonedisplay,
+        p.processor?.split(' ').slice(-2).join(' '),
+        p.battery?.split(',')[0],
+      ].filter(Boolean).slice(0, 3);
+      return (
+        <a href={`/${p.slug}`} class="card">
+          {p.status && <span class={`card-badge ${badgeClass}`}>{p.status}</span>}
+          {p.discount && <span class="card-discount">{p.discount}</span>}
+          <div class="card-img-wrap">
+            <img
+              class="card-img"
+              src={p.source}
+              alt={`${p.fullname ?? p.name} — Lipa Mdogo Mdogo Nairobi`}
+              loading="lazy"
+              width="300"
+              height="225"
+              decoding="async"
+            />
+          </div>
+          <div class="card-body">
+            <div class="card-brand">{p.brand}</div>
+            <div class="card-name">{p.fullname ?? p.name}</div>
+            <div class="card-specs">
+              {specs.map(s => <span class="spec-pill">{s}</span>)}
+            </div>
+            <div class="card-rating">
+              <span class="stars">{renderStars(rating)}</span>
+              <span class="rating-count">({reviewCount})</span>
+            </div>
+            <div class="card-price">
+              <span class="price-deposit">{p.deposit}</span>
+              <span class="price-label">deposit</span>
+            </div>
+            <div class="installment-note">From {p.from}/wk &middot; Deposit {p.deposit}</div>
+            <div class="card-cta">
+              <button class="btn-cart">Add to Cart</button>
+              <button class="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- PROMO STRIP -->
+  <div class="promo-strip">
+    <div>
+      <h3>Deposit Under KSh 3,000 &mdash; Get a Phone Today</h3>
+      <p>Pay just KSh 2,000&ndash;2,999 deposit and take your phone home. Spread the rest weekly via M-Pesa. No paperwork.</p>
+    </div>
+    <a href="/phones/deposit-under-3000" class="btn-primary">Shop Now</a>
+  </div>
+
+  <hr class="section-rule" />
+
+  <!-- SAMSUNG -->
+  <div class="section-head">
+    <h2>Samsung Phones <span class="tag new">New</span></h2>
+    <a href="/phones/samsung" class="see-all">All Samsung &rarr;</a>
+  </div>
+  <div class="product-grid">
+    {samsungList.map(p => {
+      const statusLower = p.status?.toLowerCase();
+      const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+      const rating      = p.reviews?.averageRating ?? 4.5;
+      const reviewCount = p.reviews?.reviewCount ?? 0;
+      const specs       = [
+        p.phonedisplay,
+        p.processor?.split(' ').slice(-2).join(' '),
+        p.battery?.split(',')[0],
+      ].filter(Boolean).slice(0, 3);
+      return (
+        <a href={`/${p.slug}`} class="card">
+          {p.status && <span class={`card-badge ${badgeClass}`}>{p.status}</span>}
+          {p.discount && <span class="card-discount">{p.discount}</span>}
+          <div class="card-img-wrap">
+            <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} lipa mdogo mdogo`} loading="lazy" width="300" height="225" decoding="async" />
+          </div>
+          <div class="card-body">
+            <div class="card-brand">{p.brand}</div>
+            <div class="card-name">{p.fullname ?? p.name}</div>
+            <div class="card-specs">{specs.map(s => <span class="spec-pill">{s}</span>)}</div>
+            <div class="card-rating">
+              <span class="stars">{renderStars(rating)}</span>
+              <span class="rating-count">({reviewCount})</span>
+            </div>
+            <div class="card-price">
+              <span class="price-deposit">{p.deposit}</span>
+              <span class="price-label">deposit</span>
+            </div>
+            <div class="installment-note">From {p.from}/wk &middot; Deposit {p.deposit}</div>
+            <div class="card-cta">
+              <button class="btn-cart">Add to Cart</button>
+              <button class="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <hr class="section-rule" />
+
+  <!-- TECNO -->
+  <div class="section-head">
+    <h2>Tecno Phones</h2>
+    <a href="/phones/tecno" class="see-all">All Tecno &rarr;</a>
+  </div>
+  <div class="product-grid">
+    {tecnoList.map(p => {
+      const statusLower = p.status?.toLowerCase();
+      const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+      const rating      = p.reviews?.averageRating ?? 4.5;
+      const reviewCount = p.reviews?.reviewCount ?? 0;
+      const specs       = [
+        p.phonedisplay,
+        p.processor?.split(' ').slice(-2).join(' '),
+        p.battery?.split(',')[0],
+      ].filter(Boolean).slice(0, 3);
+      return (
+        <a href={`/${p.slug}`} class="card">
+          {p.status && <span class={`card-badge ${badgeClass}`}>{p.status}</span>}
+          {p.discount && <span class="card-discount">{p.discount}</span>}
+          <div class="card-img-wrap">
+            <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} lipa mdogo mdogo`} loading="lazy" width="300" height="225" decoding="async" />
+          </div>
+          <div class="card-body">
+            <div class="card-brand">{p.brand}</div>
+            <div class="card-name">{p.fullname ?? p.name}</div>
+            <div class="card-specs">{specs.map(s => <span class="spec-pill">{s}</span>)}</div>
+            <div class="card-rating">
+              <span class="stars">{renderStars(rating)}</span>
+              <span class="rating-count">({reviewCount})</span>
+            </div>
+            <div class="card-price">
+              <span class="price-deposit">{p.deposit}</span>
+              <span class="price-label">deposit</span>
+            </div>
+            <div class="installment-note">From {p.from}/wk &middot; Deposit {p.deposit}</div>
+            <div class="card-cta">
+              <button class="btn-cart">Add to Cart</button>
+              <button class="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <hr class="section-rule" />
+
+  <!-- WHY CHOOSE US -->
+  <div class="section-head">
+    <h2>Why Choose MdogomdogoDeals?</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="why-title">No Credit Check</div>
+      <div class="why-desc">No CRB score needed. Pay your deposit and take your phone home today.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <div class="why-title">Pay via M-Pesa</div>
+      <div class="why-desc">All deposits and weekly installments via M-Pesa. No bank visits needed.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+      </div>
+      <div class="why-title">Same-Day Delivery</div>
+      <div class="why-desc">Order before 2 PM and receive your phone in Nairobi CBD the same day.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="why-title">100% Genuine Phones</div>
+      <div class="why-desc">All phones come with full manufacturer warranty. No clones, no fakes.</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="how-inner">
+    <h2>How Lipa Mdogo Mdogo Works</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <div>
+          <div class="how-title">Pick Your Phone</div>
+          <div class="how-desc">Browse {products.length}+ smartphones and find one that fits your budget and style.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <div>
+          <div class="how-title">Pay Deposit via M-Pesa</div>
+          <div class="how-desc">Pay from KSh 2,000 deposit. No guarantor or CRB check required.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <div>
+          <div class="how-title">Delivered to Your Door</div>
+          <div class="how-desc">Same-day delivery in Nairobi CBD. Pay on delivery — no risk.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">4</div>
+        <div>
+          <div class="how-title">Pay Weekly</div>
+          <div class="how-desc">Spread the balance in weekly M-Pesa payments that suit your pay cycle.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo">Mdogo<span>mdogo</span>Deals</a>
+        <p class="footer-tagline">
+          Nairobi's trusted lipa mdogo mdogo phone shop. Genuine smartphones on flexible weekly
+          M-Pesa installments. No credit check. No stress.
+        </p>
+        <div class="footer-contact">
+          <a href="https://wa.me/254700000000">WhatsApp: 0700 000 000</a>
+          <a href="tel:+254700000000">Call: 0700 000 000</a>
+          <a href="mailto:hello@mdogomdogodeals.co.ke">hello@mdogomdogodeals.co.ke</a>
+          <p style="font-size:12px;color:var(--text-light);margin-top:6px;">Nairobi CBD &mdash; Mon&ndash;Sat 8AM&ndash;8PM</p>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Top Brands</div>
+        <ul class="footer-links">
+          {ALL_BRANDS.map(brand => (
+            <li><a href={`/phones/${brandSlug(brand)}`}>{brand}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop by Deposit</div>
+        <ul class="footer-links">
+          {DEPOSIT_FILTERS.map(dep => (
+            <li><a href={`/phones/${dep.key}`}>{dep.label}</a></li>
+          ))}
+          <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones</a></li>
+        </ul>
+        <div class="footer-col-title" style="margin-top:14px;">Shop by Storage</div>
+        <ul class="footer-links">
+          {STORAGE_FILTERS.map(stor => (
+            <li><a href={`/phones/${stor.key}`}>{stor.label} Phones</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones</a></li>
+          <li><a href="/how-it-works">How It Works</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 MdogomdogoDeals. All rights reserved.</p>
+      <p>Lipa Mdogo Mdogo Phones Nairobi &middot; Pay via M-Pesa &middot; Free Delivery CBD</p>
+    </div>
+  </div>
+</footer>
+
+<!-- SEO TAGS -->
+<div class="seo-tags">
+  <div class="seo-tags-inner">
+    <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo phones nairobi</a>
+    <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy phone pay later kenya</a>
+    {DEPOSIT_FILTERS.map(dep => (
+      <a href={`/phones/${dep.key}`} class="seo-tag">{dep.label} phone nairobi</a>
+    ))}
+    {ALL_BRANDS.map(brand => (
+      <a href={`/phones/${brandSlug(brand)}`} class="seo-tag">{brand} lipa mdogo mdogo</a>
+    ))}
+    <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">pay weekly phone mpesa nairobi</a>
+    <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa pole pole phone nairobi</a>
+    <a href="/phones/storage-128gb"             class="seo-tag">128gb phone lipa mdogo mdogo</a>
+  </div>
+</div>
+
+</body>
+</html>
