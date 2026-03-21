@@ -6933,13 +6933,13 @@ export const products = [
   id: 60,
   name: "iPhone 11 128GB",
   fullname:"iPhone 11 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 3110mAh (Dual SIM) 12MP +12MP",
-  status: "Used",
-  image: "/phones/iphone_11_128gb.jpg",
+  status: "New",
+  image: "/phones/iphone11.webp",
   from: "KSh 4,800",
   deposit: "KSh 8,999",
   daily: "KSh 165",
   totalPrice: "KSh 35,999",
-  source: "/phones/iphone_11_128gb.webp",
+  source: "/phones/iphone11.webp",
   discount: "-5%",
   display: "block",
   phonedisplay: "6.1\" Liquid Retina HD (1792 × 828)",
@@ -6956,7 +6956,7 @@ export const products = [
   seller: "Mkopa",
   model: "A2221",
   storage: "128GB",
-  condition: "used",
+  condition: "New",
   gtin: "0194252345900",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Iphone","Mophones","Loan or Cash"],
 
@@ -7045,126 +7045,130 @@ export const products = [
 },
 
 
-{
-  id: 61,
-  name: "Samsung Galaxy S20 128GB",
-  fullname:"Samsung Galaxy S20 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 12MP+64MP",
-  status: "Used",
-  image: "/phones/samsung_galaxy_s20_128gb.jpg",
-  from: "KSh 4,200",
-  deposit: "KSh 6,199",
-  daily: "KSh 110",
-  totalPrice: "KSh 31,199",
-  source: "/phones/samsung_galaxy_s20_128gb.webp",
-  discount: "-6%",
-  display: "block",
-  phonedisplay: "6.2\" Dynamic AMOLED 2X (3200 × 1440, 120Hz)",
-  processor: "Exynos 990 (7nm+) / Snapdragon 865 (7nm+)",
-  camera: "12MP + 64MP + 12MP (rear), 10MP (front)",
-  memory: "128GB / 8GB RAM",
-  battery: "4000mAh, 25W Fast Charging, Wireless Charging",
-  version: "Android 13, One UI 5",
-  depositanddaily: "KSh 5,000 Daily KSh 110",
-  slug: "samsung-galaxy-s20-128gb",
-  slugs: "samsung-galaxy-s20-128gb",
-  description: "Buy Samsung Galaxy S20 128GB on credit in Nairobi, Kenya. Enjoy a sleek design, flagship performance, and pro-level cameras with flexible daily payments.",
-  brand: "Samsung",
-  seller: "Mkopa",
-  model: "SM-G980F",
-  storage: "128GB",
-  condition: "used",
-  gtin: "0887276390981",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash"],
 
-  details: [
-    {
-      title: "Body and Design",
-      content: `The Samsung Galaxy S20 128GB features a slim and elegant design with Gorilla Glass 6 on the front and back and an aluminum frame. Measuring 151.7 × 69.1 × 7.9mm and weighing 163g, it offers a comfortable one-hand experience with a premium build.`,
-    },
-    {
-      title: "Display",
-      content: `Immerse yourself in a 6.2-inch Dynamic AMOLED 2X display offering a smooth 120Hz refresh rate. With HDR10+ support and a QHD+ resolution of 3200 × 1440 pixels, colors and contrast look incredibly vivid and realistic.`,
-    },
-    {
-      title: "Camera System",
-      content: `Equipped with a triple-camera setup—12MP wide, 64MP telephoto, and 12MP ultra-wide—the Galaxy S20 captures stunning details with 3x hybrid zoom and 8K video recording. The 10MP front camera ensures sharp selfies and clear video calls.`,
-    },
-    {
-      title: "Performance",
-      content: `Powered by the Exynos 990 (or Snapdragon 865) processor with 8GB RAM, the Galaxy S20 handles multitasking, gaming, and productivity with ease. It remains smooth and responsive even with demanding applications.`,
-    },
-    {
-      title: "Operating System",
-      content: `Running Android 13 with One UI 5, the Galaxy S20 offers a refined interface, improved privacy settings, enhanced multitasking, and long-term Samsung security updates.`,
-    },
-    {
-      title: "Storage and Memory",
-      content: `Comes with 128GB internal storage and 8GB RAM, expandable via microSD up to 1TB. Ideal for users who store photos, videos, and apps without worrying about space.`,
-    },
-    {
-      title: "Battery and Charging",
-      content: `The 4000mAh battery supports 25W fast charging, 15W wireless charging, and 4.5W reverse wireless charging. It offers up to 14 hours of video playback, keeping you powered throughout your day.`,
-    },
-    {
-      title: "Connectivity and Sensors",
-      content: `Connectivity includes 4G LTE, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, proximity, compass, and barometer.`,
-    },
-    {
-      title: "Pros and Cons",
-      pros: [
-        "Brilliant 120Hz Dynamic AMOLED 2X display",
-        "Powerful processor and 8GB RAM",
-        "Impressive camera system with 8K video",
-        "Wireless and reverse charging supported",
-        "Premium design and lightweight feel",
-      ],
-      cons: [
-        "Battery drains faster at 120Hz",
-        "No 3.5mm headphone jack",
-        "High resolution mode not available at 120Hz",
-      ],
-    },
-    {
-      title: "Verdict",
-      content: `The Samsung Galaxy S20 128GB continues to deliver flagship-level performance, stunning visuals, and reliable everyday usability in 2025. It’s a great choice for users seeking a balance of design, speed, and camera quality at a fair price.`,
-    },
-  ],
 
-  color: "Cosmic Gray, Cloud Blue, Cloud Pink",
-  weight: "163g",
-  dimensions: {
-    length: "151.7mm",
-    width: "69.1mm",
-    height: "7.9mm",
-  },
-  material: "Glass and Aluminum",
-  pattern: "Glossy Finish",
-  productLine: "Galaxy S20 Series",
-  reviews: {
-    averageRating: 4.6,
-    reviewCount: 48,
-    reviews: [
-      {
-        author: "Denis O.",
-        rating: 5,
-        reviewBody: "Still a great phone in 2025! Excellent display and performance.",
-        datePublished: "2025-03-18",
-      },
-      {
-        author: "Mercy T.",
-        rating: 4,
-        reviewBody: "Camera is amazing, but battery could last a bit longer at 120Hz.",
-        datePublished: "2025-04-09",
-      },
-    ],
-  },
-},
+
+
+// {
+//   id: 61,
+//   name: "Samsung Galaxy S20 128GB",
+//   fullname:"Samsung Galaxy S20 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 12MP+64MP",
+//   status: "Used",
+//   image: "/phones/samsung_galaxy_s20_128gb.jpg",
+//   from: "KSh 4,200",
+//   deposit: "KSh 6,199",
+//   daily: "KSh 110",
+//   totalPrice: "KSh 31,199",
+//   source: "/phones/samsung_galaxy_s20_128gb.webp",
+//   discount: "-6%",
+//   display: "block",
+//   phonedisplay: "6.2\" Dynamic AMOLED 2X (3200 × 1440, 120Hz)",
+//   processor: "Exynos 990 (7nm+) / Snapdragon 865 (7nm+)",
+//   camera: "12MP + 64MP + 12MP (rear), 10MP (front)",
+//   memory: "128GB / 8GB RAM",
+//   battery: "4000mAh, 25W Fast Charging, Wireless Charging",
+//   version: "Android 13, One UI 5",
+//   depositanddaily: "KSh 5,000 Daily KSh 110",
+//   slug: "samsung-galaxy-s20-128gb",
+//   slugs: "samsung-galaxy-s20-128gb",
+//   description: "Buy Samsung Galaxy S20 128GB on credit in Nairobi, Kenya. Enjoy a sleek design, flagship performance, and pro-level cameras with flexible daily payments.",
+//   brand: "Samsung",
+//   seller: "Mkopa",
+//   model: "SM-G980F",
+//   storage: "128GB",
+//   condition: "used",
+//   gtin: "0887276390981",
+//   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash"],
+
+//   details: [
+//     {
+//       title: "Body and Design",
+//       content: `The Samsung Galaxy S20 128GB features a slim and elegant design with Gorilla Glass 6 on the front and back and an aluminum frame. Measuring 151.7 × 69.1 × 7.9mm and weighing 163g, it offers a comfortable one-hand experience with a premium build.`,
+//     },
+//     {
+//       title: "Display",
+//       content: `Immerse yourself in a 6.2-inch Dynamic AMOLED 2X display offering a smooth 120Hz refresh rate. With HDR10+ support and a QHD+ resolution of 3200 × 1440 pixels, colors and contrast look incredibly vivid and realistic.`,
+//     },
+//     {
+//       title: "Camera System",
+//       content: `Equipped with a triple-camera setup—12MP wide, 64MP telephoto, and 12MP ultra-wide—the Galaxy S20 captures stunning details with 3x hybrid zoom and 8K video recording. The 10MP front camera ensures sharp selfies and clear video calls.`,
+//     },
+//     {
+//       title: "Performance",
+//       content: `Powered by the Exynos 990 (or Snapdragon 865) processor with 8GB RAM, the Galaxy S20 handles multitasking, gaming, and productivity with ease. It remains smooth and responsive even with demanding applications.`,
+//     },
+//     {
+//       title: "Operating System",
+//       content: `Running Android 13 with One UI 5, the Galaxy S20 offers a refined interface, improved privacy settings, enhanced multitasking, and long-term Samsung security updates.`,
+//     },
+//     {
+//       title: "Storage and Memory",
+//       content: `Comes with 128GB internal storage and 8GB RAM, expandable via microSD up to 1TB. Ideal for users who store photos, videos, and apps without worrying about space.`,
+//     },
+//     {
+//       title: "Battery and Charging",
+//       content: `The 4000mAh battery supports 25W fast charging, 15W wireless charging, and 4.5W reverse wireless charging. It offers up to 14 hours of video playback, keeping you powered throughout your day.`,
+//     },
+//     {
+//       title: "Connectivity and Sensors",
+//       content: `Connectivity includes 4G LTE, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, accelerometer, gyroscope, proximity, compass, and barometer.`,
+//     },
+//     {
+//       title: "Pros and Cons",
+//       pros: [
+//         "Brilliant 120Hz Dynamic AMOLED 2X display",
+//         "Powerful processor and 8GB RAM",
+//         "Impressive camera system with 8K video",
+//         "Wireless and reverse charging supported",
+//         "Premium design and lightweight feel",
+//       ],
+//       cons: [
+//         "Battery drains faster at 120Hz",
+//         "No 3.5mm headphone jack",
+//         "High resolution mode not available at 120Hz",
+//       ],
+//     },
+//     {
+//       title: "Verdict",
+//       content: `The Samsung Galaxy S20 128GB continues to deliver flagship-level performance, stunning visuals, and reliable everyday usability in 2025. It’s a great choice for users seeking a balance of design, speed, and camera quality at a fair price.`,
+//     },
+//   ],
+
+//   color: "Cosmic Gray, Cloud Blue, Cloud Pink",
+//   weight: "163g",
+//   dimensions: {
+//     length: "151.7mm",
+//     width: "69.1mm",
+//     height: "7.9mm",
+//   },
+//   material: "Glass and Aluminum",
+//   pattern: "Glossy Finish",
+//   productLine: "Galaxy S20 Series",
+//   reviews: {
+//     averageRating: 4.6,
+//     reviewCount: 48,
+//     reviews: [
+//       {
+//         author: "Denis O.",
+//         rating: 5,
+//         reviewBody: "Still a great phone in 2025! Excellent display and performance.",
+//         datePublished: "2025-03-18",
+//       },
+//       {
+//         author: "Mercy T.",
+//         rating: 4,
+//         reviewBody: "Camera is amazing, but battery could last a bit longer at 120Hz.",
+//         datePublished: "2025-04-09",
+//       },
+//     ],
+//   },
+// },
 
 {
   id: 62,
   name: "Samsung Galaxy Note 20 Ultra 128GB",
   fullname:"Samsung Galaxy Note 20 Ultra 6.67 Inches, 128GB ROM + 4GB RAM, Battery: 4500mAh (Dual SIM) 108MP+12MP",
-  status: "Used",
+  status: "Out of the market",
   image: "/phones/samsung_galaxy_note_20_ultra_128gb.jpg",
   from: "KSh 5,200",
   deposit: "KSh 16,799",
@@ -7187,7 +7191,7 @@ export const products = [
   seller: "Mkopa",
   model: "SM-N985F",
   storage: "128GB",
-  condition: "used",
+  condition: "New",
   gtin: "0887276419576",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
@@ -7277,17 +7281,101 @@ export const products = [
 },
 
 
+
+{
+  id: 62,
+  name: "Samsung Galaxy Note 20 128GB",
+  fullname:"Samsung Galaxy Note 20 6.7 Inches, 128GB ROM + 8GB RAM, Battery: 4300mAh (Dual SIM) 64MP",
+  status: "New",
+  image: "/phones/samsung_galaxy_note_20_128gb.jpg",
+  from: "KSh 4,800",
+  deposit: "KSh 6,500",
+  daily: "KSh 160",
+  totalPrice: "KSh 42,999",
+  source: "/phones/samsungnote20.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.7\" Super AMOLED Plus (2400 × 1080, 60Hz)",
+  processor: "Exynos 990 (7nm+) / Snapdragon 865+ (7nm+)",
+  camera: "64MP + 12MP + 12MP (rear), 10MP (front)",
+  memory: "128GB / 8GB RAM",
+  battery: "4300mAh, 25W Fast Charging, Wireless & Reverse Charging",
+  version: "Android 13, One UI 5",
+  depositanddaily: "KSh 6,000 Daily KSh 120",
+  slug: "samsung-galaxy-note-20-128gb",
+  slugs: "samsung-galaxy-note-20-128gb",
+  description: "Buy Samsung Galaxy Note 20 128GB on credit in Nairobi, Kenya. Enjoy powerful performance, sleek design, and S Pen productivity with flexible daily payment plans.",
+  brand: "Samsung",
+  seller: "Mkopa",
+  model: "SM-N981B",
+  storage: "128GB",
+  condition: "New",
+  gtin: "0887276419477",
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
+
+  details: [
+    {
+      title: "Body and Design",
+      content: `The Samsung Galaxy Note 20 128GB features a sleek and modern design with a glass front and polycarbonate back, framed in aluminum. Measuring 161.6 × 75.2 × 8.3mm and weighing 192g, it is lighter and easier to handle than the Ultra variant. Available in Mystic Bronze, Mystic Green, and Mystic Gray, it offers a premium yet practical feel.`,
+    },
+    {
+      title: "Display",
+      content: `The device comes with a 6.7-inch Super AMOLED Plus display with Full HD+ resolution. While it runs at 60Hz, it still delivers vibrant colors, excellent brightness, and a smooth viewing experience for daily use and entertainment.`,
+    },
+    {
+      title: "Camera System",
+      content: `The triple-camera setup includes a 64MP telephoto sensor, 12MP wide, and 12MP ultra-wide lens. It supports 3x hybrid zoom and 8K video recording. The 10MP front camera ensures clear selfies and high-quality video calls.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Exynos 990 (or Snapdragon 865+) processor with 8GB RAM, the Galaxy Note 20 delivers reliable performance for multitasking, gaming, and productivity. It handles everyday tasks smoothly with optimized efficiency.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 13 with Samsung One UI 5, the phone offers a clean and customizable experience. The S Pen enhances productivity with features like Air Actions, note-taking, and seamless integration with Samsung apps.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Comes with 128GB internal storage and 8GB RAM. Unlike the Ultra version, it does not support microSD expansion, but still provides sufficient space for most users.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `Equipped with a 4300mAh battery, the device supports 25W fast charging, wireless charging, and reverse wireless charging. It comfortably lasts a full day with moderate usage.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Includes 5G support, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C 3.2. It also supports Samsung DeX and S Pen Air Gestures. Sensors include an in-display fingerprint scanner, accelerometer, gyroscope, and proximity sensor.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "S Pen with advanced productivity features",
+        "Solid performance with 8GB RAM",
+        "Good camera system with 8K video",
+        "Sleek and lighter design",
+        "Wireless and reverse charging support",
+      ],
+      cons: [
+        "No 120Hz refresh rate",
+        "Plastic back instead of glass",
+        "No microSD card support",
+      ],
+    },
+  ]
+},
+
+
 {
   id: 63,
-  name: "Samsung Galaxy S24 256GB",
-  fullname:"Samsung Galaxy S24 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 50MP",
+  name: "Samsung Galaxy S24 Ultra 256GB",
+  fullname:"Samsung Galaxy S24 Ultra 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 4000mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/samsung_galaxy_s24_256gb.jpg",
   from: "KSh 12,500",
-  deposit: "KSh 34,399",
+  deposit: "KSh 34,500",
   daily: "KSh 372",
   totalPrice: "KSh 98,399",
-  source: "/phones/samsung_galaxy_s24_256gb.webp",
+  source: "/phones/SamsungGalaxyS24ultra.webp",
   discount: "-12%",
   display: "block",
   phonedisplay: "6.2\" Dynamic LTPO AMOLED 2X (2340 × 1080, 120Hz)",
@@ -7402,8 +7490,8 @@ export const products = [
   status: "New",
   image: "/phones/samsung_galaxy_s23_ultra_256gb.jpg",
   from: "KSh 14,200",
-  deposit: "KSh 27,299",
-  daily: "KSh 294",
+  deposit: "KSh 29,000",
+  daily: "KSh 315",
   totalPrice: "KSh 77,999",
   source: "/phones/samsung_galaxy_s23_ultra_256gb.webp",
   discount: "-9%",
@@ -7634,9 +7722,9 @@ export const products = [
   fullname:"Samsung Galaxy S21 Ultra 6.67 Inches, 128GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 108MP + 12MP",
   status: "New",
   image: "/phones/samsung_galaxy_s21_ultra_128gb.jpg",
-  from: "KSh 11,500",
-  deposit: "KSh 11,199",
-  daily: "KSh 195",
+  from: "KSh 10,000",
+  deposit: "KSh 10,000",
+  daily: "KSh 180",
   totalPrice: "KSh 190,000",
   source: "/phones/samsung_galaxy_s21_ultra_128gb.webp",
   discount: "-10%",
@@ -7745,127 +7833,127 @@ export const products = [
 },
 
 
-{
-  id: 67,
-  name: "Samsung Galaxy Note 10 Plus 256GB",
-  fullname:"Samsung Galaxy Note 10 Plus 6.67 Inches, 1TB ROM + 12 RAM, Battery: 5100mAh (Dual SIM) 50MP",
-  status: "New",
-  image: "/phones/samsung_galaxy_note_10_plus_256gb.jpg",
-  from: "KSh 8,800",
-  deposit: "KSh 9,999",
-  daily: "KSh 174",
-  totalPrice: "KSh 39,999",
-  source: "/phones/samsung_galaxy_note_10_plus_256gb.webp",
-  discount: "-12%",
-  display: "block",
-  phonedisplay: "6.8\" Quad HD+ Dynamic AMOLED (3040 × 1440)",
-  processor: "Exynos 9825 (7nm) / Snapdragon 855 (7nm)",
-  camera: "12MP + 12MP + 16MP + ToF (rear), 10MP (front)",
-  memory: "256GB / 12GB RAM, MicroSD up to 1TB",
-  battery: "4300mAh, 45W Fast Charging, Wireless & Reverse Charging",
-  version: "Android 9, upgradable to Android 13, One UI 5",
-  depositanddaily: "KSh 10,500 Daily KSh 250",
-  slug: "samsung-galaxy-note-10-plus-256gb",
-  slugs: "samsung-galaxy-note-10-plus-256gb",
-  description: "Buy Samsung Galaxy Note 10 Plus 256GB on credit in Nairobi, Kenya. Premium S Pen experience, massive display, and powerful performance with flexible daily payment options.",
-  brand: "Samsung",
-  seller: "Mophones",
-  model: "SM-N975F",
-  storage: "256GB",
-  condition: "new",
-  gtin: "8806090079427",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
+// {
+//   id: 67,
+//   name: "Samsung Galaxy Note 10 Plus 256GB",
+//   fullname:"Samsung Galaxy Note 10 Plus 6.67 Inches, 1TB ROM + 12 RAM, Battery: 5100mAh (Dual SIM) 50MP",
+//   status: "New",
+//   image: "/phones/samsung_galaxy_note_10_plus_256gb.jpg",
+//   from: "KSh 8,800",
+//   deposit: "KSh 9,999",
+//   daily: "KSh 174",
+//   totalPrice: "KSh 39,999",
+//   source: "/phones/samsung_galaxy_note_10_plus_256gb.webp",
+//   discount: "-12%",
+//   display: "block",
+//   phonedisplay: "6.8\" Quad HD+ Dynamic AMOLED (3040 × 1440)",
+//   processor: "Exynos 9825 (7nm) / Snapdragon 855 (7nm)",
+//   camera: "12MP + 12MP + 16MP + ToF (rear), 10MP (front)",
+//   memory: "256GB / 12GB RAM, MicroSD up to 1TB",
+//   battery: "4300mAh, 45W Fast Charging, Wireless & Reverse Charging",
+//   version: "Android 9, upgradable to Android 13, One UI 5",
+//   depositanddaily: "KSh 10,500 Daily KSh 250",
+//   slug: "samsung-galaxy-note-10-plus-256gb",
+//   slugs: "samsung-galaxy-note-10-plus-256gb",
+//   description: "Buy Samsung Galaxy Note 10 Plus 256GB on credit in Nairobi, Kenya. Premium S Pen experience, massive display, and powerful performance with flexible daily payment options.",
+//   brand: "Samsung",
+//   seller: "Mophones",
+//   model: "SM-N975F",
+//   storage: "256GB",
+//   condition: "new",
+//   gtin: "8806090079427",
+//   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
-  // 🧩 Structured text sections
-  details: [
-    {
-      title: "Body and Design",
-      content: `The Galaxy Note 10 Plus boasts a sleek glass and metal design, measuring 162.3 × 77.2 × 7.9mm and weighing 196g. With an edge-to-edge Infinity-O display and Gorilla Glass 6 protection, it’s available in Aura Glow, Aura White, and Aura Black finishes that exude luxury.`,
-    },
-    {
-      title: "Display",
-      content: `It features a 6.8-inch Quad HD+ Dynamic AMOLED display offering HDR10+ certification and superior brightness. The nearly bezel-less design and sharp contrast levels make it ideal for entertainment, productivity, and design work.`,
-    },
-    {
-      title: "Camera System",
-      content: `Equipped with a triple rear camera setup (12MP wide, 12MP telephoto, 16MP ultra-wide) plus a DepthVision sensor, the Note 10 Plus delivers detailed photos, Live Focus effects, and 4K UHD video recording. The 10MP front camera ensures crisp selfies and professional video calls.`,
-    },
-    {
-      title: "Performance",
-      content: `Powered by the Exynos 9825 (or Snapdragon 855 in select regions) with 12GB RAM, the Note 10 Plus offers desktop-level performance. It’s built for heavy multitasking, gaming, and creative tasks like video editing and drawing with the S Pen.`,
-    },
-    {
-      title: "Operating System",
-      content: `Originally launched on Android 9 Pie, it’s upgradable to Android 13 with One UI 5. It delivers smooth transitions, smart device management, improved S Pen functionality, and enhanced customization options.`,
-    },
-    {
-      title: "Storage and Memory",
-      content: `With 256GB UFS 3.0 internal storage and MicroSD support up to 1TB, the Note 10 Plus provides abundant space for apps, photos, and videos while maintaining top read/write speeds.`,
-    },
-    {
-      title: "Battery and Charging",
-      content: `The 4300mAh battery supports 45W Super Fast Charging, 15W wireless charging, and 9W reverse wireless charging. It’s designed to last a full day of productivity and creativity with intelligent power optimization.`,
-    },
-    {
-      title: "Connectivity and Sensors",
-      content: `Connectivity features include 4G LTE, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, proximity, gyro, accelerometer, compass, and barometer. The S Pen features Bluetooth remote functions and air gestures for enhanced control.`,
-    },
-    {
-      title: "Pros and Cons",
-      pros: [
-        "Massive 6.8-inch AMOLED display with HDR10+",
-        "Powerful performance with 12GB RAM",
-        "S Pen with air gestures and remote control",
-        "Expandable storage up to 1TB",
-        "Premium glass and metal design",
-      ],
-      cons: [
-        "No headphone jack",
-        "High repair costs for display",
-        "Still limited 45W charger availability",
-      ],
-    },
-    {
-      title: "Verdict",
-      content: `The Samsung Galaxy Note 10 Plus 256GB remains a productivity powerhouse, combining top-tier performance, exceptional display quality, and the creative versatility of the S Pen — perfect for professionals and creators alike.`,
-    },
-  ],
+//   // 🧩 Structured text sections
+//   details: [
+//     {
+//       title: "Body and Design",
+//       content: `The Galaxy Note 10 Plus boasts a sleek glass and metal design, measuring 162.3 × 77.2 × 7.9mm and weighing 196g. With an edge-to-edge Infinity-O display and Gorilla Glass 6 protection, it’s available in Aura Glow, Aura White, and Aura Black finishes that exude luxury.`,
+//     },
+//     {
+//       title: "Display",
+//       content: `It features a 6.8-inch Quad HD+ Dynamic AMOLED display offering HDR10+ certification and superior brightness. The nearly bezel-less design and sharp contrast levels make it ideal for entertainment, productivity, and design work.`,
+//     },
+//     {
+//       title: "Camera System",
+//       content: `Equipped with a triple rear camera setup (12MP wide, 12MP telephoto, 16MP ultra-wide) plus a DepthVision sensor, the Note 10 Plus delivers detailed photos, Live Focus effects, and 4K UHD video recording. The 10MP front camera ensures crisp selfies and professional video calls.`,
+//     },
+//     {
+//       title: "Performance",
+//       content: `Powered by the Exynos 9825 (or Snapdragon 855 in select regions) with 12GB RAM, the Note 10 Plus offers desktop-level performance. It’s built for heavy multitasking, gaming, and creative tasks like video editing and drawing with the S Pen.`,
+//     },
+//     {
+//       title: "Operating System",
+//       content: `Originally launched on Android 9 Pie, it’s upgradable to Android 13 with One UI 5. It delivers smooth transitions, smart device management, improved S Pen functionality, and enhanced customization options.`,
+//     },
+//     {
+//       title: "Storage and Memory",
+//       content: `With 256GB UFS 3.0 internal storage and MicroSD support up to 1TB, the Note 10 Plus provides abundant space for apps, photos, and videos while maintaining top read/write speeds.`,
+//     },
+//     {
+//       title: "Battery and Charging",
+//       content: `The 4300mAh battery supports 45W Super Fast Charging, 15W wireless charging, and 9W reverse wireless charging. It’s designed to last a full day of productivity and creativity with intelligent power optimization.`,
+//     },
+//     {
+//       title: "Connectivity and Sensors",
+//       content: `Connectivity features include 4G LTE, Wi-Fi 6, Bluetooth 5.0, NFC, GPS, and USB Type-C. Sensors include ultrasonic fingerprint, proximity, gyro, accelerometer, compass, and barometer. The S Pen features Bluetooth remote functions and air gestures for enhanced control.`,
+//     },
+//     {
+//       title: "Pros and Cons",
+//       pros: [
+//         "Massive 6.8-inch AMOLED display with HDR10+",
+//         "Powerful performance with 12GB RAM",
+//         "S Pen with air gestures and remote control",
+//         "Expandable storage up to 1TB",
+//         "Premium glass and metal design",
+//       ],
+//       cons: [
+//         "No headphone jack",
+//         "High repair costs for display",
+//         "Still limited 45W charger availability",
+//       ],
+//     },
+//     {
+//       title: "Verdict",
+//       content: `The Samsung Galaxy Note 10 Plus 256GB remains a productivity powerhouse, combining top-tier performance, exceptional display quality, and the creative versatility of the S Pen — perfect for professionals and creators alike.`,
+//     },
+//   ],
 
-  color: "Aura Glow, Aura White, Aura Black",
-  weight: "196g",
-  dimensions: {
-    length: "162.3mm",
-    width: "77.2mm",
-    height: "7.9mm"
-  },
-  material: "Aluminum Frame with Gorilla Glass 6",
-  pattern: "Glossy Finish",
-  productLine: "Galaxy Note Series",
-  reviews: {
-    averageRating: 4.6,
-    reviewCount: 84,
-    reviews: [
-      {
-        author: "Brian N.",
-        rating: 5,
-        reviewBody: "An absolute gem! The display and S Pen are fantastic for my work.",
-        datePublished: "2025-02-12"
-      },
-      {
-        author: "Irene K.",
-        rating: 4,
-        reviewBody: "Battery life is decent, performance top-notch. Still a great buy in 2025.",
-        datePublished: "2025-03-02"
-      }
-    ]
-  }
-},
+//   color: "Aura Glow, Aura White, Aura Black",
+//   weight: "196g",
+//   dimensions: {
+//     length: "162.3mm",
+//     width: "77.2mm",
+//     height: "7.9mm"
+//   },
+//   material: "Aluminum Frame with Gorilla Glass 6",
+//   pattern: "Glossy Finish",
+//   productLine: "Galaxy Note Series",
+//   reviews: {
+//     averageRating: 4.6,
+//     reviewCount: 84,
+//     reviews: [
+//       {
+//         author: "Brian N.",
+//         rating: 5,
+//         reviewBody: "An absolute gem! The display and S Pen are fantastic for my work.",
+//         datePublished: "2025-02-12"
+//       },
+//       {
+//         author: "Irene K.",
+//         rating: 4,
+//         reviewBody: "Battery life is decent, performance top-notch. Still a great buy in 2025.",
+//         datePublished: "2025-03-02"
+//       }
+//     ]
+//   }
+// },
 
 {
   id: 68,
   name: "Samsung Galaxy S21 Plus 5G (128GB)",
   fullname:"Samsung Galaxy S21 Plus 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 4800mAh (Dual SIM) 12MP + 12MP",
-  status: "Used",
+  status: "New",
   image: "/phones/samsung_galaxy_s21_plus_5g_128gb.jpg",
   from: "KSh 6,200",
   deposit: "KSh 11,199",
@@ -7888,7 +7976,7 @@ export const products = [
   seller: "Mophones",
   model: "SM-G996B",
   storage: "128GB",
-  condition: "used",
+  condition: "New",
   gtin: "8806090881235",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
@@ -8459,12 +8547,12 @@ export const products = [
     name: "Samsung Galaxy S20+",
     fullname:"Samsung Galaxy S20+ 6.7 Inches, 128GB ROM + 8GB RAM, Battery: 4500mAh (Dual SIM) 64MP",
     status: "New",
-    image: "/product/phones/samsung_galaxy_s20_plus.webp",
+    image: "/product/phones/samsung-s20-+.webp",
     from: "KSh 6,000",
     deposit: "KSh 6,000",
     daily: "Ksh 145",
     totalPrice: "KSh 32,500",
-    source: "/phones/samsung_galaxy_s20_plus.webp",
+    source: "/phones/samsung-s20-+.webp",
     discount: "-15%",
     display: "block",
     phonedisplay: "6.7\" QHD+ (3200 × 1440)",
@@ -8576,6 +8664,138 @@ export const products = [
       ]
     }
   },
+
+
+
+
+  {
+    id: 73,
+    name: "Samsung Galaxy S20 Ultra",
+    fullname:"Samsung Galaxy S20 Ultra 6.9 Inches, 128GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 108MP",
+    status: "New",
+    image: "/product/phones/samsung-s20-ultra.webp",
+    from: "KSh 8,500",
+    deposit: "KSh 8,500",
+    daily: "Ksh 195",
+    totalPrice: "KSh 48,500",
+    source: "/phones/samsung-s20-ultra.webp",
+    discount: "-18%",
+    display: "block",
+    phonedisplay: "6.9\" QHD+ (3200 × 1440)",
+    processor: "Exynos 990 / Snapdragon 865",
+    camera: "108MP + 48MP Telephoto + 12MP Ultra-wide + DepthVision (rear), 40MP (front)",
+    memory: "128GB / 12GB RAM, MicroSD up to 1TB",
+    battery: "5000mAh, 45W Fast Charging",
+    version: "Android 10, upgradable to Android 13, One UI 5",
+    depositanddaily: "KSh 8,500 Daily KSh 155",
+    slug: "samsung-galaxy-s20-ultra",
+    slugs: "samsung-galaxy-s20-ultra",
+    description: "Buy Samsung Galaxy S20 Ultra on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
+    brand: "Samsung",
+    seller: "Mkopa",
+    model: "SM-G988B",
+    storage: "128GB",
+    condition: "new",
+    gtin: "",
+    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+    details: [
+      {
+        title: "Body and Design",
+        content: `The Samsung Galaxy S20 Ultra features a bold and premium design with a large glass body and aluminum frame. Measuring 166.9 × 76.0 × 8.8mm and weighing 222g, it feels solid and powerful in hand. Available in Cosmic Grey and Cosmic Black, the device stands out with its massive camera module and immersive edge-to-edge display design.`,
+      },
+      {
+        title: "Display",
+        content: `Enjoy a massive 6.9-inch Dynamic AMOLED 2X display with QHD+ resolution (3200 × 1440) and 120Hz refresh rate. The display offers ultra-smooth scrolling, vibrant colors, HDR10+ support, and exceptional brightness, making it perfect for gaming, streaming, and productivity.`,
+      },
+      {
+        title: "Camera System",
+        content: `The Galaxy S20 Ultra is built for photography enthusiasts, featuring a groundbreaking 108MP main sensor, a 48MP periscope telephoto lens with up to 100x Space Zoom, and a 12MP ultra-wide camera. It supports 8K video recording and advanced AI enhancements. The 40MP front camera delivers ultra-clear selfies and 4K video recording.`,
+      },
+      {
+        title: "Performance",
+        content: `Powered by the Exynos 990 or Snapdragon 865 processor, the Galaxy S20 Ultra delivers flagship-level performance. With 12GB RAM and 128GB storage, it handles heavy multitasking, gaming, and high-resolution video editing with ease.`,
+      },
+      {
+        title: "Operating System",
+        content: `Running Android 10 (upgradable to Android 13) with Samsung One UI 5, the phone offers a smooth and customizable user experience with enhanced security, productivity tools, and ecosystem integration.`,
+      },
+      {
+        title: "Storage and Memory",
+        content: `The device comes with 128GB internal storage and 12GB RAM, ensuring smooth performance and ample space. Expandable storage via microSD up to 1TB allows for storing large files, videos, and apps.`,
+      },
+      {
+        title: "Battery and Charging",
+        content: `Equipped with a massive 5000mAh battery, the Galaxy S20 Ultra easily lasts through heavy usage. It supports 45W fast charging, fast wireless charging, and Wireless PowerShare for charging other devices.`,
+      },
+      {
+        title: "Connectivity and Sensors",
+        content: `Features include 5G support, Wi-Fi 6, Bluetooth 5.0, NFC, USB Type-C, ultrasonic fingerprint sensor, facial recognition, and IP68 water and dust resistance.`,
+      },
+      {
+        title: "Pros and Cons",
+        pros: [
+          "Huge 6.9″ 120Hz AMOLED display",
+          "108MP camera with 100x Space Zoom",
+          "Powerful flagship performance",
+          "Massive 5000mAh battery",
+          "Premium build quality with IP68 rating",
+        ],
+        cons: [
+          "Large and heavy design",
+          "Camera zoom can be inconsistent at high levels",
+          "Expensive compared to other models",
+        ],
+      },
+      {
+        title: "Verdict",
+        content: `The Samsung Galaxy S20 Ultra is a powerhouse flagship designed for users who want top-tier performance, advanced photography, and a massive display. It is ideal for content creators, gamers, and professionals looking for a premium Android experience.`,
+      },
+    ],
+
+    color: "Cosmic Grey, Cosmic Black",
+    weight: "222g",
+    dimensions: {
+      length: "166.9mm",
+      width: "76.0mm",
+      height: "8.8mm"
+    },
+    material: "Glass front (Gorilla Glass 6), Glass back (Gorilla Glass 6), Aluminum frame",
+    pattern: "Glossy Premium Finish",
+    productLine: "Samsung Galaxy S",
+    reviews: {
+      averageRating: 4.7,
+      reviewCount: 102,
+      reviews: [
+        {
+          author: "David O.",
+          rating: 5,
+          reviewBody: "The camera is insane, especially the zoom!",
+          datePublished: "2025-01-20"
+        },
+        {
+          author: "Grace N.",
+          rating: 5,
+          reviewBody: "Big screen and powerful battery. Perfect for my daily use.",
+          datePublished: "2025-02-10"
+        },
+        {
+          author: "Brian K.",
+          rating: 4,
+          reviewBody: "Great performance but quite heavy.",
+          datePublished: "2025-02-25"
+        }
+      ]
+    }
+},
+
+  
+
+
+
+
+
+
 
   {
   id: 74,
