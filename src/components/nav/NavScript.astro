@@ -30,6 +30,126 @@
     if (ev.key === "cart") updateCartCount();
   });
 
+  // ─── Improved Search Logic ────────────────────────────────────────────────
+
+  /**
+   * Scores a product against a query. Returns a number >= 0.
+   * Higher score = better match. 0 = no match.
+   *
+   * Strategy:
+   *  1. Split query into tokens.
+   *  2. Every token must appear somewhere in the product name (AND logic).
+   *  3. Bonus score for: exact full-string match, token appearing at word
+   *     boundary, consecutive tokens matching in order.
+   */
+  function scoreProduct(product: Product, query: string): number {
+    const name = product.name.toLowerCase();
+    const tokens = query
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .filter((t) => t.length > 0);
+
+    if (tokens.length === 0) return 0;
+
+    // All tokens must be present (AND match)
+    const allPresent = tokens.every((token) => name.includes(token));
+    if (!allPresent) return 0;
+
+    let score = 1; // base score for passing AND filter
+
+    // Bonus: exact full match
+    if (name === query.toLowerCase().trim()) score += 100;
+
+    // Bonus: name starts with the full query
+    if (name.startsWith(query.toLowerCase().trim())) score += 50;
+
+    // Bonus: each token matches at a word boundary (start of a word)
+    tokens.forEach((token) => {
+      const wordBoundaryRegex = new RegExp(`\\b${escapeRegex(token)}`);
+      if (wordBoundaryRegex.test(name)) score += 10;
+    });
+
+    // Bonus: tokens appear consecutively in order
+    const joinedTokens = tokens.join("\\s+");
+    const consecutiveRegex = new RegExp(joinedTokens);
+    if (consecutiveRegex.test(name)) score += 20;
+
+    // Bonus: more tokens matched = more relevant
+    score += tokens.length * 2;
+
+    return score;
+  }
+
+  function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  // ─── Highlight matched tokens in result names ─────────────────────────────
+
+  function highlightTokens(text: string, query: string): string {
+    const tokens = query
+      .trim()
+      .split(/\s+/)
+      .filter((t) => t.length > 0);
+
+    let highlighted = text;
+    tokens.forEach((token) => {
+      const regex = new RegExp(`(${escapeRegex(token)})`, "gi");
+      highlighted = highlighted.replace(regex, "<mark>$1</mark>");
+    });
+    return highlighted;
+  }
+
+  // ─── Render Results ───────────────────────────────────────────────────────
+
+  function performSearch(
+    query: string,
+    resultsContainer: HTMLDivElement
+  ): void {
+    if (!query.trim()) {
+      resultsContainer.classList.remove("active");
+      return;
+    }
+
+    // Score and filter
+    const scored = (products as Product[])
+      .map((product) => ({ product, score: scoreProduct(product, query) }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score); // best matches first
+
+    if (scored.length === 0) {
+      resultsContainer.innerHTML =
+        '<div class="no-results" role="status">No products found</div>';
+      resultsContainer.classList.add("active");
+      return;
+    }
+
+    const html: string = scored
+      .map(
+        ({ product }) => `
+          <a href="/${product.slug}" class="search-result-item" role="option">
+            <div class="search-result-image-wrapper">
+              <img src="${product.source}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23f3f4f6%22 width=%2260%22 height=%2260%22/%3E%3C/svg%3E'">
+            </div>
+            <div class="search-result-info">
+              <div class="search-result-name">
+                ${highlightTokens(product.name, query)}
+                <span class="search-result-status">${product.status}</span>
+              </div>
+              <div class="search-result-price">${product.deposit}</div>
+            </div>
+          </a>
+        `
+      )
+      .join("");
+
+    resultsContainer.innerHTML = html;
+    resultsContainer.classList.add("active");
+  }
+
+  // ─── Placeholder Rotator ──────────────────────────────────────────────────
+
   class FakePlaceholderRotator {
     private elements: Array<{
       input: HTMLInputElement;
@@ -126,6 +246,8 @@
     }
   }
 
+  // ─── Menu ─────────────────────────────────────────────────────────────────
+
   const menuBtn = document.getElementById(
     "menuBtn"
   ) as HTMLButtonElement | null;
@@ -186,85 +308,34 @@
     }
   });
 
-  function performSearch(
-    query: string,
-    resultsContainer: HTMLDivElement
-  ): void {
-    if (!query.trim()) {
-      resultsContainer.classList.remove("active");
-      return;
-    }
-
-    const filtered = (products as Product[]).filter((product: Product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    if (filtered.length === 0) {
-      resultsContainer.innerHTML =
-        '<div class="no-results" role="status">No products found</div>';
-      resultsContainer.classList.add("active");
-      return;
-    }
-
-    const html: string = filtered
-      .map(
-        (product: Product) => `
-          <a href="/${product.slug}" class="search-result-item" role="option">
-            <div class="search-result-image-wrapper">
-              <img src="${product.source}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23f3f4f6%22 width=%2260%22 height=%2260%22/%3E%3C/svg%3E'">
-            </div>
-            <div class="search-result-info">
-              <div class="search-result-name">
-                ${product.name}
-                <span class="search-result-status">${product.status}</span>
-              </div>
-              <div class="search-result-price">${product.deposit}</div>
-            </div>
-          </a>
-        `
-      )
-      .join("");
-
-    resultsContainer.innerHTML = html;
-    resultsContainer.classList.add("active");
-  }
+  // ─── Search Event Listeners ───────────────────────────────────────────────
 
   searchInput?.addEventListener("input", (e: Event) => {
     const target = e.target as HTMLInputElement;
-    if (searchResults) {
-      performSearch(target.value, searchResults);
-    }
+    if (searchResults) performSearch(target.value, searchResults);
   });
 
   searchBtn?.addEventListener("click", () => {
-    if (searchInput && searchResults) {
-      performSearch(searchInput.value, searchResults);
-    }
+    if (searchInput && searchResults) performSearch(searchInput.value, searchResults);
   });
 
   searchInput?.addEventListener("keypress", (e: KeyboardEvent) => {
-    if (e.key === "Enter" && searchResults) {
-      performSearch(searchInput.value, searchResults);
-    }
+    if (e.key === "Enter" && searchResults) performSearch(searchInput.value, searchResults);
   });
 
   searchInputMobile?.addEventListener("input", (e: Event) => {
     const target = e.target as HTMLInputElement;
-    if (searchResultsMobile) {
-      performSearch(target.value, searchResultsMobile);
-    }
+    if (searchResultsMobile) performSearch(target.value, searchResultsMobile);
   });
 
   searchBtnMobile?.addEventListener("click", () => {
-    if (searchInputMobile && searchResultsMobile) {
+    if (searchInputMobile && searchResultsMobile)
       performSearch(searchInputMobile.value, searchResultsMobile);
-    }
   });
 
   searchInputMobile?.addEventListener("keypress", (e: KeyboardEvent) => {
-    if (e.key === "Enter" && searchInputMobile && searchResultsMobile) {
+    if (e.key === "Enter" && searchInputMobile && searchResultsMobile)
       performSearch(searchInputMobile.value, searchResultsMobile);
-    }
   });
 
   document.addEventListener("click", (e: MouseEvent) => {
@@ -274,6 +345,8 @@
       searchResultsMobile?.classList.remove("active");
     }
   });
+
+  // ─── Keyboard Navigation ──────────────────────────────────────────────────
 
   function setupKeyboardNavigation(
     input: HTMLInputElement,
@@ -305,12 +378,9 @@
     });
   }
 
-  if (searchInput && searchResults) {
-    setupKeyboardNavigation(searchInput, searchResults);
-  }
-  if (searchInputMobile && searchResultsMobile) {
+  if (searchInput && searchResults) setupKeyboardNavigation(searchInput, searchResults);
+  if (searchInputMobile && searchResultsMobile)
     setupKeyboardNavigation(searchInputMobile, searchResultsMobile);
-  }
 
   document.addEventListener("keydown", (e: KeyboardEvent) => {
     if (e.key === "Escape" && mobileMenu?.classList.contains("active")) {
@@ -320,6 +390,8 @@
       menuBtn?.focus();
     }
   });
+
+  // ─── Init Placeholder Rotator ─────────────────────────────────────────────
 
   document.addEventListener("DOMContentLoaded", () => {
     new FakePlaceholderRotator([
