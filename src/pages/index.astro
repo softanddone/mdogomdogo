@@ -46,31 +46,34 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* — Core palette: ink + blue + one functional red — */
-      --ink:        #0d1117;   /* headings, logo */
-      --ink-mid:    #24292f;   /* strong text */
-      --ink-light:  #57606a;   /* body / labels */
-      --ink-faint:  #8c959f;   /* captions */
+      /* — Warm, trustworthy palette — */
+      --ink:        #1a1f2e;
+      --ink-mid:    #2d3444;
+      --ink-light:  #5a6478;
+      --ink-faint:  #9aa3b2;
 
-      --blue:       #1a56db;   /* primary CTA, links, active */
-      --blue-dark:  #1341b0;   /* hover */
-      --blue-bg:    #f0f4ff;   /* tinted backgrounds */
-      --blue-line:  #c8d8fc;   /* borders / dividers */
+      --blue:       #1a56db;
+      --blue-dark:  #1341b0;
+      --blue-bg:    #eef3ff;
+      --blue-line:  #c5d5fb;
 
-      --red:        #cf222e;   /* badge-hot, flash bar */
-      --red-bg:     #fff0f0;
+      --green:      #0a7c3e;
+      --green-bg:   #edfaf3;
+
+      --red:        #c92424;
+      --red-bg:     #fff2f2;
 
       --canvas:     #ffffff;
-      --surface:    #f6f8fa;   /* section bg, card hover */
-      --border:     #d0d7de;   /* card / input borders */
-      --border-mid: #e8ecef;   /* lighter rules */
+      --surface:    #f4f6f9;
+      --border:     #dce1ea;
+      --border-mid: #eaecf0;
 
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 14px;
-      --shadow-sm: 0 1px 3px rgba(13,17,23,0.07);
-      --shadow-md: 0 4px 16px rgba(13,17,23,0.09);
-      --shadow-lg: 0 10px 32px rgba(13,17,23,0.12);
+      --shadow-sm: 0 1px 3px rgba(26,31,46,0.08);
+      --shadow-md: 0 4px 18px rgba(26,31,46,0.1);
+      --shadow-lg: 0 10px 36px rgba(26,31,46,0.13);
     }
 
     body { font-family: 'Inter', sans-serif; background: var(--canvas); color: var(--ink-mid); -webkit-font-smoothing: antialiased; }
@@ -78,12 +81,12 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     img { display: block; }
 
     /* TOP BAR */
-    .top-bar { background: var(--ink); color: #8c959f; font-size: 12px; font-weight: 500; padding: 7px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .top-bar { background: #1a2744; color: #8fa3c0; font-size: 12px; font-weight: 500; padding: 7px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .top-bar-pills { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-    .top-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 3px 10px; font-size: 11.5px; color: #c9d1d9; }
-    .top-pill svg { width: 10px; height: 10px; color: #c9d1d9; }
+    .top-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 3px 10px; font-size: 11.5px; color: #d4e0f0; }
+    .top-pill svg { width: 10px; height: 10px; color: #7eb3e8; }
     .top-bar-right { display: flex; align-items: center; gap: 10px; }
-    .top-wa { background: #238636; color: #fff; border-radius: 6px; padding: 4px 12px; font-size: 11.5px; font-weight: 600; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .top-wa { background: #1a7a35; color: #fff; border-radius: 6px; padding: 4px 12px; font-size: 11.5px; font-weight: 600; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
     .top-wa svg { width: 12px; height: 12px; }
 
     /* SITE HEADER */
@@ -110,15 +113,15 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .main-nav li a.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
 
     /* HERO */
-    .hero { background: linear-gradient(160deg, #0d1117 0%, #161c2d 55%, #1a3060 100%); padding: 48px 24px 44px; position: relative; overflow: hidden; }
+    .hero { background: linear-gradient(160deg, #0e1629 0%, #132048 55%, #1a3575 100%); padding: 48px 24px 44px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 700px 500px at 85% 50%, rgba(26,86,219,0.18) 0%, transparent 70%); pointer-events: none; }
     .hero-inner { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 1; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 4px 12px; font-size: 11.5px; font-weight: 600; color: #c9d1d9; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
-    .hero-eyebrow svg { width: 10px; height: 10px; color: #c9d1d9; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 4px 12px; font-size: 11.5px; font-weight: 600; color: #d4e5f5; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
+    .hero-eyebrow svg { width: 10px; height: 10px; color: #7eb3e8; }
     .hero-text h1 { font-size: 42px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
-    .hero-text h1 em { font-style: normal; color: #7eb6ff; }
-    .hero-text p { font-size: 15px; color: #8c959f; margin-bottom: 28px; line-height: 1.7; max-width: 440px; }
-    .hero-text p strong { color: #c9d1d9; font-weight: 600; }
+    .hero-text h1 em { font-style: normal; color: #90c0ff; }
+    .hero-text p { font-size: 15px; color: #8fa5c5; margin-bottom: 28px; line-height: 1.7; max-width: 440px; }
+    .hero-text p strong { color: #d4e5f5; font-weight: 600; }
     .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
     .btn-hero { background: var(--blue); color: #fff; border-radius: var(--radius-md); padding: 12px 28px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s, transform 0.15s; letter-spacing: -0.2px; font-family: 'Inter', sans-serif; }
     .btn-hero:hover { background: var(--blue-dark); transform: translateY(-1px); }
@@ -126,18 +129,18 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .btn-hero-ghost { background: rgba(255,255,255,0.08); color: #c9d1d9; border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-md); padding: 11px 24px; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; display: inline-block; transition: background 0.15s; }
     .btn-hero-ghost:hover { background: rgba(255,255,255,0.13); }
     .hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
-    .hero-stat .num { font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-    .hero-stat .lbl { font-size: 12px; color: #57606a; margin-top: 1px; }
+    .hero-stat .num { font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.2; }
+    .hero-stat .lbl { font-size: 12px; color: #6b88aa; margin-top: 1px; }
     .hero-right { display: flex; flex-direction: column; gap: 12px; }
     .dep-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .dep-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-md); padding: 16px; text-align: center; transition: background 0.15s, border-color 0.15s; cursor: pointer; }
     .dep-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
     .dep-card .amount { font-size: 20px; font-weight: 800; color: #fff; }
-    .dep-card .sublabel { font-size: 11px; color: #57606a; margin-top: 3px; }
+    .dep-card .sublabel { font-size: 11px; color: #6b88aa; margin-top: 3px; }
     .hero-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .hero-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 10px 8px; text-align: center; }
-    .hero-badge svg { width: 18px; height: 18px; color: #8c959f; margin: 0 auto 5px; }
-    .hero-badge span { display: block; font-size: 11px; color: #8c959f; line-height: 1.4; font-weight: 500; }
+    .hero-badge svg { width: 18px; height: 18px; color: #7eb3e8; margin: 0 auto 5px; }
+    .hero-badge span { display: block; font-size: 11px; color: #8fa5c5; line-height: 1.4; font-weight: 500; }
 
     /* FLASH DEALS BAR */
     .flash-bar { background: var(--red); padding: 0 24px; display: flex; align-items: stretch; gap: 0; overflow: hidden; }
@@ -154,13 +157,14 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .flash-badge { background: rgba(255,255,255,0.2); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
 
     /* TRUST BAR */
-    /* TRUST BAR */
-    .trust-bar { background: var(--canvas); border-bottom: 1px solid var(--border); padding: 12px 24px; }
-    .trust-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
-    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--ink-light); padding: 0 24px; border-right: 1px solid var(--border-mid); }
+    .trust-bar { background: var(--canvas); border-bottom: 1px solid var(--border); padding: 0 24px; }
+    .trust-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: stretch; }
+    .trust-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 600; color: var(--ink-mid); padding: 12px 20px; border-right: 1px solid var(--border-mid); flex: 1; }
     .trust-item:last-child { border-right: none; }
-    .trust-icon { width: 26px; height: 26px; background: var(--blue-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .trust-icon svg { width: 12px; height: 12px; color: var(--blue); }
+    .trust-item strong { display: block; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+    .trust-item span { color: var(--ink-light); }
+    .trust-icon { width: 32px; height: 32px; background: var(--green-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .trust-icon svg { width: 14px; height: 14px; color: var(--green); }
 
     /* PAGE WRAP */
     .page-wrap { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
@@ -190,7 +194,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .card { display: flex; flex-direction: column; background: var(--canvas); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; position: relative; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1); text-decoration: none; color: inherit; }
     .card:hover { border-color: var(--blue-line); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
     .card-badge { position: absolute; top: 10px; left: 10px; z-index: 3; padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; line-height: 1; }
-    .badge-new  { background: #1a7f37; }
+    .badge-new  { background: var(--green); }
     .badge-hot  { background: var(--red); }
     .badge-sale { background: var(--blue); }
     .card-discount { position: absolute; top: 10px; right: 10px; z-index: 3; background: var(--red); color: #fff; font-size: 10.5px; font-weight: 700; padding: 3px 8px; border-radius: 5px; line-height: 1.4; }
@@ -203,12 +207,12 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .card-specs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 9px; }
     .spec-pill { background: var(--surface); border: 1px solid var(--border-mid); color: var(--ink-light); border-radius: 4px; padding: 2px 7px; font-size: 10.5px; font-weight: 500; white-space: nowrap; }
     .card-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 10px; }
-    .stars { color: #b08800; font-size: 12px; letter-spacing: 0.5px; }
+    .stars { color: #c08000; font-size: 12px; letter-spacing: 0.5px; }
     .rating-count { font-size: 11px; color: var(--ink-faint); }
     .card-price { margin-bottom: 6px; }
     .price-deposit { font-size: 23px; font-weight: 800; color: var(--blue); letter-spacing: -0.5px; line-height: 1; }
     .price-label { font-size: 11px; color: var(--ink-faint); font-weight: 400; margin-left: 3px; }
-    .installment-note { font-size: 11px; color: #1a7f37; font-weight: 600; background: #f0faf4; padding: 4px 9px; border-radius: 5px; margin-bottom: 11px; display: inline-block; line-height: 1.5; }
+    .installment-note { font-size: 11px; color: var(--green); font-weight: 600; background: var(--green-bg); padding: 4px 9px; border-radius: 5px; margin-bottom: 11px; display: inline-block; line-height: 1.5; }
     .card-cta { display: flex; gap: 6px; margin-top: auto; }
     .btn-cart { flex: 1; background: var(--blue); color: #fff; border: none; border-radius: var(--radius-sm); padding: 9px 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s; }
     .btn-cart:hover { background: var(--blue-dark); }
@@ -216,12 +220,12 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .btn-buy:hover { background: #24292f; }
 
     /* BUDGET PICKS */
-    .budget-section { background: var(--ink); border-radius: var(--radius-lg); padding: 28px 24px; margin: 28px 0; }
+    .budget-section { background: #0e1629; border-radius: var(--radius-lg); padding: 28px 24px; margin: 28px 0; }
     .budget-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .budget-head h2 { font-size: 19px; font-weight: 700; color: #fff; }
-    .budget-head h2 span { color: #7eb6ff; }
-    .budget-see-all { font-size: 12.5px; color: #57606a; font-weight: 500; }
-    .budget-see-all:hover { color: #8c959f; }
+    .budget-head h2 { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+    .budget-head h2 span { color: #90c0ff; }
+    .budget-see-all { font-size: 12.5px; color: #6b88aa; font-weight: 500; }
+    .budget-see-all:hover { color: #90c0ff; }
     .budget-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
     .budget-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); overflow: hidden; transition: background 0.15s, border-color 0.15s, transform 0.2s cubic-bezier(0.34,1.3,0.64,1); text-decoration: none; color: inherit; display: flex; flex-direction: column; }
     .budget-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.25); transform: translateY(-3px); }
@@ -229,17 +233,17 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .budget-img { width: 80%; height: 80%; object-fit: contain; transition: transform 0.3s; }
     .budget-card:hover .budget-img { transform: scale(1.06); }
     .budget-body { padding: 10px 11px; flex: 1; display: flex; flex-direction: column; }
-    .budget-name { font-size: 12px; font-weight: 500; color: #c9d1d9; line-height: 1.4; margin-bottom: 7px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .budget-deposit { font-size: 18px; font-weight: 800; color: #7eb6ff; }
-    .budget-deposit-lbl { font-size: 10px; color: #57606a; }
-    .budget-cta { width: 100%; background: rgba(126,182,255,0.1); border: 1px solid rgba(126,182,255,0.2); color: #7eb6ff; padding: 8px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s; text-align: center; display: block; }
+    .budget-name { font-size: 12px; font-weight: 500; color: #c8daf0; line-height: 1.4; margin-bottom: 7px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .budget-deposit { font-size: 18px; font-weight: 800; color: #90c0ff; }
+    .budget-deposit-lbl { font-size: 10px; color: #6b88aa; }
+    .budget-cta { width: 100%; background: rgba(126,182,255,0.1); border: 1px solid rgba(144,192,255,0.25); color: #90c0ff; padding: 8px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.15s; text-align: center; display: block; }
     .budget-cta:hover { background: rgba(126,182,255,0.18); }
 
     /* PROMO BANNERS */
     .promo-banners { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
     .promo-banner { border-radius: var(--radius-lg); padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; overflow: hidden; position: relative; }
     .promo-banner-a { background: linear-gradient(135deg, #161c2d 0%, #1e3a6e 100%); border: 1px solid rgba(26,86,219,0.3); }
-    .promo-banner-b { background: var(--ink); border: 1px solid rgba(255,255,255,0.1); }
+    .promo-banner-b { background: linear-gradient(135deg, #0e1629 0%, #132048 100%); border: 1px solid rgba(144,192,255,0.15); }
     .promo-text h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; letter-spacing: -0.3px; }
     .promo-text p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
     .promo-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: 12px 16px; text-align: center; flex-shrink: 0; }
@@ -283,7 +287,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .testimonials-head p { font-size: 14px; color: var(--ink-light); }
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .testi-card { background: var(--canvas); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
-    .testi-stars { color: #b08800; font-size: 14px; margin-bottom: 10px; }
+    .testi-stars { color: #c08000; font-size: 14px; margin-bottom: 10px; }
     .testi-text { font-size: 13.5px; color: var(--ink-mid); line-height: 1.65; margin-bottom: 14px; font-style: italic; }
     .testi-footer { display: flex; align-items: center; gap: 10px; }
     .testi-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--blue); flex-shrink: 0; }
@@ -316,27 +320,27 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .seo-content a:hover { text-decoration: underline; }
 
     /* FOOTER */
-    .footer { background: var(--ink); padding: 40px 24px 20px; }
+    .footer { background: #0e1629; padding: 40px 24px 20px; }
     .footer-inner { max-width: 1320px; margin: 0 auto; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 28px; }
     .footer-logo { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 10px; display: block; }
-    .footer-logo em { color: #7eb6ff; font-style: normal; }
-    .footer-tagline { font-size: 13px; color: #57606a; line-height: 1.7; margin-bottom: 16px; }
-    .footer-contact a { display: block; font-size: 13px; color: #8c959f; margin-bottom: 5px; }
-    .footer-contact a:hover { color: #c9d1d9; }
-    .footer-col-title { font-size: 10px; font-weight: 700; color: #444c56; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .footer-logo em { color: #90c0ff; font-style: normal; }
+    .footer-tagline { font-size: 13px; color: #4e6a8a; line-height: 1.7; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: #6b88aa; margin-bottom: 5px; }
+    .footer-contact a:hover { color: #d4e5f5; }
+    .footer-col-title { font-size: 10px; font-weight: 700; color: #3d5a80; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
     .footer-links { list-style: none; }
     .footer-links li { margin-bottom: 7px; }
-    .footer-links a { font-size: 13px; color: #57606a; transition: color 0.15s; }
-    .footer-links a:hover { color: #c9d1d9; }
+    .footer-links a { font-size: 13px; color: #4e6a8a; transition: color 0.15s; }
+    .footer-links a:hover { color: #d4e5f5; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-    .footer-bottom p { font-size: 12px; color: #444c56; }
+    .footer-bottom p { font-size: 12px; color: #3d5a80; }
 
     /* SEO TAGS */
-    .seo-tags { border-top: 1px solid rgba(255,255,255,0.05); padding: 14px 24px; background: #090d12; }
+    .seo-tags { border-top: 1px solid rgba(255,255,255,0.05); padding: 14px 24px; background: #091020; }
     .seo-tags-inner { max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 6px; }
-    .seo-tag { font-size: 11.5px; color: #444c56; border: 1px solid #21262d; border-radius: 4px; padding: 3px 9px; background: #0d1117; transition: color 0.12s, border-color 0.12s; }
-    .seo-tag:hover { color: #8c959f; border-color: #444c56; }
+    .seo-tag { font-size: 11.5px; color: #3d5a80; border: 1px solid #1a2d50; border-radius: 4px; padding: 3px 9px; background: #0e1629; transition: color 0.12s, border-color 0.12s; }
+    .seo-tag:hover { color: #90c0ff; border-color: #3d5a80; }
 
     /* RESPONSIVE */
     @media (max-width: 1100px) {
@@ -349,24 +353,41 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     @media (max-width: 900px) {
       .product-grid { grid-template-columns: repeat(3, 1fr); }
       .budget-grid { grid-template-columns: repeat(3, 1fr); }
+      .brand-grid { grid-template-columns: repeat(4, 1fr); }
       .how-grid { grid-template-columns: repeat(2, 1fr); }
       .how-grid::before { display: none; }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
       .promo-banners { grid-template-columns: 1fr; }
+      /* Trust bar: 2-up grid on tablet */
+      .trust-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; justify-items: start; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border-mid); padding: 10px 16px; width: 100%; }
+      .trust-item:nth-child(odd) { border-right: 1px solid var(--border-mid); }
+      .trust-item:nth-last-child(-n+2) { border-bottom: none; }
     }
     @media (max-width: 700px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
       .budget-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-text h1 { font-size: 30px; }
+      .brand-grid { grid-template-columns: repeat(4, 1fr); }
+      .hero-text h1 { font-size: 28px; }
+      .hero-text p { font-size: 14px; }
+      /* Trust bar: keep 2-col on mobile */
+      .trust-inner { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 500px) {
       .header-search { display: none; }
       .brand-grid { grid-template-columns: repeat(4, 1fr); }
+      .brand-chip { padding: 10px 4px 8px; }
+      .brand-logo-wrap { height: 34px; }
+      .brand-chip-sub { font-size: 10px; }
       .how-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
-      .trust-item { padding: 0 12px; border: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      /* Trust bar: full-width single column on very small screens */
+      .trust-inner { grid-template-columns: 1fr; }
+      .trust-item { border-right: none !important; border-bottom: 1px solid var(--border-mid); }
+      .trust-item:last-child { border-bottom: none; }
     }
   </style>
 </head>
@@ -380,15 +401,15 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     <div class="top-bar-pills">
       <span class="top-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Free delivery 
+        Pay after delivery — zero risk
       </span>
       <span class="top-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        No credit check
+        No CRB check · No guarantor
       </span>
       <span class="top-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Pay after delivery via M-Pesa
+        Free same-day delivery Nairobi
       </span>
     </div>
     <div class="top-bar-right">
@@ -401,7 +422,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
   </div>
 
   <!-- SITE HEADER -->
-  <!-- <header class="site-header">
+  <header class="site-header">
     <a href="/" class="logo">Mdogo<em>mdogo</em>Deals <span class="logo-badge">Nairobi</span></a>
     <div class="header-search" role="search">
       <input type="search" placeholder="Search phones, brands, models…" aria-label="Search phones" />
@@ -413,7 +434,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
         <a href="tel:+254100028823" class="number">0100 028 823</a>
       </div>
     </div>
-  </header> -->
+  </header>
 
   <!-- MAIN NAV -->
   <nav class="main-nav" aria-label="Main navigation">
@@ -526,24 +547,24 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
   <div class="trust-bar" role="region" aria-label="Trust signals">
     <div class="trust-inner">
       <div class="trust-item">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        Deposit from KSh 2,000
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></div>
+        <div><strong>Order Now, Pay After Delivery</strong><br><span style="font-size:11px;font-weight:400;">We deliver first — you pay when satisfied</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        No Credit Check
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></div>
-        Same-Day Delivery Nairobi
+        <div><strong>No Credit Check</strong><br><span style="font-size:11px;font-weight:400;">No CRB, no guarantor needed</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-        Pay via M-Pesa on Delivery
+        <div><strong>Pay via M-Pesa</strong><br><span style="font-size:11px;font-weight:400;">Daily, weekly or monthly plans</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        100% Genuine Phones
+        <div><strong>100% Genuine Phones</strong><br><span style="font-size:11px;font-weight:400;">Full manufacturer warranty</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><strong>Same-Day Delivery</strong><br><span style="font-size:11px;font-weight:400;">Order before 2 PM, get it today</span></div>
       </div>
     </div>
   </div>
