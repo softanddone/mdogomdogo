@@ -81,18 +81,45 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     img { display: block; }
 
     /* TOP BAR */
-    .top-bar { background: #1a2744; color: #8fa3c0; font-size: 12px; font-weight: 500; padding: 6px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .top-bar-pills { display: flex; align-items: center; gap: 6px; }
+    .top-bar {
+      background: #1a2744;
+      color: #8fa3c0;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .top-bar-pills { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .top-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 3px 10px; font-size: 11.5px; color: #d4e0f0; white-space: nowrap; }
-    .top-pill svg { width: 10px; height: 10px; color: #7eb3e8; }
+    .top-pill svg { width: 10px; height: 10px; color: #7eb3e8; flex-shrink: 0; }
     .top-bar-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
     .top-phone { font-size: 11.5px; color: #d4e0f0; font-weight: 600; white-space: nowrap; }
     .top-wa { background: #1a7a35; color: #fff; border-radius: 6px; padding: 5px 12px; font-size: 11.5px; font-weight: 600; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
     .top-wa svg { width: 12px; height: 12px; }
-    /* Mobile: hide pills, show only contact + WhatsApp */
     @media (max-width: 700px) {
-      .top-bar-pills { display: none; }
-      .top-bar { justify-content: space-between; }
+      /* Stack into two rows: pills on top, contact on bottom */
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding: 8px 14px;
+      }
+      .top-bar-pills {
+        justify-content: center;
+        gap: 5px;
+      }
+      .top-pill {
+        font-size: 11px;
+        padding: 3px 9px;
+      }
+      .top-bar-right {
+        justify-content: center;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-top: 6px;
+      }
     }
 
     /* SITE HEADER */
