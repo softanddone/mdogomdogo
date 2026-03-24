@@ -23,11 +23,30 @@ export const products = [
     slugs: "oppo-a3x",
     description: "Buy Oppo A3x on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
     brand: "Oppo",
-    seller: "Mkopa",
+    seller: "Mogo",
     model: "CPH2641",
     storage: "128GB",
     condition: "new",
     gtin: "",
+    curved_screen:"no",
+    dual_sim:"yes",
+    waterproof:"no", 
+    gaming_phone:"yes",
+    esim_compatible:"no",
+    amoled_display:"no",
+    is_it_5g:"no",
+    ram_expandible:"yes",
+    good_phone:"yes",
+    performance:"Snapdragon 6s reliable processor chipset",
+    fingerprint:"onscreen display",
+    wireless_charging:"no",
+    refresh_rate:"90Hz",
+    fast_charging:"yes",
+    battery_life:"all day usage",
+    speed:"The Oppo A3x offers decent everyday speed powered by a budget-friendly processor and 4GB RAM, making it smooth for tasks like WhatsApp, browsing, and video streaming, with a 120Hz display adding a more fluid feel when scrolling; however, it may slow down with heavy gaming or intense multitasking, so it’s best suited for normal daily use rather than high-performance needs.",
+    camera_quality:"good for photography",
+    megapixel:"8MP",
+
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
 
@@ -151,11 +170,30 @@ export const products = [
     slugs: "tecno-pop-10-64-4",
     description: "Buy Tecno Pop 10 64GB on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & affordable daily payments. Fast delivery available",
     brand: "Tecno",
-    seller: "Mkopa",
+    seller: "Onfon Mobile",
     model: "Tecno Pop 10",
     storage: "64GB",
     condition: "new",
     gtin: "",
+
+    curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc budget processor suitable for daily tasks",
+fingerprint:"rear mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"no",
+battery_life:"all day usage",
+speed:"The Tecno Pop 10 delivers basic everyday performance with its entry-level processor and 4GB RAM, making it suitable for simple tasks like calling, WhatsApp, light browsing, and watching videos; however, it is not designed for heavy multitasking or gaming, so performance may feel slow under demanding use.",
+camera_quality:"basic photography",
+megapixel:"13MP",
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
     details: [
@@ -243,8 +281,6 @@ export const products = [
 },
 
 
-
-
   {
   id: 2,
   name: "Oppo A3 Pro",
@@ -270,11 +306,35 @@ export const products = [
   slugs: "oppo-a3-pro",
   description: "Buy Oppo A3 Pro on credit in Kenya. Affordable installments with Lipa Mdogo Mdogo. Stunning AMOLED display and reliable battery.",
   brand: "Oppo",
-  seller: "Mkopa",
+  seller: "Onfon Mobile",
   model: "CPH2639",
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Dimensity reliable 5G processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Oppo A3 Pro offers smooth and responsive performance thanks to its Dimensity 5G chipset and up to 8GB RAM, making it great for multitasking, social media, and moderate gaming; the 120Hz display ensures fluid scrolling and a better overall experience, though very heavy gaming may still push its limits.",
+camera_quality:"good for photography",
+megapixel:"50MP",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -396,6 +456,26 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Snapdragon 680 efficient 4G processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Oppo A60 delivers smooth everyday performance powered by the Snapdragon 680 and up to 8GB RAM, making it reliable for multitasking, social media, and video streaming; the 90Hz display keeps scrolling fluid, though it is not built for heavy gaming or very demanding tasks.",
+camera_quality:"good for photography",
+megapixel:"50MP",
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
 
@@ -516,7 +596,7 @@ export const products = [
   slugs: "oppo-reno14",
   description: "Get Oppo Reno 14 on credit in Kenya. Stunning AMOLED display, powerful chipset, and pro-grade cameras. Pay in small installments.",
   brand: "Oppo",
-  seller: "Mkopa",
+  seller: "Onfon Mobile",
   model: "CPH2667",
   storage: "256GB",
   condition: "new",
@@ -630,11 +710,30 @@ export const products = [
   slugs: "oppo-reno14-pro",
   description: "Buy Oppo Reno 14 Pro in Kenya on installments. Powerful processor, premium cameras, and fast SUPERVOOC charging.",
   brand: "Oppo",
-  seller: "Mkopa",
+  seller: "Mogo, Onfon Mobile",
   model: "CPH2669",
   storage: "512GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Dimensity 8450 flagship-level 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Oppo Reno 14 Pro delivers flagship-level performance powered by the Dimensity 8450 chipset and high RAM options, making it extremely smooth for multitasking, gaming, and demanding apps; the 120Hz AMOLED display and fast storage enhance responsiveness, while sustained performance remains stable even under heavy use, making it suitable for power users and gamers.",
+camera_quality:"excellent for photography",
+megapixel:"50MP triple camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno", "Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -744,11 +843,30 @@ export const products = [
   slugs: "oppo-reno14f-5g",
   description: "Order Oppo Reno 14F 5G on credit in Kenya. Stylish AMOLED display, 5G ready, and affordable installments.",
   brand: "Oppo",
-  seller: "Mkopa",
+  seller: "Mogo, Onfon Mobile",
   model: "CPH2673",
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Snapdragon 6 Gen 1 efficient 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Oppo Reno 14F 5G offers smooth and reliable performance for daily use powered by the Snapdragon 6 Gen 1 and up to 12GB RAM, making it great for multitasking, social media, and moderate gaming; the 120Hz AMOLED display keeps everything fluid, though it is not a high-end gaming chip, so very heavy tasks may not perform at flagship levels.",
+camera_quality:"very good for photography",
+megapixel:"50MP triple camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Reno","Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -864,6 +982,30 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G99 Ultra efficient gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Redmi Note 14 offers smooth and responsive performance for everyday use powered by the Helio G99 Ultra and 6GB RAM, making it great for social media, streaming, and moderate gaming; the 120Hz AMOLED display adds fluid scrolling, though it is not designed for heavy high-end gaming or intensive multitasking.",
+camera_quality:"very good for photography",
+megapixel:"108MP triple camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Xiaomi", "Redmi Note Series","Mogo","Loan", "Smartphones","Lipa Mdogo Mdogo"],
 
   details: [
@@ -971,11 +1113,32 @@ export const products = [
   
   description: "Buy Infinix Hot 60 Pro (8/128GB) in Nairobi, Kenya. Big display, long-lasting battery, and great performance. Pay in small installments with Lipa Mdogo Mdogo.",
   brand: "Infinix",
-  seller: "Authorized Dealer",
+  seller: "Mogo, Onfon Mobile",
   model: "Hot 60 Pro",
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G200 powerful gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"144Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Infinix Hot 60 Pro delivers strong midrange performance powered by the Helio G200 and 8GB RAM, making it smooth for multitasking, gaming, and daily apps; the 144Hz AMOLED display ensures ultra-fluid scrolling and responsiveness, though sustained heavy gaming may still cause slight heating or performance drops over time.",
+camera_quality:"good for photography",
+megapixel:"50MP",
+
   categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Hot Series","Mogo","Smartphones","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -1089,6 +1252,29 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Helio G100 Ultimate gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"yes",
+refresh_rate:"144Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Infinix Note 50 Pro delivers strong midrange performance powered by the Helio G100 Ultimate and 8GB RAM, making it smooth for multitasking, gaming, and everyday apps; the 144Hz AMOLED display ensures very fluid interactions, while performance remains stable for most tasks, though it may not match flagship-level power in very demanding gaming scenarios.",
+camera_quality:"very good for photography",
+megapixel:"50MP dual camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Infinix", "Note Series","Mogo","Smartphones","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -1203,6 +1389,31 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G100 reliable gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Infinix Hot 50 Pro delivers smooth and reliable everyday performance powered by the Helio G100 and 8GB RAM, making it suitable for multitasking, social media, and moderate gaming; the 120Hz AMOLED display keeps interactions fluid, though it is not built for heavy high-end gaming and may slow under intensive tasks.",
+camera_quality:"good for photography",
+megapixel:"50MP dual camera",
+
+
+
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","Hot Series","Smartphones","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -1314,6 +1525,28 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G81 efficient budget processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Infinix Hot 60i delivers reliable everyday performance powered by the Helio G81 and 6GB RAM, making it suitable for calls, WhatsApp, browsing, and light multitasking; the 120Hz display adds smoothness to scrolling, but it is not designed for heavy gaming or demanding apps, where performance may feel limited.",
+camera_quality:"good for basic photography",
+megapixel:"50MP dual camera",
+
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","Hot Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -1422,6 +1655,30 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G81 budget processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"no",
+battery_life:"all day usage",
+speed:"The Infinix Smart 9 provides basic everyday performance powered by the Helio G81 and 4GB RAM, making it suitable for calls, WhatsApp, browsing, and light apps; the 120Hz display adds smooth scrolling, but it is not built for gaming or heavy multitasking, where it may slow down.",
+camera_quality:"basic photography",
+megapixel:"13MP",
+
+
+
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -1532,6 +1789,28 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Dimensity 8350 Ultimate flagship gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"yes",
+refresh_rate:"144Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Infinix GT 30 Pro delivers flagship-level gaming performance powered by the Dimensity 8350 Ultimate and 12GB RAM, making it extremely smooth for heavy gaming, multitasking, and demanding apps; the 144Hz AMOLED display and advanced cooling system ensure fluid gameplay and stable performance, though extended sessions may still cause slight heating under extreme load.",
+camera_quality:"very good for photography",
+megapixel:"108MP dual camera",
+
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","GT Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -1643,6 +1922,27 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G50 efficient entry-level processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"no",
+battery_life:"all day usage",
+speed:"The Infinix Smart 9 HD delivers basic everyday performance powered by the Helio G50 and 3GB or 4GB RAM, making it suitable for calls, WhatsApp, browsing, and light apps; the 90Hz display adds smoother scrolling, but it is not designed for gaming or heavy multitasking and may lag under demanding use.",
+camera_quality:"basic photography",
+megapixel:"13MP",
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series","Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -1751,6 +2051,28 @@ export const products = [
   storage: "64-128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T7250 efficient entry-level processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"no",
+battery_life:"all day usage",
+speed:"The Infinix Smart 10 offers basic but smooth everyday performance powered by the Unisoc T7250 and up to 4GB RAM, making it suitable for calls, WhatsApp, browsing, and light apps; the 120Hz display improves scrolling experience, but it is not designed for gaming or heavy multitasking and may lag under demanding use.",
+camera_quality:"basic photography",
+megapixel:"8MP",
+
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","Smart Series","Loan","Lipa Mdogo Mdogo","Smartphones","Mogo"],
   details: [
   {
@@ -1866,6 +2188,26 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Dimensity 7300 Ultimate powerful 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"144Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Infinix Note 50S 5G delivers strong midrange performance powered by the Dimensity 7300 Ultimate and 8GB RAM, making it smooth for multitasking, gaming, and demanding apps; the 144Hz AMOLED display ensures ultra-fluid scrolling and gameplay, while performance remains stable for most tasks, though it does not fully reach flagship gaming levels under extreme load.",
+camera_quality:"very good for photography",
+megapixel:"64MP dual camera",
+
   categoryPath: ["Electronics","Mobile Phones","Infinix","Note Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -1981,6 +2323,25 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 reliable gaming processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 9 Pro delivers smooth everyday performance powered by the Helio G85 and 4GB RAM, making it suitable for multitasking, social media, and light to moderate gaming; the 90Hz display improves scrolling smoothness, though heavy gaming and intensive tasks may cause some slowdowns.",
+camera_quality:"very good for photography",
+megapixel:"50MP triple camera",
   categoryPath: ["Electronics","Mobile Phones","Tecno","Spark Series","Mogo","Lipa Mdogo Mdogo","Loan","Smartphones"],
   details: [
   {
@@ -2101,6 +2462,25 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G99 efficient gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Camon 20 Pro delivers smooth and reliable performance powered by the Helio G99 and 8GB RAM, making it great for multitasking, social media, and moderate gaming; the 120Hz AMOLED display ensures fluid scrolling and responsiveness, though it is not designed for heavy high-end gaming and may slow under very demanding tasks.",
+camera_quality:"very good for photography",
+megapixel:"64MP triple camera",
   categoryPath: ["Electronics","Mobile Phones","Tecno","Camon Series","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -2223,6 +2603,27 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "4895180765432",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 reliable gaming processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 9 Pro delivers smooth everyday performance powered by the Helio G85 and 4GB RAM, making it suitable for multitasking, social media, and light to moderate gaming; the 90Hz display improves scrolling smoothness, though heavy gaming and demanding tasks may cause some slowdown.",
+camera_quality:"very good for photography",
+megapixel:"50MP triple camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -2329,6 +2730,25 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "4895180792341",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 reliable gaming processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Camon 20 delivers smooth everyday performance powered by the Helio G85 and 8GB RAM, making it reliable for multitasking, social media, and moderate gaming; the AMOLED display enhances visuals, though the 60Hz refresh rate and chipset mean it is not designed for heavy gaming or intensive performance tasks.",
+camera_quality:"very good for photography",
+megapixel:"64MP triple camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogp","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -2434,6 +2854,25 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "4895180792358",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G99 strong mid‑range processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Tecno Camon 20 Pro delivers smooth and responsive performance powered by the Helio G99 and 8GB RAM, making it great for everyday use, multitasking, social media, and moderate gaming; the 120Hz AMOLED display ensures fluid visuals and scrolling, though it’s not a flagship‑level gaming device if pushed into very demanding tasks.",
+camera_quality:"very good for photography",
+megapixel:"64MP triple camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -2541,6 +2980,27 @@ export const products = [
   storage: "512GB",
   condition: "new",
   gtin: "4895180792365",
+
+curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Dimensity 7050 flagship‑class 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Tecno Camon 20 Premier 5G delivers flagship‑level performance with the Dimensity 7050 and plenty of RAM, making it extremely smooth for multitasking, gaming, and demanding apps; the 120Hz AMOLED curved display and fast storage deliver fluid visuals, and overall performance stays strong even under heavy use.",
+camera_quality:"excellent for photography",
+megapixel:"50MP quad camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogo","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
@@ -2648,6 +3108,27 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "4895180794122",
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T616 reliable everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 20 delivers smooth everyday performance powered by the Unisoc T616 and 8GB RAM, making it suitable for everyday tasks like WhatsApp, browsing, and social media; the 90Hz display adds smoother scrolling, though it’s not designed for heavy gaming or demanding multitasking.",
+camera_quality:"good for photography",
+megapixel:"50MP dual camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -2754,6 +3235,24 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T602 efficient everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 20C delivers reliable everyday performance powered by the Unisoc T602 and 4GB RAM, making it suitable for basic tasks like calling, WhatsApp, browsing, and social media; it’s not designed for gaming or heavy multitasking, so performance may slow under demanding use.",
+camera_quality:"good for photography",
+megapixel:"50MP dual camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -2855,6 +3354,25 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no", 
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G88 reliable gaming processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 10 Pro delivers smooth everyday performance powered by the Helio G88 and 8GB RAM, making it suitable for multitasking, social media, and light to moderate gaming; the 90Hz display adds more fluid scrolling, though heavy gaming or very demanding tasks may show some slowdowns.",
+camera_quality:"very good for photography",
+megapixel:"64MP triple camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -2957,6 +3475,24 @@ export const products = [
   storage: "32GB",
   condition: "new",
   gtin: "",
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc chipset for basic everyday use",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Megaphone 19 offers reliable everyday performance with its entry‑level Unisoc processor and sufficient RAM for calls, WhatsApp, and light apps; it is not designed for gaming or heavy multitasking, but handles basic tasks smoothly.",
+camera_quality:"good for casual photos",
+megapixel:"13MP",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
   details: [
   {
@@ -3058,6 +3594,24 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T606 efficient everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 10C delivers reliable everyday performance powered by the Unisoc T606 and sufficient RAM, making it suitable for calls, WhatsApp, browsing, and social media; it’s not designed for heavy gaming or intensive multitasking, but handles basic daily tasks smoothly.",
+camera_quality:"good for photography",
+megapixel:"50MP dual camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -3160,6 +3714,25 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc entry‑level processor for everyday tasks",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark Go 2023 offers reliable basic performance with its entry‑level Unisoc chipset and sufficient RAM, making it suitable for daily activities like calls, WhatsApp, browsing, and social media; it’s not designed for gaming or heavy multitasking, but handles simple tasks smoothly.",
+camera_quality:"good for casual photography",
+megapixel:"13MP",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -3262,6 +3835,24 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+  curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Dimensity 9000 flagship‑class 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Tecno Phantom X2 Pro delivers flagship‑level performance powered by the Dimensity 9000 and generous RAM, making it extremely smooth for heavy gaming, multitasking, and demanding apps; the 120Hz curved AMOLED display and advanced optics ensure fluid visuals and excellent responsiveness even under sustained load.",
+camera_quality:"excellent for photography",
+megapixel:"50MP triple camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno"],
   details: [
   {
@@ -3435,6 +4026,28 @@ export const products = [
   model: "Phantom V Fold",
   storage: "512GB",
   condition: "new",
+
+
+curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"MediaTek Dimensity 9000+ flagship 5G processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Tecno Phantom V Fold delivers flagship‑level performance powered by the Dimensity 9000+ and 12GB RAM, making it extremely smooth for multitasking, gaming, and demanding apps; its large foldable 7.85″ 120Hz AMOLED display combined with dual‑screen multitasking enhances productivity and entertainment, though foldable devices are typically heavier than standard phones.",
+camera_quality:"excellent for photography",
+megapixel:"50MP + 50MP + 13MP triple camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Mogo"],
   productLine: "Tecno Phantom",
   reviews: {
@@ -3489,6 +4102,25 @@ export const products = [
   
   storage: "64GB",
   condition: "new",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T606 efficient everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 8C delivers reliable basic performance powered by the Unisoc T606 and sufficient RAM, making it suitable for daily tasks like calls, WhatsApp, browsing, and social media; it’s not designed for heavy gaming or intensive multitasking, but handles simple apps smoothly.",
+camera_quality:"good for photography",
+megapixel:"16MP dual camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Loan","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
@@ -3600,6 +4232,28 @@ export const products = [
   material: "Eco-friendly back cover (Mars Orange made from recycled materials)",
   
   condition: "new",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T610 efficient budget gaming processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Tecno Pova Neo 2 delivers smooth everyday and casual gaming performance powered by the Unisoc T610 and ample RAM, making it suitable for multitasking, streaming, and light to moderate gaming; the 90Hz display enhances fluidity, though it’s not designed for heavy high‑end games or very intense multitasking.",
+camera_quality:"good for photography",
+megapixel:"50MP dual camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno","Mogo","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -3705,6 +4359,26 @@ export const products = [
   model: "V60 5G",
   storage: "256GB",
   condition: "new",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 7 Gen 4 powerful 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Vivo V60 5G delivers smooth and responsive performance powered by the Snapdragon 7 Gen 4 and generous RAM, making it great for multitasking, gaming, and everyday apps; the 120Hz AMOLED display and high battery capacity ensure fluid visuals and reliable endurance under heavy usage without frequent charging.",
+camera_quality:"excellent for photography",
+megapixel:"50MP triple ZEISS camera",
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
@@ -3820,6 +4494,28 @@ export const products = [
   model: "V50 Lite",
   storage: "256GB",
   condition: "new",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Dimensity 6300 efficient mid‑range 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Vivo V50 Lite 5G delivers smooth everyday performance with its Dimensity 6300 5G chip and 12GB RAM, making it reliable for multitasking, social media, streaming, and moderate gaming; the large AMOLED display with up to 120Hz refresh rate ensures fluid visuals and responsive interactions, while the huge 6500 mAh battery and 90 W fast charging keep you going all day without frequent charging.",  
+camera_quality:"very good for photography",  
+megapixel:"50MP + 8MP dual camera",  
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan", "Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -3936,6 +4632,25 @@ export const products = [
   model: "Y04",
   storage: "128GB",
   condition: "new",
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes", 
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T7225 reliable everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Vivo Y04 offers reliable everyday performance powered by the Unisoc T7225 and 4GB RAM, making it suitable for calls, WhatsApp, browsing, and light multitasking; the 90Hz display adds smoother scrolling, though it is not designed for gaming or very demanding apps, making it best suited for basic daily use.",
+camera_quality:"good for casual photography",
+megapixel:"13MP rear + 5MP front",
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Lipa Mdogo Mdogo","Loan"],
   details: [
   {
@@ -4050,6 +4765,25 @@ export const products = [
   model: "V50",
   storage: "512GB",
   condition: "new",
+
+  curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 7 Gen 3 powerful 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Vivo V50 5G delivers smooth and responsive performance thanks to its Snapdragon 7 Gen 3 chipset and generous RAM options, making it great for multitasking, gaming, and demanding apps; the large 120 Hz AMOLED display and 6000 mAh battery with fast charging keep visuals fluid and endurance strong throughout the day, while advanced camera features help capture quality photos and videos.",  
+camera_quality:"excellent for photography",  
+megapixel:"50 MP dual rear + 50 MP front cameras",  
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -4164,6 +4898,25 @@ export const products = [
   model: "Y29",
   storage: "256GB",
   condition: "new",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Dimensity 6300 efficient 5G processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Vivo Y29 delivers smooth everyday performance powered by the Dimensity 6300 chipset and up to 8GB RAM, making it suitable for daily tasks like browsing, social media, and light gaming; the 120Hz display provides fluid scrolling, though it’s not designed for very heavy multitasking or high‑end gaming.",  
+camera_quality:"good for photography",  
+megapixel:"50MP dual rear camera",  
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -4278,6 +5031,29 @@ export const products = [
   model: "Y19s",
   storage: "128GB",
   condition: "new",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc Tiger T612 efficient everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Vivo Y19s offers smooth everyday performance with its Unisoc T612 chipset and up to 6GB RAM, making it suitable for calls, browsing, social media, and light apps; the 90Hz display enhances fluidity for scrolling, though it’s not designed for heavy gaming or intensive multitasking.",  
+camera_quality:"good for photography",  
+megapixel:"50MP rear + 5MP front",  
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo","Mogo"],
   details: [
   {
@@ -4391,6 +5167,24 @@ export const products = [
   model: "V40",
   storage: "256GB",
   condition: "new",
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 7 Gen 3 mid‑range 5G processor",
+fingerprint:"onscreen display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Vivo V40 5G delivers smooth everyday performance with its Snapdragon 7 Gen 3 chipset and generous RAM, making it great for multitasking, social media, streaming, and moderate gaming; the 120 Hz AMOLED display ensures fluid visuals and the large 5500 mAh battery with 80 W fast charging easily powers through a full day of typical use.",  
+camera_quality:"very good for photography",
+megapixel:"50 MP dual rear + 50 MP front cameras",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Loan", "Lipa Mdogo Mdogo"],
   details: [
   {
@@ -4505,6 +5299,26 @@ export const products = [
   model: "Y18",
   storage: "128GB",
   condition: "new",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc Tiger T606 efficient everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Vivo Y18 offers smooth everyday performance powered by the Unisoc Tiger T606 and up to 6GB RAM, making it reliable for calls, WhatsApp, browsing, and social media; while it’s not designed for heavy gaming or multitasking, it handles basic daily tasks smoothly.",  
+camera_quality:"good for photography",  
+megapixel:"50MP dual rear camera",  
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -4619,6 +5433,25 @@ export const products = [
   model: "Y03",
   storage: "128GB",
   condition: "New",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc Tiger T602 reliable everyday processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Vivo Y03 delivers smooth everyday performance with its Unisoc Tiger T602 and sufficient RAM for calls, WhatsApp, browsing, and social media; it’s not built for gaming or heavy multitasking, but it handles basic daily tasks reliably.",  
+camera_quality:"good for casual photography",  
+megapixel:"8MP rear + 5MP front",  
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Mogo","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -4733,6 +5566,26 @@ export const products = [
   model: "Y28",
   storage: "256GB",
   condition: "New",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 reliable mid‑range processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day heavy usage",
+speed:"The Vivo Y28 delivers smooth everyday performance powered by the Helio G85 and up to 8GB RAM, making it reliable for multitasking, social media, video streaming, and moderate gaming; its 90Hz display provides fluid scrolling, though it’s not designed for flagship‑level performance or very heavy multitasking.",  
+camera_quality:"good for photography",  
+megapixel:"50MP dual rear camera",  
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Loan","Lipa Mdogo Mdogo"],
   details: [
   {
@@ -4846,6 +5699,27 @@ export const products = [
   model: "Y27s",
   storage: "256GB",
   condition: "New",
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 680 efficient everyday 4G processor",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Vivo Y27s delivers smooth everyday performance powered by the Snapdragon 680 and 8GB RAM, making it suitable for calls, messaging, browsing, and social media; the 90 Hz FHD+ display provides fluid visuals, though it is not designed for heavy gaming or very demanding multitasking.",  
+camera_quality:"good for photography",  
+megapixel:"50 MP + 2 MP dual rear camera",  
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo"],
   details: [
   {
@@ -4962,6 +5836,27 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G-series processor suitable for everyday 4G tasks",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 40 delivers smooth everyday performance with its Helio G-series chipset and adequate RAM, handling calls, messaging, social media, and light multitasking efficiently; the 90Hz display improves scrolling smoothness, though it is not built for heavy gaming.",
+camera_quality:"good for basic photography",
+megapixel:"50 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo", "Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -5079,6 +5974,27 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G81 Ultimate processor designed for efficient everyday 4G usage",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Infinix Hot 60i offers smooth daily performance powered by the Helio G81 Ultimate and up to 8GB RAM, handling calls, social media, browsing, and light multitasking well; the 120Hz display makes interactions feel fluid, but it is not intended for heavy gaming or intensive tasks.",  
+camera_quality:"good for basic photography",  
+megapixel:"50 MP + auxiliary lens",
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix", "Mogo","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -5197,6 +6113,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G99 processor built for reliable everyday 4G performance",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy A16 provides smooth everyday performance for calls, messaging, browsing, and social media with its Helio G99 chipset and up to 8GB RAM; the 90Hz AMOLED display enhances fluidity, but it is not intended for heavy gaming or demanding multitasking.",  
+camera_quality:"good for photography",  
+megapixel:"50 MP + 5 MP + 2 MP triple rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan","Lipa Mdogo Mdogo" ],
 
   // 🧩 Structured text sections
@@ -5314,6 +6252,27 @@ export const products = [
     storage: "128GB",
     condition: "new",
     gtin: "",
+
+
+    curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Exynos 1330 (5G) or MediaTek Helio G99 (4G) processor built for reliable everyday performance",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy A17 delivers smooth daily performance with its efficient chipset and up to 8GB RAM, handling calls, browsing, social media, and moderate multitasking well; the 90Hz AMOLED display ensures fluid visuals, though it is not designed for heavy gaming.",  
+camera_quality:"good for photography",  
+megapixel:"50 MP + 5 MP + 2 MP triple rear camera",
+
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
     // 🧩 Structured text sections
@@ -5430,6 +6389,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 processor designed for basic everyday 4G tasks",
+fingerprint:"no",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy A05 handles everyday tasks like calls, messaging, browsing, and social media reliably with its Helio G85 chipset and up to 6GB RAM; however, it is best suited for light use and not ideal for heavy multitasking or gaming.",  
+camera_quality:"good for basic photography",  
+megapixel:"50 MP + 2 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -5547,6 +6528,28 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 processor suitable for everyday 4G usage",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy A06 delivers stable everyday performance for calls, messaging, browsing, and social media with its Helio G85 chipset and up to 6GB RAM; it handles basic multitasking well but is not designed for demanding applications or heavy gaming.",  
+camera_quality:"good for basic photography",  
+megapixel:"50 MP + 2 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -5663,6 +6666,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"no",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G85 or similar entry-level processor designed for basic everyday 4G usage",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy A07 offers reliable performance for basic tasks like calls, messaging, browsing, and social media; it handles light multitasking adequately but is not intended for heavy gaming or demanding applications.",  
+camera_quality:"good for basic photography",  
+megapixel:"50 MP + 2 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Watu Simu","Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -5779,6 +6804,28 @@ export const products = [
   storage: "64GB",
   condition: "new",
   gtin: "",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T7250 processor designed for basic everyday 4G usage",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Pop 10 delivers smooth basic performance for calls, messaging, browsing, and social media with its Unisoc processor and entry-level RAM; the 120Hz display makes interactions feel fluid, though it is not suitable for heavy gaming or demanding multitasking.",  
+camera_quality:"good for basic photography",  
+megapixel:"13 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -5896,6 +6943,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T606 processor designed for efficient everyday 4G performance",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"no",
+battery_life:"all day usage",
+speed:"The HMD X2 provides reliable everyday performance for calls, messaging, browsing, and social media with its Unisoc T606 chipset and 4GB RAM; the 90Hz display ensures smoother scrolling, though it is not built for heavy gaming or demanding multitasking.",  
+camera_quality:"good for basic photography",  
+megapixel:"13 MP rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa","Loan","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -6015,6 +7084,29 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T606 processor designed for efficient everyday 4G performance",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"no",
+battery_life:"all day usage",
+speed:"The HMD X20 delivers reliable everyday performance with its Unisoc T606 chipset and up to 6GB RAM, handling calls, messaging, browsing, and social media smoothly; the 90Hz display improves fluidity, but it is not designed for heavy gaming or intensive multitasking.",  
+camera_quality:"good for basic photography",  
+megapixel:"50 MP + 2 MP dual rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa", "Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -6132,6 +7224,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T616 or similar efficient mid-range 5G-ready processor for everyday use",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The HMD X30 delivers reliable everyday performance with its efficient processor and up to 8GB RAM, handling calls, messaging, browsing, and social media smoothly; the 90Hz display improves fluidity, and it supports light multitasking, though it is not designed for heavy gaming.",  
+camera_quality:"good for photography",  
+megapixel:"50 MP + 2 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "HMD", "Mkopa","Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -6251,6 +7365,28 @@ export const products = [
     storage: "1TB",
     condition: "new",
     gtin: "194253403176",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Apple A16 Bionic chip built for high-end performance and efficiency",
+fingerprint:"no",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The iPhone 14 Pro Max delivers extremely fast and smooth performance with its A16 Bionic chip, handling gaming, multitasking, video editing, and demanding apps with ease; the 120Hz ProMotion display ensures ultra-smooth visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"48 MP + 12 MP + 12 MP triple rear camera",
+
+
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "MoPhones","Loan or Cash","Lipa Mdogo Mdogo"],
 
     // 🧩 Structured text sections
@@ -6341,239 +7477,7 @@ export const products = [
 
 
   
-  {
-    id: 55,
-    name: "iPhone 14 Pro Max",
-  fullname:"Iphone 14 Pro Max 5G 6.67 Inches, 512GB ROM + 6GB RAM, Battery: 4323mAh (Dual SIM) 48MP+12MP+12MP",
-    status: "New",
-    image: "/phones/iphone_14_pro_max_512gb.jpg",
-    from: "KSh 12,800",
-    deposit: "KSh 35,499",
-    daily: "KSh 382",
-    totalPrice: "KSh 189,000",
-    source: "/phones/iphone_14_pro_max_512gb.webp",
-    discount: "-12%",
-    display: "block",
-    phonedisplay: '6.7" Super Retina XDR (2796 × 1290)',
-    processor: "Apple A16 Bionic",
-    camera: "48MP + 12MP + 12MP (rear), 12MP (front)",
-    memory: "512GB / 6GB RAM",
-    battery: "4323mAh, 20W Fast Charging, MagSafe Wireless",
-    version: "iOS 17",
-    depositanddaily: "KSh 22,000 Daily KSh 320",
-    slug: "iphone-14-pro-max-512gb",
-    slugs: "iphone-14-pro-max-512gb",
-    description: "Buy iPhone 14 Pro Max 512GB on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Available from Watu Simu, Mkopa & other dealers with fast delivery.",
-    brand: "Apple",
-    seller: "Watu Simu",
-    model: "A2894",
-    storage: "512GB",
-    condition: "new",
-    gtin: "194253408112",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "MoPhones", "Loan or Cash","Lipa Mdogo Mdogo"],
-
-    // 🧩 Structured text sections
-    details: [
-      {
-        title: "Body and Design",
-        content: `The iPhone 14 Pro Max 512GB maintains its luxurious stainless steel frame and matte glass back. It measures 160.7 × 77.6 × 7.85mm, weighs 240g, and comes in elegant colors like Deep Purple, Gold, and Silver. Its refined build quality and IP68 water resistance make it as durable as it is beautiful.`,
-      },
-      {
-        title: "Display",
-        content: `Featuring a 6.7-inch Super Retina XDR OLED display with ProMotion 120Hz refresh rate, the visuals are sharp, fluid, and detailed. The Always-On Display and Dynamic Island deliver a smarter user experience, while HDR support ensures vibrant contrast and true-to-life color reproduction.`,
-      },
-      {
-        title: "Camera System",
-        content: `Equipped with a triple 48MP + 12MP + 12MP camera setup, the iPhone 14 Pro Max 512GB captures incredible photos and 4K ProRes videos. The Photonic Engine enhances low-light shots, and the 12MP TrueDepth front camera ensures flawless selfies and Face ID performance.`,
-      },
-      {
-        title: "Performance",
-        content: `Powered by the Apple A16 Bionic processor, this device offers incredible efficiency and speed. Whether you're gaming, editing videos, or multitasking, the 6-core CPU and 5-core GPU ensure smooth performance and excellent battery optimization.`,
-      },
-      {
-        title: "Operating System",
-        content: `Running iOS 17, the iPhone 14 Pro Max 512GB provides improved privacy, widgets, and Lock Screen customization. New features like StandBy mode and Contact Posters enhance usability while maintaining Apple’s signature simplicity and reliability.`,
-      },
-      {
-        title: "Storage and Memory",
-        content: `With 512GB of internal storage and 6GB of RAM, the iPhone 14 Pro Max 512GB offers the perfect balance for users who need ample space for 4K videos, games, and productivity apps without the premium cost of the 1TB version.`,
-      },
-      {
-        title: "Battery and Charging",
-        content: `The 4323mAh battery supports 20W wired charging and 15W MagSafe wireless charging. With adaptive battery optimization, you get up to 28 hours of video playback and reliable all-day power with moderate use.`,
-      },
-      {
-        title: "Connectivity and Sensors",
-        content: `This model supports 5G, Wi-Fi 6, Bluetooth 5.3, and GPS for seamless connectivity. It includes Face ID, barometer, proximity sensor, ambient light sensor, and a LiDAR scanner for improved AR experiences.`,
-      },
-      {
-        title: "Pros and Cons",
-        pros: [
-          "Super Retina XDR display with Dynamic Island",
-          "Excellent triple camera performance",
-          "Fast A16 Bionic chip",
-          "Ample 512GB storage for creators",
-          "Long-lasting battery with MagSafe support",
-        ],
-        cons: [
-          "Premium price tag",
-          "Still uses Lightning port",
-          "Slightly bulky for small hands",
-        ],
-      },
-      {
-        title: "Verdict",
-        content: `The iPhone 14 Pro Max 512GB offers elite performance and premium build quality with ample storage for most users. It's an excellent choice for content creators and professionals who want flagship performance without paying for the 1TB tier.`,
-      },
-    ],
-
-    color: "Deep Purple, Gold, Silver",
-    weight: "240g",
-    dimensions: {
-      length: "160.7mm",
-      width: "77.6mm",
-      height: "7.85mm"
-    },
-    material: "Stainless Steel and Glass",
-    pattern: "Matte Finish",
-    productLine: "iPhone 14 Pro",
-    reviews: {
-      averageRating: 4.7,
-      reviewCount: 98,
-      reviews: [
-        {
-          author: "Brian K.",
-          rating: 5,
-          reviewBody: "The performance is insane — storage is more than enough for my photos and videos.",
-          datePublished: "2025-03-25"
-        },
-        {
-          author: "Faith N.",
-          rating: 4,
-          reviewBody: "Beautiful phone, battery could last slightly longer but overall amazing.",
-          datePublished: "2025-04-30"
-        }
-      ]
-    }
-  },
-
-
-  {
-    id: 56,
-    name: "iPhone 14 Pro Max",
-    fullname:"IPhone 14 Pro Max 5G 6.67 Inches, 256GB ROM + 6GB RAM, Battery: 5100mAh (Dual SIM) 48MP + 48MP",
-    status: "New",
-    image: "/phones/iphone_14_pro_max_256gb.jpg",
-    from: "KSh 11,900",
-    deposit: "KSh 34,299",
-    daily: "KSh 370",
-    totalPrice: "KSh 97,999",
-    source: "/phones/iphone_14_pro_max_256gb.webp",
-    discount: "-14%",
-    display: "block",
-    phonedisplay: '6.7" Super Retina XDR (2796 × 1290)',
-    processor: "Apple A16 Bionic",
-    camera: "48MP + 12MP + 12MP (rear), 12MP (front)",
-    memory: "256GB / 6GB RAM",
-    battery: "4323mAh, 20W Fast Charging, MagSafe Wireless",
-    version: "iOS 17",
-    depositanddaily: "KSh 19,000 Daily KSh 290",
-    slug: "iphone-14-pro-max-256gb",
-    slugs: "iphone-14-pro-max-256gb",
-    description: "Buy iPhone 14 Pro Max 256GB on credit in Nairobi Kenya. Get easy payment options, fast delivery, and flexible daily installments through MKOPA or Watu Simu.",
-    brand: "Apple",
-    seller: "Watu Simu",
-    model: "A2894",
-    storage: "256GB",
-    condition: "new",
-    gtin: "194253401102",
-    categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "Mophones","Loan or Cash"],
-
-    // 🧩 Structured text sections
-    details: [
-      {
-        title: "Body and Design",
-        content: `The iPhone 14 Pro Max 256GB continues Apple’s tradition of premium craftsmanship. Built with surgical-grade stainless steel and matte glass, it’s sleek and durable. Measuring 160.7 × 77.6 × 7.85mm and weighing 240g, it feels solid in hand. Available in Space Black, Silver, Gold, and Deep Purple.`,
-      },
-      {
-        title: "Display",
-        content: `Its 6.7-inch Super Retina XDR OLED display delivers stunning brightness and color accuracy. With ProMotion 120Hz technology, HDR10, and Always-On Display, you’ll enjoy a smooth, vibrant visual experience whether gaming, editing, or streaming content.`,
-      },
-      {
-        title: "Camera System",
-        content: `Capture incredible shots with the triple 48MP + 12MP + 12MP camera setup. The main 48MP sensor produces vivid, detailed photos even in low light. The 12MP telephoto and ultra-wide cameras enhance creativity, while the 12MP front camera ensures natural-looking selfies and video calls.`,
-      },
-      {
-        title: "Performance",
-        content: `Powered by Apple’s A16 Bionic chip, the iPhone 14 Pro Max 256GB offers blazing speed and efficiency. It handles demanding tasks like 4K editing and gaming effortlessly, while ensuring smooth performance across apps and multitasking.`,
-      },
-      {
-        title: "Operating System",
-        content: `Running iOS 17, it brings new personalization features, improved Siri, and enhanced security. iOS 17’s ecosystem integration ensures effortless syncing with MacBooks, iPads, and Apple Watch for a seamless Apple experience.`,
-      },
-      {
-        title: "Storage and Memory",
-        content: `This 256GB variant provides ample space for most users, balancing storage capacity with affordability. With 6GB of RAM, it ensures fast app loading, smooth multitasking, and lag-free use across intensive tasks.`,
-      },
-      {
-        title: "Battery and Charging",
-        content: `Featuring a 4323mAh battery, it supports 20W fast charging and 15W MagSafe wireless charging. You’ll get up to 26 hours of video playback and consistent all-day battery life for heavy users.`,
-      },
-      {
-        title: "Connectivity and Sensors",
-        content: `Supports 5G, Wi-Fi 6, Bluetooth 5.3, GPS, and dual eSIM. Includes Face ID, LiDAR scanner, barometer, accelerometer, and proximity sensor. The Lightning port enables fast charging and data transfer, while MagSafe accessories snap on easily.`,
-      },
-      {
-        title: "Pros and Cons",
-        pros: [
-          "Powerful A16 Bionic chip",
-          "ProMotion 120Hz OLED display",
-          "Excellent 48MP main camera",
-          "Perfect balance between storage and price",
-          "Premium stainless steel design",
-        ],
-        cons: [
-          "Still uses Lightning port",
-          "Heavier than most phones",
-          "Expensive accessories",
-        ],
-      },
-      {
-        title: "Verdict",
-        content: `The iPhone 14 Pro Max 256GB is the ideal option for users seeking flagship performance, stunning design, and generous storage without overspending on the 512GB or 1TB models. It’s an excellent blend of power, value, and luxury.`,
-      },
-    ],
-
-    color: "Space Black, Gold, Silver, Deep Purple",
-    weight: "240g",
-    dimensions: {
-      length: "160.7mm",
-      width: "77.6mm",
-      height: "7.85mm"
-    },
-    material: "Stainless Steel and Glass",
-    pattern: "Matte Finish",
-    productLine: "iPhone 14 Pro",
-    reviews: {
-      averageRating: 4.6,
-      reviewCount: 85,
-      reviews: [
-        {
-          author: "Kevin O.",
-          rating: 5,
-          reviewBody: "Great phone, handles everything smoothly — perfect storage size for me.",
-          datePublished: "2025-03-08"
-        },
-        {
-          author: "Naomi L.",
-          rating: 4,
-          reviewBody: "Camera is superb and display is stunning, though it’s a bit heavy.",
-          datePublished: "2025-04-11"
-        }
-      ]
-    }
-  },
-
+  
 
   {
     id: 57,
@@ -6604,6 +7508,31 @@ export const products = [
     storage: "256GB",
     condition: "new",
     gtin: "194252703911",
+
+
+
+    curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Apple A15 Bionic chip built for high-end performance and efficiency",
+fingerprint:"no",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The iPhone 13 Pro Max delivers very fast and smooth performance with its A15 Bionic chip, handling gaming, multitasking, video editing, and demanding apps with ease; the 120Hz ProMotion display ensures fluid visuals and responsive interactions.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"12 MP + 12 MP + 12 MP triple rear camera",
+
+
+
+
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone", "Mophones","Loan or Cash"],
 
     // 🧩 Structured text sections
@@ -6724,6 +7653,30 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "0194253156482",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Apple A15 Bionic chip built for high-end performance and efficiency",
+fingerprint:"no",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The iPhone 13 Pro Max 128GB delivers very fast and smooth performance with its A15 Bionic chip, handling gaming, multitasking, video editing, and demanding apps with ease; the 120Hz ProMotion display ensures ultra-smooth visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"12 MP + 12 MP + 12 MP triple rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple","Iphone","Loan or Cash", "MoPhones"],
 
   // 🧩 Structured text sections
@@ -6841,6 +7794,28 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "0194252034171",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Apple A14 Bionic chip built for strong and efficient high-end performance",
+fingerprint:"no",
+wireless_charging:"yes",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The iPhone 12 Pro Max 256GB delivers strong and reliable performance with its A14 Bionic chip, handling gaming, multitasking, and demanding apps smoothly; however, its 60Hz display makes it less fluid compared to newer Pro models.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"12 MP + 12 MP + 12 MP triple rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Iphones","Iphone","Loan & Cash","Mophones"],
 
   // 🧩 Structured text sections
@@ -6958,6 +7933,29 @@ export const products = [
   storage: "128GB",
   condition: "New",
   gtin: "0194252345900",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Apple A13 Bionic chip built for reliable and efficient performance in everyday tasks",
+fingerprint:"no",
+wireless_charging:"yes",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The iPhone 11 128GB delivers smooth everyday performance with its A13 Bionic chip, handling calls, messaging, social media, and light to moderate gaming well; however, its 60Hz display is less fluid compared to newer models.",  
+camera_quality:"very good for photography",  
+megapixel:"12 MP + 12 MP dual rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Apple", "Iphone","Mophones","Loan or Cash"],
 
   details: [
@@ -7193,6 +8191,29 @@ export const products = [
   storage: "128GB",
   condition: "New",
   gtin: "0887276419576",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 865 processor built for flagship-level performance",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy Note 20 Ultra 128GB delivers powerful flagship performance with its Snapdragon 865+ processor and up to 12GB RAM, handling gaming, multitasking, and heavy apps smoothly; the 120Hz display provides very fluid visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"108 MP + 12 MP + 12 MP triple rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -7311,6 +8332,30 @@ export const products = [
   storage: "128GB",
   condition: "New",
   gtin: "0887276419477",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Exynos 990 or Snapdragon 865+ processor depending on region, delivering flagship-level performance",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy Note 20 128GB delivers strong flagship performance with its powerful processor and ample RAM, handling gaming, multitasking, and demanding apps smoothly; however, its 60Hz display is less fluid compared to higher refresh rate models.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"64 MP + 12 MP + 12 MP triple rear camera",
+
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   details: [
@@ -7394,6 +8439,25 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "8806095509803",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 8 Gen 3 for Galaxy flagship processor built for top-tier performance and efficiency",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S24 Ultra 256GB delivers extremely powerful flagship performance with its Snapdragon 8 Gen 3 processor and 12GB RAM, handling heavy gaming, multitasking, AI features, and demanding apps with ease; the 120Hz AMOLED display ensures ultra-smooth visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"200 MP + 50 MP + 10 MP + 12 MP quad rear camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "MoPhones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -7512,6 +8576,31 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "8806095507123",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 8 Gen 2 for Galaxy flagship processor built for high-end performance and efficiency",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S23 Ultra 256GB delivers top-tier flagship performance with its Snapdragon 8 Gen 2 for Galaxy and up to 12GB RAM, handling gaming, multitasking, AI features, and demanding apps with ease; the 120Hz AMOLED display ensures ultra-smooth visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"200 MP + 12 MP + 10 MP + 10 MP quad rear camera",
+
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -7629,6 +8718,29 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "8806092948820",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 8 Gen 1 flagship processor built for high-end performance",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S22 Ultra 256GB delivers strong flagship performance with its Snapdragon 8 Gen 1 processor and up to 12GB RAM, handling gaming, multitasking, and demanding apps smoothly; the 120Hz AMOLED display provides very fluid visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"108 MP + 10 MP + 10 MP + 12 MP quad rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -7745,6 +8857,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "8806090884748",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 888 or Exynos 2100 flagship processor depending on region",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S21 Ultra 128GB delivers powerful flagship performance with its Snapdragon 888 or Exynos 2100 processor and up to 16GB RAM, handling gaming, multitasking, and demanding apps smoothly; the 120Hz AMOLED display ensures very fluid visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"108 MP + 10 MP + 10 MP + 12 MP quad rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -7978,6 +9112,29 @@ export const products = [
   storage: "128GB",
   condition: "New",
   gtin: "8806090881235",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 888 5G flagship processor built for high-end performance",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S21 Plus 5G 128GB delivers strong flagship performance with its Snapdragon 888 (or Exynos 2100 in some regions), handling gaming, multitasking, and demanding apps smoothly; the 120Hz AMOLED display ensures very fluid visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"12 MP + 64 MP + 12 MP triple rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -8096,6 +9253,28 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "8806090708457",
+
+
+curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 750G processor built for efficient mid-range 5G performance",
+fingerprint:"under display",
+wireless_charging:"no",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy A42 5G 128GB delivers stable mid-range performance with its Snapdragon 750G processor and up to 8GB RAM, handling calls, browsing, social media, and light multitasking well; however, its 60Hz display is less smooth compared to higher refresh rate devices.",  
+camera_quality:"good for photography",  
+megapixel:"48 MP + 8 MP + 5 MP + 5 MP quad rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mophones","Loan or Cash","Lipa Mdogo Mdogo"],
 
   details: [
@@ -8212,6 +9391,28 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "0194252039564",
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Apple A14 Bionic chip built for strong and efficient high-end performance",
+fingerprint:"no",
+wireless_charging:"yes",
+refresh_rate:"60Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The iPhone 12 Pro 256GB delivers strong flagship performance with its A14 Bionic chip, handling gaming, multitasking, and demanding apps smoothly; however, its 60Hz display is less fluid compared to newer Pro models.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"12 MP + 12 MP + 12 MP triple rear camera",
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "iphone","Apple","Loan or Cash", "Mophones","Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -8329,6 +9530,25 @@ export const products = [
   storage: "128GB",
   condition: "new",
   gtin: "",
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"no",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"Unisoc T7100 / T603 processor designed for efficient everyday 4G performance",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"90Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The :contentReference[oaicite:0]{index=0} delivers smooth everyday performance with its Unisoc T7100/T603 chipset and up to 4GB RAM, handling calls, messaging, browsing, and social media efficiently; the 90Hz display improves fluidity, though it is not designed for heavy gaming or demanding multitasking.",  
+camera_quality:"good for basic photography",  
+megapixel:"13 MP rear camera",
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Itel", "Mogo", "Loan", "Lipa Mdogo Mdogo"],
 
   // 🧩 Structured text sections
@@ -8427,7 +9647,7 @@ export const products = [
     deposit: "KSh 6,000",
     daily: "Ksh 145",
     totalPrice: "KSh 28,500",
-    source: "/phones/tecno_spark_40_pro_plus.webp",
+    source: "/phones/spark_40_pro_256.webp",
     discount: "-12%",
     display: "block",
     phonedisplay: "6.78\" FHD+ (2436 × 1080)",
@@ -8446,6 +9666,25 @@ export const products = [
     storage: "256GB",
     condition: "new",
     gtin: "",
+
+    curved_screen:"yes",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"no",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Dimensity 7020 processor built for efficient everyday 5G performance",
+fingerprint:"side mounted",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Spark 40 Pro Plus delivers smooth everyday performance with its Dimensity 7020 chipset and ample RAM, handling calls, messaging, browsing, and social media efficiently; the 120Hz display ensures fluid visuals, though it is not designed for heavy gaming or very demanding multitasking.",  
+camera_quality:"good for photography",  
+megapixel:"108 MP triple rear camera",
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
 
@@ -8571,6 +9810,30 @@ export const products = [
     storage: "128GB",
     condition: "new",
     gtin: "",
+
+
+
+    curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 865 5G flagship processor built for high-end performance",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S20+ delivers strong flagship performance with its Snapdragon 865 (or Exynos 990 in some regions), handling gaming, multitasking, and demanding apps smoothly; the 120Hz AMOLED display provides very fluid visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"12 MP + 64 MP + 12 MP + DepthVision quad rear camera",
+
+
+
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
     // 🧩 Structured text sections
@@ -8697,6 +9960,30 @@ export const products = [
     storage: "128GB",
     condition: "new",
     gtin: "",
+
+
+
+
+    curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"yes",
+esim_compatible:"yes",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"no",
+good_phone:"yes",
+performance:"Qualcomm Snapdragon 865 5G flagship processor built for high-end performance",
+fingerprint:"under display",
+wireless_charging:"yes",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Samsung Galaxy S20 Ultra delivers powerful flagship performance with its Snapdragon 865 (or Exynos 990 in some regions), handling gaming, multitasking, and demanding apps smoothly; the 120Hz AMOLED display ensures very fluid visuals and responsiveness.",  
+camera_quality:"excellent for photography and video",  
+megapixel:"108 MP + 48 MP + 12 MP + DepthVision quad rear camera",
+
+
     categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Samsung", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
     details: [
@@ -8826,6 +10113,31 @@ export const products = [
   storage: "256GB",
   condition: "new",
   gtin: "",
+
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Helio G99 or Dimensity series processor designed for efficient everyday 4G/5G performance",
+fingerprint:"under display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Camon 40 Pro delivers smooth everyday performance with its efficient chipset and ample RAM, handling calls, messaging, browsing, and social media with ease; the 120Hz AMOLED display ensures fluid visuals, but it is not designed for heavy gaming or very demanding multitasking.",  
+camera_quality:"excellent for photography",  
+megapixel:"50 MP + 2 MP triple rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Watu","Loan","Lipa Mdogo Mdogo"],
 
   details: [
@@ -8951,6 +10263,30 @@ export const products = [
   storage: "512GB",
   condition: "new",
   gtin: "",
+
+
+
+  curved_screen:"no",
+dual_sim:"yes",
+waterproof:"yes",
+gaming_phone:"no",
+esim_compatible:"no",
+amoled_display:"yes",
+is_it_5g:"yes",
+ram_expandible:"yes",
+good_phone:"yes",
+performance:"MediaTek Dimensity 8020 processor built for efficient mid-to-high-end 5G performance",
+fingerprint:"under display",
+wireless_charging:"no",
+refresh_rate:"120Hz",
+fast_charging:"yes",
+battery_life:"all day usage",
+speed:"The Tecno Camon 50 Pro Max delivers smooth and responsive everyday performance with its Dimensity 8020 processor and ample RAM, handling calls, messaging, browsing, social media, and multitasking with ease; the 120Hz AMOLED display provides very fluid visuals, and it can handle moderate gaming, though it is not a dedicated gaming phone.",  
+camera_quality:"excellent for photography",  
+megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
+
+
+
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Watu","Loan","Lipa Mdogo Mdogo"],
 
   details: [
