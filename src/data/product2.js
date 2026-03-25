@@ -11333,6 +11333,142 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
       }
     ]
   }
+},
+
+
+{
+  id: 3,
+  name: "Redmi Note 15",
+  fullname:"Redmi Note 15 6.77 Inches, 128GB ROM + 6GB RAM, Battery: 5800mAh (Dual SIM) 108MP",
+  status: "New",
+  image: "/phones/redmi_note_15.webp",
+  from: "KSh 4,500",
+  deposit: "KSh 5,500",
+  daily: "KSh 110",
+  totalPrice: "KSh 26,500",
+  source: "/phones/redmi_note_15.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.77\" FHD+ AMOLED",
+  processor: "Qualcomm Snapdragon 6 Gen 3",
+  camera: "108MP + 2MP (rear), 20MP (front)",
+  memory: "128GB / 6GB RAM, MicroSD up to 1TB",
+  battery: "5800mAh, 45W Fast Charging",
+  version: "Android 15, HyperOS",
+  depositanddaily: "KSh 5,500 Daily KSh 110",
+  slug: "redmi-note-15",
+  slugs: "redmi-note-15",
+  description: "Buy Redmi Note 15 on credit with deposit and daily installments. Powerful performance, AMOLED display, and high-resolution camera.",
+  brand: "Xiaomi",
+  seller: "Mkopa",
+  model: "Redmi Note 15",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"no",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"yes",
+  is_it_5g:"yes",
+  ram_expandible:"yes",
+  good_phone:"yes",
+  performance:"Snapdragon 6 Gen 3 5G processor",
+  fingerprint:"under display",
+  wireless_charging:"yes",
+  refresh_rate:"120Hz",
+  fast_charging:"yes",
+  battery_life:"all day usage",
+  speed:"The Redmi Note 15 delivers fast and reliable performance powered by the Snapdragon 6 Gen 3 and 6GB RAM, making it ideal for multitasking, gaming, and streaming; the 120Hz AMOLED display ensures smooth scrolling and responsiveness.",
+  camera_quality:"excellent for photography",
+  megapixel:"108MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Xiaomi", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Redmi Note 15 features a sleek and modern design with a slim profile and durable build. It includes IP64/IP66-rated protection against dust and splashes, making it reliable for everyday use. The phone has a premium finish and is comfortable to hold.` 
+  },
+  {
+    title: "Display",
+    content: `It comes with a 6.77-inch AMOLED display with Full HD+ resolution and a 120Hz refresh rate. The screen delivers vibrant colors, deep blacks, and smooth visuals, making it ideal for gaming, streaming, and browsing.` 
+  },
+  {
+    title: "Camera System",
+    content: `The Redmi Note 15 is equipped with a high-resolution 108MP main camera that captures sharp and detailed photos, along with a 2MP depth sensor. The 20MP front camera ensures high-quality selfies and video calls.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the Snapdragon 6 Gen 3 chipset, the phone delivers efficient and smooth performance for multitasking, gaming, and everyday use, with reliable 5G connectivity.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 15 with Xiaomi’s HyperOS, the device offers a smooth and optimized user experience with improved performance and customization features.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `With 128GB storage and 6GB RAM, the device provides enough space for apps, photos, and videos. It also supports MicroSD expansion up to 1TB.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `The phone packs a large 5800mAh battery that easily lasts a full day of usage. It supports 45W fast charging for quick top-ups.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Includes 5G, Wi-Fi, Bluetooth, NFC, GPS, USB Type-C, and IR blaster. It also features an in-display fingerprint sensor and essential sensors.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "108MP high-resolution camera",
+      "AMOLED 120Hz display",
+      "Strong Snapdragon 5G performance",
+      "Large battery with fast charging",
+      "Expandable storage"
+    ],
+    cons: [
+      "No premium chipset for heavy gaming",
+      "Plastic build",
+      "Camera struggles in low light"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Redmi Note 15 is a strong midrange smartphone offering a great balance of performance, display quality, and camera capability. It is ideal for users who want a reliable 5G phone with a high-resolution camera and long battery life at an affordable price.` 
+  },
+],
+
+  color: "Black, Forest Green, Blue, Purple",
+  weight: "183g",
+  dimensions: {
+    length: "164.0mm",
+    width: "75.4mm",
+    height: "7.9mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Redmi Note Series",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 28,
+    reviews: [
+      {
+        author: "Kevin M.",
+        rating: 5,
+        reviewBody: "Camera quality is excellent and battery lasts long.",
+        datePublished: "2026-02-12"
+      },
+      {
+        author: "Diana W.",
+        rating: 4,
+        reviewBody: "Very smooth display and good performance.",
+        datePublished: "2026-03-01"
+      }
+    ]
+  }
 }
 
 
