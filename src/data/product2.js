@@ -10244,7 +10244,7 @@ megapixel:"50 MP + 2 MP triple rear camera",
   deposit: "KSh 9,500",
   daily: "Ksh 200",
   totalPrice: "KSh 39,500",
-  source: "/phones/camon50pro.webp",
+  source: "/phones/tecno_camon_50_pro.webp",
   discount: "-10%",
   display: "block",
   phonedisplay: "6.82\" AMOLED FHD+ (2720 × 1220) 144Hz",
@@ -10388,9 +10388,9 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
   image: "/phones/moto_g_stylus_5g.webp",
   from: "KSh 5,000",
   deposit: "KSh 6,000",
-  daily: "KSh 120",
+  daily: "KSh 60",
   totalPrice: "KSh 30,000",
-  source: "/phones/moto-g-stylus-5g.webp",
+  source: "/phones/motorola-moto-g-stylus-5g.webp",
   discount: "-8%",
   display: "block",
   phonedisplay: "6.6\" FHD+ IPS LCD",
@@ -10404,7 +10404,7 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
   slugs: "motorola-g-stylus-5g",
   description: "Buy Motorola Moto G Stylus 5G on credit with deposit and daily installments. Comes with built-in stylus and powerful 5G performance.",
   brand: "Motorola",
-  seller: "Mkopa",
+  seller: "Mophones",
   model: "XT2315",
   storage: "256GB",
   condition: "new",
@@ -10523,10 +10523,10 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
   status: "New",
   image: "/phones/moto_g_power.webp",
   from: "KSh 4,500",
-  deposit: "KSh 5,500",
-  daily: "KSh 110",
+  deposit: "KSh 4,000",
+  daily: "KSh 49",
   totalPrice: "KSh 27,000",
-  source: "/phones/moto-g-power.webp",
+  source: "/phones/motorola-moto-g-power-5g.webp",
   discount: "-9%",
   display: "block",
   phonedisplay: "6.7\" FHD+ IPS LCD",
@@ -10540,7 +10540,7 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
   slugs: "motorola-g-power",
   description: "Buy Motorola Moto G Power on credit with deposit and daily installments. Strong battery life and smooth 5G performance.",
   brand: "Motorola",
-  seller: "Mkopa",
+  seller: "Mophones",
   model: "XT2415",
   storage: "128GB",
   condition: "new",
@@ -10649,10 +10649,691 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
       }
     ]
   }
+},
+
+
+
+
+
+{
+  id: 3,
+  name: "Oppo A6x",
+  fullname:"Oppo A6x 6.75 Inches, 128GB ROM + 4GB RAM, Battery: 6100mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/oppoa6x.webp",
+  from: "KSh 3,500",
+  deposit: "KSh 4,100",
+  daily: "KSh 95",
+  totalPrice: "KSh 18,500",
+  source: "/phones/oppoa6x.webp",
+  discount: "-12%",
+  display: "block",
+  phonedisplay: "6.75\" LCD HD+",
+  processor: "Qualcomm Snapdragon 685",
+  camera: "50MP + QVGA (rear), 5MP (front)",
+  memory: "128GB / 4GB RAM, MicroSD supported",
+  battery: "6100mAh, 15W Charging",
+  version: "Android 15, ColorOS 15",
+  depositanddaily: "KSh 4,500 Daily KSh 90",
+  slug: "oppo-a6x",
+  slugs: "oppo-a6x",
+  description: "Buy Oppo A6x on credit with deposit and daily installments. Massive battery and smooth 120Hz display for everyday use.",
+  brand: "Oppo",
+  seller: "Mogo",
+  model: "CPH2819",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"no",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"no",
+  is_it_5g:"no",
+  ram_expandible:"yes",
+  good_phone:"yes",
+  performance:"Snapdragon 685 efficient 4G processor",
+  fingerprint:"side mounted",
+  wireless_charging:"no",
+  refresh_rate:"120Hz",
+  fast_charging:"no",
+  battery_life:"2 days usage",
+  speed:"The Oppo A6x delivers stable everyday performance powered by the Snapdragon 685 and 4GB RAM, making it suitable for social media, browsing, and light gaming; the 120Hz display ensures smooth scrolling, though it is not designed for heavy gaming.",
+  camera_quality:"basic photography",
+  megapixel:"13MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Oppo A6x features a modern and stylish design with a matte-textured finish that resists fingerprints. It measures approximately 166.6 × 78.5 × 8.6mm and weighs about 205g, giving it a solid feel in hand. Available in Ice Blue and Plum Purple, it offers a sleek and youthful look.` 
+  },
+  {
+    title: "Display",
+    content: `The phone comes with a large 6.75-inch HD+ display with a smooth 120Hz refresh rate. It delivers decent brightness and fluid scrolling, making it ideal for watching videos, browsing, and everyday use.` 
+  },
+  {
+    title: "Camera System",
+    content: `The Oppo A6x is equipped with a 13MP main camera and a secondary sensor for basic photography. The 5MP front camera is suitable for selfies and video calls. Camera performance is decent in good lighting but limited in low light.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the Snapdragon 685 processor, the Oppo A6x handles everyday tasks like social media, browsing, and streaming efficiently. It is best suited for light usage and casual gaming.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 15 with ColorOS 15, the device offers a smooth and optimized experience with useful features like RAM expansion and smart system optimizations.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `The Oppo A6x comes with 128GB storage and 4GB RAM, expandable via MicroSD card. RAM expansion technology allows better multitasking performance.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `A standout feature is the massive 6100mAh battery, which can easily last up to two days on moderate usage. It supports basic 15W charging.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Includes 4G LTE, Wi-Fi 5, Bluetooth 5.0, GPS, USB Type-C, and a 3.5mm headphone jack. It also features a side-mounted fingerprint scanner and essential sensors.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "Huge 6100mAh battery",
+      "Smooth 120Hz display",
+      "Affordable pricing",
+      "Expandable storage",
+      "Reliable everyday performance"
+    ],
+    cons: [
+      "Basic camera system",
+      "No fast charging",
+      "Not suitable for heavy gaming"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Oppo A6x is an excellent budget smartphone focused on battery life and smooth everyday usage. It’s ideal for users who prioritize long battery life, affordability, and a large display over high-end performance.` 
+  },
+],
+
+  color: "Ice Blue, Purple",
+  weight: "205g",
+  dimensions: {
+    length: "166.6mm",
+    width: "78.5mm",
+    height: "8.6mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Oppo A",
+  reviews: {
+    averageRating: 4.2,
+    reviewCount: 14,
+    reviews: [
+      {
+        author: "David O.",
+        rating: 5,
+        reviewBody: "Battery lasts very long, perfect for daily use.",
+        datePublished: "2025-02-05"
+      },
+      {
+        author: "Mary N.",
+        rating: 4,
+        reviewBody: "Good budget phone but camera is basic.",
+        datePublished: "2025-02-20"
+      }
+    ]
+  }
+},
+
+
+
+
+{
+  id: 3,
+  name: "Oppo A6 Pro 5G",
+  fullname:"Oppo A6 Pro 5G 6.57 Inches, 256GB ROM + 8GB RAM, Battery: 6500mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/oppo_6_pro_5g.webp",
+  from: "KSh 6,500",
+  deposit: "KSh 9,500",
+  daily: "KSh 200",
+  totalPrice: "KSh 36,000",
+  source: "/phones/oppo_6_pro_5g.webp",
+  discount: "-7%",
+  display: "block",
+  phonedisplay: "6.57\" FHD+ AMOLED",
+  processor: "MediaTek Dimensity 6300",
+  camera: "50MP + 2MP (rear), 16MP (front)",
+  memory: "256GB / 8GB RAM, MicroSD supported",
+  battery: "6500mAh, 80W Fast Charging",
+  version: "Android 15, ColorOS 15",
+  depositanddaily: "KSh 7,500 Daily KSh 150",
+  slug: "oppo-a6-pro-5g",
+  slugs: "oppo-a6-pro-5g",
+  description: "Buy Oppo A6 Pro 5G on credit with deposit and daily installments. Premium AMOLED display, massive battery, and ultra-fast charging.",
+  brand: "Oppo",
+  seller: "Mkopa",
+  model: "CPH2781",
+  storage: "256GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"no",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"yes",
+  is_it_5g:"yes",
+  ram_expandible:"yes",
+  good_phone:"yes",
+  performance:"MediaTek Dimensity 6300 5G processor",
+  fingerprint:"under display",
+  wireless_charging:"no",
+  refresh_rate:"120Hz",
+  fast_charging:"yes",
+  battery_life:"2 days usage",
+  speed:"The Oppo A6 Pro 5G delivers fast and efficient performance powered by the Dimensity 6300 and 8GB RAM, making it ideal for multitasking, gaming, and 5G usage; the 120Hz AMOLED display ensures ultra-smooth visuals and responsiveness.",
+  camera_quality:"very good for photography",
+  megapixel:"50MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Oppo A6 Pro 5G features a sleek and durable design with a premium matte finish and IP69 water and dust resistance. It measures approximately 158.2 × 75.0 × 8.0mm and weighs about 185g, making it slim yet strong for everyday use. Available in stylish colors like Stellar Blue and Rosewood Red.` 
+  },
+  {
+    title: "Display",
+    content: `The device features a 6.57-inch AMOLED display with Full HD+ resolution and a 120Hz refresh rate. It supports up to 1400 nits brightness and delivers vibrant colors and smooth scrolling for an immersive viewing experience.` 
+  },
+  {
+    title: "Camera System",
+    content: `Equipped with a 50MP main camera and a 2MP secondary sensor, the Oppo A6 Pro 5G captures detailed and sharp photos. The 16MP front camera ensures clear selfies and video calls, with AI enhancements for better image quality.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the MediaTek Dimensity 6300 chipset, the phone provides reliable performance for multitasking, gaming, and 5G connectivity. It ensures smooth operation with optimized power efficiency.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 15 with ColorOS 15, the phone offers a smooth, customizable, and feature-rich user experience with improved privacy and system optimization.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `With 256GB storage and 8GB RAM, the device handles heavy apps and multitasking easily. Storage can be expanded via MicroSD, offering flexibility for users.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `The standout 6500mAh battery provides up to two days of usage. With 80W SUPERVOOC fast charging, the phone can fully charge in under an hour, minimizing downtime.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Includes 5G connectivity, Wi-Fi 5, Bluetooth 5.4, NFC, GPS, and USB Type-C. It also features an in-display fingerprint sensor, accelerometer, compass, and proximity sensor.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "AMOLED 120Hz display",
+      "Massive 6500mAh battery",
+      "Very fast 80W charging",
+      "5G connectivity",
+      "IP69 water and dust resistance"
+    ],
+    cons: [
+      "No wireless charging",
+      "Plastic build",
+      "No headphone jack"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Oppo A6 Pro 5G is a powerful midrange smartphone that stands out with its premium AMOLED display, massive battery, and ultra-fast charging. It’s ideal for users who want long battery life, smooth performance, and modern features at a competitive price.` 
+  },
+],
+
+  color: "Blue, Red, Titanium",
+  weight: "185g",
+  dimensions: {
+    length: "158.2mm",
+    width: "75.0mm",
+    height: "8.0mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Oppo A",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 26,
+    reviews: [
+      {
+        author: "James K.",
+        rating: 5,
+        reviewBody: "Battery and charging speed are amazing.",
+        datePublished: "2025-02-18"
+      },
+      {
+        author: "Faith W.",
+        rating: 4,
+        reviewBody: "Display is very smooth and bright.",
+        datePublished: "2025-03-05"
+      }
+    ]
+  }
+},
+
+{
+  id: 3,
+  name: "Oppo A5",
+  fullname:"Oppo A5 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 6000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/oppo_a5.webp",
+  from: "KSh 4,000",
+  deposit: "KSh 5,500",
+  daily: "KSh 126",
+  totalPrice: "KSh 22,000",
+  source: "/phones/oppo_a5.webp",
+  discount: "-10%",
+  display: "block",
+  phonedisplay: "6.67\" LCD HD+",
+  processor: "Qualcomm Snapdragon 6s Gen 1",
+  camera: "50MP + 2MP (rear), 5MP (front)",
+  memory: "128GB / 6GB RAM, MicroSD supported",
+  battery: "6000mAh, 45W Fast Charging",
+  version: "Android 15, ColorOS 15",
+  depositanddaily: "KSh 5,000 Daily KSh 100",
+  slug: "oppo-a5",
+  slugs: "oppo-a5",
+  description: "Buy Oppo A5 on credit with deposit and daily installments. Massive battery, durable design, and smooth performance.",
+  brand: "Oppo",
+  seller: "Mkopa",
+  model: "CPH2727",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"no",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"no",
+  is_it_5g:"no",
+  ram_expandible:"yes",
+  good_phone:"yes",
+  performance:"Snapdragon 6s Gen 1 efficient 4G processor",
+  fingerprint:"side mounted",
+  wireless_charging:"no",
+  refresh_rate:"90Hz",
+  fast_charging:"yes",
+  battery_life:"2 days usage",
+  speed:"The Oppo A5 delivers stable and efficient performance powered by the Snapdragon 6s Gen 1 and 6GB RAM, making it suitable for multitasking, streaming, and everyday apps; the smooth display ensures fluid scrolling though it is not designed for heavy gaming.",
+  camera_quality:"good for photography",
+  megapixel:"50MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Oppo A5 features a durable and modern design with IP65 water and dust resistance. It has a sleek matte finish that resists fingerprints and offers a comfortable grip. Measuring about 165.7 × 76.2 × 8.0mm and weighing around 193g, it feels solid and reliable for daily use.` 
+  },
+  {
+    title: "Display",
+    content: `The phone comes with a 6.67-inch HD+ IPS LCD display with a 90Hz refresh rate. It delivers smooth visuals, decent brightness, and a good viewing experience for social media, videos, and browsing.` 
+  },
+  {
+    title: "Camera System",
+    content: `Equipped with a 50MP main camera and a 2MP depth sensor, the Oppo A5 captures detailed photos in good lighting conditions. The 5MP front camera handles selfies and video calls adequately.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the Snapdragon 6s Gen 1 processor, the Oppo A5 ensures efficient performance for everyday tasks such as browsing, streaming, and light gaming.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 15 with ColorOS 15, the phone offers a clean and optimized user experience with useful features and improved performance.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `The device includes 128GB internal storage and 6GB RAM, allowing smooth multitasking and enough space for apps and media. Storage can be expanded via MicroSD.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `A standout feature is the massive 6000mAh battery, which can easily last up to two days on moderate usage. It supports 45W fast charging for quick top-ups.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Includes 4G LTE, Wi-Fi 5, Bluetooth 5.0, GPS, USB Type-C, and a 3.5mm headphone jack. It also features a side-mounted fingerprint sensor and essential sensors.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "Huge 6000mAh battery",
+      "Durable IP65 design",
+      "Reliable Snapdragon processor",
+      "50MP camera",
+      "Expandable storage"
+    ],
+    cons: [
+      "HD+ resolution only",
+      "No 5G support",
+      "Basic front camera"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Oppo A5 is a solid budget smartphone designed for users who prioritize battery life, durability, and reliable everyday performance. It’s ideal for students and users looking for a long-lasting and affordable phone.` 
+  },
+],
+
+  color: "Aurora Green, Mist White, Purple",
+  weight: "193g",
+  dimensions: {
+    length: "165.7mm",
+    width: "76.2mm",
+    height: "8.0mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Oppo A",
+  reviews: {
+    averageRating: 4.3,
+    reviewCount: 18,
+    reviews: [
+      {
+        author: "Samuel K.",
+        rating: 5,
+        reviewBody: "Battery lasts very long and performance is stable.",
+        datePublished: "2025-02-12"
+      },
+      {
+        author: "Grace W.",
+        rating: 4,
+        reviewBody: "Good phone but display could be sharper.",
+        datePublished: "2025-03-01"
+      }
+    ]
+  }
+},
+
+
+
+{
+  id: 3,
+  name: "Infinix Note Edge 5G",
+  fullname:"Infinix Note Edge 5G 6.78 Inches, 256GB ROM + 8GB RAM, Battery: 6500mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/infinix_note_edge_5g.webp",
+  from: "KSh 8,000",
+  deposit: "KSh 8,000",
+  daily: "KSh 180",
+  totalPrice: "KSh 32,500",
+  source: "/phones/infinix_note_edge_5g.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.78\" 1.5K AMOLED",
+  processor: "MediaTek Dimensity 7100",
+  camera: "50MP (rear), 13MP (front)",
+  memory: "256GB / 8GB RAM",
+  battery: "6500mAh, 45W Fast Charging",
+  version: "Android 16, XOS 16",
+  depositanddaily: "KSh 6,500 Daily KSh 130",
+  slug: "infinix-note-edge-5g",
+  slugs: "infinix-note-edge-5g",
+  description: "Buy Infinix Note Edge 5G on credit with deposit and daily installments. Curved AMOLED display, strong 5G performance, and massive battery.",
+  brand: "Infinix",
+  seller: "Mkopa",
+  model: "X6887",
+  storage: "256GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"yes",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"yes",
+  is_it_5g:"yes",
+  ram_expandible:"no",
+  good_phone:"yes",
+  performance:"MediaTek Dimensity 7100 5G processor",
+  fingerprint:"under display",
+  wireless_charging:"no",
+  refresh_rate:"120Hz",
+  fast_charging:"yes",
+  battery_life:"2 days usage",
+  speed:"The Infinix Note Edge 5G delivers smooth and responsive performance powered by the Dimensity 7100 and 8GB RAM, making it suitable for multitasking, gaming, and 5G usage; the 120Hz AMOLED display ensures fluid scrolling and an immersive experience.",
+  camera_quality:"good for photography",
+  megapixel:"50MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Infinix Note Edge 5G features a slim and premium curved design with a thickness of around 7.2mm and a weight of about 190g. It comes with IP65 dust and water resistance and Gorilla Glass protection, giving it durability and a premium feel.` 
+  },
+  {
+    title: "Display",
+    content: `It features a large 6.78-inch 1.5K AMOLED curved display with a 120Hz refresh rate and up to 4500 nits peak brightness. The screen delivers vibrant colors, deep blacks, and ultra-smooth performance for gaming and media consumption.` 
+  },
+  {
+    title: "Camera System",
+    content: `The phone is equipped with a 50MP main camera capable of capturing detailed photos and 4K video. The 13MP front camera handles selfies and video calls well, with AI enhancements for better results.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the MediaTek Dimensity 7100 chipset, the device provides efficient and reliable 5G performance. It is well-suited for multitasking, gaming, and everyday use.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 16 with XOS 16, the phone offers a feature-rich experience with customization options, improved performance, and extended software support.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `The device comes with 256GB storage and 8GB RAM, offering fast app performance and enough space for files, apps, and media. However, it does not support MicroSD expansion.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `The massive 6500mAh battery ensures up to two days of usage. It supports 45W fast charging and reverse charging, making it highly reliable for heavy users.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Includes 5G, Wi-Fi, Bluetooth 5.4, NFC, GPS, USB Type-C, and infrared. It also features an in-display fingerprint sensor, accelerometer, gyroscope, and compass.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "Curved AMOLED 120Hz display",
+      "Huge 6500mAh battery",
+      "Strong 5G performance",
+      "Premium slim design",
+      "Stereo JBL-tuned speakers"
+    ],
+    cons: [
+      "No MicroSD card support",
+      "No wireless charging",
+      "Camera lacks advanced stabilization"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Infinix Note Edge 5G stands out as a powerful midrange smartphone with a premium curved AMOLED display, long-lasting battery, and solid 5G performance. It’s ideal for users who want a stylish device with strong everyday performance and excellent battery life.` 
+  },
+],
+
+  color: "Titanium, Black, Green, Blue",
+  weight: "190g",
+  dimensions: {
+    length: "163.1mm",
+    width: "77.4mm",
+    height: "7.2mm"
+  },
+  material: "Glass front, Plastic back",
+  pattern: "Matte",
+  productLine: "Infinix Note Series",
+  reviews: {
+    averageRating: 4.4,
+    reviewCount: 22,
+    reviews: [
+      {
+        author: "Dennis K.",
+        rating: 5,
+        reviewBody: "Display is amazing and battery lasts very long.",
+        datePublished: "2026-02-25"
+      },
+      {
+        author: "Sarah W.",
+        rating: 4,
+        reviewBody: "Great performance but no memory card slot.",
+        datePublished: "2026-03-10"
+      }
+    ]
+  }
+},
+
+{
+  id: 3,
+  name: "Tecno Spark Slim",
+  fullname:"Tecno Spark Slim 6.78 Inches, 256GB ROM + 8GB RAM, Battery: 5160mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/tecno_spark_slim.webp",
+  from: "KSh 5,000",
+  deposit: "KSh 6,900",
+  daily: "KSh 150",
+  totalPrice: "KSh 28,500",
+  source: "/phones/tecno_spark_slim.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.78\" 1.5K AMOLED",
+  processor: "MediaTek Helio G200",
+  camera: "50MP (rear), 13MP (front)",
+  memory: "256GB / 8GB RAM",
+  battery: "5160mAh, 45W Fast Charging",
+  version: "Android 15, HiOS 15",
+  depositanddaily: "KSh 6,900 Daily KSh 150",
+  slug: "tecno-spark-slim",
+  slugs: "tecno-spark-slim",
+  description: "Buy Tecno Spark Slim on credit with deposit and daily installments. Ultra-slim design, AMOLED display, and smooth performance.",
+  brand: "Tecno",
+  seller: "Mkopa",
+  model: "Spark Slim",
+  storage: "256GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"yes",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"yes",
+  is_it_5g:"no",
+  ram_expandible:"no",
+  good_phone:"yes",
+  performance:"MediaTek Helio G200 efficient 4G processor",
+  fingerprint:"under display",
+  wireless_charging:"no",
+  refresh_rate:"144Hz",
+  fast_charging:"yes",
+  battery_life:"all day usage",
+  speed:"The Tecno Spark Slim delivers smooth everyday performance powered by the Helio G200 and 8GB RAM, making it suitable for multitasking, streaming, and casual gaming; the 144Hz AMOLED display ensures ultra-smooth scrolling and responsiveness.",
+  camera_quality:"good for photography",
+  megapixel:"50MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Tecno", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Tecno Spark Slim stands out with its ultra-thin 5.9mm design, making it one of the slimmest smartphones available. It weighs about 156g and features a curved body with a premium finish. The device is also IP64-rated for dust and splash resistance, adding durability to its stylish form.` 
+  },
+  {
+    title: "Display",
+    content: `It features a 6.78-inch AMOLED display with a 1.5K resolution and a 144Hz refresh rate. The screen delivers vibrant colors, deep contrast, and exceptional brightness up to 4500 nits, making it ideal for outdoor use and media consumption.` 
+  },
+  {
+    title: "Camera System",
+    content: `The phone is equipped with a 50MP main camera that captures clear and detailed images, along with a 13MP front camera for selfies and video calls. AI enhancements improve image quality in different lighting conditions.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the MediaTek Helio G200 processor, the Spark Slim delivers efficient performance for daily tasks, social media, and casual gaming. It balances power efficiency with reliable speed.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 15 with HiOS 15, the phone offers a modern user experience with AI features, customization options, and improved system performance.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `With 256GB of internal storage and 8GB RAM, the device provides ample space for apps, media, and files. However, it does not support MicroSD expansion.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `The 5160mAh battery ensures long-lasting usage throughout the day. It supports 45W fast charging, allowing the phone to charge fully in under an hour.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Includes 4G LTE, Wi-Fi, Bluetooth 5.4, NFC, GPS, USB Type-C, and infrared. It also features an in-display fingerprint scanner and essential sensors.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "Ultra-slim and lightweight design",
+      "144Hz AMOLED display",
+      "Large 256GB storage",
+      "Fast 45W charging",
+      "Premium look and feel"
+    ],
+    cons: [
+      "No 5G support",
+      "No MicroSD slot",
+      "Processor not ideal for heavy gaming"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Tecno Spark Slim is a stylish midrange smartphone that prioritizes design, display quality, and everyday performance. It’s perfect for users who want a slim, lightweight phone with a premium AMOLED screen and solid battery life at an affordable price.` 
+  },
+],
+
+  color: "Slim White, Cool Black",
+  weight: "156g",
+  dimensions: {
+    length: "164.2mm",
+    width: "75.9mm",
+    height: "5.9mm"
+  },
+  material: "Glass front, Fiber back",
+  pattern: "Glossy",
+  productLine: "Tecno Spark Series",
+  reviews: {
+    averageRating: 4.4,
+    reviewCount: 20,
+    reviews: [
+      {
+        author: "Eric K.",
+        rating: 5,
+        reviewBody: "Very slim and beautiful phone with a great display.",
+        datePublished: "2026-01-15"
+      },
+      {
+        author: "Naomi W.",
+        rating: 4,
+        reviewBody: "Good performance but no 5G support.",
+        datePublished: "2026-02-08"
+      }
+    ]
+  }
 }
 
 
-
-
-  
 ];
