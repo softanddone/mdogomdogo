@@ -693,7 +693,7 @@ megapixel:"50MP",
   status: "New",
   image: "/phones/oppo_reno14_pro.jpg",
   from: "KSh 9,000",
-  deposit: "KSh 6,600",
+  deposit: "KSh 12,600",
   daily: "KSh 155",
   totalPrice: "KSh 55,000",
   source: "/phones/oppo_reno14_pro.webp",
@@ -10374,6 +10374,278 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
         rating: 5,
         reviewBody: "Camera quality is excellent, feels like a flagship device.",
         datePublished: "2025-05-11"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 3,
+  name: "Motorola G Stylus 5G",
+  fullname:"Motorola Moto G Stylus 5G 6.6 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/moto_g_stylus_5g.webp",
+  from: "KSh 5,000",
+  deposit: "KSh 6,000",
+  daily: "KSh 120",
+  totalPrice: "KSh 30,000",
+  source: "/phones/moto-g-stylus-5g.webp",
+  discount: "-8%",
+  display: "block",
+  phonedisplay: "6.6\" FHD+ IPS LCD",
+  processor: "Qualcomm Snapdragon 6 Gen 1",
+  camera: "50MP + 8MP (rear), 16MP (front)",
+  memory: "256GB / 8GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 20W Fast Charging",
+  version: "Android 13/14, MyUX",
+  depositanddaily: "KSh 6,000 Daily KSh 120",
+  slug: "motorola-g-stylus-5g",
+  slugs: "motorola-g-stylus-5g",
+  description: "Buy Motorola Moto G Stylus 5G on credit with deposit and daily installments. Comes with built-in stylus and powerful 5G performance.",
+  brand: "Motorola",
+  seller: "Mkopa",
+  model: "XT2315",
+  storage: "256GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"no",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"no",
+  is_it_5g:"yes",
+  ram_expandible:"yes",
+  good_phone:"yes",
+  performance:"Snapdragon 6 Gen 1 5G processor",
+  fingerprint:"side mounted",
+  wireless_charging:"yes",
+  refresh_rate:"120Hz",
+  fast_charging:"yes",
+  battery_life:"all day usage",
+  speed:"The Motorola Moto G Stylus 5G delivers fast and responsive performance powered by the Snapdragon 6 Gen 1 and 8GB RAM, making it excellent for multitasking, gaming, and 5G connectivity; the 120Hz display ensures ultra-smooth scrolling and responsiveness.",
+  camera_quality:"very good for photography",
+  megapixel:"50MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Motorola", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Motorola Moto G Stylus 5G features a sleek and modern design with a built-in stylus for enhanced productivity and creativity. It has a premium feel with a water-repellent design, measuring approximately 162.8 × 73.8 × 9.2mm and weighing about 202g. The phone is comfortable to hold and ideal for note-taking, sketching, and navigation.` 
+  },
+  {
+    title: "Display",
+    content: `Enjoy an immersive viewing experience on the 6.6-inch Full HD+ display with a 120Hz refresh rate. The screen delivers sharp visuals, vibrant colors, and smooth scrolling, making it perfect for gaming, streaming, and browsing.` 
+  },
+  {
+    title: "Camera System",
+    content: `The Moto G Stylus 5G features a 50MP main camera with advanced image processing for clear and detailed shots, along with an 8MP ultra-wide camera for expansive scenes. The 16MP front camera ensures high-quality selfies and video calls.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the Snapdragon 6 Gen 1 processor, the device offers fast and efficient performance. Combined with 8GB RAM and 256GB storage, it handles multitasking, gaming, and everyday apps with ease.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 13/14 with Motorola’s MyUX interface, the phone provides a near-stock Android experience with useful customizations, gestures, and security enhancements.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `With 256GB internal storage and 8GB RAM, the Moto G Stylus 5G offers plenty of space for apps, media, and files. Storage is expandable up to 1TB via MicroSD.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `The 5000mAh battery easily lasts a full day of heavy usage. It supports 20W fast charging and also includes wireless charging support for added convenience.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Stay connected with 5G, Wi-Fi, Bluetooth 5.1, GPS, and USB Type-C. It includes a side-mounted fingerprint scanner, accelerometer, gyroscope, proximity sensor, and compass.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "Built-in stylus for productivity",
+      "Smooth 120Hz display",
+      "Strong 5G performance",
+      "Large 5000mAh battery",
+      "Expandable storage"
+    ],
+    cons: [
+      "LCD instead of AMOLED",
+      "Charging speed could be faster",
+      "Slightly bulky design"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Motorola Moto G Stylus 5G is a versatile smartphone designed for productivity and entertainment. With its built-in stylus, smooth display, and reliable 5G performance, it is perfect for users who want more functionality without paying flagship prices.` 
+  },
+],
+
+  color: "Black, Blue",
+  weight: "202g",
+  dimensions: {
+    length: "162.8mm",
+    width: "73.8mm",
+    height: "9.2mm"
+  },
+  material: "Plastic",
+  pattern: "Matte",
+  productLine: "Moto G Series",
+  reviews: {
+    averageRating: 4.5,
+    reviewCount: 24,
+    reviews: [
+      {
+        author: "Brian M.",
+        rating: 5,
+        reviewBody: "Stylus is very useful and battery lasts long.",
+        datePublished: "2025-02-10"
+      },
+      {
+        author: "Anne N.",
+        rating: 4,
+        reviewBody: "Smooth performance and great display.",
+        datePublished: "2025-02-22"
+      }
+    ]
+  }
+},
+
+
+{
+  id: 3,
+  name: "Motorola G Power",
+  fullname:"Motorola Moto G Power 6.7 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+  status: "New",
+  image: "/phones/moto_g_power.webp",
+  from: "KSh 4,500",
+  deposit: "KSh 5,500",
+  daily: "KSh 110",
+  totalPrice: "KSh 27,000",
+  source: "/phones/moto-g-power.webp",
+  discount: "-9%",
+  display: "block",
+  phonedisplay: "6.7\" FHD+ IPS LCD",
+  processor: "MediaTek Dimensity 7020",
+  camera: "50MP + 8MP (rear), 16MP (front)",
+  memory: "128GB / 8GB RAM, MicroSD up to 1TB",
+  battery: "5000mAh, 30W Fast Charging",
+  version: "Android 14, MyUX",
+  depositanddaily: "KSh 5,500 Daily KSh 110",
+  slug: "motorola-g-power",
+  slugs: "motorola-g-power",
+  description: "Buy Motorola Moto G Power on credit with deposit and daily installments. Strong battery life and smooth 5G performance.",
+  brand: "Motorola",
+  seller: "Mkopa",
+  model: "XT2415",
+  storage: "128GB",
+  condition: "new",
+  gtin: "",
+
+  curved_screen:"no",
+  dual_sim:"yes",
+  waterproof:"yes", 
+  gaming_phone:"yes",
+  esim_compatible:"no",
+  amoled_display:"no",
+  is_it_5g:"yes",
+  ram_expandible:"yes",
+  good_phone:"yes",
+  performance:"MediaTek Dimensity 7020 5G processor",
+  fingerprint:"side mounted",
+  wireless_charging:"yes",
+  refresh_rate:"120Hz",
+  fast_charging:"yes",
+  battery_life:"all day usage",
+  speed:"The Motorola Moto G Power delivers reliable performance powered by the Dimensity 7020 and 8GB RAM, making it suitable for multitasking, streaming, and light gaming; the 120Hz display ensures smooth scrolling and responsiveness.",
+  camera_quality:"average for photography",
+  megapixel:"50MP",
+
+  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Motorola", "Mogo","Loan","Lipa Mdogo Mdogo"],
+
+  details: [
+  {
+    title: "Body and Design",
+    content: `The Motorola Moto G Power features a modern design with a premium vegan leather finish that improves grip and comfort. It measures approximately 167.2 × 76.4 × 8.5mm and weighs about 201g, giving it a solid feel in hand. The water-repellent build adds durability for everyday use.` 
+  },
+  {
+    title: "Display",
+    content: `Enjoy a large 6.7-inch Full HD+ display with a smooth 120Hz refresh rate. The IPS LCD panel delivers sharp visuals and fluid scrolling, making it great for watching videos, browsing, and gaming.` 
+  },
+  {
+    title: "Camera System",
+    content: `The phone comes with a 50MP main camera and an 8MP ultra-wide lens for versatile photography. The 16MP front camera captures clear selfies. While the camera performs well in daylight, low-light performance is average.` 
+  },
+  {
+    title: "Performance",
+    content: `Powered by the MediaTek Dimensity 7020 processor, the Moto G Power offers stable and efficient performance. With 8GB RAM, it handles daily apps, multitasking, and casual gaming smoothly.` 
+  },
+  {
+    title: "Operating System",
+    content: `Running on Android 14 with Motorola’s MyUX interface, the device provides a clean and near-stock Android experience with useful gestures and customization options.` 
+  },
+  {
+    title: "Storage and Memory",
+    content: `The device includes 128GB of internal storage and 8GB RAM, with support for MicroSD expansion up to 1TB, giving users plenty of space for apps, photos, and videos.` 
+  },
+  {
+    title: "Battery and Charging",
+    content: `Equipped with a 5000mAh battery, the Moto G Power easily lasts a full day of usage. It supports 30W fast charging and also includes 15W wireless charging for convenience.` 
+  },
+  {
+    title: "Connectivity and Sensors",
+    content: `Features include 5G connectivity, Wi-Fi, Bluetooth 5.3, GPS, USB Type-C, and a 3.5mm headphone jack. It also has a side-mounted fingerprint scanner, accelerometer, gyroscope, and compass.` 
+  },
+  {
+    title: "Pros and Cons",
+    pros: [
+      "Excellent battery life",
+      "Smooth 120Hz display",
+      "5G connectivity",
+      "Wireless charging support",
+      "Expandable storage"
+    ],
+    cons: [
+      "Average camera performance",
+      "LCD instead of AMOLED",
+      "Performance not ideal for heavy gaming"
+    ]
+  },
+  {
+    title: "Verdict",
+    content: `The Motorola Moto G Power is a solid budget smartphone focused on battery life and everyday reliability. It’s ideal for users who want long-lasting performance, smooth display, and essential 5G features at an affordable price.` 
+  },
+],
+
+  color: "Blue, Purple",
+  weight: "201g",
+  dimensions: {
+    length: "167.2mm",
+    width: "76.4mm",
+    height: "8.5mm"
+  },
+  material: "Plastic, Vegan Leather",
+  pattern: "Matte",
+  productLine: "Moto G Series",
+  reviews: {
+    averageRating: 4.3,
+    reviewCount: 21,
+    reviews: [
+      {
+        author: "Kevin O.",
+        rating: 5,
+        reviewBody: "Battery life is amazing and performance is smooth.",
+        datePublished: "2025-03-02"
+      },
+      {
+        author: "Jane M.",
+        rating: 4,
+        reviewBody: "Good phone but camera could be better.",
+        datePublished: "2025-03-18"
       }
     ]
   }
