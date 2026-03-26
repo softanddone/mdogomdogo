@@ -23,7 +23,7 @@ export const products = [
     slugs: "oppo-a3x",
     description: "Buy Oppo A3x on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & daily payments. Fast delivery from MKOPA, Watu Simu & more",
     brand: "Oppo",
-    seller: "Mogo",
+    seller: "Mogo, Onfon Mobile",
     model: "CPH2641",
     storage: "128GB",
     condition: "new",
@@ -153,7 +153,7 @@ export const products = [
     status: "New",
     image: "/product/phones/tecnopop10-64.webp",
     from: "KSh 2,000",
-    deposit: "KSh 2,000",
+    deposit: "KSh 2,700",
     daily: "Ksh 70",
     totalPrice: "KSh 12,000",
     source: "/phones/tecnopop10-64.webp",
@@ -170,7 +170,7 @@ export const products = [
     slugs: "tecno-pop-10-64-4",
     description: "Buy Tecno Pop 10 64GB on credit in Nairobi Kenya. Lipa mdogo mdogo with small deposit & affordable daily payments. Fast delivery available",
     brand: "Tecno",
-    seller: "Onfon Mobile",
+    seller: "Onfon Mobile, Mogo",
     model: "Tecno Pop 10",
     storage: "64GB",
     condition: "new",
@@ -1218,10 +1218,6 @@ megapixel:"50MP",
   }
 },
 
-
-
-  
-  
 
   {
   id: 9,
