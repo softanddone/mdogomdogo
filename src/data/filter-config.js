@@ -57,7 +57,7 @@ export const PAYMENT_FILTERS = [
 
 export const ALL_BRANDS = [...new Set(products.map(p => p.brand).filter(Boolean))];
 
-export function brandSlug(brand) {
+export function brandSlugall(brand) {
   return brand.toLowerCase().replace(/\s+/g, '-');
 }
 

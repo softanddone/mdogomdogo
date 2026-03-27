@@ -4,28 +4,28 @@
 // Generates pages like:
 //   /features/5g-phones-kenya
 //   /features/xiaomi-5g-phones-kenya
-//   /features/gaming-phones-kenya
-//   /features/108mp-camera-phones-kenya
-//   /features/xiaomi-5g-gaming-phones-kenya  (brand × feature combo)
-//
-// ─── imports ──────────────────────────────────────────────────────────────────
+//   /features/5g-gaming-phones-kenya
+//   /features/xiaomi-5g-gaming-phones-kenya
+
 import { products } from '../../data/product2.js';
 import {
   FEATURE_FILTERS,
-  getProductFeatures,
+  COMBO_PAIRS,
+  comboHref,
   featureHref,
   featureBrandSlug,
+  getProductFeatures,
 } from '../../data/feature-config.js';
-import { ALL_BRANDS, brandSlug } from '../../data/filter-config.js';
+import { ALL_BRANDS } from '../../data/filter-config.js';
 import Gift from '../../components/Gift.astro';
 import Nav from '../../components/Nav.astro';
 
 // ─── getStaticPaths ───────────────────────────────────────────────────────────
 
 export async function getStaticPaths() {
-  const { products }       = await import('../../data/product2.js');
-  const { FEATURE_FILTERS, featureBrandSlug } = await import('../../data/feature-config.js');
-  const { ALL_BRANDS }     = await import('../../data/filter-config.js');
+  const { products }      = await import('../../data/product2.js');
+  const { FEATURE_FILTERS, COMBO_PAIRS, featureBrandSlug } = await import('../../data/feature-config.js');
+  const { ALL_BRANDS }    = await import('../../data/filter-config.js');
 
   const paths = [];
 
@@ -35,82 +35,44 @@ export async function getStaticPaths() {
     if (!filtered.length) continue;
     paths.push({
       params: { featureSlug: `${feat.key}-phones-kenya` },
-      props:  {
-        primaryFeature: feat,
-        secondaryFeature: null,
-        brandFilter: null,
-        filteredProducts: filtered,
-        label: feat.h1,
-      },
+      props:  { primaryFeature: feat, secondaryFeature: null, brandFilter: null, filteredProducts: filtered, label: feat.h1 },
     });
   }
 
-  // 2. Brand × Feature  →  /features/xiaomi-5g-phones-kenya
+  // 2. Brand x Feature  →  /features/xiaomi-5g-phones-kenya
   for (const brand of ALL_BRANDS) {
     for (const feat of FEATURE_FILTERS) {
-      const filtered = products.filter(
-        p => feat.match(p) && p.brand?.toLowerCase() === brand.toLowerCase()
-      );
+      const filtered = products.filter(p => feat.match(p) && p.brand?.toLowerCase() === brand.toLowerCase());
       if (!filtered.length) continue;
       paths.push({
         params: { featureSlug: `${featureBrandSlug(brand)}-${feat.key}-phones-kenya` },
-        props:  {
-          primaryFeature: feat,
-          secondaryFeature: null,
-          brandFilter: brand,
-          filteredProducts: filtered,
-          label: `${brand} ${feat.h1}`,
-        },
+        props:  { primaryFeature: feat, secondaryFeature: null, brandFilter: brand, filteredProducts: filtered, label: `${brand} ${feat.h1}` },
       });
     }
   }
 
-  // 3. Feature × Feature combos  →  /features/5g-gaming-phones-kenya
-  //    (only the most useful combos — avoids combinatorial explosion)
-  const COMBOS = [
-    ['5g', 'gaming'],
-    ['5g', 'amoled'],
-    ['5g', '120hz'],
-    ['5g', 'fast-charging'],
-    ['gaming', 'amoled'],
-    ['gaming', '120hz'],
-    ['amoled', '120hz'],
-    ['108mp-camera', 'amoled'],
-    ['108mp-camera', 'fast-charging'],
-  ];
-
-  for (const [keyA, keyB] of COMBOS) {
+  // 3. Feature x Feature combos  →  /features/5g-gaming-phones-kenya
+  //    Slug is always [keyA]-[keyB] as listed in COMBO_PAIRS — canonical order guaranteed.
+  for (const [keyA, keyB] of COMBO_PAIRS) {
     const featA = FEATURE_FILTERS.find(f => f.key === keyA);
     const featB = FEATURE_FILTERS.find(f => f.key === keyB);
     if (!featA || !featB) continue;
     const filtered = products.filter(p => featA.match(p) && featB.match(p));
     if (!filtered.length) continue;
+
+    // 3a. Feature x Feature (no brand)
     paths.push({
       params: { featureSlug: `${keyA}-${keyB}-phones-kenya` },
-      props:  {
-        primaryFeature: featA,
-        secondaryFeature: featB,
-        brandFilter: null,
-        filteredProducts: filtered,
-        label: `${featA.label} + ${featB.label} Phones in Kenya`,
-      },
+      props:  { primaryFeature: featA, secondaryFeature: featB, brandFilter: null, filteredProducts: filtered, label: `${featA.label} & ${featB.label} Phones in Kenya` },
     });
 
-    // 4. Brand × Feature × Feature  →  /features/xiaomi-5g-gaming-phones-kenya
+    // 3b. Brand x Feature x Feature  →  /features/xiaomi-5g-gaming-phones-kenya
     for (const brand of ALL_BRANDS) {
-      const brandFiltered = filtered.filter(
-        p => p.brand?.toLowerCase() === brand.toLowerCase()
-      );
+      const brandFiltered = filtered.filter(p => p.brand?.toLowerCase() === brand.toLowerCase());
       if (!brandFiltered.length) continue;
       paths.push({
         params: { featureSlug: `${featureBrandSlug(brand)}-${keyA}-${keyB}-phones-kenya` },
-        props:  {
-          primaryFeature: featA,
-          secondaryFeature: featB,
-          brandFilter: brand,
-          filteredProducts: brandFiltered,
-          label: `${brand} ${featA.label} + ${featB.label} Phones in Kenya`,
-        },
+        props:  { primaryFeature: featA, secondaryFeature: featB, brandFilter: brand, filteredProducts: brandFiltered, label: `${brand} ${featA.label} & ${featB.label} Phones in Kenya` },
       });
     }
   }
@@ -126,45 +88,41 @@ const { primaryFeature, secondaryFeature, brandFilter, filteredProducts, label }
 const CARDS_PER_PAGE = 20;
 const totalPages     = Math.ceil(filteredProducts.length / CARDS_PER_PAGE);
 
-const pageTitle  = `${label} — Buy on Installments | MdogomdogoDeals Nairobi`;
-const metaDesc   = `${primaryFeature.description} ${filteredProducts.length} phones available. No credit check. Free delivery in Nairobi CBD.`;
+const pageTitle   = `${label} — Buy on Installments | MdogomdogoDeals Nairobi`;
+const metaDesc    = `${primaryFeature.description} ${filteredProducts.length} phones available. No credit check. Free delivery in Nairobi CBD.`;
 const canonicalUrl = `https://mdogomdogodeals.co.ke/features/${featureSlug}`;
 
-// Breadcrumbs
 const breadcrumbs = [
   { label: 'Home',       href: '/' },
   { label: 'All Phones', href: '/phones/lipa-mdogo-mdogo-nairobi' },
   { label: 'Features',   href: '/features/5g-phones-kenya' },
-  ...(brandFilter ? [{ label: `${brandFilter} Phones`, href: `/phones/${brandFilter.toLowerCase()}` }] : []),
-  { label: primaryFeature.label, href: `/features/${primaryFeature.key}-phones-kenya` },
-  ...(secondaryFeature ? [{ label: secondaryFeature.label, href: `/features/${secondaryFeature.key}-phones-kenya` }] : []),
+  ...(brandFilter      ? [{ label: `${brandFilter} Phones`,    href: `/phones/${brandFilter.toLowerCase()}` }] : []),
+  { label: primaryFeature.label,   href: featureHref(primaryFeature.key) },
+  ...(secondaryFeature ? [{ label: secondaryFeature.label,     href: featureHref(secondaryFeature.key) }] : []),
 ];
 
-// Related feature links — exclude active features, pick top 6
+// Related features (exclude active ones)
 const relatedFeatureLinks = FEATURE_FILTERS
   .filter(f => f.key !== primaryFeature.key && f.key !== secondaryFeature?.key)
   .filter(f => products.filter(f.match).length > 0)
   .slice(0, 8);
 
-// Related brands for this feature
-const brandsInResults = [...new Set(filteredProducts.map(p => p.brand).filter(Boolean))];
+// All brands that have at least one product matching the primary feature
 const allFeatureBrands = ALL_BRANDS.filter(b =>
   products.some(p => primaryFeature.match(p) && p.brand?.toLowerCase() === b.toLowerCase())
 );
 
-// Cross-feature combos for internal linking
-const COMBO_KEYS = ['5g', 'gaming', 'amoled', '120hz', 'fast-charging', '108mp-camera'];
-const crossLinks = COMBO_KEYS
-  .filter(k => k !== primaryFeature.key)
-  .map(k => FEATURE_FILTERS.find(f => f.key === k))
-  .filter(Boolean)
+// Cross-feature combos — only include pairs that have a registered page (comboHref returns non-null)
+// and where there are actual matching products.
+const crossLinks = FEATURE_FILTERS
+  .filter(f => f.key !== primaryFeature.key && f.key !== secondaryFeature?.key)
   .filter(f => {
-    const combined = products.filter(p => primaryFeature.match(p) && f.match(p));
-    return combined.length > 0;
+    const href = comboHref(primaryFeature.key, f.key);
+    if (!href) return false;
+    return products.filter(p => primaryFeature.match(p) && f.match(p)).length > 0;
   })
   .slice(0, 5);
 
-// Helpers
 function renderStars(rating) {
   const full = Math.floor(rating);
   return '★'.repeat(full) + '☆'.repeat(5 - full);
@@ -186,7 +144,6 @@ function renderStars(rating) {
   <meta property="og:url"         content={canonicalUrl} />
   <meta property="og:site_name"   content="MdogomdogoDeals" />
 
-  <!-- ItemList structured data -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -213,7 +170,6 @@ function renderStars(rating) {
     }))
   })} />
 
-  <!-- BreadcrumbList -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -226,6 +182,7 @@ function renderStars(rating) {
   })} />
 
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -237,10 +194,6 @@ function renderStars(rating) {
     }
     body { font-family: 'Barlow', sans-serif; background: var(--gray-1); color: var(--text); }
 
-    /* ── Top banner ── */
-    .top-banner { background: var(--navy); color: #fff; text-align: center; padding: 9px 16px; font-size: 13px; font-weight: 500; }
-    .top-banner span { color: var(--gold); font-weight: 700; }
-
     /* ── Breadcrumbs ── */
     .breadcrumb-bar { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 16px; }
     .breadcrumb-list { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; list-style: none; }
@@ -249,47 +202,43 @@ function renderStars(rating) {
     .breadcrumb-list li a:hover { text-decoration: underline; }
     .breadcrumb-list li.sep { color: var(--gray-3); }
 
-    /* ── Feature nav (horizontal chips) ── */
+    /* ── Feature nav ── */
     .filter-nav { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 8px 0 0; }
     .filter-nav-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; padding: 0 16px; margin-bottom: 6px; }
     .filter-nav-scroll { display: flex; align-items: center; gap: 7px; overflow-x: auto; padding: 2px 16px 10px; scrollbar-width: none; }
     .filter-nav-scroll::-webkit-scrollbar { display: none; }
-    .filter-nav-link { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+    .filter-nav-link { display: inline-flex; align-items: center; flex-shrink: 0; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
     .filter-nav-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
     .filter-nav-link.active { border-color: var(--primary); background: var(--primary); color: #fff; }
 
-    /* ── Hero page header ── */
+    /* ── Combo strip ── */
+    .combo-strip { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 8px 0 0; }
+    .combo-strip-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; padding: 0 16px; margin-bottom: 6px; }
+    .combo-strip-scroll { display: flex; align-items: center; gap: 7px; overflow-x: auto; padding: 2px 16px 10px; scrollbar-width: none; }
+    .combo-strip-scroll::-webkit-scrollbar { display: none; }
+    .combo-chip { display: inline-flex; align-items: center; flex-shrink: 0; border: 1.5px solid var(--navy); background: var(--navy); color: #fff; border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.15s; white-space: nowrap; }
+    .combo-chip:hover { opacity: 0.85; }
+
+    /* ── Page hero ── */
     .page-header { max-width: 1280px; margin: 0 auto; padding: 24px 20px 0; }
-    .feature-hero { background: linear-gradient(135deg, var(--navy) 0%, #1a2f4a 100%); border-radius: 14px; padding: 28px 32px; margin-bottom: 20px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-    .feature-icon { font-size: 52px; flex-shrink: 0; }
-    .feature-hero-text h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 6px; line-height: 1.1; }
-    .feature-hero-text p  { font-size: 14px; color: rgba(255,255,255,0.75); max-width: 600px; line-height: 1.6; }
-    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-    .hero-badge  { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: #fff; }
-    .result-count { display: inline-block; background: var(--gold); color: var(--navy); border-radius: 6px; padding: 3px 10px; font-size: 13px; font-weight: 800; }
+    .feature-hero { background: var(--navy); border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; }
+    .feature-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.15; }
+    .feature-hero p  { font-size: 14px; color: rgba(255,255,255,0.72); max-width: 640px; line-height: 1.65; }
+    .hero-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .hero-tag  { display: inline-flex; align-items: center; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 4px; padding: 4px 10px; font-size: 12px; font-weight: 600; color: #fff; letter-spacing: 0.03em; }
+    .result-count { display: inline-block; background: var(--primary); color: #fff; border-radius: 4px; padding: 3px 10px; font-size: 13px; font-weight: 700; margin-left: 10px; vertical-align: middle; }
 
-    /* ── Brand filter for this feature ── */
-    .brand-filter-bar { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-
-    /* ── Cross-feature combo links ── */
-    .combo-section { max-width: 1280px; margin: 0 auto; padding: 16px 20px 0; }
-    .combo-section-label { font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; display: block; }
-    .combo-chips { display: flex; gap: 7px; flex-wrap: wrap; }
-    .combo-chip { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
-    .combo-chip:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
-    .combo-chip .fire { font-size: 14px; }
-
-    /* ── Product grid (same as filter page) ── */
-    .page-body { max-width: 1280px; margin: 16px auto 0; padding: 0 20px 24px; }
+    /* ── Product grid ── */
+    .page-body { max-width: 1280px; margin: 0 auto; padding: 16px 20px 24px; }
     .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-    .card { display: none; flex-direction: column; background: #fff; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--gray-2); transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; cursor: pointer; position: relative; text-decoration: none; color: inherit; }
+    .card { display: none; flex-direction: column; background: #fff; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--gray-2); transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; position: relative; text-decoration: none; color: inherit; }
     .card.visible { display: flex; }
     .card:hover { border-color: var(--primary); box-shadow: 0 8px 28px rgba(26,115,232,0.12); transform: translateY(-3px); }
     .badge { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 3px 9px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
     .badge-new  { background: var(--badge-new); }
     .badge-hot  { background: var(--badge-hot); }
     .badge-sale { background: var(--badge-sale); }
-    .feat-badge { position: absolute; top: 10px; right: 10px; z-index: 2; background: var(--navy); color: #fff; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 700; }
+    .feat-pill { position: absolute; top: 10px; right: 10px; z-index: 2; background: var(--navy); color: #fff; border-radius: 4px; padding: 2px 7px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
     .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--gray-1); display: flex; align-items: center; justify-content: center; }
     .card-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; transition: transform 0.3s; }
     .card:hover .card-img { transform: scale(1.05); }
@@ -309,7 +258,7 @@ function renderStars(rating) {
     .card-cta { display: flex; gap: 7px; margin-top: auto; }
     .btn-cart { flex: 1; background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
     .btn-cart:hover { background: var(--primary-dark); }
-    .btn-buy { flex: 1; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-buy  { flex: 1; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
     .btn-buy:hover { background: #162640; }
     .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; }
     .empty-state h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 8px; }
@@ -325,14 +274,16 @@ function renderStars(rating) {
     .page-btn.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
     .page-ellipsis { display: inline-flex; align-items: flex-end; justify-content: center; width: 32px; height: 40px; color: var(--text-light); font-size: 16px; padding-bottom: 4px; }
 
-    /* ── Internal link sections ── */
-    .internal-links { max-width: 1280px; margin: 0 auto; padding: 0 20px 32px; }
+    /* ── Internal links ── */
+    .internal-links { max-width: 1280px; margin: 0 auto; padding: 0 20px 36px; }
     .il-section { margin-bottom: 28px; }
-    .il-section h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .il-section h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
     .il-grid { display: flex; flex-wrap: wrap; gap: 7px; }
-    .il-link { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
+    .il-link { display: inline-flex; align-items: center; gap: 4px; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 6px; padding: 7px 13px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
     .il-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
-    .il-link .cnt { font-size: 11px; color: var(--text-light); }
+    .il-link .cnt { font-size: 11px; color: var(--text-light); margin-left: 2px; }
+    .il-link.combo { border-color: var(--navy); color: var(--navy); }
+    .il-link.combo:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
 
     /* ── SEO section ── */
     .seo-section { max-width: 1280px; margin: 0 auto; padding: 0 20px 56px; }
@@ -342,19 +293,14 @@ function renderStars(rating) {
     .seo-col p  { font-size: 13px; color: var(--text-light); line-height: 1.75; }
     .seo-col p a { color: var(--text-light); text-decoration: underline; text-decoration-color: var(--gray-2); text-underline-offset: 2px; }
     .seo-col p a:hover { color: var(--primary); text-decoration-color: var(--primary); }
-    .seo-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+    .seo-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
     .seo-tag { display: inline-block; background: #fff; border: 1px solid var(--gray-2); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--text-light); text-decoration: none; transition: all 0.12s; }
     .seo-tag:hover { border-color: var(--primary); color: var(--primary); }
 
     /* ── Responsive ── */
     @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
     @media (max-width: 800px)  { .product-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 560px)  {
-      .product-grid { grid-template-columns: repeat(2, 1fr); }
-      .feature-hero { padding: 20px; }
-      .feature-icon { font-size: 36px; }
-      .feature-hero-text h1 { font-size: 24px; }
-    }
+    @media (max-width: 560px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } .feature-hero { padding: 20px; } .feature-hero h1 { font-size: 22px; } }
     @media (max-width: 700px)  { .seo-grid { grid-template-columns: 1fr; gap: 20px; } }
   </style>
 </head>
@@ -369,88 +315,75 @@ function renderStars(rating) {
       {breadcrumbs.map((b, i) => (
         <>
           {i > 0 && <li class="sep">›</li>}
-          <li>
-            {i < breadcrumbs.length - 1
-              ? <a href={b.href}>{b.label}</a>
-              : b.label}
-          </li>
+          <li>{i < breadcrumbs.length - 1 ? <a href={b.href}>{b.label}</a> : b.label}</li>
         </>
       ))}
     </ol>
   </nav>
 
-  <!-- FEATURE NAV — all feature categories -->
+  <!-- FEATURE CATEGORY NAV -->
   <nav class="filter-nav" aria-label="Browse by feature">
     <span class="filter-nav-label">Browse by Feature</span>
     <div class="filter-nav-scroll">
       {FEATURE_FILTERS.map(feat => (
         <a
-          href={`/features/${feat.key}-phones-kenya`}
+          href={featureHref(feat.key)}
           class={`filter-nav-link${feat.key === primaryFeature.key ? ' active' : ''}`}
         >
-          {feat.icon} {feat.label}
+          {feat.label}
         </a>
       ))}
     </div>
   </nav>
 
-  <!-- BRAND FILTER for this feature -->
+  <!-- BRAND FILTER for this feature (only shown when there are multiple brands) -->
   {allFeatureBrands.length > 1 && (
-    <div class="brand-filter-bar">
-      <nav class="filter-nav" aria-label={`Filter ${primaryFeature.label} phones by brand`}>
-        <span class="filter-nav-label">Brand</span>
-        <div class="filter-nav-scroll">
+    <nav class="filter-nav" aria-label={`Filter ${primaryFeature.label} phones by brand`}>
+      <span class="filter-nav-label">Brand</span>
+      <div class="filter-nav-scroll">
+        <a href={featureHref(primaryFeature.key)} class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>
+          All Brands
+        </a>
+        {allFeatureBrands.map(brand => (
           <a
-            href={`/features/${primaryFeature.key}-phones-kenya`}
-            class={`filter-nav-link${!brandFilter ? ' active' : ''}`}
-          >All Brands</a>
-          {allFeatureBrands.map(brand => (
-            <a
-              href={`/features/${brand.toLowerCase()}-${primaryFeature.key}-phones-kenya`}
-              class={`filter-nav-link${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' active' : ''}`}
-            >
-              {brand}
-            </a>
-          ))}
-        </div>
-      </nav>
-    </div>
+            href={featureHref(primaryFeature.key, brand)}
+            class={`filter-nav-link${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' active' : ''}`}
+          >
+            {brand}
+          </a>
+        ))}
+      </div>
+    </nav>
   )}
 
-  <!-- CROSS-FEATURE COMBOS -->
+  <!-- COMBO STRIP — only rendered when valid combos exist -->
   {crossLinks.length > 0 && (
-    <div class="combo-section">
-      <span class="combo-section-label">
-        {primaryFeature.icon} Combine {primaryFeature.label} with
-      </span>
-      <div class="combo-chips">
+    <nav class="combo-strip" aria-label={`Combine ${primaryFeature.label} with other features`}>
+      <span class="combo-strip-label">{primaryFeature.label} combined with</span>
+      <div class="combo-strip-scroll">
         {crossLinks.map(feat => (
-          <a href={`/features/${primaryFeature.key}-${feat.key}-phones-kenya`} class="combo-chip">
-            <span class="fire">🔥</span>
+          <a href={comboHref(primaryFeature.key, feat.key)} class="combo-chip">
             {primaryFeature.label} + {feat.label}
           </a>
         ))}
       </div>
-    </div>
+    </nav>
   )}
 
-  <!-- HERO HEADER -->
+  <!-- PAGE HERO -->
   <div class="page-header">
     <div class="feature-hero">
-      <div class="feature-icon">{primaryFeature.icon}{secondaryFeature ? secondaryFeature.icon : ''}</div>
-      <div class="feature-hero-text">
-        <h1>
-          {label}
-          <span class="result-count" style="margin-left:10px;">{filteredProducts.length} phones</span>
-        </h1>
-        <p>{primaryFeature.description}</p>
-        <div class="hero-badges">
-          <span class="hero-badge">✅ No Credit Check</span>
-          <span class="hero-badge">📦 Free Delivery Nairobi</span>
-          <span class="hero-badge">💳 Pay via M-Pesa</span>
-          {brandFilter && <span class="hero-badge">🏷️ {brandFilter} Only</span>}
-          {secondaryFeature && <span class="hero-badge">{secondaryFeature.icon} {secondaryFeature.label} Included</span>}
-        </div>
+      <h1>
+        {label}
+        <span class="result-count">{filteredProducts.length} phones</span>
+      </h1>
+      <p>{primaryFeature.description}</p>
+      <div class="hero-meta">
+        <span class="hero-tag">No Credit Check</span>
+        <span class="hero-tag">Free Delivery — Nairobi CBD</span>
+        <span class="hero-tag">Pay via M-Pesa</span>
+        {brandFilter      && <span class="hero-tag">{brandFilter} Only</span>}
+        {secondaryFeature && <span class="hero-tag">{secondaryFeature.label} Included</span>}
       </div>
     </div>
   </div>
@@ -460,7 +393,7 @@ function renderStars(rating) {
     <div class="product-grid" id="product-grid">
       {filteredProducts.length === 0 ? (
         <div class="empty-state">
-          <h2>😕 No phones found</h2>
+          <h2>No phones found for this filter</h2>
           <p><a href="/phones/lipa-mdogo-mdogo-nairobi">View all phones</a> or try a different feature above.</p>
         </div>
       ) : filteredProducts.map((p, i) => {
@@ -469,22 +402,23 @@ function renderStars(rating) {
         const specs = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
         const rating      = p.reviews?.averageRating ?? 4.5;
         const reviewCount = p.reviews?.reviewCount   ?? 0;
-        // Highlight the relevant spec tag
         const highlightSpec = (s) => {
-          if (primaryFeature.key === '5g' && s?.includes('5G')) return true;
-          if (primaryFeature.key === 'amoled' && s?.toLowerCase().includes('amoled')) return true;
-          if (primaryFeature.key === '120hz' && s?.includes('120')) return true;
+          if (!s) return false;
+          if (primaryFeature.key === '5g'          && s.includes('5G'))                  return true;
+          if (primaryFeature.key === 'amoled'      && s.toLowerCase().includes('amoled')) return true;
+          if (primaryFeature.key === '120hz'       && s.includes('120'))                  return true;
+          if (primaryFeature.key === '108mp-camera'&& s.includes('108'))                  return true;
           return false;
         };
         return (
-          <a href={`/${p.slug}`} class="card" data-index={i} style="text-decoration:none;color:inherit;">
+          <a href={`/${p.slug}`} class="card" data-index={i}>
             <span class={`badge ${badgeClass}`}>{p.status ?? 'NEW'}</span>
-            <span class="feat-badge">{primaryFeature.icon} {primaryFeature.label}</span>
+            <span class="feat-pill">{primaryFeature.label}</span>
             <div class="card-img-wrap">
               <img
                 class="card-img"
                 src={p.source}
-                alt={`${p.fullname ?? p.name} ${primaryFeature.label} phone Kenya installments`}
+                alt={`${p.fullname ?? p.name} — ${primaryFeature.label} phone on installments in Kenya`}
                 loading="lazy"
                 width="300"
                 height="225"
@@ -495,9 +429,7 @@ function renderStars(rating) {
               <div class="card-brand">{p.brand}</div>
               <div class="card-name">{p.fullname}</div>
               <div class="card-specs">
-                {specs.map(s => (
-                  <span class={`spec-tag${highlightSpec(s) ? ' highlight' : ''}`}>{s}</span>
-                ))}
+                {specs.map(s => <span class={`spec-tag${highlightSpec(s) ? ' highlight' : ''}`}>{s}</span>)}
               </div>
               <div class="card-rating">
                 <span class="stars">{renderStars(rating)}</span>
@@ -507,9 +439,9 @@ function renderStars(rating) {
                 <span class="price-current">{p.deposit}</span>
                 {p.discount && <span class="price-save">{p.discount}</span>}
               </div>
-              <div class="installment-note">💳 Small daily instalments · Deposit {p.deposit}</div>
+              <div class="installment-note">Small daily instalments · Deposit {p.deposit}</div>
               <div class="card-cta">
-                <button class="btn-cart">🛒 Cart</button>
+                <button class="btn-cart">Add to Cart</button>
                 <button class="btn-buy">Buy Now</button>
               </div>
             </div>
@@ -527,18 +459,18 @@ function renderStars(rating) {
     </div>
   )}
 
-  <!-- ── INTERNAL LINKS ── -->
+  <!-- INTERNAL LINKS -->
   <section class="internal-links" aria-label="Related phone categories">
 
-    <!-- More brands for this feature -->
+    <!-- Brands for this feature -->
     {allFeatureBrands.length > 0 && (
       <div class="il-section">
-        <h2>More {primaryFeature.icon} {primaryFeature.label} Phones by Brand</h2>
+        <h2>{primaryFeature.label} Phones by Brand</h2>
         <div class="il-grid">
           {allFeatureBrands.map(brand => {
             const cnt = products.filter(p => primaryFeature.match(p) && p.brand?.toLowerCase() === brand.toLowerCase()).length;
             return (
-              <a href={`/features/${brand.toLowerCase()}-${primaryFeature.key}-phones-kenya`} class="il-link">
+              <a href={featureHref(primaryFeature.key, brand)} class="il-link">
                 {brand} {primaryFeature.label} <span class="cnt">({cnt})</span>
               </a>
             );
@@ -547,19 +479,17 @@ function renderStars(rating) {
       </div>
     )}
 
-    <!-- Brand phone pages -->
+    <!-- If on a brand page, show other features for that brand -->
     {brandFilter && (
       <div class="il-section">
         <h2>More {brandFilter} Phones</h2>
         <div class="il-grid">
-          <a href={`/phones/${brandFilter.toLowerCase()}`} class="il-link">
-            All {brandFilter} Phones on Installments
-          </a>
+          <a href={`/phones/${brandFilter.toLowerCase()}`} class="il-link">All {brandFilter} Phones</a>
           {FEATURE_FILTERS.filter(f => f.key !== primaryFeature.key).map(feat => {
             const cnt = products.filter(p => feat.match(p) && p.brand?.toLowerCase() === brandFilter.toLowerCase()).length;
             if (!cnt) return null;
             return (
-              <a href={`/features/${brandFilter.toLowerCase()}-${feat.key}-phones-kenya`} class="il-link">
+              <a href={featureHref(feat.key, brandFilter)} class="il-link">
                 {brandFilter} {feat.label} <span class="cnt">({cnt})</span>
               </a>
             );
@@ -568,31 +498,18 @@ function renderStars(rating) {
       </div>
     )}
 
-    <!-- Related feature categories -->
-    <div class="il-section">
-      <h2>Other Feature Categories</h2>
-      <div class="il-grid">
-        {relatedFeatureLinks.map(feat => {
-          const cnt = products.filter(feat.match).length;
-          return (
-            <a href={`/features/${feat.key}-phones-kenya`} class="il-link">
-              {feat.icon} {feat.h1} <span class="cnt">({cnt})</span>
-            </a>
-          );
-        })}
-      </div>
-    </div>
-
-    <!-- Hot combos -->
+    <!-- Combo pages — use comboHref to guarantee canonical slugs -->
     {crossLinks.length > 0 && (
       <div class="il-section">
-        <h2>🔥 Popular Combos with {primaryFeature.label}</h2>
+        <h2>Popular Combinations with {primaryFeature.label}</h2>
         <div class="il-grid">
           {crossLinks.map(feat => {
+            const href = comboHref(primaryFeature.key, feat.key);
+            if (!href) return null;
             const cnt = products.filter(p => primaryFeature.match(p) && feat.match(p)).length;
             return (
-              <a href={`/features/${primaryFeature.key}-${feat.key}-phones-kenya`} class="il-link">
-                🔥 {primaryFeature.label} + {feat.label} <span class="cnt">({cnt})</span>
+              <a href={href} class="il-link combo">
+                {primaryFeature.label} + {feat.label} <span class="cnt">({cnt})</span>
               </a>
             );
           })}
@@ -600,14 +517,29 @@ function renderStars(rating) {
       </div>
     )}
 
-    <!-- Deposit filter cross-links -->
+    <!-- Other feature categories -->
     <div class="il-section">
-      <h2>{primaryFeature.icon} {primaryFeature.label} Phones by Deposit</h2>
+      <h2>Other Feature Categories</h2>
       <div class="il-grid">
-        <a href="/phones/deposit-under-3000" class="il-link">Deposit Under 3,000</a>
-        <a href="/phones/deposit-under-5000" class="il-link">Deposit Under 5,000</a>
-        <a href="/phones/deposit-under-10000" class="il-link">Deposit Under 10,000</a>
-        <a href="/phones/lipa-mdogo-mdogo-nairobi" class="il-link">All Lipa Mdogo Mdogo Phones</a>
+        {relatedFeatureLinks.map(feat => {
+          const cnt = products.filter(feat.match).length;
+          return (
+            <a href={featureHref(feat.key)} class="il-link">
+              {feat.h1} <span class="cnt">({cnt})</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Deposit cross-links -->
+    <div class="il-section">
+      <h2>{primaryFeature.label} Phones by Deposit</h2>
+      <div class="il-grid">
+        <a href="/phones/deposit-under-3000"          class="il-link">Deposit Under KSh 3,000</a>
+        <a href="/phones/deposit-under-5000"          class="il-link">Deposit Under KSh 5,000</a>
+        <a href="/phones/deposit-under-10000"         class="il-link">Deposit Under KSh 10,000</a>
+        <a href="/phones/lipa-mdogo-mdogo-nairobi"    class="il-link">All Lipa Mdogo Mdogo Phones</a>
       </div>
     </div>
 
@@ -623,15 +555,16 @@ function renderStars(rating) {
         <p>
           {primaryFeature.description}
           {brandFilter
-            ? ` Browse all ${brandFilter} ${primaryFeature.label} phones on installments or explore other brands below.`
-            : ` Pay a small deposit and spread the rest weekly or daily via M-Pesa. No guarantor needed.`}
+            ? ` Browse all ${brandFilter} ${primaryFeature.label} phones on installments, or explore other brands below.`
+            : ` Pay a small deposit and spread the rest weekly or daily via M-Pesa. No guarantor needed.`
+          }
         </p>
         <div class="seo-tags">
-          <a href={`/features/${primaryFeature.key}-phones-kenya`} class="seo-tag">{primaryFeature.label.toLowerCase()} phone Kenya</a>
-          <a href={`/features/${primaryFeature.key}-phones-kenya`} class="seo-tag">{primaryFeature.label.toLowerCase()} phone Nairobi</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy phone pay later Kenya</a>
-          <a href="/phones/deposit-under-5000" class="seo-tag">deposit under 5000</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo nairobi</a>
+          <a href={featureHref(primaryFeature.key)} class="seo-tag">{primaryFeature.label} phone Kenya</a>
+          <a href={featureHref(primaryFeature.key)} class="seo-tag">{primaryFeature.label} phone Nairobi</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">buy phone pay later Kenya</a>
+          <a href="/phones/deposit-under-5000"         class="seo-tag">deposit under 5000</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">lipa mdogo mdogo Nairobi</a>
         </div>
       </div>
 
@@ -643,11 +576,11 @@ function renderStars(rating) {
           <a href="/features/xiaomi-5g-phones-kenya">Xiaomi 5G</a>,
           <a href="/features/tecno-gaming-phones-kenya">Tecno Gaming</a>, and
           <a href="/features/infinix-amoled-phones-kenya">Infinix AMOLED</a>
-          are some of the most searched phone categories in Kenya on installments.
+          are among the most searched phone categories in Kenya on installments.
         </p>
         <div class="seo-tags">
           {allFeatureBrands.slice(0, 6).map(brand => (
-            <a href={`/features/${brand.toLowerCase()}-${primaryFeature.key}-phones-kenya`} class="seo-tag">
+            <a href={featureHref(primaryFeature.key, brand)} class="seo-tag">
               {brand} {primaryFeature.label}
             </a>
           ))}
@@ -657,23 +590,22 @@ function renderStars(rating) {
       <div class="seo-col">
         <h3>How It Works</h3>
         <p>
-          Order online and get same-day delivery in Nairobi CBD. Pay a deposit via M-Pesa, then choose
-          <a href="/phones/lipa-mdogo-mdogo-nairobi">daily, weekly, or monthly</a> installments —
+          Order online and get same-day delivery in Nairobi CBD.
+          Pay a deposit via M-Pesa, then choose <a href="/phones/lipa-mdogo-mdogo-nairobi">daily, weekly, or monthly</a> installments —
           whichever fits your budget. No hidden charges, no credit check.
         </p>
         <div class="seo-tags">
-          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phone installment delivery Nairobi</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">online order phone Kenya</a>
-          <a href="/phones/storage-128gb" class="seo-tag">128GB installment phone</a>
-          <a href="/phones/storage-256gb" class="seo-tag">256GB pay later Kenya</a>
-          <a href="/phones/deposit-under-10000" class="seo-tag">deposit below 10000</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">phone installment delivery Nairobi</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">online order phone Kenya</a>
+          <a href="/phones/storage-128gb"              class="seo-tag">128GB installment phone</a>
+          <a href="/phones/storage-256gb"              class="seo-tag">256GB pay later Kenya</a>
+          <a href="/phones/deposit-under-10000"        class="seo-tag">deposit below 10000</a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- PAGINATION SCRIPT -->
   <script define:vars={{ totalPages, CARDS_PER_PAGE, totalProducts: filteredProducts.length }}>
   (function () {
     const cards  = Array.from(document.querySelectorAll('#product-grid .card'));
@@ -706,15 +638,11 @@ function renderStars(rating) {
         if (page !== null) btn.addEventListener('click', () => showPage(page));
         return btn;
       };
-      const dot = () => {
-        const s = document.createElement('span');
-        s.className = 'page-ellipsis'; s.textContent = '…'; return s;
-      };
+      const dot = () => { const s = document.createElement('span'); s.className = 'page-ellipsis'; s.textContent = '…'; return s; };
       const prev = make('&#8592;', active - 1);
       if (active === 1) prev.classList.add('disabled');
       barEl.appendChild(prev);
-      const nums = [...new Set([1, totalPages, active, active - 1, active + 1]
-        .filter(p => p >= 1 && p <= totalPages))].sort((a, b) => a - b);
+      const nums = [...new Set([1, totalPages, active, active - 1, active + 1].filter(p => p >= 1 && p <= totalPages))].sort((a, b) => a - b);
       let last = 0;
       nums.forEach(p => {
         if (p - last > 1) barEl.appendChild(dot());

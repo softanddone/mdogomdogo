@@ -5,6 +5,7 @@ import {
   STORAGE_FILTERS,
   ALL_BRANDS,
   brandSlug,
+  brandSlugall,
   parseDeposit,
   parseStorageSlug,
 } from '../../data/filter-config.js';
@@ -51,7 +52,7 @@ export async function getStaticPaths() {
   // 3. Brand-only
   for (const brand of ALL_BRANDS) {
     paths.push({
-      params: { filterSlug: brandSlug(brand) },
+      params: { filterSlug: brandSlugall(brand) },
       props:  { depositFilter: null, brandFilter: brand, storageFilter: null, label: `${brand} Phones on Installments` },
     });
   }
@@ -60,7 +61,7 @@ export async function getStaticPaths() {
   for (const brand of ALL_BRANDS) {
     for (const dep of DEPOSIT_FILTERS) {
       paths.push({
-        params: { filterSlug: `${brandSlug(brand)}-${dep.key}` },
+        params: { filterSlug: `${brandSlugall(brand)}-${dep.key}` },
         props:  { depositFilter: dep, brandFilter: brand, storageFilter: null, label: `${brand} ${dep.h1}` },
       });
     }
@@ -78,7 +79,7 @@ export async function getStaticPaths() {
   for (const brand of ALL_BRANDS) {
     for (const stor of STORAGE_FILTERS) {
       paths.push({
-        params: { filterSlug: `${brandSlug(brand)}-${stor.key}` },
+        params: { filterSlug: `${brandSlugall(brand)}-${stor.key}` },
         props:  { depositFilter: null, brandFilter: brand, storageFilter: stor, label: `${brand} ${stor.label} Phones on Installments` },
       });
     }
@@ -118,7 +119,7 @@ const canonicalUrl = `https://mdogomdogodeals.co.ke/phones/${filterSlug}`;
 const breadcrumbs = [
   { label: 'Home',       href: '/' },
   { label: 'All Phones', href: '/phones/lipa-mdogo-mdogo-nairobi' },
-  ...(brandFilter   ? [{ label: `${brandFilter} Phones`,    href: `/phones/${brandSlug(brandFilter)}`  }] : []),
+  ...(brandFilter   ? [{ label: `${brandFilter} Phones`,    href: `/phones/${brandSlugall(brandFilter)}`  }] : []),
   ...(depositFilter ? [{ label: depositFilter.label,        href: `/phones/${depositFilter.key}`        }] : []),
   ...(storageFilter ? [{ label: `${storageFilter.label} Storage`, href: `/phones/${storageFilter.key}` }] : []),
 ];
@@ -328,11 +329,11 @@ const baseDepositHref = (b, d, s) => {
 <nav class="filter-nav" aria-label="Filter by deposit">
   <span class="filter-nav-label">Deposit</span>
   <div class="filter-nav-scroll">
-    <a href={brandFilter ? `/phones/${brandSlug(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
+    <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
        class={`filter-nav-link${!depositFilter ? ' active' : ''}`}>All</a>
     {DEPOSIT_FILTERS.map(dep => {
       const href = brandFilter
-        ? `/phones/${brandSlug(brandFilter)}-${dep.key}`
+        ? `/phones/${brandSlugall(brandFilter)}-${dep.key}`
         : `/phones/${dep.key}`;
       return (
         <a href={href} class={`filter-nav-link${depositFilter?.key === dep.key ? ' active' : ''}`}>
@@ -351,8 +352,8 @@ const baseDepositHref = (b, d, s) => {
        class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>All</a>
     {ALL_BRANDS.map(brand => {
       const href = depositFilter
-        ? `/phones/${brandSlug(brand)}-${depositFilter.key}`
-        : `/phones/${brandSlug(brand)}`;
+        ? `/phones/${brandSlugall(brand)}-${depositFilter.key}`
+        : `/phones/${brandSlugall(brand)}`;
       return (
         <a href={href} class={`filter-nav-link${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' active' : ''}`}>
           {brand}
@@ -366,11 +367,11 @@ const baseDepositHref = (b, d, s) => {
 <nav class="filter-nav" aria-label="Filter by storage">
   <span class="filter-nav-label">Storage</span>
   <div class="filter-nav-scroll">
-    <a href={brandFilter ? `/phones/${brandSlug(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
+    <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
        class={`filter-nav-link${!storageFilter ? ' active' : ''}`}>All</a>
     {STORAGE_FILTERS.map(stor => {
       const href = brandFilter
-        ? `/phones/${brandSlug(brandFilter)}-${stor.key}`
+        ? `/phones/${brandSlugall(brandFilter)}-${stor.key}`
         : `/phones/${stor.key}`;
       return (
         <a href={href} class={`filter-nav-link${storageFilter?.key === stor.key ? ' active' : ''}`}>
@@ -414,7 +415,7 @@ const baseDepositHref = (b, d, s) => {
       )}
       {depositFilter && (
         <a href={brandFilter
-            ? `/phones/${brandSlug(brandFilter)}`
+            ? `/phones/${brandSlugall(brandFilter)}`
             : '/phones/lipa-mdogo-mdogo-nairobi'}
            class="filter-chip" title={`Remove deposit filter`}>
           {depositFilter.label}
@@ -423,7 +424,7 @@ const baseDepositHref = (b, d, s) => {
       )}
       {storageFilter && (
         <a href={brandFilter
-            ? `/phones/${brandSlug(brandFilter)}`
+            ? `/phones/${brandSlugall(brandFilter)}`
             : '/phones/lipa-mdogo-mdogo-nairobi'}
            class="filter-chip" title={`Remove ${storageFilter.label} storage filter`}>
           {storageFilter.label} Storage
@@ -503,7 +504,7 @@ const baseDepositHref = (b, d, s) => {
       {ALL_BRANDS.map(brand => {
         const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
         return (
-          <a href={`/phones/${brandSlug(brand)}`} class="related-link">
+          <a href={`/phones/${brandSlugall(brand)}`} class="related-link">
             {brand}<span class="count">({count})</span>
           </a>
         );

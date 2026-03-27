@@ -7,6 +7,16 @@ import Nav from "../components/Nav.astro";
 import Gift from "../components/Gift.astro";
 import { products } from "../data/product2";
 
+import {
+  FEATURE_FILTERS,
+  getProductFeatures,
+  featureHref,
+  comboHref,
+  COMBO_PAIRS,
+} from '../data/feature-config.js';
+import { brandSlugall } from '../data/filter-config.js';
+
+
 export async function getStaticPaths() {
   return products.map((product) => ({
     params: { slug: product.slug },
@@ -15,6 +25,15 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const currentProduct = products.find((p) => p.slug === slug);
+
+
+
+const productFeatureKeys    = getProductFeatures(currentProduct);
+const productFeatureObjects = FEATURE_FILTERS.filter(f => productFeatureKeys.includes(f.key));
+
+
+
+
 
 if (!currentProduct) {
   return Astro.redirect("/404");
@@ -925,6 +944,65 @@ function renderStars(r: number) {
       </div>
     </section>
 
+
+    {productFeatureObjects.length > 0 && (
+  <section class="product-feature-links">
+    <h2>Explore Similar Phones</h2>
+    <div class="feat-link-grid">
+
+      <!-- Feature-only links  →  /features/5g-phones-kenya -->
+      {productFeatureObjects.map(feat => (
+        <a href={featureHref(feat.key)} class="feat-link">
+          All {feat.label} Phones in Kenya
+        </a>
+      ))}
+
+      <!-- Brand x Feature links  →  /features/xiaomi-5g-phones-kenya -->
+      {currentProduct.brand && productFeatureObjects.map(feat => (
+        <a href={featureHref(feat.key, currentProduct.brand)} class="feat-link brand-feat">
+          {currentProduct.brand} {feat.label} Phones
+        </a>
+      ))}
+
+      <!--
+        Combo links  →  /features/5g-gaming-phones-kenya
+        comboHref() always returns the canonical slug order (or null if not registered),
+        so these links can never produce a 404.
+      -->
+      {(() => {
+        const links = [];
+        for (let i = 0; i < productFeatureKeys.length; i++) {
+          for (let j = i + 1; j < productFeatureKeys.length; j++) {
+            const href = comboHref(productFeatureKeys[i], productFeatureKeys[j]);
+            if (!href) continue;
+            const fa = FEATURE_FILTERS.find(f => f.key === productFeatureKeys[i]);
+            const fb = FEATURE_FILTERS.find(f => f.key === productFeatureKeys[j]);
+            links.push(
+              <a href={href} class="feat-link combo-feat">
+                {fa.label} + {fb.label} Phones in Kenya
+              </a>
+            );
+          }
+        }
+        return links;
+      })()}
+
+      <!-- General links -->
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="feat-link">
+        All Lipa Mdogo Mdogo Phones
+      </a>
+      {currentProduct.brand && (
+        <a href={`/phones/${brandSlugall(currentProduct.brand)}`} class="feat-link">
+          All {currentProduct.brand} Phones on Installments
+        </a>
+      )}
+
+    </div>
+  </section>
+)}
+
+
+
   </main>
 </ProductLayout>
 
@@ -1625,4 +1703,71 @@ function renderStars(r: number) {
   }
   .pac-browse a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .pac-browse a:hover { text-decoration: underline; }
+
+
+
+
+
+
+
+
+
+
+.product-feature-links {
+    max-width: 860px;
+    margin: 40px auto 0;
+    padding: 0 20px 48px;
+  }
+  .product-feature-links h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .feat-link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .feat-link {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    border: 1.5px solid var(--gray-2);
+    border-radius: 6px;
+    padding: 7px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .feat-link:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+  .feat-link.brand-feat {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+  .feat-link.combo-feat {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+  .feat-link.combo-feat:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+
+
+
+
+
+
 </style>

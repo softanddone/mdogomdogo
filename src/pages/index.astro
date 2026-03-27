@@ -5,6 +5,7 @@ import {
   DEPOSIT_FILTERS,
   STORAGE_FILTERS,
   brandSlug,
+  brandSlugall,
   parseDeposit,
 } from '../data/filter-config.js';
 import Gift from '../components/Gift.astro';
@@ -521,7 +522,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
       <li><a href="/" class="active">Home</a></li>
       <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones</a></li>
       {ALL_BRANDS.map(brand => (
-        <li><a href={`/phones/${brandSlug(brand)}`}>{brand}</a></li>
+        <li><a href={`/phones/${brandSlugall(brand)}`}>{brand}</a></li>
       ))}
       {DEPOSIT_FILTERS.map(dep => (
         <li><a href={`/phones/${dep.key}`}>{dep.label}</a></li>
@@ -1082,7 +1083,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
           <div class="footer-col-title">Top Brands</div>
           <ul class="footer-links">
             {ALL_BRANDS.map(brand => (
-              <li><a href={`/phones/${brandSlug(brand)}`}>{brand} lipa mdogo mdogo</a></li>
+              <li><a href={`/phones/${brandSlugall(brand)}`}>{brand} lipa mdogo mdogo</a></li>
             ))}
           </ul>
         </div>
@@ -1132,7 +1133,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
         <a href={`/phones/${dep.key}`} class="seo-tag">{dep.label} phone nairobi</a>
       ))}
       {ALL_BRANDS.map(brand => (
-        <a href={`/phones/${brandSlug(brand)}`} class="seo-tag">{brand} lipa mdogo mdogo nairobi</a>
+        <a href={`/phones/${brandSlugall(brand)}`} class="seo-tag">{brand} lipa mdogo mdogo nairobi</a>
       ))}
       <a href="/phones/storage-128gb" class="seo-tag">128gb phone lipa mdogo mdogo</a>
       <a href="/phones/storage-256gb" class="seo-tag">256gb phone installment nairobi</a>

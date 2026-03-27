@@ -5,6 +5,7 @@ import {
   STORAGE_FILTERS,
   ALL_BRANDS,
   brandSlug,
+  brandSlugall,
   parseDeposit,
   parseStorageSlug,
 } from '../data/filter-config.js';
@@ -290,7 +291,7 @@ function renderStars(rating) {
     <div class="filter-nav-scroll">
       <a href={`/categories/${category}`} class="filter-nav-link active">All</a>
       {ALL_BRANDS.map(brand => (
-        <a href={`/phones/${brandSlug(brand)}`} class="filter-nav-link">{brand}</a>
+        <a href={`/phones/${brandSlugall(brand)}`} class="filter-nav-link">{brand}</a>
       ))}
     </div>
   </nav>
@@ -421,7 +422,7 @@ function renderStars(rating) {
         {ALL_BRANDS.map(brand => {
           const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
           return (
-            <a href={`/phones/${brandSlug(brand)}`} class="related-link">
+            <a href={`/phones/${brandSlugall(brand)}`} class="related-link">
               {brand}<span class="count">({count})</span>
             </a>
           );
