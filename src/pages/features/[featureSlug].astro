@@ -1,0 +1,734 @@
+---
+// src/pages/features/[featureSlug].astro
+//
+// Generates pages like:
+//   /features/5g-phones-kenya
+//   /features/xiaomi-5g-phones-kenya
+//   /features/gaming-phones-kenya
+//   /features/108mp-camera-phones-kenya
+//   /features/xiaomi-5g-gaming-phones-kenya  (brand × feature combo)
+//
+// ─── imports ──────────────────────────────────────────────────────────────────
+import { products } from '../../data/product2.js';
+import {
+  FEATURE_FILTERS,
+  getProductFeatures,
+  featureHref,
+  featureBrandSlug,
+} from '../../data/feature-config.js';
+import { ALL_BRANDS, brandSlug } from '../../data/filter-config.js';
+import Gift from '../../components/Gift.astro';
+import Nav from '../../components/Nav.astro';
+
+// ─── getStaticPaths ───────────────────────────────────────────────────────────
+
+export async function getStaticPaths() {
+  const { products }       = await import('../../data/product2.js');
+  const { FEATURE_FILTERS, featureBrandSlug } = await import('../../data/feature-config.js');
+  const { ALL_BRANDS }     = await import('../../data/filter-config.js');
+
+  const paths = [];
+
+  // 1. Feature-only  →  /features/5g-phones-kenya
+  for (const feat of FEATURE_FILTERS) {
+    const filtered = products.filter(feat.match);
+    if (!filtered.length) continue;
+    paths.push({
+      params: { featureSlug: `${feat.key}-phones-kenya` },
+      props:  {
+        primaryFeature: feat,
+        secondaryFeature: null,
+        brandFilter: null,
+        filteredProducts: filtered,
+        label: feat.h1,
+      },
+    });
+  }
+
+  // 2. Brand × Feature  →  /features/xiaomi-5g-phones-kenya
+  for (const brand of ALL_BRANDS) {
+    for (const feat of FEATURE_FILTERS) {
+      const filtered = products.filter(
+        p => feat.match(p) && p.brand?.toLowerCase() === brand.toLowerCase()
+      );
+      if (!filtered.length) continue;
+      paths.push({
+        params: { featureSlug: `${featureBrandSlug(brand)}-${feat.key}-phones-kenya` },
+        props:  {
+          primaryFeature: feat,
+          secondaryFeature: null,
+          brandFilter: brand,
+          filteredProducts: filtered,
+          label: `${brand} ${feat.h1}`,
+        },
+      });
+    }
+  }
+
+  // 3. Feature × Feature combos  →  /features/5g-gaming-phones-kenya
+  //    (only the most useful combos — avoids combinatorial explosion)
+  const COMBOS = [
+    ['5g', 'gaming'],
+    ['5g', 'amoled'],
+    ['5g', '120hz'],
+    ['5g', 'fast-charging'],
+    ['gaming', 'amoled'],
+    ['gaming', '120hz'],
+    ['amoled', '120hz'],
+    ['108mp-camera', 'amoled'],
+    ['108mp-camera', 'fast-charging'],
+  ];
+
+  for (const [keyA, keyB] of COMBOS) {
+    const featA = FEATURE_FILTERS.find(f => f.key === keyA);
+    const featB = FEATURE_FILTERS.find(f => f.key === keyB);
+    if (!featA || !featB) continue;
+    const filtered = products.filter(p => featA.match(p) && featB.match(p));
+    if (!filtered.length) continue;
+    paths.push({
+      params: { featureSlug: `${keyA}-${keyB}-phones-kenya` },
+      props:  {
+        primaryFeature: featA,
+        secondaryFeature: featB,
+        brandFilter: null,
+        filteredProducts: filtered,
+        label: `${featA.label} + ${featB.label} Phones in Kenya`,
+      },
+    });
+
+    // 4. Brand × Feature × Feature  →  /features/xiaomi-5g-gaming-phones-kenya
+    for (const brand of ALL_BRANDS) {
+      const brandFiltered = filtered.filter(
+        p => p.brand?.toLowerCase() === brand.toLowerCase()
+      );
+      if (!brandFiltered.length) continue;
+      paths.push({
+        params: { featureSlug: `${featureBrandSlug(brand)}-${keyA}-${keyB}-phones-kenya` },
+        props:  {
+          primaryFeature: featA,
+          secondaryFeature: featB,
+          brandFilter: brand,
+          filteredProducts: brandFiltered,
+          label: `${brand} ${featA.label} + ${featB.label} Phones in Kenya`,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+// ─── PAGE DATA ────────────────────────────────────────────────────────────────
+
+const { featureSlug } = Astro.params;
+const { primaryFeature, secondaryFeature, brandFilter, filteredProducts, label } = Astro.props;
+
+const CARDS_PER_PAGE = 20;
+const totalPages     = Math.ceil(filteredProducts.length / CARDS_PER_PAGE);
+
+const pageTitle  = `${label} — Buy on Installments | MdogomdogoDeals Nairobi`;
+const metaDesc   = `${primaryFeature.description} ${filteredProducts.length} phones available. No credit check. Free delivery in Nairobi CBD.`;
+const canonicalUrl = `https://mdogomdogodeals.co.ke/features/${featureSlug}`;
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home',       href: '/' },
+  { label: 'All Phones', href: '/phones/lipa-mdogo-mdogo-nairobi' },
+  { label: 'Features',   href: '/features/5g-phones-kenya' },
+  ...(brandFilter ? [{ label: `${brandFilter} Phones`, href: `/phones/${brandFilter.toLowerCase()}` }] : []),
+  { label: primaryFeature.label, href: `/features/${primaryFeature.key}-phones-kenya` },
+  ...(secondaryFeature ? [{ label: secondaryFeature.label, href: `/features/${secondaryFeature.key}-phones-kenya` }] : []),
+];
+
+// Related feature links — exclude active features, pick top 6
+const relatedFeatureLinks = FEATURE_FILTERS
+  .filter(f => f.key !== primaryFeature.key && f.key !== secondaryFeature?.key)
+  .filter(f => products.filter(f.match).length > 0)
+  .slice(0, 8);
+
+// Related brands for this feature
+const brandsInResults = [...new Set(filteredProducts.map(p => p.brand).filter(Boolean))];
+const allFeatureBrands = ALL_BRANDS.filter(b =>
+  products.some(p => primaryFeature.match(p) && p.brand?.toLowerCase() === b.toLowerCase())
+);
+
+// Cross-feature combos for internal linking
+const COMBO_KEYS = ['5g', 'gaming', 'amoled', '120hz', 'fast-charging', '108mp-camera'];
+const crossLinks = COMBO_KEYS
+  .filter(k => k !== primaryFeature.key)
+  .map(k => FEATURE_FILTERS.find(f => f.key === k))
+  .filter(Boolean)
+  .filter(f => {
+    const combined = products.filter(p => primaryFeature.match(p) && f.match(p));
+    return combined.length > 0;
+  })
+  .slice(0, 5);
+
+// Helpers
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  return '★'.repeat(full) + '☆'.repeat(5 - full);
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={metaDesc} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={pageTitle} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:url"         content={canonicalUrl} />
+  <meta property="og:site_name"   content="MdogomdogoDeals" />
+
+  <!-- ItemList structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": label,
+    "description": metaDesc,
+    "numberOfItems": filteredProducts.length,
+    "itemListElement": filteredProducts.slice(0, 20).map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.fullname ?? p.name,
+        "brand": { "@type": "Brand", "name": p.brand },
+        "image": p.source,
+        "url": `https://mdogomdogodeals.co.ke/${p.slug}`,
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "KES",
+          "price": p.deposit?.replace(/[^0-9]/g, '') ?? "0",
+          "availability": "https://schema.org/InStock",
+          "seller": { "@type": "Organization", "name": "MdogomdogoDeals" }
+        }
+      }
+    }))
+  })} />
+
+  <!-- BreadcrumbList -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((b, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": b.label,
+      "item": `https://mdogomdogodeals.co.ke${b.href}`
+    }))
+  })} />
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1a73e8; --primary-dark: #1557b0; --primary-light: #e8f0fe;
+      --gold: #f5a623; --navy: #0d1b2a; --green: #00b96b; --red: #e53935;
+      --gray-1: #f5f7fa; --gray-2: #e8eaed; --gray-3: #9aa0a6;
+      --text: #202124; --text-light: #5f6368;
+      --badge-new: #00b96b; --badge-hot: #e53935; --badge-sale: #1a73e8;
+    }
+    body { font-family: 'Barlow', sans-serif; background: var(--gray-1); color: var(--text); }
+
+    /* ── Top banner ── */
+    .top-banner { background: var(--navy); color: #fff; text-align: center; padding: 9px 16px; font-size: 13px; font-weight: 500; }
+    .top-banner span { color: var(--gold); font-weight: 700; }
+
+    /* ── Breadcrumbs ── */
+    .breadcrumb-bar { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 16px; }
+    .breadcrumb-list { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; list-style: none; }
+    .breadcrumb-list li { font-size: 13px; color: var(--text-light); }
+    .breadcrumb-list li a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .breadcrumb-list li a:hover { text-decoration: underline; }
+    .breadcrumb-list li.sep { color: var(--gray-3); }
+
+    /* ── Feature nav (horizontal chips) ── */
+    .filter-nav { background: #fff; border-bottom: 1px solid var(--gray-2); padding: 8px 0 0; }
+    .filter-nav-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; padding: 0 16px; margin-bottom: 6px; }
+    .filter-nav-scroll { display: flex; align-items: center; gap: 7px; overflow-x: auto; padding: 2px 16px 10px; scrollbar-width: none; }
+    .filter-nav-scroll::-webkit-scrollbar { display: none; }
+    .filter-nav-link { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; border: 1.5px solid var(--gray-2); background: var(--gray-1); color: var(--text); border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+    .filter-nav-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .filter-nav-link.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+    /* ── Hero page header ── */
+    .page-header { max-width: 1280px; margin: 0 auto; padding: 24px 20px 0; }
+    .feature-hero { background: linear-gradient(135deg, var(--navy) 0%, #1a2f4a 100%); border-radius: 14px; padding: 28px 32px; margin-bottom: 20px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .feature-icon { font-size: 52px; flex-shrink: 0; }
+    .feature-hero-text h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 6px; line-height: 1.1; }
+    .feature-hero-text p  { font-size: 14px; color: rgba(255,255,255,0.75); max-width: 600px; line-height: 1.6; }
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .hero-badge  { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: #fff; }
+    .result-count { display: inline-block; background: var(--gold); color: var(--navy); border-radius: 6px; padding: 3px 10px; font-size: 13px; font-weight: 800; }
+
+    /* ── Brand filter for this feature ── */
+    .brand-filter-bar { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── Cross-feature combo links ── */
+    .combo-section { max-width: 1280px; margin: 0 auto; padding: 16px 20px 0; }
+    .combo-section-label { font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; display: block; }
+    .combo-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+    .combo-chip { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 20px; padding: 5px 13px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
+    .combo-chip:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .combo-chip .fire { font-size: 14px; }
+
+    /* ── Product grid (same as filter page) ── */
+    .page-body { max-width: 1280px; margin: 16px auto 0; padding: 0 20px 24px; }
+    .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .card { display: none; flex-direction: column; background: #fff; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--gray-2); transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; cursor: pointer; position: relative; text-decoration: none; color: inherit; }
+    .card.visible { display: flex; }
+    .card:hover { border-color: var(--primary); box-shadow: 0 8px 28px rgba(26,115,232,0.12); transform: translateY(-3px); }
+    .badge { position: absolute; top: 10px; left: 10px; z-index: 2; padding: 3px 9px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
+    .badge-new  { background: var(--badge-new); }
+    .badge-hot  { background: var(--badge-hot); }
+    .badge-sale { background: var(--badge-sale); }
+    .feat-badge { position: absolute; top: 10px; right: 10px; z-index: 2; background: var(--navy); color: #fff; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 700; }
+    .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--gray-1); display: flex; align-items: center; justify-content: center; }
+    .card-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; transition: transform 0.3s; }
+    .card:hover .card-img { transform: scale(1.05); }
+    .card-body { padding: 12px 12px 10px; flex: 1; display: flex; flex-direction: column; }
+    .card-brand { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; margin-bottom: 6px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-specs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .spec-tag { background: var(--gray-1); border: 1px solid var(--gray-2); color: var(--text-light); border-radius: 4px; padding: 2px 7px; font-size: 11px; }
+    .spec-tag.highlight { background: var(--primary-light); border-color: var(--primary); color: var(--primary); font-weight: 700; }
+    .stars { color: var(--gold); font-size: 13px; }
+    .rating-count { font-size: 11.5px; color: var(--text-light); }
+    .card-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 9px; }
+    .price-current { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--primary); }
+    .price-save { font-size: 11.5px; font-weight: 700; color: var(--green); }
+    .card-price { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; margin-bottom: 6px; }
+    .installment-note { font-size: 11.5px; color: var(--primary-dark); font-weight: 600; background: var(--primary-light); padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+    .card-cta { display: flex; gap: 7px; margin-top: auto; }
+    .btn-cart { flex: 1; background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-cart:hover { background: var(--primary-dark); }
+    .btn-buy { flex: 1; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 9px 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Barlow', sans-serif; }
+    .btn-buy:hover { background: #162640; }
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; }
+    .empty-state h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 8px; }
+    .empty-state a { color: var(--primary); font-weight: 600; }
+
+    /* ── Pagination ── */
+    .pagination-wrap { max-width: 1280px; margin: 0 auto; padding: 4px 20px 32px; }
+    .pagination-info { text-align: center; font-size: 13px; color: var(--text-light); margin-bottom: 14px; }
+    .pagination-bar { display: flex; align-items: center; justify-content: center; gap: 5px; flex-wrap: wrap; }
+    .page-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; padding: 0 12px; border: 1.5px solid var(--gray-2); background: #fff; color: var(--text); border-radius: 8px; font-size: 14px; font-weight: 600; font-family: 'Barlow', sans-serif; cursor: pointer; transition: all 0.15s; }
+    .page-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .page-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; cursor: default; pointer-events: none; }
+    .page-btn.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .page-ellipsis { display: inline-flex; align-items: flex-end; justify-content: center; width: 32px; height: 40px; color: var(--text-light); font-size: 16px; padding-bottom: 4px; }
+
+    /* ── Internal link sections ── */
+    .internal-links { max-width: 1280px; margin: 0 auto; padding: 0 20px 32px; }
+    .il-section { margin-bottom: 28px; }
+    .il-section h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+    .il-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+    .il-link { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid var(--gray-2); border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.15s; }
+    .il-link:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .il-link .cnt { font-size: 11px; color: var(--text-light); }
+
+    /* ── SEO section ── */
+    .seo-section { max-width: 1280px; margin: 0 auto; padding: 0 20px 56px; }
+    .seo-section hr { border: none; border-top: 1px solid var(--gray-2); margin-bottom: 28px; }
+    .seo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 40px; }
+    .seo-col h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+    .seo-col p  { font-size: 13px; color: var(--text-light); line-height: 1.75; }
+    .seo-col p a { color: var(--text-light); text-decoration: underline; text-decoration-color: var(--gray-2); text-underline-offset: 2px; }
+    .seo-col p a:hover { color: var(--primary); text-decoration-color: var(--primary); }
+    .seo-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+    .seo-tag { display: inline-block; background: #fff; border: 1px solid var(--gray-2); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--text-light); text-decoration: none; transition: all 0.12s; }
+    .seo-tag:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 800px)  { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px)  {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-hero { padding: 20px; }
+      .feature-icon { font-size: 36px; }
+      .feature-hero-text h1 { font-size: 24px; }
+    }
+    @media (max-width: 700px)  { .seo-grid { grid-template-columns: 1fr; gap: 20px; } }
+  </style>
+</head>
+<body>
+
+  <Gift/>
+  <Nav/>
+
+  <!-- BREADCRUMBS -->
+  <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list">
+      {breadcrumbs.map((b, i) => (
+        <>
+          {i > 0 && <li class="sep">›</li>}
+          <li>
+            {i < breadcrumbs.length - 1
+              ? <a href={b.href}>{b.label}</a>
+              : b.label}
+          </li>
+        </>
+      ))}
+    </ol>
+  </nav>
+
+  <!-- FEATURE NAV — all feature categories -->
+  <nav class="filter-nav" aria-label="Browse by feature">
+    <span class="filter-nav-label">Browse by Feature</span>
+    <div class="filter-nav-scroll">
+      {FEATURE_FILTERS.map(feat => (
+        <a
+          href={`/features/${feat.key}-phones-kenya`}
+          class={`filter-nav-link${feat.key === primaryFeature.key ? ' active' : ''}`}
+        >
+          {feat.icon} {feat.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <!-- BRAND FILTER for this feature -->
+  {allFeatureBrands.length > 1 && (
+    <div class="brand-filter-bar">
+      <nav class="filter-nav" aria-label={`Filter ${primaryFeature.label} phones by brand`}>
+        <span class="filter-nav-label">Brand</span>
+        <div class="filter-nav-scroll">
+          <a
+            href={`/features/${primaryFeature.key}-phones-kenya`}
+            class={`filter-nav-link${!brandFilter ? ' active' : ''}`}
+          >All Brands</a>
+          {allFeatureBrands.map(brand => (
+            <a
+              href={`/features/${brand.toLowerCase()}-${primaryFeature.key}-phones-kenya`}
+              class={`filter-nav-link${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' active' : ''}`}
+            >
+              {brand}
+            </a>
+          ))}
+        </div>
+      </nav>
+    </div>
+  )}
+
+  <!-- CROSS-FEATURE COMBOS -->
+  {crossLinks.length > 0 && (
+    <div class="combo-section">
+      <span class="combo-section-label">
+        {primaryFeature.icon} Combine {primaryFeature.label} with
+      </span>
+      <div class="combo-chips">
+        {crossLinks.map(feat => (
+          <a href={`/features/${primaryFeature.key}-${feat.key}-phones-kenya`} class="combo-chip">
+            <span class="fire">🔥</span>
+            {primaryFeature.label} + {feat.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- HERO HEADER -->
+  <div class="page-header">
+    <div class="feature-hero">
+      <div class="feature-icon">{primaryFeature.icon}{secondaryFeature ? secondaryFeature.icon : ''}</div>
+      <div class="feature-hero-text">
+        <h1>
+          {label}
+          <span class="result-count" style="margin-left:10px;">{filteredProducts.length} phones</span>
+        </h1>
+        <p>{primaryFeature.description}</p>
+        <div class="hero-badges">
+          <span class="hero-badge">✅ No Credit Check</span>
+          <span class="hero-badge">📦 Free Delivery Nairobi</span>
+          <span class="hero-badge">💳 Pay via M-Pesa</span>
+          {brandFilter && <span class="hero-badge">🏷️ {brandFilter} Only</span>}
+          {secondaryFeature && <span class="hero-badge">{secondaryFeature.icon} {secondaryFeature.label} Included</span>}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <main class="page-body">
+    <div class="product-grid" id="product-grid">
+      {filteredProducts.length === 0 ? (
+        <div class="empty-state">
+          <h2>😕 No phones found</h2>
+          <p><a href="/phones/lipa-mdogo-mdogo-nairobi">View all phones</a> or try a different feature above.</p>
+        </div>
+      ) : filteredProducts.map((p, i) => {
+        const statusLower = p.status?.toLowerCase();
+        const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+        const specs = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
+        const rating      = p.reviews?.averageRating ?? 4.5;
+        const reviewCount = p.reviews?.reviewCount   ?? 0;
+        // Highlight the relevant spec tag
+        const highlightSpec = (s) => {
+          if (primaryFeature.key === '5g' && s?.includes('5G')) return true;
+          if (primaryFeature.key === 'amoled' && s?.toLowerCase().includes('amoled')) return true;
+          if (primaryFeature.key === '120hz' && s?.includes('120')) return true;
+          return false;
+        };
+        return (
+          <a href={`/${p.slug}`} class="card" data-index={i} style="text-decoration:none;color:inherit;">
+            <span class={`badge ${badgeClass}`}>{p.status ?? 'NEW'}</span>
+            <span class="feat-badge">{primaryFeature.icon} {primaryFeature.label}</span>
+            <div class="card-img-wrap">
+              <img
+                class="card-img"
+                src={p.source}
+                alt={`${p.fullname ?? p.name} ${primaryFeature.label} phone Kenya installments`}
+                loading="lazy"
+                width="300"
+                height="225"
+                decoding="async"
+              />
+            </div>
+            <div class="card-body">
+              <div class="card-brand">{p.brand}</div>
+              <div class="card-name">{p.fullname}</div>
+              <div class="card-specs">
+                {specs.map(s => (
+                  <span class={`spec-tag${highlightSpec(s) ? ' highlight' : ''}`}>{s}</span>
+                ))}
+              </div>
+              <div class="card-rating">
+                <span class="stars">{renderStars(rating)}</span>
+                <span class="rating-count">({reviewCount})</span>
+              </div>
+              <div class="card-price">
+                <span class="price-current">{p.deposit}</span>
+                {p.discount && <span class="price-save">{p.discount}</span>}
+              </div>
+              <div class="installment-note">💳 Small daily instalments · Deposit {p.deposit}</div>
+              <div class="card-cta">
+                <button class="btn-cart">🛒 Cart</button>
+                <button class="btn-buy">Buy Now</button>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </main>
+
+  <!-- PAGINATION -->
+  {filteredProducts.length > CARDS_PER_PAGE && (
+    <div class="pagination-wrap" id="pagination-wrap">
+      <p class="pagination-info" id="pagination-info"></p>
+      <div class="pagination-bar" id="pagination-bar"></div>
+    </div>
+  )}
+
+  <!-- ── INTERNAL LINKS ── -->
+  <section class="internal-links" aria-label="Related phone categories">
+
+    <!-- More brands for this feature -->
+    {allFeatureBrands.length > 0 && (
+      <div class="il-section">
+        <h2>More {primaryFeature.icon} {primaryFeature.label} Phones by Brand</h2>
+        <div class="il-grid">
+          {allFeatureBrands.map(brand => {
+            const cnt = products.filter(p => primaryFeature.match(p) && p.brand?.toLowerCase() === brand.toLowerCase()).length;
+            return (
+              <a href={`/features/${brand.toLowerCase()}-${primaryFeature.key}-phones-kenya`} class="il-link">
+                {brand} {primaryFeature.label} <span class="cnt">({cnt})</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- Brand phone pages -->
+    {brandFilter && (
+      <div class="il-section">
+        <h2>More {brandFilter} Phones</h2>
+        <div class="il-grid">
+          <a href={`/phones/${brandFilter.toLowerCase()}`} class="il-link">
+            All {brandFilter} Phones on Installments
+          </a>
+          {FEATURE_FILTERS.filter(f => f.key !== primaryFeature.key).map(feat => {
+            const cnt = products.filter(p => feat.match(p) && p.brand?.toLowerCase() === brandFilter.toLowerCase()).length;
+            if (!cnt) return null;
+            return (
+              <a href={`/features/${brandFilter.toLowerCase()}-${feat.key}-phones-kenya`} class="il-link">
+                {brandFilter} {feat.label} <span class="cnt">({cnt})</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- Related feature categories -->
+    <div class="il-section">
+      <h2>Other Feature Categories</h2>
+      <div class="il-grid">
+        {relatedFeatureLinks.map(feat => {
+          const cnt = products.filter(feat.match).length;
+          return (
+            <a href={`/features/${feat.key}-phones-kenya`} class="il-link">
+              {feat.icon} {feat.h1} <span class="cnt">({cnt})</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Hot combos -->
+    {crossLinks.length > 0 && (
+      <div class="il-section">
+        <h2>🔥 Popular Combos with {primaryFeature.label}</h2>
+        <div class="il-grid">
+          {crossLinks.map(feat => {
+            const cnt = products.filter(p => primaryFeature.match(p) && feat.match(p)).length;
+            return (
+              <a href={`/features/${primaryFeature.key}-${feat.key}-phones-kenya`} class="il-link">
+                🔥 {primaryFeature.label} + {feat.label} <span class="cnt">({cnt})</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- Deposit filter cross-links -->
+    <div class="il-section">
+      <h2>{primaryFeature.icon} {primaryFeature.label} Phones by Deposit</h2>
+      <div class="il-grid">
+        <a href="/phones/deposit-under-3000" class="il-link">Deposit Under 3,000</a>
+        <a href="/phones/deposit-under-5000" class="il-link">Deposit Under 5,000</a>
+        <a href="/phones/deposit-under-10000" class="il-link">Deposit Under 10,000</a>
+        <a href="/phones/lipa-mdogo-mdogo-nairobi" class="il-link">All Lipa Mdogo Mdogo Phones</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section" aria-label={`About ${primaryFeature.label} phones in Kenya`}>
+    <hr />
+    <div class="seo-grid">
+
+      <div class="seo-col">
+        <h3>{primaryFeature.label} Phones in Kenya</h3>
+        <p>
+          {primaryFeature.description}
+          {brandFilter
+            ? ` Browse all ${brandFilter} ${primaryFeature.label} phones on installments or explore other brands below.`
+            : ` Pay a small deposit and spread the rest weekly or daily via M-Pesa. No guarantor needed.`}
+        </p>
+        <div class="seo-tags">
+          <a href={`/features/${primaryFeature.key}-phones-kenya`} class="seo-tag">{primaryFeature.label.toLowerCase()} phone Kenya</a>
+          <a href={`/features/${primaryFeature.key}-phones-kenya`} class="seo-tag">{primaryFeature.label.toLowerCase()} phone Nairobi</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy phone pay later Kenya</a>
+          <a href="/phones/deposit-under-5000" class="seo-tag">deposit under 5000</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo nairobi</a>
+        </div>
+      </div>
+
+      <div class="seo-col">
+        <h3>Popular Brands</h3>
+        <p>
+          Looking for a specific brand?
+          <a href="/features/samsung-5g-phones-kenya">Samsung 5G</a>,
+          <a href="/features/xiaomi-5g-phones-kenya">Xiaomi 5G</a>,
+          <a href="/features/tecno-gaming-phones-kenya">Tecno Gaming</a>, and
+          <a href="/features/infinix-amoled-phones-kenya">Infinix AMOLED</a>
+          are some of the most searched phone categories in Kenya on installments.
+        </p>
+        <div class="seo-tags">
+          {allFeatureBrands.slice(0, 6).map(brand => (
+            <a href={`/features/${brand.toLowerCase()}-${primaryFeature.key}-phones-kenya`} class="seo-tag">
+              {brand} {primaryFeature.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="seo-col">
+        <h3>How It Works</h3>
+        <p>
+          Order online and get same-day delivery in Nairobi CBD. Pay a deposit via M-Pesa, then choose
+          <a href="/phones/lipa-mdogo-mdogo-nairobi">daily, weekly, or monthly</a> installments —
+          whichever fits your budget. No hidden charges, no credit check.
+        </p>
+        <div class="seo-tags">
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phone installment delivery Nairobi</a>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">online order phone Kenya</a>
+          <a href="/phones/storage-128gb" class="seo-tag">128GB installment phone</a>
+          <a href="/phones/storage-256gb" class="seo-tag">256GB pay later Kenya</a>
+          <a href="/phones/deposit-under-10000" class="seo-tag">deposit below 10000</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PAGINATION SCRIPT -->
+  <script define:vars={{ totalPages, CARDS_PER_PAGE, totalProducts: filteredProducts.length }}>
+  (function () {
+    const cards  = Array.from(document.querySelectorAll('#product-grid .card'));
+    const infoEl = document.getElementById('pagination-info');
+    const barEl  = document.getElementById('pagination-bar');
+
+    if (!cards.length || totalPages <= 1) {
+      cards.forEach(c => c.classList.add('visible'));
+      return;
+    }
+
+    let currentPage = 1;
+
+    function showPage(page) {
+      currentPage = page;
+      const start = (page - 1) * CARDS_PER_PAGE;
+      const end   = start + CARDS_PER_PAGE;
+      cards.forEach((c, i) => c.classList.toggle('visible', i >= start && i < end));
+      infoEl.textContent = `Showing ${start + 1}–${Math.min(end, totalProducts)} of ${totalProducts} phones`;
+      buildBar(page);
+      document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function buildBar(active) {
+      barEl.innerHTML = '';
+      const make = (label, page, cls) => {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn' + (cls ? ' ' + cls : '');
+        btn.innerHTML = label;
+        if (page !== null) btn.addEventListener('click', () => showPage(page));
+        return btn;
+      };
+      const dot = () => {
+        const s = document.createElement('span');
+        s.className = 'page-ellipsis'; s.textContent = '…'; return s;
+      };
+      const prev = make('&#8592;', active - 1);
+      if (active === 1) prev.classList.add('disabled');
+      barEl.appendChild(prev);
+      const nums = [...new Set([1, totalPages, active, active - 1, active + 1]
+        .filter(p => p >= 1 && p <= totalPages))].sort((a, b) => a - b);
+      let last = 0;
+      nums.forEach(p => {
+        if (p - last > 1) barEl.appendChild(dot());
+        barEl.appendChild(make(p, p, p === active ? 'active' : ''));
+        last = p;
+      });
+      const next = make('&#8594;', active + 1);
+      if (active === totalPages) next.classList.add('disabled');
+      barEl.appendChild(next);
+    }
+
+    showPage(1);
+  })();
+  </script>
+
+</body>
+</html>
