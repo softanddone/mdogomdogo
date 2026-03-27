@@ -61,6 +61,11 @@ export function brandSlugall(brand) {
   return brand.toLowerCase().replace(/\s+/g, '-');
 }
 
+export function brandSlug(brand) {
+  return brand.toLowerCase().replace(/\s+/g, '-');
+}
+
+
 export function parseDeposit(str) {
   if (!str) return 0;
   return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
