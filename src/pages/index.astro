@@ -12,7 +12,7 @@ import Gift from '../components/Gift.astro';
 import Nav from '../components/Nav.astro';
 
 const featured    = products.slice(0, 5);
-const flashDeals  = products.filter(p => p.discount).slice(0, 4);
+const flashDeals  = products.filter(p => p.discount).slice(0, 3);
 const budgetPicks = products.filter(p => parseDeposit(p.deposit) < 5000).slice(0, 5);
 const samsungList = products.filter(p => p.brand?.toLowerCase() === 'samsung').slice(0, 5);
 const tecnoList   = products.filter(p => p.brand?.toLowerCase() === 'tecno').slice(0, 5);
@@ -47,7 +47,6 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* — Warm, trustworthy palette — */
       --ink:        #1a1f2e;
       --ink-mid:    #2d3444;
       --ink-light:  #5a6478;
@@ -101,46 +100,12 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .top-wa { background: #1a7a35; color: #fff; border-radius: 6px; padding: 5px 12px; font-size: 11.5px; font-weight: 600; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
     .top-wa svg { width: 12px; height: 12px; }
     @media (max-width: 700px) {
-      .top-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 0;
-      }
-      /* Row 1 — pills, left-aligned, full width */
-      .top-bar-pills {
-        justify-content: flex-start;
-        gap: 5px;
-        padding: 7px 14px;
-        flex-wrap: wrap;
-      }
-      .top-pill {
-        font-size: 11px;
-        padding: 3px 9px;
-      }
-      /* Row 2 — phone and WhatsApp as two equal blocks */
-      .top-bar-right {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        border-top: 1px solid rgba(255,255,255,0.1);
-      }
-      .top-phone {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 8px 12px;
-        border-right: 1px solid rgba(255,255,255,0.1);
-        font-size: 12px;
-        font-weight: 700;
-        color: #d4e0f0;
-      }
-      .top-wa {
-        justify-content: center;
-        border-radius: 0;
-        padding: 8px 12px;
-        font-size: 12px;
-      }
+      .top-bar { flex-direction: column; align-items: stretch; gap: 0; padding: 0; }
+      .top-bar-pills { justify-content: flex-start; gap: 5px; padding: 7px 14px; flex-wrap: wrap; }
+      .top-pill { font-size: 11px; padding: 3px 9px; }
+      .top-bar-right { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,0.1); }
+      .top-phone { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 12px; border-right: 1px solid rgba(255,255,255,0.1); font-size: 12px; font-weight: 700; color: #d4e0f0; }
+      .top-wa { justify-content: center; border-radius: 0; padding: 8px 12px; font-size: 12px; }
     }
 
     /* SITE HEADER */
@@ -166,49 +131,423 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .main-nav li a:hover { color: var(--blue); border-bottom-color: var(--blue-line); }
     .main-nav li a.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
 
-    /* HERO */
-    .hero { background: linear-gradient(160deg, #0e1629 0%, #132048 55%, #1a3575 100%); padding: 48px 24px 44px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 700px 500px at 85% 50%, rgba(26,86,219,0.18) 0%, transparent 70%); pointer-events: none; }
-    .hero-inner { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 1; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 4px 12px; font-size: 11.5px; font-weight: 600; color: #d4e5f5; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px; }
-    .hero-eyebrow svg { width: 10px; height: 10px; color: #7eb3e8; }
-    .hero-text h1 { font-size: 42px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
-    .hero-text h1 em { font-style: normal; color: #90c0ff; }
-    .hero-text p { font-size: 15px; color: #8fa5c5; margin-bottom: 28px; line-height: 1.7; max-width: 440px; }
-    .hero-text p strong { color: #d4e5f5; font-weight: 600; }
+    /* ─── HERO ─────────────────────────────────────────────────────── */
+    /*
+      The animation only mutates background-position on a pseudo-element
+      that is composited separately — no layout or paint is triggered.
+      This is safe for Core Web Vitals (no CLS, no TBT impact).
+    */
+    @keyframes heroShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 24px 44px;
+      /* Base colour so content is never on white during load */
+      background: #F3E9DC;
+    }
+
+    /* Animated gradient layer — lives below content, never repaints text */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* 300% width gives the position animation enough travel */
+      background: linear-gradient(
+        135deg,
+        #F3E9DC 0%,
+        #F5ECD8 15%,
+        #F9F0E3 30%,
+        wheat    45%,
+        #FAF0DC 55%,
+        #FDF6EE 70%,
+        #ffffff  85%,
+        #F3E9DC 100%
+      );
+      background-size: 300% 300%;
+      animation: heroShift 12s ease-in-out infinite;
+      /* Keep below all content */
+      z-index: 0;
+      /* GPU compositing — no layout cost */
+      will-change: background-position;
+    }
+
+    /* Subtle radial accent that gives the right side a slight blue warmth */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 600px 400px at 90% 60%, rgba(26,86,219,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1; /* sits above both pseudo-elements */
+    }
+
+    /* ── Hero text — dark on the light gradient ── */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(26,31,46,0.07);
+      border: 1px solid rgba(26,31,46,0.14);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1a56db;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-eyebrow svg { width: 10px; height: 10px; color: #1a56db; }
+
+    .hero-text h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--ink);          /* near-black — crisp on warm cream */
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .hero-text h1 em {
+      font-style: normal;
+      color: var(--blue);         /* brand blue accent on the headline */
+    }
+
+    .hero-text p {
+      font-size: 15px;
+      color: var(--ink-light);    /* medium dark — readable on cream */
+      margin-bottom: 28px;
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .hero-text p strong { color: var(--ink); font-weight: 700; }
+
     .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
-    .btn-hero { background: var(--blue); color: #fff; border-radius: var(--radius-md); padding: 12px 28px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s, transform 0.15s; letter-spacing: -0.2px; font-family: 'Inter', sans-serif; }
+
+    .btn-hero {
+      background: var(--blue);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, transform 0.15s;
+      letter-spacing: -0.2px;
+      font-family: 'Inter', sans-serif;
+    }
     .btn-hero:hover { background: var(--blue-dark); transform: translateY(-1px); }
     .btn-hero svg { width: 14px; height: 14px; }
-    .btn-hero-ghost { background: rgba(255,255,255,0.08); color: #c9d1d9; border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-md); padding: 11px 24px; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; display: inline-block; transition: background 0.15s; }
-    .btn-hero-ghost:hover { background: rgba(255,255,255,0.13); }
+
+    /* Ghost button — dark border on light bg */
+    .btn-hero-ghost {
+      background: rgba(26,31,46,0.06);
+      color: var(--ink-mid);
+      border: 1px solid rgba(26,31,46,0.18);
+      border-radius: var(--radius-md);
+      padding: 11px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      display: inline-block;
+      transition: background 0.15s;
+    }
+    .btn-hero-ghost:hover { background: rgba(26,31,46,0.11); }
+
     .hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
-    .hero-stat .num { font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.2; }
-    .hero-stat .lbl { font-size: 12px; color: #6b88aa; margin-top: 1px; }
+    .hero-stat .num {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--ink);          /* dark stat numbers */
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    .hero-stat .lbl {
+      font-size: 12px;
+      color: var(--ink-light);    /* muted label */
+      margin-top: 1px;
+    }
+
+    /* Right-side deposit cards — keep on warm tint */
     .hero-right { display: flex; flex-direction: column; gap: 12px; }
     .dep-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .dep-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-md); padding: 16px; text-align: center; transition: background 0.15s, border-color 0.15s; cursor: pointer; }
-    .dep-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
-    .dep-card .amount { font-size: 20px; font-weight: 800; color: #fff; }
-    .dep-card .sublabel { font-size: 11px; color: #6b88aa; margin-top: 3px; }
-    .hero-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .hero-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 10px 8px; text-align: center; }
-    .hero-badge svg { width: 18px; height: 18px; color: #7eb3e8; margin: 0 auto 5px; }
-    .hero-badge span { display: block; font-size: 11px; color: #8fa5c5; line-height: 1.4; font-weight: 500; }
+    .dep-card {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(26,31,46,0.12);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      transition: background 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .dep-card:hover { background: rgba(255,255,255,0.8); border-color: var(--blue); }
+    .dep-card .amount { font-size: 20px; font-weight: 800; color: var(--ink); }
+    .dep-card .sublabel { font-size: 11px; color: var(--ink-light); margin-top: 3px; }
 
-    /* FLASH DEALS BAR */
-    .flash-bar { background: var(--red); padding: 0 24px; display: flex; align-items: stretch; gap: 0; overflow: hidden; }
-    .flash-label { background: #a40e26; color: #fff; font-size: 13px; font-weight: 700; padding: 10px 18px; display: flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0; font-family: 'Inter', sans-serif; }
-    .flash-label svg { width: 14px; height: 14px; animation: pulse 1s infinite; }
+    .hero-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .hero-badge {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(26,31,46,0.1);
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .hero-badge svg { width: 18px; height: 18px; color: var(--blue); margin: 0 auto 5px; }
+    .hero-badge span { display: block; font-size: 11px; color: var(--ink-mid); line-height: 1.4; font-weight: 600; }
+    /* ── end Hero ── */
+
+    /* ─── FLASH DEALS — card grid section ─────────────────────────── */
+    .flash-section {
+      background: #fff9f0;
+      border-top: 1px solid #f0d9b5;
+      border-bottom: 1px solid #f0d9b5;
+      padding: 24px;
+    }
+    .flash-section-inner { max-width: 1320px; margin: 0 auto; }
+
+    .flash-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .flash-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .flash-section-title h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.4px;
+    }
+    .flash-pulse-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .flash-pulse-badge svg { width: 12px; height: 12px; animation: pulse 1s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-    .flash-items { display: flex; align-items: center; gap: 0; overflow-x: auto; scrollbar-width: none; flex: 1; }
-    .flash-items::-webkit-scrollbar { display: none; }
-    .flash-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-right: 1px solid rgba(255,255,255,0.15); white-space: nowrap; transition: background 0.15s; }
-    .flash-item:hover { background: rgba(255,255,255,0.1); }
-    .flash-item img { width: 36px; height: 36px; object-fit: contain; border-radius: 4px; background: rgba(255,255,255,0.15); }
-    .flash-item-name { font-size: 12.5px; color: #fff; font-weight: 500; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
-    .flash-item-price { font-size: 14px; font-weight: 700; color: #fff; }
-    .flash-badge { background: rgba(255,255,255,0.2); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+
+    .flash-see-all {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .flash-see-all:hover { text-decoration: underline; }
+    .flash-see-all svg { width: 14px; height: 14px; }
+
+    /* Three-column card grid — matches main product cards in style */
+    .flash-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* Flash card — reuses the main .card aesthetic + an orange accent banner */
+    .flash-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--canvas);
+      border-radius: var(--radius-lg);
+      border: 1px solid #f0c080;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      text-decoration: none;
+      color: inherit;
+    }
+    .flash-card:hover { border-color: var(--red); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+
+    /* Top orange accent strip */
+    .flash-card-accent {
+      height: 4px;
+      background: linear-gradient(90deg, #e05a00, var(--red));
+      flex-shrink: 0;
+    }
+
+    .flash-card-discount {
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      z-index: 3;
+      background: var(--red);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 5px;
+      line-height: 1.4;
+    }
+    .flash-card-hot {
+      position: absolute;
+      top: 14px;
+      left: 12px;
+      z-index: 3;
+      background: #e05a00;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .flash-card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .flash-card-img {
+      width: 85%;
+      height: 85%;
+      object-fit: contain;
+      transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .flash-card:hover .flash-card-img { transform: scale(1.06); }
+
+    .flash-card-body {
+      padding: 14px 14px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .flash-card-brand {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .flash-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 8px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .flash-card-specs {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .flash-spec-pill {
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      color: var(--ink-light);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 10.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .flash-card-pricing {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .flash-price-deposit {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .flash-price-label {
+      font-size: 12px;
+      color: var(--ink-faint);
+      font-weight: 400;
+    }
+    .flash-installment-note {
+      font-size: 11.5px;
+      color: var(--green);
+      font-weight: 600;
+      background: var(--green-bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .flash-card-cta {
+      display: flex;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .flash-btn-cart {
+      flex: 1;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+    .flash-btn-cart:hover { background: #a40e26; }
+    .flash-btn-buy {
+      flex: 1;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+    .flash-btn-buy:hover { background: #24292f; }
+
+    @media (max-width: 900px) { .flash-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .flash-grid { grid-template-columns: 1fr; } }
+    /* ── end Flash Deals ── */
 
     /* TRUST BAR */
     .trust-bar { background: var(--canvas); border-bottom: 1px solid var(--border); padding: 0 24px; }
@@ -248,22 +587,10 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     .brand-logo-wrap { display: flex; align-items: center; justify-content: center; height: 46px; margin-bottom: 6px; overflow: hidden; width: 100%; }
     .brand-logo-wrap svg, .brand-logo-wrap img { max-width: 100%; height: auto; }
     .brand-chip-sub { font-size: 11px; color: var(--ink-faint); font-weight: 500; }
-    /* On small screens: horizontal scroll row, each chip a fixed width */
     @media (max-width: 900px) {
-      .brand-grid {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 8px;
-        padding-bottom: 6px;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
+      .brand-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
       .brand-grid::-webkit-scrollbar { display: none; }
-      .brand-chip {
-        flex: 0 0 90px;
-        min-width: 90px;
-      }
+      .brand-chip { flex: 0 0 90px; min-width: 90px; }
       .brand-logo-wrap { height: 38px; }
     }
     @media (max-width: 500px) {
@@ -441,7 +768,6 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .testimonials-grid { grid-template-columns: 1fr 1fr; }
       .promo-banners { grid-template-columns: 1fr; }
-      /* Trust bar: 2-up grid on tablet */
       .trust-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; justify-items: start; }
       .trust-item { border-right: none; border-bottom: 1px solid var(--border-mid); padding: 10px 16px; width: 100%; }
       .trust-item:nth-child(odd) { border-right: 1px solid var(--border-mid); }
@@ -452,7 +778,6 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
       .budget-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-text h1 { font-size: 28px; }
       .hero-text p { font-size: 14px; }
-      /* Trust bar: keep 2-col on mobile */
       .trust-inner { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 500px) {
@@ -464,10 +789,14 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
       .how-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
-      /* Trust bar: full-width single column on very small screens */
       .trust-inner { grid-template-columns: 1fr; }
       .trust-item { border-right: none !important; border-bottom: 1px solid var(--border-mid); }
       .trust-item:last-child { border-bottom: none; }
+    }
+
+    /* Respect reduced-motion preference — pause the hero animation */
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before { animation: none; }
     }
   </style>
 </head>
@@ -492,6 +821,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
         Free same-day delivery Nairobi
       </span>
     </div>
+
     <div class="top-bar-right">
       <a href="tel:+254100028823" class="top-phone">📞 0100 028 823</a>
       <a href="https://wa.me/254100028823" class="top-wa">
@@ -500,21 +830,6 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
       </a>
     </div>
   </div>
-
-  <!-- SITE HEADER -->
-  <!-- <header class="site-header">
-    <a href="/" class="logo">Mdogo<em>mdogo</em>Deals <span class="logo-badge">Nairobi</span></a>
-    <div class="header-search" role="search">
-      <input type="search" placeholder="Search phones, brands, models…" aria-label="Search phones" />
-      <button type="submit" aria-label="Search">Search</button>
-    </div>
-    <div class="header-right">
-      <div class="header-contact">
-        <div class="label">Order Now</div>
-        <a href="tel:+254100028823" class="number">0100 028 823</a>
-      </div>
-    </div>
-  </header> -->
 
   <!-- MAIN NAV -->
   <nav class="main-nav" aria-label="Main navigation">
@@ -530,7 +845,7 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     </ul>
   </nav>
 
-  <!-- HERO -->
+  <!-- ═══ HERO ═══════════════════════════════════════════════════════ -->
   <section class="hero" aria-label="Hero">
     <div class="hero-inner">
       <div class="hero-text">
@@ -601,26 +916,57 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
     </div>
   </section>
 
-  <!-- FLASH DEALS BAR -->
+  <!-- ═══ FLASH DEALS — full card grid ══════════════════════════════ -->
   {flashDeals.length > 0 && (
-    <div class="flash-bar" role="region" aria-label="Flash deals">
-      <div class="flash-label">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        Flash Deals
-      </div>
-      <div class="flash-items">
-        {flashDeals.map(p => (
-          <a href={`/${p.slug}`} class="flash-item">
-            <img src={p.source} alt={p.fullname ?? p.name} width="36" height="36" loading="lazy" />
-            <div>
-              <div class="flash-item-name">{p.fullname ?? p.name}</div>
-              <div class="flash-item-price">{p.deposit}</div>
-            </div>
-            {p.discount && <span class="flash-badge">{p.discount}</span>}
+    <section class="flash-section" role="region" aria-label="Flash deals">
+      <div class="flash-section-inner">
+        <div class="flash-section-head">
+          <div class="flash-section-title">
+            <h2>Flash Deals</h2>
+            <span class="flash-pulse-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Limited Offer
+            </span>
+          </div>
+          <a href="/phones/lipa-mdogo-mdogo-nairobi" class="flash-see-all">
+            View all deals
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-        ))}
+        </div>
+
+        <div class="flash-grid">
+          {flashDeals.map(p => {
+            const specs = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
+            return (
+              <a href={`/${p.slug}`} class="flash-card">
+                <div class="flash-card-accent"></div>
+                <span class="flash-card-hot">🔥 Flash Deal</span>
+                {p.discount && <span class="flash-card-discount">{p.discount}</span>}
+                <div class="flash-card-img-wrap">
+                  <img class="flash-card-img" src={p.source} alt={`${p.fullname ?? p.name} — Flash Deal Nairobi`} loading="eager" width="300" height="225" decoding="async" />
+                </div>
+                <div class="flash-card-body">
+                  <div class="flash-card-brand">{p.brand}</div>
+                  <h3 class="flash-card-name">{p.fullname ?? p.name}</h3>
+                  <div class="flash-card-specs">
+                    {specs.map(s => <span class="flash-spec-pill">{s}</span>)}
+                  </div>
+                  <div class="flash-card-pricing">
+                    <span class="flash-price-deposit">{p.deposit}</span>
+                    <span class="flash-price-label">deposit</span>
+                  </div>
+                  <div class="flash-installment-note">✓ From {p.from}/wk · Pay via M-Pesa</div>
+                  <div class="flash-card-cta">
+                    <button class="flash-btn-cart">Grab This Deal</button>
+                    <button class="flash-btn-buy">Buy Now</button>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   )}
 
   <!-- TRUST BAR -->
@@ -977,42 +1323,6 @@ const metaDesc  = 'Buy smartphones on installments in Nairobi. Pay a small depos
       </div>
     </div>
   </section>
-
-  <!-- TESTIMONIALS -->
-  <!-- <section class="testimonials-section" aria-label="Customer reviews">
-    <div class="testimonials-inner">
-      <div class="testimonials-head">
-        <h2>What Our Customers Say</h2>
-        <p>Thousands of Nairobi residents have already gotten their phones through us</p>
-      </div>
-      <div class="testimonials-grid">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Niliagiza Samsung A16 na waliwasilisha same day. Nilikagua kwanza kabla ya kulipa deposit. Process ilikuwa rahisi sana. Naipendekeza sana!"</p>
-          <div class="testi-footer">
-            <div class="testi-avatar">JM</div>
-            <div><div class="testi-name">James M.</div><div class="testi-loc">Nairobi, Eastlands</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"I paid KSh 2,500 deposit and took the Tecno Camon home. Weekly instalments via M-Pesa are very manageable. No CRB check — that's a game changer."</p>
-          <div class="testi-footer">
-            <div class="testi-avatar">AW</div>
-            <div><div class="testi-name">Amina W.</div><div class="testi-loc">Kiambu, Ruiru</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Genuine phones, fast delivery, and excellent customer service. I've now bought three phones from MdogomdogoDeals for my family. Highly recommended!"</p>
-          <div class="testi-footer">
-            <div class="testi-avatar">PO</div>
-            <div><div class="testi-name">Peter O.</div><div class="testi-loc">Nairobi, South B</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <!-- FAQ -->
   <section class="faq-section" aria-label="Frequently asked questions">
