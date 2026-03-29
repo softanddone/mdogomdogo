@@ -12,7 +12,15 @@ import Gift from '../components/Gift.astro';
 import Nav from '../components/Nav.astro';
 
 const featured    = products.slice(0, 5);
-const flashDeals  = products.filter(p => p.discount).slice(0, 3);
+// const flashDeals  = products.filter(p => p.discount).slice(0, 3);
+
+
+const flashDeals = products.filter(p => 
+  ["samsung-galaxy-s24-256gb", "tecno-camon-50-pro-max", "samsung-galaxy-s20-ultra"].includes(p.slug)
+);
+
+
+
 const budgetPicks = products.filter(p => parseDeposit(p.deposit) < 5000).slice(0, 5);
 const samsungList = products.filter(p => p.brand?.toLowerCase() === 'samsung').slice(0, 5);
 const tecnoList   = products.filter(p => p.brand?.toLowerCase() === 'tecno').slice(0, 5);
