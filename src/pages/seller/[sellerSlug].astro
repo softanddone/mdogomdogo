@@ -142,7 +142,7 @@ const lowestDeposit = (() => {
 })();
 
 const pageTitle    = `${sellerName} Phones on Installments in Kenya | MdogomdogoDeals`;
-const metaDesc     = `Buy ${sellerName} phones on Lipa Mdogo Mdogo in Nairobi. ${sellerProducts.length} phones available. Small deposit, pay daily or weekly via M-Pesa. No credit check.`;
+const metaDesc     = `Shop ${sellerName} phones on Lipa Mdogo Mdogo in Nairobi. ${sellerProducts.length} phones in stock. Low deposit, flexible daily or weekly M-Pesa payments. Zero credit check required.`;
 const canonicalUrl = `https://mdogomdogodeals.co.ke/seller/${rawSlug}`;
 
 const breadcrumbs = [
@@ -338,7 +338,7 @@ function renderStars(rating) {
 
   <!-- SELLER NAV -->
   <nav class="filter-nav" aria-label="Browse by installment provider">
-    <span class="filter-nav-label">Installment Provider</span>
+    <span class="filter-nav-label">Shop by Provider</span>
     <div class="filter-nav-scroll">
       {allSellers.map(s => (
         <a href={sellerHref(s)} class={`filter-nav-link${s === sellerName ? ' active' : ''}`}>
@@ -351,7 +351,7 @@ function renderStars(rating) {
   <!-- BRAND FILTER scoped to this seller -->
   {sellerBrands.length > 1 && (
     <nav class="filter-nav" aria-label={`Filter ${sellerName} phones by brand`}>
-      <span class="filter-nav-label">Brand</span>
+      <span class="filter-nav-label">Filter by Brand</span>
       <div class="filter-nav-scroll">
         {sellerBrands.map(brand => {
           const cnt = sellerProducts.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
@@ -378,11 +378,13 @@ function renderStars(rating) {
           <span class="result-count">{sellerProducts.length} phones</span>
         </h1>
         <p>
-          Buy {sellerName} phones on Lipa Mdogo Mdogo in Nairobi. Pay a small deposit and spread
-          the balance in daily or weekly M-Pesa installments — no credit check, no guarantor.
+          Get your next phone through {sellerName} on Lipa Mdogo Mdogo — Nairobi's
+          most flexible way to own a smartphone. Put down a small deposit, then pay
+          daily or weekly via M-Pesa at your own pace. No guarantor, no paperwork,
+          no credit check.
         </p>
         <div class="hero-meta">
-          <span class="hero-tag">No Credit Check</span>
+          <span class="hero-tag">Zero Credit Check</span>
           <span class="hero-tag">Free Delivery — Nairobi CBD</span>
           <span class="hero-tag">Pay via M-Pesa</span>
           <span class="hero-tag">Provider: {sellerName}</span>
@@ -396,19 +398,19 @@ function renderStars(rating) {
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-value">{sellerProducts.length}</div>
-        <div class="stat-label">Phones Available</div>
+        <div class="stat-label">Phones in Stock</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">{sellerBrands.length}</div>
-        <div class="stat-label">Brands Stocked</div>
+        <div class="stat-label">Brands Available</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">{lowestDeposit}</div>
-        <div class="stat-label">Lowest Deposit</div>
+        <div class="stat-label">Starting Deposit</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">{sellerFeatureObjects.slice(0, 2).map(f => f.label).join(' · ') || '—'}</div>
-        <div class="stat-label">Top Features</div>
+        <div class="stat-label">Popular Features</div>
       </div>
     </div>
   </div>
@@ -418,8 +420,8 @@ function renderStars(rating) {
     <div class="product-grid" id="product-grid">
       {sellerProducts.length === 0 ? (
         <div class="empty-state">
-          <h2>No phones found for this provider</h2>
-          <p><a href="/phones/lipa-mdogo-mdogo-nairobi">View all phones</a></p>
+          <h2>No phones listed for this provider yet</h2>
+          <p><a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all available phones</a></p>
         </div>
       ) : sellerProducts.map((p, i) => {
         const statusLower = p.status?.toLowerCase();
@@ -448,7 +450,7 @@ function renderStars(rating) {
                 <span class="price-current">{p.deposit}</span>
                 {p.discount && <span class="price-save">{p.discount}</span>}
               </div>
-              <div class="installment-note">Small daily instalments · Deposit {p.deposit}</div>
+              <div class="installment-note">Flexible daily instalments · Deposit {p.deposit}</div>
               <div class="card-cta">
                 <button class="btn-cart">Add to Cart</button>
                 <button class="btn-buy">Buy Now</button>
@@ -472,7 +474,7 @@ function renderStars(rating) {
 
     {sellerBrands.length > 0 && (
       <div class="il-section">
-        <h2>{sellerName} Phones by Brand</h2>
+        <h2>Shop {sellerName} Phones by Brand</h2>
         <div class="il-grid">
           {sellerBrands.map(brand => {
             const cnt = sellerProducts.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
@@ -484,7 +486,7 @@ function renderStars(rating) {
 
     {sellerFeatureObjects.length > 0 && (
       <div class="il-section">
-        <h2>{sellerName} — Browse by Feature</h2>
+        <h2>Find Your {sellerName} Phone by Feature</h2>
         <div class="il-grid">
           {sellerFeatureObjects.map(feat => {
             const cnt = sellerProducts.filter(feat.match).length;
@@ -496,7 +498,7 @@ function renderStars(rating) {
 
     {allSellers.filter(s => s !== sellerName).length > 0 && (
       <div class="il-section">
-        <h2>Other Installment Providers</h2>
+        <h2>Compare Other Installment Providers</h2>
         <div class="il-grid">
           {allSellers.filter(s => s !== sellerName).map(s => {
             // Count using parseSellers(p.seller) — NOT categoryPath or any other field
@@ -508,7 +510,7 @@ function renderStars(rating) {
     )}
 
     <div class="il-section">
-      <h2>{sellerName} Phones by Deposit</h2>
+      <h2>Shop {sellerName} Phones by Deposit Range</h2>
       <div class="il-grid">
         <a href="/phones/deposit-under-3000"       class="il-link">Deposit Under KSh 3,000</a>
         <a href="/phones/deposit-under-5000"       class="il-link">Deposit Under KSh 5,000</a>
@@ -524,11 +526,12 @@ function renderStars(rating) {
     <hr />
     <div class="seo-grid">
       <div class="seo-col">
-        <h3>{sellerName} Lipa Mdogo Mdogo</h3>
+        <h3>Why Choose {sellerName}?</h3>
         <p>
-          {sellerName} is one of the leading phone installment providers in Kenya.
-          Browse {sellerProducts.length} phones available through {sellerName} on Lipa Mdogo Mdogo —
-          pay a small deposit and clear the balance in manageable daily or weekly M-Pesa payments. No credit check required.
+          {sellerName} is a trusted phone installment provider in Kenya with a proven track record.
+          Explore {sellerProducts.length} phones available on Lipa Mdogo Mdogo through {sellerName} —
+          commit to a low deposit today and settle the balance through simple, affordable daily or
+          weekly M-Pesa payments. No credit check, no stress.
         </p>
         <div class="seo-tags">
           <a href={canonicalUrl}                     class="seo-tag">{sellerName} phones Kenya</a>
@@ -538,10 +541,11 @@ function renderStars(rating) {
         </div>
       </div>
       <div class="seo-col">
-        <h3>Brands Available</h3>
+        <h3>Brands You Can Get</h3>
         <p>
-          {sellerName} stocks phones from {sellerBrands.join(', ')}.
-          Whether you need a budget device or a capable mid-ranger, there is an option on easy installments to suit your needs.
+          Through {sellerName}, you can own a phone from {sellerBrands.join(', ')}.
+          Whether you're after an ultra-affordable entry-level handset or a capable mid-range
+          device, every option comes with the same easy installment terms — no hidden fees.
         </p>
         <div class="seo-tags">
           {sellerBrands.map(brand => (
@@ -550,11 +554,12 @@ function renderStars(rating) {
         </div>
       </div>
       <div class="seo-col">
-        <h3>How It Works</h3>
+        <h3>How to Get Started</h3>
         <p>
-          Order online and get same-day delivery in Nairobi CBD.
-          Pay a deposit via M-Pesa to {sellerName}, then choose daily or weekly installments.
-          No hidden charges, no guarantor, no paperwork.
+          Pick your phone, place your order online, and receive same-day delivery right to
+          Nairobi CBD. Pay your deposit to {sellerName} via M-Pesa, then choose a daily or
+          weekly installment schedule that fits your budget. No hidden charges, no guarantor,
+          no paperwork — just your new phone.
         </p>
         <div class="seo-tags">
           <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phone installment Nairobi</a>
