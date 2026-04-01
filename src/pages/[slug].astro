@@ -1,8 +1,8 @@
+
 ---
 export const prerender = true;
 
 import ProductLayout from "../layouts/ProductLayout.astro";
-import ProductCard from "../components/ProductCard.astro";
 import Nav from "../components/Nav.astro";
 import Gift from "../components/Gift.astro";
 import { products } from "../data/product2";
@@ -41,9 +41,8 @@ if (!currentProduct) {
 
 // ── Smart related products: unique per product page ──────────────────────────
 const currentDeposit = parseInt((currentProduct.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
-const PRICE_TIER_RANGE = 3000; // ±KES 3000 = same price tier
+const PRICE_TIER_RANGE = 3000;
 
-// Seeded shuffle — unique per slug so every product page gets different results
 function seededShuffle<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
   let s = seed >>> 0;
@@ -57,12 +56,10 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return a;
 }
 
-// Build a numeric seed from the full slug string — unique per product
 const slugSeed = currentProduct.slug.split('').reduce((n, c, i) => n + c.charCodeAt(0) * (i + 7), 0);
 
 const otherProducts = products.filter((p) => p.id !== currentProduct.id);
 
-// Tier 1 — same brand, close price (most relevant)
 const tier1 = seededShuffle(
   otherProducts.filter((p) => {
     const dep = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
@@ -71,14 +68,12 @@ const tier1 = seededShuffle(
   slugSeed
 );
 
-// Tier 2 — same brand, any price
 const tier1ids = new Set(tier1.map((p) => p.id));
 const tier2 = seededShuffle(
   otherProducts.filter((p) => p.brand === currentProduct.brand && !tier1ids.has(p.id)),
   slugSeed + 1
 );
 
-// Tier 3 — different brand, close price (cross-brand comparison)
 const tier12ids = new Set([...tier1, ...tier2].map((p) => p.id));
 const tier3 = seededShuffle(
   otherProducts.filter((p) => {
@@ -90,7 +85,6 @@ const tier3 = seededShuffle(
   slugSeed + 2
 );
 
-// Tier 4 — same storage, different brand (spec-similar)
 const currentStorage = (currentProduct.storage ?? '').replace(/[^0-9]/g, '');
 const tier123ids = new Set([...tier1, ...tier2, ...tier3].map((p) => p.id));
 const tier4 = seededShuffle(
@@ -101,14 +95,12 @@ const tier4 = seededShuffle(
   slugSeed + 3
 );
 
-// Tier 5 — any remaining products (pure fallback, shuffled uniquely per slug)
 const tier1234ids = new Set([...tier1, ...tier2, ...tier3, ...tier4].map((p) => p.id));
 const tier5 = seededShuffle(
   otherProducts.filter((p) => !tier1234ids.has(p.id)),
   slugSeed + 4
 );
 
-// Fill pool up to 4 from tiers in priority order
 const pool: typeof products = [];
 for (const tier of [tier1, tier2, tier3, tier4, tier5]) {
   for (const p of tier) {
@@ -123,35 +115,35 @@ const relatedProducts = pool.slice(0, 4);
 const faqs = [
   {
     question: `How does Lipa Mdogo Mdogo work for the ${currentProduct.name}?`,
-    answer: `It is simple — we deliver the phone to you first. You inspect it, and only then pay the deposit of KES ${currentProduct.deposit}. After a free grace period, you begin paying KES ${currentProduct.daily} daily (or weekly or monthly) until fully paid. There is no upfront payment required to place an order.`,
+    answer: `It works like this — we bring the phone straight to your door. You inspect it, switch it on, and test it yourself. Only once you are satisfied do you pay the deposit of KES ${currentProduct.deposit}. After a free grace period, you pay KES ${currentProduct.daily} daily — or choose weekly or monthly — until the balance is cleared. No upfront payment is required to place your order.`,
   },
   {
-    question: "Do I pay anything before delivery?",
-    answer: "No. There is no payment before delivery. We bring the phone to you first. You inspect it, confirm you are happy, and only then pay the deposit. That is it.",
+    question: "Do I pay anything before the phone is delivered?",
+    answer: "Nothing at all. We deliver first, you inspect second, you pay third. The deposit is only collected once you have seen the phone in person and confirmed you are happy with it. There are no booking fees, no delivery charges, and no payment required before we arrive.",
   },
   {
     question: "Which areas do you deliver to?",
-    answer: "We deliver same-day to Nairobi, Kiambu, Machakos, and Kajiado counties. Call or WhatsApp us to confirm your exact location before ordering.",
+    answer: "We offer same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado counties. This covers most of greater Nairobi and the surrounding region. Call or WhatsApp us on 0100028823 to confirm your exact location before placing an order.",
   },
   {
     question: "How do I place an order?",
-    answer: `You can order in three ways: (1) Call us on 0100028823, (2) WhatsApp us on 0100028823, or (3) fill in the order form on this page. We will confirm your order and arrange same-day delivery.`,
+    answer: `Three easy ways: (1) Call us on 0100028823, (2) WhatsApp us on 0100028823 — the quickest option, or (3) complete the order form on this page. Once we receive your order we will confirm same-day delivery details with you directly.`,
   },
   {
-    question: `Is the ${currentProduct.name} genuine?`,
-    answer: `Yes, 100% genuine ${currentProduct.brand} ${currentProduct.name} with manufacturer warranty, sourced from authorized distributors in Kenya.`,
+    question: `Is the ${currentProduct.name} original and genuine?`,
+    answer: `Yes — every ${currentProduct.brand} ${currentProduct.name} we sell is 100% genuine, brand new, and sourced directly from authorised ${currentProduct.brand} distributors in Kenya. Each unit comes with a full manufacturer warranty.`,
   },
   {
-    question: `What colors are available for the ${currentProduct.name}?`,
-    answer: `Available in: ${currentProduct.color}. Mention your preferred color when ordering.`,
+    question: `What colours are available for the ${currentProduct.name}?`,
+    answer: `The ${currentProduct.brand} ${currentProduct.name} is available in: ${currentProduct.color}. Just mention your preferred colour when you place your order and we will confirm availability.`,
   },
   {
-    question: "What warranty is included?",
-    answer: `Every unit comes with a 2-year manufacturer warranty covering hardware defects, with support from ${currentProduct.brand} and ${currentProduct.seller}.`,
+    question: "What warranty comes with the phone?",
+    answer: `Every unit includes a 2-year manufacturer warranty covering hardware defects, backed by ${currentProduct.brand} and ${currentProduct.seller}. You also benefit from our after-sales support throughout your instalment period.`,
   },
   {
-    question: "What if I miss a daily payment?",
-    answer: "Just contact us. We offer flexible grace periods and can adjust your payment schedule. No penalties for genuine cases.",
+    question: "What happens if I miss a daily payment?",
+    answer: "Life happens — we understand. Just reach out to us as soon as you can. We offer flexible grace periods and are always willing to work out a revised payment schedule. There are no automatic penalties for genuine cases.",
   },
 ];
 
@@ -248,8 +240,6 @@ function renderStars(r: number) {
   <Gift />
   <Nav />
 
-  
-
   <main class="product-page">
 
     <!-- BREADCRUMB -->
@@ -268,16 +258,16 @@ function renderStars(r: number) {
     <!-- SEO INTRO -->
     <div class="seo-intro">
       <p>
-        Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
-        You are in the right place. The <a href={`/phones/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
-        <strong>Lipa Mdogo Mdogo</strong> — pay a small deposit after delivery and spread the rest in
-        affordable daily or weekly instalments. No credit check, no guarantor, no upfront payment.
+        Searching for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
+        You have found it. The <a href={`/phones/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
+        <strong>Lipa Mdogo Mdogo</strong> — Kenya's most flexible phone instalment plan. Pay a small deposit only after the phone is delivered to your door, then spread the balance in
+        affordable daily, weekly, or monthly payments. Zero credit check, no guarantor, no money required before delivery.
         Same-day delivery across <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
-        {currentProduct.ram && ` Packed with ${currentProduct.ram} RAM`}
+        {currentProduct.ram && ` Loaded with ${currentProduct.ram} RAM`}
         {currentProduct.storage && `, ${currentProduct.storage} storage`}
         {currentProduct.battery && `, and a ${currentProduct.battery} battery`}
-        {` — the ${currentProduct.brand} ${currentProduct.name} is one of the best value smartphones available in Kenya today.`}
-        &nbsp;<a href="#price-kenya">See price &amp; instalments &darr;</a>
+        {` — the ${currentProduct.brand} ${currentProduct.name} is among the best-value smartphones you can own in Kenya right now.`}
+        &nbsp;<a href="#price-kenya">See pricing &amp; instalments &darr;</a>
       </p>
     </div>
 
@@ -368,16 +358,11 @@ function renderStars(r: number) {
             </div>
           </div>
           <div class="installment-note">
-            Or from <strong>
-              
-
-              {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
-              
-              /week</strong> &mdash; choose daily, weekly, or monthly instalments after the free grace period
+            Or from <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong> &mdash; choose daily, weekly, or monthly instalments after your free grace period
           </div>
           <ul class="pricing-bullets">
             <li>No payment before delivery</li>
-            <li>Inspect the phone first, then pay deposit</li>
+            <li>Inspect the phone first — pay deposit after</li>
             <li>No interest &mdash; no hidden fees &mdash; no credit check</li>
           </ul>
         </div>
@@ -409,7 +394,7 @@ function renderStars(r: number) {
           <div class="form-fields">
             <input class="form-input" type="text"  id="f-name"  placeholder="Your full name" />
             <input class="form-input" type="tel"   id="f-phone" placeholder="Phone number" />
-            <input class="form-input" type="text"  id="f-area"  placeholder="Delivery area  (e.g. Nairobi, Kiambu, Machakos, Kajiado)" />
+            <input class="form-input" type="text"  id="f-area"  placeholder="Delivery area (e.g. Nairobi, Kiambu, Machakos, Kajiado)" />
             <textarea class="form-input form-textarea" id="f-notes" rows="2" placeholder="Any notes — optional"></textarea>
           </div>
           <button class="btn-submit" id="submit-order-btn" type="button">Confirm Order via WhatsApp</button>
@@ -436,9 +421,7 @@ function renderStars(r: number) {
           </div>
         </div>
 
-        <p class="seller-line">
-          <!-- Sold by <a href={`/${brandSlug}-phones`}>{currentProduct.seller}</a> &middot; Nairobi, Kenya -->
-        </p>
+        <p class="seller-line"></p>
 
       </div>
     </section>
@@ -478,68 +461,70 @@ function renderStars(r: number) {
         <h2 class="section-title">About the {currentProduct.brand} {currentProduct.name}</h2>
         <div class="prose">
           <p>
-            The <strong>{currentProduct.brand} {currentProduct.name}</strong> is one of the most sought-after smartphones in Kenya right now —
-            and for good reason. Whether you are a student in Nairobi looking for a reliable phone for online classes,
-            a professional who needs a fast device for emails and video calls, or simply someone who wants a quality smartphone
-            without paying the full price upfront, the {currentProduct.brand} {currentProduct.name} delivers on all fronts.
-            Available on <strong>Lipa Mdogo Mdogo</strong> — Kenya's most flexible phone instalment plan — you can own this phone
-            today with just a small deposit paid after delivery.
+            The <strong>{currentProduct.brand} {currentProduct.name}</strong> has quickly become one of the most popular smartphones in Kenya —
+            and it is easy to see why. Whether you are a student in Nairobi who needs a dependable device for online classes and research,
+            a professional who relies on their phone for emails, video calls, and mobile banking,
+            or simply someone who wants a quality smartphone without having to raise a large lump sum first,
+            the {currentProduct.brand} {currentProduct.name} covers every need.
+            With <strong>Lipa Mdogo Mdogo</strong> — Kenya's leading phone instalment service —
+            you can take this phone home today with just a small deposit, paid only after it arrives at your door.
           </p>
 
           {currentProduct.ram && (
             <p>
-              <strong>Performance you can feel:</strong> Powered by {currentProduct.processor && `a ${currentProduct.processor} processor and `}{currentProduct.ram} of RAM,
-              the {currentProduct.brand} {currentProduct.name} handles everything you throw at it —
-              switching between apps, streaming YouTube, managing multiple WhatsApp groups, and playing games —
-              all without slowdown. Whether you are multitasking at work or scrolling through social media on your commute,
-              this phone keeps up effortlessly.
+              <strong>Performance that keeps up with you:</strong> The {currentProduct.brand} {currentProduct.name} runs on
+              {currentProduct.processor && ` a ${currentProduct.processor} processor paired with`} {currentProduct.ram} of RAM,
+              giving you the horsepower to handle everything from heavy multitasking to gaming without a hint of slowdown.
+              Switching between WhatsApp, mobile banking, YouTube, and work apps is seamless —
+              the kind of everyday smoothness that makes a real difference.
             </p>
           )}
 
           {currentProduct.storage && (
             <p>
-              <strong>Never run out of space:</strong> With {currentProduct.storage} of built-in storage,
-              the {currentProduct.brand} {currentProduct.name} gives you plenty of room for your photos, videos, music,
-              documents, and apps. No more deleting old files just to make space — store your M-Pesa statements,
-              WhatsApp media, TikTok downloads, and everything else you need, all in one place.
-              {currentProduct.expandableStorage && ` You can also expand storage further with a microSD card.`}
+              <strong>Storage that actually fits your life:</strong> With {currentProduct.storage} of built-in storage,
+              you will not find yourself constantly deleting photos or shuffling files to make space.
+              Keep your M-Pesa transaction history, WhatsApp media, downloaded music, important documents,
+              and all your favourite apps — everything in one place, always accessible.
+              {currentProduct.expandableStorage && ` Need even more room? A microSD card lets you expand further with ease.`}
             </p>
           )}
 
           {currentProduct.camera && (
             <p>
-              <strong>A camera built for everyday Kenya:</strong> The {currentProduct.camera} camera system on the {currentProduct.brand} {currentProduct.name}
-              is designed to capture real life in sharp, vivid detail — from busy Nairobi streets and family gatherings
-              to Kenya's stunning landscapes. Whether you are shooting portraits, street photography, or quick videos
-              for Instagram and TikTok, you will be impressed by the quality. The front camera handles selfies and
-              video calls equally well, making it a great choice for professionals and content creators.
+              <strong>A camera that earns its keep:</strong> The {currentProduct.camera} camera system on the {currentProduct.brand} {currentProduct.name}
+              is built to capture real Kenyan moments in sharp, true-to-life detail —
+              busy Nairobi streets, family celebrations, weekend trips to the countryside.
+              Portraits come out crisp, low-light shots hold their colour,
+              and video looks clean whether you are shooting for Instagram, TikTok, or just keeping memories.
+              The front camera handles selfies and video calls with the same quality.
             </p>
           )}
 
           {currentProduct.battery && (
             <p>
-              <strong>Battery that lasts the whole day:</strong> The {currentProduct.battery} battery in the {currentProduct.brand} {currentProduct.name}
-              is built to keep up with a full Kenyan workday — long commutes on matatus, extended work sessions,
-              evenings of entertainment, and everything in between. Fewer interruptions, less time hunting for a charger.
-              {currentProduct.charging && ` And with ${currentProduct.charging}, topping back up is quick when you do need it.`}
+              <strong>A battery that goes the distance:</strong> The {currentProduct.battery} battery is designed to outlast even the busiest Kenyan day —
+              long matatu commutes, back-to-back meetings, evening entertainment, and late-night scrolling.
+              You can stop worrying about finding a charger mid-afternoon and focus on what matters.
+              {currentProduct.charging && ` When you do need a top-up, ${currentProduct.charging} gets you back to full fast.`}
             </p>
           )}
 
           {currentProduct.display && (
             <p>
-              <strong>A display that stands out:</strong> The {currentProduct.display} screen brings content to life with
-              vibrant colours and crisp clarity — perfect for streaming, gaming, and video calls. Whether you are watching
-              a film on your commute, following a tutorial, or video-calling family upcountry, the display delivers
-              a premium viewing experience at an accessible price.
+              <strong>A screen worth looking at:</strong> The {currentProduct.display} display delivers vivid colours,
+              sharp text, and smooth motion — whether you are streaming films on your commute,
+              following a step-by-step tutorial, video-calling family across the country,
+              or gaming on a free evening. You get a premium viewing experience without the premium price tag.
             </p>
           )}
 
           <p>
-            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan networks —
-            <strong>Safaricom 4G/LTE, Airtel Kenya, and Telkom Kenya</strong> — so you get strong signal,
-            fast mobile data, and clear calls wherever you are in the country.
-            It comes with a <strong>2-year manufacturer warranty</strong> and is sourced directly from
-            authorised {currentProduct.brand} distributors in Kenya.
+            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks —
+            <strong>Safaricom 4G/LTE, Airtel Kenya, and Telkom Kenya</strong> — so you stay connected
+            with fast data and clear calls wherever you are.
+            Every unit is sourced directly from authorised {currentProduct.brand} distributors in Kenya
+            and comes with a <strong>2-year manufacturer warranty</strong> for complete peace of mind.
           </p>
         </div>
       </div>
@@ -549,31 +534,34 @@ function renderStars(r: number) {
         <h2 class="section-title">{currentProduct.brand} {currentProduct.name} vs Similar Phones in Kenya</h2>
         <div class="prose">
           <p>
-            Compared to other smartphones in the same price range in Kenya, the <strong>{currentProduct.brand} {currentProduct.name}</strong> stands out
-            for its balance of performance, camera quality, and battery life. While many budget phones compromise on at least
-            one of these, the {currentProduct.name} holds its ground across all three — making it one of the strongest
-            all-round choices for Kenyan buyers in {currentProduct.releaseYear || '2024'}.
+            When you look at other phones in the same price bracket in Kenya,
+            the <strong>{currentProduct.brand} {currentProduct.name}</strong> stands out for delivering a genuinely balanced package.
+            Many devices at this deposit range sacrifice battery life for a bigger screen,
+            or trade processing speed for camera megapixels.
+            The {currentProduct.name} holds its own across all three — making it one of the smartest all-round buys for Kenyan shoppers in {currentProduct.releaseYear || '2024'}.
           </p>
           {currentProduct.ram && currentProduct.battery && (
             <p>
-              Where some competing phones offer more RAM but a smaller battery, or a larger display but a weaker processor,
-              the {currentProduct.brand} {currentProduct.name} strikes a practical balance —
-              {currentProduct.ram} RAM ensures smooth everyday performance,
-              while the {currentProduct.battery} battery means you are unlikely to run out of charge before the end of the day.
+              Where competitors at a similar price point often compromise in one area,
+              the {currentProduct.brand} {currentProduct.name} keeps things balanced:
+              {currentProduct.ram} RAM for fluid everyday performance,
+              and a {currentProduct.battery} battery that comfortably covers a full day
+              without you having to ration your screen time.
             </p>
           )}
           {currentProduct.camera && (
             <p>
-              On camera, the {currentProduct.brand} {currentProduct.name}'s {currentProduct.camera} setup outperforms many phones
-              at a similar deposit range in Kenya. For social media content, WhatsApp photos, and casual video recording,
-              it delivers noticeably sharper results than older or lower-spec alternatives.
+              On camera performance, the {currentProduct.brand} {currentProduct.name}'s {currentProduct.camera} setup punches noticeably above its weight class.
+              For social media content, WhatsApp photos, casual video recording, and clear selfies,
+              it produces sharper, more detailed results than older or lower-spec alternatives at a comparable deposit.
             </p>
           )}
           <p>
-            If you are comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> against similar devices,
-            keep in mind that with Lipa Mdogo Mdogo you are not paying the full price upfront —
-            just a small deposit on delivery, making it accessible regardless of which phone you choose.
-            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones on instalments</a> to compare options side by side.
+            Comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> to alternatives is easy —
+            and with Lipa Mdogo Mdogo, the comparison is even simpler.
+            You are not committing to the full price upfront on any phone:
+            just a small deposit on delivery and manageable daily payments thereafter.
+            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones on instalments</a> to see your options side by side.
           </p>
         </div>
       </div>
@@ -585,23 +573,23 @@ function renderStars(r: number) {
           <div class="pros-col">
             <h3 class="pc-heading pc-pros">Pros</h3>
             <ul class="pc-list">
-              {currentProduct.battery && <li>Long battery life — {currentProduct.battery} keeps you powered all day</li>}
-              {currentProduct.ram && <li>Smooth performance with {currentProduct.ram} RAM for multitasking</li>}
-              {currentProduct.storage && <li>Generous {currentProduct.storage} internal storage — no constant deleting</li>}
-              {currentProduct.camera && <li>Capable {currentProduct.camera} camera for photos and video</li>}
-              <li>Works on all Kenyan networks — Safaricom, Airtel, Telkom</li>
-              <li>Available on Lipa Mdogo Mdogo — deposit paid only after delivery</li>
-              <li>2-year manufacturer warranty included</li>
-              <li>Same-day delivery in Nairobi, Kiambu, Machakos &amp; Kajiado</li>
+              {currentProduct.battery && <li>All-day battery — {currentProduct.battery} keeps you going without charging anxiety</li>}
+              {currentProduct.ram && <li>Smooth, responsive performance with {currentProduct.ram} RAM</li>}
+              {currentProduct.storage && <li>Generous {currentProduct.storage} storage — no more deleting apps to make space</li>}
+              {currentProduct.camera && <li>Versatile {currentProduct.camera} camera system for photos and video</li>}
+              <li>Compatible with all Kenyan networks — Safaricom, Airtel, Telkom</li>
+              <li>Lipa Mdogo Mdogo — deposit only after you inspect the phone</li>
+              <li>2-year manufacturer warranty on every unit</li>
+              <li>Same-day delivery to Nairobi, Kiambu, Machakos &amp; Kajiado</li>
             </ul>
           </div>
           <div class="cons-col">
             <h3 class="pc-heading pc-cons">Cons</h3>
             <ul class="pc-list">
-              {currentProduct.wirelessCharging === 'Not Available' && <li>No wireless charging support</li>}
+              {currentProduct.wirelessCharging === 'Not Available' && <li>No wireless charging</li>}
               {currentProduct.audioJack === 'No' && <li>No 3.5mm headphone jack</li>}
-              <li>Limited to delivery in 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
-              <li>Full balance must be cleared through daily/weekly instalments</li>
+              <li>Delivery currently limited to 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
+              <li>Full balance paid in daily or weekly instalments over time</li>
             </ul>
           </div>
         </div>
@@ -611,7 +599,7 @@ function renderStars(r: number) {
       <div class="section-card" id="people-also-compare">
         <h2 class="section-title">People Also Compare</h2>
         <p class="pac-intro">
-          Buyers looking at the <strong>{currentProduct.brand} {currentProduct.name}</strong> in Kenya often also consider these alternatives.
+          Shoppers checking out the <strong>{currentProduct.brand} {currentProduct.name}</strong> in Kenya frequently consider these alternatives too.
           All are available on Lipa Mdogo Mdogo instalments with same-day delivery.
         </p>
         <div class="pac-grid">
@@ -632,12 +620,12 @@ function renderStars(r: number) {
       <div class="section-card" id="section-ideal">
         <h2 class="section-title">Who Is the {currentProduct.brand} {currentProduct.name} Ideal For?</h2>
         <div class="use-cases-grid">
-          <div class="use-case"><strong>Students</strong><p>Online classes, research, and learning apps run smoothly without lag.</p></div>
-          <div class="use-case"><strong>Professionals</strong><p>Email, video calls, and banking apps — fast and reliable all day.</p></div>
-          <div class="use-case"><strong>Content Creators</strong><p>Powerful camera and processor for photos, reels, and social content.</p></div>
-          <div class="use-case"><strong>Gamers</strong><p>Smooth performance on popular mobile games without overheating.</p></div>
-          <div class="use-case"><strong>Social Media</strong><p>Stay connected on WhatsApp, Instagram, TikTok, Facebook, and X.</p></div>
-          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery and a great display for life in Kenya's busiest counties.</p></div>
+          <div class="use-case"><strong>Students</strong><p>Online learning, research apps, and class tools run without lag or interruption.</p></div>
+          <div class="use-case"><strong>Professionals</strong><p>Email, video calls, mobile banking, and work apps — fast and reliable all day long.</p></div>
+          <div class="use-case"><strong>Content Creators</strong><p>A capable camera and powerful processor for photos, reels, and social content.</p></div>
+          <div class="use-case"><strong>Gamers</strong><p>Fluid performance on popular Kenyan mobile games without lag or overheating.</p></div>
+          <div class="use-case"><strong>Social Media Users</strong><p>Stay connected on WhatsApp, Instagram, TikTok, Facebook, and X all day.</p></div>
+          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery, a vivid display, and reliable performance for life across Kenya's busiest counties.</p></div>
         </div>
       </div>
 
@@ -675,66 +663,53 @@ function renderStars(r: number) {
           <div class="price-kenya-row">
             <span class="pkr-label">Or from</span>
             <span class="pkr-value accent">
-              
-              
-
-
               {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
-              
-              <span class="pkr-per">/week</span></span>
+              <span class="pkr-per">/week</span>
+            </span>
           </div>
         </div>
 
         <div class="prose" style="margin-top: 1.5rem;">
           <p>
             The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> on Lipa Mdogo Mdogo
-            starts at a deposit of <strong>{currentProduct.deposit}</strong>.
-            That deposit is only paid <em>after</em> we deliver the phone to your door and you have inspected it —
-            not before. Once you are happy, you pay the deposit and the phone is yours.
-            You then continue with small payments of <strong>{currentProduct.daily} per day</strong>
-            or <strong>
-              
-              
-              
-
-              {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
-              
-              
-               per week</strong> at your own pace.
-            No interest. No hidden charges. No credit check.
+            starts at a deposit of just <strong>{currentProduct.deposit}</strong> —
+            and that deposit is only paid <em>after</em> the phone reaches your door and you have inspected it.
+            You pay nothing in advance. Once you are satisfied, you hand over the deposit and the phone is yours.
+            From there, you continue with <strong>{currentProduct.daily} per day</strong>
+            or <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7} per week</strong> at whatever pace suits you.
+            No interest. No hidden charges. No credit check needed.
           </p>
           <p>
-            When people search for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>
-            they are usually worried about a large lump sum. With MdogomdogoDeals that never happens.
-            The only amount you commit to upfront is the <strong>{currentProduct.deposit} deposit</strong> —
-            and even that comes <em>after</em> the phone is in your hands.
-            It is the most accessible way to own a genuine {currentProduct.brand} smartphone in Kenya today.
+            Most people searching for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>
+            are worried about paying a large amount upfront. With MdogomdogoDeals, that is never the case.
+            The only commitment you make at the door is the <strong>{currentProduct.deposit} deposit</strong> —
+            and even that happens <em>after</em> you have seen and approved the phone.
+            It is the most straightforward way to own a genuine {currentProduct.brand} in Kenya today.
           </p>
           {currentProduct.storage && (
             <p>
-              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the most popular
-              choice among Kenyan buyers. If you need a different storage option, let us know when you order
-              and we will advise on availability.
+              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the version most Kenyan buyers go for.
+              If you need a different storage option, let us know when ordering and we will confirm what is available.
             </p>
           )}
         </div>
 
         <div class="price-why-grid">
           <div class="price-why-item">
-            <strong>Deposit paid on delivery</strong>
-            <p>We deliver first. You inspect the phone. Only then you pay the {currentProduct.deposit} deposit.</p>
+            <strong>Deposit after delivery</strong>
+            <p>We bring the phone to you first. You inspect it thoroughly, then pay the {currentProduct.deposit} deposit.</p>
           </div>
           <div class="price-why-item">
-            <strong>No interest added</strong>
-            <p>What you see is what you pay — no extra charges on top of your instalments.</p>
+            <strong>Zero interest</strong>
+            <p>The price you see is the price you pay — no hidden charges or extra fees on top of your instalments.</p>
           </div>
           <div class="price-why-item">
-            <strong>Flexible schedule</strong>
-            <p>Continue paying daily, weekly, or monthly — whichever suits your income cycle.</p>
+            <strong>Flexible payment rhythm</strong>
+            <p>Pay daily, weekly, or monthly — whichever fits your income cycle best.</p>
           </div>
           <div class="price-why-item">
-            <strong>Genuine product</strong>
-            <p>Every phone comes from authorised {currentProduct.brand} distributors with a 2-year warranty.</p>
+            <strong>100% genuine &amp; warranted</strong>
+            <p>Every phone comes from authorised {currentProduct.brand} distributors with a full 2-year manufacturer warranty.</p>
           </div>
         </div>
 
@@ -797,7 +772,7 @@ function renderStars(r: number) {
             </tbody>
           </table>
           <div class="network-note">
-            The {currentProduct.brand} {currentProduct.name} works fully on all major Kenyan networks — Safaricom 4G/LTE, Airtel Kenya 4G, and Telkom Kenya.
+            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G/LTE, Airtel Kenya 4G, and Telkom Kenya — right out of the box.
           </div>
         </div>
 
@@ -822,57 +797,52 @@ function renderStars(r: number) {
     <section class="tab-panel" id="tab-delivery" role="tabpanel">
       <div class="section-card" id="delivery">
 
-        <h2 class="section-title">How It Works</h2>
+        <h2 class="section-title">How Lipa Mdogo Mdogo Works</h2>
         <ol class="payment-steps">
           <li>
             <div class="step-circle">1</div>
             <div>
-              <strong>Order</strong> — call us, WhatsApp us, or fill in the order form on this page.
-              No payment is needed to place your order.
+              <strong>Place your order</strong> — call us, WhatsApp us, or fill in the order form on this page.
+              No payment or deposit is required to place your order.
             </div>
           </li>
           <li>
             <div class="step-circle">2</div>
             <div>
-              <strong>Delivery</strong> — we deliver the {currentProduct.brand} {currentProduct.name} to you same day
-              within Nairobi, Kiambu, Machakos, or Kajiado.
+              <strong>Same-day delivery</strong> — we deliver the {currentProduct.brand} {currentProduct.name} directly to you,
+              same day within Nairobi, Kiambu, Machakos, or Kajiado.
             </div>
           </li>
           <li>
             <div class="step-circle">3</div>
             <div>
-              <strong>Inspect</strong> — check the phone. Power it on, test it, make sure you are fully satisfied.
-              You pay nothing until you approve.
+              <strong>Inspect the phone</strong> — power it on, test the camera, open your apps, and take your time.
+              You pay nothing until you are fully satisfied.
             </div>
           </li>
           <li>
             <div class="step-circle">4</div>
             <div>
-              <strong>Pay deposit</strong> — once happy, pay the deposit of <strong>KES {currentProduct.deposit}</strong>
-              via M-Pesa or cash on the spot. The phone is yours to take home.
+              <strong>Pay your deposit</strong> — once you are happy, pay <strong>KES {currentProduct.deposit}</strong>
+              via M-Pesa or cash. The {currentProduct.brand} {currentProduct.name} is yours.
             </div>
           </li>
           <li>
             <div class="step-circle">5</div>
             <div>
-              <strong>Start instalments</strong> — after a free grace period, pay
-              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES 
-                
-                
-                {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
-                
-                /week</strong>
-              at your own pace until the balance is cleared.
+              <strong>Start your instalments</strong> — after a free grace period, pay
+              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong>
+              at your own pace until the balance is fully cleared.
             </div>
           </li>
         </ol>
 
         <div class="benefits-banner">
           <span>No payment before delivery</span>
-          <span>Inspect before you pay</span>
+          <span>Inspect before you commit</span>
           <span>No interest or hidden fees</span>
           <span>No credit check required</span>
-          <span>Daily, weekly or monthly payments</span>
+          <span>Daily, weekly, or monthly payments</span>
         </div>
 
         <h2 class="section-title" style="margin-top:2.5rem;">Delivery Areas</h2>
@@ -894,7 +864,7 @@ function renderStars(r: number) {
             <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, and surrounding areas.</p>
           </div>
         </div>
-        <p class="delivery-note">Not sure if we cover your exact location? Call 0100028823 to confirm before ordering.</p>
+        <p class="delivery-note">Not sure if we reach your exact location? Call or WhatsApp 0100028823 before ordering and we will confirm for you.</p>
 
       </div>
     </section>
@@ -916,23 +886,11 @@ function renderStars(r: number) {
       </div>
     </section>
 
-    <!-- RELATED PRODUCTS -->
-    <!-- {relatedProducts.length > 0 && (
-      <section class="related-section">
-        <h2 class="related-title">More {currentProduct.brand} Phones on Instalments</h2>
-        <div class="related-grid">
-          {relatedProducts.map((product) => (
-            <ProductCard product={product} />
-          ))}
-        </div>
-      </section>
-    )} -->
-
     <!-- BOTTOM CTA -->
     <section class="bottom-cta">
       <div class="cta-inner">
-        <h2>Order the {currentProduct.brand} {currentProduct.name} Today</h2>
-        <p>Delivered same day &mdash; pay <strong>KES {currentProduct.deposit}</strong> deposit only after you inspect and approve</p>
+        <h2>Get the {currentProduct.brand} {currentProduct.name} Delivered Today</h2>
+        <p>Same-day delivery &mdash; pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve</p>
         <div class="cta-btns">
           <a href="tel:+254100028823" class="btn-primary">Call 0100028823</a>
           <a
@@ -950,25 +908,18 @@ function renderStars(r: number) {
     <h2>Explore Similar Phones</h2>
     <div class="feat-link-grid">
 
-      <!-- Feature-only links  →  /features/5g-phones-kenya -->
       {productFeatureObjects.map(feat => (
         <a href={featureHref(feat.key)} class="feat-link">
           All {feat.label} Phones in Kenya
         </a>
       ))}
 
-      <!-- Brand x Feature links  →  /features/xiaomi-5g-phones-kenya -->
       {currentProduct.brand && productFeatureObjects.map(feat => (
         <a href={featureHref(feat.key, currentProduct.brand)} class="feat-link brand-feat">
           {currentProduct.brand} {feat.label} Phones
         </a>
       ))}
 
-      <!--
-        Combo links  →  /features/5g-gaming-phones-kenya
-        comboHref() always returns the canonical slug order (or null if not registered),
-        so these links can never produce a 404.
-      -->
       {(() => {
         const links = [];
         for (let i = 0; i < productFeatureKeys.length; i++) {
@@ -987,7 +938,6 @@ function renderStars(r: number) {
         return links;
       })()}
 
-      <!-- General links -->
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="feat-link">
         All Lipa Mdogo Mdogo Phones
       </a>
@@ -1031,7 +981,6 @@ function renderStars(r: number) {
       const panel = document.getElementById(`tab-${btn.dataset.tab}`);
       if (panel) {
         panel.classList.add('active');
-        // scroll tab nav into view smoothly
         document.getElementById('tab-nav')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     });
@@ -1075,7 +1024,6 @@ function renderStars(r: number) {
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── CSS variables — identical to parent filter page ── */
   :root {
     --primary:       #1a73e8;
     --primary-dark:  #1557b0;
@@ -1097,7 +1045,6 @@ function renderStars(r: number) {
   }
   body { font-family: 'Barlow', sans-serif; background: var(--gray-1); color: var(--text); }
 
-  /* ── Top banner + header (mirrors parent exactly) ── */
   .top-banner {
     background: var(--navy); color: #fff;
     text-align: center; padding: 9px 16px;
@@ -1115,12 +1062,10 @@ function renderStars(r: number) {
   }
   .logo span { color: var(--gold); }
 
-  /* ── Breadcrumb (mirrors parent) ── */
   .breadcrumb-bar {
     background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 20px;
   }
 
-  /* ── SEO intro paragraph ── */
   .seo-intro {
     background: #fff; border-bottom: 1px solid var(--gray-2);
     padding: 14px 20px;
@@ -1138,12 +1083,8 @@ function renderStars(r: number) {
   .breadcrumb-list a:hover { text-decoration: underline; }
   .breadcrumb-list .sep { color: var(--gray-3); }
 
-  /* ── Page wrapper ── */
   .product-page { max-width: 1280px; margin: 0 auto; padding: 20px 20px 56px; }
 
-  /* ════════════════════════════════════════
-     HERO
-     ════════════════════════════════════════ */
   .hero-section {
     display: grid; grid-template-columns: 460px 1fr; gap: 24px;
     background: #fff; border: 1.5px solid var(--gray-2);
@@ -1152,7 +1093,6 @@ function renderStars(r: number) {
   }
   @media (max-width: 940px) { .hero-section { grid-template-columns: 1fr; } }
 
-  /* Gallery */
   .gallery-col { display: flex; flex-direction: column; gap: 12px; }
   .main-img-wrap {
     position: relative; background: var(--gray-1);
@@ -1196,7 +1136,6 @@ function renderStars(r: number) {
     padding: 3px 9px; font-size: 11.5px; font-weight: 500;
   }
 
-  /* Info column */
   .info-col { display: flex; flex-direction: column; gap: 16px; }
 
   .info-brand-row { display: flex; align-items: center; gap: 10px; }
@@ -1224,7 +1163,6 @@ function renderStars(r: number) {
   .rating-link { color: var(--primary); text-decoration: none; font-size: 13px; }
   .rating-link:hover { text-decoration: underline; }
 
-  /* Trust strip */
   .trust-strip {
     background: #e6f9f1; border: 1px solid #a7f0ca;
     border-radius: 7px; padding: 9px 14px;
@@ -1233,7 +1171,6 @@ function renderStars(r: number) {
   }
   .trust-strip span + span::before { content: ' · '; font-weight: 400; opacity: .6; }
 
-  /* Pricing card */
   .pricing-card {
     background: var(--primary-light); border: 2px solid var(--primary);
     border-radius: var(--radius); padding: 18px 20px;
@@ -1255,7 +1192,6 @@ function renderStars(r: number) {
     height: 44px; margin: 0 18px; flex-shrink: 0;
   }
 
-  /* On small screens: stack price blocks vertically, reduce font sizes */
   @media (max-width: 480px) {
     .pricing-row { flex-direction: column; align-items: flex-start; gap: 12px; }
     .divider-v { display: none; }
@@ -1273,7 +1209,6 @@ function renderStars(r: number) {
   }
   .pricing-bullets li::before { content: '✓  '; }
 
-  /* Color option */
   .option-row { display: flex; align-items: center; gap: 12px; }
   .option-label { font-size: 13px; font-weight: 700; color: var(--text-light); }
   .color-chip {
@@ -1282,7 +1217,6 @@ function renderStars(r: number) {
     padding: 5px 14px; border-radius: 20px;
   }
 
-  /* Order methods */
   .order-block { display: flex; flex-direction: column; gap: 10px; }
 
   .order-heading {
@@ -1290,7 +1224,6 @@ function renderStars(r: number) {
     letter-spacing: .07em; color: var(--text-light); margin-bottom: 2px;
   }
 
-  /* WhatsApp — primary, most prominent */
   .btn-order-wa {
     display: flex; align-items: center; justify-content: center;
     width: 100%; padding: 15px 20px;
@@ -1302,7 +1235,6 @@ function renderStars(r: number) {
   }
   .btn-order-wa:hover { background: #1fb356; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.35); }
 
-  /* Call — secondary, clearly labelled */
   .btn-order-call {
     display: flex; align-items: center; justify-content: center;
     width: 100%; padding: 13px 20px;
@@ -1314,7 +1246,6 @@ function renderStars(r: number) {
   }
   .btn-order-call:hover { background: var(--primary-light); transform: translateY(-1px); }
 
-  /* Order form — tertiary, plain outlined */
   .btn-order-form {
     display: flex; align-items: center; justify-content: center;
     width: 100%; padding: 11px 20px;
@@ -1326,7 +1257,6 @@ function renderStars(r: number) {
   }
   .btn-order-form:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
 
-  /* Order form */
   .order-form-wrap {
     background: var(--gray-1); border: 1.5px solid var(--gray-2);
     border-radius: var(--radius); padding: 18px;
@@ -1354,7 +1284,6 @@ function renderStars(r: number) {
   .btn-submit:hover { background: var(--primary-dark); }
   .form-note { font-size: 12px; color: var(--text-light); text-align: center; }
 
-  /* Trust badges */
   .trust-badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   @media (max-width: 480px) { .trust-badges { grid-template-columns: repeat(2, 1fr); } }
   .trust-badge {
@@ -1374,9 +1303,6 @@ function renderStars(r: number) {
   .seller-line a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .seller-line a:hover { text-decoration: underline; }
 
-  /* ════════════════════════════════════════
-     TAB NAV
-     ════════════════════════════════════════ */
   .tab-nav {
     display: flex; gap: 4px; flex-wrap: wrap;
     background: #fff; border: 1.5px solid var(--gray-2);
@@ -1394,9 +1320,6 @@ function renderStars(r: number) {
   .tab-btn:hover { background: var(--gray-1); color: var(--text); }
   .tab-btn.active { background: var(--primary); color: #fff; }
 
-  /* ════════════════════════════════════════
-     TAB PANELS + SECTION CARD
-     ════════════════════════════════════════ */
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
@@ -1416,7 +1339,6 @@ function renderStars(r: number) {
   .prose p:last-child { margin-bottom: 0; }
   .prose strong { color: var(--text); }
 
-  /* Features grid */
   .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   @media (max-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
   .feature-item {
@@ -1427,7 +1349,6 @@ function renderStars(r: number) {
   }
   .feat-check { color: var(--green); font-weight: 900; flex-shrink: 0; }
 
-  /* Use cases */
   .use-cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   @media (max-width: 640px) { .use-cases-grid { grid-template-columns: repeat(2, 1fr); } }
   .use-case {
@@ -1437,7 +1358,6 @@ function renderStars(r: number) {
   .use-case strong { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
   .use-case p { font-size: 12.5px; color: var(--text-light); line-height: 1.5; margin: 0; }
 
-  /* Box list */
   .box-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
   .box-list li {
     font-size: 14px; color: var(--text-light);
@@ -1446,7 +1366,6 @@ function renderStars(r: number) {
   }
   .box-list li::before { content: '— '; font-weight: 700; color: var(--primary); }
 
-  /* Spec table */
   .spec-group { margin-bottom: 24px; }
   .spec-group-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -1477,7 +1396,6 @@ function renderStars(r: number) {
   .add-feat strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 4px; }
   .add-feat p { font-size: 12px; color: var(--text-light); margin: 0; line-height: 1.45; }
 
-  /* Payment steps */
   .payment-steps { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
   .payment-steps li {
     display: flex; align-items: flex-start; gap: 14px;
@@ -1501,7 +1419,6 @@ function renderStars(r: number) {
   }
   .benefits-banner span::before { content: '✓  '; }
 
-  /* Counties grid */
   .counties-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 16px 0 12px; }
   @media (max-width: 580px) { .counties-grid { grid-template-columns: 1fr; } }
   .county-card {
@@ -1515,7 +1432,6 @@ function renderStars(r: number) {
   .county-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; margin: 0; }
   .delivery-note { font-size: 13px; color: var(--text-light); font-style: italic; }
 
-  /* FAQ */
   .faq-list { display: flex; flex-direction: column; gap: 8px; }
   .faq-item {
     border: 1.5px solid var(--gray-2); border-radius: 9px;
@@ -1533,7 +1449,6 @@ function renderStars(r: number) {
   .faq-item[open] summary::after { content: '−'; }
   .faq-item p { padding: 14px 16px; font-size: 13.5px; color: var(--text-light); line-height: 1.65; }
 
-  /* Related */
   .related-section { margin-bottom: 16px; }
   .related-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -1543,7 +1458,6 @@ function renderStars(r: number) {
   @media (max-width: 900px) { .related-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 620px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
 
-  /* Bottom CTA */
   .bottom-cta {
     background: var(--navy); border-radius: var(--radius);
     padding: 40px 28px; text-align: center; margin-bottom: 8px;
@@ -1568,9 +1482,6 @@ function renderStars(r: number) {
   .btn-whatsapp { background: #25d366; color: #fff; }
   .btn-whatsapp:hover { background: #1fb356; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.3); }
 
-  /* ════════════════════════════════════════
-     PRICE IN KENYA SECTION
-     ════════════════════════════════════════ */
   .price-kenya-block {
     display: flex; flex-direction: column; gap: 0;
     border: 2px solid var(--primary); border-radius: var(--radius);
@@ -1611,17 +1522,12 @@ function renderStars(r: number) {
     margin-top: 20px; align-items: stretch;
   }
 
-  /* Prose links */
   .prose a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .prose a:hover { text-decoration: underline; }
 
-  /* SEO intro links */
   .seo-intro a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .seo-intro a:hover { text-decoration: underline; }
 
-  /* ════════════════════════════════════════
-     PROS & CONS
-     ════════════════════════════════════════ */
   .pros-cons-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
   }
@@ -1655,9 +1561,6 @@ function renderStars(r: number) {
     color: var(--red); font-weight: 900;
   }
 
-  /* ════════════════════════════════════════
-     PEOPLE ALSO COMPARE
-     ════════════════════════════════════════ */
   .pac-intro {
     font-size: 14px; color: var(--text-light); line-height: 1.6;
     margin-bottom: 16px;
@@ -1704,16 +1607,7 @@ function renderStars(r: number) {
   .pac-browse a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .pac-browse a:hover { text-decoration: underline; }
 
-
-
-
-
-
-
-
-
-
-.product-feature-links {
+  .product-feature-links {
     max-width: 860px;
     margin: 40px auto 0;
     padding: 0 20px 48px;
@@ -1764,10 +1658,4 @@ function renderStars(r: number) {
     color: var(--primary);
     background: var(--primary-light);
   }
-
-
-
-
-
-
 </style>

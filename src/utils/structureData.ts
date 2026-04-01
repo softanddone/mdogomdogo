@@ -985,8 +985,8 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
         logo: {
           '@type': 'ImageObject',
           '@id': `${baseUrl}#logo`,
-          url: `${baseUrl}/phones/y2.png`,
-          contentUrl: `${baseUrl}/phones/y2.png`,
+          url: `${baseUrl}/phones/logo.jpg`,
+          contentUrl: `${baseUrl}/phones/logo.jpg`,
           width: 300,
           height: 150,
           caption: 'Mdogo Mdogo Deals Kenya Logo'
