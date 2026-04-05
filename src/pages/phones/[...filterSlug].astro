@@ -688,11 +688,11 @@ function renderStars(rating) {
 
       <!-- ── Deposit ── -->
       <div class="filter-group" id="fg-deposit">
-        <button class={`fg-toggle${depositFilter ? ' open' : ''}`} type="button" data-group="deposit">
+        <button class="fg-toggle open" type="button" data-group="deposit">
           <span class="fg-toggle-label">Deposit</span>
-          <span class="fg-arrow" style={depositFilter ? 'transform: rotate(90deg)' : ''}>›</span>
+          <span class="fg-arrow" style="transform: rotate(90deg)">›</span>
         </button>
-        <div class="fg-body" style={depositFilter ? '' : 'display:none'}>
+        <div class="fg-body">
           <div class="fp-wrap">
             <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
                class={`fp${!depositFilter ? ' fp-active' : ''}`}>Any deposit</a>
@@ -712,11 +712,11 @@ function renderStars(rating) {
 
       <!-- ── Storage ── -->
       <div class="filter-group" id="fg-storage">
-        <button class={`fg-toggle${storageFilter ? ' open' : ''}`} type="button" data-group="storage">
+        <button class="fg-toggle open" type="button" data-group="storage">
           <span class="fg-toggle-label">Storage</span>
-          <span class="fg-arrow" style={storageFilter ? 'transform: rotate(90deg)' : ''}>›</span>
+          <span class="fg-arrow" style="transform: rotate(90deg)">›</span>
         </button>
-        <div class="fg-body" style={storageFilter ? '' : 'display:none'}>
+        <div class="fg-body">
           <div class="fp-wrap">
             <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
                class={`fp${!storageFilter ? ' fp-active' : ''}`}>Any size</a>
