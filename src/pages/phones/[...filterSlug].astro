@@ -315,11 +315,13 @@ function renderStars(rating) {
       background: var(--white);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
-      overflow: hidden;
+      overflow-y: auto;
+      max-height: calc(100vh - 32px);
       position: sticky;
       top: 16px;
       align-self: flex-start;
       margin-right: 20px;
+      z-index: 10;
     }
 
     /* Sidebar header */
@@ -388,7 +390,7 @@ function renderStars(rating) {
     /* ── Mobile overlay ── */
     .filter-overlay {
       display: none;
-      position: fixed; inset: 0; z-index: 199;
+      position: fixed; inset: 0; z-index: 9998;
       background: rgba(0,0,0,0.45);
     }
     .filter-overlay.overlay-show { display: block; }
@@ -402,7 +404,8 @@ function renderStars(rating) {
         top: 0; left: 0; bottom: 0;
         width: 280px;
         max-width: 85vw;
-        z-index: 200;
+        max-height: 100vh;
+        z-index: 9999;
         border-radius: 0;
         border: none;
         border-right: 1.5px solid var(--border);
