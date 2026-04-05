@@ -107,20 +107,17 @@ const canonicalUrl = `https://mdogomdogodeals.co.ke/phones/${filterSlug}`;
 const breadcrumbs = [
   { label: 'Home',       href: '/' },
   { label: 'All Phones', href: '/phones/lipa-mdogo-mdogo-nairobi' },
-  ...(brandFilter   ? [{ label: `${brandFilter} Phones`,         href: `/phones/${brandSlugall(brandFilter)}`  }] : []),
-  ...(depositFilter ? [{ label: depositFilter.label,             href: `/phones/${depositFilter.key}`          }] : []),
-  ...(storageFilter ? [{ label: `${storageFilter.label} Storage`, href: `/phones/${storageFilter.key}`         }] : []),
+  ...(brandFilter   ? [{ label: `${brandFilter} Phones`,          href: `/phones/${brandSlugall(brandFilter)}`  }] : []),
+  ...(depositFilter ? [{ label: depositFilter.label,              href: `/phones/${depositFilter.key}`          }] : []),
+  ...(storageFilter ? [{ label: `${storageFilter.label} Storage`, href: `/phones/${storageFilter.key}`          }] : []),
 ];
+
+const hasFilters = !!(brandFilter || depositFilter || storageFilter);
 
 function renderStars(rating) {
   const full = Math.floor(rating);
   return '★'.repeat(full) + '☆'.repeat(5 - full);
 }
-
-const baseDepositHref = (b, d, s) => {
-  const parts = [b ? brandSlug(b) : null, d ? d.key : null, s ? s.key : null].filter(Boolean);
-  return parts.length ? `/phones/${parts.join('-')}` : '/phones/lipa-mdogo-mdogo-nairobi';
-};
 ---
 
 <!DOCTYPE html>
@@ -201,13 +198,9 @@ const baseDepositHref = (b, d, s) => {
 
     /* ── Announcement bar ── */
     .top-banner {
-      background: var(--ink);
-      color: #fff;
-      text-align: center;
-      padding: 10px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.01em;
+      background: var(--ink); color: #fff;
+      text-align: center; padding: 10px 16px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
     }
     .top-banner strong { color: var(--gold); }
 
@@ -219,69 +212,223 @@ const baseDepositHref = (b, d, s) => {
     .breadcrumb-list li a:hover { text-decoration: underline; }
     .breadcrumb-list li.sep { color: var(--border); }
 
-    /* ── Filter nav ── */
-    .filter-nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 8px 0 0; }
-    .filter-nav-label { display: block; font-size: 10px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; padding: 0 20px; margin-bottom: 7px; }
-    .filter-nav-scroll { display: flex; align-items: center; gap: 6px; overflow-x: auto; padding: 0 20px 10px; scrollbar-width: none; -ms-overflow-style: none; }
-    .filter-nav-scroll::-webkit-scrollbar { display: none; }
-    .filter-nav-link {
-      display: inline-flex; align-items: center; flex-shrink: 0;
-      border: 1.5px solid var(--border); background: var(--paper); color: var(--ink-2);
-      border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 500;
-      text-decoration: none; white-space: nowrap;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    /* ══════════════════════════════════════════
+       PAGE HEADER (with mobile filter toggle)
+    ══════════════════════════════════════════ */
+    .page-header-strip {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
     }
-    .filter-nav-link:hover  { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-    .filter-nav-link.active { border-color: var(--accent); background: var(--accent); color: #fff; }
-
-    /* ── Page header ── */
-    .page-header { max-width: 1280px; margin: 0 auto; padding: 28px 20px 0; }
-    .page-header h1 {
+    .page-header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .page-header-inner h1 {
       font-family: var(--font-head);
-      font-size: clamp(22px, 4vw, 32px);
+      font-size: clamp(18px, 3vw, 28px);
       font-weight: 800;
       color: var(--ink);
-      line-height: 1.15;
-      margin-bottom: 8px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .page-header-inner p {
+      font-size: 13.5px;
+      color: var(--ink-3);
+      line-height: 1.6;
     }
     .result-count {
       display: inline-block;
-      background: var(--accent-dim);
-      color: var(--accent);
-      border-radius: 6px;
-      padding: 2px 10px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-left: 10px;
-      vertical-align: middle;
+      background: var(--accent-dim); color: var(--accent);
+      border-radius: 6px; padding: 2px 10px;
+      font-size: 13px; font-weight: 700;
+      margin-left: 10px; vertical-align: middle;
     }
-    .page-header p { font-size: 14px; color: var(--ink-3); margin-bottom: 0; line-height: 1.65; }
 
-    /* ── Active filter chips ── */
-    .active-filters { max-width: 1280px; margin: 0 auto; padding: 16px 20px 0; }
-    .active-filters-label { display: block; font-size: 10px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .active-filter-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
-    .filter-chip {
+    /* Mobile filter toggle button */
+    .filter-drawer-toggle {
+      display: none; /* hidden on desktop */
+      align-items: center; gap: 7px;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 8px; padding: 8px 14px;
+      font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+      color: var(--ink); cursor: pointer; white-space: nowrap;
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s;
+      position: relative;
+    }
+    .filter-drawer-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-active-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      position: absolute; top: 6px; right: 6px;
+    }
+    @media (max-width: 900px) {
+      .filter-drawer-toggle { display: inline-flex; }
+    }
+
+    /* Active filter chips bar */
+    .active-chips-bar {
+      max-width: 1400px;
+      margin: 12px auto 0;
+      display: flex; align-items: center; flex-wrap: wrap; gap: 7px;
+    }
+    .active-chip {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--accent-dim); border: 1.5px solid var(--accent);
       color: var(--accent); border-radius: 999px; padding: 5px 13px;
       font-size: 13px; font-weight: 600; text-decoration: none;
       transition: background 0.15s;
     }
-    .filter-chip:hover { background: #d0deff; }
-    .filter-chip svg { opacity: 0.6; flex-shrink: 0; }
-    .filter-chip-clear {
+    .active-chip:hover { background: #d0deff; }
+    .chip-clear {
       display: inline-flex; align-items: center;
       font-size: 13px; color: var(--red); font-weight: 600;
       text-decoration: none; padding: 5px 13px; border-radius: 999px;
       border: 1.5px solid var(--red); background: #fdeef1;
       transition: opacity 0.15s;
     }
-    .filter-chip-clear:hover { opacity: 0.75; }
+    .chip-clear:hover { opacity: 0.75; }
+
+    /* ══════════════════════════════════════════
+       MAIN LAYOUT — sidebar + content
+    ══════════════════════════════════════════ */
+    .phones-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      padding: 24px 20px;
+    }
+
+    /* ══════════════════════════════════════════
+       FILTER SIDEBAR
+    ══════════════════════════════════════════ */
+    .filter-sidebar {
+      width: 230px;
+      flex-shrink: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: sticky;
+      top: 16px;
+      align-self: flex-start;
+      margin-right: 20px;
+    }
+
+    /* Sidebar header */
+    .fs-head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fs-title { font-family: var(--font-head); font-size: 15px; font-weight: 800; color: var(--ink); flex: 1; }
+    .fs-clear { font-size: 12px; color: var(--red); font-weight: 600; text-decoration: none; }
+    .fs-clear:hover { text-decoration: underline; }
+    .fs-close {
+      display: none; /* hidden on desktop */
+      background: none; border: none;
+      font-size: 18px; color: var(--ink-3);
+      cursor: pointer; line-height: 1; padding: 2px 4px;
+    }
+
+    /* Accordion filter groups */
+    .filter-group { border-bottom: 1px solid var(--border); }
+    .filter-group:last-child { border-bottom: none; }
+
+    .fg-toggle {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; background: none; border: none;
+      cursor: pointer; font-family: var(--font-body);
+      text-align: left;
+    }
+    .fg-toggle-label { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .fg-arrow { font-size: 16px; color: var(--ink-3); transition: transform 0.2s; line-height: 1; }
+    .fg-toggle.open .fg-arrow { transform: rotate(90deg); }
+
+    .fg-body { padding: 6px 12px 12px; }
+
+    .fg-sublabel {
+      display: block;
+      font-size: 10px; font-weight: 700; color: var(--ink-3);
+      text-transform: uppercase; letter-spacing: 0.09em;
+      margin: 8px 0 5px;
+    }
+
+    /* Filter pills */
+    .fp-wrap { display: flex; flex-direction: column; gap: 3px; }
+    .fp {
+      display: block; padding: 6px 10px; border-radius: 6px;
+      font-size: 13px; font-weight: 500; color: var(--ink-2);
+      text-decoration: none; transition: background 0.12s, color 0.12s;
+    }
+    .fp:hover { background: var(--accent-dim); color: var(--accent); }
+    .fp.fp-active { background: var(--accent); color: #fff; font-weight: 700; }
+    .fp-sub { display: block; font-size: 11px; color: var(--ink-3); margin-top: 1px; }
+    .fp.fp-active .fp-sub { color: rgba(255,255,255,0.75); }
+
+    /* Quick picks */
+    .fs-quicklinks { padding: 12px 16px 14px; }
+    .fs-ql-head {
+      display: block; font-size: 10px; font-weight: 700; color: var(--ink-3);
+      text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 8px;
+    }
+    .fs-ql-link {
+      display: block; font-size: 12.5px; color: var(--accent); font-weight: 600;
+      text-decoration: none; padding: 4px 0;
+    }
+    .fs-ql-link:hover { text-decoration: underline; }
+
+    /* ── Mobile overlay ── */
+    .filter-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 199;
+      background: rgba(0,0,0,0.45);
+    }
+    .filter-overlay.overlay-show { display: block; }
+
+    /* ── Mobile drawer behaviour ── */
+    @media (max-width: 900px) {
+      .phones-layout { padding-top: 0; }
+
+      .filter-sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        width: 280px;
+        max-width: 85vw;
+        z-index: 200;
+        border-radius: 0;
+        border: none;
+        border-right: 1.5px solid var(--border);
+        transform: translateX(-110%);
+        transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+        overflow-y: auto;
+        margin-right: 0;
+      }
+      .filter-sidebar.drawer-open { transform: translateX(0); }
+      .fs-close { display: block; }
+    }
+
+    /* ══════════════════════════════════════════
+       CONTENT AREA
+    ══════════════════════════════════════════ */
+    .phones-main { flex: 1; min-width: 0; }
 
     /* ── Product grid ── */
-    .page-body { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
-    .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 1200px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 900px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
 
     .card {
       display: none; flex-direction: column;
@@ -302,7 +449,7 @@ const baseDepositHref = (b, d, s) => {
       letter-spacing: 0.06em; text-transform: uppercase; color: #fff;
     }
     .badge-new  { background: var(--green); }
-    .badge-hot  { background: var(--red);   }
+    .badge-hot  { background: var(--red); }
     .badge-sale { background: var(--accent); }
 
     .card-img-wrap {
@@ -338,15 +485,13 @@ const baseDepositHref = (b, d, s) => {
     .btn-cart {
       flex: 1; background: var(--accent); color: #fff; border: none;
       border-radius: 7px; padding: 9px 10px; font-size: 13px; font-weight: 700;
-      cursor: pointer; font-family: var(--font-body);
-      transition: background 0.15s;
+      cursor: pointer; font-family: var(--font-body); transition: background 0.15s;
     }
     .btn-cart:hover { background: #0044cc; }
     .btn-buy {
       flex: 1; background: var(--ink); color: #fff; border: none;
       border-radius: 7px; padding: 9px 10px; font-size: 13px; font-weight: 700;
-      cursor: pointer; font-family: var(--font-body);
-      transition: background 0.15s;
+      cursor: pointer; font-family: var(--font-body); transition: background 0.15s;
     }
     .btn-buy:hover { background: #1e2533; }
 
@@ -355,7 +500,7 @@ const baseDepositHref = (b, d, s) => {
     .empty-state a { color: var(--accent); font-weight: 600; }
 
     /* ── Pagination ── */
-    .pagination-wrap { max-width: 1280px; margin: 0 auto; padding: 4px 20px 52px; }
+    .pagination-wrap { padding: 4px 0 36px; }
     .pagination-info { text-align: center; font-size: 13px; color: var(--ink-3); margin-bottom: 14px; }
     .pagination-bar  { display: flex; align-items: center; justify-content: center; gap: 5px; flex-wrap: wrap; }
     .page-btn {
@@ -363,8 +508,7 @@ const baseDepositHref = (b, d, s) => {
       min-width: 40px; height: 40px; padding: 0 12px;
       border: 1.5px solid var(--border); background: var(--white); color: var(--ink);
       border-radius: 8px; font-size: 14px; font-weight: 600;
-      font-family: var(--font-body); cursor: pointer;
-      transition: all 0.15s;
+      font-family: var(--font-body); cursor: pointer; transition: all 0.15s;
     }
     .page-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
     .page-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; pointer-events: none; }
@@ -372,7 +516,7 @@ const baseDepositHref = (b, d, s) => {
     .page-ellipsis { display: inline-flex; align-items: flex-end; justify-content: center; width: 32px; height: 40px; color: var(--ink-3); font-size: 16px; padding-bottom: 4px; user-select: none; }
 
     /* ── Related filter pills ── */
-    .related-filters { max-width: 1280px; margin: 0 auto; padding: 0 20px 36px; }
+    .related-filters { padding: 0 0 36px; }
     .related-filters h2 { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 12px; }
     .related-grid { display: flex; flex-wrap: wrap; gap: 7px; }
     .related-link {
@@ -385,7 +529,7 @@ const baseDepositHref = (b, d, s) => {
     .related-link .count { font-size: 11px; color: var(--ink-3); margin-left: 3px; }
 
     /* ── SEO content block ── */
-    .seo-section { max-width: 1280px; margin: 0 auto; padding: 0 20px 64px; }
+    .seo-section { padding: 0 0 64px; }
     .seo-section hr { border: none; border-top: 1px solid var(--border); margin-bottom: 32px; }
     .seo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 48px; }
     .seo-col h3 { font-family: var(--font-head); font-size: 13px; font-weight: 800; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 10px; }
@@ -396,9 +540,8 @@ const baseDepositHref = (b, d, s) => {
     .seo-tag { display: inline-block; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--ink-3); text-decoration: none; transition: all 0.12s; }
     .seo-tag:hover { border-color: var(--accent); color: var(--accent); }
 
-    @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
-    @media (max-width: 800px)  { .product-grid { grid-template-columns: repeat(3, 1fr); } .seo-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } .seo-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 800px)  { .seo-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px)  { .seo-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -423,340 +566,444 @@ const baseDepositHref = (b, d, s) => {
     </ol>
   </nav>
 
-  <!-- ── Deposit filter ── -->
-  <nav class="filter-nav" aria-label="Filter by deposit">
-    <span class="filter-nav-label">Deposit</span>
-    <div class="filter-nav-scroll">
-      <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
-         class={`filter-nav-link${!depositFilter ? ' active' : ''}`}>Any deposit</a>
-      {DEPOSIT_FILTERS.map(dep => {
-        const href = brandFilter
-          ? `/phones/${brandSlugall(brandFilter)}-${dep.key}`
-          : `/phones/${dep.key}`;
-        return (
-          <a href={href} class={`filter-nav-link${depositFilter?.key === dep.key ? ' active' : ''}`}>
-            {dep.label}
-          </a>
-        );
-      })}
+  <!-- ── Page header strip ── -->
+  <div class="page-header-strip">
+    <div class="page-header-inner">
+      <div>
+        <h1>
+          {label}
+          <span class="result-count">{filteredProducts.length} phones</span>
+        </h1>
+        <p>
+          {brandFilter && `${brandFilter} phones `}
+          {storageFilter && `with ${storageFilter.label} storage `}
+          {depositFilter ? `starting from ${depositFilter.label} deposit` : 'available on lipa mdogo mdogo'} —
+          walk away with your phone today and pay the balance in small daily or weekly M-Pesa installments.
+          No paperwork. No credit check. Free delivery within Nairobi.
+        </p>
+      </div>
+
+      <!-- Mobile filter toggle -->
+      <button class="filter-drawer-toggle" id="filterToggleBtn" type="button" aria-label="Open filters">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0">
+          <line x1="1" y1="3.5" x2="13" y2="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="3" y1="7" x2="11" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="5" y1="10.5" x2="9" y2="10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Filters
+        {hasFilters && <span class="filter-active-dot"></span>}
+      </button>
     </div>
-  </nav>
 
-  <!-- ── Brand filter ── -->
-  <nav class="filter-nav" aria-label="Filter by brand">
-    <span class="filter-nav-label">Brand</span>
-    <div class="filter-nav-scroll">
-      <a href={depositFilter ? `/phones/${depositFilter.key}` : '/phones/lipa-mdogo-mdogo-nairobi'}
-         class={`filter-nav-link${!brandFilter ? ' active' : ''}`}>All brands</a>
-      {ALL_BRANDS.map(brand => {
-        const href = depositFilter
-          ? `/phones/${brandSlugall(brand)}-${depositFilter.key}`
-          : `/phones/${brandSlugall(brand)}`;
-        return (
-          <a href={href} class={`filter-nav-link${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' active' : ''}`}>
-            {brand}
-          </a>
-        );
-      })}
-    </div>
-  </nav>
-
-  <!-- ── Storage filter ── -->
-  <nav class="filter-nav" aria-label="Filter by storage">
-    <span class="filter-nav-label">Storage</span>
-    <div class="filter-nav-scroll">
-      <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
-         class={`filter-nav-link${!storageFilter ? ' active' : ''}`}>Any size</a>
-      {STORAGE_FILTERS.map(stor => {
-        const href = brandFilter
-          ? `/phones/${brandSlugall(brandFilter)}-${stor.key}`
-          : `/phones/${stor.key}`;
-        return (
-          <a href={href} class={`filter-nav-link${storageFilter?.key === stor.key ? ' active' : ''}`}>
-            {stor.label}
-          </a>
-        );
-      })}
-    </div>
-  </nav>
-
-  <!-- ── Page header ── -->
-  <div class="page-header">
-    <h1>
-      {label}
-      <span class="result-count">{filteredProducts.length} phones</span>
-    </h1>
-    <p>
-      {brandFilter && `${brandFilter} phones `}
-      {storageFilter && `with ${storageFilter.label} storage `}
-      {depositFilter ? `starting from ${depositFilter.label} deposit` : 'available on lipa mdogo mdogo'} —
-      walk away with your phone today and pay the balance in small daily or weekly M-Pesa installments.
-      No paperwork. No credit check. Free delivery within Nairobi.
-    </p>
-  </div>
-
-  <!-- ── Active filter chips ── -->
-  {(brandFilter || depositFilter || storageFilter) && (
-    <div class="active-filters">
-      <span class="active-filters-label">Active filters</span>
-      <div class="active-filter-chips">
-
+    <!-- Active filter chips -->
+    {hasFilters && (
+      <div class="active-chips-bar">
         {brandFilter && (
           <a href={depositFilter
               ? `/phones/${depositFilter.key}`
               : storageFilter
               ? `/phones/${storageFilter.key}`
               : '/phones/lipa-mdogo-mdogo-nairobi'}
-             class="filter-chip" title={`Remove ${brandFilter} filter`}>
+             class="active-chip">
             {brandFilter}
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="flex-shrink:0">
+              <line x1="1.5" y1="1.5" x2="9.5" y2="9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="9.5" y1="1.5" x2="1.5" y2="9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
           </a>
         )}
         {depositFilter && (
           <a href={brandFilter
               ? `/phones/${brandSlugall(brandFilter)}`
               : '/phones/lipa-mdogo-mdogo-nairobi'}
-             class="filter-chip" title="Remove deposit filter">
+             class="active-chip">
             {depositFilter.label}
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="flex-shrink:0">
+              <line x1="1.5" y1="1.5" x2="9.5" y2="9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="9.5" y1="1.5" x2="1.5" y2="9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
           </a>
         )}
         {storageFilter && (
           <a href={brandFilter
               ? `/phones/${brandSlugall(brandFilter)}`
               : '/phones/lipa-mdogo-mdogo-nairobi'}
-             class="filter-chip" title={`Remove ${storageFilter.label} storage filter`}>
+             class="active-chip">
             {storageFilter.label} Storage
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="12" y1="2" x2="2" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="flex-shrink:0">
+              <line x1="1.5" y1="1.5" x2="9.5" y2="9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="9.5" y1="1.5" x2="1.5" y2="9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
           </a>
         )}
-
-        <a href="/phones/lipa-mdogo-mdogo-nairobi" class="filter-chip-clear">Clear all</a>
+        <a href="/phones/lipa-mdogo-mdogo-nairobi" class="chip-clear">Clear all</a>
       </div>
-    </div>
-  )}
+    )}
+  </div>
 
-  <!-- ── Product grid ── -->
-  <main class="page-body">
-    <div class="product-grid" id="product-grid">
-      {filteredProducts.length === 0 ? (
-        <div class="empty-state">
-          <h2>😕 No phones match this filter</h2>
-          <p><a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones</a> or try a different filter above.</p>
+  <!-- ── Main layout: sidebar + content ── -->
+  <div class="phones-layout">
+
+    <!-- Overlay (mobile) -->
+    <div class="filter-overlay" id="filterOverlay"></div>
+
+    <!-- ── Filter Sidebar ── -->
+    <aside class="filter-sidebar" id="filterSidebar" aria-label="Filter phones">
+
+      <!-- Header -->
+      <div class="fs-head">
+        <span class="fs-title">Filters</span>
+        {hasFilters && <a href="/phones/lipa-mdogo-mdogo-nairobi" class="fs-clear">Clear all</a>}
+        <button class="fs-close" id="filterCloseBtn" type="button" aria-label="Close filters">&#10005;</button>
+      </div>
+
+      <!-- ── Brand ── -->
+      <div class="filter-group" id="fg-brand">
+        <button class="fg-toggle open" type="button" data-group="brand">
+          <span class="fg-toggle-label">Brand</span>
+          <span class="fg-arrow" style="transform: rotate(90deg)">›</span>
+        </button>
+        <div class="fg-body">
+          <div class="fp-wrap">
+            <a href={depositFilter ? `/phones/${depositFilter.key}` : storageFilter ? `/phones/${storageFilter.key}` : '/phones/lipa-mdogo-mdogo-nairobi'}
+               class={`fp${!brandFilter ? ' fp-active' : ''}`}>All brands</a>
+            {ALL_BRANDS.map(brand => {
+              const href = depositFilter
+                ? `/phones/${brandSlugall(brand)}-${depositFilter.key}`
+                : storageFilter
+                ? `/phones/${brandSlugall(brand)}-${storageFilter.key}`
+                : `/phones/${brandSlugall(brand)}`;
+              return (
+                <a href={href} class={`fp${brandFilter?.toLowerCase() === brand.toLowerCase() ? ' fp-active' : ''}`}>
+                  {brand}
+                </a>
+              );
+            })}
+          </div>
         </div>
-      ) : filteredProducts.map((p, i) => {
-        const statusLower = p.status?.toLowerCase();
-        const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
-        const badgeLabel  = p.status ?? 'NEW';
-        const specs       = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
-        const rating      = p.reviews?.averageRating ?? 4.5;
-        const reviewCount = p.reviews?.reviewCount ?? 0;
-        const altText     = [
-          p.fullname ?? p.name,
-          p.brand,
-          depositFilter ? `Deposit ${depositFilter.label}` : 'Lipa Mdogo Mdogo',
-          'Buy Nairobi Kenya Installments',
-        ].filter(Boolean).join(' ');
-        return (
-          <a href={`/${p.slug}`} class="card" data-index={i} style="text-decoration:none; color:inherit;">
-            <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
-            <div class="card-img-wrap">
-              <img class="card-img" src={p.source} alt={altText} loading="lazy" width="300" height="225" decoding="async" />
-            </div>
-            <div class="card-body">
-              <div class="card-brand">{p.brand}</div>
-              <div class="card-name">{p.fullname}</div>
-              <div class="card-specs">{specs.map(s => <span class="spec-tag">{s}</span>)}</div>
-              <div class="card-rating">
-                <span class="stars">{renderStars(rating)}</span>
-                <span class="rating-count">({reviewCount})</span>
-              </div>
-              <div class="card-price">
-                <span class="price-current">{p.deposit}</span>
-                {p.discount && <span class="price-save">{p.discount}</span>}
-              </div>
-              <div class="installment-note">💳 Deposit {p.deposit} · Pay the rest daily or weekly</div>
-              <div class="card-cta">
-                <button class="btn-cart">🛒 Add to Cart</button>
-                <button class="btn-buy">Buy Now</button>
-              </div>
-            </div>
-          </a>
-        );
-      })}
-    </div>
-  </main>
+      </div>
 
-  <!-- ── Pagination ── -->
-  {filteredProducts.length > CARDS_PER_PAGE && (
-    <div class="pagination-wrap" id="pagination-wrap">
-      <p class="pagination-info" id="pagination-info"></p>
-      <div class="pagination-bar" id="pagination-bar"></div>
-    </div>
-  )}
+      <!-- ── Deposit ── -->
+      <div class="filter-group" id="fg-deposit">
+        <button class={`fg-toggle${depositFilter ? ' open' : ''}`} type="button" data-group="deposit">
+          <span class="fg-toggle-label">Deposit</span>
+          <span class="fg-arrow" style={depositFilter ? 'transform: rotate(90deg)' : ''}>›</span>
+        </button>
+        <div class="fg-body" style={depositFilter ? '' : 'display:none'}>
+          <div class="fp-wrap">
+            <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
+               class={`fp${!depositFilter ? ' fp-active' : ''}`}>Any deposit</a>
+            {DEPOSIT_FILTERS.map(dep => {
+              const href = brandFilter
+                ? `/phones/${brandSlugall(brandFilter)}-${dep.key}`
+                : `/phones/${dep.key}`;
+              return (
+                <a href={href} class={`fp${depositFilter?.key === dep.key ? ' fp-active' : ''}`}>
+                  {dep.label}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-  <!-- ── Related filter suggestions ── -->
-  {filteredProducts.length > 0 && (
-    <section class="related-filters">
-      <h2>Explore More</h2>
-      <div class="related-grid">
-        {ALL_BRANDS.map(brand => {
-          const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
+      <!-- ── Storage ── -->
+      <div class="filter-group" id="fg-storage">
+        <button class={`fg-toggle${storageFilter ? ' open' : ''}`} type="button" data-group="storage">
+          <span class="fg-toggle-label">Storage</span>
+          <span class="fg-arrow" style={storageFilter ? 'transform: rotate(90deg)' : ''}>›</span>
+        </button>
+        <div class="fg-body" style={storageFilter ? '' : 'display:none'}>
+          <div class="fp-wrap">
+            <a href={brandFilter ? `/phones/${brandSlugall(brandFilter)}` : '/phones/lipa-mdogo-mdogo-nairobi'}
+               class={`fp${!storageFilter ? ' fp-active' : ''}`}>Any size</a>
+            {STORAGE_FILTERS.map(stor => {
+              const href = brandFilter
+                ? `/phones/${brandSlugall(brandFilter)}-${stor.key}`
+                : depositFilter
+                ? `/phones/${depositFilter.key}-${stor.key}`
+                : `/phones/${stor.key}`;
+              return (
+                <a href={href} class={`fp${storageFilter?.key === stor.key ? ' fp-active' : ''}`}>
+                  {stor.label}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Quick picks ── -->
+      <div class="fs-quicklinks">
+        <span class="fs-ql-head">Quick picks</span>
+        <a href="/phones/samsung-deposit-under-5000"    class="fs-ql-link">Samsung under 5K deposit</a>
+        <a href="/phones/deposit-under-3000"            class="fs-ql-link">Cheapest deposits</a>
+        <a href="/phones/storage-128gb"                 class="fs-ql-link">128GB phones</a>
+        <a href="/phones/storage-256gb"                 class="fs-ql-link">256GB phones</a>
+        <a href="/phones/infinix"                       class="fs-ql-link">Infinix installments</a>
+        <a href="/phones/tecno-deposit-under-5000"      class="fs-ql-link">Tecno under 5K</a>
+      </div>
+
+    </aside>
+
+    <!-- ── Content area ── -->
+    <main class="phones-main" id="phonesMain">
+
+      <!-- Product grid -->
+      <div class="product-grid" id="product-grid">
+        {filteredProducts.length === 0 ? (
+          <div class="empty-state">
+            <h2>😕 No phones match this filter</h2>
+            <p><a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones</a> or try a different filter.</p>
+          </div>
+        ) : filteredProducts.map((p, i) => {
+          const statusLower = p.status?.toLowerCase();
+          const badgeClass  = statusLower === 'new' ? 'badge-new' : statusLower === 'hot' ? 'badge-hot' : 'badge-sale';
+          const badgeLabel  = p.status ?? 'NEW';
+          const specs       = [p.phonedisplay, p.processor?.split(' ').slice(-2).join(' '), p.battery?.split(',')[0]].filter(Boolean).slice(0, 3);
+          const rating      = p.reviews?.averageRating ?? 4.5;
+          const reviewCount = p.reviews?.reviewCount ?? 0;
+          const altText     = [
+            p.fullname ?? p.name, p.brand,
+            depositFilter ? `Deposit ${depositFilter.label}` : 'Lipa Mdogo Mdogo',
+            'Buy Nairobi Kenya Installments',
+          ].filter(Boolean).join(' ');
           return (
-            <a href={`/phones/${brandSlugall(brand)}`} class="related-link">
-              {brand} <span class="count">({count})</span>
+            <a href={`/${p.slug}`} class="card" data-index={i} style="text-decoration:none; color:inherit;">
+              <span class={`badge ${badgeClass}`}>{badgeLabel}</span>
+              <div class="card-img-wrap">
+                <img class="card-img" src={p.source} alt={altText} loading="lazy" width="300" height="225" decoding="async" />
+              </div>
+              <div class="card-body">
+                <div class="card-brand">{p.brand}</div>
+                <div class="card-name">{p.fullname}</div>
+                <div class="card-specs">{specs.map(s => <span class="spec-tag">{s}</span>)}</div>
+                <div class="card-rating">
+                  <span class="stars">{renderStars(rating)}</span>
+                  <span class="rating-count">({reviewCount})</span>
+                </div>
+                <div class="card-price">
+                  <span class="price-current">{p.deposit}</span>
+                  {p.discount && <span class="price-save">{p.discount}</span>}
+                </div>
+                <div class="installment-note">💳 Deposit {p.deposit} · Pay the rest daily or weekly</div>
+                <div class="card-cta">
+                  <button class="btn-cart">🛒 Add to Cart</button>
+                  <button class="btn-buy">Buy Now</button>
+                </div>
+              </div>
             </a>
           );
         })}
-        {DEPOSIT_FILTERS.map(dep => {
-          const count = products.filter(p => {
-            const d = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
-            return d >= dep.min && d <= dep.max;
-          }).length;
-          return (
-            <a href={`/phones/${dep.key}`} class="related-link">
-              {dep.label} <span class="count">({count})</span>
-            </a>
-          );
-        })}
-        {STORAGE_FILTERS.map(stor => (
-          <a href={`/phones/${stor.key}`} class="related-link">{stor.label} Storage</a>
-        ))}
       </div>
-    </section>
-  )}
 
-  <!-- ── SEO content block ── -->
-  <section class="seo-section" aria-label="About installment phones in Nairobi">
-    <hr />
-    <div class="seo-grid">
-
-      <div class="seo-col">
-        <h3>Pay Small, Own Big</h3>
-        <p>
-          Lipa mdogo mdogo means exactly what it says — pay a little, get a lot.
-          Put down a small deposit, walk out with your phone, then send the balance via M-Pesa in daily or weekly bites that fit your budget.
-          {brandFilter
-            ? ` We stock the full range of ${brandFilter} phones on installment — from entry-level to flagship — all available without a credit check.`
-            : depositFilter
-            ? ` With a ${depositFilter.label} deposit you can own a brand-new smartphone today. No salary slip, no bank account, no guarantor needed.`
-            : storageFilter
-            ? ` All ${storageFilter.label} phones in our catalog are available on flexible installments — store more, pay less at a time.`
-            : ' Samsung, Tecno, Infinix, Oppo, Redmi, Apple — every brand, any budget, all on easy installments in Nairobi.'
-          }
-        </p>
-        <div class="seo-tags">
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">buy phone pay later Kenya</a>
-          <a href="/phones/deposit-under-3000"          class="seo-tag">phones deposit under 3000</a>
-          <a href="/phones/deposit-under-5000"          class="seo-tag">phones deposit under 5000</a>
-          <a href="/phones/deposit-under-10000"         class="seo-tag">phones deposit under 10000</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">daily installment phone Kenya</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">weekly M-Pesa phone payment</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">lipa pole pole phones Nairobi</a>
-          <a href="/phones/deposit-under-3000"          class="seo-tag">budget phone small deposit</a>
+      <!-- Pagination -->
+      {filteredProducts.length > CARDS_PER_PAGE && (
+        <div class="pagination-wrap" id="pagination-wrap">
+          <p class="pagination-info" id="pagination-info"></p>
+          <div class="pagination-bar" id="pagination-bar"></div>
         </div>
-      </div>
+      )}
 
-      <div class="seo-col">
-        <h3>Top Brands, Better Deals</h3>
-        <p>
-          Not sure which brand to pick?
-          <a href="/phones/samsung">Samsung Galaxy A Series</a> leads on camera quality and resale value — perfect if you want a phone that lasts.
-          <a href="/phones/tecno">Tecno Spark & Camon</a> punch above their weight on battery and selfie performance.
-          <a href="/phones/infinix">Infinix Hot Series</a> gives you a huge screen and all-day battery at one of the lowest deposits available.
-          <a href="/phones/redmi">Redmi</a> is the go-to for 4G speed and clean software at a fair price.
-          All brands, all on installments — choose the one that fits your lifestyle.
-        </p>
-        <div class="seo-tags">
-          <a href="/phones/samsung"                     class="seo-tag">Samsung lipa mdogo mdogo</a>
-          <a href="/phones/samsung-deposit-under-10000" class="seo-tag">Samsung deposit under 10000</a>
-          <a href="/phones/tecno"                       class="seo-tag">Tecno Camon installment</a>
-          <a href="/phones/tecno-deposit-under-5000"    class="seo-tag">Tecno deposit under 5000</a>
-          <a href="/phones/infinix"                     class="seo-tag">Infinix Hot lipa mdogo mdogo</a>
-          <a href="/phones/redmi"                       class="seo-tag">Redmi 4G installment Kenya</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">5G phones lipa mdogo mdogo</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">best camera phone pay later</a>
+      <!-- Related filter suggestions -->
+      {filteredProducts.length > 0 && (
+        <section class="related-filters">
+          <h2>Explore More</h2>
+          <div class="related-grid">
+            {ALL_BRANDS.map(brand => {
+              const count = products.filter(p => p.brand?.toLowerCase() === brand.toLowerCase()).length;
+              return (
+                <a href={`/phones/${brandSlugall(brand)}`} class="related-link">
+                  {brand} <span class="count">({count})</span>
+                </a>
+              );
+            })}
+            {DEPOSIT_FILTERS.map(dep => {
+              const count = products.filter(p => {
+                const d = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
+                return d >= dep.min && d <= dep.max;
+              }).length;
+              return (
+                <a href={`/phones/${dep.key}`} class="related-link">
+                  {dep.label} <span class="count">({count})</span>
+                </a>
+              );
+            })}
+            {STORAGE_FILTERS.map(stor => (
+              <a href={`/phones/${stor.key}`} class="related-link">{stor.label} Storage</a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- SEO content block -->
+      <section class="seo-section" aria-label="About installment phones in Nairobi">
+        <hr />
+        <div class="seo-grid">
+          <div class="seo-col">
+            <h3>Pay Small, Own Big</h3>
+            <p>
+              Lipa mdogo mdogo means exactly what it says — pay a little, get a lot.
+              Put down a small deposit, walk out with your phone, then send the balance via M-Pesa in daily or weekly bites that fit your budget.
+              {brandFilter
+                ? ` We stock the full range of ${brandFilter} phones on installment — from entry-level to flagship — all available without a credit check.`
+                : depositFilter
+                ? ` With a ${depositFilter.label} deposit you can own a brand-new smartphone today. No salary slip, no bank account, no guarantor needed.`
+                : storageFilter
+                ? ` All ${storageFilter.label} phones in our catalog are available on flexible installments — store more, pay less at a time.`
+                : ' Samsung, Tecno, Infinix, Oppo, Redmi, Apple — every brand, any budget, all on easy installments in Nairobi.'
+              }
+            </p>
+            <div class="seo-tags">
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">buy phone pay later Kenya</a>
+              <a href="/phones/deposit-under-3000"         class="seo-tag">phones deposit under 3000</a>
+              <a href="/phones/deposit-under-5000"         class="seo-tag">phones deposit under 5000</a>
+              <a href="/phones/deposit-under-10000"        class="seo-tag">phones deposit under 10000</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">daily installment phone Kenya</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">weekly M-Pesa phone payment</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">lipa pole pole phones Nairobi</a>
+              <a href="/phones/deposit-under-3000"         class="seo-tag">budget phone small deposit</a>
+            </div>
+          </div>
+          <div class="seo-col">
+            <h3>Top Brands, Better Deals</h3>
+            <p>
+              Not sure which brand to pick?
+              <a href="/phones/samsung">Samsung Galaxy A Series</a> leads on camera quality and resale value.
+              <a href="/phones/tecno">Tecno Spark & Camon</a> punch above their weight on battery and selfie performance.
+              <a href="/phones/infinix">Infinix Hot Series</a> gives you a huge screen and all-day battery at one of the lowest deposits available.
+              <a href="/phones/redmi">Redmi</a> is the go-to for 4G speed and clean software at a fair price.
+            </p>
+            <div class="seo-tags">
+              <a href="/phones/samsung"                    class="seo-tag">Samsung lipa mdogo mdogo</a>
+              <a href="/phones/samsung-deposit-under-10000" class="seo-tag">Samsung deposit under 10000</a>
+              <a href="/phones/tecno"                      class="seo-tag">Tecno Camon installment</a>
+              <a href="/phones/tecno-deposit-under-5000"   class="seo-tag">Tecno deposit under 5000</a>
+              <a href="/phones/infinix"                    class="seo-tag">Infinix Hot lipa mdogo mdogo</a>
+              <a href="/phones/redmi"                      class="seo-tag">Redmi 4G installment Kenya</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">5G phones lipa mdogo mdogo</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">best camera phone pay later</a>
+            </div>
+          </div>
+          <div class="seo-col">
+            <h3>How It Works</h3>
+            <p>
+              Pick your phone, agree on a deposit, and we deliver same day anywhere in Nairobi CBD.
+              After that, just send your installment via M-Pesa — daily, weekly, or monthly, whichever suits you.
+              No hidden fees, no interest surprises, no credit bureau checks.
+              Most customers are fully paid up within 3–6 months.
+              <a href="/phones/lipa-mdogo-mdogo-nairobi">Start browsing</a> and find your next phone today.
+            </p>
+            <div class="seo-tags">
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">phone installment delivery Nairobi</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">order phone online Kenya</a>
+              <a href="/phones/deposit-under-10000"        class="seo-tag">phone deposit below 10000 Nairobi</a>
+              <a href="/phones/storage-128gb"              class="seo-tag">128GB installment phone</a>
+              <a href="/phones/storage-256gb"              class="seo-tag">256GB pay later Kenya</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">big battery phone installment</a>
+              <a href="/phones/lipa-mdogo-mdogo-nairobi"  class="seo-tag">large screen lipa mdogo mdogo</a>
+              <a href="/phones/deposit-under-3000"         class="seo-tag">most affordable smartphone Kenya</a>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="seo-col">
-        <h3>How It Works</h3>
-        <p>
-          It's simple. Pick your phone, agree on a deposit, and we deliver same day to your door anywhere in Nairobi CBD.
-          After that, just send your installment via M-Pesa — daily, weekly, or monthly, whichever suits you.
-          No hidden fees, no interest surprises, no credit bureau checks.
-          Most customers are fully paid up within 3–6 months and come back for their next upgrade.
-          <a href="/phones/lipa-mdogo-mdogo-nairobi">Start browsing</a> and find your next phone today.
-        </p>
-        <div class="seo-tags">
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">phone installment delivery Nairobi</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">order phone online Kenya</a>
-          <a href="/phones/deposit-under-10000"         class="seo-tag">phone deposit below 10000 Nairobi</a>
-          <a href="/phones/storage-128gb"               class="seo-tag">128GB installment phone</a>
-          <a href="/phones/storage-256gb"               class="seo-tag">256GB pay later Kenya</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">big battery phone installment</a>
-          <a href="/phones/lipa-mdogo-mdogo-nairobi"   class="seo-tag">large screen lipa mdogo mdogo</a>
-          <a href="/phones/deposit-under-3000"          class="seo-tag">most affordable smartphone Kenya</a>
-        </div>
-      </div>
+    </main>
+  </div>
 
-    </div>
-  </section>
-
+  <!-- ── Scripts ── -->
   <script define:vars={{ totalPages, CARDS_PER_PAGE, totalProducts: filteredProducts.length }}>
   (function () {
+    // ── Pagination ──────────────────────────────────────────────────────────
     const cards  = Array.from(document.querySelectorAll('#product-grid .card'));
     const infoEl = document.getElementById('pagination-info');
     const barEl  = document.getElementById('pagination-bar');
 
     if (!cards.length || totalPages <= 1) {
       cards.forEach(c => c.classList.add('visible'));
-      return;
+    } else {
+      let currentPage = 1;
+
+      function showPage(page) {
+        currentPage = page;
+        const start = (page - 1) * CARDS_PER_PAGE;
+        const end   = start + CARDS_PER_PAGE;
+        cards.forEach((c, i) => c.classList.toggle('visible', i >= start && i < end));
+        infoEl.textContent = `Showing ${start + 1}–${Math.min(end, totalProducts)} of ${totalProducts} phones`;
+        buildBar(page);
+        document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function buildBar(active) {
+        barEl.innerHTML = '';
+        const make = (label, page, cls) => {
+          const btn = document.createElement('button');
+          btn.className = 'page-btn' + (cls ? ' ' + cls : '');
+          btn.innerHTML = label;
+          if (page !== null) btn.addEventListener('click', () => showPage(page));
+          return btn;
+        };
+        const dot = () => {
+          const s = document.createElement('span');
+          s.className = 'page-ellipsis';
+          s.textContent = '…';
+          return s;
+        };
+        const prev = make('&#8592;', active - 1);
+        if (active === 1) prev.classList.add('disabled');
+        barEl.appendChild(prev);
+        const nums = [...new Set([1, totalPages, active, active - 1, active + 1].filter(p => p >= 1 && p <= totalPages))].sort((a, b) => a - b);
+        let last = 0;
+        nums.forEach(p => {
+          if (p - last > 1) barEl.appendChild(dot());
+          barEl.appendChild(make(p, p, p === active ? 'active' : ''));
+          last = p;
+        });
+        const next = make('&#8594;', active + 1);
+        if (active === totalPages) next.classList.add('disabled');
+        barEl.appendChild(next);
+      }
+
+      showPage(1);
     }
 
-    let currentPage = 1;
-
-    function showPage(page) {
-      currentPage = page;
-      const start = (page - 1) * CARDS_PER_PAGE;
-      const end   = start + CARDS_PER_PAGE;
-      cards.forEach((c, i) => c.classList.toggle('visible', i >= start && i < end));
-      infoEl.textContent = `Showing ${start + 1}–${Math.min(end, totalProducts)} of ${totalProducts} phones`;
-      buildBar(page);
-      document.getElementById('product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function buildBar(active) {
-      barEl.innerHTML = '';
-      const make = (label, page, cls) => {
-        const btn = document.createElement('button');
-        btn.className = 'page-btn' + (cls ? ' ' + cls : '');
-        btn.innerHTML = label;
-        if (page !== null) btn.addEventListener('click', () => showPage(page));
-        return btn;
-      };
-      const dot = () => {
-        const s = document.createElement('span');
-        s.className = 'page-ellipsis';
-        s.textContent = '…';
-        return s;
-      };
-      const prev = make('&#8592;', active - 1);
-      if (active === 1) prev.classList.add('disabled');
-      barEl.appendChild(prev);
-      const nums = [...new Set([1, totalPages, active, active - 1, active + 1].filter(p => p >= 1 && p <= totalPages))].sort((a, b) => a - b);
-      let last = 0;
-      nums.forEach(p => {
-        if (p - last > 1) barEl.appendChild(dot());
-        barEl.appendChild(make(p, p, p === active ? 'active' : ''));
-        last = p;
+    // ── Accordion toggles ───────────────────────────────────────────────────
+    document.querySelectorAll('.fg-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body  = btn.nextElementSibling;
+        const arrow = btn.querySelector('.fg-arrow');
+        const isOpen = btn.classList.toggle('open');
+        body.style.display  = isOpen ? '' : 'none';
+        arrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
       });
-      const next = make('&#8594;', active + 1);
-      if (active === totalPages) next.classList.add('disabled');
-      barEl.appendChild(next);
+    });
+
+    // ── Drawer (mobile) ─────────────────────────────────────────────────────
+    const sidebar    = document.getElementById('filterSidebar');
+    const overlay    = document.getElementById('filterOverlay');
+    const toggleBtn  = document.getElementById('filterToggleBtn');
+    const closeBtn   = document.getElementById('filterCloseBtn');
+
+    function openDrawer() {
+      sidebar.classList.add('drawer-open');
+      overlay.classList.add('overlay-show');
+      document.body.style.overflow = 'hidden';
     }
 
-    showPage(1);
+    function closeDrawer() {
+      sidebar.classList.remove('drawer-open');
+      overlay.classList.remove('overlay-show');
+      document.body.style.overflow = '';
+    }
+
+    toggleBtn?.addEventListener('click', openDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    overlay?.addEventListener('click', closeDrawer);
+
+    // Close drawer whenever user navigates to a new filter (any <a> inside sidebar)
+    sidebar?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
   })();
   </script>
 
