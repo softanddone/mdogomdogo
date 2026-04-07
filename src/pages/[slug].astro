@@ -1,4 +1,3 @@
-
 ---
 export const prerender = true;
 
@@ -30,9 +29,6 @@ const currentProduct = products.find((p) => p.slug === slug);
 
 const productFeatureKeys    = getProductFeatures(currentProduct);
 const productFeatureObjects = FEATURE_FILTERS.filter(f => productFeatureKeys.includes(f.key));
-
-
-
 
 
 if (!currentProduct) {
@@ -114,36 +110,36 @@ const relatedProducts = pool.slice(0, 4);
 
 const faqs = [
   {
-    question: `How does Lipa Mdogo Mdogo work for the ${currentProduct.name}?`,
-    answer: `It works like this — we bring the phone straight to your door. You inspect it, switch it on, and test it yourself. Only once you are satisfied do you pay the deposit of KES ${currentProduct.deposit}. After a free grace period, you pay KES ${currentProduct.daily} daily — or choose weekly or monthly — until the balance is cleared. No upfront payment is required to place your order.`,
+    question: `How does the Lipa Mdogo Mdogo instalment plan work for the ${currentProduct.name}?`,
+    answer: `It is straightforward. We deliver the phone directly to your location — no advance payment required. Once it arrives, you turn it on, test every feature, and try it for yourself. Only when you are completely satisfied do you pay the deposit of KES ${currentProduct.deposit}. After that, a short grace period begins before your daily payments of KES ${currentProduct.daily} kick in. You can also choose to pay weekly or monthly instead — whatever matches your cash flow best. No booking fee, no delivery charge, nothing owed before the phone is in your hands.`,
   },
   {
-    question: "Do I pay anything before the phone is delivered?",
-    answer: "Nothing at all. We deliver first, you inspect second, you pay third. The deposit is only collected once you have seen the phone in person and confirmed you are happy with it. There are no booking fees, no delivery charges, and no payment required before we arrive.",
+    question: "Do I need to pay anything before delivery?",
+    answer: "Absolutely not. MdogomdogoDeals operates on a simple principle: we deliver first, you inspect second, you pay third. The deposit is only collected once the phone is physically with you and you have confirmed it meets your expectations. There are no hidden booking fees, no upfront processing charges, and no payment of any kind before our rider arrives at your door.",
   },
   {
-    question: "Which areas do you deliver to?",
-    answer: "We offer same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado counties. This covers most of greater Nairobi and the surrounding region. Call or WhatsApp us on 0100028823 to confirm your exact location before placing an order.",
+    question: "Which counties and areas do you cover?",
+    answer: "We offer free same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado counties — covering the entire greater Nairobi metropolitan area and surrounding regions. This includes Nairobi CBD, Westlands, Kasarani, Embakasi, Thika, Ruiru, Athi River, Kitengela, Ngong, and many more. Not sure whether we reach your exact location? Call or WhatsApp us on 0100028823 before ordering and we will confirm right away.",
   },
   {
-    question: "How do I place an order?",
-    answer: `Three easy ways: (1) Call us on 0100028823, (2) WhatsApp us on 0100028823 — the quickest option, or (3) complete the order form on this page. Once we receive your order we will confirm same-day delivery details with you directly.`,
+    question: "How do I place an order for the phone?",
+    answer: `Ordering is easy — three options are available: (1) WhatsApp us on 0100028823 for the fastest response, (2) call us directly on 0100028823 to speak with our team, or (3) fill in the order form on this page. As soon as we receive your order, we will confirm your delivery slot and estimated arrival time the same day.`,
   },
   {
-    question: `Is the ${currentProduct.name} original and genuine?`,
-    answer: `Yes — every ${currentProduct.brand} ${currentProduct.name} we sell is 100% genuine, brand new, and sourced directly from authorised ${currentProduct.brand} distributors in Kenya. Each unit comes with a full manufacturer warranty.`,
+    question: `Is the ${currentProduct.name} brand new and genuine?`,
+    answer: `Yes, without exception. Every ${currentProduct.brand} ${currentProduct.name} we sell is brand new, 100% genuine, and sourced exclusively through authorised ${currentProduct.brand} distributors operating in Kenya. No refurbished units, no grey-market imports, no imitations. Every phone comes sealed in original ${currentProduct.brand} retail packaging and includes a full manufacturer warranty for your peace of mind.`,
   },
   {
-    question: `What colours are available for the ${currentProduct.name}?`,
-    answer: `The ${currentProduct.brand} ${currentProduct.name} is available in: ${currentProduct.color}. Just mention your preferred colour when you place your order and we will confirm availability.`,
+    question: `What colour options are available for the ${currentProduct.name}?`,
+    answer: `The ${currentProduct.brand} ${currentProduct.name} is currently available in the following colours: ${currentProduct.color}. When placing your order, simply let us know your preferred colour and we will confirm availability. If your first choice is out of stock, we will advise you immediately so you can choose an alternative without any delay to your delivery.`,
   },
   {
-    question: "What warranty comes with the phone?",
-    answer: `Every unit includes a 2-year manufacturer warranty covering hardware defects, backed by ${currentProduct.brand} and ${currentProduct.seller}. You also benefit from our after-sales support throughout your instalment period.`,
+    question: "What warranty does the phone come with?",
+    answer: `Every ${currentProduct.brand} ${currentProduct.name} purchased through MdogomdogoDeals comes with a 2-year manufacturer warranty covering factory defects and hardware faults, backed by ${currentProduct.brand} and ${currentProduct.seller}. In addition, you benefit from our dedicated after-sales support team throughout your instalment period — so you are never left without assistance.`,
   },
   {
-    question: "What happens if I miss a daily payment?",
-    answer: "Life happens — we understand. Just reach out to us as soon as you can. We offer flexible grace periods and are always willing to work out a revised payment schedule. There are no automatic penalties for genuine cases.",
+    question: "What happens if I am unable to make a payment on time?",
+    answer: "We understand that life does not always go to plan. If you are going through a difficult period, the most important thing is to contact us proactively. Our team is trained to work with customers compassionately — we can arrange a revised payment schedule, extend a grace period, or pause instalments temporarily depending on your situation. There are no automatic penalties for customers who communicate with us honestly.",
   },
 ];
 
@@ -258,16 +254,15 @@ function renderStars(r: number) {
     <!-- SEO INTRO -->
     <div class="seo-intro">
       <p>
-        Searching for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
-        You have found it. The <a href={`/phones/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is available in Kenya on
-        <strong>Lipa Mdogo Mdogo</strong> — Kenya's most flexible phone instalment plan. Pay a small deposit only after the phone is delivered to your door, then spread the balance in
-        affordable daily, weekly, or monthly payments. Zero credit check, no guarantor, no money required before delivery.
-        Same-day delivery across <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
-        {currentProduct.ram && ` Loaded with ${currentProduct.ram} RAM`}
-        {currentProduct.storage && `, ${currentProduct.storage} storage`}
-        {currentProduct.battery && `, and a ${currentProduct.battery} battery`}
-        {` — the ${currentProduct.brand} ${currentProduct.name} is among the best-value smartphones you can own in Kenya right now.`}
-        &nbsp;<a href="#price-kenya">See pricing &amp; instalments &darr;</a>
+        Looking up the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
+        You have come to the right place. The <a href={`/phones/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is now available in Kenya through
+        <strong>Lipa Mdogo Mdogo</strong> — the country's most trusted phone instalment service. Own it today with zero upfront cost: a small deposit is collected only after the phone reaches your door and you have inspected it, then spread the remaining balance in affordable daily, weekly, or monthly payments. No credit check, no guarantor, no money needed before delivery.
+        Same-day delivery to <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
+        {currentProduct.ram && ` Featuring ${currentProduct.ram} RAM`}
+        {currentProduct.storage && `, ${currentProduct.storage} of built-in storage`}
+        {currentProduct.battery && `, and a powerful ${currentProduct.battery} battery`}
+        {` — the ${currentProduct.brand} ${currentProduct.name} is one of the sharpest smartphone deals available in Kenya today.`}
+        &nbsp;<a href="#price-kenya">View pricing &amp; instalments &darr;</a>
       </p>
     </div>
 
@@ -306,7 +301,7 @@ function renderStars(r: number) {
           )}
           {currentProduct.source3 && (
             <button class="thumb" data-src={currentProduct.source3} aria-label="View image 3">
-              <img src={currentProduct.source3} alt={`${currentProduct.brand} ${currentProduct.name} camera — buy Nairobi lipa mdogo mdogo`} width="72" height="72" loading="lazy" />
+              <img src={currentProduct.source3} alt={`${currentProduct.brand} ${currentProduct.name} camera detail — lipa mdogo mdogo Kenya`} width="72" height="72" loading="lazy" />
             </button>
           )}
         </div>
@@ -333,15 +328,15 @@ function renderStars(r: number) {
             <span class="stars">{renderStars(rating)}</span>
             <span class="rating-val">{rating}</span>
             <span class="rating-sep">·</span>
-            <a href="#tab-faq" class="rating-link">{reviewCount} reviews</a>
+            <a href="#tab-faq" class="rating-link">{reviewCount} verified reviews</a>
           </div>
         )}
 
         <!-- Delivery trust strip -->
         <div class="trust-strip">
-          <span>Same-day delivery</span>
+          <span>Free same-day delivery</span>
           <span>Nairobi · Kiambu · Machakos · Kajiado</span>
-          <span>Pay on delivery</span>
+          <span>Pay only after delivery</span>
         </div>
 
         <!-- Pricing -->
@@ -358,11 +353,11 @@ function renderStars(r: number) {
             </div>
           </div>
           <div class="installment-note">
-            Or from <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong> &mdash; choose daily, weekly, or monthly instalments after your free grace period
+            Or from <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong> &mdash; choose daily, weekly, or monthly instalments after your grace period
           </div>
           <ul class="pricing-bullets">
-            <li>No payment before delivery</li>
-            <li>Inspect the phone first — pay deposit after</li>
+            <li>Zero payment before delivery</li>
+            <li>Inspect the phone first — deposit paid only after</li>
             <li>No interest &mdash; no hidden fees &mdash; no credit check</li>
           </ul>
         </div>
@@ -398,7 +393,7 @@ function renderStars(r: number) {
             <textarea class="form-input form-textarea" id="f-notes" rows="2" placeholder="Any notes — optional"></textarea>
           </div>
           <button class="btn-submit" id="submit-order-btn" type="button">Confirm Order via WhatsApp</button>
-          <p class="form-note">We will call you to confirm delivery within minutes.</p>
+          <p class="form-note">Our team will call you within minutes to confirm your delivery.</p>
         </div>
 
         <!-- Trust badges -->
@@ -461,70 +456,73 @@ function renderStars(r: number) {
         <h2 class="section-title">About the {currentProduct.brand} {currentProduct.name}</h2>
         <div class="prose">
           <p>
-            The <strong>{currentProduct.brand} {currentProduct.name}</strong> has quickly become one of the most popular smartphones in Kenya —
-            and it is easy to see why. Whether you are a student in Nairobi who needs a dependable device for online classes and research,
-            a professional who relies on their phone for emails, video calls, and mobile banking,
-            or simply someone who wants a quality smartphone without having to raise a large lump sum first,
-            the {currentProduct.brand} {currentProduct.name} covers every need.
-            With <strong>Lipa Mdogo Mdogo</strong> — Kenya's leading phone instalment service —
-            you can take this phone home today with just a small deposit, paid only after it arrives at your door.
+            The <strong>{currentProduct.brand} {currentProduct.name}</strong> has earned its place as one of the most sought-after smartphones in Kenya —
+            and the reasons are clear the moment you pick it up. Whether you are a university student in Nairobi juggling online lectures and research,
+            a small business owner managing operations from your phone,
+            a professional who needs reliable communication tools every single day,
+            or simply someone ready to upgrade without parting with a large sum at once —
+            the {currentProduct.brand} {currentProduct.name} was built for you.
+            Through <strong>Lipa Mdogo Mdogo</strong>, Kenya's leading phone instalment plan,
+            you can walk away with this phone today by paying only a small deposit — and only after it has been delivered and inspected.
           </p>
 
           {currentProduct.ram && (
             <p>
-              <strong>Performance that keeps up with you:</strong> The {currentProduct.brand} {currentProduct.name} runs on
-              {currentProduct.processor && ` a ${currentProduct.processor} processor paired with`} {currentProduct.ram} of RAM,
-              giving you the horsepower to handle everything from heavy multitasking to gaming without a hint of slowdown.
-              Switching between WhatsApp, mobile banking, YouTube, and work apps is seamless —
-              the kind of everyday smoothness that makes a real difference.
+              <strong>Speed and power built for real Kenyan use:</strong> Driven by
+              {currentProduct.processor && ` a ${currentProduct.processor} chipset and`} {currentProduct.ram} of RAM,
+              the {currentProduct.brand} {currentProduct.name} handles everything you throw at it without breaking stride.
+              M-Pesa transactions, video calls on Teams and Zoom, streaming on YouTube, and heavy multitasking across multiple apps
+              all run with the kind of smooth, responsive performance that makes a genuine difference in daily life.
+              No lag, no hesitation — just a phone that keeps up with you.
             </p>
           )}
 
           {currentProduct.storage && (
             <p>
-              <strong>Storage that actually fits your life:</strong> With {currentProduct.storage} of built-in storage,
-              you will not find yourself constantly deleting photos or shuffling files to make space.
-              Keep your M-Pesa transaction history, WhatsApp media, downloaded music, important documents,
-              and all your favourite apps — everything in one place, always accessible.
-              {currentProduct.expandableStorage && ` Need even more room? A microSD card lets you expand further with ease.`}
+              <strong>Storage that gives you breathing room:</strong> With {currentProduct.storage} of internal storage built in,
+              you can stop worrying about running out of space.
+              Store your M-Pesa records, downloaded playlists, work documents, WhatsApp media, photos, and all your essential apps — 
+              without ever having to shuffle files or delete things to make room.
+              {currentProduct.expandableStorage && ` And if you need even more space down the line, microSD expansion gives you extra room without any hassle.`}
             </p>
           )}
 
           {currentProduct.camera && (
             <p>
-              <strong>A camera that earns its keep:</strong> The {currentProduct.camera} camera system on the {currentProduct.brand} {currentProduct.name}
-              is built to capture real Kenyan moments in sharp, true-to-life detail —
-              busy Nairobi streets, family celebrations, weekend trips to the countryside.
-              Portraits come out crisp, low-light shots hold their colour,
-              and video looks clean whether you are shooting for Instagram, TikTok, or just keeping memories.
-              The front camera handles selfies and video calls with the same quality.
+              <strong>Photography that goes beyond the basics:</strong> The {currentProduct.camera} camera system on the {currentProduct.brand} {currentProduct.name}
+              was designed to capture Kenya in full detail — vibrant Nairobi streetscapes, family gatherings, Rift Valley landscapes,
+              memorable celebrations, and the everyday moments worth keeping.
+              Portrait shots come out sharp and natural, low-light results hold colour without excessive noise,
+              and videos look clean and polished whether you are posting to TikTok, sharing on WhatsApp, or building a content library.
+              The front camera delivers the same quality for selfies and video calls.
             </p>
           )}
 
           {currentProduct.battery && (
             <p>
-              <strong>A battery that goes the distance:</strong> The {currentProduct.battery} battery is designed to outlast even the busiest Kenyan day —
-              long matatu commutes, back-to-back meetings, evening entertainment, and late-night scrolling.
-              You can stop worrying about finding a charger mid-afternoon and focus on what matters.
-              {currentProduct.charging && ` When you do need a top-up, ${currentProduct.charging} gets you back to full fast.`}
+              <strong>A battery engineered for Kenyan days:</strong> Kenyan life is long and busy —
+              from early morning commutes on Nairobi's roads to late-night scrolling after a full day.
+              The {currentProduct.battery} battery in the {currentProduct.brand} {currentProduct.name} is built to match that rhythm,
+              giving you a full day of screen-on time without rationing your usage or hunting for a power socket in the afternoon.
+              {currentProduct.charging && ` When you do need to recharge, ${currentProduct.charging} gets you topped up fast so you are never stuck waiting.`}
             </p>
           )}
 
           {currentProduct.display && (
             <p>
-              <strong>A screen worth looking at:</strong> The {currentProduct.display} display delivers vivid colours,
-              sharp text, and smooth motion — whether you are streaming films on your commute,
-              following a step-by-step tutorial, video-calling family across the country,
-              or gaming on a free evening. You get a premium viewing experience without the premium price tag.
+              <strong>A display that makes everything look better:</strong> The {currentProduct.display} screen delivers vivid, accurate colours,
+              crisp text at every size, and smooth motion that makes content genuinely enjoyable to watch.
+              Whether you are streaming Series on Netflix during your commute, following a tutorial on YouTube,
+              video-calling family upcountry, or gaming on a quiet evening —
+              you get a viewing experience that punches well above the phone's price point in Kenya.
             </p>
           )}
 
           <p>
-            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks —
-            <strong>Safaricom 4G/LTE, Airtel Kenya, and Telkom Kenya</strong> — so you stay connected
-            with fast data and clear calls wherever you are.
-            Every unit is sourced directly from authorised {currentProduct.brand} distributors in Kenya
-            and comes with a <strong>2-year manufacturer warranty</strong> for complete peace of mind.
+            Every {currentProduct.brand} {currentProduct.name} sold by MdogomdogoDeals works seamlessly with all major Kenyan networks —
+            <strong>Safaricom 4G LTE, Airtel Kenya, and Telkom Kenya</strong> — straight out of the box, with no configuration needed.
+            Each unit is sourced directly from authorised {currentProduct.brand} distributors in Kenya,
+            sealed in original packaging, and backed by a full <strong>2-year manufacturer warranty</strong>.
           </p>
         </div>
       </div>
@@ -534,34 +532,34 @@ function renderStars(r: number) {
         <h2 class="section-title">{currentProduct.brand} {currentProduct.name} vs Similar Phones in Kenya</h2>
         <div class="prose">
           <p>
-            When you look at other phones in the same price bracket in Kenya,
-            the <strong>{currentProduct.brand} {currentProduct.name}</strong> stands out for delivering a genuinely balanced package.
-            Many devices at this deposit range sacrifice battery life for a bigger screen,
-            or trade processing speed for camera megapixels.
-            The {currentProduct.name} holds its own across all three — making it one of the smartest all-round buys for Kenyan shoppers in {currentProduct.releaseYear || '2024'}.
+            When stacked against competing smartphones in the same deposit range in Kenya,
+            the <strong>{currentProduct.brand} {currentProduct.name}</strong> consistently holds its own where it matters most.
+            Many alternatives at a similar price point ask you to compromise — a bigger screen at the expense of battery,
+            or faster processing at the cost of camera quality.
+            The {currentProduct.name} refuses that trade-off, delivering a well-rounded package
+            that makes it one of the best-value buys for Kenyan consumers in {currentProduct.releaseYear || '2024'}.
           </p>
           {currentProduct.ram && currentProduct.battery && (
             <p>
-              Where competitors at a similar price point often compromise in one area,
-              the {currentProduct.brand} {currentProduct.name} keeps things balanced:
-              {currentProduct.ram} RAM for fluid everyday performance,
-              and a {currentProduct.battery} battery that comfortably covers a full day
-              without you having to ration your screen time.
+              Where rival handsets in the same price bracket often sacrifice in one area,
+              the {currentProduct.brand} {currentProduct.name} holds the line across the board:
+              {currentProduct.ram} RAM keeps everyday performance smooth and responsive,
+              while the {currentProduct.battery} battery comfortably carries you through a full Kenyan day
+              without you having to watch the percentage bar nervously.
             </p>
           )}
           {currentProduct.camera && (
             <p>
-              On camera performance, the {currentProduct.brand} {currentProduct.name}'s {currentProduct.camera} setup punches noticeably above its weight class.
-              For social media content, WhatsApp photos, casual video recording, and clear selfies,
-              it produces sharper, more detailed results than older or lower-spec alternatives at a comparable deposit.
+              Camera performance is another area where the {currentProduct.brand} {currentProduct.name}'s {currentProduct.camera} setup consistently outperforms competitors at a comparable deposit.
+              For social content, WhatsApp photo sharing, casual videography, and crisp video calling,
+              it produces noticeably sharper, more detailed results than older or lower-spec handsets in the same bracket.
             </p>
           )}
           <p>
-            Comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> to alternatives is easy —
-            and with Lipa Mdogo Mdogo, the comparison is even simpler.
-            You are not committing to the full price upfront on any phone:
-            just a small deposit on delivery and manageable daily payments thereafter.
-            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones on instalments</a> to see your options side by side.
+            Comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> across options is simple —
+            and with Lipa Mdogo Mdogo, you are never locked into a large upfront commitment on any device.
+            A small deposit on delivery, then manageable daily or weekly instalments from there.
+            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse the full range of phones on instalments</a> and compare side by side.
           </p>
         </div>
       </div>
@@ -573,23 +571,23 @@ function renderStars(r: number) {
           <div class="pros-col">
             <h3 class="pc-heading pc-pros">Pros</h3>
             <ul class="pc-list">
-              {currentProduct.battery && <li>All-day battery — {currentProduct.battery} keeps you going without charging anxiety</li>}
-              {currentProduct.ram && <li>Smooth, responsive performance with {currentProduct.ram} RAM</li>}
-              {currentProduct.storage && <li>Generous {currentProduct.storage} storage — no more deleting apps to make space</li>}
-              {currentProduct.camera && <li>Versatile {currentProduct.camera} camera system for photos and video</li>}
-              <li>Compatible with all Kenyan networks — Safaricom, Airtel, Telkom</li>
-              <li>Lipa Mdogo Mdogo — deposit only after you inspect the phone</li>
-              <li>2-year manufacturer warranty on every unit</li>
-              <li>Same-day delivery to Nairobi, Kiambu, Machakos &amp; Kajiado</li>
+              {currentProduct.battery && <li>Exceptional battery life — {currentProduct.battery} powers a full day without anxiety</li>}
+              {currentProduct.ram && <li>Fast, fluid everyday performance with {currentProduct.ram} RAM</li>}
+              {currentProduct.storage && <li>Spacious {currentProduct.storage} storage — room for everything that matters</li>}
+              {currentProduct.camera && <li>Capable {currentProduct.camera} camera system for photos, video, and selfies</li>}
+              <li>Full compatibility with Safaricom, Airtel, and Telkom Kenya networks</li>
+              <li>Deposit collected only after you inspect and approve the phone</li>
+              <li>Full 2-year manufacturer warranty included on every unit</li>
+              <li>Free same-day delivery to Nairobi, Kiambu, Machakos &amp; Kajiado</li>
             </ul>
           </div>
           <div class="cons-col">
             <h3 class="pc-heading pc-cons">Cons</h3>
             <ul class="pc-list">
-              {currentProduct.wirelessCharging === 'Not Available' && <li>No wireless charging</li>}
-              {currentProduct.audioJack === 'No' && <li>No 3.5mm headphone jack</li>}
-              <li>Delivery currently limited to 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
-              <li>Full balance paid in daily or weekly instalments over time</li>
+              {currentProduct.wirelessCharging === 'Not Available' && <li>Wireless charging not supported</li>}
+              {currentProduct.audioJack === 'No' && <li>No 3.5mm headphone jack included</li>}
+              <li>Delivery currently available in 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
+              <li>Full balance repaid gradually through daily or weekly instalments</li>
             </ul>
           </div>
         </div>
@@ -599,8 +597,8 @@ function renderStars(r: number) {
       <div class="section-card" id="people-also-compare">
         <h2 class="section-title">People Also Compare</h2>
         <p class="pac-intro">
-          Shoppers checking out the <strong>{currentProduct.brand} {currentProduct.name}</strong> in Kenya frequently consider these alternatives too.
-          All are available on Lipa Mdogo Mdogo instalments with same-day delivery.
+          Customers researching the <strong>{currentProduct.brand} {currentProduct.name}</strong> in Kenya commonly shortlist these alternatives too.
+          All are available through Lipa Mdogo Mdogo with same-day delivery and deposit-after-delivery terms.
         </p>
         <div class="pac-grid">
           {relatedProducts.slice(0, 4).map(p => (
@@ -614,18 +612,18 @@ function renderStars(r: number) {
             </a>
           ))}
         </div>
-        <p class="pac-browse"><a href={`/phones/${brandSlug}`}>View all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones &rarr;</a></p>
+        <p class="pac-browse"><a href={`/phones/${brandSlug}`}>See all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse every phone on instalments &rarr;</a></p>
       </div>
 
       <div class="section-card" id="section-ideal">
-        <h2 class="section-title">Who Is the {currentProduct.brand} {currentProduct.name} Ideal For?</h2>
+        <h2 class="section-title">Who Is the {currentProduct.brand} {currentProduct.name} Best For?</h2>
         <div class="use-cases-grid">
-          <div class="use-case"><strong>Students</strong><p>Online learning, research apps, and class tools run without lag or interruption.</p></div>
-          <div class="use-case"><strong>Professionals</strong><p>Email, video calls, mobile banking, and work apps — fast and reliable all day long.</p></div>
-          <div class="use-case"><strong>Content Creators</strong><p>A capable camera and powerful processor for photos, reels, and social content.</p></div>
-          <div class="use-case"><strong>Gamers</strong><p>Fluid performance on popular Kenyan mobile games without lag or overheating.</p></div>
-          <div class="use-case"><strong>Social Media Users</strong><p>Stay connected on WhatsApp, Instagram, TikTok, Facebook, and X all day.</p></div>
-          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery, a vivid display, and reliable performance for life across Kenya's busiest counties.</p></div>
+          <div class="use-case"><strong>Students</strong><p>Online classes, research, academic tools, and study apps run without lag or interruption throughout the school day.</p></div>
+          <div class="use-case"><strong>Professionals</strong><p>Email, mobile banking, video conferencing, and productivity apps — fast and dependable from morning briefings to evening calls.</p></div>
+          <div class="use-case"><strong>Content Creators</strong><p>A capable camera, ample storage, and a powerful processor for shooting, editing, and posting content on the go.</p></div>
+          <div class="use-case"><strong>Gamers</strong><p>Smooth, lag-free performance on Kenya's most popular mobile games — from casual play to competitive titles.</p></div>
+          <div class="use-case"><strong>Social Media Users</strong><p>Stay active on WhatsApp, Instagram, TikTok, Facebook, and X all day long without the battery giving out.</p></div>
+          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery, a vivid display, and dependable performance for life across Nairobi and Kenya's busiest counties.</p></div>
         </div>
       </div>
 
@@ -637,7 +635,7 @@ function renderStars(r: number) {
           <li>1 &times; Charging adapter</li>
           <li>1 &times; SIM ejector pin</li>
           <li>1 &times; User manual and warranty card</li>
-          <li>Original retail packaging</li>
+          <li>Original sealed retail packaging</li>
         </ul>
       </div>
 
@@ -671,45 +669,45 @@ function renderStars(r: number) {
 
         <div class="prose" style="margin-top: 1.5rem;">
           <p>
-            The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> on Lipa Mdogo Mdogo
-            starts at a deposit of just <strong>{currentProduct.deposit}</strong> —
-            and that deposit is only paid <em>after</em> the phone reaches your door and you have inspected it.
-            You pay nothing in advance. Once you are satisfied, you hand over the deposit and the phone is yours.
-            From there, you continue with <strong>{currentProduct.daily} per day</strong>
-            or <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7} per week</strong> at whatever pace suits you.
-            No interest. No hidden charges. No credit check needed.
+            The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> through MdogomdogoDeals starts at a deposit of just <strong>{currentProduct.deposit}</strong> —
+            and crucially, that deposit is only collected <em>after</em> the phone has been delivered to your location and you have had a chance to inspect it fully.
+            You pay absolutely nothing to place your order or arrange delivery.
+            Once you are satisfied with what you see, you hand over the deposit and the phone is yours.
+            After that, continue with <strong>{currentProduct.daily} per day</strong>
+            or <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7} per week</strong> at the pace that suits you best.
+            Zero interest. No processing fees. No credit check at any stage.
           </p>
           <p>
-            Most people searching for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>
-            are worried about paying a large amount upfront. With MdogomdogoDeals, that is never the case.
-            The only commitment you make at the door is the <strong>{currentProduct.deposit} deposit</strong> —
-            and even that happens <em>after</em> you have seen and approved the phone.
-            It is the most straightforward way to own a genuine {currentProduct.brand} in Kenya today.
+            The biggest concern most Kenyans have when searching for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>
+            is the prospect of paying a large lump sum before they can take the phone home. With MdogomdogoDeals, that problem simply does not exist.
+            The only financial commitment at the door is the <strong>{currentProduct.deposit} deposit</strong> —
+            and it only happens <em>after</em> you have seen, tested, and approved the phone yourself.
+            It is the most transparent way to own a genuine {currentProduct.brand} in Kenya right now.
           </p>
           {currentProduct.storage && (
             <p>
-              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the version most Kenyan buyers go for.
-              If you need a different storage option, let us know when ordering and we will confirm what is available.
+              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the configuration most popular with Kenyan buyers.
+              If you are interested in a different storage option, mention it when you place your order and we will confirm what we have available.
             </p>
           )}
         </div>
 
         <div class="price-why-grid">
           <div class="price-why-item">
-            <strong>Deposit after delivery</strong>
-            <p>We bring the phone to you first. You inspect it thoroughly, then pay the {currentProduct.deposit} deposit.</p>
+            <strong>Deposit collected after delivery</strong>
+            <p>We bring the phone to you first. You inspect it at your own pace, then pay the {currentProduct.deposit} deposit — not before.</p>
           </div>
           <div class="price-why-item">
-            <strong>Zero interest</strong>
-            <p>The price you see is the price you pay — no hidden charges or extra fees on top of your instalments.</p>
+            <strong>Completely interest-free</strong>
+            <p>What you see on this page is exactly what you pay — no additional charges, fees, or interest applied to your instalments.</p>
           </div>
           <div class="price-why-item">
-            <strong>Flexible payment rhythm</strong>
-            <p>Pay daily, weekly, or monthly — whichever fits your income cycle best.</p>
+            <strong>Your payment rhythm, your choice</strong>
+            <p>Pay daily, weekly, or monthly — whichever aligns best with how and when your income arrives.</p>
           </div>
           <div class="price-why-item">
-            <strong>100% genuine &amp; warranted</strong>
-            <p>Every phone comes from authorised {currentProduct.brand} distributors with a full 2-year manufacturer warranty.</p>
+            <strong>Genuine products, full warranty</strong>
+            <p>Every unit is sourced from authorised {currentProduct.brand} distributors in Kenya and comes with a complete 2-year manufacturer warranty.</p>
           </div>
         </div>
 
@@ -772,19 +770,19 @@ function renderStars(r: number) {
             </tbody>
           </table>
           <div class="network-note">
-            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G/LTE, Airtel Kenya 4G, and Telkom Kenya — right out of the box.
+            The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G LTE, Airtel Kenya 4G, and Telkom Kenya — right out of the box, with no setup required.
           </div>
         </div>
 
         <div class="spec-group">
           <h3 class="spec-group-title">Additional Features</h3>
           <div class="add-features-grid">
-            <div class="add-feat"><strong>Security</strong><p>Fingerprint sensor, Face unlock, PIN / Pattern</p></div>
-            <div class="add-feat"><strong>Audio</strong><p>Stereo speakers, Dolby Atmos, Hi-Res audio</p></div>
-            <div class="add-feat"><strong>Gaming</strong><p>Game mode, GPU turbo, Optimised performance</p></div>
-            <div class="add-feat"><strong>Display</strong><p>Night mode, Reading mode, Eye comfort shield</p></div>
-            <div class="add-feat"><strong>Sensors</strong><p>Accelerometer, Gyroscope, Proximity, Compass</p></div>
-            <div class="add-feat"><strong>Smart Features</strong><p>AI Assistant, Smart gestures, Split screen</p></div>
+            <div class="add-feat"><strong>Security</strong><p>Fingerprint sensor, Face unlock, PIN / Pattern / Swipe</p></div>
+            <div class="add-feat"><strong>Audio</strong><p>Stereo speakers, Dolby Atmos support, Hi-Res audio</p></div>
+            <div class="add-feat"><strong>Gaming</strong><p>Dedicated game mode, GPU optimisation, thermal management</p></div>
+            <div class="add-feat"><strong>Display</strong><p>Night mode, Reading mode, Eye comfort shield, adaptive brightness</p></div>
+            <div class="add-feat"><strong>Sensors</strong><p>Accelerometer, Gyroscope, Proximity sensor, Digital compass</p></div>
+            <div class="add-feat"><strong>Smart Features</strong><p>AI-powered assistant, Smart gestures, Split-screen multitasking</p></div>
           </div>
         </div>
 
@@ -802,37 +800,37 @@ function renderStars(r: number) {
           <li>
             <div class="step-circle">1</div>
             <div>
-              <strong>Place your order</strong> — call us, WhatsApp us, or fill in the order form on this page.
-              No payment or deposit is required to place your order.
+              <strong>Place your order — no payment required</strong> — call us, WhatsApp us on 0100028823, or complete the order form on this page.
+              We do not ask for any payment, deposit, or booking fee to process your order.
             </div>
           </li>
           <li>
             <div class="step-circle">2</div>
             <div>
-              <strong>Same-day delivery</strong> — we deliver the {currentProduct.brand} {currentProduct.name} directly to you,
-              same day within Nairobi, Kiambu, Machakos, or Kajiado.
+              <strong>Free same-day delivery</strong> — we dispatch the {currentProduct.brand} {currentProduct.name} directly to your location,
+              arriving the same day across Nairobi, Kiambu, Machakos, or Kajiado.
             </div>
           </li>
           <li>
             <div class="step-circle">3</div>
             <div>
-              <strong>Inspect the phone</strong> — power it on, test the camera, open your apps, and take your time.
-              You pay nothing until you are fully satisfied.
+              <strong>Inspect the phone thoroughly</strong> — power it on, test the camera, open your apps, check the display and speakers.
+              Take as much time as you need. You pay nothing until you are fully satisfied.
             </div>
           </li>
           <li>
             <div class="step-circle">4</div>
             <div>
-              <strong>Pay your deposit</strong> — once you are happy, pay <strong>KES {currentProduct.deposit}</strong>
-              via M-Pesa or cash. The {currentProduct.brand} {currentProduct.name} is yours.
+              <strong>Pay your deposit after approval</strong> — once you are happy with the phone, pay <strong>KES {currentProduct.deposit}</strong>
+              via M-Pesa or cash. The {currentProduct.brand} {currentProduct.name} is officially yours.
             </div>
           </li>
           <li>
             <div class="step-circle">5</div>
             <div>
-              <strong>Start your instalments</strong> — after a free grace period, pay
+              <strong>Begin your instalments at your own pace</strong> — after a free grace period, pay
               <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong>
-              at your own pace until the balance is fully cleared.
+              on a schedule that works for you, until the remaining balance is fully cleared.
             </div>
           </li>
         </ol>
@@ -840,8 +838,8 @@ function renderStars(r: number) {
         <div class="benefits-banner">
           <span>No payment before delivery</span>
           <span>Inspect before you commit</span>
-          <span>No interest or hidden fees</span>
-          <span>No credit check required</span>
+          <span>Zero interest or hidden fees</span>
+          <span>No credit check or guarantor</span>
           <span>Daily, weekly, or monthly payments</span>
         </div>
 
@@ -849,22 +847,22 @@ function renderStars(r: number) {
         <div class="counties-grid">
           <div class="county-card">
             <strong>Nairobi</strong>
-            <p>CBD, Westlands, Kilimani, Kasarani, Embakasi, Eastleigh, South B &amp; C, Langata, and all estates.</p>
+            <p>CBD, Westlands, Kilimani, Kasarani, Embakasi, Eastleigh, South B &amp; C, Langata, Parklands, and all residential estates.</p>
           </div>
           <div class="county-card">
             <strong>Kiambu</strong>
-            <p>Thika, Ruiru, Juja, Kiambu Town, Kikuyu, Limuru, Karuri, Githurai, and surrounding areas.</p>
+            <p>Thika, Ruiru, Juja, Kiambu Town, Kikuyu, Limuru, Karuri, Githurai, Banana, and all surrounding areas.</p>
           </div>
           <div class="county-card">
             <strong>Machakos</strong>
-            <p>Machakos Town, Athi River, Mavoko, Kangundo, Kathiani, and nearby areas.</p>
+            <p>Machakos Town, Athi River, Mavoko, Kangundo, Kathiani, Matuu, and nearby areas.</p>
           </div>
           <div class="county-card">
             <strong>Kajiado</strong>
-            <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, and surrounding areas.</p>
+            <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, Namanga road corridor, and surrounding areas.</p>
           </div>
         </div>
-        <p class="delivery-note">Not sure if we reach your exact location? Call or WhatsApp 0100028823 before ordering and we will confirm for you.</p>
+        <p class="delivery-note">Unsure whether we reach your exact location? Call or WhatsApp 0100028823 before placing your order and we will confirm right away.</p>
 
       </div>
     </section>
@@ -890,14 +888,14 @@ function renderStars(r: number) {
     <section class="bottom-cta">
       <div class="cta-inner">
         <h2>Get the {currentProduct.brand} {currentProduct.name} Delivered Today</h2>
-        <p>Same-day delivery &mdash; pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve</p>
+        <p>Same-day delivery &mdash; pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve the phone</p>
         <div class="cta-btns">
           <a href="tel:+254100028823" class="btn-primary">Call 0100028823</a>
           <a
             href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name}`}
             class="btn-whatsapp"
             target="_blank" rel="noopener"
-          >WhatsApp Us</a>
+          >WhatsApp Us Now</a>
         </div>
       </div>
     </section>
