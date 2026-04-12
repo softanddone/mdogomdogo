@@ -22,14 +22,12 @@ const samsungList = products.filter(p => p.brand?.toLowerCase() === 'samsung').s
 const tecnoList   = products.filter(p => p.brand?.toLowerCase() === 'tecno').slice(0, 5);
 const infinixList = products.filter(p => p.brand?.toLowerCase() === 'infinix').slice(0, 5);
 
-// Feature links with live counts — only show features that have stock
 const featureLinks = FEATURE_FILTERS.map(feat => ({
   ...feat,
   count: products.filter(feat.match).length,
   href: `/features/${feat.key}-phones-kenya`,
 })).filter(f => f.count > 0);
 
-// Colour/icon map — add more keys as FEATURE_FILTERS grows
 const featureIcons = {
   '5g':             { icon: '5G',  color: '#1a56db', bg: '#eef3ff' },
   'gaming':         { icon: '🎮',  color: '#7c3aed', bg: '#f5f3ff' },
@@ -510,11 +508,11 @@ function renderStars(rating) {
     <div class="top-bar-pills">
       <span class="top-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Inspect first — pay only when you're happy
+        Check the phone first — pay only when satisfied
       </span>
       <span class="top-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        No CRB · No guarantor · Fast approval for everyone
+        Zero CRB checks · No guarantor · Instant approval
       </span>
       <span class="top-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -550,23 +548,24 @@ function renderStars(rating) {
       <div class="hero-text">
         <div class="hero-eyebrow">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Nairobi's #1 Lipa Mdogo Mdogo Phone Shop
+          Kenya's Most Trusted Lipa Mdogo Mdogo Phone Shop
         </div>
         <h1>
-          Lipa Mdogo Mdogo Phones in Kenya —<br>
-          <em>Lowest Deposits in Nairobi</em>
+          Lipa Mdogo Mdogo Phones Kenya —<br>
+          <em>Own a Smartphone From KSh 2,000</em>
         </h1>
         <p>
-          Walk out today with a brand-new smartphone for as little as <strong>KSh 2,000 deposit</strong>.
-          Pay the rest in flexible daily, weekly or monthly <strong>M-Pesa instalments</strong> — no CRB check,
-          no guarantor, no payslip needed. Tecno, Samsung, Infinix, iPhone and more, all on lipa mdogo mdogo.
+          Walk out today with a genuine, brand-new phone for as little as <strong>KSh 2,000 deposit</strong>.
+          Pay the balance in manageable <strong>M-Pesa instalments</strong> — daily, weekly or monthly — with
+          zero CRB checks, no guarantor and no payslip required. Samsung, Tecno, Infinix, iPhone, Redmi and
+          more, all available lipa mdogo mdogo in Kenya.
         </p>
         <div class="hero-btns">
           <a href="/phones/lipa-mdogo-mdogo-nairobi" class="btn-hero">
-            See All Phones on Instalment
+            Browse All Phones on Instalment
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a href="/phones/deposit-under-5000" class="btn-hero-ghost">Start Under KSh 5K Deposit</a>
+          <a href="/phones/deposit-under-5000" class="btn-hero-ghost">Phones Under KSh 5K Deposit</a>
         </div>
         <div class="hero-stats">
           <div class="hero-stat">
@@ -575,7 +574,7 @@ function renderStars(rating) {
           </div>
           <div class="hero-stat">
             <div class="num">KSh 2K</div>
-            <div class="lbl">Lowest Deposit</div>
+            <div class="lbl">Minimum Deposit</div>
           </div>
           <div class="hero-stat">
             <div class="num">Same Day</div>
@@ -583,7 +582,7 @@ function renderStars(rating) {
           </div>
           <div class="hero-stat">
             <div class="num">0%</div>
-            <div class="lbl">Paperwork Required</div>
+            <div class="lbl">Paperwork Needed</div>
           </div>
         </div>
       </div>
@@ -600,11 +599,11 @@ function renderStars(rating) {
         <div class="hero-badges">
           <div class="hero-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>100% Original Phones</span>
+            <span>100% Genuine Phones</span>
           </div>
           <div class="hero-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-            <span>M-Pesa Payments</span>
+            <span>Pay via M-Pesa</span>
           </div>
           <div class="hero-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
@@ -617,18 +616,18 @@ function renderStars(rating) {
 
   <!-- ═══ FLASH DEALS ════════════════════════════════════════════════ -->
   {flashDeals.length > 0 && (
-    <section class="flash-section" role="region" aria-label="Flash deals — best lipa mdogo mdogo phones 2026 Nairobi">
+    <section class="flash-section" role="region" aria-label="Flash deals — top lipa mdogo mdogo smartphones Nairobi 2026">
       <div class="flash-section-inner">
         <div class="flash-section-head">
           <div class="flash-section-title">
-            <h2>Flash Deals — Best Lipa Mdogo Mdogo Phones 2026</h2>
+            <h2>Top Lipa Mdogo Mdogo Deals — Grab While Stock Lasts</h2>
             <span class="flash-pulse-badge">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              Limited Offer
+              Limited Stock
             </span>
           </div>
           <a href="/phones/lipa-mdogo-mdogo-nairobi" class="flash-see-all">
-            View all deals
+            See all deals
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
@@ -638,10 +637,10 @@ function renderStars(rating) {
             return (
               <a href={`/${p.slug}`} class="flash-card">
                 <div class="flash-card-accent"></div>
-                <span class="flash-card-hot">🔥 Flash Deal</span>
+                <span class="flash-card-hot">🔥 Hot Deal</span>
                 {p.discount && <span class="flash-card-discount">{p.discount}</span>}
                 <div class="flash-card-img-wrap">
-                  <img class="flash-card-img" src={p.source} alt={`${p.fullname ?? p.name} — buy on instalment Kenya`} loading="eager" width="300" height="225" decoding="async" />
+                  <img class="flash-card-img" src={p.source} alt={`${p.fullname ?? p.name} — lipa mdogo mdogo Kenya`} loading="eager" width="300" height="225" decoding="async" />
                 </div>
                 <div class="flash-card-body">
                   <div class="flash-card-brand">{p.brand}</div>
@@ -649,11 +648,11 @@ function renderStars(rating) {
                   <div class="flash-card-specs">{specs.map(s => <span class="flash-spec-pill">{s}</span>)}</div>
                   <div class="flash-card-pricing">
                     <span class="flash-price-deposit">{p.deposit}</span>
-                    <span class="flash-price-label">deposit</span>
+                    <span class="flash-price-label">deposit only</span>
                   </div>
-                  <div class="flash-installment-note">✓ From {p.from}/wk · Pay via M-Pesa</div>
+                  <div class="flash-installment-note">✓ From {p.from}/wk · Lipa pole pole via M-Pesa</div>
                   <div class="flash-card-cta">
-                    <button class="flash-btn-cart">Grab This Deal</button>
+                    <button class="flash-btn-cart">Claim This Deal</button>
                     <button class="flash-btn-buy">Buy Now</button>
                   </div>
                 </div>
@@ -666,27 +665,27 @@ function renderStars(rating) {
   )}
 
   <!-- TRUST BAR -->
-  <div class="trust-bar" role="region" aria-label="Trust signals">
+  <div class="trust-bar" role="region" aria-label="Why shop with us">
     <div class="trust-inner">
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></div>
-        <div><strong>Inspect First — Pay Only When You're Happy</strong><br><span style="font-size:11px;font-weight:400;">Zero risk — not happy? You don't pay a cent</span></div>
+        <div><strong>Inspect Before You Pay — Zero Risk Guarantee</strong><br><span style="font-size:11px;font-weight:400;">Not happy with the phone? Walk away without paying a cent</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <div><strong>No CRB. No Guarantor. No Payslip Needed.</strong><br><span style="font-size:11px;font-weight:400;">Fast approval — pay deposit via M-Pesa and it's yours</span></div>
+        <div><strong>No CRB · No Guarantor · No Payslip</strong><br><span style="font-size:11px;font-weight:400;">Pay your deposit via M-Pesa and the phone is yours — it's that simple</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-        <div><strong>Flexible Payment Plans — Daily, Weekly or Monthly</strong><br><span style="font-size:11px;font-weight:400;">Lipa pole pole at the pace that works for you</span></div>
+        <div><strong>Daily, Weekly or Monthly M-Pesa Plans</strong><br><span style="font-size:11px;font-weight:400;">Lipa pole pole at whatever pace works for your budget</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div><strong>100% Original Phones — Sealed &amp; Fully Warranted</strong><br><span style="font-size:11px;font-weight:400;">Every phone genuine, brand new &amp; sourced from authorized distributors</span></div>
+        <div><strong>Sealed, Original Phones with Full Warranty</strong><br><span style="font-size:11px;font-weight:400;">Every phone is brand new, from authorized Kenyan distributors</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div><strong>Same-Day Delivery Across Nairobi — Order Before 2 PM</strong><br><span style="font-size:11px;font-weight:400;">Nairobi CBD, Kiambu, Machakos &amp; Kajiado covered</span></div>
+        <div><strong>Free Same-Day Delivery — Order Before 2 PM</strong><br><span style="font-size:11px;font-weight:400;">Delivered to Nairobi CBD, Kiambu, Machakos &amp; Kajiado today</span></div>
       </div>
     </div>
   </div>
@@ -697,7 +696,7 @@ function renderStars(rating) {
     <!-- BRANDS -->
     <section aria-label="Shop by brand — lipa mdogo mdogo phones Kenya">
       <div class="section-head">
-        <div class="section-head-left"><h2>Popular Brands on Instalment</h2></div>
+        <div class="section-head-left"><h2>Top Brands Available on Lipa Mdogo Mdogo</h2></div>
         <a href="/phones/lipa-mdogo-mdogo-nairobi" class="see-all">All brands <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
       <div class="brand-grid" role="list">
@@ -739,10 +738,10 @@ function renderStars(rating) {
     <hr class="section-rule" />
 
     <!-- ═══ SHOP BY FEATURE ════════════════════════════════════════════ -->
-    <section aria-label="Shop phones by feature — 5G, gaming, AMOLED, curved display and more on instalment Kenya">
+    <section aria-label="Shop lipa mdogo mdogo phones by feature — 5G, gaming, AMOLED and more Kenya">
       <div class="section-head">
         <div class="section-head-left">
-          <h2>Shop by Feature</h2>
+          <h2>Find Your Perfect Phone by Feature</h2>
           <span class="tag tag-blue">Filter by spec</span>
         </div>
         <a href="/features/5g-phones-kenya" class="see-all">
@@ -763,7 +762,7 @@ function renderStars(rating) {
               <div class="feature-icon-wrap">{meta.icon}</div>
               <div class="feature-card-text">
                 <div class="feature-card-label">{feat.label}</div>
-                <div class="feature-card-count"><strong>{feat.count}</strong> phones</div>
+                <div class="feature-card-count"><strong>{feat.count}</strong> phones available</div>
               </div>
             </a>
           );
@@ -774,11 +773,11 @@ function renderStars(rating) {
     <hr class="section-rule" />
 
     <!-- TRENDING OFFERS -->
-    <section aria-label="Trending lipa mdogo mdogo smartphones Kenya">
+    <section aria-label="Trending lipa mdogo mdogo smartphones Kenya 2026">
       <div class="section-head">
         <div class="section-head-left">
-          <h2>Trending — Affordable Smartphones on Instalment</h2>
-          <span class="tag tag-red">Hot</span>
+          <h2>Trending Now — Smartphones on Lipa Mdogo Mdogo</h2>
+          <span class="tag tag-red">Popular</span>
         </div>
         <a href="/phones/lipa-mdogo-mdogo-nairobi" class="see-all">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
@@ -794,7 +793,7 @@ function renderStars(rating) {
               {p.status && <span class={`card-badge ${badgeClass}`}>{p.status}</span>}
               {p.discount && <span class="card-discount">{p.discount}</span>}
               <div class="card-img-wrap">
-                <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} — buy on instalment Kenya`} loading="lazy" width="300" height="225" decoding="async" />
+                <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} — lipa mdogo mdogo Kenya`} loading="lazy" width="300" height="225" decoding="async" />
               </div>
               <div class="card-body">
                 <div class="card-brand">{p.brand}</div>
@@ -802,7 +801,7 @@ function renderStars(rating) {
                 <div class="card-specs">{specs.map(s => <span class="spec-pill">{s}</span>)}</div>
                 <div class="card-rating"><span class="stars">{renderStars(rating)}</span><span class="rating-count">({reviewCount})</span></div>
                 <div class="card-price"><span class="price-deposit">{p.deposit}</span><span class="price-label">deposit</span></div>
-                <div class="installment-note">✓ Lipa pole pole · Deposit {p.deposit}</div>
+                <div class="installment-note">✓ Lipa mdogo mdogo · Start with {p.deposit}</div>
                 <div class="card-cta"><button class="btn-cart">Add to Cart</button><button class="btn-buy">Buy Now</button></div>
               </div>
             </a>
@@ -813,22 +812,22 @@ function renderStars(rating) {
 
     <!-- BUDGET PICKS -->
     {budgetPicks.length > 0 && (
-      <div class="budget-section" role="region" aria-label="Cheap phones on instalment Kenya — small deposit under KSh 5000">
+      <div class="budget-section" role="region" aria-label="Cheap smartphones on instalment Kenya — deposit under KSh 5,000">
         <div class="budget-head">
-          <h2>Cheap Phones on Instalment — <span>Small Deposit Under KSh 5,000</span></h2>
-          <a href="/phones/deposit-under-5000" class="budget-see-all">See all budget phones →</a>
+          <h2>Budget Phones on Lipa Mdogo Mdogo — <span>Deposit Under KSh 5,000</span></h2>
+          <a href="/phones/deposit-under-5000" class="budget-see-all">All budget phones →</a>
         </div>
         <div class="budget-grid">
           {budgetPicks.map(p => (
             <a href={`/${p.slug}`} class="budget-card">
               <div class="budget-img-wrap">
-                <img class="budget-img" src={p.source} alt={`${p.fullname ?? p.name} — affordable phone instalment Kenya`} loading="lazy" width="200" height="150" />
+                <img class="budget-img" src={p.source} alt={`${p.fullname ?? p.name} — cheap phone lipa mdogo mdogo Kenya`} loading="lazy" width="200" height="150" />
               </div>
               <div class="budget-body">
                 <div class="budget-name">{p.fullname ?? p.name}</div>
                 <div>
                   <div class="budget-deposit">{p.deposit}</div>
-                  <div class="budget-deposit-lbl">deposit only</div>
+                  <div class="budget-deposit-lbl">deposit to start</div>
                 </div>
               </div>
               <span class="budget-cta">Get This Phone →</span>
@@ -839,12 +838,12 @@ function renderStars(rating) {
     )}
 
     <!-- PROMO BANNERS -->
-    <div class="promo-banners" role="region" aria-label="Promotional offers">
+    <div class="promo-banners" role="region" aria-label="Special offers — lipa mdogo mdogo phones Kenya">
       <div class="promo-banner promo-banner-a">
         <div class="promo-text">
-          <h3>Phones with Small Deposit in Nairobi — Start from KSh 2,000</h3>
-          <p>Pay a small deposit via M-Pesa and walk out with an original smartphone today. Clear the balance in weekly or monthly instalments — zero paperwork, zero stress. Buy now, pay later phones Kenya made easy.</p>
-          <a href="/phones/deposit-under-3000" class="promo-btn">Shop Low-Deposit Phones →</a>
+          <h3>Start Lipa Mdogo Mdogo from Just KSh 2,000 — Walk Out With Your Phone Today</h3>
+          <p>Pay a small deposit via M-Pesa and leave with a sealed, original smartphone today. Lipa the balance in weekly or monthly instalments at your own pace — zero stress, zero paperwork, zero hidden charges.</p>
+          <a href="/phones/deposit-under-3000" class="promo-btn">Shop Lowest Deposit Phones →</a>
         </div>
         <div class="promo-badge">
           <div class="big">KSh 2K</div>
@@ -853,8 +852,8 @@ function renderStars(rating) {
       </div>
       <div class="promo-banner promo-banner-b">
         <div class="promo-text">
-          <h3>Free Same-Day Delivery — Nairobi, Kiambu, Machakos &amp; Kajiado</h3>
-          <p>Order before 2 PM and your phone arrives today. Inspect it at your door before paying a single shilling. Easy payment phones Kenya, delivered to you.</p>
+          <h3>Free Same-Day Delivery to Your Door — Nairobi, Kiambu, Machakos &amp; Kajiado</h3>
+          <p>Order your lipa mdogo mdogo phone before 2 PM and it arrives the same day at no extra cost. Inspect it at your doorstep before paying anything — risk-free smartphone shopping in Kenya.</p>
           <a href="/phones/lipa-mdogo-mdogo-nairobi" class="promo-btn">Order Now →</a>
         </div>
         <div class="promo-badge">
@@ -867,11 +866,11 @@ function renderStars(rating) {
     <hr class="section-rule" />
 
     <!-- SAMSUNG -->
-    <section aria-label="Samsung phones lipa mdogo mdogo Kenya — Galaxy on hire purchase">
+    <section aria-label="Samsung phones lipa mdogo mdogo Kenya — Galaxy on hire purchase Nairobi">
       <div class="section-head">
         <div class="section-head-left">
-          <h2>Samsung Phones on Instalment</h2>
-          <span class="tag tag-blue">Lipa Mdogo Mdogo</span>
+          <h2>Samsung Phones on Lipa Mdogo Mdogo</h2>
+          <span class="tag tag-blue">Pay in Instalments</span>
         </div>
         <a href="/phones/samsung" class="see-all">All Samsung <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
@@ -895,7 +894,7 @@ function renderStars(rating) {
                 <div class="card-specs">{specs.map(s => <span class="spec-pill">{s}</span>)}</div>
                 <div class="card-rating"><span class="stars">{renderStars(rating)}</span><span class="rating-count">({reviewCount})</span></div>
                 <div class="card-price"><span class="price-deposit">{p.deposit}</span><span class="price-label">deposit</span></div>
-                <div class="installment-note">✓ From {p.from}/wk &middot; Deposit {p.deposit}</div>
+                <div class="installment-note">✓ From {p.from}/wk &middot; Lipa pole pole M-Pesa</div>
                 <div class="card-cta"><button class="btn-cart">Add to Cart</button><button class="btn-buy">Buy Now</button></div>
               </div>
             </a>
@@ -907,10 +906,10 @@ function renderStars(rating) {
     <hr class="section-rule" />
 
     <!-- TECNO -->
-    <section aria-label="Tecno phones on instalment Kenya — Camon and Spark lipa mdogo mdogo">
+    <section aria-label="Tecno phones lipa mdogo mdogo Kenya — Camon and Spark series on instalment">
       <div class="section-head">
         <div class="section-head-left">
-          <h2>Tecno Phones on Instalment</h2>
+          <h2>Tecno Phones on Lipa Mdogo Mdogo</h2>
           <span class="tag tag-ink">Best Value</span>
         </div>
         <a href="/phones/tecno" class="see-all">All Tecno <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -935,7 +934,7 @@ function renderStars(rating) {
                 <div class="card-specs">{specs.map(s => <span class="spec-pill">{s}</span>)}</div>
                 <div class="card-rating"><span class="stars">{renderStars(rating)}</span><span class="rating-count">({reviewCount})</span></div>
                 <div class="card-price"><span class="price-deposit">{p.deposit}</span><span class="price-label">deposit</span></div>
-                <div class="installment-note">✓ From {p.from}/wk &middot; Deposit {p.deposit}</div>
+                <div class="installment-note">✓ From {p.from}/wk &middot; Lipa mdogo mdogo Kenya</div>
                 <div class="card-cta"><button class="btn-cart">Add to Cart</button><button class="btn-buy">Buy Now</button></div>
               </div>
             </a>
@@ -947,10 +946,10 @@ function renderStars(rating) {
     <hr class="section-rule" />
 
     <!-- INFINIX -->
-    <section aria-label="Infinix lipa mdogo mdogo Kenya — Hot and Note series on instalment">
+    <section aria-label="Infinix lipa mdogo mdogo Kenya — Hot and Note series on instalment Nairobi">
       <div class="section-head">
         <div class="section-head-left">
-          <h2>Infinix Phones on Instalment</h2>
+          <h2>Infinix Phones on Lipa Mdogo Mdogo</h2>
           <span class="tag tag-ink">New Arrivals</span>
         </div>
         <a href="/phones/infinix" class="see-all">All Infinix <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -967,7 +966,7 @@ function renderStars(rating) {
               {p.status && <span class={`card-badge ${badgeClass}`}>{p.status}</span>}
               {p.discount && <span class="card-discount">{p.discount}</span>}
               <div class="card-img-wrap">
-                <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} — Infinix instalment Kenya`} loading="lazy" width="300" height="225" decoding="async" />
+                <img class="card-img" src={p.source} alt={`${p.fullname ?? p.name} — Infinix lipa mdogo mdogo Kenya`} loading="lazy" width="300" height="225" decoding="async" />
               </div>
               <div class="card-body">
                 <div class="card-brand">{p.brand}</div>
@@ -975,7 +974,7 @@ function renderStars(rating) {
                 <div class="card-specs">{specs.map(s => <span class="spec-pill">{s}</span>)}</div>
                 <div class="card-rating"><span class="stars">{renderStars(rating)}</span><span class="rating-count">({reviewCount})</span></div>
                 <div class="card-price"><span class="price-deposit">{p.deposit}</span><span class="price-label">deposit</span></div>
-                <div class="installment-note">✓ From {p.from}/wk &middot; Deposit {p.deposit}</div>
+                <div class="installment-note">✓ From {p.from}/wk &middot; Lipa pole pole Kenya</div>
                 <div class="card-cta"><button class="btn-cart">Add to Cart</button><button class="btn-buy">Buy Now</button></div>
               </div>
             </a>
@@ -987,30 +986,30 @@ function renderStars(rating) {
     <hr class="section-rule" />
 
     <!-- WHY CHOOSE US -->
-    <section aria-label="Why choose MdogomdogoDeals for phones on instalment Kenya">
+    <section aria-label="Why Kenyans choose MdogomdogoDeals for lipa mdogo mdogo phones">
       <div class="section-head">
-        <div class="section-head-left"><h2>Why Kenyans Choose MdogomdogoDeals</h2></div>
+        <div class="section-head-left"><h2>Why Thousands of Kenyans Trust MdogomdogoDeals</h2></div>
       </div>
       <div class="why-grid">
         <div class="why-card">
           <div class="why-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <div class="why-title">No CRB Check, No Payslip — Open to Everyone</div>
-          <div class="why-desc">No credit score, no guarantor, no forms, no payslip. Pay your deposit via M-Pesa and walk out with a brand-new phone. Fast approval — if you're in Kenya, you qualify.</div>
+          <div class="why-title">No CRB, No Payslip — Lipa Mdogo Mdogo Is Open to Everyone</div>
+          <div class="why-desc">Forget credit scores and bank statements. Our lipa mdogo mdogo process needs just one thing: your M-Pesa deposit. Instant approval — if you're in Kenya, you qualify today.</div>
         </div>
         <div class="why-card">
           <div class="why-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-          <div class="why-title">Flexible M-Pesa Payments — Your Pace</div>
-          <div class="why-desc">Choose daily, weekly or monthly payment plans — whatever fits your cash flow. Lipa pole pole via M-Pesa, simple and convenient. Pay monthly, weekly or even daily.</div>
+          <div class="why-title">Flexible M-Pesa Plans — Lipa Pole Pole at Your Pace</div>
+          <div class="why-desc">Pick daily, weekly or monthly repayments — whichever fits your cash flow. Our lipa mdogo mdogo phone plans are designed around real Kenyan budgets, not bank schedules.</div>
         </div>
         <div class="why-card">
           <div class="why-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12H3l9-9 9 9h-2"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></div>
-          <div class="why-title">Free Same-Day Delivery in Nairobi</div>
-          <div class="why-desc">Order before 2 PM and receive your phone today — free delivery across Nairobi, Kiambu, Machakos and Kajiado. No delivery fee, ever. Mpya phones at your door.</div>
+          <div class="why-title">Free Same-Day Delivery Across Greater Nairobi</div>
+          <div class="why-desc">Order your lipa mdogo mdogo phone before 2 PM and receive it today — free of charge — anywhere in Nairobi, Kiambu, Machakos or Kajiado. No delivery fee, ever.</div>
         </div>
         <div class="why-card">
           <div class="why-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="why-title">100% Original Phones — With Warranty</div>
-          <div class="why-desc">Every phone is brand new, sourced from authorized distributors, and comes with a full manufacturer warranty. Genuine lipa mdogo mdogo phones with warranty — always.</div>
+          <div class="why-title">Sealed, Original Phones — Every Single One Warranted</div>
+          <div class="why-desc">Every lipa mdogo mdogo phone we sell is brand new, sourced from Kenya's authorized distributors, and backed by a full manufacturer's warranty. No clones, no refurbished units — ever.</div>
         </div>
       </div>
     </section>
@@ -1018,79 +1017,78 @@ function renderStars(rating) {
   </main>
 
   <!-- HOW IT WORKS -->
-  <section class="how-section" aria-label="How lipa mdogo mdogo works — phones on loan Kenya via M-Pesa">
+  <section class="how-section" aria-label="How lipa mdogo mdogo works in Kenya — phones on instalment via M-Pesa">
     <div class="how-inner">
       <div class="how-header">
-        <h2>How Lipa Mdogo Mdogo Works in Kenya</h2>
-        <p>Get your phone on instalment in 4 simple steps — no paperwork, no guarantor, delivered same day across Nairobi</p>
+        <h2>How Lipa Mdogo Mdogo Works — 4 Simple Steps</h2>
+        <p>Get a brand-new smartphone on instalment in minutes — no paperwork, no guarantor, delivered same day across Nairobi</p>
       </div>
       <div class="how-grid">
         <div class="how-card">
           <div class="how-num how-num-1">1</div>
-          <div class="how-title">Order Online, by Phone or WhatsApp</div>
-          <div class="how-desc">Browse {products.length}+ original smartphones and place your order in under 2 minutes. No forms, no appointments — just pick your phone and pay later.</div>
+          <div class="how-title">Pick Your Phone Online, by Call or WhatsApp</div>
+          <div class="how-desc">Browse {products.length}+ original smartphones and select your lipa mdogo mdogo phone in under 2 minutes. No forms, no waiting — just choose and we handle the rest.</div>
         </div>
         <div class="how-card">
           <div class="how-num how-num-2">2</div>
-          <div class="how-title">Free Same-Day Delivery to Your Door</div>
-          <div class="how-desc">We deliver free across Nairobi, Kiambu, Machakos and Kajiado. Order before 2 PM and it arrives today — fast approval, fast delivery.</div>
+          <div class="how-title">We Deliver Free to Your Door — Same Day</div>
+          <div class="how-desc">Your lipa mdogo mdogo phone is delivered free across Nairobi, Kiambu, Machakos and Kajiado. Order before 2 PM and it arrives today — fast, reliable, free.</div>
         </div>
         <div class="how-card">
           <div class="how-num how-num-3">3</div>
-          <div class="how-title">Inspect First — Pay Only When Happy</div>
-          <div class="how-desc">Check it's exactly what you ordered. Happy? Pay your small deposit via M-Pesa. Not satisfied? No charge — zero risk, zero stress.</div>
+          <div class="how-title">Inspect First — Pay Your Deposit Only When Happy</div>
+          <div class="how-desc">Open the box, power it on, test everything. Satisfied? Send your lipa mdogo mdogo deposit via M-Pesa and the phone is officially yours. Not happy? Walk away — no charge.</div>
         </div>
         <div class="how-card">
           <div class="how-num how-num-4">4</div>
-          <div class="how-title">Yours — Clear the Balance in Easy Instalments</div>
-          <div class="how-desc">Pay off the rest in affordable daily, weekly or monthly M-Pesa instalments. Lipa pole pole at your own pace — flexible payment plans Kenya.</div>
+          <div class="how-title">Lipa Mdogo Mdogo — Clear the Balance at Your Own Pace</div>
+          <div class="how-desc">Pay off the remaining balance in easy daily, weekly or monthly M-Pesa instalments. Choose a 3-month or 6-month plan — flexible lipa pole pole payments designed for real life in Kenya.</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section" aria-label="Frequently asked questions — phones on instalment Kenya lipa mdogo mdogo">
+  <section class="faq-section" aria-label="Frequently asked questions — lipa mdogo mdogo phones Kenya">
     <div class="faq-inner">
       <div class="faq-head">
-        <h2>Frequently Asked Questions</h2>
-        <p>Everything you need to know about buying phones on instalment in Kenya</p>
+        <h2>Lipa Mdogo Mdogo FAQs — Your Questions Answered</h2>
+        <p>Everything you need to know about buying a phone on instalment in Kenya</p>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is the lowest deposit I can start with?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-        <div class="faq-a">Just <strong>KSh 2,000</strong> gets you started. Browse our <a href="/phones/deposit-under-3000">phones under KSh 3,000 deposit</a> for the widest selection at the lowest entry point — no hidden fees, no surprises. These are some of the most affordable smartphones on instalment in Nairobi.</div>
+        <button class="faq-q" aria-expanded="false">What is the smallest deposit to start lipa mdogo mdogo?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a">The minimum deposit to start lipa mdogo mdogo at MdogomdogoDeals is just <strong>KSh 2,000</strong>. Explore our <a href="/phones/deposit-under-3000">phones available under KSh 3,000 deposit</a> for the largest selection at the lowest entry point — no hidden costs, no surprises, genuine phones only.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Do I need a payslip or CRB clearance to qualify?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-        <div class="faq-a">Not at all. We offer phones on instalment <strong>without a payslip</strong>, no CRB check, and no guarantor. These are phones with no credit check in Kenya — <strong>if you can pay the deposit via M-Pesa, the phone is yours.</strong></div>
+        <button class="faq-q" aria-expanded="false">Do I need a payslip or CRB clearance for lipa mdogo mdogo?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a">Absolutely not. Our lipa mdogo mdogo plan requires <strong>no payslip, no CRB check and no guarantor</strong>. We offer phones on instalment with no credit history required — if you can pay the deposit via M-Pesa, the phone walks out with you today.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How fast will I receive my phone?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-        <div class="faq-a">Order before 2 PM and we deliver <strong>same day — free of charge</strong> — to Nairobi, Kiambu, Machakos and Kajiado. You inspect the phone at your door before paying anything.</div>
+        <button class="faq-q" aria-expanded="false">How quickly will my phone be delivered after I order?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a">Order your lipa mdogo mdogo phone before 2 PM and it will be delivered <strong>the same day, free of charge</strong>, anywhere in Nairobi, Kiambu, Machakos or Kajiado. You inspect it at the door before a single shilling changes hands.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Are the phones original? Will I get a warranty?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-        <div class="faq-a">Every phone we sell is <strong>100% brand new, sealed and genuine</strong>, sourced directly from authorized distributors. Each comes with the full manufacturer's warranty. We only stock original phones on instalment in Kenya — no clones, no refurbished units.</div>
+        <button class="faq-q" aria-expanded="false">Are the phones genuine? Do they come with a warranty?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a">Yes — every lipa mdogo mdogo phone we sell is <strong>100% brand new, factory sealed and sourced from Kenya's authorized distributors</strong>. Each comes with the full manufacturer's warranty. We stock only original phones — no refurbished units, no imitations, guaranteed.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Which brands can I get on lipa mdogo mdogo?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-        <div class="faq-a">We stock {products.length}+ smartphones across all major brands — <a href="/phones/samsung">Samsung</a> (including 5G models), <a href="/phones/tecno">Tecno</a>, <a href="/phones/infinix">Infinix</a>, <a href="/phones/redmi">Redmi</a>, <a href="/phones/oppo">Oppo</a>, <a href="/phones/vivo">Vivo</a>, <a href="/phones/itel">Itel</a> and <a href="/phones/apple">iPhones</a> — all available lipa mdogo mdogo. New models added every week.</div>
+        <button class="faq-q" aria-expanded="false">Which phone brands are available on lipa mdogo mdogo?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a">We stock {products.length}+ smartphones across all major brands on lipa mdogo mdogo — <a href="/phones/samsung">Samsung</a>, <a href="/phones/tecno">Tecno</a>, <a href="/phones/infinix">Infinix</a>, <a href="/phones/redmi">Redmi</a>, <a href="/phones/oppo">Oppo</a>, <a href="/phones/vivo">Vivo</a>, <a href="/phones/itel">Itel</a> and <a href="/phones/apple">iPhones</a>. We add new models every week so there's always something fresh to choose from.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Can I choose how often I pay — daily, weekly or monthly?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-        <div class="faq-a">Yes. We offer <strong>flexible payment plans</strong> — pay daily, weekly or monthly via M-Pesa, whatever works for your budget. Pay monthly phones Kenya or choose weekly payment phones Kenya — the choice is yours, with 3-month or 6-month instalment plans on selected phones.</div>
+        <button class="faq-q" aria-expanded="false">Can I choose my own lipa mdogo mdogo repayment schedule?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a">Yes — our lipa mdogo mdogo plans are fully flexible. Choose <strong>daily, weekly or monthly M-Pesa payments</strong> based on what works for you. We offer 3-month and 6-month instalment options on selected phones, giving you genuine freedom to lipa pole pole at your own pace.</div>
       </div>
-     
     </div>
   </section>
 
   <!-- SEO CONTENT -->
-  <section class="seo-content" aria-label="Phones on instalment Kenya — lipa mdogo mdogo and lipa pole pole">
+  <section class="seo-content" aria-label="About lipa mdogo mdogo phones Kenya — buy on instalment via M-Pesa">
     <div class="seo-content-inner">
-      <h2>Buy a Phone on Instalment in Kenya — Lipa Mdogo Mdogo via M-Pesa, No Payslip Needed</h2>
-      <p>MdogomdogoDeals is Kenya's most trusted lipa mdogo mdogo phone shop. With {products.length}+ original smartphones in stock and deposits starting from just KSh 2,000, owning a brand-new <a href="/phones/samsung">Samsung</a>, <a href="/phones/tecno">Tecno</a>, <a href="/phones/infinix">Infinix</a> or <a href="/phones/apple">iPhone</a> on instalment has never been easier. No CRB check. No guarantor. No payslip. Fast approval for everyone.</p>
-      <p>Here's how it works: order online or via WhatsApp, and we deliver free same-day across Nairobi, Kiambu, Machakos and Kajiado. You inspect the phone at your door first — pay your small deposit via M-Pesa only when you're happy. Then clear the balance in <a href="/phones/deposit-under-5000">easy instalments</a> at your own pace — choose phones with weekly payment Kenya, daily or monthly — whatever suits you.</p>
-      <p>Looking for a cheap android phone on instalment? Start with a <a href="/phones/deposit-under-3000">low deposit under KSh 3,000</a>. Want a flagship? We have <a href="/features/5g-phones-kenya">5G phones lipa mdogo mdogo Kenya</a>, <a href="/phones/apple">lipa pole pole iPhone Kenya</a> and <a href="/features/curved-display-phones-kenya">curved display phones on instalment Kenya</a> all available lipa pole pole. Browse by feature — <a href="/features/gaming-phones-kenya">gaming phones lipa mdogo mdogo Kenya</a>, <a href="/features/amoled-phones-kenya">AMOLED displays</a>, <a href="/features/large-battery-phones-kenya">large battery phones</a> and more. Every phone is sealed, genuine and fully warranted — that's the MdogomdogoDeals promise. The best lipa mdogo mdogo deals Nairobi, period.</p>
+      <h2>Kenya's #1 Lipa Mdogo Mdogo Phone Shop — Genuine Smartphones on Instalment, No CRB, No Payslip</h2>
+      <p>MdogomdogoDeals is Kenya's most trusted destination for lipa mdogo mdogo phones. With {products.length}+ original, sealed smartphones ready for same-day delivery across Nairobi — and deposits starting from a mere KSh 2,000 — owning a brand-new <a href="/phones/samsung">Samsung</a>, <a href="/phones/tecno">Tecno</a>, <a href="/phones/infinix">Infinix</a>, <a href="/phones/redmi">Redmi</a> or <a href="/phones/apple">iPhone</a> on instalment has never been more accessible. No CRB check. No guarantor. No payslip. Lipa mdogo mdogo works for every Kenyan.</p>
+      <p>Here is exactly how it works: choose your phone online, call us on 0100 028 823 or WhatsApp us, and we deliver free of charge, same day, anywhere in Nairobi, Kiambu, Machakos or Kajiado. Inspect the phone at your door — only when you are 100% happy do you send your lipa mdogo mdogo deposit via M-Pesa. Then lipa pole pole by clearing the balance in manageable <a href="/phones/deposit-under-5000">daily, weekly or monthly instalments</a> — no pressure, no stress.</p>
+      <p>Looking for a cheap smartphone on instalment in Kenya? Start with a <a href="/phones/deposit-under-3000">deposit under KSh 3,000</a>. Want a high-end device? We stock <a href="/features/5g-phones-kenya">5G phones on lipa mdogo mdogo</a>, <a href="/phones/apple">iPhones on lipa pole pole</a> and <a href="/features/curved-display-phones-kenya">curved display phones on instalment</a>. You can also filter by spec — <a href="/features/gaming-phones-kenya">gaming phones lipa mdogo mdogo</a>, <a href="/features/amoled-phones-kenya">AMOLED display phones</a>, <a href="/features/large-battery-phones-kenya">large battery phones on instalment</a> and much more. Every single phone is brand new, factory sealed and fully warranted — that is the MdogomdogoDeals promise. The best lipa mdogo mdogo phone deals in Nairobi, period.</p>
     </div>
   </section>
 
@@ -1100,7 +1098,7 @@ function renderStars(rating) {
       <div class="footer-grid">
         <div>
           <a href="/" class="footer-logo">Mdogo<em>mdogo</em>Deals</a>
-          <p class="footer-tagline">Kenya's most trusted lipa mdogo mdogo phone shop. Buy original smartphones on flexible M-Pesa instalment plans — lowest deposits, no CRB check, no payslip, no guarantor, free same-day delivery. The easiest way to get your next phone on instalment in Nairobi.</p>
+          <p class="footer-tagline">Kenya's leading lipa mdogo mdogo phone shop. Get a genuine, brand-new smartphone on flexible M-Pesa instalment plans — lowest deposits in Nairobi, no CRB check, no guarantor, no payslip, free same-day delivery. The simplest way to own your next phone on lipa mdogo mdogo in Kenya.</p>
           <div class="footer-contact">
             <a href="https://wa.me/254100028823">📲 WhatsApp: 0100 028 823</a>
             <a href="tel:+254100028823">📞 Call: 0100 028 823</a>
@@ -1109,7 +1107,7 @@ function renderStars(rating) {
           </div>
         </div>
         <div>
-          <div class="footer-col-title">Top Brands on Instalment</div>
+          <div class="footer-col-title">Top Brands on Lipa Mdogo Mdogo</div>
           <ul class="footer-links">
             {ALL_BRANDS.map(brand => (
               <li><a href={`/phones/${brandSlugall(brand)}`}>{brand} lipa mdogo mdogo Kenya</a></li>
@@ -1120,14 +1118,14 @@ function renderStars(rating) {
           <div class="footer-col-title">Shop by Deposit</div>
           <ul class="footer-links">
             {DEPOSIT_FILTERS.map(dep => (
-              <li><a href={`/phones/${dep.key}`}>{dep.label} phone Kenya</a></li>
+              <li><a href={`/phones/${dep.key}`}>{dep.label} lipa mdogo mdogo Kenya</a></li>
             ))}
-            <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All phones on instalment Kenya</a></li>
+            <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All lipa mdogo mdogo phones Kenya</a></li>
           </ul>
           <div class="footer-col-title" style="margin-top:16px;">Shop by Feature</div>
           <ul class="footer-links">
             {featureLinks.map(feat => (
-              <li><a href={feat.href}>{feat.label} phones Kenya instalment</a></li>
+              <li><a href={feat.href}>{feat.label} phones lipa mdogo mdogo Kenya</a></li>
             ))}
           </ul>
         </div>
@@ -1135,10 +1133,10 @@ function renderStars(rating) {
           <div class="footer-col-title">Quick Links</div>
           <ul class="footer-links">
             <li><a href="/">Home</a></li>
-            <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones on Instalment Kenya</a></li>
+            <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones on Lipa Mdogo Mdogo</a></li>
             <li><a href="/features/5g-phones-kenya">5G Phones Lipa Mdogo Mdogo Kenya</a></li>
-            <li><a href="/features/gaming-phones-kenya">Gaming Phones Lipa Mdogo Mdogo Kenya</a></li>
-            <li><a href="/features/curved-display-phones-kenya">Curved Display Phones Instalment Kenya</a></li>
+            <li><a href="/features/gaming-phones-kenya">Gaming Phones on Instalment Kenya</a></li>
+            <li><a href="/features/curved-display-phones-kenya">Curved Display Phones Lipa Mdogo Mdogo</a></li>
             <li><a href="/">How Lipa Mdogo Mdogo Works</a></li>
             <li><a href="/">About MdogomdogoDeals</a></li>
             <li><a href="/">Contact Us</a></li>
@@ -1154,53 +1152,53 @@ function renderStars(rating) {
   </footer>
 
   <!-- SEO KEYWORD TAGS -->
-  <nav class="seo-tags" aria-label="Browse by keyword — phones on instalment Kenya">
+  <nav class="seo-tags" aria-label="Browse lipa mdogo mdogo phones by keyword — Kenya">
     <div class="seo-tags-inner">
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo phones nairobi</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo phones kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa pole pole phones kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy phone on installments kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo phones kenya 2026</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa pole pole smartphones kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy phone on instalment kenya</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phones on credit nairobi</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">smartphones on hire purchase kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo smartphones</a>
-      <a href="/phones/apple" class="seo-tag">lipa pole pole iphone kenya</a>
-      <a href="/phones/samsung" class="seo-tag">lipa mdogo mdogo samsung phones</a>
-      <a href="/phones/deposit-under-5000" class="seo-tag">cheap phones on installment kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo smartphones kenya</a>
+      <a href="/phones/apple" class="seo-tag">iphone lipa pole pole kenya</a>
+      <a href="/phones/samsung" class="seo-tag">samsung lipa mdogo mdogo phones</a>
+      <a href="/phones/deposit-under-5000" class="seo-tag">cheap phones on instalment kenya</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">best lipa mdogo mdogo phones 2026</a>
       <a href="/features/5g-phones-kenya" class="seo-tag">5g phones lipa mdogo mdogo kenya</a>
-      <a href="/features/curved-display-phones-kenya" class="seo-tag">curved display phones installment kenya</a>
-      <a href="/phones/deposit-under-3000" class="seo-tag">phones with small deposit kenya</a>
+      <a href="/features/curved-display-phones-kenya" class="seo-tag">curved display phones instalment kenya</a>
+      <a href="/phones/deposit-under-3000" class="seo-tag">phones small deposit kenya</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">pay monthly phones kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phones with weekly payment kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo phones without payslip</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phones weekly payment kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo no payslip</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phones on loan kenya mpesa</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">original phones installment kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo infinix tecno oppo kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">affordable smartphones installment nairobi</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phones with flexible payment plans kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">genuine phones instalment kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo infinix tecno samsung</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">affordable smartphones instalment nairobi</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">flexible payment plan phones kenya</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">buy now pay later phones kenya</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo phones with warranty</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">fast approval phone installment kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phones with no credit check kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">instant approval phone instalment kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">no credit check phones kenya</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa pole pole android phones kenya</a>
       <a href="/phones/deposit-under-3000" class="seo-tag">low deposit phones nairobi</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">easy payment phones kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo deals nairobi</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">best installment phone shops kenya</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">mpya phones lipa mdogo mdogo</a>
-      <a href="/features/108mp-camera-phones-kenya" class="seo-tag">camera phones installment kenya</a>
-      <a href="/features/gaming-phones-kenya" class="seo-tag">gaming phones lipa mdogo mdogo kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">lipa mdogo mdogo deals nairobi 2026</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">best instalment phone shop kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">mpya phones lipa mdogo mdogo nairobi</a>
+      <a href="/features/108mp-camera-phones-kenya" class="seo-tag">camera phones instalment kenya</a>
+      <a href="/features/gaming-phones-kenya" class="seo-tag">gaming phones lipa mdogo mdogo</a>
       <a href="/phones/samsung" class="seo-tag">samsung lipa mdogo mdogo nairobi</a>
       <a href="/phones/apple" class="seo-tag">iphone lipa mdogo mdogo kenya</a>
-      <a href="/phones/tecno" class="seo-tag">tecno phones on installment kenya</a>
+      <a href="/phones/tecno" class="seo-tag">tecno phones instalment kenya</a>
       <a href="/phones/infinix" class="seo-tag">infinix lipa mdogo mdogo nairobi</a>
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phone financing kenya</a>
+      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">phone financing kenya mpesa</a>
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="seo-tag">smartphone credit nairobi</a>
       {featureLinks.map(feat => (
-        <a href={feat.href} class="seo-tag">{feat.label} phone kenya instalment</a>
+        <a href={feat.href} class="seo-tag">{feat.label} phone kenya lipa mdogo mdogo</a>
       ))}
       {DEPOSIT_FILTERS.map(dep => (
-        <a href={`/phones/${dep.key}`} class="seo-tag">{dep.label} phone nairobi</a>
+        <a href={`/phones/${dep.key}`} class="seo-tag">{dep.label} lipa mdogo mdogo phone nairobi</a>
       ))}
       {ALL_BRANDS.map(brand => (
         <a href={`/phones/${brandSlugall(brand)}`} class="seo-tag">{brand} lipa mdogo mdogo kenya</a>
