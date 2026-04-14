@@ -5132,140 +5132,141 @@ megapixel:"50MP rear + 5MP front",
       }
     ]
   }
-}
-,{
-  id: 39,
-  name: "Vivo V40",
-  fullname:"Vivo V40 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
-  status: "New",
-  image: "/phones/vivo_v40.jpg",
-  from: "KSh 12,400",
-  deposit: "KSh 4,800",
-  daily: "KSh 150",
-  totalPrice: "KSh 12,400",
-  source: "/phones/vivo_v40.webp",
-  discount: "-4%",
-  display: "6.7″ AMOLED FHD+",
-  processor: "Snapdragon 7 Gen 1",
-  camera: "50MP (rear), 16MP (front)",
-  memory: "12GB RAM / 256GB",
-  battery: "5000mAh, 44W Charging",
-  version: "Android 14",
-  depositanddaily: "KSh 4,800 Daily KSh 150",
-  slug: "vivo-v40",
-  slugs: "vivo-v40",
-  description: "High-end Vivo V series phone with strong camera performance.",
-  brand: "Vivo",
-  seller: "Onfon Mobile",
-  model: "V40",
-  storage: "256GB",
-  condition: "new",
-  curved_screen:"no",
-dual_sim:"yes",
-waterproof:"yes",
-gaming_phone:"yes",
-esim_compatible:"yes",
-amoled_display:"yes",
-is_it_5g:"yes",
-ram_expandible:"yes",
-good_phone:"yes",
-performance:"Qualcomm Snapdragon 7 Gen 3 mid‑range 5G processor",
-fingerprint:"onscreen display",
-wireless_charging:"no",
-refresh_rate:"120Hz",
-fast_charging:"yes",
-battery_life:"all day heavy usage",
-speed:"The Vivo V40 5G delivers smooth everyday performance with its Snapdragon 7 Gen 3 chipset and generous RAM, making it great for multitasking, social media, streaming, and moderate gaming; the 120 Hz AMOLED display ensures fluid visuals and the large 5500 mAh battery with 80 W fast charging easily powers through a full day of typical use.",  
-camera_quality:"very good for photography",
-megapixel:"50 MP dual rear + 50 MP front cameras",
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Loan", "Lipa Mdogo Mdogo"],
-  details: [
-  {
-    title: "Body and Design",
-    content: `The Vivo V40 blends luxury and modern craftsmanship in a sleek design that feels as good as it looks. Its ultra-slim body, curved glass edges, and elegant color finishes like Stellar Silver and Crystal Black make it stand out. The premium metallic frame adds strength and sophistication, while the punch-hole display and minimal camera island complete its flagship look.`,
-  },
-  {
-    title: "Display",
-    content: `Feast your eyes on a stunning 6.78-inch AMOLED display with 120Hz refresh rate and 2800 x 1260 pixels resolution. The Vivo V40 delivers deep contrasts, bright colors, and fluid motion for a premium viewing experience. Whether you're watching videos, gaming, or scrolling social media, the HDR10+ certified display provides clarity even under bright sunlight.`,
-  },
-  {
-    title: "Camera System",
-    content: `The Vivo V40 takes smartphone photography to the next level with its 50MP Ultra-Sensing main camera featuring OIS (Optical Image Stabilization) for sharp and detailed photos. Accompanied by a 50MP ultra-wide lens, you can capture sweeping landscapes and group shots effortlessly. The 32MP front selfie camera produces studio-quality portraits with AI Beauty and Night Portrait modes — perfect for content creators and social users.`,
-  },
-  {
-    title: "Performance",
-    content: `Powered by the Qualcomm Snapdragon 7 Gen 3 processor, the Vivo V40 ensures lightning-fast performance with low power consumption. Multitasking, gaming, and video editing are handled smoothly with 12GB RAM and up to 12GB Extended RAM. The advanced vapor cooling system keeps temperatures low during heavy use, ensuring consistent performance.`,
-  },
-  {
-    title: "Operating System",
-    content: `Running on Funtouch OS 14 based on Android 14, the Vivo V40 offers a smooth, clean, and customizable interface. Features like Smart Motion Gestures, Ultra Game Mode, and Dynamic Effects enhance both productivity and fun. Privacy Dashboard and improved app management make it secure and user-friendly.`,
-  },
-  {
-    title: "Storage and Memory",
-    content: `The Vivo V40 comes with 256GB of internal UFS 3.1 storage, offering ultra-fast read/write speeds and plenty of space for apps, videos, and games. It also includes 12GB physical RAM and up to 12GB Extended RAM, delivering unmatched multitasking power and efficiency.`,
-  },
-  {
-    title: "Battery and Charging",
-    content: `Stay powered all day with the Vivo V40’s 5000mAh battery and 80W FlashCharge support. You can recharge from 0% to 100% in under 40 minutes, keeping you connected without downtime. The battery optimization system intelligently manages background processes to extend battery life even further.`,
-  },
-  {
-    title: "Connectivity and Sensors",
-    content: `The Vivo V40 supports 5G connectivity for ultra-fast internet speeds, dual SIM, Wi-Fi 6, Bluetooth 5.3, NFC, and GPS. Security options include an in-display fingerprint scanner and face unlock. The device also features stereo speakers, a gyroscope, and proximity sensors for an enhanced multimedia experience.`,
-  },
-  {
-    title: "Pros and Cons",
-    pros: [
-      "Premium design with AMOLED 120Hz display",
-      "Powerful Snapdragon 7 Gen 3 processor",
-      "Excellent dual 50MP camera system",
-      "Massive 12GB RAM + 12GB Extended RAM",
-      "Fast 80W charging with long battery life",
-    ],
-    cons: [
-      "No microSD card slot",
-      "No official IP68 waterproof rating",
-      "Slightly premium price range",
-    ],
-  },
-  {
-    title: "Verdict",
-    content: `The Vivo V40 is a powerhouse that combines elegant design, superb performance, and flagship-level photography. Ideal for professionals, gamers, and creators, it delivers everything you need in a stylish and dependable package. Available now at Mdogomdogo Deals — get your Vivo V40 on *lipa mdogo mdogo* (pay slowly) and enjoy fast delivery across Nairobi, Kiambu, and nearby regions.`,
-  },
-],
+},
+// ,{
+//   id: 39,
+//   name: "Vivo V40",
+//   fullname:"Vivo V40 5G 6.67 Inches, 256GB ROM + 12GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
+//   status: "New",
+//   image: "/phones/vivo_v40.jpg",
+//   from: "KSh 12,400",
+//   deposit: "KSh 4,800",
+//   daily: "KSh 150",
+//   totalPrice: "KSh 12,400",
+//   source: "/phones/vivo_v40.webp",
+//   discount: "-4%",
+//   display: "6.7″ AMOLED FHD+",
+//   processor: "Snapdragon 7 Gen 1",
+//   camera: "50MP (rear), 16MP (front)",
+//   memory: "12GB RAM / 256GB",
+//   battery: "5000mAh, 44W Charging",
+//   version: "Android 14",
+//   depositanddaily: "KSh 4,800 Daily KSh 150",
+//   slug: "vivo-v40",
+//   slugs: "vivo-v40",
+//   description: "High-end Vivo V series phone with strong camera performance.",
+//   brand: "Vivo",
+//   seller: "Onfon Mobile",
+//   model: "V40",
+//   storage: "256GB",
+//   condition: "new",
+//   curved_screen:"no",
+// dual_sim:"yes",
+// waterproof:"yes",
+// gaming_phone:"yes",
+// esim_compatible:"yes",
+// amoled_display:"yes",
+// is_it_5g:"yes",
+// ram_expandible:"yes",
+// good_phone:"yes",
+// performance:"Qualcomm Snapdragon 7 Gen 3 mid‑range 5G processor",
+// fingerprint:"onscreen display",
+// wireless_charging:"no",
+// refresh_rate:"120Hz",
+// fast_charging:"yes",
+// battery_life:"all day heavy usage",
+// speed:"The Vivo V40 5G delivers smooth everyday performance with its Snapdragon 7 Gen 3 chipset and generous RAM, making it great for multitasking, social media, streaming, and moderate gaming; the 120 Hz AMOLED display ensures fluid visuals and the large 5500 mAh battery with 80 W fast charging easily powers through a full day of typical use.",  
+// camera_quality:"very good for photography",
+// megapixel:"50 MP dual rear + 50 MP front cameras",
+//   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Vivo","Mogo","Loan", "Lipa Mdogo Mdogo"],
+//   details: [
+//   {
+//     title: "Body and Design",
+//     content: `The Vivo V40 blends luxury and modern craftsmanship in a sleek design that feels as good as it looks. Its ultra-slim body, curved glass edges, and elegant color finishes like Stellar Silver and Crystal Black make it stand out. The premium metallic frame adds strength and sophistication, while the punch-hole display and minimal camera island complete its flagship look.`,
+//   },
+//   {
+//     title: "Display",
+//     content: `Feast your eyes on a stunning 6.78-inch AMOLED display with 120Hz refresh rate and 2800 x 1260 pixels resolution. The Vivo V40 delivers deep contrasts, bright colors, and fluid motion for a premium viewing experience. Whether you're watching videos, gaming, or scrolling social media, the HDR10+ certified display provides clarity even under bright sunlight.`,
+//   },
+//   {
+//     title: "Camera System",
+//     content: `The Vivo V40 takes smartphone photography to the next level with its 50MP Ultra-Sensing main camera featuring OIS (Optical Image Stabilization) for sharp and detailed photos. Accompanied by a 50MP ultra-wide lens, you can capture sweeping landscapes and group shots effortlessly. The 32MP front selfie camera produces studio-quality portraits with AI Beauty and Night Portrait modes — perfect for content creators and social users.`,
+//   },
+//   {
+//     title: "Performance",
+//     content: `Powered by the Qualcomm Snapdragon 7 Gen 3 processor, the Vivo V40 ensures lightning-fast performance with low power consumption. Multitasking, gaming, and video editing are handled smoothly with 12GB RAM and up to 12GB Extended RAM. The advanced vapor cooling system keeps temperatures low during heavy use, ensuring consistent performance.`,
+//   },
+//   {
+//     title: "Operating System",
+//     content: `Running on Funtouch OS 14 based on Android 14, the Vivo V40 offers a smooth, clean, and customizable interface. Features like Smart Motion Gestures, Ultra Game Mode, and Dynamic Effects enhance both productivity and fun. Privacy Dashboard and improved app management make it secure and user-friendly.`,
+//   },
+//   {
+//     title: "Storage and Memory",
+//     content: `The Vivo V40 comes with 256GB of internal UFS 3.1 storage, offering ultra-fast read/write speeds and plenty of space for apps, videos, and games. It also includes 12GB physical RAM and up to 12GB Extended RAM, delivering unmatched multitasking power and efficiency.`,
+//   },
+//   {
+//     title: "Battery and Charging",
+//     content: `Stay powered all day with the Vivo V40’s 5000mAh battery and 80W FlashCharge support. You can recharge from 0% to 100% in under 40 minutes, keeping you connected without downtime. The battery optimization system intelligently manages background processes to extend battery life even further.`,
+//   },
+//   {
+//     title: "Connectivity and Sensors",
+//     content: `The Vivo V40 supports 5G connectivity for ultra-fast internet speeds, dual SIM, Wi-Fi 6, Bluetooth 5.3, NFC, and GPS. Security options include an in-display fingerprint scanner and face unlock. The device also features stereo speakers, a gyroscope, and proximity sensors for an enhanced multimedia experience.`,
+//   },
+//   {
+//     title: "Pros and Cons",
+//     pros: [
+//       "Premium design with AMOLED 120Hz display",
+//       "Powerful Snapdragon 7 Gen 3 processor",
+//       "Excellent dual 50MP camera system",
+//       "Massive 12GB RAM + 12GB Extended RAM",
+//       "Fast 80W charging with long battery life",
+//     ],
+//     cons: [
+//       "No microSD card slot",
+//       "No official IP68 waterproof rating",
+//       "Slightly premium price range",
+//     ],
+//   },
+//   {
+//     title: "Verdict",
+//     content: `The Vivo V40 is a powerhouse that combines elegant design, superb performance, and flagship-level photography. Ideal for professionals, gamers, and creators, it delivers everything you need in a stylish and dependable package. Available now at Mdogomdogo Deals — get your Vivo V40 on *lipa mdogo mdogo* (pay slowly) and enjoy fast delivery across Nairobi, Kiambu, and nearby regions.`,
+//   },
+// ],
 
-  color: "Black, Purple",
-  weight: "184g",
-  dimensions: { length: "164.1mm", width: "75.0mm", height: "7.8mm" },
-  material: "Plastic",
-  pattern: "Glossy",
-  productLine: "V Series",
-  reviews: {
-    averageRating: 4.7,
-    reviewCount: 3,
-    reviews: [
-      {
-        author: "George K.",
-        rating: 5,
-        reviewBody: "Camera is amazing for videos and photos.",
-        datePublished: "2025-09-04"
-      },
-      {
-        author: "Rose J.",
-        rating: 4,
-        reviewBody: "Bright display and smooth UI.",
-        datePublished: "2025-09-13"
-      },
-      {
-        author: "Alex N.",
-        rating: 5,
-        reviewBody: "Best Vivo phone I’ve ever owned.",
-        datePublished: "2025-09-21"
-      }
-    ]
-  }
-}
-,
-  {
+//   color: "Black, Purple",
+//   weight: "184g",
+//   dimensions: { length: "164.1mm", width: "75.0mm", height: "7.8mm" },
+//   material: "Plastic",
+//   pattern: "Glossy",
+//   productLine: "V Series",
+//   reviews: {
+//     averageRating: 4.7,
+//     reviewCount: 3,
+//     reviews: [
+//       {
+//         author: "George K.",
+//         rating: 5,
+//         reviewBody: "Camera is amazing for videos and photos.",
+//         datePublished: "2025-09-04"
+//       },
+//       {
+//         author: "Rose J.",
+//         rating: 4,
+//         reviewBody: "Bright display and smooth UI.",
+//         datePublished: "2025-09-13"
+//       },
+//       {
+//         author: "Alex N.",
+//         rating: 5,
+//         reviewBody: "Best Vivo phone I’ve ever owned.",
+//         datePublished: "2025-09-21"
+//       }
+//     ]
+//   }
+// }
+// ,
+  
+{
   id: 40,
   name: "Vivo Y18",
   fullname:"Vivo Y18 5G 6.67 Inches, 128GB ROM + 6GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
