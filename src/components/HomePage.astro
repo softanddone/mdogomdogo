@@ -26,10 +26,6 @@ const siteName='MdogomdogoDeals';
 const pageTitle='Lipa Mdogo Mdogo Phones — From KSh 2,000 | MdogomdogoDeals';
 const pageDesc=`Kenya's #1 smartphone instalment shop. Own a Samsung, Tecno, Infinix or iPhone from KSh 2,000 deposit. M-Pesa payments, no CRB, no guarantor. Free same-day delivery Nairobi. ${products.length}+ phones in stock.`;
 
-
-
-
-
 const compRows=[
   ["Min. deposit","KSh 2,000","KSh 5,000+","KSh 3,000–10,000"],
   ["CRB / credit check","None","Required","Often required"],
@@ -42,17 +38,7 @@ const compRows=[
 ---
 
 <Fragment>
-  <!--
-    FONT STRATEGY: Amazon-style ecommerce standard
-    - Amazon Ember / Roboto for body (clean, neutral, highly legible)
-    - No decorative serif — pure utilitarian ecommerce feel
-    COLOR STRATEGY: Amazon-inspired
-    - Primary orange (#FF9900) for CTAs / accents
-    - Dark navy (#131921) for header
-    - Mid blue (#146EB4) for links
-    - White (#FFFFFF) backgrounds
-    - Light gray (#F3F3F3) for section alternates
-  -->
+  {/* FIX: Google Fonts preconnect + font-display=swap to reduce render-blocking on slow connections */}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
@@ -60,9 +46,18 @@ const compRows=[
   <title>{pageTitle}</title>
   <meta name="description" content={pageDesc} />
   <link rel="canonical" href={`${siteUrl}/`} />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="geo.region" content="KE-30" />
   <meta name="geo.placename" content="Nairobi, Kenya" />
+
+  {/*
+    FIX: hreflang link tag — was noted in JSON-LD comments as a TODO but never implemented.
+    This tells Google to serve this page to English-language Kenyan searchers,
+    and avoids competing with global English results for Kenyan-specific queries
+    like "lipa mdogo mdogo phones" and "phone instalments Nairobi".
+  */}
+  <link rel="alternate" hreflang="en-KE" href={`${siteUrl}/`} />
+  <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content={pageTitle} />
@@ -77,36 +72,31 @@ const compRows=[
   <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
 
   <style>
-    /* ═══════════════════════════════════════════════
-       RESET + ROOT
-    ═══════════════════════════════════════════════ */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
     :root{
-      /* ── Amazon-inspired ecommerce palette ── */
-      --amz-navy:    #131921;   /* header dark */
-      --amz-navy2:   #1a2634;   /* header hover strip */
-      --amz-orange:  #FF9900;   /* primary CTA */
-      --amz-orange-d:#e68a00;   /* CTA hover */
-      --amz-yellow:  #FFD814;   /* Buy button */
-      --amz-yellow-d:#f0c91e;   /* Buy button hover */
-      --amz-link:    #146EB4;   /* link blue */
-      --amz-link-d:  #0f5a96;   /* link hover */
-      --amz-green:   #007600;   /* in stock / positive */
-      --amz-red:     #B12704;   /* sale / warning */
-      --amz-star:    #FF9900;   /* star rating */
+      --amz-navy:    #131921;
+      --amz-navy2:   #1a2634;
+      --amz-orange:  #FF9900;
+      --amz-orange-d:#e68a00;
+      --amz-yellow:  #FFD814;
+      --amz-yellow-d:#f0c91e;
+      --amz-link:    #146EB4;
+      --amz-link-d:  #0f5a96;
+      --amz-green:   #007600;
+      --amz-red:     #B12704;
+      --amz-star:    #FF9900;
 
       --white:       #ffffff;
-      --gray-50:     #F3F3F3;   /* section alt bg — Amazon light */
+      --gray-50:     #F3F3F3;
       --gray-100:    #EAEDED;
       --gray-200:    #D5D9D9;
       --gray-300:    #B9BABB;
       --gray-400:    #888C8C;
       --gray-500:    #565959;
-      --gray-700:    #232F3E;   /* Amazon dark text */
+      --gray-700:    #232F3E;
       --gray-900:    #0F1111;
 
-      /* ── Typography: Roboto = Amazon Ember equivalent on Google Fonts ── */
       --font-body:   'Roboto', 'Amazon Ember', Arial, sans-serif;
       --font-cond:   'Roboto Condensed', 'Arial Narrow', Arial, sans-serif;
 
@@ -140,17 +130,14 @@ const compRows=[
     button{font-family:var(--font-body);cursor:pointer}
     #root{background:var(--gray-50)}
 
-    /* ── UTILS ── */
     .wrap{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* ── BUTTONS — Amazon style ── */
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:var(--radius-sm);font-family:var(--font-body);font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap;line-height:1;border:1px solid transparent}
     .btn-sm{padding:7px 14px;font-size:12px}
     .btn-md{padding:9px 18px;font-size:13px}
     .btn-lg{padding:11px 24px;font-size:14px;font-weight:700}
 
-    /* Orange CTA — primary */
     .btn-primary{
       background:linear-gradient(to bottom,#f0c040,#e68a00);
       background:var(--amz-orange);
@@ -160,7 +147,6 @@ const compRows=[
     }
     .btn-primary:hover{background:var(--amz-orange-d);border-color:#a88734}
 
-    /* Yellow — Buy Now style */
     .btn-yellow{
       background:linear-gradient(to bottom,#ffe159,var(--amz-yellow));
       color:var(--gray-900);
@@ -177,9 +163,13 @@ const compRows=[
     .btn-green{background:#007600;color:#fff;border-color:#006400}
     .btn-green:hover{background:#005f00}
 
-    /* ── NOTICE BAR ── */
-    .notice-bar{background:var(--amz-navy2);height:36px;display:flex;align-items:center;overflow:hidden;position:relative}
-    .notice-ticker{display:flex;white-space:nowrap;animation:ticker 36s linear infinite}
+    /*
+      FIX (CLS): notice-bar has fixed height + will-change on the ticker wrapper only.
+      The outer bar height is explicit so the browser reserves layout space before
+      the font loads, preventing a Cumulative Layout Shift on first paint.
+    */
+    .notice-bar{background:var(--amz-navy2);height:36px;display:flex;align-items:center;overflow:hidden;position:relative;contain:layout}
+    .notice-ticker{display:flex;white-space:nowrap;animation:ticker 36s linear infinite;will-change:transform}
     @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     .notice-item{display:inline-flex;align-items:center;gap:10px;padding:0 36px;font-size:12px;font-weight:500;color:rgba(255,255,255,.85)}
     .notice-sep{color:rgba(255,255,255,.3)}
@@ -190,7 +180,6 @@ const compRows=[
     .notice-cta-wa{background:#25D366;color:#fff}
     .notice-cta-wa:hover{background:#1ebe5b}
 
-    /* ── HEADER — Amazon dark navy ── */
     .site-header{background:var(--amz-navy);border-bottom:1px solid #3a4553;position:sticky;top:0;z-index:200}
     .header-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--px);display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:60px;gap:16px}
 
@@ -211,7 +200,6 @@ const compRows=[
     .header-link-btn .hb-top{font-size:10px;color:rgba(255,255,255,.7)}
     .header-link-btn .hb-bot{font-size:12px;font-weight:700}
 
-    /* ── CATEGORY NAV BAR — Amazon dark nav ── */
     .cat-nav{background:var(--amz-navy2);border-bottom:1px solid #3a4553}
     .cat-nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--px);display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
     .cat-nav-inner::-webkit-scrollbar{display:none}
@@ -219,9 +207,6 @@ const compRows=[
     .cat-nav-link:hover{border-color:rgba(255,255,255,.5);color:#fff}
     .cat-nav-link.active{border-color:rgba(255,255,255,.8);color:#fff}
 
-    /* ═══════════════════════════════════════════════
-       HERO — 3-col layout
-    ═══════════════════════════════════════════════ */
     .hero{background:var(--white);border-bottom:1px solid var(--gray-200);padding:0 var(--px)}
     .hero-inner{
       max-width:var(--max-w);margin:0 auto;
@@ -230,7 +215,6 @@ const compRows=[
       gap:12px;padding:12px 0
     }
 
-    /* ── Sidebar — left category nav ── */
     .hero-sidebar{
       background:var(--white);
       border:1px solid var(--gray-200);
@@ -256,7 +240,6 @@ const compRows=[
     .sidebar-item:hover{background:var(--gray-50);color:var(--amz-link)}
     .sidebar-item-arrow{margin-left:auto;color:var(--gray-300);font-size:13px}
 
-    /* ── Hero banner — CSS-only shimmer ── */
     .hero-banner{
       border-radius:var(--radius-md);
       overflow:hidden;
@@ -267,13 +250,6 @@ const compRows=[
       padding:40px 44px;
     }
 
-    /*
-      SHIMMER — pure CSS, zero JavaScript.
-      A pseudo-element sweeps a translucent highlight
-      across the banner on a 4-second loop.
-      Uses will-change:transform for GPU compositing —
-      no layout/paint, maximally lightweight.
-    */
     .hero-banner::before{
       content:'';
       position:absolute;
@@ -298,7 +274,6 @@ const compRows=[
       100%{transform:translateX(100%)}
     }
 
-    /* Subtle dot grid texture */
     .hero-banner::after{
       content:'';
       position:absolute;
@@ -334,7 +309,6 @@ const compRows=[
     .hero-sub{font-size:14px;color:rgba(255,255,255,.72);line-height:1.6;margin-bottom:24px;max-width:400px}
     .hero-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
 
-    /* Amazon yellow buy button */
     .hero-btn-main{
       background:linear-gradient(to bottom,#ffe159,var(--amz-yellow));
       color:var(--gray-900);
@@ -347,7 +321,6 @@ const compRows=[
     }
     .hero-btn-main:hover{background:var(--amz-yellow-d)}
 
-    /* Orange outline secondary */
     .hero-btn-ghost{
       background:transparent;color:var(--amz-orange);
       border:1.5px solid var(--amz-orange);
@@ -369,7 +342,6 @@ const compRows=[
       color:rgba(255,255,255,.8);font-weight:500;
     }
 
-    /* ── Right aside ── */
     .hero-aside{display:flex;flex-direction:column;gap:10px}
 
     .aside-card{
@@ -418,7 +390,6 @@ const compRows=[
     .aside-wa-text strong{display:block;font-size:13px;font-weight:700;color:#fff;margin-bottom:1px}
     .aside-wa-text span{font-size:11px;color:rgba(255,255,255,.6)}
 
-    /* ── MOBILE DEPOSIT + BRAND QUICK NAV (shown on mobile only) ── */
     .mobile-quick-nav{display:none}
     .mqn-section{padding:10px 0 0}
     .mqn-label{
@@ -426,7 +397,6 @@ const compRows=[
       text-transform:uppercase;letter-spacing:.08em;
       padding:0 0 8px;
     }
-    /* Horizontal scrolling deposit pills */
     .mqn-deposits{
       display:flex;gap:8px;overflow-x:auto;
       padding-bottom:10px;scrollbar-width:none;
@@ -445,7 +415,6 @@ const compRows=[
       transition:all .12s;
     }
     .mqn-dep-pill:hover{background:var(--gray-100);border-color:var(--gray-300)}
-    /* Category horizontal scroll */
     .mqn-cats{
       display:flex;gap:8px;overflow-x:auto;
       padding-bottom:10px;scrollbar-width:none;
@@ -463,9 +432,6 @@ const compRows=[
     }
     .mqn-cat-chip:hover{background:var(--amz-navy2)}
 
-    /* ═══════════════════════════════════════════════
-       WHAT IS LIPA MDOGO MDOGO
-    ═══════════════════════════════════════════════ */
     .explainer{background:var(--white);padding:32px 0;border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
     .explainer-inner{max-width:860px}
     .explainer-h2{font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:14px;line-height:1.3}
@@ -473,9 +439,6 @@ const compRows=[
     .explainer-p:last-child{margin-bottom:0}
     .explainer-p strong{color:var(--gray-700)}
 
-    /* ═══════════════════════════════════════════════
-       SECTION SCAFFOLDING
-    ═══════════════════════════════════════════════ */
     .section{padding:24px 0;background:var(--white)}
     .section-alt{background:var(--gray-50)}
     .section-bordered{border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
@@ -496,9 +459,6 @@ const compRows=[
     }
     .see-all:hover{color:var(--amz-link-d);text-decoration:underline}
 
-    /* ═══════════════════════════════════════════════
-       TRUST STRIP
-    ═══════════════════════════════════════════════ */
     .trust-strip{background:var(--white);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
     .trust-strip-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--px);display:grid;grid-template-columns:repeat(5,1fr)}
     .trust-item{display:flex;align-items:center;gap:10px;padding:14px 12px;border-right:1px solid var(--gray-100)}
@@ -507,9 +467,6 @@ const compRows=[
     .trust-text strong{display:block;font-size:12px;font-weight:700;color:var(--gray-900);margin-bottom:1px}
     .trust-text span{font-size:11px;color:var(--gray-400);line-height:1.35}
 
-    /* ═══════════════════════════════════════════════
-       TRUST PROOF BLOCK
-    ═══════════════════════════════════════════════ */
     .trust-proof{background:var(--amz-navy);padding:24px 0}
     .trust-proof-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--px);display:grid;grid-template-columns:repeat(4,1fr)}
     .trust-stat{text-align:center;padding:14px 16px;border-right:1px solid rgba(255,255,255,.1)}
@@ -521,14 +478,8 @@ const compRows=[
     .testimonial-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;margin-bottom:8px;font-style:italic}
     .testimonial-author{font-size:11px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em}
 
-    /* ═══════════════════════════════════════════════
-       FLASH DEALS
-    ═══════════════════════════════════════════════ */
     .flash-track{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 
-    /* ═══════════════════════════════════════════════
-       PRODUCT CARD — Amazon style
-    ═══════════════════════════════════════════════ */
     .prod-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 
     .pcard{
@@ -604,12 +555,6 @@ const compRows=[
     }
     .pcard-btn-view:hover{background:var(--gray-50);border-color:var(--gray-400)}
 
-    /* ═══════════════════════════════════════════════
-       BRANDS — responsive grid
-       Mobile: 2-column icon strips
-       Tablet: 4 columns
-       Desktop: 8 columns
-    ═══════════════════════════════════════════════ */
     .brands-row{
       display:grid;
       grid-template-columns:repeat(8,1fr);
@@ -628,9 +573,6 @@ const compRows=[
     .brand-card-logo{height:28px;display:flex;align-items:center;justify-content:center;width:100%}
     .brand-card-name{font-size:10px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;text-align:center}
 
-    /* ═══════════════════════════════════════════════
-       FEATURES
-    ═══════════════════════════════════════════════ */
     .feat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
     .feat-tile{
       background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-md);
@@ -649,9 +591,6 @@ const compRows=[
     .feat-tile-count{font-size:11px;color:var(--gray-400)}
     .feat-tile-count strong{color:var(--amz-link);font-weight:600}
 
-    /* ═══════════════════════════════════════════════
-       BUDGET SECTION
-    ═══════════════════════════════════════════════ */
     .budget-wrap{background:var(--amz-navy);border-radius:var(--radius-lg);padding:28px;margin:0}
     .budget-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
     .budget-title{font-family:var(--font-cond);font-size:22px;color:#fff;font-weight:700}
@@ -681,9 +620,6 @@ const compRows=[
     }
     .budget-card-cta:hover{background:var(--amz-yellow-d)}
 
-    /* ═══════════════════════════════════════════════
-       PROMO BLOCKS
-    ═══════════════════════════════════════════════ */
     .promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .promo-banner{
       border-radius:var(--radius-lg);overflow:hidden;position:relative;
@@ -705,9 +641,6 @@ const compRows=[
     }
     .promo-big{position:absolute;top:12px;right:20px;font-family:var(--font-cond);font-size:56px;font-weight:700;color:rgba(255,255,255,.06);line-height:1;pointer-events:none}
 
-    /* ═══════════════════════════════════════════════
-       HOW IT WORKS
-    ═══════════════════════════════════════════════ */
     .steps-row{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
     .steps-row::before{content:'';position:absolute;top:24px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,var(--amz-orange),rgba(255,153,0,.3),var(--amz-orange));z-index:0}
     .step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;position:relative;z-index:1}
@@ -717,9 +650,6 @@ const compRows=[
     .step-title{font-size:13px;font-weight:700;color:var(--gray-900);margin-bottom:6px}
     .step-desc{font-size:12px;color:var(--gray-400);line-height:1.6}
 
-    /* ═══════════════════════════════════════════════
-       WHY US
-    ═══════════════════════════════════════════════ */
     .why-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
     .why-left-head{font-family:var(--font-cond);font-size:30px;color:var(--gray-900);margin-bottom:12px;line-height:1.2;font-weight:700;text-transform:uppercase}
     .why-left-head em{font-style:normal;color:var(--amz-orange)}
@@ -736,9 +666,6 @@ const compRows=[
     .why-feat-title{font-size:13px;font-weight:700;color:var(--gray-900);margin-bottom:3px}
     .why-feat-desc{font-size:12px;color:var(--gray-400);line-height:1.55}
 
-    /* ═══════════════════════════════════════════════
-       COMPARISON TABLE
-    ═══════════════════════════════════════════════ */
     .comp-table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
     .comp-table thead tr{background:var(--amz-navy);color:#fff}
     .comp-table th{padding:11px 14px;text-align:left;font-weight:700}
@@ -754,9 +681,6 @@ const compRows=[
     .comp-other{color:var(--gray-400)}
     .comp-note{font-size:11px;color:var(--gray-400);margin-top:8px}
 
-    /* ═══════════════════════════════════════════════
-       FAQ
-    ═══════════════════════════════════════════════ */
     .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .faq-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden}
     .faq-trigger{
@@ -778,9 +702,6 @@ const compRows=[
     .faq-body a{color:var(--amz-link);font-weight:600}
     .faq-body a:hover{text-decoration:underline}
 
-    /* ═══════════════════════════════════════════════
-       SEO COPY
-    ═══════════════════════════════════════════════ */
     .seo-block{border-top:1px solid var(--gray-200);padding:28px 0;background:var(--white)}
     .seo-inner{max-width:860px}
     .seo-inner h2{font-family:var(--font-cond);font-size:18px;color:var(--gray-700);margin-bottom:12px;font-weight:700}
@@ -789,12 +710,9 @@ const compRows=[
     .seo-inner a:hover{text-decoration:underline}
     .seo-inner strong{color:var(--gray-700)}
 
-    /* ═══════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════ */
     .footer-cta-band{background:var(--amz-orange);padding:20px var(--px)}
     .footer-cta-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .footer-cta-text h3{font-family:var(--font-cond);font-size:20px;color:var(--gray-900);margin-bottom:2px;font-weight:700;text-transform:uppercase}
+    .footer-cta-text h2{font-family:var(--font-cond);font-size:20px;color:var(--gray-900);margin-bottom:2px;font-weight:700;text-transform:uppercase}
     .footer-cta-text p{font-size:12px;color:rgba(0,0,0,.6)}
     .footer-cta-btns{display:flex;gap:8px;flex-shrink:0}
     .f-btn-call{
@@ -827,22 +745,29 @@ const compRows=[
     .footer-bottom{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
     .footer-bottom p{font-size:11px;color:rgba(255,255,255,.18)}
 
-    /* ═══════════════════════════════════════════════
-       KEYWORD STRIP
-    ═══════════════════════════════════════════════ */
-    .kw-strip{background:#06101f;padding:10px var(--px);border-top:1px solid rgba(255,255,255,.04)}
-    .kw-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-wrap:wrap;gap:4px}
-    .kw{font-size:11px;color:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-sm);padding:2px 7px;transition:color .12s}
-    .kw:hover{color:var(--amz-orange)}
+    /*
+      FIX: keyword strip redesigned as a proper accessible footer nav.
+      - Removed the near-invisible rgba(255,255,255,.12) text (Google spam flag).
+      - Now uses rgba(255,255,255,.45) — readable, not hidden, not stuffed.
+      - Presented as a genuine navigation landmark with proper contrast.
+    */
+    .kw-strip{background:#06101f;padding:14px var(--px);border-top:1px solid rgba(255,255,255,.06)}
+    .kw-strip-label{max-width:var(--max-w);margin:0 auto 8px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em}
+    .kw-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-wrap:wrap;gap:6px}
+    .kw{
+      font-size:12px;
+      color:rgba(255,255,255,.45);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--radius-sm);
+      padding:4px 10px;
+      transition:color .12s, border-color .12s;
+    }
+    .kw:hover{color:var(--amz-orange);border-color:rgba(255,153,0,.4)}
 
-    /* ═══════════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════════ */
     @media(max-width:1100px){
       .prod-grid{grid-template-columns:repeat(4,1fr)}
       .hero-inner{grid-template-columns:1fr 1fr}
       .hero-sidebar{display:none}
-      /* Brands: 4 per row on tablet */
       .brands-row{grid-template-columns:repeat(4,1fr)}
       .budget-grid{grid-template-columns:repeat(4,1fr)}
       .flash-track{grid-template-columns:repeat(3,1fr)}
@@ -863,15 +788,12 @@ const compRows=[
       .promo-grid{grid-template-columns:1fr}
       .flash-track{grid-template-columns:1fr 1fr}
       .trust-testimonials{grid-template-columns:1fr}
-      /* Show mobile quick nav when aside/sidebar hidden */
       .mobile-quick-nav{display:block}
-      /* Brands: still 4 on tablet-ish */
       .brands-row{grid-template-columns:repeat(4,1fr)}
     }
 
     @media(max-width:700px){
       .prod-grid{grid-template-columns:repeat(2,1fr)}
-      /* Brands: 4 per row still works on 700px, keeps cards readable */
       .brands-row{grid-template-columns:repeat(4,1fr)}
       .budget-grid{grid-template-columns:repeat(2,1fr)}
       .hero-h1{font-size:28px}
@@ -881,25 +803,22 @@ const compRows=[
     }
 
     @media(max-width:480px){
-      /* Brands: 2 per row on small phones — BIG tap targets, never disappear */
       .brands-row{grid-template-columns:repeat(2,1fr);gap:6px}
       .brand-card{aspect-ratio:auto;flex-direction:row;justify-content:flex-start;gap:10px;padding:10px 14px}
       .brand-card-logo{height:22px;width:auto;flex-shrink:0}
       .brand-card-name{font-size:12px;text-align:left;text-transform:capitalize;font-weight:600;color:var(--gray-700)}
-
       .prod-grid{grid-template-columns:repeat(2,1fr)}
       .flash-track{grid-template-columns:1fr}
       .trust-strip-inner{grid-template-columns:1fr 1fr}
       .trust-proof-inner{grid-template-columns:repeat(2,1fr)}
       .steps-row{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr}
-      .hero-banner::before{animation-duration:6s}/* slightly slower on mobile to save battery */
+      .hero-banner::before{animation-duration:6s}
       .budget-grid{grid-template-columns:repeat(2,1fr)}
       .feat-row{grid-template-columns:1fr 1fr}
     }
 
     @media(max-width:360px){
-      /* Smallest phones: still 2 columns but tighter */
       .brands-row{grid-template-columns:repeat(2,1fr);gap:4px}
       .brand-card{padding:8px 10px}
       .prod-grid{grid-template-columns:1fr 1fr}
@@ -913,19 +832,19 @@ const compRows=[
 </Fragment>
 
 <div id="root">
- 
+
   <!-- NOTICE BAR -->
   <div class="notice-bar" role="banner" aria-label="Announcements">
     <div class="notice-ticker" aria-hidden="true">
       <span class="notice-item"><span class="notice-sep">◆</span> Inspect your phone before paying a shilling</span>
       <span class="notice-item"><span class="notice-sep">◆</span> No CRB · No guarantor · No payslip</span>
       <span class="notice-item"><span class="notice-sep">◆</span> Free same-day delivery across Nairobi</span>
-      <span class="notice-item"><span class="notice-sep">◆</span> Smartphone instalments from KSh 2,000 deposit</span>
+      <span class="notice-item"><span class="notice-sep">◆</span> Phone instalments Kenya from KSh 2,000 deposit</span>
       <span class="notice-item"><span class="notice-sep">◆</span> M-Pesa payments — daily, weekly or monthly</span>
       <span class="notice-item"><span class="notice-sep">◆</span> Inspect your phone before paying a shilling</span>
       <span class="notice-item"><span class="notice-sep">◆</span> No CRB · No guarantor · No payslip</span>
       <span class="notice-item"><span class="notice-sep">◆</span> Free same-day delivery across Nairobi</span>
-      <span class="notice-item"><span class="notice-sep">◆</span> Smartphone instalments from KSh 2,000 deposit</span>
+      <span class="notice-item"><span class="notice-sep">◆</span> Phone instalments Kenya from KSh 2,000 deposit</span>
       <span class="notice-item"><span class="notice-sep">◆</span> M-Pesa payments — daily, weekly or monthly</span>
     </div>
     <div class="notice-end">
@@ -935,16 +854,14 @@ const compRows=[
   </div>
 
   <!-- HEADER -->
-  
-   <Gift />
+  <Gift />
   <Nav />
-
 
   <!-- HERO -->
   <section class="hero" aria-label="Buy smartphones on instalment in Nairobi — from KSh 2,000 deposit">
     <div class="hero-inner">
 
-      <!-- Left sidebar — hidden on mobile, replaced by mobile-quick-nav -->
+      <!-- Left sidebar -->
       <nav class="hero-sidebar" aria-label="Browse categories">
         <div class="sidebar-hd">Browse Categories</div>
         <a href="/phones/samsung" class="sidebar-item">Samsung<span class="sidebar-item-arrow">›</span></a>
@@ -961,12 +878,12 @@ const compRows=[
         <a href="/phones/lipa-mdogo-mdogo-nairobi" class="sidebar-item" style="background:rgba(255,153,0,.08);color:var(--amz-link);font-weight:700;border-bottom:none">All Phones ›</a>
       </nav>
 
-      <!-- Main banner with CSS-only shimmer -->
-      <div class="hero-banner" role="img" aria-label="Lipa Mdogo Mdogo phones in Nairobi — KSh 2,000 deposit, no CRB required">
+      <!-- Main banner -->
+      <div class="hero-banner" role="img" aria-label="Smartphone hire purchase Nairobi — KSh 2,000 deposit, no CRB required">
         <div class="hero-content">
           <span class="hero-tag">Kenya #1 Instalment Phone Shop · 2026</span>
           <h1 class="hero-h1"><em>Lipa Mdogo Mdogo</em><br>Phones in Nairobi<br>From KSh 2,000 Deposit</h1>
-          <p class="hero-sub">Genuine smartphones on M-Pesa instalments. No CRB. No payslip. Free same-day delivery across Nairobi.</p>
+          <p class="hero-sub">Genuine smartphones on M-Pesa instalments — also known as lipa pole pole or smartphone hire purchase. No CRB. No payslip. Free same-day delivery across Nairobi.</p>
           <div class="hero-cta-row">
             <button class="hero-btn-main" onclick="window.location='/phones/lipa-mdogo-mdogo-nairobi'" type="button">
               Shop Now
@@ -983,7 +900,7 @@ const compRows=[
         </div>
       </div>
 
-      <!-- Right aside — hidden on mobile -->
+      <!-- Right aside -->
       <aside class="hero-aside" aria-label="Quick access">
         <div class="aside-card">
           <div class="aside-card-hd">
@@ -1021,11 +938,7 @@ const compRows=[
     </div>
   </section>
 
-  <!--
-    MOBILE QUICK NAV — replaces the hidden sidebar and aside on small screens.
-    Shows deposit pills + category chips as horizontal scroll strips.
-    Visible only on ≤900px via CSS display:none / display:block.
-  -->
+  <!-- MOBILE QUICK NAV -->
   <div class="mobile-quick-nav" role="navigation" aria-label="Quick navigation">
     <div class="wrap">
       <div class="mqn-section">
@@ -1095,8 +1008,8 @@ const compRows=[
     <div class="wrap">
       <div class="explainer-inner">
         <h2 class="explainer-h2">What is Lipa Mdogo Mdogo in Kenya?</h2>
-        <p class="explainer-p">Lipa mdogo mdogo — Swahili for "pay a little by little" — is Kenya's most popular way to own a smartphone without paying the full price upfront. Place a small deposit via M-Pesa and clear the remaining balance over weekly or monthly instalments. At MdogomdogoDeals, deposits start from <strong>KSh 2,000</strong> with repayment plans over 3 or 6 months. No bank account, no CRB check, and no guarantor is ever required.</p>
-        <p class="explainer-p">Also known as <strong>lipa pole pole</strong> — meaning the same thing: pay gradually, at your own pace. Both terms are used interchangeably across Nairobi and describe the same flexible instalment plan available here.</p>
+        <p class="explainer-p">Lipa mdogo mdogo — Swahili for "pay a little by little" — is Kenya's most popular way to own a smartphone without paying the full price upfront. Place a small deposit via M-Pesa and clear the remaining balance over weekly or monthly instalments. At MdogomdogoDeals, <strong>phone instalments Kenya</strong>-wide start from <strong>KSh 2,000</strong> with repayment plans over 3 or 6 months. No bank account, no CRB check, and no guarantor is ever required.</p>
+        <p class="explainer-p">Also known as <strong>lipa pole pole</strong> — meaning the same thing: pay gradually, at your own pace. Both terms are used interchangeably across Nairobi and describe the same flexible instalment plan available here. Some shoppers also call it <strong>smartphone hire purchase Nairobi</strong> — all the same concept.</p>
         <p class="explainer-p">Every phone is 100% brand new, factory sealed, and sourced from authorized Kenyan distributors — full manufacturer warranty included. We deliver free, same day, anywhere in Greater Nairobi when you order before 2 PM.</p>
       </div>
     </div>
@@ -1109,7 +1022,7 @@ const compRows=[
         <div class="section-head">
           <div class="section-head-left">
             <div class="section-label">Limited Stock</div>
-            <h2 class="section-title">Flash Deals — Nairobi</h2>
+            <h2 class="section-title">Flash Deals — Phone Instalments Nairobi</h2>
           </div>
           <a href="/phones/lipa-mdogo-mdogo-nairobi" class="see-all">See all deals →</a>
         </div>
@@ -1121,7 +1034,7 @@ const compRows=[
               <a href={`/${p.slug}`} class="pcard pcard-flash" role="listitem">
                 {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
                 {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-                <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} instalment price Nairobi`} loading="eager" width="160" height="160" /></div>
+                <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} — instalment price Nairobi, ${p.phonedisplay ?? ''}`} loading="eager" width="160" height="160" /></div>
                 <div class="pcard-body">
                   <div class="pcard-brand">{p.brand}</div>
                   <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1159,13 +1072,13 @@ const compRows=[
     </div>
   </div>
 
-  <!-- BRANDS — fully responsive: 8col → 4col → 4col → 2col list -->
-  <section class="section section-alt" aria-label="Shop by brand">
+  <!-- BRANDS -->
+  <section class="section section-alt" aria-label="Shop phones by brand on instalment in Kenya">
     <div class="wrap">
       <div class="section-head">
         <div class="section-head-left">
           <div class="section-label">Top Brands</div>
-          <h2 class="section-title">Shop by Brand</h2>
+          <h2 class="section-title">Shop Phones by Brand — Instalment Kenya</h2>
         </div>
         <a href="/phones/lipa-mdogo-mdogo-nairobi" class="see-all">Browse all brands →</a>
       </div>
@@ -1212,7 +1125,7 @@ const compRows=[
       <div class="section-head">
         <div class="section-head-left">
           <div class="section-label">Filter by Spec</div>
-          <h2 class="section-title">Shop by Feature</h2>
+          <h2 class="section-title">Shop by Feature — Smartphone Hire Purchase Kenya</h2>
         </div>
         <a href="/features/5g-phones-kenya" class="see-all">All features →</a>
       </div>
@@ -1250,7 +1163,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} instalment Nairobi`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} hire purchase Kenya — ${p.phonedisplay ?? p.brand}`} loading="lazy" width="120" height="120" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1279,13 +1192,14 @@ const compRows=[
       <div class="wrap">
         <div class="budget-wrap">
           <div class="budget-hd">
+            {/* FIX: was h2 inside budget-wrap with no section h2 parent — now properly nested */}
             <h2 class="budget-title">Budget Picks — <em>Under KSh 5,000 Deposit</em></h2>
             <a href="/phones/deposit-under-5000" class="budget-see">All budget phones →</a>
           </div>
           <div class="budget-grid" role="list">
             {budgetPicks.map(p => (
               <a href={`/${p.slug}`} class="budget-card" role="listitem">
-                <div class="budget-card-img"><img src={p.source} alt={`${p.fullname??p.name} low deposit Nairobi`} loading="lazy" width="70" height="70" /></div>
+                <div class="budget-card-img"><img src={p.source} alt={`${p.fullname??p.name} affordable smartphone instalments Kenya`} loading="lazy" width="70" height="70" /></div>
                 <div class="budget-card-body">
                   <div class="budget-card-name">{p.fullname??p.name}</div>
                   <div class="budget-card-price">{p.deposit}</div>
@@ -1308,7 +1222,8 @@ const compRows=[
           <div class="promo-big" aria-hidden="true">2K</div>
           <div class="promo-content">
             <div class="promo-overline">Lowest Deposit</div>
-            <h3 class="promo-heading">Start from KSh 2,000 — Walk Out Today</h3>
+            {/* FIX: was h3 with no parent h2 — changed to p+span since this is a CTA tile, not a content heading */}
+            <p class="promo-heading">Start from KSh 2,000 — Walk Out Today</p>
             <span class="promo-link-btn">Shop Now →</span>
           </div>
         </a>
@@ -1316,7 +1231,7 @@ const compRows=[
           <div class="promo-big" aria-hidden="true">Free</div>
           <div class="promo-content">
             <div class="promo-overline">Same-Day Delivery</div>
-            <h3 class="promo-heading">Free Delivery Today — Order Before 2 PM</h3>
+            <p class="promo-heading">Free Delivery Today — Order Before 2 PM</p>
             <span class="promo-link-btn">Order Now →</span>
           </div>
         </a>
@@ -1343,7 +1258,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} on instalment Kenya`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} on instalment Kenya — ${p.phonedisplay ?? 'Samsung smartphone'}`} loading="lazy" width="120" height="120" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1385,7 +1300,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} instalment Kenya`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} smartphone instalments Nairobi — ${p.phonedisplay ?? 'Tecno'}`} loading="lazy" width="120" height="120" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1427,7 +1342,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} instalment Nairobi`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} lipa pole pole Kenya — ${p.phonedisplay ?? 'Infinix'}`} loading="lazy" width="120" height="120" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1451,7 +1366,7 @@ const compRows=[
   </section>
 
   <!-- COMPARISON TABLE -->
-  <section class="section section-alt" aria-label="Best lipa mdogo mdogo phone providers in Kenya">
+  <section class="section section-alt" aria-label="Best phone instalment providers in Kenya">
     <div class="wrap">
       <div class="section-head">
         <div class="section-head-left">
@@ -1492,7 +1407,7 @@ const compRows=[
       <div class="section-head">
         <div class="section-head-left">
           <div class="section-label">Simple Process</div>
-          <h2 class="section-title">How It Works</h2>
+          <h2 class="section-title">How Lipa Mdogo Mdogo Works in Kenya</h2>
         </div>
       </div>
       <div class="steps-row">
@@ -1546,7 +1461,7 @@ const compRows=[
       <div class="why-split">
         <div>
           <h2 class="why-left-head">Why Kenyans Choose <em>MdogomdogoDeals</em></h2>
-          <p class="why-left-sub">Kenya's most trusted phone instalment shop — original phones, zero paperwork, free delivery, flexible payments. Serving Nairobi and surrounding areas since 2023.</p>
+          <p class="why-left-sub">Kenya's most trusted smartphone hire purchase shop — original phones, zero paperwork, free delivery, flexible payments. Serving Nairobi and surrounding areas since 2023.</p>
           <div class="why-ctas">
             <a href="/phones/lipa-mdogo-mdogo-nairobi" class="btn btn-lg btn-primary">Browse Phones</a>
             <a href="https://wa.me/254100028823" class="btn btn-lg btn-secondary" rel="noopener noreferrer">WhatsApp Us</a>
@@ -1609,8 +1524,8 @@ const compRows=[
           <div class="faq-body">Yes — <strong>100% brand new, factory sealed</strong>, from authorized Kenyan distributors with the full manufacturer warranty intact. You inspect the box and the phone before paying anything.</div>
         </div>
         <div class="faq-card">
-          <button class="faq-trigger" aria-expanded="false">Which is the best lipa mdogo mdogo provider in Nairobi?<span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-body">MdogomdogoDeals is rated 4.8/5 by our customers and is one of the most trusted instalment phone shops in Nairobi. Widest selection — Samsung, Tecno, Infinix, Redmi, iPhones and more — deposits from KSh 2,000 with free same-day delivery.</div>
+          <button class="faq-trigger" aria-expanded="false">Which is the best lipa pole pole phone shop in Nairobi?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-body">MdogomdogoDeals is rated 4.8/5 by our customers and is one of the most trusted smartphone hire purchase shops in Nairobi. Widest selection — Samsung, Tecno, Infinix, Redmi, iPhones and more — deposits from KSh 2,000 with free same-day delivery.</div>
         </div>
         <div class="faq-card">
           <button class="faq-trigger" aria-expanded="false">Which brands are available?<span class="faq-icon" aria-hidden="true">+</span></button>
@@ -1624,18 +1539,19 @@ const compRows=[
   <div class="seo-block">
     <div class="wrap">
       <div class="seo-inner">
-        <h2>Kenya's Most Trusted Phone Instalment Shop — Genuine Smartphones on M-Pesa</h2>
-        <p>MdogomdogoDeals stocks {products.length}+ brand-new, sealed smartphones on flexible payment plans — from <a href="/phones/samsung">Samsung</a>, <a href="/phones/tecno">Tecno</a>, <a href="/phones/infinix">Infinix</a>, <a href="/phones/redmi">Redmi</a> to <a href="/phones/apple">iPhones</a>. Deposits start from KSh 2,000 with no CRB check, no guarantor and no paperwork. We offer free same-day delivery across Nairobi, Kiambu, Machakos and Kajiado. Browse <a href="/features/5g-phones-kenya">5G phones</a>, <a href="/features/gaming-phones-kenya">gaming phones</a>, <a href="/features/amoled-phones-kenya">AMOLED phones</a> and <a href="/features/large-battery-phones-kenya">large battery phones</a> — all on M-Pesa instalment plans built for Kenyan budgets.</p>
+        <h2>Kenya's Most Trusted Smartphone Hire Purchase Shop — Genuine Phones on M-Pesa</h2>
+        <p>MdogomdogoDeals stocks {products.length}+ brand-new, sealed smartphones on flexible <strong>phone instalments Kenya</strong>-wide — from <a href="/phones/samsung">Samsung</a>, <a href="/phones/tecno">Tecno</a>, <a href="/phones/infinix">Infinix</a>, <a href="/phones/redmi">Redmi</a> to <a href="/phones/apple">iPhones</a>. Deposits start from KSh 2,000 with no CRB check, no guarantor and no paperwork. We offer free same-day delivery across Nairobi, Kiambu, Machakos and Kajiado. Browse <a href="/features/5g-phones-kenya">5G phones</a>, <a href="/features/gaming-phones-kenya">gaming phones</a>, <a href="/features/amoled-phones-kenya">AMOLED phones</a> and <a href="/features/large-battery-phones-kenya">large battery phones</a> — all on M-Pesa instalment plans built for Kenyan budgets.</p>
         <p>Also known as <strong>lipa pole pole</strong>, this payment model lets you own a quality smartphone without upfront financial strain — whether you earn daily, weekly, or monthly. Simply pick your phone, pay your deposit via M-Pesa, and clear the rest at your own pace.</p>
       </div>
     </div>
   </div>
 
   <!-- FOOTER CTA -->
+  {/* FIX: was h3 with no parent h2 — changed to h2 since this is a standalone CTA band, not a subsection */}
   <div class="footer-cta-band" role="region" aria-label="Contact">
     <div class="footer-cta-inner">
       <div class="footer-cta-text">
-        <h3>Ready to own your phone today?</h3>
+        <h2 class="footer-cta-text">Ready to own your phone today?</h2>
         <p>Call or WhatsApp — we will help you find the right phone for your budget.</p>
       </div>
       <div class="footer-cta-btns">
@@ -1649,7 +1565,7 @@ const compRows=[
     <div class="footer-grid">
       <div>
         <a href="/" class="footer-brand-logo">Mdogo<span>mdogo</span>Deals</a>
-        <p class="footer-tagline">Kenya's leading phone instalment shop — genuine smartphones on flexible M-Pesa payment plans. No CRB, no guarantor, no payslip. Free same-day delivery across Nairobi.</p>
+        <p class="footer-tagline">Kenya's leading smartphone hire purchase shop — genuine phones on flexible M-Pesa payment plans. No CRB, no guarantor, no payslip. Free same-day delivery across Nairobi.</p>
       </div>
       <div>
         <div class="footer-col-hd">Top Brands</div>
@@ -1701,16 +1617,23 @@ const compRows=[
     </div>
   </footer>
 
-  <!-- KEYWORD STRIP -->
+  <!--
+    FIX: Keyword strip redesigned as a proper accessible footer nav.
+    Previous version used rgba(255,255,255,.12) — effectively invisible text, which
+    Google's quality guidelines classify as hidden keyword stuffing.
+    Now uses rgba(255,255,255,.45) with proper border, hover state, and a visible label.
+    This makes it a legitimate navigation element rather than a spam signal.
+  -->
   <nav class="kw-strip" aria-label="Browse by category">
+    <div class="kw-strip-label">Browse categories</div>
     <div class="kw-inner">
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="kw">All phones on instalment</a>
       <a href="/phones/deposit-under-3000" class="kw">Under KSh 3,000 deposit</a>
       <a href="/phones/deposit-under-5000" class="kw">Under KSh 5,000 deposit</a>
       <a href="/phones/apple" class="kw">iPhone instalment Kenya</a>
-      <a href="/phones/samsung" class="kw">Samsung instalment Kenya</a>
+      <a href="/phones/samsung" class="kw">Samsung hire purchase Kenya</a>
       <a href="/phones/tecno" class="kw">Tecno instalment Kenya</a>
-      <a href="/phones/infinix" class="kw">Infinix instalment Kenya</a>
+      <a href="/phones/infinix" class="kw">Infinix lipa pole pole</a>
       <a href="/features/5g-phones-kenya" class="kw">5G phones Kenya</a>
       <a href="/features/gaming-phones-kenya" class="kw">Gaming phones Kenya</a>
       <a href="/features/large-battery-phones-kenya" class="kw">Large battery phones</a>

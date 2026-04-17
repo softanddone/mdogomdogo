@@ -25,7 +25,11 @@ const seoData = {
 // ============================================
 import { generateHomepageSchema } from "../utils/structureData";
 
-const homepageSchema = generateHomepageSchema(products, seoData);
+
+// const homepageSchema = generateHomepageSchema(products, seoData, featured, flashDeals);
+const featured = products.slice(0, 10);
+
+const homepageSchema = generateHomepageSchema(products, seoData, featured);
 ---
 
 <!doctype html>

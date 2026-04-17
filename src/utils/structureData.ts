@@ -333,7 +333,7 @@ export function generateProductSchema(product: FlexibleProduct) {
         
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+254-720-202-167',
+          telephone: '+254-100-028-823',
           contactType: 'customer service',
           areaServed: 'KE'
         }
@@ -700,7 +700,7 @@ export function generateTVProductSchema(product: FlexibleProduct) {
         
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+254-720-202-167',
+          telephone: '+254-100-028-823',
           contactType: 'customer service',
           availableLanguage: ['English', 'Swahili'],
           areaServed: 'KE'
@@ -911,12 +911,32 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
 // FIXED: Homepage schema with @graph
 
 
-export function generateHomepageSchema(products: FlexibleProduct[], seoData: any) {
+
+export function generateHomepageSchema(
+  products: FlexibleProduct[],
+  seoData: any,
+  featured: FlexibleProduct[]
+) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
+
+  // REMINDER: hreflang MUST be a <link> tag in <head> — NOT in JSON-LD.
+  // <link rel="alternate" hreflang="en-KE" href="https://mdogomdogodeals.co.ke/" />
+  // This is now added in HomePage.astro.
+
+  // ACTION REQUIRED: Replace the GBP_URL placeholder below with your real
+  // Google Business Profile URL from Google Maps (right-click your listing → Share → copy link).
+  // Format: https://maps.app.goo.gl/XXXXXXX  OR  https://www.google.com/maps/place/?cid=XXXXXXX
+  const GBP_URL = 'https://www.google.com/maps/place/MdogomdogoDeals'; // ← replace with real GBP URL
+
+  // ACTION REQUIRED: Set this to your actual verified review count from Google / Trustpilot.
+  // Syncing this number to real third-party reviews is required for Google to show star ratings.
+  // Inflated or unverifiable counts cause Google to suppress the AggregateRating snippet entirely.
+  const VERIFIED_REVIEW_COUNT = '312'; // ← update to match your real verified review count
 
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
+
       // WebPage
       {
         '@type': 'WebPage',
@@ -933,22 +953,12 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
           contentUrl: seoData.ogImage,
         },
         inLanguage: 'en-KE',
-        breadcrumb: {
-          '@type': 'BreadcrumbList',
-          '@id': `${baseUrl}#breadcrumb`,
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'Lipa Mdogo Mdogo Phones',
-              item: `${baseUrl}/phones/lipa-mdogo-mdogo-nairobi`,
-            },
-          ],
-        },
       },
 
       // WebSite
+      // Verify /search?q=samsung returns real results before relying on SearchAction.
+      // Test with: curl "https://mdogomdogodeals.co.ke/search?q=samsung"
+      // If the route 404s, Google drops the Sitelinks search box entirely.
       {
         '@type': 'WebSite',
         '@id': `${baseUrl}#website`,
@@ -969,7 +979,7 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
         inLanguage: 'en-KE',
       },
 
-      // Organization
+      // Organization — GBP URL added to sameAs (FIX: strengthens Knowledge Panel)
       {
         '@type': 'Organization',
         '@id': `${baseUrl}#organization`,
@@ -1019,7 +1029,10 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
           },
         ],
         email: 'hello@mdogomdogodeals.co.ke',
+        // FIX: Added GBP_URL to sameAs — required for Google to associate the
+        // Organization entity with your Google Business Profile and Map Pack listing.
         sameAs: [
+          GBP_URL,
           'https://wa.me/254100028823',
           'https://www.facebook.com/profile.php?id=61578574354368',
           'https://x.com/mdogomdogodeals',
@@ -1028,7 +1041,10 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
         areaServed: { '@type': 'Country', name: 'Kenya' },
       },
 
-      // LocalBusiness — replaces the standalone ldLocal block
+      // LocalBusiness
+      // FIX: GBP_URL added to sameAs — this is the most important signal for
+      // Map Pack eligibility and Knowledge Panel triggering.
+      // FIX: reviewCount must match your actual verified third-party review count.
       {
         '@type': ['LocalBusiness', 'MobilePhoneStore'],
         '@id': `${baseUrl}#localbusiness`,
@@ -1067,17 +1083,98 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
           name: 'Smartphones on Instalment',
           numberOfItems: products.length,
         },
+        makesOffer: { '@id': `${baseUrl}#instalment-service` },
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.8',
           bestRating: '5',
           worstRating: '1',
-          reviewCount: '4800',
+          // IMPORTANT: This value must match your real verified review count
+          // (Google reviews, Trustpilot, etc.). Google suppresses star snippets
+          // when it cannot verify the count against a known source.
+          reviewCount: VERIFIED_REVIEW_COUNT,
         },
-        sameAs: ['https://wa.me/254100028823'],
+        // FIX: GBP_URL is the critical addition here — links this entity to your
+        // Google Maps listing for Map Pack and local Knowledge Panel eligibility.
+        sameAs: [
+          GBP_URL,
+          'https://wa.me/254100028823',
+        ],
       },
 
-      // FAQPage — replaces the standalone ldFaq block, with real business-specific answers
+      // Service entity — instalment offering
+      {
+        '@type': 'Service',
+        '@id': `${baseUrl}#instalment-service`,
+        name: 'Smartphone Instalment Plan — Lipa Mdogo Mdogo',
+        alternateName: ['Lipa Pole Pole', 'Phone Hire Purchase Kenya'],
+        description:
+          'Buy a genuine smartphone on M-Pesa instalments from as little as KSh 2,000 deposit. No CRB check, no guarantor, no payslip required. Plans available over 3 or 6 months with daily, weekly or monthly payment options.',
+        provider: { '@id': `${baseUrl}#organization` },
+        serviceType: 'Smartphone Instalment Plan',
+        category: 'Consumer Electronics Financing',
+        areaServed: [
+          { '@type': 'City', name: 'Nairobi' },
+          { '@type': 'City', name: 'Kiambu' },
+          { '@type': 'City', name: 'Machakos' },
+          { '@type': 'City', name: 'Kajiado' },
+        ],
+        eligibleRegion: {
+          '@type': 'Country',
+          name: 'Kenya',
+        },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'KES',
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            minPrice: 2000,
+            maxPrice: 150000,
+            priceCurrency: 'KES',
+            description: 'Minimum deposit KSh 2,000. Full price varies by model.',
+          },
+          availability: 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
+          seller: { '@id': `${baseUrl}#organization` },
+          areaServed: [
+            { '@type': 'City', name: 'Nairobi' },
+            { '@type': 'City', name: 'Kiambu' },
+            { '@type': 'City', name: 'Machakos' },
+            { '@type': 'City', name: 'Kajiado' },
+          ],
+          eligibleCustomerType: 'https://schema.org/Person',
+          description:
+            'No CRB check, no payslip, no guarantor. M-Pesa deposit only. Free same-day delivery in Nairobi.',
+        },
+        termsOfService: `${baseUrl}/terms`,
+      },
+
+      // ItemList — FIX: each item now includes @id referencing the product page
+      // entity, enabling stronger association between the list and individual
+      // product pages that have their own Product schema.
+      {
+        '@type': 'ItemList',
+        '@id': `${baseUrl}#featured-phones`,
+        name: 'Featured Smartphones on Instalment — Nairobi',
+        description: `Top smartphones available on lipa mdogo mdogo in Kenya. Deposits from KSh 2,000.`,
+        numberOfItems: featured.length,
+        itemListElement: featured.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          url: `${baseUrl}/${p.slug}`,
+          name: p.fullname ?? p.name,
+          // Links to the Product @id on each product page (if that page has Product schema).
+          // If your product pages don't yet have Product schema, this is harmless but inert.
+          item: {
+            '@type': 'Product',
+            '@id': `${baseUrl}/${p.slug}#product`,
+            name: p.fullname ?? p.name,
+            url: `${baseUrl}/${p.slug}`,
+          },
+        })),
+      },
+
+      // FAQPage — unchanged, already well-structured
       {
         '@type': 'FAQPage',
         '@id': `${baseUrl}#faq`,
@@ -1153,6 +1250,7 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
 
   return JSON.stringify(graphData, null, 2);
 }
+
 
 
 export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
@@ -1299,7 +1397,7 @@ export function generateOrganizationSchema() {
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: '+254-720-202-167',
+        telephone: '+254-100-028-823',
         contactType: 'customer service',
         availableLanguage: ['English', 'Swahili'],
         areaServed: 'KE',
@@ -1314,7 +1412,7 @@ export function generateOrganizationSchema() {
       },
       {
         '@type': 'ContactPoint',
-        telephone: '+254-711-000-000',
+        telephone: '+254-100-028-823',
         contactType: 'sales',
         availableLanguage: ['English', 'Swahili'],
         areaServed: 'KE'
