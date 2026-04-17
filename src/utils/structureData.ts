@@ -913,68 +913,62 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
 
 export function generateHomepageSchema(products: FlexibleProduct[], seoData: any) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
-  
+
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
-      // WebPage - uses seoData passed from HomeLayout
+      // WebPage
       {
         '@type': 'WebPage',
         '@id': `${baseUrl}#webpage`,
         url: seoData.canonical,
         name: seoData.title,
         description: seoData.description,
-        isPartOf: {
-          '@id': `${baseUrl}#website`
-        },
-        about: {
-          '@id': `${baseUrl}#organization`
-        },
-        publisher: {
-          '@id': `${baseUrl}#organization`
-        },
+        isPartOf: { '@id': `${baseUrl}#website` },
+        about: { '@id': `${baseUrl}#organization` },
+        publisher: { '@id': `${baseUrl}#organization` },
         primaryImageOfPage: {
           '@type': 'ImageObject',
           url: seoData.ogImage,
-          contentUrl: seoData.ogImage
+          contentUrl: seoData.ogImage,
         },
         inLanguage: 'en-KE',
         breadcrumb: {
           '@type': 'BreadcrumbList',
           '@id': `${baseUrl}#breadcrumb`,
           itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
             {
               '@type': 'ListItem',
-              position: 1,
-              name: 'Home',
-              item: baseUrl
-            }
-          ]
-        }
+              position: 2,
+              name: 'Lipa Mdogo Mdogo Phones',
+              item: `${baseUrl}/phones/lipa-mdogo-mdogo-nairobi`,
+            },
+          ],
+        },
       },
-      
+
       // WebSite
       {
         '@type': 'WebSite',
-        '@id': `${baseUrl}#website`, 
+        '@id': `${baseUrl}#website`,
         url: baseUrl,
         name: seoData.siteName,
         alternateName: 'MMD Kenya',
-        description: 'Buy phones on Lipa Mdogo Mdogo payment plans in Nairobi and across Kenya',
-        publisher: {
-          '@id': `${baseUrl}#organization`
-        },
+        description:
+          "Kenya's #1 smartphone instalment shop. Own a Samsung, Tecno, Infinix or iPhone from KSh 2,000 deposit. M-Pesa payments, no CRB, no guarantor. Free same-day delivery Nairobi.",
+        publisher: { '@id': `${baseUrl}#organization` },
         potentialAction: {
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: `${baseUrl}/search?q={search_term_string}`
+            urlTemplate: `${baseUrl}/search?q={search_term_string}`,
           },
-          'query-input': 'required name=search_term_string'
+          'query-input': 'required name=search_term_string',
         },
-        inLanguage: 'en-KE'
+        inLanguage: 'en-KE',
       },
-      
+
       // Organization
       {
         '@type': 'Organization',
@@ -989,86 +983,177 @@ export function generateHomepageSchema(products: FlexibleProduct[], seoData: any
           contentUrl: `${baseUrl}/phones/logo.jpg`,
           width: 300,
           height: 150,
-          caption: 'Mdogo Mdogo Deals Kenya Logo'
+          caption: 'Mdogo Mdogo Deals Kenya Logo',
         },
-        image: {
-          '@id': `${baseUrl}#logo`
-        },
-        description: 'Mobile phone retailer in Nairobi offering flexible payment plans for smartphones. Daily installments from KES 50.',
+        image: { '@id': `${baseUrl}#logo` },
+        description:
+          "Kenya's most trusted phone instalment shop. Genuine smartphones on flexible M-Pesa payment plans. No CRB, no guarantor, no payslip. Free same-day delivery across Nairobi.",
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'CBD Center',
           addressLocality: 'Nairobi',
-          addressRegion: 'Nairobi County', 
+          addressRegion: 'Nairobi County',
           postalCode: '00100',
-          addressCountry: 'KE'
+          addressCountry: 'KE',
         },
         geo: {
           '@type': 'GeoCoordinates',
           latitude: -1.2921,
-          longitude: 36.8219
+          longitude: 36.8219,
         },
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+254720202167',
-          contactType: 'customer service',
-          availableLanguage: ['English', 'Swahili'],
-          areaServed: 'KE'
-        },
-        sameAs: [
-          'https://www.facebook.com/profile.php?id=61578574354368',
-          'https://x.com/mdogomdogodeals', 
-          'https://www.instagram.com/mdogomdogodeals_/'
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: '+254100028823',
+            contactType: 'customer service',
+            availableLanguage: ['English', 'Swahili'],
+            areaServed: 'KE',
+            contactOption: 'TollFree',
+          },
+          {
+            '@type': 'ContactPoint',
+            telephone: '+254100028823',
+            contactType: 'sales',
+            availableLanguage: ['English', 'Swahili'],
+            areaServed: 'KE',
+          },
         ],
-        areaServed: {
-          '@type': 'Country',
-          name: 'Kenya'
-        }
+        email: 'hello@mdogomdogodeals.co.ke',
+        sameAs: [
+          'https://wa.me/254100028823',
+          'https://www.facebook.com/profile.php?id=61578574354368',
+          'https://x.com/mdogomdogodeals',
+          'https://www.instagram.com/mdogomdogodeals_/',
+        ],
+        areaServed: { '@type': 'Country', name: 'Kenya' },
       },
-      
-      // FAQ - Neutral and informational
+
+      // LocalBusiness — replaces the standalone ldLocal block
+      {
+        '@type': ['LocalBusiness', 'MobilePhoneStore'],
+        '@id': `${baseUrl}#localbusiness`,
+        name: 'MdogomdogoDeals',
+        url: baseUrl,
+        telephone: '+254100028823',
+        email: 'hello@mdogomdogodeals.co.ke',
+        image: `${baseUrl}/og-image.jpg`,
+        logo: { '@id': `${baseUrl}#logo` },
+        parentOrganization: { '@id': `${baseUrl}#organization` },
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'CBD Center',
+          addressLocality: 'Nairobi',
+          addressRegion: 'Nairobi County',
+          postalCode: '00100',
+          addressCountry: 'KE',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: -1.2921,
+          longitude: 36.8219,
+        },
+        openingHours: 'Mo-Sa 08:00-20:00',
+        priceRange: 'KSh 2,000–KSh 150,000',
+        currenciesAccepted: 'KES',
+        paymentAccepted: 'M-Pesa, Cash',
+        areaServed: [
+          { '@type': 'City', name: 'Nairobi' },
+          { '@type': 'City', name: 'Kiambu' },
+          { '@type': 'City', name: 'Machakos' },
+          { '@type': 'City', name: 'Kajiado' },
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Smartphones on Instalment',
+          numberOfItems: products.length,
+        },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.8',
+          bestRating: '5',
+          worstRating: '1',
+          reviewCount: '4800',
+        },
+        sameAs: ['https://wa.me/254100028823'],
+      },
+
+      // FAQPage — replaces the standalone ldFaq block, with real business-specific answers
       {
         '@type': 'FAQPage',
+        '@id': `${baseUrl}#faq`,
         mainEntity: [
           {
             '@type': 'Question',
-            name: 'How do installment payment plans work?',
+            name: 'What is the minimum deposit for lipa mdogo mdogo?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Installment plans allow you to pay for a phone in smaller amounts over time instead of the full price upfront. Payment frequency can be daily, weekly, or monthly depending on the plan.'
-            }
+              text: 'Just KSh 2,000. No CRB, no payslip, no guarantor required.',
+            },
           },
           {
             '@type': 'Question',
-            name: 'What documents are required to buy on credit?',
+            name: 'How fast is delivery in Nairobi?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Typically, you need a valid ID, proof of income or business activity, and contact information. Specific requirements may vary by payment provider.'
-            }
+              text: 'Same-day free delivery when you order before 2 PM. Nairobi, Kiambu, Machakos and Kajiado are all covered.',
+            },
           },
           {
             '@type': 'Question',
-            name: 'Is delivery available in Nairobi?',
+            name: 'Are the phones genuine?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Yes, delivery is available within Nairobi and surrounding areas. Some providers also offer nationwide shipping options.'
-            }
+              text: 'Yes — 100% brand new, factory sealed, from authorized Kenyan distributors with full manufacturer warranty.',
+            },
           },
           {
             '@type': 'Question',
-            name: 'Which phone brands can I buy on installment?',
+            name: 'What happens if I miss an instalment payment?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Most major smartphone brands are available including Samsung, Tecno, Infinix, Oppo, and others. Availability depends on current stock.'
-            }
-          }
-        ]
-      }
-    ]
+              text: 'Contact us immediately via WhatsApp or call 0100 028 823. We will work with you on a revised payment schedule. Early communication always helps.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is MdogomdogoDeals legitimate?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes. We are a registered Kenyan business supplying factory-sealed phones from authorized distributors. Customers inspect every phone before paying a deposit.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What documents do I need to qualify?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'No documents needed. No CRB check, no payslip, no guarantor. A valid M-Pesa number and your deposit is all that is required.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Which is the best lipa mdogo mdogo provider in Nairobi?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'MdogomdogoDeals is rated 4.8/5 by customers and is one of the most trusted instalment phone shops in Nairobi. Deposits from KSh 2,000 with free same-day delivery and the widest selection of brands.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Which phone brands are available on instalment?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `${products.length}+ phones available — Samsung, Tecno, Infinix, Redmi, Oppo, Vivo, Itel and iPhones. New models added weekly.`,
+            },
+          },
+        ],
+      },
+    ],
   };
 
   return JSON.stringify(graphData, null, 2);
 }
+
 
 export function generateEventSchema(product: FlexibleProduct, eventData?: any) {
   if (!eventData) return null;
