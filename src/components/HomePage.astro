@@ -38,7 +38,6 @@ const compRows=[
 ---
 
 <Fragment>
-  {/* FIX: Google Fonts preconnect + font-display=swap to reduce render-blocking on slow connections */}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet" />
@@ -50,12 +49,6 @@ const compRows=[
   <meta name="geo.region" content="KE-30" />
   <meta name="geo.placename" content="Nairobi, Kenya" />
 
-  {/*
-    FIX: hreflang link tag — was noted in JSON-LD comments as a TODO but never implemented.
-    This tells Google to serve this page to English-language Kenyan searchers,
-    and avoids competing with global English results for Kenyan-specific queries
-    like "lipa mdogo mdogo phones" and "phone instalments Nairobi".
-  */}
   <link rel="alternate" hreflang="en-KE" href={`${siteUrl}/`} />
   <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
 
@@ -163,11 +156,6 @@ const compRows=[
     .btn-green{background:#007600;color:#fff;border-color:#006400}
     .btn-green:hover{background:#005f00}
 
-    /*
-      FIX (CLS): notice-bar has fixed height + will-change on the ticker wrapper only.
-      The outer bar height is explicit so the browser reserves layout space before
-      the font loads, preventing a Cumulative Layout Shift on first paint.
-    */
     .notice-bar{background:var(--amz-navy2);height:36px;display:flex;align-items:center;overflow:hidden;position:relative;contain:layout}
     .notice-ticker{display:flex;white-space:nowrap;animation:ticker 36s linear infinite;will-change:transform}
     @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -509,15 +497,17 @@ const compRows=[
       font-size:10px;font-weight:700;padding:2px 7px;border-radius:var(--radius-sm);
     }
 
-    .pcard-flash .pcard-img{aspect-ratio:4/3;padding:20px}
-    .pcard-flash .pcard-img img{width:160px;height:160px;object-fit:contain}
+    /* FIXED: flash card image — no padding, full fill */
+    .pcard-flash .pcard-img{aspect-ratio:4/3;padding:0}
+    .pcard-flash .pcard-img img{width:100%;height:100%;object-fit:contain}
 
+    /* FIXED: standard card image — no padding, full fill */
     .pcard-img{
       background:var(--white);
       display:flex;align-items:center;justify-content:center;
-      padding:16px;aspect-ratio:1/1;overflow:hidden;
+      padding:0;aspect-ratio:1/1;overflow:hidden;
     }
-    .pcard-img img{width:120px;height:120px;object-fit:contain;transition:transform .28s}
+    .pcard-img img{width:100%;height:100%;object-fit:contain;transition:transform .28s}
     .pcard:hover .pcard-img img{transform:scale(1.05)}
 
     .pcard-body{padding:10px 12px;flex:1;display:flex;flex-direction:column;border-top:1px solid var(--gray-100)}
@@ -604,8 +594,9 @@ const compRows=[
       display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:all .15s;
     }
     .budget-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,153,0,.4)}
-    .budget-card-img{background:rgba(255,255,255,.03);padding:14px;display:flex;align-items:center;justify-content:center;aspect-ratio:1}
-    .budget-card-img img{width:70px;height:70px;object-fit:contain;transition:transform .28s}
+    /* FIXED: budget card image — no padding, full fill */
+    .budget-card-img{background:rgba(255,255,255,.03);padding:0;display:flex;align-items:center;justify-content:center;aspect-ratio:1;overflow:hidden}
+    .budget-card-img img{width:100%;height:100%;object-fit:contain;transition:transform .28s}
     .budget-card:hover .budget-card-img img{transform:scale(1.07)}
     .budget-card-body{padding:8px 10px 12px;flex:1;display:flex;flex-direction:column}
     .budget-card-name{font-size:11px;color:rgba(255,255,255,.5);line-height:1.4;margin-bottom:6px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -745,12 +736,6 @@ const compRows=[
     .footer-bottom{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
     .footer-bottom p{font-size:11px;color:rgba(255,255,255,.18)}
 
-    /*
-      FIX: keyword strip redesigned as a proper accessible footer nav.
-      - Removed the near-invisible rgba(255,255,255,.12) text (Google spam flag).
-      - Now uses rgba(255,255,255,.45) — readable, not hidden, not stuffed.
-      - Presented as a genuine navigation landmark with proper contrast.
-    */
     .kw-strip{background:#06101f;padding:14px var(--px);border-top:1px solid rgba(255,255,255,.06)}
     .kw-strip-label{max-width:var(--max-w);margin:0 auto 8px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em}
     .kw-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-wrap:wrap;gap:6px}
@@ -1016,7 +1001,7 @@ const compRows=[
               <a href={`/${p.slug}`} class="pcard pcard-flash" role="listitem">
                 {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
                 {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-                <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} — instalment price Nairobi, ${p.phonedisplay ?? ''}`} loading="eager" width="160" height="160" /></div>
+                <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} — instalment price Nairobi, ${p.phonedisplay ?? ''}`} loading="eager" /></div>
                 <div class="pcard-body">
                   <div class="pcard-brand">{p.brand}</div>
                   <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1145,7 +1130,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} hire purchase Kenya — ${p.phonedisplay ?? p.brand}`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} hire purchase Kenya — ${p.phonedisplay ?? p.brand}`} loading="lazy" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1174,14 +1159,13 @@ const compRows=[
       <div class="wrap">
         <div class="budget-wrap">
           <div class="budget-hd">
-            {/* FIX: was h2 inside budget-wrap with no section h2 parent — now properly nested */}
             <h2 class="budget-title">Budget Picks — <em>Under KSh 5,000 Deposit</em></h2>
             <a href="/phones/deposit-under-5000" class="budget-see">All budget phones →</a>
           </div>
           <div class="budget-grid" role="list">
             {budgetPicks.map(p => (
               <a href={`/${p.slug}`} class="budget-card" role="listitem">
-                <div class="budget-card-img"><img src={p.source} alt={`${p.fullname??p.name} affordable smartphone instalments Kenya`} loading="lazy" width="70" height="70" /></div>
+                <div class="budget-card-img"><img src={p.source} alt={`${p.fullname??p.name} affordable smartphone instalments Kenya`} loading="lazy" /></div>
                 <div class="budget-card-body">
                   <div class="budget-card-name">{p.fullname??p.name}</div>
                   <div class="budget-card-price">{p.deposit}</div>
@@ -1204,7 +1188,6 @@ const compRows=[
           <div class="promo-big" aria-hidden="true">2K</div>
           <div class="promo-content">
             <div class="promo-overline">Lowest Deposit</div>
-            {/* FIX: was h3 with no parent h2 — changed to p+span since this is a CTA tile, not a content heading */}
             <p class="promo-heading">Start from KSh 2,000 — Walk Out Today</p>
             <span class="promo-link-btn">Shop Now →</span>
           </div>
@@ -1240,7 +1223,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} on instalment Kenya — ${p.phonedisplay ?? 'Samsung smartphone'}`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} on instalment Kenya — ${p.phonedisplay ?? 'Samsung smartphone'}`} loading="lazy" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1282,7 +1265,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} smartphone instalments Nairobi — ${p.phonedisplay ?? 'Tecno'}`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} smartphone instalments Nairobi — ${p.phonedisplay ?? 'Tecno'}`} loading="lazy" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1324,7 +1307,7 @@ const compRows=[
             <a href={`/${p.slug}`} class="pcard" role="listitem">
               {p.status&&<span class={`pcard-badge ${bc}`}>{p.status}</span>}
               {p.discount&&<span class="pcard-disc">{p.discount}</span>}
-              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} lipa pole pole Kenya — ${p.phonedisplay ?? 'Infinix'}`} loading="lazy" width="120" height="120" /></div>
+              <div class="pcard-img"><img src={p.source} alt={`${p.fullname??p.name} lipa pole pole Kenya — ${p.phonedisplay ?? 'Infinix'}`} loading="lazy" /></div>
               <div class="pcard-body">
                 <div class="pcard-brand">{p.brand}</div>
                 <h3 class="pcard-name">{p.fullname??p.name}</h3>
@@ -1529,7 +1512,6 @@ const compRows=[
   </div>
 
   <!-- FOOTER CTA -->
-  {/* FIX: was h3 with no parent h2 — changed to h2 since this is a standalone CTA band, not a subsection */}
   <div class="footer-cta-band" role="region" aria-label="Contact">
     <div class="footer-cta-inner">
       <div class="footer-cta-text">
@@ -1599,13 +1581,6 @@ const compRows=[
     </div>
   </footer>
 
-  <!--
-    FIX: Keyword strip redesigned as a proper accessible footer nav.
-    Previous version used rgba(255,255,255,.12) — effectively invisible text, which
-    Google's quality guidelines classify as hidden keyword stuffing.
-    Now uses rgba(255,255,255,.45) with proper border, hover state, and a visible label.
-    This makes it a legitimate navigation element rather than a spam signal.
-  -->
   <nav class="kw-strip" aria-label="Browse by category">
     <div class="kw-strip-label">Browse categories</div>
     <div class="kw-inner">
