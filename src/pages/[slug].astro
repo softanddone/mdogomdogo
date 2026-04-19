@@ -111,19 +111,23 @@ const relatedProducts = pool.slice(0, 4);
 const faqs = [
   {
     question: `How does the Lipa Mdogo Mdogo instalment plan work for the ${currentProduct.name}?`,
-    answer: `It is straightforward. We deliver the phone directly to your location — no advance payment required. Once it arrives, you turn it on, test every feature, and try it for yourself. Only when you are completely satisfied do you pay the deposit of KES ${currentProduct.deposit}. After that, a short grace period begins before your daily payments of KES ${currentProduct.daily} kick in. You can also choose to pay weekly or monthly instead — whatever matches your cash flow best. No booking fee, no delivery charge, nothing owed before the phone is in your hands.`,
+    answer: `It is straightforward. We deliver the phone directly to your location in Nairobi, Kiambu, Machakos, or Kajiado — no advance payment required. Once it arrives, you turn it on, test every feature, and try it for yourself. Only when you are completely satisfied do you pay the deposit of KES ${currentProduct.deposit}. After that, a short grace period begins before your daily payments of KES ${currentProduct.daily} kick in. You can also choose to pay weekly or monthly instead — whatever matches your cash flow best. This is the most flexible lipa mdogo mdogo plan available in Kenya today: no booking fee, no delivery charge, nothing owed before the phone is in your hands.`,
+  },
+  {
+    question: "What is Lipa Mdogo Mdogo and how is it different from Lipa Pole Pole?",
+    answer: "Lipa mdogo mdogo and lipa pole pole are both popular Kenyan phrases describing the same idea: paying for something gradually in small, manageable instalments rather than all at once. At MdogomdogoDeals, we use both terms interchangeably. Whether you call it lipa mdogo mdogo, lipa pole pole, or simply phone instalments, the system is the same — we deliver your phone first, you inspect it, then you pay a small deposit and continue with daily, weekly, or monthly payments until the balance is cleared. No lump sum, no credit check, no guarantor.",
   },
   {
     question: "Do I need to pay anything before delivery?",
-    answer: "Absolutely not. MdogomdogoDeals operates on a simple principle: we deliver first, you inspect second, you pay third. The deposit is only collected once the phone is physically with you and you have confirmed it meets your expectations. There are no hidden booking fees, no upfront processing charges, and no payment of any kind before our rider arrives at your door.",
+    answer: "Absolutely not. MdogomdogoDeals operates on a simple principle: we deliver first, you inspect second, you pay third. The deposit is only collected once the phone is physically with you and you have confirmed it meets your expectations. There are no hidden booking fees, no upfront processing charges, and no payment of any kind before our rider arrives at your door. This is what makes our lipa mdogo mdogo plan the most trusted phone instalment service in Nairobi.",
   },
   {
-    question: "Which counties and areas do you cover?",
+    question: "Which counties and areas in Nairobi do you cover for free delivery?",
     answer: "We offer free same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado counties — covering the entire greater Nairobi metropolitan area and surrounding regions. This includes Nairobi CBD, Westlands, Kasarani, Embakasi, Thika, Ruiru, Athi River, Kitengela, Ngong, and many more. Not sure whether we reach your exact location? Call or WhatsApp us on 0100028823 before ordering and we will confirm right away.",
   },
   {
-    question: "How do I place an order for the phone?",
-    answer: `Ordering is easy — three options are available: (1) WhatsApp us on 0100028823 for the fastest response, (2) call us directly on 0100028823 to speak with our team, or (3) fill in the order form on this page. As soon as we receive your order, we will confirm your delivery slot and estimated arrival time the same day.`,
+    question: "How do I place an order for the phone on lipa mdogo mdogo?",
+    answer: `Ordering on our lipa mdogo mdogo plan is easy — three options are available: (1) WhatsApp us on 0100028823 for the fastest response, (2) call us directly on 0100028823 to speak with our team, or (3) fill in the order form on this page. As soon as we receive your order, we will confirm your delivery date and estimated arrival time the same day. Delivery is free and happens the same day you place your order for all areas within Nairobi, Kiambu, Machakos, and Kajiado.`,
   },
   {
     question: `Is the ${currentProduct.name} brand new and genuine?`,
@@ -254,15 +258,17 @@ function renderStars(r: number) {
     <!-- SEO INTRO -->
     <div class="seo-intro">
       <p>
-        Looking up the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>?
+        Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya on lipa mdogo mdogo</strong>?
         You have come to the right place. The <a href={`/phones/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is now available in Kenya through
-        <strong>Lipa Mdogo Mdogo</strong> — the country's most trusted phone instalment service. Own it today with zero upfront cost: a small deposit is collected only after the phone reaches your door and you have inspected it, then spread the remaining balance in affordable daily, weekly, or monthly payments. No credit check, no guarantor, no money needed before delivery.
-        Same-day delivery to <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong>.
+        <strong>MdogomdogoDeals</strong> — Nairobi's most trusted phone lipa mdogo mdogo and lipa pole pole service.
+        Own it today with <strong>zero upfront cost</strong>: a small deposit is collected only after the phone reaches your door and you have inspected it, then spread the remaining balance in affordable daily, weekly, or monthly payments.
+        No credit check, no guarantor, no money needed before delivery.
+        <strong>Free same-day delivery</strong> to <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong> — delivered today, you pay after.
         {currentProduct.ram && ` Featuring ${currentProduct.ram} RAM`}
         {currentProduct.storage && `, ${currentProduct.storage} of built-in storage`}
         {currentProduct.battery && `, and a powerful ${currentProduct.battery} battery`}
-        {` — the ${currentProduct.brand} ${currentProduct.name} is one of the sharpest smartphone deals available in Kenya today.`}
-        &nbsp;<a href="#price-kenya">View pricing &amp; instalments &darr;</a>
+        {` — the ${currentProduct.brand} ${currentProduct.name} is one of the sharpest lipa mdogo mdogo smartphone deals available in Nairobi today.`}
+        &nbsp;<a href="#price-kenya">View lipa mdogo mdogo pricing &amp; instalments &darr;</a>
       </p>
     </div>
 
@@ -283,7 +289,7 @@ function renderStars(r: number) {
           <img
             id="main-product-img"
             src={currentProduct.source}
-            alt={`${currentProduct.brand} ${currentProduct.name} price in Kenya — buy on instalments Nairobi`}
+            alt={`${currentProduct.brand} ${currentProduct.name} lipa mdogo mdogo Nairobi Kenya — buy on instalments`}
             class="main-product-img"
             loading="eager"
             width="560" height="560"
@@ -292,7 +298,7 @@ function renderStars(r: number) {
 
         <div class="thumb-row">
           <button class="thumb active" data-src={currentProduct.source} aria-label="View image 1">
-            <img src={currentProduct.source} alt={`${currentProduct.brand} ${currentProduct.name} front view Kenya`} width="72" height="72" />
+            <img src={currentProduct.source} alt={`${currentProduct.brand} ${currentProduct.name} front view Kenya lipa mdogo mdogo`} width="72" height="72" />
           </button>
           {currentProduct.source2 && (
             <button class="thumb" data-src={currentProduct.source2} aria-label="View image 2">
@@ -301,7 +307,7 @@ function renderStars(r: number) {
           )}
           {currentProduct.source3 && (
             <button class="thumb" data-src={currentProduct.source3} aria-label="View image 3">
-              <img src={currentProduct.source3} alt={`${currentProduct.brand} ${currentProduct.name} camera detail — lipa mdogo mdogo Kenya`} width="72" height="72" loading="lazy" />
+              <img src={currentProduct.source3} alt={`${currentProduct.brand} ${currentProduct.name} camera detail — lipa pole pole Kenya`} width="72" height="72" loading="lazy" />
             </button>
           )}
         </div>
@@ -320,7 +326,7 @@ function renderStars(r: number) {
         </div>
 
         <h1 class="product-title">
-          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name} &mdash; Lipa Mdogo Mdogo Kenya
+          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name} &mdash; Lipa Mdogo Mdogo Nairobi
         </h1>
 
         {reviewCount > 0 && (
@@ -334,9 +340,9 @@ function renderStars(r: number) {
 
         <!-- Delivery trust strip -->
         <div class="trust-strip">
-          <span>Free same-day delivery</span>
-          <span>Nairobi · Kiambu · Machakos · Kajiado</span>
-          <span>Pay only after delivery</span>
+          <span>Free same-day delivery — Nairobi &amp; surroundings</span>
+          <span>Lipa mdogo mdogo · Lipa pole pole</span>
+          <span>Pay only after delivery — zero upfront</span>
         </div>
 
         <!-- Pricing -->
@@ -353,11 +359,11 @@ function renderStars(r: number) {
             </div>
           </div>
           <div class="installment-note">
-            Or from <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong> &mdash; choose daily, weekly, or monthly instalments after your grace period
+            Or from <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong> &mdash; choose daily, weekly, or monthly instalments — lipa mdogo mdogo or lipa pole pole, your choice
           </div>
           <ul class="pricing-bullets">
-            <li>Zero payment before delivery</li>
-            <li>Inspect the phone first — deposit paid only after</li>
+            <li>Zero payment before delivery — free delivery today</li>
+            <li>Inspect the phone first — deposit paid only after you approve</li>
             <li>No interest &mdash; no hidden fees &mdash; no credit check</li>
           </ul>
         </div>
@@ -367,11 +373,11 @@ function renderStars(r: number) {
           <p class="order-heading">How would you like to order?</p>
 
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name}`}
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on lipa mdogo mdogo`}
             class="btn-order-wa"
             target="_blank" rel="noopener"
           >
-            Order via WhatsApp
+            Order via WhatsApp — Free Delivery Today
           </a>
 
           <a href="tel:+254100028823" class="btn-order-call">
@@ -385,15 +391,29 @@ function renderStars(r: number) {
 
         <!-- Inline order form (hidden by default) -->
         <div class="order-form-wrap" id="order-form-wrap" hidden>
-          <p class="form-title">Place Your Order</p>
+          <p class="form-title">Place Your Lipa Mdogo Mdogo Order</p>
           <div class="form-fields">
             <input class="form-input" type="text"  id="f-name"  placeholder="Your full name" />
             <input class="form-input" type="tel"   id="f-phone" placeholder="Phone number" />
             <input class="form-input" type="text"  id="f-area"  placeholder="Delivery area (e.g. Nairobi, Kiambu, Machakos, Kajiado)" />
+            <div class="form-field-group">
+              <label class="form-label" for="f-date">Preferred delivery date</label>
+              <input class="form-input" type="date" id="f-date" />
+            </div>
+            <div class="form-field-group">
+              <label class="form-label" for="f-time">Preferred delivery time</label>
+              <select class="form-input form-select" id="f-time">
+                <option value="">Select a time slot</option>
+                <option value="Morning (8am – 12pm)">Morning (8am – 12pm)</option>
+                <option value="Afternoon (12pm – 4pm)">Afternoon (12pm – 4pm)</option>
+                <option value="Evening (4pm – 7pm)">Evening (4pm – 7pm)</option>
+                <option value="Anytime today">Anytime today — as soon as possible</option>
+              </select>
+            </div>
             <textarea class="form-input form-textarea" id="f-notes" rows="2" placeholder="Any notes — optional"></textarea>
           </div>
           <button class="btn-submit" id="submit-order-btn" type="button">Confirm Order via WhatsApp</button>
-          <p class="form-note">Our team will call you within minutes to confirm your delivery.</p>
+          <p class="form-note">Our team will call you within minutes to confirm your free delivery slot.</p>
         </div>
 
         <!-- Trust badges -->
@@ -408,11 +428,11 @@ function renderStars(r: number) {
           </div>
           <div class="trust-badge">
             <span class="tbadge-icon">&#9654;</span>
-            <span>Same-Day<br/>Delivery</span>
+            <span>Free Same-Day<br/>Delivery</span>
           </div>
           <div class="trust-badge">
             <span class="tbadge-icon">&#9432;</span>
-            <span>Pay After<br/>Delivery</span>
+            <span>Lipa Mdogo<br/>Mdogo</span>
           </div>
         </div>
 
@@ -453,7 +473,7 @@ function renderStars(r: number) {
 
       <!-- ABOUT — expanded -->
       <div class="section-card" id="section-about">
-        <h2 class="section-title">About the {currentProduct.brand} {currentProduct.name}</h2>
+        <h2 class="section-title">About the {currentProduct.brand} {currentProduct.name} — Lipa Mdogo Mdogo Kenya</h2>
         <div class="prose">
           <p>
             The <strong>{currentProduct.brand} {currentProduct.name}</strong> has earned its place as one of the most sought-after smartphones in Kenya —
@@ -462,8 +482,9 @@ function renderStars(r: number) {
             a professional who needs reliable communication tools every single day,
             or simply someone ready to upgrade without parting with a large sum at once —
             the {currentProduct.brand} {currentProduct.name} was built for you.
-            Through <strong>Lipa Mdogo Mdogo</strong>, Kenya's leading phone instalment plan,
-            you can walk away with this phone today by paying only a small deposit — and only after it has been delivered and inspected.
+            Through <strong>MdogomdogoDeals</strong>, Kenya's leading <strong>lipa mdogo mdogo</strong> and <strong>lipa pole pole</strong> phone service,
+            you can walk away with this phone today by paying only a small deposit — and only after it has been delivered to your location in Nairobi, Kiambu, Machakos, or Kajiado and you have inspected it.
+            Delivery is always <strong>free</strong> and same-day.
           </p>
 
           {currentProduct.ram && (
@@ -523,25 +544,26 @@ function renderStars(r: number) {
             <strong>Safaricom 4G LTE, Airtel Kenya, and Telkom Kenya</strong> — straight out of the box, with no configuration needed.
             Each unit is sourced directly from authorised {currentProduct.brand} distributors in Kenya,
             sealed in original packaging, and backed by a full <strong>2-year manufacturer warranty</strong>.
+            Available today on our <strong>lipa mdogo mdogo</strong> plan — free delivery to Nairobi and the greater metropolitan area.
           </p>
         </div>
       </div>
 
       <!-- COMPARISON -->
       <div class="section-card" id="section-comparison">
-        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} vs Similar Phones in Kenya</h2>
+        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} vs Similar Phones in Kenya — Lipa Mdogo Mdogo</h2>
         <div class="prose">
           <p>
-            When stacked against competing smartphones in the same deposit range in Kenya,
+            When stacked against competing smartphones in the same lipa mdogo mdogo deposit range in Kenya,
             the <strong>{currentProduct.brand} {currentProduct.name}</strong> consistently holds its own where it matters most.
             Many alternatives at a similar price point ask you to compromise — a bigger screen at the expense of battery,
             or faster processing at the cost of camera quality.
             The {currentProduct.name} refuses that trade-off, delivering a well-rounded package
-            that makes it one of the best-value buys for Kenyan consumers in {currentProduct.releaseYear || '2024'}.
+            that makes it one of the best-value lipa pole pole buys for Kenyan consumers in {currentProduct.releaseYear || '2024'}.
           </p>
           {currentProduct.ram && currentProduct.battery && (
             <p>
-              Where rival handsets in the same price bracket often sacrifice in one area,
+              Where rival handsets in the same lipa mdogo mdogo price bracket often sacrifice in one area,
               the {currentProduct.brand} {currentProduct.name} holds the line across the board:
               {currentProduct.ram} RAM keeps everyday performance smooth and responsive,
               while the {currentProduct.battery} battery comfortably carries you through a full Kenyan day
@@ -556,10 +578,10 @@ function renderStars(r: number) {
             </p>
           )}
           <p>
-            Comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> across options is simple —
-            and with Lipa Mdogo Mdogo, you are never locked into a large upfront commitment on any device.
-            A small deposit on delivery, then manageable daily or weekly instalments from there.
-            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse the full range of phones on instalments</a> and compare side by side.
+            Comparing the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> across lipa mdogo mdogo options is simple —
+            and with MdogomdogoDeals, you are never locked into a large upfront commitment on any device.
+            A small deposit on delivery, then manageable daily or weekly instalments — lipa pole pole all the way.
+            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse the full range of phones on lipa mdogo mdogo</a> and compare side by side.
           </p>
         </div>
       </div>
@@ -576,9 +598,9 @@ function renderStars(r: number) {
               {currentProduct.storage && <li>Spacious {currentProduct.storage} storage — room for everything that matters</li>}
               {currentProduct.camera && <li>Capable {currentProduct.camera} camera system for photos, video, and selfies</li>}
               <li>Full compatibility with Safaricom, Airtel, and Telkom Kenya networks</li>
-              <li>Deposit collected only after you inspect and approve the phone</li>
-              <li>Full 2-year manufacturer warranty included on every unit</li>
+              <li>Lipa mdogo mdogo — deposit collected only after you inspect and approve the phone</li>
               <li>Free same-day delivery to Nairobi, Kiambu, Machakos &amp; Kajiado</li>
+              <li>Full 2-year manufacturer warranty included on every unit</li>
             </ul>
           </div>
           <div class="cons-col">
@@ -586,8 +608,8 @@ function renderStars(r: number) {
             <ul class="pc-list">
               {currentProduct.wirelessCharging === 'Not Available' && <li>Wireless charging not supported</li>}
               {currentProduct.audioJack === 'No' && <li>No 3.5mm headphone jack included</li>}
-              <li>Delivery currently available in 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
-              <li>Full balance repaid gradually through daily or weekly instalments</li>
+              <li>Free delivery currently available in 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
+              <li>Full balance repaid gradually through lipa mdogo mdogo daily or weekly instalments</li>
             </ul>
           </div>
         </div>
@@ -595,15 +617,15 @@ function renderStars(r: number) {
 
       <!-- PEOPLE ALSO COMPARE -->
       <div class="section-card" id="people-also-compare">
-        <h2 class="section-title">People Also Compare</h2>
+        <h2 class="section-title">People Also Compare — Lipa Mdogo Mdogo Kenya</h2>
         <p class="pac-intro">
-          Customers researching the <strong>{currentProduct.brand} {currentProduct.name}</strong> in Kenya commonly shortlist these alternatives too.
-          All are available through Lipa Mdogo Mdogo with same-day delivery and deposit-after-delivery terms.
+          Customers researching the <strong>{currentProduct.brand} {currentProduct.name}</strong> on lipa mdogo mdogo in Kenya commonly shortlist these alternatives too.
+          All are available through MdogomdogoDeals with free same-day delivery and deposit-after-delivery terms — the ultimate lipa pole pole experience.
         </p>
         <div class="pac-grid">
           {relatedProducts.slice(0, 4).map(p => (
             <a href={`/${p.slug}`} class="pac-card">
-              <img src={p.source} alt={`${p.brand} ${p.name} price Kenya`} width="80" height="80" loading="lazy" />
+              <img src={p.source} alt={`${p.brand} ${p.name} lipa mdogo mdogo Kenya`} width="80" height="80" loading="lazy" />
               <div class="pac-info">
                 <span class="pac-brand">{p.brand}</span>
                 <span class="pac-name">{p.fullname ?? p.name}</span>
@@ -612,18 +634,18 @@ function renderStars(r: number) {
             </a>
           ))}
         </div>
-        <p class="pac-browse"><a href={`/phones/${brandSlug}`}>See all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse every phone on instalments &rarr;</a></p>
+        <p class="pac-browse"><a href={`/phones/${brandSlug}`}>See all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse every phone on lipa mdogo mdogo &rarr;</a></p>
       </div>
 
       <div class="section-card" id="section-ideal">
         <h2 class="section-title">Who Is the {currentProduct.brand} {currentProduct.name} Best For?</h2>
         <div class="use-cases-grid">
-          <div class="use-case"><strong>Students</strong><p>Online classes, research, academic tools, and study apps run without lag or interruption throughout the school day.</p></div>
-          <div class="use-case"><strong>Professionals</strong><p>Email, mobile banking, video conferencing, and productivity apps — fast and dependable from morning briefings to evening calls.</p></div>
-          <div class="use-case"><strong>Content Creators</strong><p>A capable camera, ample storage, and a powerful processor for shooting, editing, and posting content on the go.</p></div>
+          <div class="use-case"><strong>Students</strong><p>Online classes, research, academic tools, and study apps run without lag or interruption throughout the school day. Own yours today on lipa mdogo mdogo.</p></div>
+          <div class="use-case"><strong>Professionals</strong><p>Email, mobile banking, video conferencing, and productivity apps — fast and dependable from morning briefings to evening calls across Nairobi.</p></div>
+          <div class="use-case"><strong>Content Creators</strong><p>A capable camera, ample storage, and a powerful processor for shooting, editing, and posting content on the go. Lipa pole pole, own it today.</p></div>
           <div class="use-case"><strong>Gamers</strong><p>Smooth, lag-free performance on Kenya's most popular mobile games — from casual play to competitive titles.</p></div>
-          <div class="use-case"><strong>Social Media Users</strong><p>Stay active on WhatsApp, Instagram, TikTok, Facebook, and X all day long without the battery giving out.</p></div>
-          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery, a vivid display, and dependable performance for life across Nairobi and Kenya's busiest counties.</p></div>
+          <div class="use-case"><strong>Social Media Users</strong><p>Stay active on WhatsApp, Instagram, TikTok, Facebook, and X all day long without the battery giving out. Free delivery to Nairobi today.</p></div>
+          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery, a vivid display, and dependable performance for life across Nairobi and Kenya's busiest counties — on lipa mdogo mdogo.</p></div>
         </div>
       </div>
 
@@ -647,7 +669,7 @@ function renderStars(r: number) {
     <section class="tab-panel" id="tab-price" role="tabpanel">
       <div class="section-card" id="price-kenya">
 
-        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} Price in Kenya</h2>
+        <h2 class="section-title">{currentProduct.brand} {currentProduct.name} Price in Kenya — Lipa Mdogo Mdogo &amp; Lipa Pole Pole</h2>
 
         <div class="price-kenya-block">
           <div class="price-kenya-row">
@@ -655,38 +677,42 @@ function renderStars(r: number) {
             <span class="pkr-value">{currentProduct.deposit}</span>
           </div>
           <div class="price-kenya-row">
-            <span class="pkr-label">Then from</span>
+            <span class="pkr-label">Then from (lipa mdogo mdogo daily)</span>
             <span class="pkr-value accent">{currentProduct.daily}<span class="pkr-per">/day</span></span>
           </div>
           <div class="price-kenya-row">
-            <span class="pkr-label">Or from</span>
+            <span class="pkr-label">Or from (lipa pole pole weekly)</span>
             <span class="pkr-value accent">
               {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
               <span class="pkr-per">/week</span>
             </span>
+          </div>
+          <div class="price-kenya-row">
+            <span class="pkr-label">Delivery fee</span>
+            <span class="pkr-value" style="color:var(--green);font-size:20px;">FREE — Same Day</span>
           </div>
         </div>
 
         <div class="prose" style="margin-top: 1.5rem;">
           <p>
             The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> through MdogomdogoDeals starts at a deposit of just <strong>{currentProduct.deposit}</strong> —
-            and crucially, that deposit is only collected <em>after</em> the phone has been delivered to your location and you have had a chance to inspect it fully.
-            You pay absolutely nothing to place your order or arrange delivery.
+            and crucially, that deposit is only collected <em>after</em> the phone has been delivered free of charge to your location and you have had a chance to inspect it fully.
+            You pay absolutely nothing to place your order or arrange your free delivery.
             Once you are satisfied with what you see, you hand over the deposit and the phone is yours.
-            After that, continue with <strong>{currentProduct.daily} per day</strong>
-            or <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7} per week</strong> at the pace that suits you best.
+            After that, continue with <strong>{currentProduct.daily} per day (lipa mdogo mdogo)</strong>
+            or <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7} per week (lipa pole pole)</strong> at the pace that suits you best.
             Zero interest. No processing fees. No credit check at any stage.
           </p>
           <p>
-            The biggest concern most Kenyans have when searching for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong>
+            The biggest concern most Kenyans in Nairobi have when searching for the <strong>{currentProduct.brand} {currentProduct.name} lipa mdogo mdogo price</strong>
             is the prospect of paying a large lump sum before they can take the phone home. With MdogomdogoDeals, that problem simply does not exist.
             The only financial commitment at the door is the <strong>{currentProduct.deposit} deposit</strong> —
             and it only happens <em>after</em> you have seen, tested, and approved the phone yourself.
-            It is the most transparent way to own a genuine {currentProduct.brand} in Kenya right now.
+            Free delivery to your door, and the most transparent lipa pole pole plan for a genuine {currentProduct.brand} in Kenya right now.
           </p>
           {currentProduct.storage && (
             <p>
-              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the configuration most popular with Kenyan buyers.
+              The {currentProduct.brand} {currentProduct.name} {currentProduct.storage} variant is the configuration most popular with Kenyan buyers on our lipa mdogo mdogo plan.
               If you are interested in a different storage option, mention it when you place your order and we will confirm what we have available.
             </p>
           )}
@@ -694,31 +720,31 @@ function renderStars(r: number) {
 
         <div class="price-why-grid">
           <div class="price-why-item">
+            <strong>Free delivery — same day in Nairobi</strong>
+            <p>We bring the phone to you at no cost. Free same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado.</p>
+          </div>
+          <div class="price-why-item">
             <strong>Deposit collected after delivery</strong>
             <p>We bring the phone to you first. You inspect it at your own pace, then pay the {currentProduct.deposit} deposit — not before.</p>
           </div>
           <div class="price-why-item">
-            <strong>Completely interest-free</strong>
-            <p>What you see on this page is exactly what you pay — no additional charges, fees, or interest applied to your instalments.</p>
+            <strong>Lipa mdogo mdogo — completely interest-free</strong>
+            <p>What you see on this page is exactly what you pay — no additional charges, fees, or interest on your instalments.</p>
           </div>
           <div class="price-why-item">
-            <strong>Your payment rhythm, your choice</strong>
-            <p>Pay daily, weekly, or monthly — whichever aligns best with how and when your income arrives.</p>
-          </div>
-          <div class="price-why-item">
-            <strong>Genuine products, full warranty</strong>
-            <p>Every unit is sourced from authorised {currentProduct.brand} distributors in Kenya and comes with a complete 2-year manufacturer warranty.</p>
+            <strong>Lipa pole pole — your payment rhythm</strong>
+            <p>Pay daily, weekly, or monthly — whichever aligns best with how and when your income arrives in Nairobi.</p>
           </div>
         </div>
 
         <div class="price-cta-row">
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name}`}
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on lipa mdogo mdogo`}
             class="btn-order-wa"
             target="_blank" rel="noopener"
             style="max-width: 340px;"
           >
-            Order via WhatsApp
+            Order via WhatsApp — Free Delivery Today
           </a>
           <a href="tel:+254100028823" class="btn-order-call" style="max-width: 340px;">
             Call Us — 0100028823
@@ -795,40 +821,40 @@ function renderStars(r: number) {
     <section class="tab-panel" id="tab-delivery" role="tabpanel">
       <div class="section-card" id="delivery">
 
-        <h2 class="section-title">How Lipa Mdogo Mdogo Works</h2>
+        <h2 class="section-title">How Lipa Mdogo Mdogo Works — Free Delivery in Nairobi</h2>
         <ol class="payment-steps">
           <li>
             <div class="step-circle">1</div>
             <div>
-              <strong>Place your order — no payment required</strong> — call us, WhatsApp us on 0100028823, or complete the order form on this page.
-              We do not ask for any payment, deposit, or booking fee to process your order.
+              <strong>Place your order — no payment required, delivery is free</strong> — call us, WhatsApp us on 0100028823, or complete the order form on this page.
+              We do not ask for any payment, deposit, or booking fee to process your lipa mdogo mdogo order. Delivery is always free.
             </div>
           </li>
           <li>
             <div class="step-circle">2</div>
             <div>
-              <strong>Free same-day delivery</strong> — we dispatch the {currentProduct.brand} {currentProduct.name} directly to your location,
-              arriving the same day across Nairobi, Kiambu, Machakos, or Kajiado.
+              <strong>Free same-day delivery anywhere in greater Nairobi</strong> — we dispatch the {currentProduct.brand} {currentProduct.name} directly to your location,
+              arriving the same day across Nairobi, Kiambu, Machakos, or Kajiado — at zero delivery cost.
             </div>
           </li>
           <li>
             <div class="step-circle">3</div>
             <div>
               <strong>Inspect the phone thoroughly</strong> — power it on, test the camera, open your apps, check the display and speakers.
-              Take as much time as you need. You pay nothing until you are fully satisfied.
+              Take as much time as you need. You pay nothing until you are fully satisfied. This is the lipa mdogo mdogo difference.
             </div>
           </li>
           <li>
             <div class="step-circle">4</div>
             <div>
-              <strong>Pay your deposit after approval</strong> — once you are happy with the phone, pay <strong>KES {currentProduct.deposit}</strong>
-              via M-Pesa or cash. The {currentProduct.brand} {currentProduct.name} is officially yours.
+              <strong>Pay your deposit after approval — not before</strong> — once you are happy with the phone, pay <strong>KES {currentProduct.deposit}</strong>
+              via M-Pesa or cash. The {currentProduct.brand} {currentProduct.name} is officially yours on lipa mdogo mdogo.
             </div>
           </li>
           <li>
             <div class="step-circle">5</div>
             <div>
-              <strong>Begin your instalments at your own pace</strong> — after a free grace period, pay
+              <strong>Lipa pole pole at your own pace</strong> — after a free grace period, pay
               <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong>
               on a schedule that works for you, until the remaining balance is fully cleared.
             </div>
@@ -836,33 +862,34 @@ function renderStars(r: number) {
         </ol>
 
         <div class="benefits-banner">
+          <span>Free same-day delivery — Nairobi &amp; surroundings</span>
           <span>No payment before delivery</span>
           <span>Inspect before you commit</span>
-          <span>Zero interest or hidden fees</span>
+          <span>Zero interest — lipa mdogo mdogo</span>
           <span>No credit check or guarantor</span>
-          <span>Daily, weekly, or monthly payments</span>
+          <span>Daily, weekly, or monthly — lipa pole pole</span>
         </div>
 
-        <h2 class="section-title" style="margin-top:2.5rem;">Delivery Areas</h2>
+        <h2 class="section-title" style="margin-top:2.5rem;">Free Delivery Areas — Same Day</h2>
         <div class="counties-grid">
           <div class="county-card">
             <strong>Nairobi</strong>
-            <p>CBD, Westlands, Kilimani, Kasarani, Embakasi, Eastleigh, South B &amp; C, Langata, Parklands, and all residential estates.</p>
+            <p>CBD, Westlands, Kilimani, Kasarani, Embakasi, Eastleigh, South B &amp; C, Langata, Parklands, and all residential estates. Free delivery, same day.</p>
           </div>
           <div class="county-card">
             <strong>Kiambu</strong>
-            <p>Thika, Ruiru, Juja, Kiambu Town, Kikuyu, Limuru, Karuri, Githurai, Banana, and all surrounding areas.</p>
+            <p>Thika, Ruiru, Juja, Kiambu Town, Kikuyu, Limuru, Karuri, Githurai, Banana, and all surrounding areas. Free same-day delivery.</p>
           </div>
           <div class="county-card">
             <strong>Machakos</strong>
-            <p>Machakos Town, Athi River, Mavoko, Kangundo, Kathiani, Matuu, and nearby areas.</p>
+            <p>Machakos Town, Athi River, Mavoko, Kangundo, Kathiani, Matuu, and nearby areas. Free delivery on your lipa mdogo mdogo order.</p>
           </div>
           <div class="county-card">
             <strong>Kajiado</strong>
-            <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, Namanga road corridor, and surrounding areas.</p>
+            <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, Namanga road corridor, and surrounding areas. Free same-day delivery.</p>
           </div>
         </div>
-        <p class="delivery-note">Unsure whether we reach your exact location? Call or WhatsApp 0100028823 before placing your order and we will confirm right away.</p>
+        <p class="delivery-note">Unsure whether we reach your exact location? Call or WhatsApp 0100028823 before placing your lipa mdogo mdogo order and we will confirm right away.</p>
 
       </div>
     </section>
@@ -872,7 +899,7 @@ function renderStars(r: number) {
          ═══════════════════════════════════════════════════════ -->
     <section class="tab-panel" id="tab-faq" role="tabpanel">
       <div class="section-card">
-        <h2 class="section-title">Frequently Asked Questions</h2>
+        <h2 class="section-title">Frequently Asked Questions — Lipa Mdogo Mdogo Kenya</h2>
         <div class="faq-list">
           {faqs.map((faq, i) => (
             <details class="faq-item" open={i === 0}>
@@ -887,15 +914,15 @@ function renderStars(r: number) {
     <!-- BOTTOM CTA -->
     <section class="bottom-cta">
       <div class="cta-inner">
-        <h2>Get the {currentProduct.brand} {currentProduct.name} Delivered Today</h2>
-        <p>Same-day delivery &mdash; pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve the phone</p>
+        <h2>Get the {currentProduct.brand} {currentProduct.name} Delivered Free Today</h2>
+        <p>Free same-day delivery to Nairobi &mdash; pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve — lipa mdogo mdogo</p>
         <div class="cta-btns">
           <a href="tel:+254100028823" class="btn-primary">Call 0100028823</a>
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name}`}
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on lipa mdogo mdogo`}
             class="btn-whatsapp"
             target="_blank" rel="noopener"
-          >WhatsApp Us Now</a>
+          >WhatsApp — Free Delivery Today</a>
         </div>
       </div>
     </section>
@@ -903,18 +930,18 @@ function renderStars(r: number) {
 
     {productFeatureObjects.length > 0 && (
   <section class="product-feature-links">
-    <h2>Explore Similar Phones</h2>
+    <h2>Explore Similar Phones on Lipa Mdogo Mdogo</h2>
     <div class="feat-link-grid">
 
       {productFeatureObjects.map(feat => (
         <a href={featureHref(feat.key)} class="feat-link">
-          All {feat.label} Phones in Kenya
+          All {feat.label} Phones in Kenya — Lipa Mdogo Mdogo
         </a>
       ))}
 
       {currentProduct.brand && productFeatureObjects.map(feat => (
         <a href={featureHref(feat.key, currentProduct.brand)} class="feat-link brand-feat">
-          {currentProduct.brand} {feat.label} Phones
+          {currentProduct.brand} {feat.label} Phones — Lipa Pole Pole
         </a>
       ))}
 
@@ -937,11 +964,11 @@ function renderStars(r: number) {
       })()}
 
       <a href="/phones/lipa-mdogo-mdogo-nairobi" class="feat-link">
-        All Lipa Mdogo Mdogo Phones
+        All Lipa Mdogo Mdogo Phones — Free Delivery Nairobi
       </a>
       {currentProduct.brand && (
         <a href={`/phones/${brandSlugall(currentProduct.brand)}`} class="feat-link">
-          All {currentProduct.brand} Phones on Installments
+          All {currentProduct.brand} Phones on Lipa Mdogo Mdogo
         </a>
       )}
 
@@ -989,6 +1016,18 @@ function renderStars(r: number) {
 (function () {
   const toggleBtn = document.getElementById('toggle-form-btn');
   const formWrap  = document.getElementById('order-form-wrap');
+
+  // Pre-fill today's date as default
+  const dateInput = document.getElementById('f-date') as HTMLInputElement | null;
+  if (dateInput) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.value = `${yyyy}-${mm}-${dd}`;
+    dateInput.min   = `${yyyy}-${mm}-${dd}`;
+  }
+
   toggleBtn?.addEventListener('click', () => {
     if (formWrap?.hasAttribute('hidden')) formWrap.removeAttribute('hidden');
     else formWrap?.setAttribute('hidden', '');
@@ -998,6 +1037,8 @@ function renderStars(r: number) {
     const name  = (document.getElementById('f-name')  as HTMLInputElement)?.value.trim();
     const phone = (document.getElementById('f-phone') as HTMLInputElement)?.value.trim();
     const area  = (document.getElementById('f-area')  as HTMLInputElement)?.value.trim();
+    const date  = (document.getElementById('f-date')  as HTMLInputElement)?.value.trim();
+    const time  = (document.getElementById('f-time')  as HTMLSelectElement)?.value.trim();
     const notes = (document.getElementById('f-notes') as HTMLTextAreaElement)?.value.trim();
 
     if (!name || !phone || !area) {
@@ -1005,13 +1046,22 @@ function renderStars(r: number) {
       return;
     }
 
+    // Format date nicely for WhatsApp message
+    let deliveryDate = date;
+    if (date) {
+      const d = new Date(date + 'T00:00:00');
+      deliveryDate = d.toLocaleDateString('en-KE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
     const product = document.querySelector<HTMLHeadingElement>('.product-title')?.textContent?.trim() ?? 'this phone';
     const msg = [
-      `Order: ${product}`,
+      `Lipa Mdogo Mdogo Order: ${product}`,
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Delivery area: ${area}`,
-      notes ? `Notes: ${notes}` : '',
+      date   ? `Preferred delivery date: ${deliveryDate}` : '',
+      time   ? `Preferred delivery time: ${time}` : '',
+      notes  ? `Notes: ${notes}` : '',
     ].filter(Boolean).join('\n');
 
     window.open(`https://wa.me/254100028823?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1265,6 +1315,11 @@ function renderStars(r: number) {
     font-size: 17px; font-weight: 800; color: var(--navy);
   }
   .form-fields { display: flex; flex-direction: column; gap: 8px; }
+  .form-field-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-label {
+    font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--text-light);
+  }
   .form-input {
     width: 100%; padding: 10px 12px;
     border: 1.5px solid var(--gray-2); border-radius: 7px;
@@ -1273,6 +1328,7 @@ function renderStars(r: number) {
   }
   .form-input:focus { border-color: var(--primary); }
   .form-textarea { resize: vertical; min-height: 56px; }
+  .form-select { appearance: auto; cursor: pointer; }
   .btn-submit {
     background: var(--primary); color: #fff; border: none;
     border-radius: 8px; padding: 12px;
