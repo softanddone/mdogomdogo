@@ -478,8 +478,6 @@ megapixel:"50MP",
 
   categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Oppo", "Mogo","Loan","Lipa Mdogo Mdogo"],
 
-
-
   details: [
   {
     title: "Body and Design",
@@ -10381,8 +10379,8 @@ megapixel:"50 MP + 50 MP + 50 MP triple rear camera",
   status: "",
   image: "/phones/moto_g_stylus_5g.webp",
   from: "KSh 5,000",
-  deposit: "KSh 6,000",
-  daily: "KSh 60",
+  deposit: "KSh 6,500",
+  daily: "KSh 121",
   totalPrice: "KSh 30,000",
   source: "/phones/motorola-moto-g-stylus-5g.webp",
   discount: "-8%",
