@@ -1,20 +1,21 @@
-export const products = [
-
-  {
+export const products =  [
+ {
     id: "9",
     name: "Samsung Galaxy A07",
     slug:"samsunga07offer",
-    storage: "128GB",
+    storage: "64GB",
     images: [
       // "/phones/aa1.jpg",
-      // "/phones/aa2.jpg",s
-      // "/phones/aa3.jpg",s
+      // "/phones/aa2.jpg",
+      // "/phones/aa3.jpg",
       "/phones/aa4.jpg",
+      // "/phones/aa5.jpg",
       "/phones/aa6.jpg",
+
 
     ],
     deposit: 2900,
-    dailyPayment: 89,
+    dailyPayment: 93,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -30,44 +31,17 @@ export const products = [
   },
 
 
-  //    {
-  //   id: "7",
-  //   name: "Samsung Galaxy A05",
-  //   slug:"samsunga05offer",
-  //   storage: "128GB/64GB",
-  //   images: ["/phones/s3.jpg", "/phones/s2.jpg", "/phones/s1.jpg"],
-  //   deposit: 2500,
-  //   dailyPayment: 85,
-  //   paymentDays: 90,
-  //   whatsappNumber: "+254100028823",
-  //   description:
-  //     "Brand new — sealed box with charger, cable, and all original accessories",
-  //   features: [
-  //     "Clean Samsung One UI experience",
-  //     "Storage: 128GB/64GB ROM / 4GB RAM",
-  //     "Camera: 50MP main rear camera",
-  //     "Large 5000mAh battery",
-  //     "Brand new (not refurb/used)",
-  //     "Original Samsung accessories included",
-  //   ],
-  // },
+  
   {
     id: "2",
     name: "Tecno Pop 10",
     slug:"tecnopop10offer",
     storage: "64GB",
     images: [
-      
       // "/phones/u1.jpeg", 
-      
-      "/phones/u2.png", 
-      
-      // "/phones/u3.jpeg"
-
-     "/phones/v.png"
-
-    
-    ],
+    "/phones/u2.png",
+    //  "/phones/u3.jpeg",
+     "/phones/v.png"],
     deposit: 2800,
     dailyPayment: 91,
     paymentDays: 90,
@@ -86,34 +60,7 @@ export const products = [
   },
 
 
-  {
-    id: "5",
-    name: "itel City 100",
-    slug:"itela100offer",
-    storage: "128GB",
-    images: ["/phones/wa1.jpeg", 
-
-      // "/phones/wa2.jpeg", 
-      
-      "/phones/wa3.jpeg"],
-    deposit: 2900,
-    dailyPayment: 87,
-    paymentDays: 90,
-    whatsappNumber: "+254100028823",
-    description:
-      "Brand new — sealed box with protective case, original charger, and all accessories",
-    features: [
-      "Large HD+ display",
-      "Storage: 128GB ROM / 4GB RAM",
-      "Camera: 8MP back camera",
-      "Long-lasting battery",
-      "Warranty: 1 year",
-      "Brand new (not refurbished or used)",
-      "Complete accessories included",
-    ],
-  },
-
-
+  
 
   {
   id: "3",
@@ -132,7 +79,6 @@ export const products = [
   description:
     "Brand new — comes with protective case and original charger",
   features: [
-    "Curved screen display",
     "Display: Large HD+ display",
     "Storage: 256GB ROM / 8GB RAM",
     "Camera: 50MP AI main camera",
@@ -142,6 +88,7 @@ export const products = [
     "Brand new sealed",
   ],
 },
+
 
   {
     id: "3",
@@ -178,14 +125,12 @@ export const products = [
     "/phones/camon501.webp",
     // "/phones/camon502.jpg",
     "/phones/tt.jpg",
-
-    
     "/phones/ttt2.webp",
 
 
     
   ],
-  deposit: 8500,
+  deposit: 9000,
   dailyPayment: 200,
   paymentDays: 90,
   whatsappNumber: "+254100028823",
@@ -212,8 +157,8 @@ export const products = [
       // "/phones/spark2.jpeg",
       "/phones/spark3.jpg",
     ],
-    deposit: 2900,
-    dailyPayment: 104,
+    deposit: 3500,
+    dailyPayment: 85,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -238,14 +183,13 @@ export const products = [
       "/phones/infinix4.jpg",
       // "/phones/infinix3.jpg",
       // "/phones/infinix2.jpg",
-
       "/phones/infi.webp",
 
 
 
     ],
-    deposit: 3000,
-    dailyPayment: 111,
+    deposit: 3500,
+    dailyPayment: 90,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -278,9 +222,13 @@ export const products = [
       "/phones/to2.webp",
       "/phones/to3.webp",
       "/phones/to4.webp",
+
+
+
+
     ],
-    deposit: 5400,
-    dailyPayment: 160,
+    deposit: 6000,
+    dailyPayment: 140,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -298,7 +246,7 @@ export const products = [
 
   {
     id: "5",
-    name: "Infinix Note 50 5G",
+    name: "Infinix Note 50 Pro",
     slug:"infinixnote50offer",
     storage: "256GB",
     images: [
@@ -307,8 +255,8 @@ export const products = [
       // "/phones/note3.jpeg",
       "/phones/note4.jpeg",
     ],
-    deposit: 7000,
-    dailyPayment: 165,
+    deposit: 7500,
+    dailyPayment: 175,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -377,37 +325,24 @@ export const products = [
     ],
   },
 
-  
-
-  // {
-  //   id: "8",
-  //   name: "Samsung Galaxy A06",
-  //   slug:"samsunga06offer",
-  //   storage: "128GB",
-  //   images: ["/phones/a61.jfif", "/phones/a62.jpg", "/phones/a63.jpg"],
-  //   deposit: 3600,
-  //   dailyPayment: 95,
-  //   paymentDays: 90,
-  //   whatsappNumber: "+254100028823",
-  //   description:
-  //     "Brand new — sealed box with charger, cable, and all original accessories",
-  //   features: [
-  //     "Modern Samsung design",
-  //     "Storage: 128GB ROM / 4GB RAM",
-  //     "Camera: 50MP AI rear camera",
-  //     "Long-lasting battery performance",
-  //     "Brand new (not refurb/used)",
-  //     "Original Samsung accessories included",
-  //   ],
-  // },
-
-
 {
   id: "10",
   name: "Samsung Galaxy A17",
   slug: "samsungA17offer",
   storage: "128GB",
-  images: ["/phones/a171.jpg", "/phones/a172.jpg"],
+  images: [
+
+    "/phones/a171.png",
+     "/phones/a172.jpg",
+
+     "/phones/sasa1.jpg",
+
+     "/phones/sasa2.jpg",
+
+     "/phones/sasa3.jpg"
+
+    
+    ],
   deposit: 5200,
   dailyPayment: 130,
   paymentDays: 90,
@@ -416,7 +351,7 @@ export const products = [
     "Brand new — sealed box with charger, cable, and all original accessories",
   features: [
     "Latest Samsung Galaxy A17 modern design",
-    "Storage: 128GB ROM / 6GB RAM",
+    "Storage: 128GB ROM / 4GB RAM",
     "Camera: 50MP AI dual rear camera",
     "Large 5000mAh battery for long daily use",
     "Smooth performance for apps, social media & gaming",
@@ -424,8 +359,6 @@ export const products = [
     "Original Samsung accessories included",
   ],
 },
-
-
 
 
 {
@@ -439,8 +372,8 @@ export const products = [
     "/phones/a422.jpg",
 
   ],
-  deposit: 4700,
-  dailyPayment: 120,
+  deposit: 5900,
+  dailyPayment: 110,
   paymentDays: 90,
   whatsappNumber: "+254100028823",
   description:
@@ -457,38 +390,17 @@ export const products = [
   ],
 },
 
-
   
-  {
-    id: "10",
-    name: "Samsung Galaxy A16",
-    slug:"samsungaA16offer",
-    storage: "128GB",
-    images: ["/phones/a161.jpeg", "/phones/a162.jpeg"],
-    deposit: 4800,
-    dailyPayment: 120,
-    paymentDays: 90,
-    whatsappNumber: "+254100028823",
-    description:
-      "Brand new — sealed box with charger, cable, and all original accessories",
-    features: [
-      "Sleek modern Samsung design",
-      "Storage: 128GB ROM / 6GB RAM",
-      "Camera: 50MP AI rear camera",
-      "Strong battery performance for daily use",
-      "Brand new (not refurb/used)",
-      "Original Samsung accessories included",
-    ],
-  },
+  
 
   {
     id: "11",
-    name: "Samsung Galaxy Note 20",
+    name: "Samsung Galaxy Note 20 Ultra",
     slug:"samsungnote20offer",
     storage: "256GB",
     images: ["/phones/n1.jpeg", "/phones/n2.jpeg"],
-    deposit: 9000,
-    dailyPayment: 220,
+    deposit: 12500,
+    dailyPayment: 230,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -510,7 +422,7 @@ export const products = [
     storage: "256GB",
     images: ["/phones/s1.jpeg", "/phones/s2.jpeg"],
     deposit: 8500,
-    dailyPayment: 210,
+    dailyPayment: 158,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -531,8 +443,8 @@ export const products = [
     slug:"samsungas20ultraoffer",
     storage: "256GB",
     images: ["/phones/su1.jpeg", "/phones/su2.jpeg"],
-    deposit: 9500,
-    dailyPayment: 235,
+    deposit: 9000,
+    dailyPayment: 165,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
     description:
@@ -549,11 +461,11 @@ export const products = [
 
   {
     id: "5",
-    name: "HMD S34",
+    name: "HMD M10",
     slug:"hmds34offer",
     storage: "64GB",
     images: ["/phones/s341.jpeg", "/phones/s342.jpeg", "/phones/s343.jpeg"],
-    deposit: 2200,
+    deposit: 2700,
     dailyPayment: 55,
     paymentDays: 90,
     whatsappNumber: "+254100028823",
@@ -578,7 +490,7 @@ export const products = [
   slug: "oppoa3xoffer",
   storage: "64GB",
   images: ["/phones/oppoa3x1.webp", "/phones/oppoa3x2.webp", "/phones/oppoa3x3.jpg"],
-  deposit: 2900,
+  deposit: 3300,
   dailyPayment: 80,
   paymentDays: 90,
   whatsappNumber: "+254100028823",
@@ -602,8 +514,8 @@ export const products = [
   slug: "oppoa5xoffer",
   storage: "128GB",
   images: ["/phones/oppoa5x1.jpg", "/phones/oppoa5x2.jpg", "/phones/oppoa5x3.jpg"],
-  deposit: 5000,
-  dailyPayment: 128,
+  deposit: 5700,
+  dailyPayment: 130,
   paymentDays: 90,
   whatsappNumber: "+254100028823",
   description:
@@ -627,8 +539,8 @@ export const products = [
   slug: "oppoa6xoffer",
   storage: "128GB",
   images: ["/phones/oppoa6x1.jpg", "/phones/oppoa6x2.webp", "/phones/oppoa6x3.jpg"],
-  deposit: 3500,
-  dailyPayment: 96,
+  deposit: 4000,
+  dailyPayment: 100,
   paymentDays: 90,
   whatsappNumber: "+254100028823",
   description:
@@ -643,9 +555,58 @@ export const products = [
     "Brand new (not refurbished or used)",
     "All original accessories included",
   ],
+},
+
+{
+  id: "7",
+  name: "Tecno Spark Slim",
+  slug: "tecnosparkslimoffer",
+  storage: "256GB",
+  images: ["/phones/slim1.jfif", "/phones/slim2.jfif", "/phones/slim3.jpg","/phones/slim3.jpg"],
+  deposit: 6500,
+  dailyPayment: 155,
+  paymentDays: 90,
+  whatsappNumber: "+254100028823",
+  description:
+    "Brand new — sealed box with original charger, protective case, and full accessories included",
+  features: [
+    "6.6-inch HD+ display with smooth visuals",
+    "Storage: 256GB ROM / 8GB RAM",
+    "50MP AI dual rear camera system",
+    "8MP front camera for clear selfies",
+    "5000mAh battery for long-lasting usage",
+    "Fast charging support",
+    "Warranty: 1 year",
+    "Brand new (not refurbished or used)",
+    "All original accessories included",
+  ],
+},
+
+
+{
+  id: "7",
+  name: "Infinix Note Edge",
+  slug: "infinixnoteedgeoffer",
+  storage: "256GB",
+  images: ["/phones/edge1.jpg", "/phones/edge2.jpg"],
+  deposit: 7900,
+  dailyPayment: 185,
+  paymentDays: 90,
+  whatsappNumber: "+254100028823",
+  description:
+    "Brand new — sealed box with original charger, protective case, and full accessories included",
+  features: [
+    "6.8-inch FHD+ display with smooth refresh rate",
+    "Storage: 256GB ROM / 8GB RAM",
+    "64MP AI triple rear camera system",
+    "16MP front camera for sharp selfies",
+    "5000mAh battery for all-day performance",
+    "Fast charging support",
+    "Side-mounted fingerprint sensor",
+    "Warranty: 1 year",
+    "Brand new (not refurbished or used)",
+    "All original accessories included",
+  ],
 }
-
-
-
 
 ]
