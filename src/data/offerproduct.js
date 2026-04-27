@@ -343,8 +343,8 @@ export const products =  [
 
     
     ],
-  deposit: 5200,
-  dailyPayment: 130,
+  deposit: 6500,
+  dailyPayment: 133,
   paymentDays: 90,
   whatsappNumber: "+254100028823",
   description:
