@@ -230,6 +230,13 @@ const quickSpecs  = [
   currentProduct.battery?.split(',')[0],
 ].filter(Boolean).slice(0, 3);
 
+// Build gallery images array for the enhanced viewer
+const galleryImages = [
+  currentProduct.source,
+  currentProduct.source2,
+  currentProduct.source3,
+].filter(Boolean);
+
 function renderStars(r: number) {
   const full = Math.floor(r);
   return '★'.repeat(full) + '☆'.repeat(5 - full);
@@ -277,47 +284,96 @@ function renderStars(r: number) {
          ═══════════════════════════════════════════════════════ -->
     <section class="hero-section">
 
-      <!-- Gallery column -->
+      <!-- ── ENHANCED GALLERY COLUMN ── -->
       <div class="gallery-col">
-        <div class="main-img-wrap">
+
+        <!-- Main image stage -->
+        <div class="main-stage" id="main-stage">
           {currentProduct.status && (
             <span class={`pdp-badge pdp-badge-${
               currentProduct.status?.toLowerCase() === 'new' ? 'new' :
               currentProduct.status?.toLowerCase() === 'hot' ? 'hot' : 'sale'
             }`}>{currentProduct.status}</span>
           )}
-          <img
-            id="main-product-img"
-            src={currentProduct.source}
-            alt={`${currentProduct.brand} ${currentProduct.name} lipa mdogo mdogo Nairobi Kenya — buy on instalments`}
-            class="main-product-img"
-            loading="eager"
-            width="560" height="560"
-          />
+
+          <!-- Zoom lens indicator -->
+          <div class="zoom-hint" id="zoom-hint">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            Hover to zoom
+          </div>
+
+          <!-- Main image with zoom container -->
+          <div class="zoom-container" id="zoom-container">
+            <img
+              id="main-product-img"
+              src={currentProduct.source}
+              alt={`${currentProduct.brand} ${currentProduct.name} lipa mdogo mdogo Nairobi Kenya — buy on instalments`}
+              class="main-product-img"
+              loading="eager"
+              width="560" height="560"
+            />
+            <!-- Zoomed lens overlay -->
+            <div class="zoom-lens" id="zoom-lens"></div>
+          </div>
+
+          <!-- Zoom result window -->
+          <div class="zoom-result" id="zoom-result"></div>
+
+          <!-- Fullscreen button -->
+          <button class="btn-fullscreen" id="btn-fullscreen" aria-label="View fullscreen" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
+
+          <!-- Prev / Next arrows (shown when >1 image) -->
+          {galleryImages.length > 1 && (
+            <>
+              <button class="gallery-arrow gallery-arrow-prev" id="arrow-prev" aria-label="Previous image" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="gallery-arrow gallery-arrow-next" id="arrow-next" aria-label="Next image" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </>
+          )}
+
+          <!-- Dot indicators -->
+          {galleryImages.length > 1 && (
+            <div class="dot-row" id="dot-row">
+              {galleryImages.map((_, i) => (
+                <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Go to image ${i + 1}`} type="button"></button>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div class="thumb-row">
-          <button class="thumb active" data-src={currentProduct.source} aria-label="View image 1">
-            <img src={currentProduct.source} alt={`${currentProduct.brand} ${currentProduct.name} front view Kenya lipa mdogo mdogo`} width="72" height="72" />
-          </button>
-          {currentProduct.source2 && (
-            <button class="thumb" data-src={currentProduct.source2} aria-label="View image 2">
-              <img src={currentProduct.source2} alt={`${currentProduct.brand} ${currentProduct.name} side view — ${currentProduct.color}`} width="72" height="72" loading="lazy" />
-            </button>
-          )}
-          {currentProduct.source3 && (
-            <button class="thumb" data-src={currentProduct.source3} aria-label="View image 3">
-              <img src={currentProduct.source3} alt={`${currentProduct.brand} ${currentProduct.name} camera detail — lipa pole pole Kenya`} width="72" height="72" loading="lazy" />
-            </button>
-          )}
-        </div>
+        <!-- Thumbnail strip -->
+        {galleryImages.length > 1 && (
+          <div class="thumb-strip" id="thumb-strip">
+            {galleryImages.map((src, i) => (
+              <button
+                class={`thumb-item ${i === 0 ? 'active' : ''}`}
+                data-index={i}
+                data-src={src}
+                aria-label={`View image ${i + 1}`}
+                type="button"
+              >
+                <img
+                  src={src}
+                  alt={`${currentProduct.brand} ${currentProduct.name} view ${i + 1}`}
+                  width="80" height="80"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </button>
+            ))}
+          </div>
+        )}
 
         <div class="quick-specs">
           {quickSpecs.map(s => <span class="spec-pill">{s}</span>)}
         </div>
       </div>
 
-      <!-- Info column -->
+      <!-- Info column (unchanged) -->
       <div class="info-col">
 
         <div class="info-brand-row">
@@ -979,22 +1035,212 @@ function renderStars(r: number) {
 
 
   </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       LIGHTBOX MODAL
+       ═══════════════════════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Previous" type="button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="Product image fullscreen" />
+    </div>
+    <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Next" type="button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox-counter" id="lightbox-counter">1 / 1</div>
+    <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+  </div>
+
 </ProductLayout>
 
 <script>
-// Image gallery
-(function () {
-  const mainImg = document.getElementById('main-product-img') as HTMLImageElement | null;
-  document.querySelectorAll<HTMLButtonElement>('.thumb').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (mainImg && btn.dataset.src) mainImg.src = btn.dataset.src;
-      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-})();
+// ─── Gallery Data ────────────────────────────────────────────────────────────
+// Collect all gallery image srcs from thumb items
+const thumbItems = Array.from(document.querySelectorAll<HTMLButtonElement>('.thumb-item'));
+const galleryImages: string[] = thumbItems.length
+  ? thumbItems.map(t => t.dataset.src ?? '')
+  : [document.querySelector<HTMLImageElement>('#main-product-img')?.src ?? ''];
 
-// Tab switching
+let currentIndex = 0;
+
+// ─── Main stage refs ─────────────────────────────────────────────────────────
+const mainImg        = document.getElementById('main-product-img') as HTMLImageElement | null;
+const zoomContainer  = document.getElementById('zoom-container') as HTMLElement | null;
+const zoomLens       = document.getElementById('zoom-lens') as HTMLElement | null;
+const zoomResult     = document.getElementById('zoom-result') as HTMLElement | null;
+const zoomHint       = document.getElementById('zoom-hint') as HTMLElement | null;
+const dotRow         = document.getElementById('dot-row');
+const arrowPrev      = document.getElementById('arrow-prev');
+const arrowNext      = document.getElementById('arrow-next');
+const btnFullscreen  = document.getElementById('btn-fullscreen');
+
+// ─── Switch active image ──────────────────────────────────────────────────────
+function setActiveImage(index: number) {
+  if (index < 0) index = galleryImages.length - 1;
+  if (index >= galleryImages.length) index = 0;
+  currentIndex = index;
+
+  const src = galleryImages[index];
+  if (mainImg) mainImg.src = src;
+
+  // Thumbnails
+  thumbItems.forEach((t, i) => t.classList.toggle('active', i === index));
+
+  // Dots
+  dotRow?.querySelectorAll<HTMLButtonElement>('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+
+  // Reset zoom result background
+  if (zoomResult && mainImg) {
+    zoomResult.style.backgroundImage = `url('${src}')`;
+  }
+}
+
+// ─── Thumbnail clicks ─────────────────────────────────────────────────────────
+thumbItems.forEach((btn, i) => {
+  btn.addEventListener('click', () => setActiveImage(i));
+});
+
+// ─── Dot clicks ───────────────────────────────────────────────────────────────
+dotRow?.querySelectorAll<HTMLButtonElement>('.dot').forEach((dot, i) => {
+  dot.addEventListener('click', () => setActiveImage(i));
+});
+
+// ─── Arrow navigation ─────────────────────────────────────────────────────────
+arrowPrev?.addEventListener('click', () => setActiveImage(currentIndex - 1));
+arrowNext?.addEventListener('click', () => setActiveImage(currentIndex + 1));
+
+// ─── Keyboard navigation ──────────────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  if (galleryImages.length <= 1) return;
+  if (e.key === 'ArrowLeft')  setActiveImage(currentIndex - 1);
+  if (e.key === 'ArrowRight') setActiveImage(currentIndex + 1);
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ─── Zoom on hover ────────────────────────────────────────────────────────────
+const ZOOM_FACTOR = 2.5;
+
+function moveLens(e: MouseEvent) {
+  if (!zoomContainer || !zoomLens || !zoomResult || !mainImg) return;
+
+  const rect   = zoomContainer.getBoundingClientRect();
+  const lensW  = zoomLens.offsetWidth;
+  const lensH  = zoomLens.offsetHeight;
+
+  let x = e.clientX - rect.left - lensW / 2;
+  let y = e.clientY - rect.top  - lensH / 2;
+
+  x = Math.max(0, Math.min(x, rect.width  - lensW));
+  y = Math.max(0, Math.min(y, rect.height - lensH));
+
+  zoomLens.style.left = `${x}px`;
+  zoomLens.style.top  = `${y}px`;
+
+  const bgX = -(x * ZOOM_FACTOR);
+  const bgY = -(y * ZOOM_FACTOR);
+  const bgW = rect.width  * ZOOM_FACTOR;
+  const bgH = rect.height * ZOOM_FACTOR;
+
+  zoomResult.style.backgroundPosition = `${bgX}px ${bgY}px`;
+  zoomResult.style.backgroundSize     = `${bgW}px ${bgH}px`;
+}
+
+zoomContainer?.addEventListener('mouseenter', () => {
+  if (!zoomLens || !zoomResult || !mainImg) return;
+  if (window.innerWidth < 768) return; // skip zoom on mobile
+  zoomLens.style.display   = 'block';
+  zoomResult.style.display = 'block';
+  zoomResult.style.backgroundImage = `url('${mainImg.src}')`;
+  if (zoomHint) zoomHint.style.opacity = '0';
+});
+
+zoomContainer?.addEventListener('mouseleave', () => {
+  if (zoomLens) zoomLens.style.display   = 'none';
+  if (zoomResult) zoomResult.style.display = 'none';
+  if (zoomHint) zoomHint.style.opacity = '1';
+});
+
+zoomContainer?.addEventListener('mousemove', moveLens);
+
+// ─── Touch swipe on main stage ────────────────────────────────────────────────
+let touchStartX = 0;
+zoomContainer?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+zoomContainer?.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) {
+    diff > 0 ? setActiveImage(currentIndex + 1) : setActiveImage(currentIndex - 1);
+  }
+});
+
+// ─── Lightbox ─────────────────────────────────────────────────────────────────
+const lightbox      = document.getElementById('lightbox') as HTMLElement | null;
+const lightboxImg   = document.getElementById('lightbox-img') as HTMLImageElement | null;
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxPrev  = document.getElementById('lightbox-prev');
+const lightboxNext  = document.getElementById('lightbox-next');
+const lightboxCounter = document.getElementById('lightbox-counter');
+const lightboxThumbs  = document.getElementById('lightbox-thumbs');
+
+function openLightbox(index: number) {
+  if (!lightbox || !lightboxImg) return;
+  lightbox.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
+  updateLightbox(index);
+
+  // Build lightbox thumbs once
+  if (lightboxThumbs && lightboxThumbs.children.length === 0) {
+    galleryImages.forEach((src, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'lb-thumb';
+      btn.dataset.index = String(i);
+      const img = document.createElement('img');
+      img.src = src;
+      img.width = 60;
+      img.height = 60;
+      img.alt = `Image ${i + 1}`;
+      btn.appendChild(img);
+      btn.addEventListener('click', () => updateLightbox(i));
+      lightboxThumbs.appendChild(btn);
+    });
+  }
+}
+
+function updateLightbox(index: number) {
+  if (index < 0) index = galleryImages.length - 1;
+  if (index >= galleryImages.length) index = 0;
+  currentIndex = index;
+  if (lightboxImg) {
+    lightboxImg.style.opacity = '0';
+    lightboxImg.src = galleryImages[index];
+    lightboxImg.onload = () => { lightboxImg.style.opacity = '1'; };
+  }
+  if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+  lightboxThumbs?.querySelectorAll<HTMLButtonElement>('.lb-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === index);
+  });
+}
+
+function closeLightbox() {
+  lightbox?.setAttribute('hidden', '');
+  document.body.style.overflow = '';
+}
+
+btnFullscreen?.addEventListener('click', () => openLightbox(currentIndex));
+lightboxClose?.addEventListener('click', closeLightbox);
+lightboxPrev?.addEventListener('click',  () => updateLightbox(currentIndex - 1));
+lightboxNext?.addEventListener('click',  () => updateLightbox(currentIndex + 1));
+lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+// Double-click main image to open lightbox
+zoomContainer?.addEventListener('dblclick', () => openLightbox(currentIndex));
+
+// ─── Tab switching ─────────────────────────────────────────────────────────────
 (function () {
   const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
   const panels  = document.querySelectorAll<HTMLElement>('.tab-panel');
@@ -1012,12 +1258,11 @@ function renderStars(r: number) {
   });
 })();
 
-// Order form toggle + WhatsApp submit
+// ─── Order form toggle + WhatsApp submit ────────────────────────────────────────
 (function () {
   const toggleBtn = document.getElementById('toggle-form-btn');
   const formWrap  = document.getElementById('order-form-wrap');
 
-  // Pre-fill today's date as default
   const dateInput = document.getElementById('f-date') as HTMLInputElement | null;
   if (dateInput) {
     const today = new Date();
@@ -1046,7 +1291,6 @@ function renderStars(r: number) {
       return;
     }
 
-    // Format date nicely for WhatsApp message
     let deliveryDate = date;
     if (date) {
       const d = new Date(date + 'T00:00:00');
@@ -1134,48 +1378,176 @@ function renderStars(r: number) {
   .product-page { max-width: 1280px; margin: 0 auto; padding: 20px 20px 56px; }
 
   .hero-section {
-    display: grid; grid-template-columns: 460px 1fr; gap: 24px;
+    display: grid; grid-template-columns: 480px 1fr; gap: 24px;
     background: #fff; border: 1.5px solid var(--gray-2);
     border-radius: var(--radius); padding: 28px;
     margin-bottom: 16px; box-shadow: var(--shadow);
   }
-  @media (max-width: 940px) { .hero-section { grid-template-columns: 1fr; } }
+  @media (max-width: 960px) { .hero-section { grid-template-columns: 1fr; } }
 
-  .gallery-col { display: flex; flex-direction: column; gap: 12px; }
-  .main-img-wrap {
-    position: relative; background: var(--gray-1);
-    border: 1.5px solid var(--gray-2); border-radius: var(--radius);
-    padding: 0; display: flex; align-items: center; justify-content: center;
-    min-height: 320px; overflow: hidden;
+  /* ══════════════════════════════════════════════════
+     ENHANCED GALLERY
+  ══════════════════════════════════════════════════ */
+  .gallery-col {
+    display: flex; flex-direction: column; gap: 10px;
+    /* Prevent zoom result from clipping outside gallery column */
+    position: relative;
   }
-  .main-product-img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    display: block; transition: transform 0.35s;
-  }
-  .main-img-wrap:hover .main-product-img { transform: scale(1.04); }
 
+  /* Main stage */
+  .main-stage {
+    position: relative;
+    background: var(--gray-1);
+    border: 1.5px solid var(--gray-2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    max-height: 460px;
+  }
+
+  /* Badge */
   .pdp-badge {
-    position: absolute; top: 12px; left: 12px; z-index: 2;
+    position: absolute; top: 12px; left: 12px; z-index: 4;
     padding: 4px 10px; border-radius: 4px;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 12px; font-weight: 800;
     letter-spacing: .07em; text-transform: uppercase; color: #fff;
+    pointer-events: none;
   }
   .pdp-badge-new  { background: var(--badge-new); }
   .pdp-badge-hot  { background: var(--badge-hot); }
   .pdp-badge-sale { background: var(--badge-sale); }
 
-  .thumb-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .thumb {
-    width: 72px; height: 72px; padding: 5px;
-    border: 2px solid var(--gray-2); border-radius: 7px;
-    background: var(--gray-1); cursor: pointer; overflow: hidden;
-    transition: border-color .15s;
+  /* Zoom hint */
+  .zoom-hint {
+    position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
+    z-index: 3; background: rgba(0,0,0,0.55); color: #fff;
+    font-size: 11px; font-weight: 600; padding: 5px 10px;
+    border-radius: 20px; display: flex; align-items: center; gap: 5px;
+    pointer-events: none; transition: opacity 0.3s;
+    white-space: nowrap;
   }
-  .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .thumb:hover, .thumb.active { border-color: var(--primary); }
-  .thumb.active { background: var(--primary-light); }
+  @media (max-width: 768px) { .zoom-hint { display: none; } }
+
+  /* Zoom container fills the stage */
+  .zoom-container {
+    width: 100%; height: 100%;
+    position: relative; cursor: crosshair;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .main-product-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+    user-select: none; pointer-events: none;
+  }
+
+  /* Zoom lens (overlay on main image) */
+  .zoom-lens {
+    display: none;
+    position: absolute;
+    width: 140px; height: 140px;
+    border: 2px solid var(--primary);
+    border-radius: 4px;
+    background: rgba(26,115,232,0.08);
+    pointer-events: none;
+    z-index: 5;
+    cursor: crosshair;
+  }
+
+  /* Zoom result (appears to the right of the gallery column) */
+  .zoom-result {
+    display: none;
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 0;
+    width: 340px;
+    height: 340px;
+    border: 1.5px solid var(--gray-2);
+    border-radius: var(--radius);
+    background-repeat: no-repeat;
+    background-color: #fff;
+    box-shadow: 0 8px 32px rgba(13,27,42,0.14);
+    z-index: 100;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  /* On narrower screens (where there's no room to the right), hide zoom result */
+  @media (max-width: 1100px) {
+    .zoom-result { display: none !important; }
+    .zoom-lens   { display: none !important; }
+  }
+
+  /* Fullscreen button */
+  .btn-fullscreen {
+    position: absolute; bottom: 12px; right: 12px; z-index: 4;
+    width: 34px; height: 34px; border-radius: 6px;
+    background: rgba(255,255,255,0.92); border: 1.5px solid var(--gray-2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-light);
+    transition: background 0.15s, color 0.15s;
+  }
+  .btn-fullscreen:hover { background: #fff; color: var(--primary); }
+
+  /* Prev / Next arrows on main stage */
+  .gallery-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 4; width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.92); border: 1.5px solid var(--gray-2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text); opacity: 0;
+    transition: opacity 0.2s, background 0.15s, color 0.15s;
+  }
+  .main-stage:hover .gallery-arrow { opacity: 1; }
+  .gallery-arrow:hover { background: #fff; color: var(--primary); border-color: var(--primary); }
+  .gallery-arrow-prev { left: 10px; }
+  .gallery-arrow-next { right: 50px; } /* offset from fullscreen btn */
+
+  /* Dot indicators */
+  .dot-row {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; z-index: 4;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.6); border: 1.5px solid rgba(255,255,255,0.8);
+    cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s;
+  }
+  .dot.active {
+    background: #fff; transform: scale(1.25);
+  }
+
+  /* Thumbnail strip */
+  .thumb-strip {
+    display: flex; gap: 8px; flex-wrap: nowrap;
+    overflow-x: auto; padding-bottom: 4px;
+    scrollbar-width: thin; scrollbar-color: var(--gray-2) transparent;
+  }
+  .thumb-strip::-webkit-scrollbar { height: 4px; }
+  .thumb-strip::-webkit-scrollbar-track { background: transparent; }
+  .thumb-strip::-webkit-scrollbar-thumb { background: var(--gray-2); border-radius: 2px; }
+
+  .thumb-item {
+    flex-shrink: 0;
+    width: 72px; height: 72px; padding: 4px;
+    border: 2px solid var(--gray-2); border-radius: 8px;
+    background: var(--gray-1); cursor: pointer;
+    overflow: hidden; transition: border-color 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .thumb-item img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    transition: transform 0.2s;
+  }
+  .thumb-item:hover img { transform: scale(1.07); }
+  .thumb-item:hover { border-color: var(--primary); }
+  .thumb-item.active {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.18);
+  }
 
   .quick-specs { display: flex; gap: 6px; flex-wrap: wrap; }
   .spec-pill {
@@ -1184,6 +1556,71 @@ function renderStars(r: number) {
     padding: 3px 9px; font-size: 11.5px; font-weight: 500;
   }
 
+  /* ══════════════════════════════════════════════════
+     LIGHTBOX
+  ══════════════════════════════════════════════════ */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.92);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .lightbox[hidden] { display: none; }
+
+  .lightbox-close {
+    position: absolute; top: 16px; right: 20px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  .lightbox-img-wrap {
+    max-width: 88vw; max-height: 78vh;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  #lightbox-img {
+    max-width: 100%; max-height: 78vh;
+    object-fit: contain; border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+
+  .lightbox-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .lightbox-arrow:hover { background: rgba(255,255,255,0.22); }
+  .lightbox-prev { left: 20px; }
+  .lightbox-next { right: 20px; }
+
+  .lightbox-counter {
+    color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 12px;
+  }
+
+  .lightbox-thumbs {
+    display: flex; gap: 8px; overflow-x: auto;
+    padding: 4px 20px; max-width: 92vw;
+    scrollbar-width: none;
+  }
+  .lightbox-thumbs::-webkit-scrollbar { display: none; }
+  .lb-thumb {
+    flex-shrink: 0; width: 56px; height: 56px; padding: 2px;
+    border: 2px solid rgba(255,255,255,0.2); border-radius: 6px;
+    background: rgba(255,255,255,0.06); cursor: pointer;
+    overflow: hidden; transition: border-color 0.15s;
+  }
+  .lb-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .lb-thumb.active { border-color: #fff; }
+  .lb-thumb:hover  { border-color: rgba(255,255,255,0.6); }
+
+  /* ══════════════════════════════════════════════════
+     REST OF PAGE (unchanged)
+  ══════════════════════════════════════════════════ */
   .info-col { display: flex; flex-direction: column; gap: 16px; }
 
   .info-brand-row { display: flex; align-items: center; gap: 10px; }
@@ -1256,14 +1693,6 @@ function renderStars(r: number) {
     font-size: 12.5px; font-weight: 600; color: var(--primary-dark);
   }
   .pricing-bullets li::before { content: '✓  '; }
-
-  .option-row { display: flex; align-items: center; gap: 12px; }
-  .option-label { font-size: 13px; font-weight: 700; color: var(--text-light); }
-  .color-chip {
-    background: var(--primary-light); border: 2px solid var(--primary);
-    color: var(--primary); font-weight: 700; font-size: 13px;
-    padding: 5px 14px; border-radius: 20px;
-  }
 
   .order-block { display: flex; flex-direction: column; gap: 10px; }
 
