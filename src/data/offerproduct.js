@@ -121,6 +121,7 @@ export const products =  [
   name: "Camon 50 Pro Max",
   slug: "camon50promaxoffer",
   storage: "256GB",
+  video:"/phones/camon404.mp4",
   images: [
     "/phones/camon501.webp",
     // "/phones/camon502.jpg",

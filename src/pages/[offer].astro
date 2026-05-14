@@ -68,8 +68,22 @@ const productList = [currentProduct];
 
     <div class="pg-grid">
 
-      <!-- Left: Image Carousel -->
+      <!-- Left: Image Carousel + Video -->
       <div class="pg-image-col">
+
+        {product.video && (
+          <div class="pg-media-tabs">
+            <button class="pg-tab active" id="tabPhotos">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              Photos
+            </button>
+            <button class="pg-tab" id="tabVideo">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Video
+            </button>
+          </div>
+        )}
+
         <div class="pg-carousel" id="carousel">
           {product.images.map((image, idx) => (
             <div class={`pg-slide ${idx === 0 ? 'active' : ''}`} data-index={idx}>
@@ -101,6 +115,26 @@ const productList = [currentProduct];
             </div>
           )}
         </div>
+
+        {product.video && (
+          <div class="pg-video-wrap" id="videoWrap">
+            {(product.video.includes('youtube.com') || product.video.includes('youtu.be')) ? (
+              <iframe
+                src={product.video}
+                class="pg-video-frame"
+                allowfullscreen
+                allow="autoplay; encrypted-media; picture-in-picture"
+                loading="lazy"
+                title={`${product.name} video`}
+              ></iframe>
+            ) : (
+              <video class="pg-video-frame" controls playsinline preload="metadata" poster={product.images[0]}>
+                <source src={product.video} type="video/mp4" />
+                Your browser does not support video playback.
+              </video>
+            )}
+          </div>
+        )}
 
         <!-- Trust row — visible on mobile below image -->
         <div class="pg-trust-row mobile-only">
@@ -486,6 +520,70 @@ const productList = [currentProduct];
     color: var(--c-ink);
   }
 
+  /* ===== MEDIA TABS ===== */
+  .pg-media-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-m);
+    padding: 4px;
+    width: fit-content;
+    box-shadow: var(--shadow-s);
+  }
+
+  .pg-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--c-ink-2);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s var(--ease), color .2s var(--ease), box-shadow .2s;
+  }
+
+  .pg-tab.active {
+    background: var(--c-ink);
+    color: #fff;
+    box-shadow: var(--shadow-s);
+  }
+
+  .pg-tab:not(.active):hover {
+    background: var(--c-bg);
+    color: var(--c-ink);
+  }
+
+  /* ===== VIDEO ===== */
+  .pg-video-wrap {
+    display: none;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    box-shadow: var(--shadow-l);
+  }
+
+  .pg-video-wrap.active {
+    display: block;
+  }
+
+  .pg-video-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    object-fit: cover;
+  }
+
   /* ===== IMAGE CAROUSEL ===== */
   .pg-image-col { position: relative; }
 
@@ -723,8 +821,8 @@ const productList = [currentProduct];
 
   .pg-block-num {
     font-family: var(--font-head);
-    font-size: 18m,.px;
-    /* font-weight: 800; */
+    font-size: 28px;
+    font-weight: 800;
     color: var(--c-ink);
     letter-spacing: -.03em;
     line-height: 1;
@@ -1236,8 +1334,9 @@ const productList = [currentProduct];
     .pg-container { padding: 0 24px; }
     .pg-grid { grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
     .pg-image-col .pg-carousel { position: sticky; top: 24px; }
+    .pg-image-col .pg-video-wrap { position: sticky; top: 24px; }
     .pg-title { font-size: 30px; }
-    .pg-block-num { font-size: 18px; }
+    .pg-block-num { font-size: 28px; }
     .pg-steps { grid-template-columns: repeat(2, 1fr); }
     .pg-features { grid-template-columns: repeat(2, 1fr); }
     .pg-trust-row.mobile-only { display: none; }
@@ -1293,6 +1392,32 @@ const productList = [currentProduct];
   carousel?.addEventListener('mouseenter', stop);
   carousel?.addEventListener('mouseleave', start);
   start();
+
+  // Media Tabs (Photos / Video)
+  const tabPhotos = document.getElementById('tabPhotos');
+  const tabVideo  = document.getElementById('tabVideo');
+  const videoWrap = document.getElementById('videoWrap');
+
+  tabPhotos?.addEventListener('click', () => {
+    tabPhotos.classList.add('active');
+    tabVideo?.classList.remove('active');
+    if (carousel) carousel.style.display = '';
+    videoWrap?.classList.remove('active');
+    // Pause any playing video when switching back to photos
+    const iframe = videoWrap?.querySelector('iframe');
+    if (iframe) iframe.src = iframe.src; // reload src to stop playback
+    const vid = videoWrap?.querySelector('video');
+    if (vid) vid.pause();
+    start(); // resume carousel autoplay
+  });
+
+  tabVideo?.addEventListener('click', () => {
+    tabVideo.classList.add('active');
+    tabPhotos?.classList.remove('active');
+    if (carousel) carousel.style.display = 'none';
+    videoWrap?.classList.add('active');
+    stop(); // pause autoplay while watching video
+  });
 
   // Share Modal
   const shareModal   = document.getElementById('shareModal')!;
