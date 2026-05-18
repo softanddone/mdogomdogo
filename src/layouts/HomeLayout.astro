@@ -10,10 +10,10 @@ const {
 const baseUrl = "https://mdogomdogodeals.co.ke";
 
 const seoData = {
-  title: "Buy Phones on Lipa Mdogo Mdogo in Nairobi Kenya | Mdogo Mdogo Deals",
+  title: "Lipa Mdogo Mdogo Phones in Nairobi Kenya | Samsung, iPhone, Tecno, Infinix, Itel, Redmi",
 
   description:
-    "Get smartphones on flexible payment plans in Nairobi. Pay daily or weekly from KES 50. Samsung, iPhone, Tecno, Infinix available. Free delivery in Nairobi.",
+    "Buy Samsung, iPhone, Tecno, Infinix, Itel, Redmi phones on Lipa Mdogo Mdogo in Nairobi. Daily or weekly payments from KES 50 with free delivery.",
   canonical: baseUrl,
   ogImage: `${baseUrl}/phones/logo.jpg`,
   siteName: "Mdogo Mdogo Deals Kenya",
@@ -37,7 +37,7 @@ const homepageSchema = generateHomepageSchema(products, seoData, featured);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
 
     <!-- Primary Meta Tags -->
     <title>{seoData.title}</title>
@@ -81,6 +81,8 @@ const homepageSchema = generateHomepageSchema(products, seoData, featured);
     />
     <meta name="apple-mobile-web-app-title" content="MMD Kenya" />
 
+    <meta property="og:image:type" content="image/jpeg" />
+
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/phones/y2.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/phones/y2.png" />
@@ -94,6 +96,11 @@ const homepageSchema = generateHomepageSchema(products, seoData, featured);
       crossorigin
     />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+
+    <link rel="alternate" hreflang="en-KE" href={seoData.canonical} />
+<link rel="alternate" hreflang="x-default" href={seoData.canonical} />
+<link rel="shortcut icon" href="/phones/y2.png" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={homepageSchema} />
@@ -129,7 +136,7 @@ const homepageSchema = generateHomepageSchema(products, seoData, featured);
 
       :global(body) {
         min-height: 100vh;
-        font-display: swap;
+        
       }
 
       :global(html) {

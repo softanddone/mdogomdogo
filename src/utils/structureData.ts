@@ -911,7 +911,6 @@ export function generateCategorySchema(category: string, products: FlexibleProdu
 // FIXED: Homepage schema with @graph
 
 
-
 export function generateHomepageSchema(
   products: FlexibleProduct[],
   seoData: any,
@@ -919,20 +918,10 @@ export function generateHomepageSchema(
 ) {
   const baseUrl = 'https://mdogomdogodeals.co.ke';
 
-  // REMINDER: hreflang MUST be a <link> tag in <head> — NOT in JSON-LD.
-  // <link rel="alternate" hreflang="en-KE" href="https://mdogomdogodeals.co.ke/" />
-  // This is now added in HomePage.astro.
+  
+  const GBP_URL = 'https://maps.google.com/?cid=17856493610344092236';
 
-  // ACTION REQUIRED: Replace the GBP_URL placeholder below with your real
-  // Google Business Profile URL from Google Maps (right-click your listing → Share → copy link).
-  // Format: https://maps.app.goo.gl/XXXXXXX  OR  https://www.google.com/maps/place/?cid=XXXXXXX
-  const GBP_URL = 'https://www.google.com/maps/place/MdogomdogoDeals'; // ← replace with real GBP URL
-
-  // ACTION REQUIRED: Set this to your actual verified review count from Google / Trustpilot.
-  // Syncing this number to real third-party reviews is required for Google to show star ratings.
-  // Inflated or unverifiable counts cause Google to suppress the AggregateRating snippet entirely.
-  const VERIFIED_REVIEW_COUNT = '312'; // ← update to match your real verified review count
-
+ 
   const graphData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -955,10 +944,7 @@ export function generateHomepageSchema(
         inLanguage: 'en-KE',
       },
 
-      // WebSite
-      // Verify /search?q=samsung returns real results before relying on SearchAction.
-      // Test with: curl "https://mdogomdogodeals.co.ke/search?q=samsung"
-      // If the route 404s, Google drops the Sitelinks search box entirely.
+      
       {
         '@type': 'WebSite',
         '@id': `${baseUrl}#website`,
@@ -966,20 +952,12 @@ export function generateHomepageSchema(
         name: seoData.siteName,
         alternateName: 'MMD Kenya',
         description:
-          "Kenya's #1 smartphone instalment shop. Own a Samsung, Tecno, Infinix or iPhone from KSh 2,000 deposit. M-Pesa payments, no CRB, no guarantor. Free same-day delivery Nairobi.",
+          "One of Nairobi's trusted smartphone instalment shops. Own a Samsung, Tecno, Infinix or iPhone from KSh 2,000 deposit. M-Pesa payments, no CRB, no guarantor. Free same-day delivery Nairobi.",
         publisher: { '@id': `${baseUrl}#organization` },
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${baseUrl}/search?q={search_term_string}`,
-          },
-          'query-input': 'required name=search_term_string',
-        },
         inLanguage: 'en-KE',
       },
 
-      // Organization — GBP URL added to sameAs (FIX: strengthens Knowledge Panel)
+     
       {
         '@type': 'Organization',
         '@id': `${baseUrl}#organization`,
@@ -996,8 +974,9 @@ export function generateHomepageSchema(
           caption: 'Mdogo Mdogo Deals Kenya Logo',
         },
         image: { '@id': `${baseUrl}#logo` },
+       
         description:
-          "Kenya's most trusted phone instalment shop. Genuine smartphones on flexible M-Pesa payment plans. No CRB, no guarantor, no payslip. Free same-day delivery across Nairobi.",
+          "Genuine smartphones on flexible M-Pesa payment plans in Kenya. Simple eligibility process with flexible payment options. Free same-day delivery across Nairobi.",
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'CBD Center',
@@ -1018,7 +997,7 @@ export function generateHomepageSchema(
             contactType: 'customer service',
             availableLanguage: ['English', 'Swahili'],
             areaServed: 'KE',
-            contactOption: 'TollFree',
+            
           },
           {
             '@type': 'ContactPoint',
@@ -1029,8 +1008,7 @@ export function generateHomepageSchema(
           },
         ],
         email: 'hello@mdogomdogodeals.co.ke',
-        // FIX: Added GBP_URL to sameAs — required for Google to associate the
-        // Organization entity with your Google Business Profile and Map Pack listing.
+        
         sameAs: [
           GBP_URL,
           'https://wa.me/254100028823',
@@ -1041,10 +1019,7 @@ export function generateHomepageSchema(
         areaServed: { '@type': 'Country', name: 'Kenya' },
       },
 
-      // LocalBusiness
-      // FIX: GBP_URL added to sameAs — this is the most important signal for
-      // Map Pack eligibility and Knowledge Panel triggering.
-      // FIX: reviewCount must match your actual verified third-party review count.
+      
       {
         '@type': ['LocalBusiness', 'MobilePhoneStore'],
         '@id': `${baseUrl}#localbusiness`,
@@ -1084,17 +1059,7 @@ export function generateHomepageSchema(
           numberOfItems: products.length,
         },
         makesOffer: { '@id': `${baseUrl}#instalment-service` },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.8',
-          bestRating: '5',
-          worstRating: '1',
-          // IMPORTANT: This value must match your real verified review count
-          // (Google reviews, Trustpilot, etc.). Google suppresses star snippets
-          // when it cannot verify the count against a known source.
-          reviewCount: VERIFIED_REVIEW_COUNT,
-        },
-        // FIX: GBP_URL is the critical addition here — links this entity to your
+        // FIX 2: GBP_URL is the critical addition here — links this entity to your
         // Google Maps listing for Map Pack and local Knowledge Panel eligibility.
         sameAs: [
           GBP_URL,
@@ -1108,8 +1073,11 @@ export function generateHomepageSchema(
         '@id': `${baseUrl}#instalment-service`,
         name: 'Smartphone Instalment Plan — Lipa Mdogo Mdogo',
         alternateName: ['Lipa Pole Pole', 'Phone Hire Purchase Kenya'],
+        // FIX 5: Removed "No CRB check, no guarantor, no payslip required" from schema
+        // description — sounds like lending/credit marketing which can trigger policy scrutiny.
+        // This language is fine on-page, but keep schema descriptions conservative.
         description:
-          'Buy a genuine smartphone on M-Pesa instalments from as little as KSh 2,000 deposit. No CRB check, no guarantor, no payslip required. Plans available over 3 or 6 months with daily, weekly or monthly payment options.',
+          'Buy a genuine smartphone on M-Pesa instalments from as little as KSh 2,000 deposit. Simple eligibility process with flexible daily, weekly or monthly payment options over 3 or 6 months.',
         provider: { '@id': `${baseUrl}#organization` },
         serviceType: 'Smartphone Instalment Plan',
         category: 'Consumer Electronics Financing',
@@ -1143,15 +1111,14 @@ export function generateHomepageSchema(
             { '@type': 'City', name: 'Kajiado' },
           ],
           eligibleCustomerType: 'https://schema.org/Person',
+          // FIX 5: Replaced "no documents needed" lending language with conservative phrasing.
           description:
-            'No CRB check, no payslip, no guarantor. M-Pesa deposit only. Free same-day delivery in Nairobi.',
+            'Simple eligibility process. M-Pesa deposit only. Free same-day delivery in Nairobi.',
         },
         termsOfService: `${baseUrl}/terms`,
       },
 
-      // ItemList — FIX: each item now includes @id referencing the product page
-      // entity, enabling stronger association between the list and individual
-      // product pages that have their own Product schema.
+      
       {
         '@type': 'ItemList',
         '@id': `${baseUrl}#featured-phones`,
@@ -1163,8 +1130,6 @@ export function generateHomepageSchema(
           position: i + 1,
           url: `${baseUrl}/${p.slug}`,
           name: p.fullname ?? p.name,
-          // Links to the Product @id on each product page (if that page has Product schema).
-          // If your product pages don't yet have Product schema, this is harmless but inert.
           item: {
             '@type': 'Product',
             '@id': `${baseUrl}/${p.slug}#product`,
@@ -1174,7 +1139,7 @@ export function generateHomepageSchema(
         })),
       },
 
-      // FAQPage — unchanged, already well-structured
+      
       {
         '@type': 'FAQPage',
         '@id': `${baseUrl}#faq`,
@@ -1184,7 +1149,7 @@ export function generateHomepageSchema(
             name: 'What is the minimum deposit for lipa mdogo mdogo?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Just KSh 2,000. No CRB, no payslip, no guarantor required.',
+              text: 'Just KSh 2,000. Simple eligibility process — no CRB check, no payslip, no guarantor required.',
             },
           },
           {
@@ -1221,18 +1186,18 @@ export function generateHomepageSchema(
           },
           {
             '@type': 'Question',
-            name: 'What documents do I need to qualify?',
+            name: 'What do I need to get started with an instalment plan?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'No documents needed. No CRB check, no payslip, no guarantor. A valid M-Pesa number and your deposit is all that is required.',
+              text: 'Just a valid M-Pesa number and your deposit. No CRB check, no payslip, and no guarantor is required.',
             },
           },
-          {
+                    {
             '@type': 'Question',
-            name: 'Which is the best lipa mdogo mdogo provider in Nairobi?',
+            name: 'How does MdogomdogoDeals compare with other instalment phone shops in Nairobi?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'MdogomdogoDeals is rated 4.8/5 by customers and is one of the most trusted instalment phone shops in Nairobi. Deposits from KSh 2,000 with free same-day delivery and the widest selection of brands.',
+              text: 'MdogomdogoDeals offers deposits from KSh 2,000, free same-day delivery, and one of the widest brand selections in Nairobi — including Samsung, Tecno, Infinix, Redmi and iPhones. Customers inspect every device before paying.',
             },
           },
           {
@@ -1250,6 +1215,7 @@ export function generateHomepageSchema(
 
   return JSON.stringify(graphData, null, 2);
 }
+
 
 
 
