@@ -258,15 +258,15 @@ function renderStars(r: number) {
         <li class="sep">›</li>
         <li><a href={`/phones/${brandSlug}`}>{currentProduct.brand}</a></li>
         <li class="sep">›</li>
-        <li>{currentProduct.brand} {currentProduct.name}</li>
+        <li> {currentProduct.name}</li>
       </ol>
     </nav>
 
     <!-- SEO INTRO -->
     <div class="seo-intro">
       <p>
-        Looking for the <strong>{currentProduct.brand} {currentProduct.name} price in Kenya on lipa mdogo mdogo</strong>?
-        You have come to the right place. The <a href={`/phones/${brandSlug}`}>{currentProduct.brand} {currentProduct.name}</a> is now available in Kenya through
+        Looking for the <strong> {currentProduct.name} price in Kenya on lipa mdogo mdogo</strong>?
+        You have come to the right place. The <a href={`/phones/${brandSlug}`}> {currentProduct.name}</a> is now available in Kenya through
         <strong>MdogomdogoDeals</strong> — Nairobi's most trusted phone lipa mdogo mdogo and lipa pole pole service.
         Own it today with <strong>zero upfront cost</strong>: a small deposit is collected only after the phone reaches your door and you have inspected it, then spread the remaining balance in affordable daily, weekly, or monthly payments.
         No credit check, no guarantor, no money needed before delivery.
@@ -274,7 +274,7 @@ function renderStars(r: number) {
         {currentProduct.ram && ` Featuring ${currentProduct.ram} RAM`}
         {currentProduct.storage && `, ${currentProduct.storage} of built-in storage`}
         {currentProduct.battery && `, and a powerful ${currentProduct.battery} battery`}
-        {` — the ${currentProduct.brand} ${currentProduct.name} is one of the sharpest lipa mdogo mdogo smartphone deals available in Nairobi today.`}
+        {` — the ${currentProduct.name} is one of the sharpest lipa mdogo mdogo smartphone deals available in Nairobi today.`}
         &nbsp;<a href="#price-kenya">View lipa mdogo mdogo pricing &amp; instalments &darr;</a>
       </p>
     </div>
@@ -307,7 +307,7 @@ function renderStars(r: number) {
             <img
               id="main-product-img"
               src={currentProduct.source}
-              alt={`${currentProduct.brand} ${currentProduct.name} lipa mdogo mdogo Nairobi Kenya — buy on instalments`}
+              alt={`${currentProduct.name} lipa mdogo mdogo Nairobi Kenya — buy on instalments`}
               class="main-product-img"
               loading="eager"
               width="560" height="560"
@@ -359,7 +359,7 @@ function renderStars(r: number) {
               >
                 <img
                   src={src}
-                  alt={`${currentProduct.brand} ${currentProduct.name} view ${i + 1}`}
+                  alt={` ${currentProduct.name} view ${i + 1}`}
                   width="80" height="80"
                   loading={i === 0 ? 'eager' : 'lazy'}
                 />
@@ -382,7 +382,7 @@ function renderStars(r: number) {
         </div>
 
         <h1 class="product-title">
-          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name} &mdash; Lipa Mdogo Mdogo Nairobi
+           {currentProduct.fullname ?? currentProduct.name} &mdash; Lipa Mdogo Mdogo Nairobi
         </h1>
 
         {reviewCount > 0 && (
@@ -429,7 +429,7 @@ function renderStars(r: number) {
           <p class="order-heading">How would you like to order?</p>
 
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on lipa mdogo mdogo`}
+            href={`https://wa.me/254100028823?text=Hi, I want to order the  ${currentProduct.name} on lipa mdogo mdogo`}
             class="btn-order-wa"
             target="_blank" rel="noopener"
           >
