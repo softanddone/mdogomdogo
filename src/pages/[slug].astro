@@ -15,7 +15,6 @@ import {
 } from '../data/feature-config.js';
 import { brandSlugall } from '../data/filter-config.js';
 
-
 export async function getStaticPaths() {
   return products.map((product) => ({
     params: { slug: product.slug },
@@ -25,17 +24,14 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const currentProduct = products.find((p) => p.slug === slug);
 
-
-
 const productFeatureKeys    = getProductFeatures(currentProduct);
 const productFeatureObjects = FEATURE_FILTERS.filter(f => productFeatureKeys.includes(f.key));
-
 
 if (!currentProduct) {
   return Astro.redirect("/404");
 }
 
-// ── Smart related products: unique per product page ──────────────────────────
+// ── Smart related products ────────────────────────────────────────────────────
 const currentDeposit = parseInt((currentProduct.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
 const PRICE_TIER_RANGE = 3000;
 
@@ -53,22 +49,18 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 }
 
 const slugSeed = currentProduct.slug.split('').reduce((n, c, i) => n + c.charCodeAt(0) * (i + 7), 0);
-
 const otherProducts = products.filter((p) => p.id !== currentProduct.id);
 
 const tier1 = seededShuffle(
   otherProducts.filter((p) => {
     const dep = parseInt((p.deposit ?? '').replace(/[^0-9]/g, ''), 10) || 0;
     return p.brand === currentProduct.brand && Math.abs(dep - currentDeposit) <= PRICE_TIER_RANGE;
-  }),
-  slugSeed
-);
+  }), slugSeed);
 
 const tier1ids = new Set(tier1.map((p) => p.id));
 const tier2 = seededShuffle(
   otherProducts.filter((p) => p.brand === currentProduct.brand && !tier1ids.has(p.id)),
-  slugSeed + 1
-);
+  slugSeed + 1);
 
 const tier12ids = new Set([...tier1, ...tier2].map((p) => p.id));
 const tier3 = seededShuffle(
@@ -77,9 +69,7 @@ const tier3 = seededShuffle(
     return p.brand !== currentProduct.brand
       && Math.abs(dep - currentDeposit) <= PRICE_TIER_RANGE
       && !tier12ids.has(p.id);
-  }),
-  slugSeed + 2
-);
+  }), slugSeed + 2);
 
 const currentStorage = (currentProduct.storage ?? '').replace(/[^0-9]/g, '');
 const tier123ids = new Set([...tier1, ...tier2, ...tier3].map((p) => p.id));
@@ -87,15 +77,11 @@ const tier4 = seededShuffle(
   otherProducts.filter((p) => {
     const s = (p.storage ?? '').replace(/[^0-9]/g, '');
     return s === currentStorage && s !== '' && !tier123ids.has(p.id);
-  }),
-  slugSeed + 3
-);
+  }), slugSeed + 3);
 
 const tier1234ids = new Set([...tier1, ...tier2, ...tier3, ...tier4].map((p) => p.id));
 const tier5 = seededShuffle(
-  otherProducts.filter((p) => !tier1234ids.has(p.id)),
-  slugSeed + 4
-);
+  otherProducts.filter((p) => !tier1234ids.has(p.id)), slugSeed + 4);
 
 const pool: typeof products = [];
 for (const tier of [tier1, tier2, tier3, tier4, tier5]) {
@@ -105,45 +91,41 @@ for (const tier of [tier1, tier2, tier3, tier4, tier5]) {
   }
   if (pool.length >= 4) break;
 }
-
 const relatedProducts = pool.slice(0, 4);
 
+// ── FAQ ───────────────────────────────────────────────────────────────────────
 const faqs = [
   {
-    question: `How does the Lipa Mdogo Mdogo instalment plan work for the ${currentProduct.name}?`,
-    answer: `It is straightforward. We deliver the phone directly to your location in Nairobi, Kiambu, Machakos, or Kajiado — no advance payment required. Once it arrives, you turn it on, test every feature, and try it for yourself. Only when you are completely satisfied do you pay the deposit of KES ${currentProduct.deposit}. After that, a short grace period begins before your daily payments of KES ${currentProduct.daily} kick in. You can also choose to pay weekly or monthly instead — whatever matches your cash flow best. This is the most flexible lipa mdogo mdogo plan available in Kenya today: no booking fee, no delivery charge, nothing owed before the phone is in your hands.`,
-  },
-  {
-    question: "What is Lipa Mdogo Mdogo and how is it different from Lipa Pole Pole?",
-    answer: "Lipa mdogo mdogo and lipa pole pole are both popular Kenyan phrases describing the same idea: paying for something gradually in small, manageable instalments rather than all at once. At MdogomdogoDeals, we use both terms interchangeably. Whether you call it lipa mdogo mdogo, lipa pole pole, or simply phone instalments, the system is the same — we deliver your phone first, you inspect it, then you pay a small deposit and continue with daily, weekly, or monthly payments until the balance is cleared. No lump sum, no credit check, no guarantor.",
+    question: `How does the instalment plan work for the ${currentProduct.name}?`,
+    answer: `We deliver the phone directly to your location in Nairobi, Kiambu, Machakos, or Kajiado — no advance payment required. Once it arrives, you turn it on, test every feature, and try it for yourself. Only when you are completely satisfied do you pay the deposit of KES ${currentProduct.deposit}. After that, a short grace period begins before your daily payments of KES ${currentProduct.daily} kick in. You can also choose to pay weekly or monthly instead — whatever matches your cash flow best.`,
   },
   {
     question: "Do I need to pay anything before delivery?",
-    answer: "Absolutely not. MdogomdogoDeals operates on a simple principle: we deliver first, you inspect second, you pay third. The deposit is only collected once the phone is physically with you and you have confirmed it meets your expectations. There are no hidden booking fees, no upfront processing charges, and no payment of any kind before our rider arrives at your door. This is what makes our lipa mdogo mdogo plan the most trusted phone instalment service in Nairobi.",
+    answer: "No. We deliver first, you inspect second, you pay third. The deposit is only collected once the phone is physically with you and you have confirmed it meets your expectations. There are no hidden booking fees, no upfront processing charges, and no payment of any kind before our rider arrives at your door.",
   },
   {
-    question: "Which counties and areas in Nairobi do you cover for free delivery?",
-    answer: "We offer free same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado counties — covering the entire greater Nairobi metropolitan area and surrounding regions. This includes Nairobi CBD, Westlands, Kasarani, Embakasi, Thika, Ruiru, Athi River, Kitengela, Ngong, and many more. Not sure whether we reach your exact location? Call or WhatsApp us on 0100028823 before ordering and we will confirm right away.",
+    question: "Which areas do you cover for free delivery?",
+    answer: "We offer free same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado counties. This includes Nairobi CBD, Westlands, Kasarani, Embakasi, Thika, Ruiru, Athi River, Kitengela, Ngong, and many more. Not sure whether we reach your exact location? Call or WhatsApp us on 0100028823 before ordering and we will confirm right away.",
   },
   {
-    question: "How do I place an order for the phone on lipa mdogo mdogo?",
-    answer: `Ordering on our lipa mdogo mdogo plan is easy — three options are available: (1) WhatsApp us on 0100028823 for the fastest response, (2) call us directly on 0100028823 to speak with our team, or (3) fill in the order form on this page. As soon as we receive your order, we will confirm your delivery date and estimated arrival time the same day. Delivery is free and happens the same day you place your order for all areas within Nairobi, Kiambu, Machakos, and Kajiado.`,
+    question: "How do I place an order?",
+    answer: `Three options: (1) WhatsApp us on 0100028823 for the fastest response, (2) call us directly on 0100028823, or (3) fill in the order form on this page. As soon as we receive your order, we confirm your delivery date and estimated arrival time the same day. Delivery is free and same-day for all areas within Nairobi, Kiambu, Machakos, and Kajiado.`,
   },
   {
     question: `Is the ${currentProduct.name} brand new and genuine?`,
-    answer: `Yes, without exception. Every ${currentProduct.brand} ${currentProduct.name} we sell is brand new, 100% genuine, and sourced exclusively through authorised ${currentProduct.brand} distributors operating in Kenya. No refurbished units, no grey-market imports, no imitations. Every phone comes sealed in original ${currentProduct.brand} retail packaging and includes a full manufacturer warranty for your peace of mind.`,
+    answer: `Yes. Every ${currentProduct.brand} ${currentProduct.name} we sell is brand new, 100% genuine, and sourced exclusively through authorised ${currentProduct.brand} distributors in Kenya. No refurbished units, no grey-market imports. Every phone comes sealed in original retail packaging and includes a full manufacturer warranty.`,
   },
   {
     question: `What colour options are available for the ${currentProduct.name}?`,
-    answer: `The ${currentProduct.brand} ${currentProduct.name} is currently available in the following colours: ${currentProduct.color}. When placing your order, simply let us know your preferred colour and we will confirm availability. If your first choice is out of stock, we will advise you immediately so you can choose an alternative without any delay to your delivery.`,
+    answer: `The ${currentProduct.brand} ${currentProduct.name} is currently available in: ${currentProduct.color}. When placing your order, let us know your preferred colour and we will confirm availability immediately.`,
   },
   {
     question: "What warranty does the phone come with?",
-    answer: `Every ${currentProduct.brand} ${currentProduct.name} purchased through MdogomdogoDeals comes with a 2-year manufacturer warranty covering factory defects and hardware faults, backed by ${currentProduct.brand} and ${currentProduct.seller}. In addition, you benefit from our dedicated after-sales support team throughout your instalment period — so you are never left without assistance.`,
+    answer: `Every ${currentProduct.brand} ${currentProduct.name} comes with a 2-year manufacturer warranty covering factory defects and hardware faults. You also benefit from our dedicated after-sales support team throughout your instalment period.`,
   },
   {
     question: "What happens if I am unable to make a payment on time?",
-    answer: "We understand that life does not always go to plan. If you are going through a difficult period, the most important thing is to contact us proactively. Our team is trained to work with customers compassionately — we can arrange a revised payment schedule, extend a grace period, or pause instalments temporarily depending on your situation. There are no automatic penalties for customers who communicate with us honestly.",
+    answer: "Contact us proactively. Our team can arrange a revised payment schedule, extend a grace period, or pause instalments temporarily depending on your situation. There are no automatic penalties for customers who communicate with us honestly.",
   },
 ];
 
@@ -157,15 +139,7 @@ const faqSchema = {
   })),
 };
 
-const keyFeatures = [
-  currentProduct.ram       ? `${currentProduct.ram} RAM`         : null,
-  currentProduct.storage   ? `${currentProduct.storage} Storage` : null,
-  currentProduct.camera    ? `${currentProduct.camera} Camera`   : null,
-  currentProduct.battery   ? `${currentProduct.battery} Battery` : null,
-  currentProduct.display   ? `${currentProduct.display} Display` : null,
-  currentProduct.processor ? `${currentProduct.processor}`       : null,
-].filter(Boolean);
-
+// ── Specs ─────────────────────────────────────────────────────────────────────
 const detailedSpecs = {
   general: [
     { label: "Brand",            value: currentProduct.brand },
@@ -173,7 +147,7 @@ const detailedSpecs = {
     { label: "Release Year",     value: currentProduct.releaseYear || "2024" },
     { label: "Operating System", value: currentProduct.os || "Android" },
     { label: "SIM Type",         value: currentProduct.simType || "Dual SIM (Nano-SIM)" },
-    { label: "Color Options",    value: currentProduct.color },
+    { label: "Colour Options",   value: currentProduct.color },
     { label: "Condition",        value: currentProduct.condition || "New" },
     { label: "Warranty",         value: "2 Years Manufacturer Warranty" },
   ],
@@ -224,134 +198,102 @@ const detailedSpecs = {
 const brandSlug   = currentProduct.brand.toLowerCase().replace(/\s+/g, "-");
 const rating      = currentProduct.reviews?.averageRating ?? 4.5;
 const reviewCount = currentProduct.reviews?.reviewCount ?? 0;
-const quickSpecs  = [
-  currentProduct.phonedisplay,
-  currentProduct.processor?.split(' ').slice(-2).join(' '),
-  currentProduct.battery?.split(',')[0],
-].filter(Boolean).slice(0, 3);
 
-// Build gallery images array for the enhanced viewer
 const galleryImages = [
   currentProduct.source,
   currentProduct.source2,
   currentProduct.source3,
 ].filter(Boolean);
 
+const dailyNum = parseInt(currentProduct.daily.replace(/\D/g, ''));
+const weeklyNum = dailyNum * 7;
+
 function renderStars(r: number) {
   const full = Math.floor(r);
   return '★'.repeat(full) + '☆'.repeat(5 - full);
 }
+
+const keyHighlights = [
+  currentProduct.ram       ? { icon: '⚡', label: 'Performance', value: `${currentProduct.ram} RAM` }         : null,
+  currentProduct.storage   ? { icon: '💾', label: 'Storage',     value: currentProduct.storage }               : null,
+  currentProduct.camera    ? { icon: '📷', label: 'Camera',      value: currentProduct.camera }                : null,
+  currentProduct.battery   ? { icon: '🔋', label: 'Battery',     value: currentProduct.battery }               : null,
+  currentProduct.display   ? { icon: '🖥', label: 'Display',     value: currentProduct.display }               : null,
+  currentProduct.processor ? { icon: '🔧', label: 'Processor',   value: currentProduct.processor }             : null,
+].filter(Boolean);
 ---
 
 <ProductLayout product={currentProduct} additionalSchemas={[faqSchema]}>
   <Gift />
   <Nav />
 
-  <main class="product-page">
+  <main class="pdp">
 
     <!-- BREADCRUMB -->
-    <nav class="breadcrumb-bar" aria-label="Breadcrumb">
-      <ol class="breadcrumb-list">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
         <li><a href="/">Home</a></li>
-        <li class="sep">›</li>
+        <li aria-hidden="true">›</li>
         <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones</a></li>
-        <li class="sep">›</li>
+        <li aria-hidden="true">›</li>
         <li><a href={`/phones/${brandSlug}`}>{currentProduct.brand}</a></li>
-        <li class="sep">›</li>
-        <li> {currentProduct.name}</li>
+        <li aria-hidden="true">›</li>
+        <li aria-current="page">{currentProduct.brand} {currentProduct.name}</li>
       </ol>
     </nav>
 
-    <!-- SEO INTRO -->
-    <div class="seo-intro">
-      <p>
-        Looking for the <strong> {currentProduct.name} price in Kenya on lipa mdogo mdogo</strong>?
-        You have come to the right place. The <a href={`/phones/${brandSlug}`}> {currentProduct.name}</a> is now available in Kenya through
-        <strong>MdogomdogoDeals</strong> — Nairobi's most trusted phone lipa mdogo mdogo and lipa pole pole service.
-        Own it today with <strong>zero upfront cost</strong>: a small deposit is collected only after the phone reaches your door and you have inspected it, then spread the remaining balance in affordable daily, weekly, or monthly payments.
-        No credit check, no guarantor, no money needed before delivery.
-        <strong>Free same-day delivery</strong> to <strong>Nairobi, Kiambu, Machakos, and Kajiado</strong> — delivered today, you pay after.
-        {currentProduct.ram && ` Featuring ${currentProduct.ram} RAM`}
-        {currentProduct.storage && `, ${currentProduct.storage} of built-in storage`}
-        {currentProduct.battery && `, and a powerful ${currentProduct.battery} battery`}
-        {` — the ${currentProduct.name} is one of the sharpest lipa mdogo mdogo smartphone deals available in Nairobi today.`}
-        &nbsp;<a href="#price-kenya">View lipa mdogo mdogo pricing &amp; instalments &darr;</a>
-      </p>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════
          HERO
-         ═══════════════════════════════════════════════════════ -->
-    <section class="hero-section">
+    ════════════════════════════════════ -->
+    <div class="hero">
 
-      <!-- ── ENHANCED GALLERY COLUMN ── -->
-      <div class="gallery-col">
-
-        <!-- Main image stage -->
-        <div class="main-stage" id="main-stage">
+      <!-- Gallery -->
+      <div class="gallery" id="gallery">
+        <div class="gallery__stage" id="gallery-stage">
           {currentProduct.status && (
-            <span class={`pdp-badge pdp-badge-${
-              currentProduct.status?.toLowerCase() === 'new' ? 'new' :
-              currentProduct.status?.toLowerCase() === 'hot' ? 'hot' : 'sale'
-            }`}>{currentProduct.status}</span>
+            <span class={`badge badge--${currentProduct.status.toLowerCase()}`}>{currentProduct.status}</span>
           )}
 
-          <!-- Zoom lens indicator -->
-          <div class="zoom-hint" id="zoom-hint">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-            Hover to zoom
-          </div>
-
-          <!-- Main image with zoom container -->
-          <div class="zoom-container" id="zoom-container">
+          <div class="gallery__zoom-wrap" id="zoom-wrap">
             <img
-              id="main-product-img"
+              id="main-img"
               src={currentProduct.source}
-              alt={`${currentProduct.name} lipa mdogo mdogo Nairobi Kenya — buy on instalments`}
-              class="main-product-img"
+              alt={`${currentProduct.brand} ${currentProduct.name} — buy on instalments in Kenya`}
+              class="gallery__main-img"
               loading="eager"
               width="560" height="560"
             />
-            <!-- Zoomed lens overlay -->
-            <div class="zoom-lens" id="zoom-lens"></div>
+            <div class="gallery__lens" id="zoom-lens" aria-hidden="true"></div>
           </div>
 
-          <!-- Zoom result window -->
-          <div class="zoom-result" id="zoom-result"></div>
+          <div class="gallery__zoom-result" id="zoom-result" aria-hidden="true"></div>
 
-          <!-- Fullscreen button -->
-          <button class="btn-fullscreen" id="btn-fullscreen" aria-label="View fullscreen" type="button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          <button class="gallery__fullscreen" id="btn-fullscreen" aria-label="View fullscreen" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
           </button>
 
-          <!-- Prev / Next arrows (shown when >1 image) -->
           {galleryImages.length > 1 && (
             <>
-              <button class="gallery-arrow gallery-arrow-prev" id="arrow-prev" aria-label="Previous image" type="button">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              <button class="gallery__arrow gallery__arrow--prev" id="arrow-prev" aria-label="Previous image" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
               </button>
-              <button class="gallery-arrow gallery-arrow-next" id="arrow-next" aria-label="Next image" type="button">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              <button class="gallery__arrow gallery__arrow--next" id="arrow-next" aria-label="Next image" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
+              <div class="gallery__dots" id="dot-row">
+                {galleryImages.map((_, i) => (
+                  <button class={`gallery__dot ${i === 0 ? 'is-active' : ''}`} data-index={i} aria-label={`Image ${i + 1}`} type="button"></button>
+                ))}
+              </div>
             </>
-          )}
-
-          <!-- Dot indicators -->
-          {galleryImages.length > 1 && (
-            <div class="dot-row" id="dot-row">
-              {galleryImages.map((_, i) => (
-                <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Go to image ${i + 1}`} type="button"></button>
-              ))}
-            </div>
           )}
         </div>
 
-        <!-- Thumbnail strip -->
         {galleryImages.length > 1 && (
-          <div class="thumb-strip" id="thumb-strip">
+          <div class="gallery__thumbs" id="thumb-strip">
             {galleryImages.map((src, i) => (
               <button
-                class={`thumb-item ${i === 0 ? 'active' : ''}`}
+                class={`gallery__thumb ${i === 0 ? 'is-active' : ''}`}
                 data-index={i}
                 data-src={src}
                 aria-label={`View image ${i + 1}`}
@@ -359,1206 +301,1212 @@ function renderStars(r: number) {
               >
                 <img
                   src={src}
-                  alt={` ${currentProduct.name} view ${i + 1}`}
-                  width="80" height="80"
+                  alt={`${currentProduct.brand} ${currentProduct.name} view ${i + 1}`}
+                  width="72" height="72"
                   loading={i === 0 ? 'eager' : 'lazy'}
                 />
               </button>
             ))}
           </div>
         )}
-
-        <div class="quick-specs">
-          {quickSpecs.map(s => <span class="spec-pill">{s}</span>)}
-        </div>
       </div>
 
-      <!-- Info column (unchanged) -->
-      <div class="info-col">
-
-        <div class="info-brand-row">
-          <span class="brand-tag">{currentProduct.brand}</span>
-          <span class="stock-tag">In Stock</span>
+      <!-- Info -->
+      <div class="info">
+        <div class="info__meta">
+          <span class="info__brand">{currentProduct.brand}</span>
+          <span class="info__stock">In Stock</span>
         </div>
 
-        <h1 class="product-title">
-           {currentProduct.fullname ?? currentProduct.name} &mdash; Lipa Mdogo Mdogo Nairobi
+        <h1 class="info__title">
+          {currentProduct.brand} {currentProduct.fullname ?? currentProduct.name}
         </h1>
 
         {reviewCount > 0 && (
-          <div class="rating-row">
-            <span class="stars">{renderStars(rating)}</span>
-            <span class="rating-val">{rating}</span>
-            <span class="rating-sep">·</span>
-            <a href="#tab-faq" class="rating-link">{reviewCount} verified reviews</a>
+          <div class="info__rating">
+            <span class="info__stars" aria-label={`Rated ${rating} out of 5`}>{renderStars(rating)}</span>
+            <span class="info__rating-val">{rating}</span>
+            <span class="info__rating-count">({reviewCount} reviews)</span>
           </div>
         )}
 
-        <!-- Delivery trust strip -->
-        <div class="trust-strip">
-          <span>Free same-day delivery — Nairobi &amp; surroundings</span>
-          <span>Lipa mdogo mdogo · Lipa pole pole</span>
-          <span>Pay only after delivery — zero upfront</span>
+        <div class="info__delivery-strip">
+          <span>Free same-day delivery — Nairobi &amp; surrounds</span>
+          <span>Pay only after delivery</span>
+          <span>No credit check</span>
         </div>
 
         <!-- Pricing -->
-        <div class="pricing-card">
-          <div class="pricing-row">
-            <div class="price-block">
-              <span class="price-label">Deposit — paid on delivery</span>
-              <span class="price-big">{currentProduct.deposit}</span>
+        <div class="pricing">
+          <div class="pricing__grid">
+            <div class="pricing__item">
+              <span class="pricing__label">Deposit — paid on delivery</span>
+              <span class="pricing__amount">{currentProduct.deposit}</span>
             </div>
-            <div class="divider-v"></div>
-            <div class="price-block">
-              <span class="price-label">Then from</span>
-              <span class="price-big accent">{currentProduct.daily}<span class="price-per">/day</span></span>
+            <div class="pricing__divider" aria-hidden="true"></div>
+            <div class="pricing__item">
+              <span class="pricing__label">Then from</span>
+              <span class="pricing__amount pricing__amount--accent">{currentProduct.daily}<small>/day</small></span>
             </div>
           </div>
-          <div class="installment-note">
-            Or from <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong> &mdash; choose daily, weekly, or monthly instalments — lipa mdogo mdogo or lipa pole pole, your choice
-          </div>
-          <ul class="pricing-bullets">
+          <p class="pricing__note">
+            Or <strong>KES {weeklyNum}/week</strong> — choose daily, weekly, or monthly payments
+          </p>
+          <ul class="pricing__perks">
             <li>Zero payment before delivery — free delivery today</li>
-            <li>Inspect the phone first — deposit paid only after you approve</li>
-            <li>No interest &mdash; no hidden fees &mdash; no credit check</li>
+            <li>Inspect the phone first — deposit only after you approve</li>
+            <li>No interest · No hidden fees · No credit check</li>
           </ul>
         </div>
 
-        <!-- ── ORDER METHODS ── -->
-        <div class="order-block">
-          <p class="order-heading">How would you like to order?</p>
-
+        <!-- Order block -->
+        <div class="order">
+          <p class="order__heading">How would you like to order?</p>
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the  ${currentProduct.name} on lipa mdogo mdogo`}
-            class="btn-order-wa"
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on instalments`}
+            class="btn btn--wa"
             target="_blank" rel="noopener"
           >
             Order via WhatsApp — Free Delivery Today
           </a>
-
-          <a href="tel:+254100028823" class="btn-order-call">
+          <a href="tel:+254100028823" class="btn btn--call">
             Call Us — 0100028823
           </a>
-
-          <button class="btn-order-form" id="toggle-form-btn" type="button">
-            Fill in an Order Form
+          <button class="btn btn--form" id="toggle-form-btn" type="button">
+            Fill In an Order Form
           </button>
         </div>
 
-        <!-- Inline order form (hidden by default) -->
-        <div class="order-form-wrap" id="order-form-wrap" hidden>
-          <p class="form-title">Place Your Lipa Mdogo Mdogo Order</p>
-          <div class="form-fields">
-            <input class="form-input" type="text"  id="f-name"  placeholder="Your full name" />
-            <input class="form-input" type="tel"   id="f-phone" placeholder="Phone number" />
-            <input class="form-input" type="text"  id="f-area"  placeholder="Delivery area (e.g. Nairobi, Kiambu, Machakos, Kajiado)" />
-            <div class="form-field-group">
-              <label class="form-label" for="f-date">Preferred delivery date</label>
-              <input class="form-input" type="date" id="f-date" />
+        <!-- Order form (hidden by default) -->
+        <div class="order-form" id="order-form-wrap" hidden>
+          <p class="order-form__title">Place Your Order</p>
+          <div class="order-form__fields">
+            <input class="order-form__input" type="text"  id="f-name"  placeholder="Your full name" autocomplete="name" />
+            <input class="order-form__input" type="tel"   id="f-phone" placeholder="Phone number" autocomplete="tel" />
+            <input class="order-form__input" type="text"  id="f-area"  placeholder="Delivery area (e.g. Nairobi, Kiambu)" />
+            <div class="order-form__row">
+              <div class="order-form__field">
+                <label class="order-form__label" for="f-date">Delivery date</label>
+                <input class="order-form__input" type="date" id="f-date" />
+              </div>
+              <div class="order-form__field">
+                <label class="order-form__label" for="f-time">Preferred time</label>
+                <select class="order-form__input" id="f-time">
+                  <option value="">Select time slot</option>
+                  <option value="Morning (8am – 12pm)">Morning (8am–12pm)</option>
+                  <option value="Afternoon (12pm – 4pm)">Afternoon (12pm–4pm)</option>
+                  <option value="Evening (4pm – 7pm)">Evening (4pm–7pm)</option>
+                  <option value="Anytime today">Anytime — ASAP</option>
+                </select>
+              </div>
             </div>
-            <div class="form-field-group">
-              <label class="form-label" for="f-time">Preferred delivery time</label>
-              <select class="form-input form-select" id="f-time">
-                <option value="">Select a time slot</option>
-                <option value="Morning (8am – 12pm)">Morning (8am – 12pm)</option>
-                <option value="Afternoon (12pm – 4pm)">Afternoon (12pm – 4pm)</option>
-                <option value="Evening (4pm – 7pm)">Evening (4pm – 7pm)</option>
-                <option value="Anytime today">Anytime today — as soon as possible</option>
-              </select>
-            </div>
-            <textarea class="form-input form-textarea" id="f-notes" rows="2" placeholder="Any notes — optional"></textarea>
+            <textarea class="order-form__input order-form__textarea" id="f-notes" rows="2" placeholder="Any notes (optional)"></textarea>
           </div>
-          <button class="btn-submit" id="submit-order-btn" type="button">Confirm Order via WhatsApp</button>
-          <p class="form-note">Our team will call you within minutes to confirm your free delivery slot.</p>
+          <button class="btn btn--submit" id="submit-order-btn" type="button">Confirm Order via WhatsApp</button>
+          <p class="order-form__note">We will call you within minutes to confirm your free delivery slot.</p>
         </div>
 
         <!-- Trust badges -->
-        <div class="trust-badges">
-          <div class="trust-badge">
-            <span class="tbadge-icon">&#10003;</span>
-            <span>100% Genuine<br/>Products</span>
+        <div class="trust">
+          <div class="trust__item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>100% Genuine</span>
           </div>
-          <div class="trust-badge">
-            <span class="tbadge-icon">&#9685;</span>
-            <span>2-Year<br/>Warranty</span>
+          <div class="trust__item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>2-Year Warranty</span>
           </div>
-          <div class="trust-badge">
-            <span class="tbadge-icon">&#9654;</span>
-            <span>Free Same-Day<br/>Delivery</span>
+          <div class="trust__item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span>Free Delivery</span>
           </div>
-          <div class="trust-badge">
-            <span class="tbadge-icon">&#9432;</span>
-            <span>Lipa Mdogo<br/>Mdogo</span>
+          <div class="trust__item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Pay Gradually</span>
           </div>
         </div>
+      </div>
+    </div>
 
-        <p class="seller-line"></p>
+    <!-- ═══════════════════════════════════
+         KEY HIGHLIGHTS (always visible)
+    ════════════════════════════════════ -->
+    {keyHighlights.length > 0 && (
+      <section class="highlights" aria-label="Key specifications">
+        <h2 class="highlights__title">Key Specifications</h2>
+        <div class="highlights__grid">
+          {keyHighlights.map(h => (
+            <div class="highlights__item">
+              <span class="highlights__icon" aria-hidden="true">{h.icon}</span>
+              <span class="highlights__label">{h.label}</span>
+              <span class="highlights__value">{h.value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
 
+    <!-- ═══════════════════════════════════
+         ABOUT (SEO content, always visible)
+    ════════════════════════════════════ -->
+    <section class="content-section" id="about">
+      <h2>{currentProduct.brand} {currentProduct.fullname ?? currentProduct.name} — Overview</h2>
+
+      <p>
+        The <strong>{currentProduct.brand} {currentProduct.name}</strong> is one of the most popular smartphones in Kenya right now,
+        and for good reason. Whether you are a student, professional, content creator, or simply someone ready to upgrade,
+        this phone delivers genuine value without requiring a large upfront payment.
+        Through <strong>MdogomdogoDeals</strong>, you can own it today — delivered free to your door in Nairobi, Kiambu, Machakos, or Kajiado,
+        with the deposit collected only after you inspect and approve the phone.
+      </p>
+
+      {currentProduct.ram && (
+        <p>
+          <strong>Performance:</strong> Powered by
+          {currentProduct.processor && ` a ${currentProduct.processor} chipset and`} {currentProduct.ram} RAM,
+          the {currentProduct.name} handles M-Pesa, video calls, YouTube, and heavy multitasking without lag.
+        </p>
+      )}
+
+      {currentProduct.storage && (
+        <p>
+          <strong>Storage:</strong> With {currentProduct.storage} of built-in storage, you have plenty of room for apps,
+          photos, WhatsApp media, and documents — without constantly clearing space.
+          {currentProduct.expandableStorage && ` MicroSD expansion is supported for even more room.`}
+        </p>
+      )}
+
+      {currentProduct.camera && (
+        <p>
+          <strong>Camera:</strong> The {currentProduct.camera} system captures sharp photos and clean video
+          in all conditions — portrait shots, low-light scenes, selfies, and 4K recording alike.
+        </p>
+      )}
+
+      {currentProduct.battery && (
+        <p>
+          <strong>Battery:</strong> The {currentProduct.battery} battery is built for full Kenyan days — early mornings to late evenings —
+          without anxiety about running out.
+          {currentProduct.charging && ` ${currentProduct.charging} gets you back up to speed quickly when you do plug in.`}
+        </p>
+      )}
+
+      {currentProduct.display && (
+        <p>
+          <strong>Display:</strong> The {currentProduct.display} screen delivers vivid, accurate colours
+          for streaming, gaming, video calls, and everyday browsing.
+        </p>
+      )}
+
+      <p>
+        Every {currentProduct.brand} {currentProduct.name} sold by MdogomdogoDeals is brand new and sealed, sourced through
+        authorised {currentProduct.brand} distributors in Kenya, fully compatible with Safaricom, Airtel, and Telkom networks out of the box,
+        and covered by a <strong>2-year manufacturer warranty</strong>.
+      </p>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         PRICE IN KENYA (always visible)
+    ════════════════════════════════════ -->
+    <section class="content-section" id="price-kenya">
+      <h2>{currentProduct.brand} {currentProduct.name} Price in Kenya</h2>
+
+      <div class="price-table">
+        <div class="price-table__row price-table__row--featured">
+          <span class="price-table__label">Deposit — paid on delivery</span>
+          <span class="price-table__value">{currentProduct.deposit}</span>
+        </div>
+        <div class="price-table__row">
+          <span class="price-table__label">Daily instalment</span>
+          <span class="price-table__value price-table__value--accent">{currentProduct.daily}<small>/day</small></span>
+        </div>
+        <div class="price-table__row">
+          <span class="price-table__label">Weekly instalment</span>
+          <span class="price-table__value price-table__value--accent">KES {weeklyNum}<small>/week</small></span>
+        </div>
+        <div class="price-table__row">
+          <span class="price-table__label">Delivery fee</span>
+          <span class="price-table__value price-table__value--free">FREE — Same Day</span>
+        </div>
+      </div>
+
+      <p>
+        The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> starts at a deposit of <strong>{currentProduct.deposit}</strong> — 
+        collected only after free delivery and your inspection. You pay nothing to place an order.
+        Once satisfied, pay the deposit and continue with <strong>{currentProduct.daily} per day</strong> or <strong>KES {weeklyNum} per week</strong> until the balance is cleared.
+        No interest. No hidden fees. No credit check.
+      </p>
+
+      <div class="why-grid">
+        <div class="why-grid__item">
+          <strong>Free same-day delivery</strong>
+          <p>We bring the phone to you at no cost, the same day you order, across Nairobi, Kiambu, Machakos, and Kajiado.</p>
+        </div>
+        <div class="why-grid__item">
+          <strong>Deposit only after delivery</strong>
+          <p>Inspect the phone at your own pace. Pay the {currentProduct.deposit} deposit only when you are happy — not before.</p>
+        </div>
+        <div class="why-grid__item">
+          <strong>Zero interest instalments</strong>
+          <p>What you see is what you pay. No processing fees, no interest, no surprise charges on any instalment.</p>
+        </div>
+        <div class="why-grid__item">
+          <strong>Flexible payment schedule</strong>
+          <p>Pay daily, weekly, or monthly — whichever schedule suits your income and lifestyle best.</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on instalments`}
+          class="btn btn--wa"
+          target="_blank" rel="noopener"
+        >Order via WhatsApp — Free Delivery Today</a>
+        <a href="tel:+254100028823" class="btn btn--call">Call 0100028823</a>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════
-         TAB NAV
-         ═══════════════════════════════════════════════════════ -->
-    <div class="tab-nav" id="tab-nav" role="tablist">
-      <button class="tab-btn active" data-tab="overview" role="tab">Overview</button>
-      <button class="tab-btn"        data-tab="price"    role="tab">Price in Kenya</button>
-      <button class="tab-btn"        data-tab="specs"    role="tab">Specifications</button>
-      <button class="tab-btn"        data-tab="delivery" role="tab">Delivery &amp; Payment</button>
-      <button class="tab-btn"        data-tab="faq"      role="tab">FAQ</button>
-    </div>
+    <!-- ═══════════════════════════════════
+         HOW IT WORKS (always visible)
+    ════════════════════════════════════ -->
+    <section class="content-section" id="how-it-works">
+      <h2>How the Instalment Plan Works</h2>
+      <ol class="steps">
+        <li class="steps__item">
+          <span class="steps__num" aria-hidden="true">1</span>
+          <div>
+            <strong>Place your order — no payment required</strong>
+            <p>Call, WhatsApp, or fill in the form on this page. No deposit, no booking fee, nothing owed to place your order. Delivery is always free.</p>
+          </div>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num" aria-hidden="true">2</span>
+          <div>
+            <strong>Free same-day delivery to your door</strong>
+            <p>We dispatch the {currentProduct.brand} {currentProduct.name} to your location in Nairobi, Kiambu, Machakos, or Kajiado — same day, at zero delivery cost.</p>
+          </div>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num" aria-hidden="true">3</span>
+          <div>
+            <strong>Inspect the phone thoroughly</strong>
+            <p>Power it on, test the camera, check the display. Take as much time as you need. You pay nothing until you are fully satisfied.</p>
+          </div>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num" aria-hidden="true">4</span>
+          <div>
+            <strong>Pay your deposit — after you approve</strong>
+            <p>Once happy, pay <strong>KES {currentProduct.deposit}</strong> via M-Pesa or cash. The phone is officially yours.</p>
+          </div>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num" aria-hidden="true">5</span>
+          <div>
+            <strong>Pay at your own pace</strong>
+            <p>After a grace period, pay <strong>KES {currentProduct.daily}/day</strong> or <strong>KES {weeklyNum}/week</strong> until the balance is cleared. Daily, weekly, or monthly — your choice.</p>
+          </div>
+        </li>
+      </ol>
 
-    <!-- ═══════════════════════════════════════════════════════
-         TAB: OVERVIEW
-         ═══════════════════════════════════════════════════════ -->
-    <section class="tab-panel active" id="tab-overview" role="tabpanel">
-
-      {keyFeatures.length > 0 && (
-        <div class="section-card" id="section-features">
-          <h2 class="section-title">Key Features</h2>
-          <div class="features-grid">
-            {keyFeatures.map(f => (
-              <div class="feature-item">
-                <span class="feat-check">&#10003;</span>
-                <span>{f}</span>
-              </div>
-            ))}
+      <div class="coverage">
+        <h3>Free Delivery Coverage</h3>
+        <div class="coverage__grid">
+          <div class="coverage__county">
+            <strong>Nairobi</strong>
+            <p>CBD, Westlands, Kilimani, Kasarani, Embakasi, Eastleigh, South B &amp; C, Langata, Parklands, and all estates.</p>
+          </div>
+          <div class="coverage__county">
+            <strong>Kiambu</strong>
+            <p>Thika, Ruiru, Juja, Kiambu Town, Kikuyu, Limuru, Karuri, Githurai, Banana, and surrounds.</p>
+          </div>
+          <div class="coverage__county">
+            <strong>Machakos</strong>
+            <p>Machakos Town, Athi River, Mavoko, Kangundo, Kathiani, Matuu, and nearby areas.</p>
+          </div>
+          <div class="coverage__county">
+            <strong>Kajiado</strong>
+            <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, Namanga corridor, and surrounds.</p>
           </div>
         </div>
-      )}
-
-      <!-- ABOUT — expanded -->
-      <div class="section-card" id="section-about">
-        <h2 class="section-title">About the  {currentProduct.name} — Lipa Mdogo Mdogo Kenya</h2>
-        <div class="prose">
-          <p>
-            The <strong> {currentProduct.name}</strong> has earned its place as one of the most sought-after smartphones in Kenya —
-            and the reasons are clear the moment you pick it up. Whether you are a university student in Nairobi juggling online lectures and research,
-            a small business owner managing operations from your phone,
-            a professional who needs reliable communication tools every single day,
-            or simply someone ready to upgrade without parting with a large sum at once —
-            the {currentProduct.name} was built for you.
-            Through <strong>MdogomdogoDeals</strong>, Kenya's leading <strong>lipa mdogo mdogo</strong> and <strong>lipa pole pole</strong> phone service,
-            you can walk away with this phone today by paying only a small deposit — and only after it has been delivered to your location in Nairobi, Kiambu, Machakos, or Kajiado and you have inspected it.
-            Delivery is always <strong>free</strong> and same-day.
-          </p>
-
-          {currentProduct.ram && (
-            <p>
-              <strong>Speed and power built for real Kenyan use:</strong> Driven by
-              {currentProduct.processor && ` a ${currentProduct.processor} chipset and`} {currentProduct.ram} of RAM,
-              the  {currentProduct.name} handles everything you throw at it without breaking stride.
-              M-Pesa transactions, video calls on Teams and Zoom, streaming on YouTube, and heavy multitasking across multiple apps
-              all run with the kind of smooth, responsive performance that makes a genuine difference in daily life.
-              No lag, no hesitation — just a phone that keeps up with you.
-            </p>
-          )}
-
-          {currentProduct.storage && (
-            <p>
-              <strong>Storage that gives you breathing room:</strong> With {currentProduct.storage} of internal storage built in,
-              you can stop worrying about running out of space.
-              Store your M-Pesa records, downloaded playlists, work documents, WhatsApp media, photos, and all your essential apps — 
-              without ever having to shuffle files or delete things to make room.
-              {currentProduct.expandableStorage && ` And if you need even more space down the line, microSD expansion gives you extra room without any hassle.`}
-            </p>
-          )}
-
-          {currentProduct.camera && (
-            <p>
-              <strong>Photography that goes beyond the basics:</strong> The {currentProduct.camera} camera system on the {currentProduct.name}
-              was designed to capture Kenya in full detail — vibrant Nairobi streetscapes, family gatherings, Rift Valley landscapes,
-              memorable celebrations, and the everyday moments worth keeping.
-              Portrait shots come out sharp and natural, low-light results hold colour without excessive noise,
-              and videos look clean and polished whether you are posting to TikTok, sharing on WhatsApp, or building a content library.
-              The front camera delivers the same quality for selfies and video calls.
-            </p>
-          )}
-
-          {currentProduct.battery && (
-            <p>
-              <strong>A battery engineered for Kenyan days:</strong> Kenyan life is long and busy —
-              from early morning commutes on Nairobi's roads to late-night scrolling after a full day.
-              The {currentProduct.battery} battery in the {currentProduct.name} is built to match that rhythm,
-              giving you a full day of screen-on time without rationing your usage or hunting for a power socket in the afternoon.
-              {currentProduct.charging && ` When you do need to recharge, ${currentProduct.charging} gets you topped up fast so you are never stuck waiting.`}
-            </p>
-          )}
-
-          {currentProduct.display && (
-            <p>
-              <strong>A display that makes everything look better:</strong> The {currentProduct.display} screen delivers vivid, accurate colours,
-              crisp text at every size, and smooth motion that makes content genuinely enjoyable to watch.
-              Whether you are streaming Series on Netflix during your commute, following a tutorial on YouTube,
-              video-calling family upcountry, or gaming on a quiet evening —
-              you get a viewing experience that punches well above the phone's price point in Kenya.
-            </p>
-          )}
-
-          <p>
-            Every  {currentProduct.name} sold by MdogomdogoDeals works seamlessly with all major Kenyan networks —
-            <strong>Safaricom 4G LTE, Airtel Kenya, and Telkom Kenya</strong> — straight out of the box, with no configuration needed.
-            Each unit is sourced directly from authorised {currentProduct.brand} distributors in Kenya,
-            sealed in original packaging, and backed by a full <strong>2-year manufacturer warranty</strong>.
-            Available today on our <strong>lipa mdogo mdogo</strong> plan — free delivery to Nairobi and the greater metropolitan area.
-          </p>
-        </div>
+        <p class="coverage__note">Unsure if we reach your area? Call or WhatsApp 0100028823 and we will confirm immediately.</p>
       </div>
+    </section>
 
-      <!-- COMPARISON -->
-      <div class="section-card" id="section-comparison">
-        <h2 class="section-title"> {currentProduct.name} vs Similar Phones in Kenya — Lipa Mdogo Mdogo</h2>
-        <div class="prose">
-          <p>
-            When stacked against competing smartphones in the same lipa mdogo mdogo deposit range in Kenya,
-            the <strong> {currentProduct.name}</strong> consistently holds its own where it matters most.
-            Many alternatives at a similar price point ask you to compromise — a bigger screen at the expense of battery,
-            or faster processing at the cost of camera quality.
-            The {currentProduct.name} refuses that trade-off, delivering a well-rounded package
-            that makes it one of the best-value lipa pole pole buys for Kenyan consumers in {currentProduct.releaseYear || '2024'}.
-          </p>
-          {currentProduct.ram && currentProduct.battery && (
-            <p>
-              Where rival handsets in the same lipa mdogo mdogo price bracket often sacrifice in one area,
-              the  {currentProduct.name} holds the line across the board:
-              {currentProduct.ram} RAM keeps everyday performance smooth and responsive,
-              while the {currentProduct.battery} battery comfortably carries you through a full Kenyan day
-              without you having to watch the percentage bar nervously.
-            </p>
-          )}
-          {currentProduct.camera && (
-            <p>
-              Camera performance is another area where the  {currentProduct.name}'s {currentProduct.camera} setup consistently outperforms competitors at a comparable deposit.
-              For social content, WhatsApp photo sharing, casual videography, and crisp video calling,
-              it produces noticeably sharper, more detailed results than older or lower-spec handsets in the same bracket.
-            </p>
-          )}
-          <p>
-            Comparing the <strong> {currentProduct.name} price in Kenya</strong> across lipa mdogo mdogo options is simple —
-            and with MdogomdogoDeals, you are never locked into a large upfront commitment on any device.
-            A small deposit on delivery, then manageable daily or weekly instalments — lipa pole pole all the way.
-            <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse the full range of phones on lipa mdogo mdogo</a> and compare side by side.
-          </p>
+    <!-- ═══════════════════════════════════
+         FULL SPECIFICATIONS (always visible)
+    ════════════════════════════════════ -->
+    <section class="content-section" id="specifications">
+      <h2>{currentProduct.brand} {currentProduct.name} — Full Specifications</h2>
+
+      {[
+        { title: 'General',               rows: detailedSpecs.general },
+        { title: 'Display',               rows: detailedSpecs.display },
+        { title: 'Performance & Storage', rows: detailedSpecs.performance },
+        { title: 'Camera',                rows: detailedSpecs.camera },
+        { title: 'Battery & Charging',    rows: detailedSpecs.battery },
+        { title: 'Connectivity',          rows: detailedSpecs.connectivity },
+        { title: 'Physical',              rows: detailedSpecs.physical },
+      ].map(group => (
+        <div class="spec-group">
+          <h3 class="spec-group__title">{group.title}</h3>
+          <table class="spec-table">
+            <tbody>
+              {group.rows.filter(r => r.value).map(row => (
+                <tr>
+                  <th class="spec-table__key" scope="row">{row.label}</th>
+                  <td class="spec-table__val">{row.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
+      ))}
 
-      <!-- PROS & CONS -->
-      <div class="section-card" id="pros-cons">
-        <h2 class="section-title"> {currentProduct.name} — Pros &amp; Cons</h2>
-        <div class="pros-cons-grid">
-          <div class="pros-col">
-            <h3 class="pc-heading pc-pros">Pros</h3>
-            <ul class="pc-list">
-              {currentProduct.battery && <li>Exceptional battery life — {currentProduct.battery} powers a full day without anxiety</li>}
-              {currentProduct.ram && <li>Fast, fluid everyday performance with {currentProduct.ram} RAM</li>}
-              {currentProduct.storage && <li>Spacious {currentProduct.storage} storage — room for everything that matters</li>}
-              {currentProduct.camera && <li>Capable {currentProduct.camera} camera system for photos, video, and selfies</li>}
-              <li>Full compatibility with Safaricom, Airtel, and Telkom Kenya networks</li>
-              <li>Lipa mdogo mdogo — deposit collected only after you inspect and approve the phone</li>
-              <li>Free same-day delivery to Nairobi, Kiambu, Machakos &amp; Kajiado</li>
-              <li>Full 2-year manufacturer warranty included on every unit</li>
-            </ul>
-          </div>
-          <div class="cons-col">
-            <h3 class="pc-heading pc-cons">Cons</h3>
-            <ul class="pc-list">
-              {currentProduct.wirelessCharging === 'Not Available' && <li>Wireless charging not supported</li>}
-              {currentProduct.audioJack === 'No' && <li>No 3.5mm headphone jack included</li>}
-              <li>Free delivery currently available in 4 counties — Nairobi, Kiambu, Machakos, Kajiado</li>
-              <li>Full balance repaid gradually through lipa mdogo mdogo daily or weekly instalments</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- PEOPLE ALSO COMPARE -->
-      <div class="section-card" id="people-also-compare">
-        <h2 class="section-title">People Also Compare — Lipa Mdogo Mdogo Kenya</h2>
-        <p class="pac-intro">
-          Customers researching the <strong> {currentProduct.name}</strong> on lipa mdogo mdogo in Kenya commonly shortlist these alternatives too.
-          All are available through MdogomdogoDeals with free same-day delivery and deposit-after-delivery terms — the ultimate lipa pole pole experience.
+      <div class="spec-group">
+        <h3 class="spec-group__title">Kenya Network Compatibility</h3>
+        <table class="spec-table">
+          <tbody>
+            <tr><th class="spec-table__key" scope="row">Kenyan Networks</th><td class="spec-table__val">Safaricom, Airtel, Telkom Kenya</td></tr>
+            <tr><th class="spec-table__key" scope="row">Network Bands</th><td class="spec-table__val">2G, 3G, 4G LTE</td></tr>
+            <tr><th class="spec-table__key" scope="row">VoLTE Support</th><td class="spec-table__val">Yes</td></tr>
+            <tr><th class="spec-table__key" scope="row">Wi-Fi Calling</th><td class="spec-table__val">Yes</td></tr>
+          </tbody>
+        </table>
+        <p class="spec-note">
+          The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G LTE, Airtel Kenya, and Telkom Kenya — right out of the box.
         </p>
-        <div class="pac-grid">
-          {relatedProducts.slice(0, 4).map(p => (
-            <a href={`/${p.slug}`} class="pac-card">
-              <img src={p.source} alt={`${p.name} lipa mdogo mdogo Kenya`} width="80" height="80" loading="lazy" />
-              <div class="pac-info">
-                <span class="pac-brand">{p.brand}</span>
-                <span class="pac-name">{p.fullname ?? p.name}</span>
-                <span class="pac-deposit">From {p.deposit} deposit</span>
+      </div>
+
+      <div class="spec-group">
+        <h3 class="spec-group__title">What's in the Box</h3>
+        <ul class="inbox-list">
+          <li>1 × {currentProduct.brand} {currentProduct.name} handset (new, sealed)</li>
+          <li>1 × USB charging cable</li>
+          <li>1 × Charging adapter</li>
+          <li>1 × SIM ejector pin</li>
+          <li>1 × User manual and warranty card</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         FAQ (always visible, schema-backed)
+    ════════════════════════════════════ -->
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <dl class="faq">
+        {faqs.map((faq, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary class="faq__question">{faq.question}</summary>
+            <dd class="faq__answer"><p>{faq.answer}</p></dd>
+          </details>
+        ))}
+      </dl>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         RELATED PHONES
+    ════════════════════════════════════ -->
+    {relatedProducts.length > 0 && (
+      <section class="content-section" id="related">
+        <h2>You May Also Like</h2>
+        <p class="related__intro">
+          Other phones available on the same instalment plan — free delivery, deposit after inspection.
+        </p>
+        <div class="related__grid">
+          {relatedProducts.map(p => (
+            <a href={`/${p.slug}`} class="related__card">
+              <img src={p.source} alt={`${p.brand} ${p.name}`} width="90" height="90" loading="lazy" />
+              <div class="related__info">
+                <span class="related__brand">{p.brand}</span>
+                <span class="related__name">{p.fullname ?? p.name}</span>
+                <span class="related__deposit">From {p.deposit}</span>
               </div>
             </a>
           ))}
         </div>
-        <p class="pac-browse"><a href={`/phones/${brandSlug}`}>See all {currentProduct.brand} phones &rarr;</a> &nbsp;|&nbsp; <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse every phone on lipa mdogo mdogo &rarr;</a></p>
-      </div>
+        <p class="related__links">
+          <a href={`/phones/${brandSlug}`}>All {currentProduct.brand} phones →</a>
+          &nbsp;·&nbsp;
+          <a href="/phones/lipa-mdogo-mdogo-nairobi">Browse all phones on instalments →</a>
+        </p>
+      </section>
+    )}
 
-      <div class="section-card" id="section-ideal">
-        <h2 class="section-title">Who Is the {currentProduct.name} Best For?</h2>
-        <div class="use-cases-grid">
-          <div class="use-case"><strong>Students</strong><p>Online classes, research, academic tools, and study apps run without lag or interruption throughout the school day. Own yours today on lipa mdogo mdogo.</p></div>
-          <div class="use-case"><strong>Professionals</strong><p>Email, mobile banking, video conferencing, and productivity apps — fast and dependable from morning briefings to evening calls across Nairobi.</p></div>
-          <div class="use-case"><strong>Content Creators</strong><p>A capable camera, ample storage, and a powerful processor for shooting, editing, and posting content on the go. Lipa pole pole, own it today.</p></div>
-          <div class="use-case"><strong>Gamers</strong><p>Smooth, lag-free performance on Kenya's most popular mobile games — from casual play to competitive titles.</p></div>
-          <div class="use-case"><strong>Social Media Users</strong><p>Stay active on WhatsApp, Instagram, TikTok, Facebook, and X all day long without the battery giving out. Free delivery to Nairobi today.</p></div>
-          <div class="use-case"><strong>Everyday Use</strong><p>All-day battery, a vivid display, and dependable performance for life across Nairobi and Kenya's busiest counties — on lipa mdogo mdogo.</p></div>
-        </div>
-      </div>
-
-      <div class="section-card" id="section-inbox">
-        <h2 class="section-title">What's in the Box</h2>
-        <ul class="box-list">
-          <li>1 &times; {currentProduct.name} handset</li>
-          <li>1 &times; USB charging cable</li>
-          <li>1 &times; Charging adapter</li>
-          <li>1 &times; SIM ejector pin</li>
-          <li>1 &times; User manual and warranty card</li>
-          <li>Original sealed retail packaging</li>
-        </ul>
-      </div>
-
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         TAB: PRICE IN KENYA
-         ═══════════════════════════════════════════════════════ -->
-    <section class="tab-panel" id="tab-price" role="tabpanel">
-      <div class="section-card" id="price-kenya">
-
-        <h2 class="section-title"> {currentProduct.name} Price in Kenya — Lipa Mdogo Mdogo &amp; Lipa Pole Pole</h2>
-
-        <div class="price-kenya-block">
-          <div class="price-kenya-row">
-            <span class="pkr-label">Starting deposit — paid on delivery</span>
-            <span class="pkr-value">{currentProduct.deposit}</span>
-          </div>
-          <div class="price-kenya-row">
-            <span class="pkr-label">Then from (lipa mdogo mdogo daily)</span>
-            <span class="pkr-value accent">{currentProduct.daily}<span class="pkr-per">/day</span></span>
-          </div>
-          <div class="price-kenya-row">
-            <span class="pkr-label">Or from (lipa pole pole weekly)</span>
-            <span class="pkr-value accent">
-              {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}
-              <span class="pkr-per">/week</span>
-            </span>
-          </div>
-          <div class="price-kenya-row">
-            <span class="pkr-label">Delivery fee</span>
-            <span class="pkr-value" style="color:var(--green);font-size:20px;">FREE — Same Day</span>
-          </div>
-        </div>
-
-        <div class="prose" style="margin-top: 1.5rem;">
-          <p>
-            The <strong> {currentProduct.name} price in Kenya</strong> through MdogomdogoDeals starts at a deposit of just <strong>{currentProduct.deposit}</strong> —
-            and crucially, that deposit is only collected <em>after</em> the phone has been delivered free of charge to your location and you have had a chance to inspect it fully.
-            You pay absolutely nothing to place your order or arrange your free delivery.
-            Once you are satisfied with what you see, you hand over the deposit and the phone is yours.
-            After that, continue with <strong>{currentProduct.daily} per day (lipa mdogo mdogo)</strong>
-            or <strong>{parseInt(currentProduct.daily.replace(/\D/g, '')) * 7} per week (lipa pole pole)</strong> at the pace that suits you best.
-            Zero interest. No processing fees. No credit check at any stage.
-          </p>
-          <p>
-            The biggest concern most Kenyans in Nairobi have when searching for the <strong> {currentProduct.name} lipa mdogo mdogo price</strong>
-            is the prospect of paying a large lump sum before they can take the phone home. With MdogomdogoDeals, that problem simply does not exist.
-            The only financial commitment at the door is the <strong>{currentProduct.deposit} deposit</strong> —
-            and it only happens <em>after</em> you have seen, tested, and approved the phone yourself.
-            Free delivery to your door, and the most transparent lipa pole pole plan for a genuine {currentProduct.brand} in Kenya right now.
-          </p>
-          {currentProduct.storage && (
-            <p>
-              The  {currentProduct.name} {currentProduct.storage} variant is the configuration most popular with Kenyan buyers on our lipa mdogo mdogo plan.
-              If you are interested in a different storage option, mention it when you place your order and we will confirm what we have available.
-            </p>
-          )}
-        </div>
-
-        <div class="price-why-grid">
-          <div class="price-why-item">
-            <strong>Free delivery — same day in Nairobi</strong>
-            <p>We bring the phone to you at no cost. Free same-day delivery across Nairobi, Kiambu, Machakos, and Kajiado.</p>
-          </div>
-          <div class="price-why-item">
-            <strong>Deposit collected after delivery</strong>
-            <p>We bring the phone to you first. You inspect it at your own pace, then pay the {currentProduct.deposit} deposit — not before.</p>
-          </div>
-          <div class="price-why-item">
-            <strong>Lipa mdogo mdogo — completely interest-free</strong>
-            <p>What you see on this page is exactly what you pay — no additional charges, fees, or interest on your instalments.</p>
-          </div>
-          <div class="price-why-item">
-            <strong>Lipa pole pole — your payment rhythm</strong>
-            <p>Pay daily, weekly, or monthly — whichever aligns best with how and when your income arrives in Nairobi.</p>
-          </div>
-        </div>
-
-        <div class="price-cta-row">
+    <!-- ═══════════════════════════════════
+         BOTTOM CTA
+    ════════════════════════════════════ -->
+    <section class="bottom-cta" aria-label="Order now">
+      <div class="bottom-cta__inner">
+        <h2>Get the {currentProduct.brand} {currentProduct.name} Delivered Today</h2>
+        <p>Free same-day delivery — pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve.</p>
+        <div class="bottom-cta__btns">
+          <a href="tel:+254100028823" class="btn btn--primary">Call 0100028823</a>
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.name} on lipa mdogo mdogo`}
-            class="btn-order-wa"
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on instalments`}
+            class="btn btn--wa"
             target="_blank" rel="noopener"
-            style="max-width: 340px;"
-          >
-            Order via WhatsApp — Free Delivery Today
-          </a>
-          <a href="tel:+254100028823" class="btn-order-call" style="max-width: 340px;">
-            Call Us — 0100028823
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         TAB: SPECIFICATIONS
-         ═══════════════════════════════════════════════════════ -->
-    <section class="tab-panel" id="tab-specs" role="tabpanel">
-      <div class="section-card" id="specifications">
-        <h2 class="section-title"> {currentProduct.name} &mdash; Full Specifications</h2>
-
-        {[
-          { title: 'General',              rows: detailedSpecs.general },
-          { title: 'Display & Screen',     rows: detailedSpecs.display },
-          { title: 'Performance & Storage',rows: detailedSpecs.performance },
-          { title: 'Camera System',        rows: detailedSpecs.camera },
-          { title: 'Battery & Charging',   rows: detailedSpecs.battery },
-          { title: 'Connectivity',         rows: detailedSpecs.connectivity },
-          { title: 'Physical',             rows: detailedSpecs.physical },
-        ].map(group => (
-          <div class="spec-group">
-            <h3 class="spec-group-title">{group.title}</h3>
-            <table class="spec-table">
-              <tbody>
-                {group.rows.filter(r => r.value).map(row => (
-                  <tr>
-                    <td class="spec-key">{row.label}</td>
-                    <td class="spec-val">{row.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
-
-        <div class="spec-group">
-          <h3 class="spec-group-title">Kenya Network Compatibility</h3>
-          <table class="spec-table">
-            <tbody>
-              <tr><td class="spec-key">Kenyan Networks</td><td class="spec-val">Safaricom, Airtel, Telkom Kenya</td></tr>
-              <tr><td class="spec-key">International Roaming</td><td class="spec-val">Yes</td></tr>
-              <tr><td class="spec-key">VoLTE Support</td><td class="spec-val">Yes</td></tr>
-              <tr><td class="spec-key">Wi-Fi Calling</td><td class="spec-val">Yes</td></tr>
-            </tbody>
-          </table>
-          <div class="network-note">
-            The {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G LTE, Airtel Kenya 4G, and Telkom Kenya — right out of the box, with no setup required.
-          </div>
-        </div>
-
-        <div class="spec-group">
-          <h3 class="spec-group-title">Additional Features</h3>
-          <div class="add-features-grid">
-            <div class="add-feat"><strong>Security</strong><p>Fingerprint sensor, Face unlock, PIN / Pattern / Swipe</p></div>
-            <div class="add-feat"><strong>Audio</strong><p>Stereo speakers, Dolby Atmos support, Hi-Res audio</p></div>
-            <div class="add-feat"><strong>Gaming</strong><p>Dedicated game mode, GPU optimisation, thermal management</p></div>
-            <div class="add-feat"><strong>Display</strong><p>Night mode, Reading mode, Eye comfort shield, adaptive brightness</p></div>
-            <div class="add-feat"><strong>Sensors</strong><p>Accelerometer, Gyroscope, Proximity sensor, Digital compass</p></div>
-            <div class="add-feat"><strong>Smart Features</strong><p>AI-powered assistant, Smart gestures, Split-screen multitasking</p></div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         TAB: DELIVERY & PAYMENT
-         ═══════════════════════════════════════════════════════ -->
-    <section class="tab-panel" id="tab-delivery" role="tabpanel">
-      <div class="section-card" id="delivery">
-
-        <h2 class="section-title">How Lipa Mdogo Mdogo Works — Free Delivery in Nairobi</h2>
-        <ol class="payment-steps">
-          <li>
-            <div class="step-circle">1</div>
-            <div>
-              <strong>Place your order — no payment required, delivery is free</strong> — call us, WhatsApp us on 0100028823, or complete the order form on this page.
-              We do not ask for any payment, deposit, or booking fee to process your lipa mdogo mdogo order. Delivery is always free.
-            </div>
-          </li>
-          <li>
-            <div class="step-circle">2</div>
-            <div>
-              <strong>Free same-day delivery anywhere in greater Nairobi</strong> — we dispatch the  {currentProduct.name} directly to your location,
-              arriving the same day across Nairobi, Kiambu, Machakos, or Kajiado — at zero delivery cost.
-            </div>
-          </li>
-          <li>
-            <div class="step-circle">3</div>
-            <div>
-              <strong>Inspect the phone thoroughly</strong> — power it on, test the camera, open your apps, check the display and speakers.
-              Take as much time as you need. You pay nothing until you are fully satisfied. This is the lipa mdogo mdogo difference.
-            </div>
-          </li>
-          <li>
-            <div class="step-circle">4</div>
-            <div>
-              <strong>Pay your deposit after approval — not before</strong> — once you are happy with the phone, pay <strong>KES {currentProduct.deposit}</strong>
-              via M-Pesa or cash. The  {currentProduct.name} is officially yours on lipa mdogo mdogo.
-            </div>
-          </li>
-          <li>
-            <div class="step-circle">5</div>
-            <div>
-              <strong>Lipa pole pole at your own pace</strong> — after a free grace period, pay
-              <strong> KES {currentProduct.daily}/day</strong> or <strong>KES {parseInt(currentProduct.daily.replace(/\D/g, '')) * 7}/week</strong>
-              on a schedule that works for you, until the remaining balance is fully cleared.
-            </div>
-          </li>
-        </ol>
-
-        <div class="benefits-banner">
-          <span>Free same-day delivery — Nairobi &amp; surroundings</span>
-          <span>No payment before delivery</span>
-          <span>Inspect before you commit</span>
-          <span>Zero interest — lipa mdogo mdogo</span>
-          <span>No credit check or guarantor</span>
-          <span>Daily, weekly, or monthly — lipa pole pole</span>
-        </div>
-
-        <h2 class="section-title" style="margin-top:2.5rem;">Free Delivery Areas — Same Day</h2>
-        <div class="counties-grid">
-          <div class="county-card">
-            <strong>Nairobi</strong>
-            <p>CBD, Westlands, Kilimani, Kasarani, Embakasi, Eastleigh, South B &amp; C, Langata, Parklands, and all residential estates. Free delivery, same day.</p>
-          </div>
-          <div class="county-card">
-            <strong>Kiambu</strong>
-            <p>Thika, Ruiru, Juja, Kiambu Town, Kikuyu, Limuru, Karuri, Githurai, Banana, and all surrounding areas. Free same-day delivery.</p>
-          </div>
-          <div class="county-card">
-            <strong>Machakos</strong>
-            <p>Machakos Town, Athi River, Mavoko, Kangundo, Kathiani, Matuu, and nearby areas. Free delivery on your lipa mdogo mdogo order.</p>
-          </div>
-          <div class="county-card">
-            <strong>Kajiado</strong>
-            <p>Ngong, Kitengela, Ongata Rongai, Kiserian, Kajiado Town, Namanga road corridor, and surrounding areas. Free same-day delivery.</p>
-          </div>
-        </div>
-        <p class="delivery-note">Unsure whether we reach your exact location? Call or WhatsApp 0100028823 before placing your lipa mdogo mdogo order and we will confirm right away.</p>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         TAB: FAQ
-         ═══════════════════════════════════════════════════════ -->
-    <section class="tab-panel" id="tab-faq" role="tabpanel">
-      <div class="section-card">
-        <h2 class="section-title">Frequently Asked Questions — Lipa Mdogo Mdogo Kenya</h2>
-        <div class="faq-list">
-          {faqs.map((faq, i) => (
-            <details class="faq-item" open={i === 0}>
-              <summary>{faq.question}</summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
+          >WhatsApp — Order Now</a>
         </div>
       </div>
     </section>
 
-    <!-- BOTTOM CTA -->
-    <section class="bottom-cta">
-      <div class="cta-inner">
-        <h2>Get the  {currentProduct.name} Delivered Free Today</h2>
-        <p>Free same-day delivery to Nairobi &mdash; pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve — lipa mdogo mdogo</p>
-        <div class="cta-btns">
-          <a href="tel:+254100028823" class="btn-primary">Call 0100028823</a>
-          <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.name} on lipa mdogo mdogo`}
-            class="btn-whatsapp"
-            target="_blank" rel="noopener"
-          >WhatsApp — Free Delivery Today</a>
-        </div>
-      </div>
-    </section>
-
-
+    <!-- ═══════════════════════════════════
+         INTERNAL LINKS
+    ════════════════════════════════════ -->
     {productFeatureObjects.length > 0 && (
-  <section class="product-feature-links">
-    <h2>Explore Similar Phones on Lipa Mdogo Mdogo</h2>
-    <div class="feat-link-grid">
-
-      {productFeatureObjects.map(feat => (
-        <a href={featureHref(feat.key)} class="feat-link">
-          All {feat.label} Phones in Kenya — Lipa Mdogo Mdogo
-        </a>
-      ))}
-
-      {currentProduct.brand && productFeatureObjects.map(feat => (
-        <a href={featureHref(feat.key, currentProduct.brand)} class="feat-link brand-feat">
-          {currentProduct.brand} {feat.label} Phones — Lipa Pole Pole
-        </a>
-      ))}
-
-      {(() => {
-        const links = [];
-        for (let i = 0; i < productFeatureKeys.length; i++) {
-          for (let j = i + 1; j < productFeatureKeys.length; j++) {
-            const href = comboHref(productFeatureKeys[i], productFeatureKeys[j]);
-            if (!href) continue;
-            const fa = FEATURE_FILTERS.find(f => f.key === productFeatureKeys[i]);
-            const fb = FEATURE_FILTERS.find(f => f.key === productFeatureKeys[j]);
-            links.push(
-              <a href={href} class="feat-link combo-feat">
-                {fa.label} + {fb.label} Phones in Kenya
-              </a>
-            );
-          }
-        }
-        return links;
-      })()}
-
-      <a href="/phones/lipa-mdogo-mdogo-nairobi" class="feat-link">
-        All Lipa Mdogo Mdogo Phones — Free Delivery Nairobi
-      </a>
-      {currentProduct.brand && (
-        <a href={`/phones/${brandSlugall(currentProduct.brand)}`} class="feat-link">
-          All {currentProduct.brand} Phones on Lipa Mdogo Mdogo
-        </a>
-      )}
-
-    </div>
-  </section>
-)}
-
-
+      <nav class="related-links" aria-label="Related categories">
+        <h2 class="related-links__title">Explore Similar Phones</h2>
+        <ul class="related-links__list">
+          {productFeatureObjects.map(feat => (
+            <li><a href={featureHref(feat.key)}>{feat.label} Phones in Kenya</a></li>
+          ))}
+          {currentProduct.brand && productFeatureObjects.map(feat => (
+            <li><a href={featureHref(feat.key, currentProduct.brand)}>{currentProduct.brand} {feat.label} Phones</a></li>
+          ))}
+          {(() => {
+            const links = [];
+            for (let i = 0; i < productFeatureKeys.length; i++) {
+              for (let j = i + 1; j < productFeatureKeys.length; j++) {
+                const href = comboHref(productFeatureKeys[i], productFeatureKeys[j]);
+                if (!href) continue;
+                const fa = FEATURE_FILTERS.find(f => f.key === productFeatureKeys[i]);
+                const fb = FEATURE_FILTERS.find(f => f.key === productFeatureKeys[j]);
+                links.push(<li><a href={href}>{fa.label} + {fb.label} Phones in Kenya</a></li>);
+              }
+            }
+            return links;
+          })()}
+          <li><a href="/phones/lipa-mdogo-mdogo-nairobi">All Phones on Instalments — Nairobi</a></li>
+          {currentProduct.brand && (
+            <li><a href={`/phones/${brandSlugall(currentProduct.brand)}`}>All {currentProduct.brand} Phones</a></li>
+          )}
+        </ul>
+      </nav>
+    )}
 
   </main>
 
-  <!-- ═══════════════════════════════════════════════════════
-       LIGHTBOX MODAL
-       ═══════════════════════════════════════════════════════ -->
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close" type="button">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <button class="lightbox__close" id="lightbox-close" aria-label="Close" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Previous" type="button">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightbox-prev" aria-label="Previous" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <div class="lightbox-img-wrap">
-      <img id="lightbox-img" src="" alt="Product image fullscreen" />
+    <div class="lightbox__img-wrap">
+      <img id="lightbox-img" src="" alt="Product image" />
     </div>
-    <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Next" type="button">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightbox-next" aria-label="Next" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-    <div class="lightbox-counter" id="lightbox-counter">1 / 1</div>
-    <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+    <div class="lightbox__counter" id="lightbox-counter">1 / 1</div>
+    <div class="lightbox__thumbs" id="lightbox-thumbs"></div>
   </div>
 
 </ProductLayout>
 
 <script>
-// ─── Gallery Data ────────────────────────────────────────────────────────────
-// Collect all gallery image srcs from thumb items
-const thumbItems = Array.from(document.querySelectorAll<HTMLButtonElement>('.thumb-item'));
-const galleryImages: string[] = thumbItems.length
-  ? thumbItems.map(t => t.dataset.src ?? '')
-  : [document.querySelector<HTMLImageElement>('#main-product-img')?.src ?? ''];
+// ── Gallery ───────────────────────────────────────────────────────────────────
+const thumbBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.gallery__thumb'));
+const galleryImages: string[] = thumbBtns.length
+  ? thumbBtns.map(t => t.dataset.src ?? '')
+  : [(document.getElementById('main-img') as HTMLImageElement)?.src ?? ''];
 
 let currentIndex = 0;
 
-// ─── Main stage refs ─────────────────────────────────────────────────────────
-const mainImg        = document.getElementById('main-product-img') as HTMLImageElement | null;
-const zoomContainer  = document.getElementById('zoom-container') as HTMLElement | null;
-const zoomLens       = document.getElementById('zoom-lens') as HTMLElement | null;
-const zoomResult     = document.getElementById('zoom-result') as HTMLElement | null;
-const zoomHint       = document.getElementById('zoom-hint') as HTMLElement | null;
-const dotRow         = document.getElementById('dot-row');
-const arrowPrev      = document.getElementById('arrow-prev');
-const arrowNext      = document.getElementById('arrow-next');
-const btnFullscreen  = document.getElementById('btn-fullscreen');
+const mainImg   = document.getElementById('main-img') as HTMLImageElement | null;
+const zoomWrap  = document.getElementById('zoom-wrap') as HTMLElement | null;
+const zoomLens  = document.getElementById('zoom-lens') as HTMLElement | null;
+const zoomRes   = document.getElementById('zoom-result') as HTMLElement | null;
+const dotRow    = document.getElementById('dot-row');
 
-// ─── Switch active image ──────────────────────────────────────────────────────
-function setActiveImage(index: number) {
-  if (index < 0) index = galleryImages.length - 1;
-  if (index >= galleryImages.length) index = 0;
-  currentIndex = index;
-
-  const src = galleryImages[index];
-  if (mainImg) mainImg.src = src;
-
-  // Thumbnails
-  thumbItems.forEach((t, i) => t.classList.toggle('active', i === index));
-
-  // Dots
-  dotRow?.querySelectorAll<HTMLButtonElement>('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
-
-  // Reset zoom result background
-  if (zoomResult && mainImg) {
-    zoomResult.style.backgroundImage = `url('${src}')`;
-  }
+function setImage(idx: number) {
+  if (idx < 0) idx = galleryImages.length - 1;
+  if (idx >= galleryImages.length) idx = 0;
+  currentIndex = idx;
+  if (mainImg) mainImg.src = galleryImages[idx];
+  thumbBtns.forEach((t, i) => t.classList.toggle('is-active', i === idx));
+  dotRow?.querySelectorAll<HTMLButtonElement>('.gallery__dot').forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  if (zoomRes && mainImg) zoomRes.style.backgroundImage = `url('${galleryImages[idx]}')`;
 }
 
-// ─── Thumbnail clicks ─────────────────────────────────────────────────────────
-thumbItems.forEach((btn, i) => {
-  btn.addEventListener('click', () => setActiveImage(i));
+thumbBtns.forEach((btn, i) => btn.addEventListener('click', () => setImage(i)));
+dotRow?.querySelectorAll<HTMLButtonElement>('.gallery__dot').forEach((dot, i) => dot.addEventListener('click', () => setImage(i)));
+document.getElementById('arrow-prev')?.addEventListener('click', () => setImage(currentIndex - 1));
+document.getElementById('arrow-next')?.addEventListener('click', () => setImage(currentIndex + 1));
+
+// Swipe
+let touchStartX = 0;
+zoomWrap?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+zoomWrap?.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) diff > 0 ? setImage(currentIndex + 1) : setImage(currentIndex - 1);
 });
 
-// ─── Dot clicks ───────────────────────────────────────────────────────────────
-dotRow?.querySelectorAll<HTMLButtonElement>('.dot').forEach((dot, i) => {
-  dot.addEventListener('click', () => setActiveImage(i));
-});
-
-// ─── Arrow navigation ─────────────────────────────────────────────────────────
-arrowPrev?.addEventListener('click', () => setActiveImage(currentIndex - 1));
-arrowNext?.addEventListener('click', () => setActiveImage(currentIndex + 1));
-
-// ─── Keyboard navigation ──────────────────────────────────────────────────────
+// Keyboard
 document.addEventListener('keydown', (e) => {
-  if (galleryImages.length <= 1) return;
-  if (e.key === 'ArrowLeft')  setActiveImage(currentIndex - 1);
-  if (e.key === 'ArrowRight') setActiveImage(currentIndex + 1);
+  if (e.key === 'ArrowLeft')  setImage(currentIndex - 1);
+  if (e.key === 'ArrowRight') setImage(currentIndex + 1);
   if (e.key === 'Escape') closeLightbox();
 });
 
-// ─── Zoom on hover ────────────────────────────────────────────────────────────
-const ZOOM_FACTOR = 2.5;
-
-function moveLens(e: MouseEvent) {
-  if (!zoomContainer || !zoomLens || !zoomResult || !mainImg) return;
-
-  const rect   = zoomContainer.getBoundingClientRect();
-  const lensW  = zoomLens.offsetWidth;
-  const lensH  = zoomLens.offsetHeight;
-
-  let x = e.clientX - rect.left - lensW / 2;
-  let y = e.clientY - rect.top  - lensH / 2;
-
-  x = Math.max(0, Math.min(x, rect.width  - lensW));
-  y = Math.max(0, Math.min(y, rect.height - lensH));
-
+// Zoom
+const ZOOM = 2.5;
+zoomWrap?.addEventListener('mouseenter', () => {
+  if (window.innerWidth < 1024 || !zoomLens || !zoomRes || !mainImg) return;
+  zoomLens.style.display = 'block';
+  zoomRes.style.display  = 'block';
+  zoomRes.style.backgroundImage = `url('${mainImg.src}')`;
+});
+zoomWrap?.addEventListener('mouseleave', () => {
+  if (zoomLens) zoomLens.style.display = 'none';
+  if (zoomRes)  zoomRes.style.display  = 'none';
+});
+zoomWrap?.addEventListener('mousemove', (e) => {
+  if (!zoomWrap || !zoomLens || !zoomRes) return;
+  const rect  = zoomWrap.getBoundingClientRect();
+  const lw = zoomLens.offsetWidth, lh = zoomLens.offsetHeight;
+  let x = Math.max(0, Math.min(e.clientX - rect.left - lw / 2, rect.width - lw));
+  let y = Math.max(0, Math.min(e.clientY - rect.top  - lh / 2, rect.height - lh));
   zoomLens.style.left = `${x}px`;
   zoomLens.style.top  = `${y}px`;
-
-  const bgX = -(x * ZOOM_FACTOR);
-  const bgY = -(y * ZOOM_FACTOR);
-  const bgW = rect.width  * ZOOM_FACTOR;
-  const bgH = rect.height * ZOOM_FACTOR;
-
-  zoomResult.style.backgroundPosition = `${bgX}px ${bgY}px`;
-  zoomResult.style.backgroundSize     = `${bgW}px ${bgH}px`;
-}
-
-zoomContainer?.addEventListener('mouseenter', () => {
-  if (!zoomLens || !zoomResult || !mainImg) return;
-  if (window.innerWidth < 768) return; // skip zoom on mobile
-  zoomLens.style.display   = 'block';
-  zoomResult.style.display = 'block';
-  zoomResult.style.backgroundImage = `url('${mainImg.src}')`;
-  if (zoomHint) zoomHint.style.opacity = '0';
+  zoomRes.style.backgroundPosition = `${-x * ZOOM}px ${-y * ZOOM}px`;
+  zoomRes.style.backgroundSize     = `${rect.width * ZOOM}px ${rect.height * ZOOM}px`;
 });
 
-zoomContainer?.addEventListener('mouseleave', () => {
-  if (zoomLens) zoomLens.style.display   = 'none';
-  if (zoomResult) zoomResult.style.display = 'none';
-  if (zoomHint) zoomHint.style.opacity = '1';
-});
+// ── Lightbox ──────────────────────────────────────────────────────────────────
+const lightbox     = document.getElementById('lightbox') as HTMLElement | null;
+const lbImg        = document.getElementById('lightbox-img') as HTMLImageElement | null;
+const lbCounter    = document.getElementById('lightbox-counter');
+const lbThumbs     = document.getElementById('lightbox-thumbs');
 
-zoomContainer?.addEventListener('mousemove', moveLens);
-
-// ─── Touch swipe on main stage ────────────────────────────────────────────────
-let touchStartX = 0;
-zoomContainer?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-zoomContainer?.addEventListener('touchend', (e) => {
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) {
-    diff > 0 ? setActiveImage(currentIndex + 1) : setActiveImage(currentIndex - 1);
-  }
-});
-
-// ─── Lightbox ─────────────────────────────────────────────────────────────────
-const lightbox      = document.getElementById('lightbox') as HTMLElement | null;
-const lightboxImg   = document.getElementById('lightbox-img') as HTMLImageElement | null;
-const lightboxClose = document.getElementById('lightbox-close');
-const lightboxPrev  = document.getElementById('lightbox-prev');
-const lightboxNext  = document.getElementById('lightbox-next');
-const lightboxCounter = document.getElementById('lightbox-counter');
-const lightboxThumbs  = document.getElementById('lightbox-thumbs');
-
-function openLightbox(index: number) {
-  if (!lightbox || !lightboxImg) return;
+function openLightbox(idx: number) {
+  if (!lightbox) return;
   lightbox.removeAttribute('hidden');
   document.body.style.overflow = 'hidden';
-  updateLightbox(index);
-
-  // Build lightbox thumbs once
-  if (lightboxThumbs && lightboxThumbs.children.length === 0) {
+  updateLightbox(idx);
+  if (lbThumbs && lbThumbs.children.length === 0) {
     galleryImages.forEach((src, i) => {
       const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'lb-thumb';
-      btn.dataset.index = String(i);
-      const img = document.createElement('img');
-      img.src = src;
-      img.width = 60;
-      img.height = 60;
-      img.alt = `Image ${i + 1}`;
+      btn.type = 'button'; btn.className = 'lightbox__thumb'; btn.dataset.index = String(i);
+      const img = document.createElement('img'); img.src = src; img.width = 60; img.height = 60; img.alt = `Image ${i + 1}`;
       btn.appendChild(img);
       btn.addEventListener('click', () => updateLightbox(i));
-      lightboxThumbs.appendChild(btn);
+      lbThumbs.appendChild(btn);
     });
   }
 }
-
-function updateLightbox(index: number) {
-  if (index < 0) index = galleryImages.length - 1;
-  if (index >= galleryImages.length) index = 0;
-  currentIndex = index;
-  if (lightboxImg) {
-    lightboxImg.style.opacity = '0';
-    lightboxImg.src = galleryImages[index];
-    lightboxImg.onload = () => { lightboxImg.style.opacity = '1'; };
-  }
-  if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
-  lightboxThumbs?.querySelectorAll<HTMLButtonElement>('.lb-thumb').forEach((t, i) => {
-    t.classList.toggle('active', i === index);
-  });
+function updateLightbox(idx: number) {
+  if (idx < 0) idx = galleryImages.length - 1;
+  if (idx >= galleryImages.length) idx = 0;
+  currentIndex = idx;
+  if (lbImg) { lbImg.style.opacity = '0'; lbImg.src = galleryImages[idx]; lbImg.onload = () => { lbImg.style.opacity = '1'; }; }
+  if (lbCounter) lbCounter.textContent = `${idx + 1} / ${galleryImages.length}`;
+  lbThumbs?.querySelectorAll<HTMLButtonElement>('.lightbox__thumb').forEach((t, i) => t.classList.toggle('is-active', i === idx));
 }
-
 function closeLightbox() {
   lightbox?.setAttribute('hidden', '');
   document.body.style.overflow = '';
 }
 
-btnFullscreen?.addEventListener('click', () => openLightbox(currentIndex));
-lightboxClose?.addEventListener('click', closeLightbox);
-lightboxPrev?.addEventListener('click',  () => updateLightbox(currentIndex - 1));
-lightboxNext?.addEventListener('click',  () => updateLightbox(currentIndex + 1));
+document.getElementById('btn-fullscreen')?.addEventListener('click', () => openLightbox(currentIndex));
+zoomWrap?.addEventListener('dblclick', () => openLightbox(currentIndex));
+document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+document.getElementById('lightbox-prev')?.addEventListener('click', () => updateLightbox(currentIndex - 1));
+document.getElementById('lightbox-next')?.addEventListener('click', () => updateLightbox(currentIndex + 1));
 lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
-// Double-click main image to open lightbox
-zoomContainer?.addEventListener('dblclick', () => openLightbox(currentIndex));
-
-// ─── Tab switching ─────────────────────────────────────────────────────────────
-(function () {
-  const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
-  const panels  = document.querySelectorAll<HTMLElement>('.tab-panel');
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      const panel = document.getElementById(`tab-${btn.dataset.tab}`);
-      if (panel) {
-        panel.classList.add('active');
-        document.getElementById('tab-nav')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    });
-  });
-})();
-
-// ─── Order form toggle + WhatsApp submit ────────────────────────────────────────
-(function () {
-  const toggleBtn = document.getElementById('toggle-form-btn');
-  const formWrap  = document.getElementById('order-form-wrap');
-
-  const dateInput = document.getElementById('f-date') as HTMLInputElement | null;
-  if (dateInput) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    dateInput.value = `${yyyy}-${mm}-${dd}`;
-    dateInput.min   = `${yyyy}-${mm}-${dd}`;
+// ── Order form ────────────────────────────────────────────────────────────────
+const toggleBtn = document.getElementById('toggle-form-btn');
+const formWrap  = document.getElementById('order-form-wrap');
+const dateInput = document.getElementById('f-date') as HTMLInputElement | null;
+if (dateInput) {
+  const today = new Date();
+  const y = today.getFullYear();
+  const m = String(today.getMonth() + 1).padStart(2, '0');
+  const d = String(today.getDate()).padStart(2, '0');
+  dateInput.value = dateInput.min = `${y}-${m}-${d}`;
+}
+toggleBtn?.addEventListener('click', () => {
+  formWrap?.hasAttribute('hidden') ? formWrap.removeAttribute('hidden') : formWrap?.setAttribute('hidden', '');
+});
+document.getElementById('submit-order-btn')?.addEventListener('click', () => {
+  const name  = (document.getElementById('f-name')  as HTMLInputElement)?.value.trim();
+  const phone = (document.getElementById('f-phone') as HTMLInputElement)?.value.trim();
+  const area  = (document.getElementById('f-area')  as HTMLInputElement)?.value.trim();
+  const date  = (document.getElementById('f-date')  as HTMLInputElement)?.value.trim();
+  const time  = (document.getElementById('f-time')  as HTMLSelectElement)?.value.trim();
+  const notes = (document.getElementById('f-notes') as HTMLTextAreaElement)?.value.trim();
+  if (!name || !phone || !area) { alert('Please fill in your name, phone number, and delivery area.'); return; }
+  let displayDate = date;
+  if (date) {
+    const dt = new Date(date + 'T00:00:00');
+    displayDate = dt.toLocaleDateString('en-KE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   }
-
-  toggleBtn?.addEventListener('click', () => {
-    if (formWrap?.hasAttribute('hidden')) formWrap.removeAttribute('hidden');
-    else formWrap?.setAttribute('hidden', '');
-  });
-
-  document.getElementById('submit-order-btn')?.addEventListener('click', () => {
-    const name  = (document.getElementById('f-name')  as HTMLInputElement)?.value.trim();
-    const phone = (document.getElementById('f-phone') as HTMLInputElement)?.value.trim();
-    const area  = (document.getElementById('f-area')  as HTMLInputElement)?.value.trim();
-    const date  = (document.getElementById('f-date')  as HTMLInputElement)?.value.trim();
-    const time  = (document.getElementById('f-time')  as HTMLSelectElement)?.value.trim();
-    const notes = (document.getElementById('f-notes') as HTMLTextAreaElement)?.value.trim();
-
-    if (!name || !phone || !area) {
-      alert('Please fill in your name, phone number, and delivery area.');
-      return;
-    }
-
-    let deliveryDate = date;
-    if (date) {
-      const d = new Date(date + 'T00:00:00');
-      deliveryDate = d.toLocaleDateString('en-KE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    }
-
-    const product = document.querySelector<HTMLHeadingElement>('.product-title')?.textContent?.trim() ?? 'this phone';
-    const msg = [
-      `Lipa Mdogo Mdogo Order: ${product}`,
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Delivery area: ${area}`,
-      date   ? `Preferred delivery date: ${deliveryDate}` : '',
-      time   ? `Preferred delivery time: ${time}` : '',
-      notes  ? `Notes: ${notes}` : '',
-    ].filter(Boolean).join('\n');
-
-    window.open(`https://wa.me/254100028823?text=${encodeURIComponent(msg)}`, '_blank');
-  });
-})();
+  const product = document.querySelector<HTMLHeadingElement>('.info__title')?.textContent?.trim() ?? 'this phone';
+  const msg = [
+    `Order (Instalment Plan): ${product}`,
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    `Delivery area: ${area}`,
+    date  ? `Preferred date: ${displayDate}` : '',
+    time  ? `Preferred time: ${time}` : '',
+    notes ? `Notes: ${notes}` : '',
+  ].filter(Boolean).join('\n');
+  window.open(`https://wa.me/254100028823?text=${encodeURIComponent(msg)}`, '_blank');
+});
 </script>
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --primary:       #1a73e8;
-    --primary-dark:  #1557b0;
-    --primary-light: #e8f0fe;
-    --gold:          #f5a623;
-    --navy:          #0d1b2a;
-    --green:         #00b96b;
-    --red:           #e53935;
-    --gray-1:        #f5f7fa;
-    --gray-2:        #e8eaed;
-    --gray-3:        #9aa0a6;
-    --text:          #202124;
-    --text-light:    #5f6368;
-    --badge-new:     #00b96b;
-    --badge-hot:     #e53935;
-    --badge-sale:    #1a73e8;
-    --radius:        10px;
-    --shadow:        0 2px 12px rgba(13,27,42,0.08);
+    --navy:    #0d1b2a;
+    --navy-2:  #162537;
+    --primary: #1a6fe8;
+    --pri-lt:  #e8f0fe;
+    --pri-dk:  #1254b8;
+    --gold:    #e6a817;
+    --green:   #00a85a;
+    --red:     #d93025;
+    --gray-1:  #f6f8fb;
+    --gray-2:  #e4e8ef;
+    --gray-3:  #9aa3ae;
+    --text:    #1c2333;
+    --text-2:  #4a5568;
+    --radius:  10px;
+    --shadow:  0 1px 6px rgba(13,27,42,0.07), 0 4px 18px rgba(13,27,42,0.05);
+    --shadow-md: 0 2px 12px rgba(13,27,42,0.10), 0 8px 32px rgba(13,27,42,0.07);
   }
+
   body { font-family: 'Barlow', sans-serif; background: var(--gray-1); color: var(--text); }
 
-  .top-banner {
-    background: var(--navy); color: #fff;
-    text-align: center; padding: 9px 16px;
-    font-size: 13px; font-weight: 500;
+  /* ── Breadcrumb ── */
+  .breadcrumb {
+    background: #fff;
+    border-bottom: 1px solid var(--gray-2);
+    padding: 10px 20px;
   }
-  .top-banner span { color: var(--gold); font-weight: 700; }
-  .site-header {
-    background: var(--primary); padding: 14px 24px 12px;
-    display: flex; align-items: center;
-  }
-  .logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 28px; font-weight: 900;
-    color: #fff; text-decoration: none;
-  }
-  .logo span { color: var(--gold); }
-
-  .breadcrumb-bar {
-    background: #fff; border-bottom: 1px solid var(--gray-2); padding: 10px 20px;
-  }
-
-  .seo-intro {
-    background: #fff; border-bottom: 1px solid var(--gray-2);
-    padding: 14px 20px;
-  }
-  .seo-intro p {
+  .breadcrumb ol {
     max-width: 1280px; margin: 0 auto;
-    font-size: 14px; color: var(--text-light); line-height: 1.75;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 5px;
+    list-style: none; font-size: 13px; color: var(--gray-3);
   }
-  .seo-intro strong { color: var(--text); }
-  .breadcrumb-list {
-    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-    list-style: none; font-size: 13px; color: var(--text-light);
-  }
-  .breadcrumb-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
-  .breadcrumb-list a:hover { text-decoration: underline; }
-  .breadcrumb-list .sep { color: var(--gray-3); }
+  .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 500; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb [aria-current="page"] { color: var(--text-2); font-weight: 500; }
 
-  .product-page { max-width: 1280px; margin: 0 auto; padding: 20px 20px 56px; }
+  /* ── Page wrapper ── */
+  .pdp { max-width: 1280px; margin: 0 auto; padding: 20px 20px 64px; }
 
-  .hero-section {
-    display: grid; grid-template-columns: 480px 1fr; gap: 24px;
-    background: #fff; border: 1.5px solid var(--gray-2);
-    border-radius: var(--radius); padding: 28px;
-    margin-bottom: 16px; box-shadow: var(--shadow);
-  }
-  @media (max-width: 960px) { .hero-section { grid-template-columns: 1fr; } }
-
-  /* ══════════════════════════════════════════════════
-     ENHANCED GALLERY
-  ══════════════════════════════════════════════════ */
-  .gallery-col {
-    display: flex; flex-direction: column; gap: 10px;
-    /* Prevent zoom result from clipping outside gallery column */
-    position: relative;
-  }
-
-  /* Main stage */
-  .main-stage {
-    position: relative;
-    background: var(--gray-1);
-    border: 1.5px solid var(--gray-2);
+  /* ═══════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════ */
+  .hero {
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 28px;
+    background: #fff;
+    border: 1px solid var(--gray-2);
     border-radius: var(--radius);
-    overflow: hidden;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+
+  /* Gallery */
+  .gallery { display: flex; flex-direction: column; gap: 10px; position: relative; }
+
+  .gallery__stage {
+    position: relative;
     aspect-ratio: 1 / 1;
-    max-height: 460px;
+    max-height: 440px;
+    border-radius: var(--radius);
+    background: var(--gray-1);
+    border: 1px solid var(--gray-2);
+    overflow: hidden;
   }
 
-  /* Badge */
-  .pdp-badge {
-    position: absolute; top: 12px; left: 12px; z-index: 4;
-    padding: 4px 10px; border-radius: 4px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; font-weight: 800;
-    letter-spacing: .07em; text-transform: uppercase; color: #fff;
-    pointer-events: none;
-  }
-  .pdp-badge-new  { background: var(--badge-new); }
-  .pdp-badge-hot  { background: var(--badge-hot); }
-  .pdp-badge-sale { background: var(--badge-sale); }
-
-  /* Zoom hint */
-  .zoom-hint {
-    position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
-    z-index: 3; background: rgba(0,0,0,0.55); color: #fff;
-    font-size: 11px; font-weight: 600; padding: 5px 10px;
-    border-radius: 20px; display: flex; align-items: center; gap: 5px;
-    pointer-events: none; transition: opacity 0.3s;
-    white-space: nowrap;
-  }
-  @media (max-width: 768px) { .zoom-hint { display: none; } }
-
-  /* Zoom container fills the stage */
-  .zoom-container {
+  .gallery__zoom-wrap {
     width: 100%; height: 100%;
-    position: relative; cursor: crosshair;
+    position: relative;
     display: flex; align-items: center; justify-content: center;
-  }
-
-  .main-product-img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    display: block;
-    transition: transform 0.3s ease;
-    user-select: none; pointer-events: none;
-  }
-
-  /* Zoom lens (overlay on main image) */
-  .zoom-lens {
-    display: none;
-    position: absolute;
-    width: 140px; height: 140px;
-    border: 2px solid var(--primary);
-    border-radius: 4px;
-    background: rgba(26,115,232,0.08);
-    pointer-events: none;
-    z-index: 5;
     cursor: crosshair;
   }
 
-  /* Zoom result (appears to the right of the gallery column) */
-  .zoom-result {
+  .gallery__main-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block; user-select: none; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .gallery__lens {
+    display: none; position: absolute;
+    width: 130px; height: 130px;
+    border: 2px solid var(--primary);
+    border-radius: 4px;
+    background: rgba(26,111,232,0.07);
+    pointer-events: none; z-index: 5;
+  }
+
+  .gallery__zoom-result {
     display: none;
     position: absolute;
-    left: calc(100% + 12px);
-    top: 0;
-    width: 340px;
-    height: 340px;
-    border: 1.5px solid var(--gray-2);
+    left: calc(100% + 14px); top: 0;
+    width: 320px; height: 320px;
+    border: 1px solid var(--gray-2);
     border-radius: var(--radius);
     background-repeat: no-repeat;
     background-color: #fff;
-    box-shadow: 0 8px 32px rgba(13,27,42,0.14);
-    z-index: 100;
-    pointer-events: none;
-    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    z-index: 100; pointer-events: none; overflow: hidden;
   }
-  /* On narrower screens (where there's no room to the right), hide zoom result */
-  @media (max-width: 1100px) {
-    .zoom-result { display: none !important; }
-    .zoom-lens   { display: none !important; }
-  }
+  @media (max-width: 1100px) { .gallery__zoom-result, .gallery__lens { display: none !important; } }
 
-  /* Fullscreen button */
-  .btn-fullscreen {
-    position: absolute; bottom: 12px; right: 12px; z-index: 4;
-    width: 34px; height: 34px; border-radius: 6px;
-    background: rgba(255,255,255,0.92); border: 1.5px solid var(--gray-2);
+  .gallery__fullscreen {
+    position: absolute; bottom: 10px; right: 10px; z-index: 4;
+    width: 32px; height: 32px; border-radius: 7px;
+    background: rgba(255,255,255,0.9); border: 1px solid var(--gray-2);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--text-light);
+    cursor: pointer; color: var(--text-2);
     transition: background 0.15s, color 0.15s;
   }
-  .btn-fullscreen:hover { background: #fff; color: var(--primary); }
+  .gallery__fullscreen:hover { background: #fff; color: var(--primary); }
 
-  /* Prev / Next arrows on main stage */
-  .gallery-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    z-index: 4; width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(255,255,255,0.92); border: 1.5px solid var(--gray-2);
+  .gallery__arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); border: 1px solid var(--gray-2);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; color: var(--text); opacity: 0;
     transition: opacity 0.2s, background 0.15s, color 0.15s;
   }
-  .main-stage:hover .gallery-arrow { opacity: 1; }
-  .gallery-arrow:hover { background: #fff; color: var(--primary); border-color: var(--primary); }
-  .gallery-arrow-prev { left: 10px; }
-  .gallery-arrow-next { right: 50px; } /* offset from fullscreen btn */
+  .gallery__stage:hover .gallery__arrow { opacity: 1; }
+  .gallery__arrow:hover { background: #fff; color: var(--primary); }
+  .gallery__arrow--prev { left: 10px; }
+  .gallery__arrow--next { right: 46px; }
 
-  /* Dot indicators */
-  .dot-row {
-    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  .gallery__dots {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
     display: flex; gap: 6px; z-index: 4;
   }
-  .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,0.6); border: 1.5px solid rgba(255,255,255,0.8);
+  .gallery__dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,0.55); border: 1.5px solid rgba(255,255,255,0.75);
     cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s;
   }
-  .dot.active {
-    background: #fff; transform: scale(1.25);
-  }
+  .gallery__dot.is-active { background: #fff; transform: scale(1.3); }
 
-  /* Thumbnail strip */
-  .thumb-strip {
+  .badge {
+    position: absolute; top: 10px; left: 10px; z-index: 4;
+    padding: 3px 9px; border-radius: 4px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.07em;
+    text-transform: uppercase; color: #fff; pointer-events: none;
+  }
+  .badge--new  { background: var(--green); }
+  .badge--hot  { background: var(--red); }
+  .badge--sale { background: var(--primary); }
+
+  .gallery__thumbs {
     display: flex; gap: 8px; flex-wrap: nowrap;
-    overflow-x: auto; padding-bottom: 4px;
+    overflow-x: auto; padding-bottom: 2px;
     scrollbar-width: thin; scrollbar-color: var(--gray-2) transparent;
   }
-  .thumb-strip::-webkit-scrollbar { height: 4px; }
-  .thumb-strip::-webkit-scrollbar-track { background: transparent; }
-  .thumb-strip::-webkit-scrollbar-thumb { background: var(--gray-2); border-radius: 2px; }
-
-  .thumb-item {
-    flex-shrink: 0;
-    width: 72px; height: 72px; padding: 4px;
+  .gallery__thumb {
+    flex-shrink: 0; width: 68px; height: 68px; padding: 3px;
     border: 2px solid var(--gray-2); border-radius: 8px;
-    background: var(--gray-1); cursor: pointer;
-    overflow: hidden; transition: border-color 0.15s, box-shadow 0.15s;
-    position: relative;
+    background: var(--gray-1); cursor: pointer; overflow: hidden;
+    transition: border-color 0.15s;
   }
-  .thumb-item img {
-    width: 100%; height: 100%; object-fit: contain; display: block;
-    transition: transform 0.2s;
+  .gallery__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .gallery__thumb:hover,
+  .gallery__thumb.is-active { border-color: var(--primary); background: var(--pri-lt); }
+
+  /* Info column */
+  .info { display: flex; flex-direction: column; gap: 18px; }
+
+  .info__meta { display: flex; align-items: center; gap: 8px; }
+  .info__brand {
+    background: var(--primary); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 3px 9px; border-radius: 4px;
   }
-  .thumb-item:hover img { transform: scale(1.07); }
-  .thumb-item:hover { border-color: var(--primary); }
-  .thumb-item.active {
-    border-color: var(--primary);
-    background: var(--primary-light);
-    box-shadow: 0 0 0 3px rgba(26,115,232,0.18);
+  .info__stock {
+    background: #e6f9f1; color: var(--green);
+    font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 4px;
   }
 
-  .quick-specs { display: flex; gap: 6px; flex-wrap: wrap; }
-  .spec-pill {
+  .info__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px; font-weight: 900; color: var(--navy); line-height: 1.2;
+  }
+
+  .info__rating { display: flex; align-items: center; gap: 7px; font-size: 14px; }
+  .info__stars { color: var(--gold); letter-spacing: 1px; }
+  .info__rating-val { font-weight: 700; }
+  .info__rating-count { color: var(--gray-3); font-size: 13px; }
+
+  .info__delivery-strip {
+    background: #e8f9f1; border: 1px solid #b2f0d0;
+    border-radius: 7px; padding: 9px 13px;
+    display: flex; flex-wrap: wrap; gap: 0;
+    font-size: 12px; font-weight: 700; color: #0a7a4a;
+  }
+  .info__delivery-strip span + span::before { content: ' · '; opacity: 0.55; font-weight: 400; }
+
+  /* Pricing card */
+  .pricing {
+    background: var(--pri-lt);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .pricing__grid {
+    display: flex; align-items: stretch;
+    margin-bottom: 12px;
+  }
+  .pricing__item { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .pricing__label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--pri-dk);
+  }
+  .pricing__amount {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; color: var(--navy); line-height: 1;
+  }
+  .pricing__amount--accent { color: var(--primary); }
+  .pricing__amount small { font-size: 14px; font-weight: 400; }
+  .pricing__divider {
+    width: 1px; background: var(--primary); opacity: 0.2;
+    height: 44px; margin: 0 18px; flex-shrink: 0; align-self: center;
+  }
+  .pricing__note {
+    background: #fff; border: 1px solid var(--primary);
+    border-radius: 6px; padding: 8px 12px;
+    font-size: 13px; color: var(--pri-dk); margin-bottom: 10px;
+  }
+  .pricing__perks {
+    list-style: none; display: flex; flex-direction: column; gap: 4px;
+    font-size: 12px; font-weight: 600; color: var(--pri-dk);
+  }
+  .pricing__perks li::before { content: '✓ '; }
+
+  @media (max-width: 480px) {
+    .pricing__grid { flex-direction: column; gap: 12px; }
+    .pricing__divider { display: none; }
+    .pricing__amount { font-size: 22px; }
+  }
+
+  /* Order block */
+  .order { display: flex; flex-direction: column; gap: 9px; }
+  .order__heading {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--gray-3); margin-bottom: 2px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 13px 18px; border-radius: 8px;
+    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 700;
+    text-decoration: none; text-align: center; border: none; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .btn--wa  { background: #25d366; color: #fff; font-size: 16px; }
+  .btn--wa:hover  { background: #1fb356; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(37,211,102,0.3); }
+  .btn--call { background: #fff; color: var(--primary); border: 2px solid var(--primary); }
+  .btn--call:hover { background: var(--pri-lt); transform: translateY(-1px); }
+  .btn--form { background: var(--gray-1); color: var(--text-2); border: 1.5px solid var(--gray-2); font-size: 13.5px; }
+  .btn--form:hover { border-color: var(--primary); color: var(--primary); background: var(--pri-lt); }
+  .btn--submit { background: var(--primary); color: #fff; font-size: 15px; }
+  .btn--submit:hover { background: var(--pri-dk); }
+  .btn--primary { background: var(--primary); color: #fff; width: auto; padding: 13px 24px; }
+  .btn--primary:hover { background: var(--pri-dk); transform: translateY(-1px); }
+
+  /* Order form */
+  .order-form {
     background: var(--gray-1); border: 1px solid var(--gray-2);
-    color: var(--text-light); border-radius: 4px;
-    padding: 3px 9px; font-size: 11.5px; font-weight: 500;
+    border-radius: var(--radius); padding: 18px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .order-form__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 800; color: var(--navy);
+  }
+  .order-form__fields { display: flex; flex-direction: column; gap: 8px; }
+  .order-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 400px) { .order-form__row { grid-template-columns: 1fr; } }
+  .order-form__field { display: flex; flex-direction: column; gap: 4px; }
+  .order-form__label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-2); }
+  .order-form__input {
+    width: 100%; padding: 9px 12px;
+    border: 1.5px solid var(--gray-2); border-radius: 7px;
+    font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--text);
+    background: #fff; outline: none; transition: border-color 0.15s;
+  }
+  .order-form__input:focus { border-color: var(--primary); }
+  .order-form__textarea { resize: vertical; min-height: 52px; }
+  .order-form__note { font-size: 12px; color: var(--gray-3); text-align: center; }
+
+  /* Trust bar */
+  .trust {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    border-top: 1px solid var(--gray-2); padding-top: 16px;
+  }
+  @media (max-width: 460px) { .trust { grid-template-columns: repeat(2, 1fr); } }
+  .trust__item {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; color: var(--text-2);
+    text-align: center; padding: 10px 6px;
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-radius: 8px;
+  }
+  .trust__item svg { color: var(--primary); }
+
+  /* ═══════════════════════════════════════
+     CONTENT SECTIONS (all always visible)
+  ═══════════════════════════════════════ */
+  .highlights,
+  .content-section {
+    background: #fff;
+    border: 1px solid var(--gray-2);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
   }
 
-  /* ══════════════════════════════════════════════════
-     LIGHTBOX
-  ══════════════════════════════════════════════════ */
+  .highlights__title,
+  .content-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 900; color: var(--navy);
+    margin-bottom: 18px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--pri-lt);
+  }
+
+  /* Highlights grid */
+  .highlights__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .highlights__item {
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-radius: 8px; padding: 14px 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    text-align: center;
+  }
+  .highlights__icon { font-size: 22px; }
+  .highlights__label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-3); }
+  .highlights__value { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
+
+  /* About prose */
+  .content-section p {
+    font-size: 14.5px; color: var(--text-2); line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .content-section p:last-child { margin-bottom: 0; }
+  .content-section strong { color: var(--text); }
+
+  /* Price table */
+  .price-table {
+    border: 2px solid var(--primary); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 20px;
+  }
+  .price-table__row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 20px; border-bottom: 1px solid var(--pri-lt);
+  }
+  .price-table__row:last-child { border-bottom: none; }
+  .price-table__row--featured { background: var(--pri-lt); }
+  .price-table__label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+  .price-table__value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px; font-weight: 900; color: var(--navy); line-height: 1;
+  }
+  .price-table__value small { font-size: 13px; font-weight: 400; }
+  .price-table__value--accent { color: var(--primary); }
+  .price-table__value--free { font-size: 16px; color: var(--green); font-weight: 800; font-family: 'Barlow', sans-serif; }
+
+  .why-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    margin: 20px 0;
+  }
+  @media (max-width: 540px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-grid__item {
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-radius: 8px; padding: 14px;
+  }
+  .why-grid__item strong { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 5px; }
+  .why-grid__item p { font-size: 13px; color: var(--text-2); line-height: 1.55; margin: 0; }
+
+  .cta-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;
+  }
+  .cta-row .btn { width: auto; flex: 1 1 180px; }
+
+  /* Steps */
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .steps__item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-radius: 9px; padding: 14px;
+    font-size: 14px; color: var(--text-2); line-height: 1.6;
+  }
+  .steps__item strong { display: block; font-size: 14.5px; color: var(--text); margin-bottom: 3px; }
+  .steps__item p { font-size: 13.5px; margin: 0; }
+  .steps__num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--primary); color: #fff;
+    font-weight: 900; font-size: 14px; font-family: 'Barlow Condensed', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Coverage */
+  .coverage > h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 900; color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .coverage__grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px;
+  }
+  @media (max-width: 520px) { .coverage__grid { grid-template-columns: 1fr; } }
+  .coverage__county {
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-radius: 8px; padding: 13px;
+  }
+  .coverage__county strong {
+    display: block; font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 4px;
+  }
+  .coverage__county p { font-size: 13px; color: var(--text-2); line-height: 1.5; margin: 0; }
+  .coverage__note { font-size: 13px; color: var(--gray-3); font-style: italic; }
+
+  /* Specs */
+  .spec-group { margin-bottom: 22px; }
+  .spec-group__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 900; color: var(--navy);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 8px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary); display: inline-block;
+  }
+  .spec-table { width: 100%; border-collapse: collapse; }
+  .spec-table tr { border-bottom: 1px solid var(--gray-2); }
+  .spec-table tr:last-child { border-bottom: none; }
+  .spec-table tr:hover { background: var(--gray-1); }
+  .spec-table__key {
+    padding: 9px 12px; width: 40%; font-weight: 600; font-size: 13.5px; color: var(--text);
+    text-align: left; vertical-align: top;
+  }
+  .spec-table__val { padding: 9px 12px; font-size: 13.5px; color: var(--text-2); }
+  .spec-note {
+    margin-top: 10px; padding: 11px 14px;
+    background: var(--pri-lt); border-left: 3px solid var(--primary);
+    border-radius: 0 7px 7px 0;
+    font-size: 13px; color: var(--pri-dk); line-height: 1.6;
+  }
+
+  /* In-box list */
+  .inbox-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .inbox-list li {
+    font-size: 13.5px; color: var(--text-2); padding: 8px 13px;
+    background: var(--gray-1); border: 1px solid var(--gray-2); border-radius: 6px;
+  }
+  .inbox-list li::before { content: '— '; font-weight: 700; color: var(--primary); }
+
+  /* FAQ */
+  .faq { display: flex; flex-direction: column; gap: 7px; }
+  .faq__item {
+    border: 1px solid var(--gray-2); border-radius: 9px;
+    overflow: hidden; transition: border-color 0.15s;
+  }
+  .faq__item[open] { border-color: var(--primary); }
+  .faq__question {
+    padding: 13px 16px; font-size: 14px; font-weight: 700; color: var(--text);
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--gray-1); gap: 12px;
+  }
+  .faq__question::-webkit-details-marker { display: none; }
+  .faq__question::after { content: '+'; font-size: 18px; font-weight: 300; color: var(--primary); flex-shrink: 0; }
+  .faq__item[open] .faq__question::after { content: '−'; }
+  .faq__answer { margin: 0; }
+  .faq__answer p { padding: 13px 16px; font-size: 13.5px; color: var(--text-2); line-height: 1.7; margin: 0; }
+
+  /* Related */
+  .related__intro { font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+  .related__grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;
+  }
+  @media (max-width: 700px) { .related__grid { grid-template-columns: repeat(2, 1fr); } }
+  .related__card {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-radius: 9px; padding: 16px 10px;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .related__card:hover {
+    border-color: var(--primary); transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(26,111,232,0.1);
+  }
+  .related__card img { width: 80px; height: 80px; object-fit: contain; }
+  .related__info { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+  .related__brand { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-3); }
+  .related__name { font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .related__deposit {
+    font-size: 12px; font-weight: 600; color: var(--primary);
+    background: var(--pri-lt); border-radius: 4px; padding: 2px 7px; margin-top: 2px;
+  }
+  .related__links { font-size: 13px; color: var(--text-2); }
+  .related__links a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  .related__links a:hover { text-decoration: underline; }
+
+  /* Bottom CTA */
+  .bottom-cta {
+    background: var(--navy); border-radius: var(--radius);
+    padding: 40px 28px; text-align: center; margin-bottom: 8px;
+  }
+  .bottom-cta__inner h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 8px;
+  }
+  .bottom-cta__inner p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 22px; }
+  .bottom-cta__inner p strong { color: var(--gold); }
+  .bottom-cta__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .bottom-cta .btn--wa,
+  .bottom-cta .btn--primary { width: auto; padding: 13px 24px; }
+
+  /* Related links nav */
+  .related-links {
+    margin-top: 40px; padding: 0 0 48px;
+  }
+  .related-links__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 900; color: var(--navy);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
+  }
+  .related-links__list {
+    display: flex; flex-wrap: wrap; gap: 8px; list-style: none;
+  }
+  .related-links__list a {
+    display: inline-block;
+    background: #fff; border: 1px solid var(--gray-2);
+    border-radius: 6px; padding: 6px 12px;
+    font-size: 13px; font-weight: 500; color: var(--text);
+    text-decoration: none; transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .related-links__list a:hover {
+    border-color: var(--primary); color: var(--primary); background: var(--pri-lt);
+  }
+
+  /* ── Lightbox ── */
   .lightbox {
     position: fixed; inset: 0; z-index: 9999;
     background: rgba(0,0,0,0.92);
@@ -1566,579 +1514,45 @@ zoomContainer?.addEventListener('dblclick', () => openLightbox(currentIndex));
     align-items: center; justify-content: center;
   }
   .lightbox[hidden] { display: none; }
-
-  .lightbox-close {
-    position: absolute; top: 16px; right: 20px;
+  .lightbox__close {
+    position: absolute; top: 16px; right: 18px;
     width: 40px; height: 40px; border-radius: 50%;
     background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
     color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: background 0.15s;
   }
-  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
-
-  .lightbox-img-wrap {
-    max-width: 88vw; max-height: 78vh;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 12px;
+  .lightbox__close:hover { background: rgba(255,255,255,0.2); }
+  .lightbox__img-wrap {
+    max-width: 88vw; max-height: 76vh;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
   }
   #lightbox-img {
-    max-width: 100%; max-height: 78vh;
-    object-fit: contain; border-radius: 4px;
-    transition: opacity 0.2s;
+    max-width: 100%; max-height: 76vh;
+    object-fit: contain; border-radius: 4px; transition: opacity 0.2s;
   }
-
-  .lightbox-arrow {
+  .lightbox__arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 44px; height: 44px; border-radius: 50%;
     background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
     color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: background 0.15s;
   }
-  .lightbox-arrow:hover { background: rgba(255,255,255,0.22); }
-  .lightbox-prev { left: 20px; }
-  .lightbox-next { right: 20px; }
-
-  .lightbox-counter {
-    color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 12px;
-  }
-
-  .lightbox-thumbs {
-    display: flex; gap: 8px; overflow-x: auto;
-    padding: 4px 20px; max-width: 92vw;
+  .lightbox__arrow:hover { background: rgba(255,255,255,0.22); }
+  .lightbox__arrow--prev { left: 18px; }
+  .lightbox__arrow--next { right: 18px; }
+  .lightbox__counter { color: rgba(255,255,255,0.55); font-size: 13px; margin-bottom: 12px; }
+  .lightbox__thumbs {
+    display: flex; gap: 8px; overflow-x: auto; padding: 4px 20px; max-width: 90vw;
     scrollbar-width: none;
   }
-  .lightbox-thumbs::-webkit-scrollbar { display: none; }
-  .lb-thumb {
-    flex-shrink: 0; width: 56px; height: 56px; padding: 2px;
+  .lightbox__thumbs::-webkit-scrollbar { display: none; }
+  .lightbox__thumb {
+    flex-shrink: 0; width: 54px; height: 54px; padding: 2px;
     border: 2px solid rgba(255,255,255,0.2); border-radius: 6px;
-    background: rgba(255,255,255,0.06); cursor: pointer;
-    overflow: hidden; transition: border-color 0.15s;
-  }
-  .lb-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .lb-thumb.active { border-color: #fff; }
-  .lb-thumb:hover  { border-color: rgba(255,255,255,0.6); }
-
-  /* ══════════════════════════════════════════════════
-     REST OF PAGE (unchanged)
-  ══════════════════════════════════════════════════ */
-  .info-col { display: flex; flex-direction: column; gap: 16px; }
-
-  .info-brand-row { display: flex; align-items: center; gap: 10px; }
-  .brand-tag {
-    background: var(--primary); color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; font-weight: 700;
-    padding: 3px 10px; border-radius: 4px;
-    text-transform: uppercase; letter-spacing: .06em;
-  }
-  .stock-tag {
-    background: #e6f9f1; color: var(--green);
-    font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 4px;
-  }
-  .product-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 28px; font-weight: 900;
-    color: var(--navy); line-height: 1.18;
-  }
-
-  .rating-row { display: flex; align-items: center; gap: 7px; font-size: 14px; }
-  .stars { color: var(--gold); font-size: 15px; }
-  .rating-val { font-weight: 700; }
-  .rating-sep { color: var(--gray-3); }
-  .rating-link { color: var(--primary); text-decoration: none; font-size: 13px; }
-  .rating-link:hover { text-decoration: underline; }
-
-  .trust-strip {
-    background: #e6f9f1; border: 1px solid #a7f0ca;
-    border-radius: 7px; padding: 9px 14px;
-    display: flex; flex-wrap: wrap; gap: 6px 0;
-    font-size: 12.5px; font-weight: 700; color: #0a7a4a;
-  }
-  .trust-strip span + span::before { content: ' · '; font-weight: 400; opacity: .6; }
-
-  .pricing-card {
-    background: var(--primary-light); border: 2px solid var(--primary);
-    border-radius: var(--radius); padding: 18px 20px;
-  }
-  .pricing-row { display: flex; align-items: center; margin-bottom: 12px; }
-  .price-block { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .price-label {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .07em; color: var(--primary-dark);
-  }
-  .price-big {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 30px; font-weight: 900; color: var(--navy); line-height: 1;
-  }
-  .price-big.accent { color: var(--primary); }
-  .price-per { font-size: 14px; font-weight: 400; }
-  .divider-v {
-    width: 1px; background: var(--primary); opacity: .2;
-    height: 44px; margin: 0 18px; flex-shrink: 0;
-  }
-
-  @media (max-width: 480px) {
-    .pricing-row { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .divider-v { display: none; }
-    .price-big { font-size: 22px; }
-    .price-label { font-size: 10px; }
-  }
-  .installment-note {
-    background: #fff; border: 1px solid var(--primary);
-    border-radius: 6px; padding: 8px 12px;
-    font-size: 13px; color: var(--primary-dark); margin-bottom: 10px;
-  }
-  .pricing-bullets {
-    list-style: none; display: flex; flex-direction: column; gap: 4px;
-    font-size: 12.5px; font-weight: 600; color: var(--primary-dark);
-  }
-  .pricing-bullets li::before { content: '✓  '; }
-
-  .order-block { display: flex; flex-direction: column; gap: 10px; }
-
-  .order-heading {
-    font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .07em; color: var(--text-light); margin-bottom: 2px;
-  }
-
-  .btn-order-wa {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; padding: 15px 20px;
-    background: #25d366; color: #fff;
-    border-radius: 8px; border: none;
-    font-family: 'Barlow', sans-serif; font-size: 17px; font-weight: 800;
-    text-decoration: none; text-align: center; letter-spacing: 0.01em;
-    transition: background .15s, transform .15s, box-shadow .15s; cursor: pointer;
-  }
-  .btn-order-wa:hover { background: #1fb356; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.35); }
-
-  .btn-order-call {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; padding: 13px 20px;
-    background: #fff; color: var(--primary);
-    border: 2px solid var(--primary); border-radius: 8px;
-    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 700;
-    text-decoration: none; text-align: center;
-    transition: background .15s, transform .15s; cursor: pointer;
-  }
-  .btn-order-call:hover { background: var(--primary-light); transform: translateY(-1px); }
-
-  .btn-order-form {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; padding: 11px 20px;
-    background: #fff; color: var(--text-light);
-    border: 1.5px solid var(--gray-2); border-radius: 8px;
-    font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 600;
-    text-align: center; cursor: pointer;
-    transition: border-color .15s, color .15s, background .15s;
-  }
-  .btn-order-form:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
-
-  .order-form-wrap {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: var(--radius); padding: 18px;
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .form-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 17px; font-weight: 800; color: var(--navy);
-  }
-  .form-fields { display: flex; flex-direction: column; gap: 8px; }
-  .form-field-group { display: flex; flex-direction: column; gap: 4px; }
-  .form-label {
-    font-size: 11.5px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .06em; color: var(--text-light);
-  }
-  .form-input {
-    width: 100%; padding: 10px 12px;
-    border: 1.5px solid var(--gray-2); border-radius: 7px;
-    font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--text);
-    background: #fff; outline: none; transition: border-color .15s;
-  }
-  .form-input:focus { border-color: var(--primary); }
-  .form-textarea { resize: vertical; min-height: 56px; }
-  .form-select { appearance: auto; cursor: pointer; }
-  .btn-submit {
-    background: var(--primary); color: #fff; border: none;
-    border-radius: 8px; padding: 12px;
-    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 700;
-    cursor: pointer; transition: background .15s;
-  }
-  .btn-submit:hover { background: var(--primary-dark); }
-  .form-note { font-size: 12px; color: var(--text-light); text-align: center; }
-
-  .trust-badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  @media (max-width: 480px) { .trust-badges { grid-template-columns: repeat(2, 1fr); } }
-  .trust-badge {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 8px; padding: 10px 8px;
-    display: flex; flex-direction: column; align-items: center; gap: 5px;
-    text-align: center; font-size: 11px; font-weight: 600;
-    color: var(--text-light); line-height: 1.4;
-  }
-  .tbadge-icon {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--primary-light); color: var(--primary);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700;
-  }
-  .seller-line { font-size: 12.5px; color: var(--text-light); }
-  .seller-line a { color: var(--primary); text-decoration: none; font-weight: 600; }
-  .seller-line a:hover { text-decoration: underline; }
-
-  .tab-nav {
-    display: flex; gap: 4px; flex-wrap: wrap;
-    background: #fff; border: 1.5px solid var(--gray-2);
-    border-radius: var(--radius); padding: 8px;
-    margin-bottom: 16px;
-    position: sticky; top: 0; z-index: 20; box-shadow: var(--shadow);
-  }
-  .tab-btn {
-    flex: 1; min-width: 100px; padding: 9px 12px; border-radius: 7px;
-    font-family: 'Barlow', sans-serif; font-size: 13.5px; font-weight: 600;
-    color: var(--text-light); background: transparent;
-    border: none; cursor: pointer; white-space: nowrap;
-    transition: background .15s, color .15s;
-  }
-  .tab-btn:hover { background: var(--gray-1); color: var(--text); }
-  .tab-btn.active { background: var(--primary); color: #fff; }
-
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  .section-card {
-    background: #fff; border: 1.5px solid var(--gray-2);
-    border-radius: var(--radius); padding: 28px;
-    margin-bottom: 16px; box-shadow: var(--shadow);
-  }
-  .section-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 22px; font-weight: 900; color: var(--navy);
-    margin-bottom: 18px; padding-bottom: 10px;
-    border-bottom: 2px solid var(--primary-light);
-  }
-
-  .prose p { font-size: 14.5px; color: var(--text-light); line-height: 1.75; margin-bottom: 12px; }
-  .prose p:last-child { margin-bottom: 0; }
-  .prose strong { color: var(--text); }
-
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  @media (max-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
-  .feature-item {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 8px; padding: 11px 13px;
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13.5px; font-weight: 600; color: var(--text);
-  }
-  .feat-check { color: var(--green); font-weight: 900; flex-shrink: 0; }
-
-  .use-cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  @media (max-width: 640px) { .use-cases-grid { grid-template-columns: repeat(2, 1fr); } }
-  .use-case {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 9px; padding: 14px;
-  }
-  .use-case strong { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
-  .use-case p { font-size: 12.5px; color: var(--text-light); line-height: 1.5; margin: 0; }
-
-  .box-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .box-list li {
-    font-size: 14px; color: var(--text-light);
-    padding: 9px 14px; background: var(--gray-1);
-    border: 1px solid var(--gray-2); border-radius: 7px;
-  }
-  .box-list li::before { content: '— '; font-weight: 700; color: var(--primary); }
-
-  .spec-group { margin-bottom: 24px; }
-  .spec-group-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px; font-weight: 800; color: var(--navy);
-    margin-bottom: 10px; padding-bottom: 6px;
-    border-bottom: 2px solid var(--primary); display: inline-block;
-  }
-  .spec-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
-  .spec-table tr { border-bottom: 1px solid var(--gray-2); }
-  .spec-table tr:last-child { border-bottom: none; }
-  .spec-table tr:hover { background: var(--gray-1); }
-  .spec-key { padding: 10px 12px; width: 38%; font-weight: 600; font-size: 13.5px; color: var(--text); }
-  .spec-val { padding: 10px 12px; font-size: 13.5px; color: var(--text-light); }
-
-  .network-note {
-    margin-top: 12px; padding: 12px 14px;
-    background: var(--primary-light); border-left: 4px solid var(--primary);
-    border-radius: 0 7px 7px 0;
-    font-size: 13px; color: var(--primary-dark); line-height: 1.6;
-  }
-
-  .add-features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; }
-  @media (max-width: 640px) { .add-features-grid { grid-template-columns: repeat(2, 1fr); } }
-  .add-feat {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 9px; padding: 13px;
-  }
-  .add-feat strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 4px; }
-  .add-feat p { font-size: 12px; color: var(--text-light); margin: 0; line-height: 1.45; }
-
-  .payment-steps { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-  .payment-steps li {
-    display: flex; align-items: flex-start; gap: 14px;
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 9px; padding: 14px;
-    font-size: 14px; color: var(--text-light); line-height: 1.55;
-  }
-  .step-circle {
-    flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
-    background: var(--primary); color: #fff;
-    font-weight: 900; font-size: 15px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
-  }
-
-  .benefits-banner {
-    background: var(--primary-light); border: 1.5px solid var(--primary);
-    border-radius: 9px; padding: 14px 18px;
-    display: flex; flex-wrap: wrap; gap: 10px 24px;
-    font-size: 13px; font-weight: 700; color: var(--primary-dark);
-  }
-  .benefits-banner span::before { content: '✓  '; }
-
-  .counties-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 16px 0 12px; }
-  @media (max-width: 580px) { .counties-grid { grid-template-columns: 1fr; } }
-  .county-card {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 9px; padding: 14px;
-  }
-  .county-card strong {
-    display: block; font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 5px;
-  }
-  .county-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; margin: 0; }
-  .delivery-note { font-size: 13px; color: var(--text-light); font-style: italic; }
-
-  .faq-list { display: flex; flex-direction: column; gap: 8px; }
-  .faq-item {
-    border: 1.5px solid var(--gray-2); border-radius: 9px;
-    overflow: hidden; transition: border-color .15s;
-  }
-  .faq-item[open] { border-color: var(--primary); }
-  .faq-item summary {
-    padding: 14px 16px; font-size: 14px; font-weight: 700;
-    color: var(--text); cursor: pointer; user-select: none; list-style: none;
-    display: flex; justify-content: space-between; align-items: center;
-    background: var(--gray-1);
-  }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::after { content: '+'; font-size: 20px; font-weight: 300; color: var(--primary); flex-shrink: 0; }
-  .faq-item[open] summary::after { content: '−'; }
-  .faq-item p { padding: 14px 16px; font-size: 13.5px; color: var(--text-light); line-height: 1.65; }
-
-  .related-section { margin-bottom: 16px; }
-  .related-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 14px;
-  }
-  .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  @media (max-width: 900px) { .related-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 620px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
-
-  .bottom-cta {
-    background: var(--navy); border-radius: var(--radius);
-    padding: 40px 28px; text-align: center; margin-bottom: 8px;
-  }
-  .cta-inner h2 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 30px; font-weight: 900; color: #fff; margin-bottom: 8px;
-  }
-  .cta-inner p { font-size: 15px; color: rgba(255,255,255,.7); margin-bottom: 24px; }
-  .cta-inner p strong { color: var(--gold); }
-  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-  .btn-primary, .btn-whatsapp {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 13px 22px; border-radius: 8px;
-    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 700;
-    text-decoration: none; border: none; cursor: pointer; min-width: 160px;
-    transition: transform .18s, box-shadow .18s;
-  }
-  .btn-primary { background: var(--primary); color: #fff; }
-  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,115,232,.3); }
-  .btn-whatsapp { background: #25d366; color: #fff; }
-  .btn-whatsapp:hover { background: #1fb356; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.3); }
-
-  .price-kenya-block {
-    display: flex; flex-direction: column; gap: 0;
-    border: 2px solid var(--primary); border-radius: var(--radius);
-    overflow: hidden; margin-bottom: 4px;
-  }
-  .price-kenya-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px; border-bottom: 1px solid var(--primary-light);
-    background: #fff;
-  }
-  .price-kenya-row:last-child { border-bottom: none; }
-  .price-kenya-row:first-child { background: var(--primary-light); }
-  .pkr-label {
-    font-size: 13px; font-weight: 600; color: var(--text-light);
-  }
-  .pkr-value {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 26px; font-weight: 900; color: var(--navy);
-    line-height: 1;
-  }
-  .pkr-value.accent { color: var(--primary); }
-  .pkr-per { font-size: 13px; font-weight: 400; }
-
-  .price-why-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-    margin-top: 20px;
-  }
-  @media (max-width: 560px) { .price-why-grid { grid-template-columns: 1fr; } }
-  .price-why-item {
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 9px; padding: 14px;
-  }
-  .price-why-item strong { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
-  .price-why-item p { font-size: 13px; color: var(--text-light); margin: 0; line-height: 1.5; }
-
-  .price-cta-row {
-    display: flex; flex-direction: column; gap: 10px;
-    margin-top: 20px; align-items: stretch;
-  }
-
-  .prose a { color: var(--primary); text-decoration: none; font-weight: 600; }
-  .prose a:hover { text-decoration: underline; }
-
-  .seo-intro a { color: var(--primary); text-decoration: none; font-weight: 600; }
-  .seo-intro a:hover { text-decoration: underline; }
-
-  .pros-cons-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  }
-  @media (max-width: 600px) { .pros-cons-grid { grid-template-columns: 1fr; } }
-
-  .pros-col, .cons-col {
-    border-radius: 9px; padding: 16px 18px;
-  }
-  .pros-col { background: #f0fdf6; border: 1.5px solid #a7f0ca; }
-  .cons-col { background: #fef6f6; border: 1.5px solid #fecaca; }
-
-  .pc-heading {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px; font-weight: 900; margin-bottom: 12px;
-    text-transform: uppercase; letter-spacing: .06em;
-  }
-  .pc-pros { color: #166534; }
-  .pc-cons { color: #991b1b; }
-
-  .pc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .pc-list li {
-    font-size: 13.5px; color: var(--text); line-height: 1.5;
-    padding-left: 20px; position: relative;
-  }
-  .pros-col .pc-list li::before {
-    content: '✓'; position: absolute; left: 0;
-    color: var(--green); font-weight: 900;
-  }
-  .cons-col .pc-list li::before {
-    content: '✗'; position: absolute; left: 0;
-    color: var(--red); font-weight: 900;
-  }
-
-  .pac-intro {
-    font-size: 14px; color: var(--text-light); line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .pac-intro strong { color: var(--text); }
-
-  .pac-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-    margin-bottom: 14px;
-  }
-  @media (max-width: 700px) { .pac-grid { grid-template-columns: repeat(2, 1fr); } }
-
-  .pac-card {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    background: var(--gray-1); border: 1.5px solid var(--gray-2);
-    border-radius: 9px; padding: 14px 10px;
-    text-decoration: none; color: inherit;
-    transition: border-color .15s, box-shadow .15s, transform .15s;
-  }
-  .pac-card:hover {
-    border-color: var(--primary); box-shadow: 0 4px 16px rgba(26,115,232,.12);
-    transform: translateY(-2px);
-  }
-  .pac-card img {
-    width: 72px; height: 72px; object-fit: contain;
-  }
-  .pac-info { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
-  .pac-brand {
-    font-size: 10px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .07em; color: var(--text-light);
-  }
-  .pac-name {
-    font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.3;
-  }
-  .pac-deposit {
-    font-size: 12px; font-weight: 600; color: var(--primary);
-    background: var(--primary-light); border-radius: 4px;
-    padding: 2px 7px; margin-top: 2px;
-  }
-
-  .pac-browse {
-    font-size: 13px; color: var(--text-light);
-  }
-  .pac-browse a { color: var(--primary); text-decoration: none; font-weight: 600; }
-  .pac-browse a:hover { text-decoration: underline; }
-
-  .product-feature-links {
-    max-width: 860px;
-    margin: 40px auto 0;
-    padding: 0 20px 48px;
-  }
-  .product-feature-links h2 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 17px;
-    font-weight: 900;
-    color: var(--navy);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 12px;
-  }
-  .feat-link-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .feat-link {
-    display: inline-flex;
-    align-items: center;
-    background: #fff;
-    border: 1.5px solid var(--gray-2);
-    border-radius: 6px;
-    padding: 7px 13px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    text-decoration: none;
-    transition: all 0.15s;
-  }
-  .feat-link:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-    background: var(--primary-light);
-  }
-  .feat-link.brand-feat {
-    border-color: var(--primary);
-    color: var(--primary);
-    background: var(--primary-light);
-  }
-  .feat-link.combo-feat {
-    border-color: var(--navy);
-    color: var(--navy);
-  }
-  .feat-link.combo-feat:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-    background: var(--primary-light);
-  }
+    background: rgba(255,255,255,0.06); cursor: pointer; overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .lightbox__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .lightbox__thumb.is-active { border-color: #fff; }
+  .lightbox__thumb:hover { border-color: rgba(255,255,255,0.6); }
 </style>
