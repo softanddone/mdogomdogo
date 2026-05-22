@@ -1489,13 +1489,13 @@ megapixel:"50MP dual camera",
 
   {
   id: 11,
-  name: "Infinix Hot 60i (6/129GB)",
+  name: "Infinix Hot 60i (6/128GB)",
   fullname:"Infinix Hot 60i 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/infinix-hot-60i-8-256.jpg",
   from: "KSh 15,500",
   deposit: "KSh 3,400",
-  daily: "KSh 89",
+  daily: "KSh 92",
   totalPrice: "KSh 20,000",
   source: "/phones/infinix-hot-60i.webp",
   discount: "-0%",
@@ -1503,17 +1503,17 @@ megapixel:"50MP dual camera",
   phonedisplay: "6.7″ IPS LCD",
   processor: "MediaTek Helio G81 Ultimate",
   camera: "50MP rear + 8MP front",
-  memory: "8GB RAM / 256GB Storage",
+  memory: "6GB RAM / 128GB Storage",
   battery: "5160mAh, 45W Fast Charging",
   version: "Android 15 / XOS",
   depositanddaily: "KSh 4,000 + KSh 120/day",
   slug: "infinix-hot-60i-8-256",
   slugs: "infinix-hot-60i",
-  description: "Buy Infinix Hot 60i (8/256GB) in Nairobi, Kenya. Enjoy Lipa Mdogo Mdogo with a small deposit and daily payments.",
+  description: "Buy Infinix Hot 60i (6/128GB) in Nairobi, Kenya. Enjoy Lipa Mdogo Mdogo with a small deposit and daily payments.",
   brand: "Infinix",
   seller: "Mogo, Onfon Mobile",
   model: "Hot 60i",
-  storage: "256GB",
+  storage: "128GB",
   condition: "new",
   gtin: "",
 
@@ -5937,142 +5937,6 @@ megapixel:"50 MP dual rear camera",
 },
 
 
-{
-  id: 45,
-  name: "Infinix Hot 60i",
-  fullname:"Infinix Hot 60i 5G 6.67 Inches, 128GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP",
-  status: "New",
-  image: "/phones/infinix_hot_60i.jpg",
-  from: "KSh 3,400",
-  deposit: "KSh 4,000",
-  daily: "KSh 98",
-  totalPrice: "KSh 18,500",
-  source: "/phones/infinix_hot_60i.webp",
-  discount: "-10%",
-  display: "block",
-  phonedisplay: "6.6\" HD+ (1612 × 720)",
-  processor: "Unisoc T606 Octa-core",
-  camera: "50MP (rear), 8MP (front)",
-  memory: "128GB / 8GB RAM (4GB+4GB Extended), MicroSD up to 1TB",
-  battery: "5000mAh, 18W Type-C Fast Charging",
-  version: "Android 14, XOS 14",
-  depositanddaily: "KSh 4,000 Daily KSh 90",
-  slug: "infinix-hot-60i",
-  slugs: "infinix-hot-60i",
-  description: "Buy Infinix Hot 60i on credit in Kenya. Lipa mdogo mdogo smartphone with large storage, fast charging, and a smooth 90Hz display. Available from Mkopa, Watu Simu & other approved sellers.",
-  brand: "Infinix",
-  seller: "Mogo, Onfon Mobile",
-  model: "X6525",
-  storage: "128GB",
-  condition: "new",
-  gtin: "",
-
-
-curved_screen:"no",
-dual_sim:"yes",
-waterproof:"yes",
-gaming_phone:"no",
-esim_compatible:"no",
-amoled_display:"no",
-is_it_5g:"no",
-ram_expandible:"yes",
-good_phone:"yes",
-performance:"MediaTek Helio G81 Ultimate processor designed for efficient everyday 4G usage",
-fingerprint:"side mounted",
-wireless_charging:"no",
-refresh_rate:"120Hz",
-fast_charging:"yes",
-battery_life:"all day usage",
-speed:"The Infinix Hot 60i offers smooth daily performance powered by the Helio G81 Ultimate and up to 8GB RAM, handling calls, social media, browsing, and light multitasking well; the 120Hz display makes interactions feel fluid, but it is not intended for heavy gaming or intensive tasks.",  
-camera_quality:"good for basic photography",  
-megapixel:"50 MP + auxiliary lens",
-
-  categoryPath: ["Electronics", "Mobile Phones", "Smartphones", "Infinix", "Mogo","Loan", "Lipa Mdogo Mdogo"],
-
-  // 🧩 Structured text sections
-  details: [
-    {
-      title: "Body and Design",
-      content: `The Infinix Hot 60i features a sleek, minimalist design with a geometric pattern on the back. It has a glass-like finish and premium feel, measuring 163.8 × 75.6 × 8.4mm. Available in Glacier Blue, Timber Black, and Palm Green, it balances aesthetics with practicality.`,
-    },
-    {
-      title: "Display",
-      content: `Experience smooth visuals on the 6.6-inch HD+ display featuring a 90Hz refresh rate. The 720 × 1612 resolution provides crisp colors and sharp contrast, making it ideal for streaming, gaming, and browsing.`,
-    },
-    {
-      title: "Camera System",
-      content: `The Infinix Hot 60i comes equipped with a 50MP main AI camera that captures vibrant and detailed shots. The 8MP front camera includes AI beautification, dual flash, and portrait enhancement for quality selfies even in low light.`,
-    },
-    {
-      title: "Performance",
-      content: `Powered by the Unisoc T606 Octa-core processor, the Hot 60i delivers responsive performance for everyday use. With 8GB of RAM (4GB physical + 4GB extended) and XOS 14 optimizations, multitasking and gaming are smooth and efficient.`,
-    },
-    {
-      title: "Operating System",
-      content: `Running on Android 14 with XOS 14, the interface is sleek and feature-packed. Users enjoy enhanced privacy options, game boosters, and battery optimization tools that extend usability throughout the day.`,
-    },
-    {
-      title: "Storage and Memory",
-      content: `The Hot 60i offers 128GB of internal storage and supports MicroSD expansion up to 1TB. Store thousands of photos, apps, and videos without running out of space.`,
-    },
-    {
-      title: "Battery and Charging",
-      content: `Equipped with a durable 5000mAh battery and 18W Type-C fast charging, the Hot 60i offers full-day power. It charges up to 50% in around 35 minutes, ensuring minimal downtime for active users.`,
-    },
-    {
-      title: "Connectivity and Sensors",
-      content: `Supports dual 4G SIM, Wi-Fi, Bluetooth 5.0, GPS, and USB Type-C connectivity. Includes side-mounted fingerprint sensor, Face Unlock, accelerometer, and proximity sensors for reliable, secure usability.`,
-    },
-    {
-      title: "Pros and Cons",
-      pros: [
-        "Smooth 90Hz HD+ display",
-        "Large 5000mAh battery",
-        "Good 50MP main camera",
-        "Ample 8GB RAM (extended)",
-        "Modern design with Type-C charging"
-      ],
-      cons: [
-        "No 5G connectivity",
-        "Plastic back panel",
-        "Average low-light selfies"
-      ],
-    },
-    {
-      title: "Verdict",
-      content: `The Infinix Hot 60i is a well-rounded budget smartphone that delivers excellent value with solid performance, stylish looks, and dependable battery life. Ideal for students and professionals who need a reliable daily driver.`,
-    },
-  ],
-
-  color: "Glacier Blue, Palm Green, Timber Black",
-  weight: "192g",
-  dimensions: {
-    length: "163.8mm",
-    width: "75.6mm",
-    height: "8.4mm"
-  },
-  material: "Plastic",
-  pattern: "Geometric",
-  productLine: "Infinix Hot",
-  reviews: {
-    averageRating: 4.7,
-    reviewCount: 41,
-    reviews: [
-      {
-        author: "Dennis L.",
-        rating: 5,
-        reviewBody: "Fast and reliable for my daily work. Great battery life too.",
-        datePublished: "2025-03-02"
-      },
-      {
-        author: "Faith W.",
-        rating: 4,
-        reviewBody: "I love the smooth screen and camera quality for this price.",
-        datePublished: "2025-03-19"
-      }
-    ]
-  }
-},
 
 
 
