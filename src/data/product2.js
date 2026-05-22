@@ -1490,7 +1490,7 @@ megapixel:"50MP dual camera",
   {
   id: 11,
   name: "Infinix Hot 60i (6/128GB)",
-  fullname:"Infinix Hot 60i 5G 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
+  fullname:"Infinix Hot 60i 6.67 Inches, 256GB ROM + 8GB RAM, Battery: 5100mAh (Dual SIM) 50MP",
   status: "New",
   image: "/phones/infinix-hot-60i-8-256.jpg",
   from: "KSh 15,500",
