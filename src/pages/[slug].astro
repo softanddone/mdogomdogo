@@ -113,15 +113,15 @@ const faqs = [
   },
   {
     question: `Is the ${currentProduct.name} brand new and genuine?`,
-    answer: `Yes. Every ${currentProduct.brand} ${currentProduct.name} we sell is brand new, 100% genuine, and sourced exclusively through authorised ${currentProduct.brand} distributors in Kenya. No refurbished units, no grey-market imports. Every phone comes sealed in original retail packaging and includes a full manufacturer warranty.`,
+    answer: `Yes. Every $ ${currentProduct.name} we sell is brand new, 100% genuine, and sourced exclusively through authorised ${currentProduct.brand} distributors in Kenya. No refurbished units, no grey-market imports. Every phone comes sealed in original retail packaging and includes a full manufacturer warranty.`,
   },
   {
     question: `What colour options are available for the ${currentProduct.name}?`,
-    answer: `The ${currentProduct.brand} ${currentProduct.name} is currently available in: ${currentProduct.color}. When placing your order, let us know your preferred colour and we will confirm availability immediately.`,
+    answer: `The ${currentProduct.name} is currently available in: ${currentProduct.color}. When placing your order, let us know your preferred colour and we will confirm availability immediately.`,
   },
   {
     question: "What warranty does the phone come with?",
-    answer: `Every ${currentProduct.brand} ${currentProduct.name} comes with a 2-year manufacturer warranty covering factory defects and hardware faults. You also benefit from our dedicated after-sales support team throughout your instalment period.`,
+    answer: `Every ${currentProduct.name} comes with a 2-year manufacturer warranty covering factory defects and hardware faults. You also benefit from our dedicated after-sales support team throughout your instalment period.`,
   },
   {
     question: "What happens if I am unable to make a payment on time?",
@@ -258,7 +258,7 @@ const keyHighlights = [
             <img
               id="main-img"
               src={currentProduct.source}
-              alt={`${currentProduct.brand} ${currentProduct.name} — buy on instalments in Kenya`}
+              alt={`${currentProduct.name} — buy on instalments in Kenya`}
               class="gallery__main-img"
               loading="eager"
               width="560" height="560"
@@ -301,7 +301,7 @@ const keyHighlights = [
               >
                 <img
                   src={src}
-                  alt={`${currentProduct.brand} ${currentProduct.name} view ${i + 1}`}
+                  alt={`${currentProduct.name} view ${i + 1}`}
                   width="72" height="72"
                   loading={i === 0 ? 'eager' : 'lazy'}
                 />
@@ -363,7 +363,7 @@ const keyHighlights = [
         <div class="order">
           <p class="order__heading">How would you like to order?</p>
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on instalments`}
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.name} on instalments`}
             class="btn btn--wa"
             target="_blank" rel="noopener"
           >
@@ -450,10 +450,10 @@ const keyHighlights = [
          ABOUT (SEO content, always visible)
     ════════════════════════════════════ -->
     <section class="content-section" id="about">
-      <h2>{currentProduct.brand} {currentProduct.fullname ?? currentProduct.name} — Overview</h2>
+      <h2> {currentProduct.fullname ?? currentProduct.name} — Overview</h2>
 
       <p>
-        The <strong>{currentProduct.brand} {currentProduct.name}</strong> is one of the most popular smartphones in Kenya right now,
+        The <strong>{currentProduct.name}</strong> is one of the most popular smartphones in Kenya right now,
         and for good reason. Whether you are a student, professional, content creator, or simply someone ready to upgrade,
         this phone delivers genuine value without requiring a large upfront payment.
         Through <strong>MdogomdogoDeals</strong>, you can own it today — delivered free to your door in Nairobi, Kiambu, Machakos, or Kajiado,
@@ -499,7 +499,7 @@ const keyHighlights = [
       )}
 
       <p>
-        Every {currentProduct.brand} {currentProduct.name} sold by MdogomdogoDeals is brand new and sealed, sourced through
+        Every {currentProduct.name} sold by MdogomdogoDeals is brand new and sealed, sourced through
         authorised {currentProduct.brand} distributors in Kenya, fully compatible with Safaricom, Airtel, and Telkom networks out of the box,
         and covered by a <strong>2-year manufacturer warranty</strong>.
       </p>
@@ -509,7 +509,7 @@ const keyHighlights = [
          PRICE IN KENYA (always visible)
     ════════════════════════════════════ -->
     <section class="content-section" id="price-kenya">
-      <h2>{currentProduct.brand} {currentProduct.name} Price in Kenya</h2>
+      <h2> {currentProduct.name} Price in Kenya</h2>
 
       <div class="price-table">
         <div class="price-table__row price-table__row--featured">
@@ -531,7 +531,7 @@ const keyHighlights = [
       </div>
 
       <p>
-        The <strong>{currentProduct.brand} {currentProduct.name} price in Kenya</strong> starts at a deposit of <strong>{currentProduct.deposit}</strong> — 
+        The <strong> {currentProduct.name} price in Kenya</strong> starts at a deposit of <strong>{currentProduct.deposit}</strong> — 
         collected only after free delivery and your inspection. You pay nothing to place an order.
         Once satisfied, pay the deposit and continue with <strong>{currentProduct.daily} per day</strong> or <strong>KES {weeklyNum} per week</strong> until the balance is cleared.
         No interest. No hidden fees. No credit check.
@@ -558,7 +558,7 @@ const keyHighlights = [
 
       <div class="cta-row">
         <a
-          href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on instalments`}
+          href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.name} on instalments`}
           class="btn btn--wa"
           target="_blank" rel="noopener"
         >Order via WhatsApp — Free Delivery Today</a>
@@ -583,7 +583,7 @@ const keyHighlights = [
           <span class="steps__num" aria-hidden="true">2</span>
           <div>
             <strong>Free same-day delivery to your door</strong>
-            <p>We dispatch the {currentProduct.brand} {currentProduct.name} to your location in Nairobi, Kiambu, Machakos, or Kajiado — same day, at zero delivery cost.</p>
+            <p>We dispatch the {currentProduct.name} to your location in Nairobi, Kiambu, Machakos, or Kajiado — same day, at zero delivery cost.</p>
           </div>
         </li>
         <li class="steps__item">
@@ -637,7 +637,7 @@ const keyHighlights = [
          FULL SPECIFICATIONS (always visible)
     ════════════════════════════════════ -->
     <section class="content-section" id="specifications">
-      <h2>{currentProduct.brand} {currentProduct.name} — Full Specifications</h2>
+      <h2>{currentProduct.name} — Full Specifications</h2>
 
       {[
         { title: 'General',               rows: detailedSpecs.general },
@@ -674,14 +674,14 @@ const keyHighlights = [
           </tbody>
         </table>
         <p class="spec-note">
-          The {currentProduct.brand} {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G LTE, Airtel Kenya, and Telkom Kenya — right out of the box.
+          The  {currentProduct.name} is fully compatible with all major Kenyan mobile networks — Safaricom 4G LTE, Airtel Kenya, and Telkom Kenya — right out of the box.
         </p>
       </div>
 
       <div class="spec-group">
         <h3 class="spec-group__title">What's in the Box</h3>
         <ul class="inbox-list">
-          <li>1 × {currentProduct.brand} {currentProduct.name} handset (new, sealed)</li>
+          <li>1 × {currentProduct.name} handset (new, sealed)</li>
           <li>1 × USB charging cable</li>
           <li>1 × Charging adapter</li>
           <li>1 × SIM ejector pin</li>
@@ -739,12 +739,12 @@ const keyHighlights = [
     ════════════════════════════════════ -->
     <section class="bottom-cta" aria-label="Order now">
       <div class="bottom-cta__inner">
-        <h2>Get the {currentProduct.brand} {currentProduct.name} Delivered Today</h2>
+        <h2>Get the {currentProduct.name} Delivered Today</h2>
         <p>Free same-day delivery — pay only <strong>KES {currentProduct.deposit}</strong> deposit after you inspect and approve.</p>
         <div class="bottom-cta__btns">
           <a href="tel:+254100028823" class="btn btn--primary">Call 0100028823</a>
           <a
-            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.brand} ${currentProduct.name} on instalments`}
+            href={`https://wa.me/254100028823?text=Hi, I want to order the ${currentProduct.name} on instalments`}
             class="btn btn--wa"
             target="_blank" rel="noopener"
           >WhatsApp — Order Now</a>
