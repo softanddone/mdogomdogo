@@ -10088,8 +10088,6 @@ megapixel:"50 MP + 2 MP triple rear camera",
 
 
 
-
-
 {
   id: 74,
   name: "Tecno Camon 50 Pro",
