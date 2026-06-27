@@ -9356,6 +9356,153 @@ megapixel:"12 MP + 12 MP + 12 MP triple rear camera",
   }
 },
 
+{
+  id: 70,
+  name: "itel S26 Ultra",
+  fullname: "itel S26 Ultra 6.78 Inches, 256GB ROM + 8GB RAM, Battery: 5000mAh (Dual SIM) 50MP AI Camera",
+  status: "",
+  image: "/phones/itel_s26_ultra.jpg",
+  from: "KSh 5,500",
+  deposit: "KSh 5,300",
+  daily: "KSh 138",
+  totalPrice: "KSh 26,999",
+  source: "/phones/itels26.webp",
+  discount: "-7%",
+  display: "block",
+  phonedisplay: "6.78\" FHD+ AMOLED, 120Hz",
+  processor: "Unisoc T620 Octa-Core",
+  camera: "50MP AI (rear), 32MP (front)",
+  memory: "256GB / 8GB RAM",
+  battery: "5000mAh, 45W Fast Charging",
+  version: "Android 16",
+  depositanddaily: "KSh 9,999 Daily KSh 140",
+  slug: "itel-s26-ultra",
+  slugs: "itel-s26-ultra",
+  description: "Buy the itel S26 Ultra on credit in Nairobi, Kenya. Enjoy a premium AMOLED display, smooth 120Hz refresh rate, powerful 50MP AI camera, large 256GB storage, and fast charging with affordable daily installments.",
+  brand: "itel",
+  seller: "Mophones",
+  model: "S26 Ultra",
+  storage: "256GB",
+  condition: "new",
+  gtin: "6976637700000",
+
+  curved_screen: "yes",
+  dual_sim: "yes",
+  waterproof: "no",
+  gaming_phone: "yes",
+  esim_compatible: "no",
+  amoled_display: "yes",
+  is_it_5g: "no",
+  ram_expandible: "yes",
+  good_phone: "yes",
+  performance: "The Unisoc T620 processor delivers smooth everyday performance for multitasking, gaming, social media, and entertainment.",
+  fingerprint: "yes",
+  wireless_charging: "no",
+  refresh_rate: "120Hz",
+  fast_charging: "yes",
+  battery_life: "all day usage",
+  speed: "The itel S26 Ultra delivers responsive performance thanks to its Unisoc T620 processor, 8GB RAM, and 120Hz AMOLED display, making everyday tasks and gaming feel smooth.",
+  camera_quality: "very good for photography and social media",
+  megapixel: "50MP AI dual rear camera",
+
+  categoryPath: [
+    "Electronics",
+    "Mobile Phones",
+    "Smartphones",
+    "itel",
+    "Loan or Cash",
+    "Mophones",
+    "Lipa Mdogo Mdogo"
+  ],
+
+  details: [
+    {
+      title: "Body and Design",
+      content: `The itel S26 Ultra features a slim premium design with a curved AMOLED display that offers an immersive viewing experience. Its lightweight construction makes it comfortable to hold while maintaining a modern flagship-inspired appearance.`,
+    },
+    {
+      title: "Display",
+      content: `Enjoy a large 6.78-inch Full HD+ AMOLED display with a smooth 120Hz refresh rate. The vibrant colors, deep blacks, and high brightness make streaming, gaming, and everyday browsing enjoyable.`,
+    },
+    {
+      title: "Camera System",
+      content: `Capture detailed photos using the 50MP AI rear camera, while the 32MP front camera produces sharp selfies and high-quality video calls. AI photography features help improve portraits, night shots, and overall image quality.`,
+    },
+    {
+      title: "Performance",
+      content: `Powered by the Unisoc T620 octa-core processor with 8GB RAM and virtual RAM expansion, the itel S26 Ultra handles daily multitasking, gaming, video streaming, and productivity with ease.`,
+    },
+    {
+      title: "Operating System",
+      content: `Running Android 16, the phone delivers a clean interface with improved privacy, smoother animations, and access to the latest Android features and security updates.`,
+    },
+    {
+      title: "Storage and Memory",
+      content: `Store thousands of photos, videos, apps, and documents with the generous 256GB internal storage. Combined with 8GB RAM, apps launch quickly and multitasking remains smooth.`,
+    },
+    {
+      title: "Battery and Charging",
+      content: `The large 5000mAh battery easily lasts an entire day on a single charge. When it's time to recharge, the 45W fast charger quickly gets you back to full power.`,
+    },
+    {
+      title: "Connectivity and Sensors",
+      content: `Features Dual SIM support, 4G LTE, Wi-Fi, Bluetooth 5.2, USB Type-C, GPS, NFC (market dependent), an in-display fingerprint sensor, and face unlock.`,
+    },
+    {
+      title: "Pros and Cons",
+      pros: [
+        "Beautiful 120Hz AMOLED display",
+        "Large 256GB storage",
+        "Fast 45W charging",
+        "Good 50MP AI camera",
+        "Premium curved design",
+      ],
+      cons: [
+        "No 5G connectivity",
+        "No official IP water resistance rating",
+        "Wireless charging not supported",
+      ],
+    },
+    {
+      title: "Verdict",
+      content: `The itel S26 Ultra offers excellent value for money by combining a premium AMOLED display, large storage, reliable battery life, and modern design. It's a great choice for users looking for flagship-style features at an affordable price.`,
+    },
+  ],
+
+  color: "Titanium Silver, Emerald Green, Midnight Black",
+  weight: "188g",
+  dimensions: {
+    length: "163.5mm",
+    width: "75.2mm",
+    height: "7.8mm"
+  },
+  material: "Glass Front, Plastic Frame, Plastic Back",
+  pattern: "Matte Finish",
+  productLine: "itel S Series",
+
+  reviews: {
+    averageRating: 4.6,
+    reviewCount: 36,
+    reviews: [
+      {
+        author: "Kevin M.",
+        rating: 5,
+        reviewBody: "The AMOLED screen is impressive and the battery easily lasts a full day.",
+        datePublished: "2026-06-12"
+      },
+      {
+        author: "Mercy W.",
+        rating: 4,
+        reviewBody: "Excellent value for the price. Plenty of storage and smooth performance.",
+        datePublished: "2026-05-28"
+      }
+    ]
+  }
+
+
+},
+
+
 
 {
   id: 71,
